@@ -85,6 +85,8 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
         } while(!arb_contains(sum, test)); /* Is the old term contained completely
                                               within the new term */
 
+        //printf("Done with long-range test in %d cycles\n", i);
+
         arb_mul(sum, sum, et, working_prec);
         arb_div(sum, sum, t2, working_prec);
 
@@ -92,7 +94,8 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
          * Determine if this error is satisfactory
          * If not, mark that we have to do the short-range version
          */
-        if(!arb_overlaps(F[m], sum))
+        arb_sub(test, F[m], sum, working_prec);
+        if(!arb_overlaps(F[m], test))
             do_short = 1;
     }
 
@@ -116,6 +119,7 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
 
         arb_mul(F[m], sum, et, working_prec);
         arb_div_si(F[m], F[m], 2*m+1, working_prec);
+        //printf("Done with short-range approximation in %d cycles\n", i);
     }
         
     /* Now do downwards recursion */
@@ -126,6 +130,7 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
         arb_add(F[i], F[i], et, working_prec);
         arb_div_ui(F[i], F[i], 2 * i + 1, working_prec);
     }
+
 
     arb_init(t2);
     arb_init(et);
