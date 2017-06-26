@@ -8,7 +8,7 @@
 #include "mirp/mpfr_help.h"
 #include <assert.h>
 
-static void mirp_boys_mp_nonzero(mpfr_t *F, int m, const mpfr_t t, mpfr_prec_t working_prec)
+void mirp_boys_mp(mpfr_t *F, int m, const mpfr_t t, mpfr_prec_t working_prec)
 {
     assert(m >= 0);
     assert(working_prec > 0);
@@ -131,32 +131,5 @@ static void mirp_boys_mp_nonzero(mpfr_t *F, int m, const mpfr_t t, mpfr_prec_t w
     mpfr_clears(t2, et, sum, term, lastterm, test, (mpfr_ptr)0);
     mpfr_clears(tmp1, tmp2, tmp3, (mpfr_ptr)0);
     mirp_clear_mpfr_arr(Ftmp, m+1);
-}
-
-
-static void mirp_boys_mp_zero(mpfr_t *F, int m, mpfr_prec_t working_prec)
-{
-    mpfr_t tmp;
-    mpfr_init2(tmp, working_prec);
-
-    for(int i = 0; i <= m; i++)
-    {
-        mpfr_set_si(tmp, 1, MPFR_RNDN);
-        mpfr_div_si(F[i], tmp, 2*i+1, MPFR_RNDN);
-    }
-
-    mpfr_clear(tmp);
-}
-
-
-void mirp_boys_mp(mpfr_t *F, int m, const mpfr_t t, mpfr_prec_t working_prec)
-{
-    assert(m >= 0);
-    assert(working_prec > 0);
-
-    if(mpfr_zero_p(t))
-        mirp_boys_mp_zero(F, m, working_prec);
-    else    
-        mirp_boys_mp_nonzero(F, m, t, working_prec);
 }
 
