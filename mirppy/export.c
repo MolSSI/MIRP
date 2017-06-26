@@ -3,6 +3,7 @@
 /* In the various export files */
 PyObject * export_mirp_boys_mp(PyObject *self, PyObject *args);
 PyObject * export_mirp_boys_interval(PyObject *self, PyObject *args);
+PyObject * export_mirp_boys_createtest(PyObject *self, PyObject *args);
 PyObject * export_mirp_boys_double(PyObject *self, PyObject *args);
 
 
@@ -12,6 +13,8 @@ static PyMethodDef mirp_methods[] = {
     {"mirp_boys_interval", export_mirp_boys_interval, METH_VARARGS,
      "Test function"},
     {"mirp_boys_double", export_mirp_boys_double, METH_VARARGS,
+     "Test function"},
+    {"mirp_boys_createtest", export_mirp_boys_createtest, METH_VARARGS,
      "Test function"},
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };

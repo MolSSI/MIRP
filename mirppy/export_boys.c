@@ -77,16 +77,88 @@ PyObject * export_mirp_boys_interval(PyObject *self, PyObject *args)
     if(!PyArg_ParseTuple(args, "isl", &m, &t, &working_prec))
         return NULL;
 
-    // ndigits = log10(2) * precision (in bits) + a fudge factor
-    // (for including more, ifneeded)
-    const size_t ndigits = 0.3010299956639812 * working_prec + 4; 
+    arb_t t_mp, F_mp[m+1];
+    arb_init(t_mp);
+    mirp_init_arb_arr(F_mp, m+1);
+    arb_set_str(t_mp, t, working_prec);
+
+    mirp_boys_interval(F_mp, m, t_mp, working_prec);
+
+    PyObject * ret = PyList_New(m+1);
+
+    for(int i = 0; i <= m; i++)
+    {
+        /* We need an (overestimate) on the number of digits we are going to print
+         *
+         * ndigits = log10(2) * precision (in bits) + a safety factor
+         * If it is an integer, we use the working precision. The only
+         * case where the result of the boys function is an integer is m = 0, t = 0,
+         * and perhaps at very long range you might get 0.
+         */
+        long ndigits;
+        slong f_prec = working_prec;
+        if(!arb_is_int(F_mp[i]))
+            f_prec = arb_rel_accuracy_bits(F_mp[i]);
+
+        ndigits = 0.3010299956639812 * f_prec+2;
+
+
+        char * strtmp = arb_get_str(F_mp[i], ndigits, ARB_STR_NO_RADIUS);
+
+        PyObject * pystr = PyUnicode_FromString(strtmp);
+        PyList_SetItem(ret, i, pystr);
+        free(strtmp);
+    }
+
+    arb_clear(t_mp);
+    mirp_clear_arb_arr(F_mp, m+1);
+
+    return ret;
+}
+
+PyObject * export_mirp_boys_createtest(PyObject *self, PyObject *args)
+{
+    UNUSED(self);
+    
+    /* For conversion between binary precision and decimal precision (number of digits)
+     * ndigits = log10(2) * precision (in bits)
+     */
+    const double log10_2 = 0.3010299956639812;
+
+    int m;
+    long ndigits;
+    const char * t = NULL;
+
+    if(!PyArg_ParseTuple(args, "isl", &m, &t, &ndigits))
+        return NULL;
 
     arb_t t_mp, F_mp[m+1];
     arb_init(t_mp);
     mirp_init_arb_arr(F_mp, m+1);
-    arb_set_str(t_mp, t, working_prec); 
 
-    mirp_boys_interval(F_mp, m, t_mp, working_prec);
+    /* Target precision/accuracy, in bits, with a safety factor
+       of 8 extra decimal digits */
+    const slong target_prec = (ndigits+8) / log10_2;
+
+    slong working_prec = target_prec;
+    int all_ndigits;
+
+    do {
+        all_ndigits = 1;
+        working_prec += 16;
+
+        arb_set_str(t_mp, t, working_prec);
+        mirp_boys_interval(F_mp, m, t_mp, working_prec); 
+        
+        for(int i = 0; i <= m; i++)
+        {
+            if(arb_rel_accuracy_bits(F_mp[i]) < target_prec)
+            {
+                all_ndigits = 0;
+                break;
+            }
+        }
+    } while(!all_ndigits);
 
     PyObject * ret = PyList_New(m+1);
 
@@ -96,7 +168,6 @@ PyObject * export_mirp_boys_interval(PyObject *self, PyObject *args)
 
         PyObject * pystr = PyUnicode_FromString(strtmp);
         PyList_SetItem(ret, i, pystr);
-
         free(strtmp);
     }
 

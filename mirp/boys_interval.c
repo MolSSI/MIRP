@@ -6,7 +6,6 @@
 
 #include "mirp/boys.h"
 #include "mirp/math.h"
-#include "mirp/arb_help.h"
 #include <assert.h>
 
 void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
@@ -121,7 +120,7 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
         arb_div_si(F[m], F[m], 2*m+1, working_prec);
         //printf("Done with short-range approximation in %d cycles\n", i);
     }
-        
+    
     /* Now do downwards recursion */
     for(i = m - 1; i >= 0; i--)
     {
@@ -132,14 +131,14 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
     }
 
 
-    arb_init(t2);
-    arb_init(et);
-    arb_init(sum);
-    arb_init(term);
-    arb_init(lastterm);
-    arb_init(test);
-    arb_init(tmp1);
-    arb_init(tmp2);
-    arb_init(tmp3);
+    arb_clear(t2);
+    arb_clear(et);
+    arb_clear(sum);
+    arb_clear(term);
+    arb_clear(lastterm);
+    arb_clear(test);
+    arb_clear(tmp1);
+    arb_clear(tmp2);
+    arb_clear(tmp3);
 }
 
