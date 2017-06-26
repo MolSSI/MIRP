@@ -12,4 +12,3 @@ add_library(mirp
                eri_mp.c
 )
 
-target_link_libraries(mirp flint arb mpfr gmp m)
