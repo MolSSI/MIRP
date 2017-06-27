@@ -2,11 +2,7 @@
 
 import argparse
 import sys
-
 from mpmath import mp
-
-import mirppy
-import mirppy.testing_utilities
 
 def calculate_boys(m, t):
     zero_mp = mp.mpf(0)
@@ -22,17 +18,30 @@ def calculate_boys(m, t):
         F_mp = mp.gammainc(M, zero_mp, t_mp) * one_mp/(two_mp * mp.power(t_mp, M))
     return F_mp
 
+def read_test_file(filepath):
+    mtv = []
+    with open(filepath, 'r') as f:
+        lines = [ l for l in f.readlines() if not l.startswith('#') ] 
+        bits = int(lines[0])
+        for l in lines[1:]:
+            m,t,v = l.strip().split(' ')
+            mtv.append((m,t,v))
+
+    return (bits, mtv)
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--filename",     type=str,            required=True,  help="File to test")
 parser.add_argument("--ndigits",      type=int, default=0, required=False, help="Number of decimal digits to test")
 args = parser.parse_args()
 
-test_digits, test_vals = mirppy.testing_utilities.read_test_file(args.filename)
+test_digits, test_vals = read_test_file(args.filename)
 
 ndigits = args.ndigits
 if ndigits == 0:
     ndigits = test_digits-1
+
+print("Verifying {} up to {} decimal digits".format(args.filename, ndigits))
 
 if ndigits >= test_digits:
     print("!-----------------------------------------------------------------------------")
