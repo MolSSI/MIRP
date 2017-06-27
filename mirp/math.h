@@ -27,7 +27,10 @@ extern "C" {
 #define NEG1_POW(n) (((n)%2)?(-1):(1))
 
 /*! \brief The value of the constant pi in double precision */
-#define ARBINT_PI 3.14159265358979324
+#define MIRP_PI 3.14159265358979324
+
+/*! \brief The value of the sqrt(pi) in double precision */
+#define MIRP_SQRT_PI 1.7724538509055160273 
 
 
 /* \brief Calculates a factorial in double precision

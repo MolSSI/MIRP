@@ -5,7 +5,6 @@
  */
 
 #include "mirp/boys.h"
-#include "mirp/math.h"
 #include <assert.h>
 
 void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
@@ -51,18 +50,20 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
 
     if(!do_short)
     {
+        /* Attempt the long-range approximation */
+        arb_const_pi(tmp1, working_prec);
+        arb_div(tmp1, tmp1, t, working_prec);
+        arb_sqrt(tmp1, tmp1, working_prec);
+        arb_div_si(tmp1, tmp1, 2, working_prec);
 
-        /* Value of the long-range approximation */
-        mirp_double_factorial_interval(tmp1, 2*m-1, working_prec);
-        arb_set_ui(tmp2, 2);
-        arb_pow_ui(tmp2, tmp2, m+1, working_prec);
-        arb_div(tmp1, tmp1, tmp2, working_prec);
+        for(i = 1; i <= m; i++)
+        {
+            arb_set_si(tmp2, 2*i-1);
+            arb_div(tmp2, tmp2, t2, working_prec);
+            arb_mul(tmp1, tmp1, tmp2, working_prec);
+        }
 
-        arb_const_pi(tmp2, working_prec);
-        arb_pow_ui(tmp3, t, 2*m+1, working_prec);
-        arb_div(tmp2, tmp2, tmp3, working_prec);
-        arb_sqrt(tmp2, tmp2, working_prec);
-        arb_mul(F[m], tmp1, tmp2, working_prec);
+        arb_set(F[m], tmp1);
 
         /* Determine the error associated with the long-range approximation */
         arb_zero(sum);
@@ -129,7 +130,6 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
         arb_add(F[i], F[i], et, working_prec);
         arb_div_ui(F[i], F[i], 2 * i + 1, working_prec);
     }
-
 
     arb_clear(t2);
     arb_clear(et);

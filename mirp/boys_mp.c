@@ -4,7 +4,6 @@
  */
 
 #include "mirp/boys.h"
-#include "mirp/math.h"
 #include "mirp/mpfr_help.h"
 #include <assert.h>
 
@@ -49,16 +48,18 @@ void mirp_boys_mp(mpfr_t *F, int m, const mpfr_t t, mpfr_prec_t working_prec)
     if(!do_short)
     {
         /* Attempt the long-range approximation */ 
-        mirp_double_factorial_mp(tmp1, 2*m-1);
-        mpfr_set_si(tmp2, 2, MPFR_RNDN);
-        mpfr_pow_ui(tmp2, tmp2, m+1, MPFR_RNDN);
-        mpfr_div(tmp1, tmp1, tmp2, MPFR_RNDN);
-
-        mpfr_const_pi(tmp2, MPFR_RNDN);
-        mpfr_pow_ui(tmp3, t, 2*m+1, MPFR_RNDN);
-        mpfr_div(tmp2, tmp2, tmp3, MPFR_RNDN);
-        mpfr_sqrt(tmp2, tmp2, MPFR_RNDN);
-        mpfr_mul(Ftmp[m], tmp1, tmp2, MPFR_RNDN);
+        mpfr_const_pi(tmp1, MPFR_RNDN);
+        mpfr_div(tmp1, tmp1, t, MPFR_RNDN);
+        mpfr_sqrt(tmp1, tmp1, MPFR_RNDN);
+        mpfr_div_si(tmp1, tmp1, 2, MPFR_RNDN);
+        
+        for(i = 1; i <= m; i++)
+        {
+            mpfr_set_si(tmp2, 2*i-1, MPFR_RNDN);
+            mpfr_div(tmp2, tmp2, t2, MPFR_RNDN);
+            mpfr_mul(tmp1, tmp1, tmp2, MPFR_RNDN);
+        }
+        mpfr_set(Ftmp[m], tmp1, MPFR_RNDN);
 
         /* Determine the error associated with the long-range approximation */
         mpfr_set_zero(sum, 0);

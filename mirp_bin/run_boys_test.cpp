@@ -2,7 +2,7 @@
 #include "test_files.hpp"
 #include <mirp/mirp.h>
 #include <memory>
-#include <cstdlib>
+#include <cmath>
 #include <iostream>
 
 using namespace mirp;
@@ -33,7 +33,7 @@ static long run_boys_test_mp(const boys_data & data, long target_prec, long work
         {
             std::cout << "Entry failed test: m = " << it.m << " t = " << it.t << "\n";
             mpfr_printf("  Calculated: %Re\n", F_mp[it.m]);
-            mpfr_printf("   Reference: %Re\n", vref_mp);
+            mpfr_printf("   Reference: %Re\n\n", vref_mp);
             nfailed++;
         }
     }
@@ -76,7 +76,7 @@ static long run_boys_test_interval(const boys_data & data, long target_prec, lon
             char * s1 = arb_get_str(F_mp[it.m], 1000, 0);
             char * s2 = arb_get_str(vref_mp, 1000, 0);
             std::cout << "   Calculated: " << s1 << "\n";
-            std::cout << "    Reference: " << s2 << "\n";
+            std::cout << "    Reference: " << s2 << "\n\n";
             free(s1);
             free(s2);
             nfailed++;
@@ -111,8 +111,14 @@ static long run_boys_test_double(const boys_data & data)
         if(vref_dbl != F_dbl[it.m])
         {
             std::cout << "Entry failed test: m = " << it.m << " t = " << it.t << "\n";
-            std::cout << "  Calculated: " << F_dbl[it.m] << "\n";
-            std::cout << "   Reference: " << vref_dbl << "\n";
+            double reldiff = std::fabs(vref_dbl - F_dbl[it.m]);
+            reldiff /= std::max(std::fabs(vref_dbl), std::fabs(F_dbl[it.m]));
+
+            auto old_cout_prec = std::cout.precision(17);
+            std::cout << "   Calculated: " << F_dbl[it.m] << "\n";
+            std::cout << "    Reference: " << vref_dbl << "\n";
+            std::cout << "Relative Diff: " << reldiff << "\n\n";
+            std::cout.precision(old_cout_prec);
             nfailed++;
         }
     }

@@ -13,7 +13,7 @@ PyObject * export_mirp_boys_double(PyObject * self, PyObject *args)
     int m;
     double t;
 
-    if(!PyArg_ParseTuple(args, "if", &m, &t))
+    if(!PyArg_ParseTuple(args, "id", &m, &t))
         return NULL;
 
     double F[m+1];

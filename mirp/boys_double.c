@@ -8,7 +8,7 @@
 #include <math.h>
 #include <assert.h>
 
-static void mirp_boys_double_nonzero(double *F, int m, double t)
+void mirp_boys_double(double *F, int m, double t)
 {
     int i;
     double test;
@@ -30,12 +30,12 @@ static void mirp_boys_double_nonzero(double *F, int m, double t)
     if(t < ((double)m + 0.5))
         do_short = 1;
      
-
     if(!do_short)
     {
         /* Attempt the long-range approximation */
-        F[m] = mirp_double_factorial(2*m-1) / pow(2, m+1);
-        F[m] *= sqrt(ARBINT_PI / pow(t, 2*m+1));
+        F[m] = MIRP_SQRT_PI / (2.0 * sqrt(t) );
+        for(i = 1; i <= m; i++)
+            F[m] *= (2.0 * (double)i - 1.0)/(t2);
 
         /* Determine the error associated with the long-range approximation */
         term = 1.0;
@@ -88,24 +88,5 @@ static void mirp_boys_double_nonzero(double *F, int m, double t)
     /* Now do downwards recursion */
     for(i = m - 1; i >= 0; i--)
         F[i] = (t2 * F[i + 1] + et) / (2 * i + 1);
-}
-
-
-static void mirp_boys_double_zero(double *F, int m)
-{
-    for(int i = 0; i <= m; i++)
-        F[i] = 1.0 / (2.0 * (double)i + 1);
-}
-
-
-void mirp_boys_double(double *F, int m, double t)
-{
-    assert(m >= 0);
-    assert(working_prec > 0);
-
-    if(t == 0.0)
-        mirp_boys_double_zero(F, m);
-    else    
-        mirp_boys_double_nonzero(F, m, t);
 }
 

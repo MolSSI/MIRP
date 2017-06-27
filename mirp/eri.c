@@ -128,7 +128,7 @@ void mirp_single_eri(double * result,
         }
     }
 
-    double pfac = 2 * pow(ARBINT_PI, 2.5)
+    double pfac = 2 * pow(MIRP_PI, 2.5)
                 * exp(-alpha1 * alpha2 * AB2 / gammap)
                 * exp(-alpha3 * alpha4 * CD2 / gammaq);
     pfac /= (gammap * gammaq * sqrt(gammap + gammaq));
