@@ -34,6 +34,11 @@ ndigits = args.ndigits
 if ndigits == 0:
     ndigits = test_digits-1
 
+if ndigits >= test_digits:
+    print("!-----------------------------------------------------------------------------")
+    print("! WARNING: number of digits you want to test >= number stored in the test file")
+    print("!-----------------------------------------------------------------------------")
+
 bad_vals = []
 passed = 0
 ntest = len(test_vals)
