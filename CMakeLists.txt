@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 project(Arbint LANGUAGES C CXX)
+enable_testing()
 
 
 macro(mirp_find_library libname)
@@ -29,3 +30,4 @@ mirp_find_library(gmp)
 add_subdirectory(mirp)
 add_subdirectory(mirp_bin)
 add_subdirectory(mirppy)
+add_subdirectory(tests)

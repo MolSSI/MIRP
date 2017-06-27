@@ -49,7 +49,7 @@ if ndigits >= test_digits:
     print("!-----------------------------------------------------------------------------")
 
 bad_vals = []
-passed = 0
+failed = 0
 ntest = len(test_vals)
 
 with mp.workdps(test_digits+8):
@@ -67,8 +67,6 @@ with mp.workdps(test_digits+8):
         if not same:
             reldiff = (mp.fabs(v-vtest))/max(mp.fabs(v), mp.fabs(vtest))
             bad_vals.append((m, t, str(vtest), str(v), reldiff))
-        else:
-            passed += 1
 
     for m,t,vtest,v,reldiff in bad_vals:
         print("Bad value: {} {}".format(m, t))
@@ -77,8 +75,10 @@ with mp.workdps(test_digits+8):
         print(" Relative diff: {}".format(str(reldiff)))
         print()
 
+failed = len(bad_vals)
+passed = ntest - failed
 percent = 100.0*float(passed)/float(ntest)
-print("{} / {} passed ({:.2f}%)".format(passed, len(test_vals), percent))
+print("{} / {} failed ({:.2f}% passed)".format(failed, len(test_vals), percent))
 if len(bad_vals) > 0:
     quit(1)
 
