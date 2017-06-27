@@ -18,12 +18,17 @@ namespace mirp {
     struct boys_data
     {
         long ndigits;
+        std::string header;
         std::vector<boys_data_entry> values;
     };
 
-    boys_data read_boys_file(const std::string & filename);
+    boys_data boys_read_file(const std::string & filename);
 
-    void write_boys_file(const std::string & filename, const boys_data & data);
+    boys_data boys_read_input_file(const std::string & filename);
+
+    void boys_write_file(const std::string & filename, const boys_data & data);
+
+    int boys_max_m(const boys_data & data);
 
 } // close namespace mirp
 

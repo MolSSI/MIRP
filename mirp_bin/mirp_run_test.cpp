@@ -3,8 +3,12 @@
 
 using namespace mirp;
 
-// in run_boys_test.cpp
-long run_boys_test(const std::string & filename, const std::string & floattype, long target_prec, long working_prec);
+namespace mirp {
+
+// in boys_run_test.cpp
+long boys_run_test(const std::string & filename, const std::string & floattype, long target_prec, long working_prec);
+
+}
 
 
 int main(int argc, char ** argv)
@@ -38,7 +42,7 @@ int main(int argc, char ** argv)
     {
         long nfailed;
         if(integral == "boys")
-            nfailed = run_boys_test(filename, floattype, target_prec, working_prec);
+            nfailed = boys_run_test(filename, floattype, target_prec, working_prec);
         else
         {
             std::cout << "Integral \"" << integral << "\" is not valid\n";

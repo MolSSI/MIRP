@@ -1,17 +1,15 @@
 
-#include "test_files.hpp"
-#include <mirp/mirp.h>
+#include "boys_test_file.hpp"
+#include <mirp/boys.h>
 #include <memory>
 #include <cmath>
 #include <iostream>
 
-using namespace mirp;
+namespace mirp {
 
-static long run_boys_test_mp(const boys_data & data, long target_prec, long working_prec)
+static long boys_run_test_mp(const boys_data & data, long target_prec, long working_prec)
 {
-    int maxm = 0;
-    for(auto & it : data.values)
-        maxm = std::max(maxm, it.m);
+    const int maxm = boys_max_m(data);
 
     mpfr_t t_mp, vref_mp;
     mpfr_init2(t_mp, working_prec);
@@ -46,11 +44,9 @@ static long run_boys_test_mp(const boys_data & data, long target_prec, long work
     return nfailed;
 }
 
-static long run_boys_test_interval(const boys_data & data, long target_prec, long working_prec)
+static long boys_run_test_interval(const boys_data & data, long target_prec, long working_prec)
 {
-    int maxm = 0;
-    for(auto & it : data.values)
-        maxm = std::max(maxm, it.m);
+    const int maxm = boys_max_m(data);
 
     arb_t t_mp, vref_mp;
     arb_init(t_mp);
@@ -91,7 +87,7 @@ static long run_boys_test_interval(const boys_data & data, long target_prec, lon
     return nfailed;
 }
 
-static long run_boys_test_double(const boys_data & data)
+static long boys_run_test_double(const boys_data & data)
 {
     int maxm = 0;
     for(auto & it : data.values)
@@ -126,15 +122,16 @@ static long run_boys_test_double(const boys_data & data)
     return nfailed;
 }
 
-long run_boys_test(const std::string & filename, const std::string & floattype, long target_prec, long working_prec)
+
+long boys_run_test(const std::string & filename, const std::string & floattype, long target_prec, long working_prec)
 {
     boys_data data;
     try {
-        data = read_boys_file(filename);
+        data = boys_read_file(filename);
     }
     catch(std::exception & ex)
     {
-        std::cout << "Unable to read data from file \"" << filename << "\"\n";
+        std::cout << "Unable to read data from file \"" << filename << "\": ";
         std::cout << ex.what() << "\n";
         return 2;
     }
@@ -144,11 +141,11 @@ long run_boys_test(const std::string & filename, const std::string & floattype, 
     long nfailed = 0;
 
     if(floattype == "mp")
-        nfailed = run_boys_test_mp(data, target_prec, working_prec);
+        nfailed = boys_run_test_mp(data, target_prec, working_prec);
     else if(floattype == "interval")
-        nfailed = run_boys_test_interval(data, target_prec, working_prec);
+        nfailed = boys_run_test_interval(data, target_prec, working_prec);
     else if(floattype == "double")
-        nfailed = run_boys_test_double(data);
+        nfailed = boys_run_test_double(data);
     else
     {
         std::string errmsg;
@@ -164,3 +161,4 @@ long run_boys_test(const std::string & filename, const std::string & floattype, 
     return nfailed;
 }
 
+} // close namespace mirp

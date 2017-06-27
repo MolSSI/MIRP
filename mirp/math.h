@@ -31,6 +31,13 @@ extern "C" {
 
 /*! \brief The value of the sqrt(pi) in double precision */
 #define MIRP_SQRT_PI 1.7724538509055160273 
+    
+/* \brief log_10(2)
+ * 
+ * For conversion between binary precision and decimal precision (number of digits)
+ * ndigits = log10(2) * precision (in bits)
+ */
+#define MIRP_LOG_10_2 0.3010299956639812
 
 
 /* \brief Calculates a factorial in double precision

@@ -6,15 +6,14 @@
 
 namespace mirp {
 
-bool cmdline_has_arg(const std::vector<std::string> cmdline, const std::string & arg)
+bool cmdline_has_arg(const std::vector<std::string> & cmdline, const std::string & arg)
 
 {
     auto it = std::find(cmdline.begin(), cmdline.end(), arg);
     return it != cmdline.end();
 }
 
-
-std::string cmdline_get_arg_str(const std::vector<std::string> cmdline, const std::string & arg)
+std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const std::string & arg)
 {
     if(!cmdline_has_arg(cmdline, arg))
     {
@@ -43,7 +42,7 @@ std::string cmdline_get_arg_str(const std::vector<std::string> cmdline, const st
     return *it; 
 }
 
-std::string cmdline_get_arg_str(const std::vector<std::string> cmdline, const std::string & arg, const std::string & def)
+std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const std::string & arg, const std::string & def)
 {
     if(!cmdline_has_arg(cmdline, arg))
         return def;
@@ -51,7 +50,7 @@ std::string cmdline_get_arg_str(const std::vector<std::string> cmdline, const st
         return cmdline_get_arg_str(cmdline, arg);
 }
 
-long cmdline_get_arg_long(const std::vector<std::string> cmdline, const std::string & arg)
+long cmdline_get_arg_long(const std::vector<std::string> & cmdline, const std::string & arg)
 {
     std::string strarg = cmdline_get_arg_str(cmdline, arg);
     std::stringstream ss(strarg); 
@@ -69,7 +68,7 @@ long cmdline_get_arg_long(const std::vector<std::string> cmdline, const std::str
     return ret;
 }
 
-long cmdline_get_arg_long(const std::vector<std::string> cmdline, const std::string & arg, long def)
+long cmdline_get_arg_long(const std::vector<std::string> & cmdline, const std::string & arg, long def)
 {
     if(!cmdline_has_arg(cmdline, arg))
         return def;
