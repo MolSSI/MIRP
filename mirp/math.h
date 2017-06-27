@@ -146,6 +146,23 @@ double mirp_binomial_coefficient(int n, int k);
  */
 void mirp_binomial_coefficient_mp(mpfr_t result, long int n, long int k);
 
+
+/*! \brief Calculates a binomial coefficient with interval arithmetic
+ *
+ * A binomial coefficient is defined as
+ *
+ * (n,k) = n! / (k! * (n-k)!)
+ *
+ * for n,k >= 0 and k <= n
+ *
+ * The working precision is taken to be the same as \p result
+ *
+ * \param [in] n The coefficient n
+ * \param [in] k The coefficient k
+ * \param [out] result The resulting binomial coefficient (n,k)
+ */
+void mirp_binomial_coefficient_interval(arb_t result, long int n, long int k, slong working_prec);
+
 #ifdef __cplusplus
 }
 #endif

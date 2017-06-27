@@ -5,14 +5,15 @@
 #include <stdlib.h>
 
 static void mirp_farr_mp(mpfr_t * f,
-                           int lmn1, int lmn2,
-                           mpfr_t xyz1, mpfr_t xyz2,
-                           mpfr_prec_t working_prec)
+                         int lmn1, int lmn2,
+                         mpfr_t xyz1, mpfr_t xyz2,
+                         mpfr_prec_t working_prec)
 {
     int i, j, k;
 
     mpfr_t tmp1, tmp2;
-    mpfr_inits2(working_prec, tmp1, tmp2, (mpfr_ptr)0);
+    mpfr_init2(tmp1, working_prec);
+    mpfr_init2(tmp2, working_prec);
 
     for (k = 0; k <= lmn1 + lmn2; k++)
     {
@@ -47,13 +48,14 @@ static void mirp_farr_mp(mpfr_t * f,
 }
 
 
-static void mirp_G_mp( mpfr_t G, mpfr_t fp, mpfr_t fq,
-                        int np, int nq, int w1, int w2,
-                        mpfr_t gammap, mpfr_t gammaq, mpfr_t gammapq,
-                        mpfr_prec_t working_prec)
+static void mirp_G_mp(mpfr_t G, mpfr_t fp, mpfr_t fq,
+                      int np, int nq, int w1, int w2,
+                      mpfr_t gammap, mpfr_t gammaq, mpfr_t gammapq,
+                      mpfr_prec_t working_prec)
 {
     mpfr_t tmp1, tmp2;
-    mpfr_inits2(working_prec, tmp1, tmp2, (mpfr_ptr)0);
+    mpfr_init2(tmp1, working_prec);
+    mpfr_init2(tmp2, working_prec);
 
     mpfr_set_si(G, NEG1_POW(np), MPFR_RNDN);
     mpfr_mul(G, G, fp, MPFR_RNDN);
@@ -89,11 +91,11 @@ static void mirp_G_mp( mpfr_t G, mpfr_t fp, mpfr_t fq,
 
 
 void mirp_single_eri_mp(mpfr_t result,
-                          int l1, int m1, int n1, mpfr_t alpha1, mpfr_t A[3],
-                          int l2, int m2, int n2, mpfr_t alpha2, mpfr_t B[3],
-                          int l3, int m3, int n3, mpfr_t alpha3, mpfr_t C[3],
-                          int l4, int m4, int n4, mpfr_t alpha4, mpfr_t D[3],
-                          mpfr_prec_t working_prec)
+                        int l1, int m1, int n1, mpfr_t alpha1, mpfr_t A[3],
+                        int l2, int m2, int n2, mpfr_t alpha2, mpfr_t B[3],
+                        int l3, int m3, int n3, mpfr_t alpha3, mpfr_t C[3],
+                        int l4, int m4, int n4, mpfr_t alpha4, mpfr_t D[3],
+                        mpfr_prec_t working_prec)
 {
     const int L_l = l1+l2+l3+l4;
     const int L_m = m1+m2+m3+m4;
@@ -244,7 +246,7 @@ void mirp_single_eri_mp(mpfr_t result,
                     mpfr_set_ui(tmp2, 4, MPFR_RNDN);
                     mpfr_pow_si(tmp2, tmp2, u1 + u2 + tx + v1 + v2 + ty + w1 + w2 + tz, MPFR_RNDN);
 
-                    mpfr_pow_si(tmp3, gammapq, tx + ty + tz, MPFR_RNDN);
+                    mpfr_pow_ui(tmp3, gammapq, tx + ty + tz, MPFR_RNDN);
                     mpfr_mul(tmp2, tmp2, tmp3, MPFR_RNDN);
 
                     mpfr_fac_ui(tmp3, xfac, MPFR_RNDN);
@@ -338,50 +340,3 @@ void mirp_single_eri_mp(mpfr_t result,
     mpfr_clear(result_tmp);
 }
 
-
-void mirp_single_eri_mp_str(char ** result,
-                              int l1, int m1, int n1, const char * alpha1, const char * A[3],
-                              int l2, int m2, int n2, const char * alpha2, const char * B[3],
-                              int l3, int m3, int n3, const char * alpha3, const char * C[3],
-                              int l4, int m4, int n4, const char * alpha4, const char * D[3],
-                              long working_prec)
-{
-    mpfr_t alpha1_mp, alpha2_mp, alpha3_mp, alpha4_mp;
-    mpfr_t A_mp[3], B_mp[3], C_mp[3], D_mp[3];
-    mpfr_t result_mp;
-    mpfr_init2(result_mp, (mpfr_prec_t)working_prec);
-
-    mpfr_init_set_str(alpha1_mp, alpha1, 10, MPFR_RNDN);
-    mpfr_init_set_str(alpha2_mp, alpha2, 10, MPFR_RNDN);
-    mpfr_init_set_str(alpha3_mp, alpha3, 10, MPFR_RNDN);
-    mpfr_init_set_str(alpha4_mp, alpha4, 10, MPFR_RNDN);
-    mpfr_init_set_str(A_mp[0], A[0], 10, MPFR_RNDN);
-    mpfr_init_set_str(A_mp[1], A[1], 10, MPFR_RNDN);
-    mpfr_init_set_str(A_mp[2], A[2], 10, MPFR_RNDN);
-    mpfr_init_set_str(B_mp[0], B[0], 10, MPFR_RNDN);
-    mpfr_init_set_str(B_mp[1], B[1], 10, MPFR_RNDN);
-    mpfr_init_set_str(B_mp[2], B[2], 10, MPFR_RNDN);
-    mpfr_init_set_str(C_mp[0], C[0], 10, MPFR_RNDN);
-    mpfr_init_set_str(C_mp[1], C[1], 10, MPFR_RNDN);
-    mpfr_init_set_str(C_mp[2], C[2], 10, MPFR_RNDN);
-    mpfr_init_set_str(D_mp[0], D[0], 10, MPFR_RNDN);
-    mpfr_init_set_str(D_mp[1], D[1], 10, MPFR_RNDN);
-    mpfr_init_set_str(D_mp[2], D[2], 10, MPFR_RNDN);
-
-    mirp_single_eri_mp(result_mp,
-                         l1, m1, n1, alpha1_mp, A_mp,
-                         l2, m2, n2, alpha2_mp, B_mp,
-                         l3, m3, n3, alpha3_mp, C_mp,
-                         l4, m4, n4, alpha4_mp, D_mp,
-                         (mpfr_prec_t)working_prec);
-
-   
-    mpfr_asprintf(result, "%Re", result_mp);
-
-    mirp_clear_mpfr_arr(A_mp, 3);
-    mirp_clear_mpfr_arr(B_mp, 3);
-    mirp_clear_mpfr_arr(C_mp, 3);
-    mirp_clear_mpfr_arr(D_mp, 3);
-    mpfr_clears(alpha1_mp, alpha2_mp, alpha3_mp, alpha4_mp, (mpfr_ptr)0);
-    mpfr_clear(result_mp);
-}

@@ -10,5 +10,6 @@ add_library(mirp
 
                eri.c
                eri_mp.c
+               eri_interval.c
 )
 

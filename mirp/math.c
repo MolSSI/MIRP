@@ -114,3 +114,28 @@ void mirp_binomial_coefficient_mp(mpfr_t result, long int n, long int k)
     mpfr_clear(f);
 }
 
+
+void mirp_binomial_coefficient_interval(arb_t result, long int n, long int k, slong working_prec)
+{
+    assert(n >= 0);
+    assert(k >= 0);
+    assert(k <= n);
+
+    /* A temporary */
+    arb_t f;
+    arb_init(f);
+
+    /* put k! in the result */
+    arb_fac_ui(result, k, working_prec);
+
+    /* next, (n-k)! in temporary, and multiply into result */
+    arb_fac_ui(f, n-k, working_prec);
+    arb_mul(result, result, f, working_prec);
+
+    /* now n! in temporary, and divide */
+    arb_fac_ui(f, n, working_prec);
+    arb_div(result, f, result, working_prec);
+
+    arb_clear(f);
+}
+
