@@ -2,6 +2,7 @@
 
 #include <gmp.h>
 #include <mpfr.h>
+#include <arb.h>
 
 #ifdef __cplusplus
 extern "C" {
