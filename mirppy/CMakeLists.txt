@@ -3,6 +3,7 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 
 add_library(mirppy MODULE 
                    export_boys.c
+                   export_eri.c
                    export.c)
 
 set_target_properties(mirppy PROPERTIES PREFIX "")

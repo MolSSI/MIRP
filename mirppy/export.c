@@ -1,20 +1,28 @@
 #include <Python.h>
 
-/* In the various export files */
+/* In export_boys.c */
 PyObject * export_mirp_boys_mp(PyObject *self, PyObject *args);
 PyObject * export_mirp_boys_interval(PyObject *self, PyObject *args);
-PyObject * export_mirp_boys_createtest(PyObject *self, PyObject *args);
 PyObject * export_mirp_boys_double(PyObject *self, PyObject *args);
+
+/* In export_eri.c */
+PyObject * export_mirp_single_eri_double(PyObject *self, PyObject *args);
+PyObject * export_mirp_prim_eri_double(PyObject *self, PyObject *args);
+PyObject * export_mirp_eri_double(PyObject *self, PyObject *args);
 
 
 static PyMethodDef mirp_methods[] = {
-    {"mirp_boys_mp", export_mirp_boys_mp, METH_VARARGS,
+    {"boys_mp", export_mirp_boys_mp, METH_VARARGS,
      "Test function"},
-    {"mirp_boys_interval", export_mirp_boys_interval, METH_VARARGS,
+    {"boys_interval", export_mirp_boys_interval, METH_VARARGS,
      "Test function"},
-    {"mirp_boys_double", export_mirp_boys_double, METH_VARARGS,
+    {"boys_double", export_mirp_boys_double, METH_VARARGS,
      "Test function"},
-    {"mirp_boys_createtest", export_mirp_boys_createtest, METH_VARARGS,
+    {"single_eri_double", export_mirp_single_eri_double, METH_VARARGS,
+     "Test function"},
+    {"prim_eri_double", export_mirp_prim_eri_double, METH_VARARGS,
+     "Test function"},
+    {"eri_double", export_mirp_eri_double, METH_VARARGS,
      "Test function"},
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
