@@ -1,5 +1,6 @@
 #include "mirp/math.h"
 #include "mirp/arb_help.h"
+#include "mirp/shell.h"
 #include "mirp/boys.h"
 #include "mirp/gpt.h"
 #include <stdlib.h>
@@ -94,10 +95,10 @@ static void mirp_G_interval(arb_t G, arb_t fp, arb_t fq,
 }
 
 void mirp_single_eri_interval(arb_t result,
-                              int l1, int m1, int n1, arb_t alpha1, arb_t A[3],
-                              int l2, int m2, int n2, arb_t alpha2, arb_t B[3],
-                              int l3, int m3, int n3, arb_t alpha3, arb_t C[3],
-                              int l4, int m4, int n4, arb_t alpha4, arb_t D[3],
+                              int l1, int m1, int n1, const arb_t alpha1, const arb_t A[3],
+                              int l2, int m2, int n2, const arb_t alpha2, const arb_t B[3],
+                              int l3, int m3, int n3, const arb_t alpha3, const arb_t C[3],
+                              int l4, int m4, int n4, const arb_t alpha4, const arb_t D[3],
                               slong working_prec)
 {
     const int L_l = l1+l2+l3+l4;
@@ -120,12 +121,8 @@ void mirp_single_eri_interval(arb_t result,
     mirp_init_arb_arr(fmq, m3+m4+1);
     mirp_init_arb_arr(fnq, n3+n4+1);
 
-    /* We need a temporary result variable in our working precision
-     * We accumulate there, only (possibly) rounding at the very end
-     */
-    arb_t result_tmp;
-    arb_init(result_tmp);
-    arb_zero(result_tmp);
+    /* Zero the result (we will be summing into it) */
+    arb_zero(result);
 
     /* Temporary variables used in constructing expressions */
     arb_t tmp1, tmp2, tmp3;
@@ -286,7 +283,7 @@ void mirp_single_eri_interval(arb_t result,
 
                     arb_div(tmp1, tmp1, tmp2, working_prec);
 
-                    arb_add(result_tmp, result_tmp, tmp1, working_prec);
+                    arb_add(result, result, tmp1, working_prec);
                 }
             }
         }
@@ -331,10 +328,7 @@ void mirp_single_eri_interval(arb_t result,
     arb_div(tmp1, tmp1, tmp2, working_prec);
 
     /* apply the prefactor */
-    arb_mul(result_tmp, result_tmp, tmp1, working_prec);
-
-    /* Store in the actual result area passed to this function (possibly rounding) */
-    arb_set(result, result_tmp);
+    arb_mul(result, result, tmp1, working_prec);
 
 
     /* cleanup */
@@ -366,5 +360,119 @@ void mirp_single_eri_interval(arb_t result,
     arb_clear(Gz);
     arb_clear(Gxy);
     arb_clear(Gxyz);
-    arb_clear(result_tmp);
+}
+
+
+size_t mirp_prim_eri_interval(arb_t * result,
+                              int am1, const arb_t alpha1, const arb_t A[3],
+                              int am2, const arb_t alpha2, const arb_t B[3],
+                              int am3, const arb_t alpha3, const arb_t C[3],
+                              int am4, const arb_t alpha4, const arb_t D[3],
+                              slong working_prec)
+{
+
+    const size_t ncart1 = MIRP_NCART(am1);
+    const size_t ncart2 = MIRP_NCART(am2);
+    const size_t ncart3 = MIRP_NCART(am3);
+    const size_t ncart4 = MIRP_NCART(am4);
+    const size_t ncart1234 = ncart1*ncart2*ncart3*ncart4;
+
+    size_t idx = 0;
+    int lmn1[3] = {am1, 0, 0};
+    for(size_t i = 0; i < ncart1; i++)
+    {
+        int lmn2[3] = {am2, 0, 0};
+        for(size_t j = 0; j < ncart2; j++)
+        {
+            int lmn3[3] = {am3, 0, 0};
+            for(size_t k = 0; k < ncart3; k++)
+            {
+                int lmn4[3] = {am4, 0, 0};
+                for(size_t l = 0; l < ncart4; l++)
+                {
+                    mirp_single_eri_interval(*(result + idx),
+                                             lmn1[0], lmn1[1], lmn1[2], alpha1, A,
+                                             lmn2[0], lmn2[1], lmn2[2], alpha2, B,
+                                             lmn3[0], lmn3[1], lmn3[2], alpha3, C,
+                                             lmn4[0], lmn4[1], lmn4[2], alpha4, D,
+                                             working_prec);
+
+                    idx++;
+
+                    mirp_iterate_gaussian(lmn4);
+                }
+
+                mirp_iterate_gaussian(lmn3);
+            }
+
+            mirp_iterate_gaussian(lmn2);
+        }
+
+        mirp_iterate_gaussian(lmn1);
+    }
+
+    return ncart1234;
+}
+
+
+size_t mirp_eri_interval(arb_t * result,
+                         int am1, const arb_t A[3], int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,
+                         int am2, const arb_t B[3], int nprim2, int ngeneral2, const arb_t * alpha2, const arb_t * coeff2,
+                         int am3, const arb_t C[3], int nprim3, int ngeneral3, const arb_t * alpha3, const arb_t * coeff3,
+                         int am4, const arb_t D[4], int nprim4, int ngeneral4, const arb_t * alpha4, const arb_t * coeff4,
+                         slong working_prec)
+{
+    const size_t ncart1 = MIRP_NCART(am1);
+    const size_t ncart2 = MIRP_NCART(am2);
+    const size_t ncart3 = MIRP_NCART(am3);
+    const size_t ncart4 = MIRP_NCART(am4);
+    const size_t ncart1234 = ncart1*ncart2*ncart3*ncart4;
+    const size_t ngeneral1234 = ngeneral1*ngeneral2*ngeneral3*ngeneral4;
+    const size_t full_size = ncart1234*ngeneral1234;
+
+    arb_t coeff;
+    arb_init(coeff);
+
+    arb_t * result_buffer = (arb_t *)malloc(full_size * sizeof(arb_t));
+    mirp_init_arb_arr(result_buffer, full_size);
+
+    for(size_t i = 0; i < full_size; i++)
+        arb_zero(result[i]);
+
+    for(int i = 0; i < nprim1; i++)
+    for(int j = 0; j < nprim2; j++)
+    for(int k = 0; k < nprim3; k++)
+    for(int l = 0; l < nprim4; l++)
+    {
+        mirp_prim_eri_interval(result_buffer,
+                               am1, alpha1[i], A,
+                               am2, alpha2[j], B,
+                               am3, alpha3[k], C,
+                               am4, alpha4[l], D,
+                               working_prec);
+
+        size_t ntotal = 0;
+        for(int m = 0; m < ngeneral1; m++)
+        for(int n = 0; n < ngeneral2; n++)
+        for(int o = 0; o < ngeneral3; o++)
+        for(int p = 0; p < ngeneral4; p++)
+        {
+            arb_mul(coeff, coeff1[m*nprim1+i], coeff2[n*nprim2+j], working_prec);
+            arb_mul(coeff, coeff,              coeff3[o*nprim3+k], working_prec);
+            arb_mul(coeff, coeff,              coeff4[p*nprim4+l], working_prec);
+
+            for(size_t q = 0; q < ncart1234; q++)
+            {
+                const size_t idx = ntotal*ncart1234+q;
+                arb_addmul(result[idx], result_buffer[q], coeff, working_prec);
+            }
+            ntotal++;
+        }
+    }
+
+    arb_clear(coeff);
+    mirp_clear_arb_arr(result_buffer, full_size);
+    free(result_buffer);    
+
+    return full_size;
 }

@@ -6,7 +6,7 @@
 
 #include "mirp/gpt.h"
 
-void mirp_gpt(double alpha1, double alpha2, double A[3], double B[3],
+void mirp_gpt(double alpha1, double alpha2, const double A[3], const double B[3],
               double * gamma, double P[3], double PA[3], double PB[3],
               double * AB2)
 {
@@ -30,8 +30,8 @@ void mirp_gpt(double alpha1, double alpha2, double A[3], double B[3],
 }
 
 
-void mirp_gpt_mp(mpfr_t alpha1, mpfr_t alpha2,
-                 mpfr_t A[3], mpfr_t B[3],
+void mirp_gpt_mp(const mpfr_t alpha1, const mpfr_t alpha2,
+                 const mpfr_t A[3], const mpfr_t B[3],
                  mpfr_t gamma,
                  mpfr_t P[3], mpfr_t PA[3], mpfr_t PB[3],
                  mpfr_t AB2,
@@ -91,8 +91,8 @@ void mirp_gpt_mp(mpfr_t alpha1, mpfr_t alpha2,
     mpfr_clears(tmp1, tmp2, tmp3, (mpfr_ptr)0);
 }
 
-void mirp_gpt_interval(arb_t alpha1, arb_t alpha2,
-                       arb_t A[3], arb_t B[3],
+void mirp_gpt_interval(const arb_t alpha1, const arb_t alpha2,
+                       const arb_t A[3], const arb_t B[3],
                        arb_t gamma,
                        arb_t P[3], arb_t PA[3], arb_t PB[3],
                        arb_t AB2,

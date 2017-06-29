@@ -40,6 +40,10 @@ extern "C" {
 #define MIRP_LOG_10_2 0.3010299956639812
 
 
+/* \brief Number of cartesian functions for a given angular momentum */
+#define MIRP_NCART(am) ((((am)+1)*((am)+2))/2)
+
+
 /* \brief Calculates a factorial in double precision
  *
  * A factorial is defined as

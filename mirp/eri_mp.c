@@ -1,4 +1,5 @@
 #include "mirp/math.h"
+#include "mirp/shell.h"
 #include "mirp/mpfr_help.h"
 #include "mirp/boys.h"
 #include "mirp/gpt.h"
@@ -91,10 +92,10 @@ static void mirp_G_mp(mpfr_t G, mpfr_t fp, mpfr_t fq,
 
 
 void mirp_single_eri_mp(mpfr_t result,
-                        int l1, int m1, int n1, mpfr_t alpha1, mpfr_t A[3],
-                        int l2, int m2, int n2, mpfr_t alpha2, mpfr_t B[3],
-                        int l3, int m3, int n3, mpfr_t alpha3, mpfr_t C[3],
-                        int l4, int m4, int n4, mpfr_t alpha4, mpfr_t D[3],
+                        int l1, int m1, int n1, const mpfr_t alpha1, const mpfr_t A[3],
+                        int l2, int m2, int n2, const mpfr_t alpha2, const mpfr_t B[3],
+                        int l3, int m3, int n3, const mpfr_t alpha3, const mpfr_t C[3],
+                        int l4, int m4, int n4, const mpfr_t alpha4, const mpfr_t D[3],
                         mpfr_prec_t working_prec)
 {
     const int L_l = l1+l2+l3+l4;
@@ -340,3 +341,124 @@ void mirp_single_eri_mp(mpfr_t result,
     mpfr_clear(result_tmp);
 }
 
+
+size_t mirp_prim_eri_mp(mpfr_t * result,
+                        int am1, const mpfr_t alpha1, const mpfr_t A[3],
+                        int am2, const mpfr_t alpha2, const mpfr_t B[3],
+                        int am3, const mpfr_t alpha3, const mpfr_t C[3],
+                        int am4, const mpfr_t alpha4, const mpfr_t D[3],
+                        mpfr_prec_t working_prec)
+{
+
+    const size_t ncart1 = MIRP_NCART(am1);
+    const size_t ncart2 = MIRP_NCART(am2);
+    const size_t ncart3 = MIRP_NCART(am3);
+    const size_t ncart4 = MIRP_NCART(am4);
+    const size_t ncart1234 = ncart1*ncart2*ncart3*ncart4;
+
+    size_t idx = 0;
+    int lmn1[3] = {am1, 0, 0};
+    for(size_t i = 0; i < ncart1; i++)
+    {
+        int lmn2[3] = {am2, 0, 0};
+        for(size_t j = 0; j < ncart2; j++)
+        {
+            int lmn3[3] = {am3, 0, 0};
+            for(size_t k = 0; k < ncart3; k++)
+            {
+                int lmn4[3] = {am4, 0, 0};
+                for(size_t l = 0; l < ncart4; l++)
+                {
+                    mirp_single_eri_mp(*(result + idx),
+                                       lmn1[0], lmn1[1], lmn1[2], alpha1, A,
+                                       lmn2[0], lmn2[1], lmn2[2], alpha2, B,
+                                       lmn3[0], lmn3[1], lmn3[2], alpha3, C,
+                                       lmn4[0], lmn4[1], lmn4[2], alpha4, D,
+                                       working_prec);
+
+                    idx++;
+
+                    mirp_iterate_gaussian(lmn4);
+                }
+
+                mirp_iterate_gaussian(lmn3);
+            }
+
+            mirp_iterate_gaussian(lmn2);
+        }
+
+        mirp_iterate_gaussian(lmn1);
+    }
+
+    return ncart1234;
+}
+
+size_t mirp_eri_mp(mpfr_t * result,
+                   int am1, const mpfr_t A[3], int nprim1, int ngeneral1, const mpfr_t * alpha1, const mpfr_t * coeff1,
+                   int am2, const mpfr_t B[3], int nprim2, int ngeneral2, const mpfr_t * alpha2, const mpfr_t * coeff2,
+                   int am3, const mpfr_t C[3], int nprim3, int ngeneral3, const mpfr_t * alpha3, const mpfr_t * coeff3,
+                   int am4, const mpfr_t D[4], int nprim4, int ngeneral4, const mpfr_t * alpha4, const mpfr_t * coeff4,
+                   mpfr_prec_t working_prec)
+{
+    const size_t ncart1 = MIRP_NCART(am1);
+    const size_t ncart2 = MIRP_NCART(am2);
+    const size_t ncart3 = MIRP_NCART(am3);
+    const size_t ncart4 = MIRP_NCART(am4);
+    const size_t ncart1234 = ncart1*ncart2*ncart3*ncart4;
+    const size_t ngeneral1234 = ngeneral1*ngeneral2*ngeneral3*ngeneral4;
+    const size_t full_size = ncart1234*ngeneral1234;
+
+    mpfr_t coeff;
+    mpfr_init2(coeff, working_prec);
+
+    mpfr_t * result_tmp = (mpfr_t *)malloc(full_size * sizeof(mpfr_t));
+    mpfr_t * result_buffer = (mpfr_t *)malloc(full_size * sizeof(mpfr_t));
+    mirp_init_mpfr_arr(result_tmp, full_size, working_prec);
+    mirp_init_mpfr_arr(result_buffer, full_size, working_prec);
+
+    for(size_t i = 0; i < full_size; i++)
+        mpfr_set_zero(result_tmp[i], 0);
+
+    for(int i = 0; i < nprim1; i++)
+    for(int j = 0; j < nprim2; j++)
+    for(int k = 0; k < nprim3; k++)
+    for(int l = 0; l < nprim4; l++)
+    {
+        mirp_prim_eri_mp(result_buffer,
+                         am1, alpha1[i], A,
+                         am2, alpha2[j], B,
+                         am3, alpha3[k], C,
+                         am4, alpha4[l], D,
+                         working_prec);
+
+
+        size_t ntotal = 0;
+        for(int m = 0; m < ngeneral1; m++)
+        for(int n = 0; n < ngeneral2; n++)
+        for(int o = 0; o < ngeneral3; o++)
+        for(int p = 0; p < ngeneral4; p++)
+        {
+            mpfr_mul(coeff, coeff1[m*nprim1+i], coeff2[n*nprim2+j], MPFR_RNDN);
+            mpfr_mul(coeff, coeff,              coeff3[o*nprim3+k], MPFR_RNDN);
+            mpfr_mul(coeff, coeff,              coeff4[p*nprim4+l], MPFR_RNDN);
+
+            for(size_t q = 0; q < ncart1234; q++)
+            {
+                const size_t idx = ntotal*ncart1234+q;
+                mpfr_fma(result_tmp[idx], result_buffer[q], coeff, result_tmp[idx], MPFR_RNDN);
+            }
+            ntotal++;
+        }
+    }
+
+    for(size_t i = 0; i < full_size; i++)
+        mpfr_set(result[i], result_tmp[i], MPFR_RNDN);
+
+    mpfr_clear(coeff);
+    mirp_clear_mpfr_arr(result_tmp, full_size);
+    mirp_clear_mpfr_arr(result_buffer, full_size);
+    free(result_buffer);    
+    free(result_tmp);    
+
+    return full_size;
+}

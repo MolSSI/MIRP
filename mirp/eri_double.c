@@ -1,5 +1,7 @@
+#include <string.h> /* for memset */
 #include <math.h>
 #include "mirp/math.h"
+#include "mirp/shell.h"
 #include "mirp/boys.h"
 #include "mirp/gpt.h"
 #include "mirp/eri.h"
@@ -28,11 +30,11 @@ static void compute_farr(double * f, int lmn1, int lmn2, double xyz1, double xyz
     }
 }
 
-void mirp_single_eri(double * result,
-                       int l1, int m1, int n1, double alpha1, double A[3],
-                       int l2, int m2, int n2, double alpha2, double B[3],
-                       int l3, int m3, int n3, double alpha3, double C[3],
-                       int l4, int m4, int n4, double alpha4, double D[3])
+void mirp_single_eri_double(double * result,
+                            int l1, int m1, int n1, double alpha1, const double A[3],
+                            int l2, int m2, int n2, double alpha2, const double B[3],
+                            int l3, int m3, int n3, double alpha3, const double C[3],
+                            int l4, int m4, int n4, double alpha4, const double D[3])
 {
     const int L_l = l1+l2+l3+l4;
     const int L_m = m1+m2+m3+m4;
@@ -136,4 +138,105 @@ void mirp_single_eri(double * result,
     *result *= pfac;
 }
 
+size_t mirp_prim_eri_double(double * result,
+                            int am1, double alpha1, const double A[3],
+                            int am2, double alpha2, const double B[3],
+                            int am3, double alpha3, const double C[3],
+                            int am4, double alpha4, const double D[3])
+{
+
+    const size_t ncart1 = MIRP_NCART(am1);
+    const size_t ncart2 = MIRP_NCART(am2);
+    const size_t ncart3 = MIRP_NCART(am3);
+    const size_t ncart4 = MIRP_NCART(am4);
+    const size_t ncart1234 = ncart1*ncart2*ncart3*ncart4;
+
+    size_t idx = 0;
+    int lmn1[3] = {am1, 0, 0};
+    for(size_t i = 0; i < ncart1; i++)
+    {
+        int lmn2[3] = {am2, 0, 0};
+        for(size_t j = 0; j < ncart2; j++)
+        {
+            int lmn3[3] = {am3, 0, 0};
+            for(size_t k = 0; k < ncart3; k++)
+            {
+                int lmn4[3] = {am4, 0, 0};
+                for(size_t l = 0; l < ncart4; l++)
+                {
+                    mirp_single_eri_double(result + idx,
+                                           lmn1[0], lmn1[1], lmn1[2], alpha1, A,
+                                           lmn2[0], lmn2[1], lmn2[2], alpha2, B,
+                                           lmn3[0], lmn3[1], lmn3[2], alpha3, C,
+                                           lmn4[0], lmn4[1], lmn4[2], alpha4, D);
+
+                    idx++;
+
+                    mirp_iterate_gaussian(lmn4);
+                }
+
+                mirp_iterate_gaussian(lmn3);
+            }
+
+            mirp_iterate_gaussian(lmn2);
+        }
+
+        mirp_iterate_gaussian(lmn1);
+    }
+
+    return ncart1234;
+}
+
+
+size_t mirp_eri_double(double * result,
+                       int am1, const double A[3], int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
+                       int am2, const double B[3], int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
+                       int am3, const double C[3], int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
+                       int am4, const double D[4], int nprim4, int ngeneral4, const double * alpha4, const double * coeff4)
+{
+
+    const size_t ncart1 = MIRP_NCART(am1);
+    const size_t ncart2 = MIRP_NCART(am2);
+    const size_t ncart3 = MIRP_NCART(am3);
+    const size_t ncart4 = MIRP_NCART(am4);
+    const size_t ncart1234 = ncart1*ncart2*ncart3*ncart4;
+    const size_t ngeneral1234 = ngeneral1*ngeneral2*ngeneral3*ngeneral4;
+    const size_t full_size = ncart1234*ngeneral1234;
+
+    double * result_buffer = (double *)malloc(full_size * sizeof(double));
+    memset(result, 0, full_size * sizeof(double));
+
+    for(int i = 0; i < nprim1; i++)
+    for(int j = 0; j < nprim2; j++)
+    for(int k = 0; k < nprim3; k++)
+    for(int l = 0; l < nprim4; l++)
+    {
+        mirp_prim_eri_double(result_buffer,
+                             am1, alpha1[i], A,
+                             am2, alpha2[j], B,
+                             am3, alpha3[k], C,
+                             am4, alpha4[l], D);
+
+        size_t ntotal = 0;
+        for(int m = 0; m < ngeneral1; m++)
+        for(int n = 0; n < ngeneral2; n++)
+        for(int o = 0; o < ngeneral3; o++)
+        for(int p = 0; p < ngeneral4; p++)
+        {
+            const double coeff = coeff1[m*nprim1+i]
+                               * coeff2[n*nprim2+j]
+                               * coeff3[o*nprim3+k]
+                               * coeff4[p*nprim4+l];
+
+            for(size_t q = 0; q < ncart1234; q++)
+                result[ntotal*ncart1234+q] += result_buffer[q] * coeff;
+            ntotal++;
+        }
+
+    }
+
+    free(result_buffer);    
+
+    return full_size;
+}
 
