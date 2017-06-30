@@ -44,7 +44,7 @@ void mirp_normalize_shell_double(int am, int nprim, int ngeneral,
      */
     double norm_fac = MIRP_PI_32;
     for(int i = 1; i <= am; i++)
-        norm_fac *= (2*i-1)/2;
+        norm_fac *= ((double)(2.0*i-1))/2.0;
 
     for(int n = 0; n < ngeneral; n++)
     {
