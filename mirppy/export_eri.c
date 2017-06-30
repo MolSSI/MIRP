@@ -15,21 +15,21 @@ PyObject * export_mirp_single_eri_double(PyObject * self, PyObject *args)
     int lmn[4][3];
     double ABCD[4][3];
 
-    if(!PyArg_ParseTuple(args, "(iii)d(ddd)(iii)d(ddd)(iii)d(ddd)(iii)d(ddd)",
-                         &(lmn[0][0]), &(lmn[0][1]), &(lmn[0][2]), &(alpha[0]), &(ABCD[0][0]), &(ABCD[0][1]), &(ABCD[0][2]),
-                         &(lmn[1][0]), &(lmn[1][1]), &(lmn[1][2]), &(alpha[1]), &(ABCD[1][0]), &(ABCD[1][1]), &(ABCD[1][2]),
-                         &(lmn[2][0]), &(lmn[2][1]), &(lmn[2][2]), &(alpha[2]), &(ABCD[2][0]), &(ABCD[2][1]), &(ABCD[2][2]),
-                         &(lmn[3][0]), &(lmn[3][1]), &(lmn[3][2]), &(alpha[3]), &(ABCD[3][0]), &(ABCD[3][1]), &(ABCD[3][2])))
+    if(!PyArg_ParseTuple(args, "(iii)(ddd)d(iii)(ddd)d(iii)(ddd)d(iii)(ddd)d",
+                         &(lmn[0][0]), &(lmn[0][1]), &(lmn[0][2]), &(ABCD[0][0]), &(ABCD[0][1]), &(ABCD[0][2]), &(alpha[0]), 
+                         &(lmn[1][0]), &(lmn[1][1]), &(lmn[1][2]), &(ABCD[1][0]), &(ABCD[1][1]), &(ABCD[1][2]), &(alpha[1]), 
+                         &(lmn[2][0]), &(lmn[2][1]), &(lmn[2][2]), &(ABCD[2][0]), &(ABCD[2][1]), &(ABCD[2][2]), &(alpha[2]), 
+                         &(lmn[3][0]), &(lmn[3][1]), &(lmn[3][2]), &(ABCD[3][0]), &(ABCD[3][1]), &(ABCD[3][2]), &(alpha[3])))
         return NULL;
 
 
 
     double result;
     mirp_single_eri_double(&result,
-                           lmn[0][0], lmn[0][1], lmn[0][2], alpha[0], ABCD[0],
-                           lmn[1][0], lmn[1][1], lmn[1][2], alpha[1], ABCD[1],
-                           lmn[2][0], lmn[2][1], lmn[2][2], alpha[2], ABCD[2],
-                           lmn[3][0], lmn[3][1], lmn[3][2], alpha[3], ABCD[3]);
+                           lmn[0], ABCD[0], alpha[0], 
+                           lmn[1], ABCD[1], alpha[1], 
+                           lmn[2], ABCD[2], alpha[2], 
+                           lmn[3], ABCD[3], alpha[3]);
 
     PyObject * ret = PyFloat_FromDouble(result);
     return ret;
@@ -44,11 +44,11 @@ PyObject * export_mirp_prim_eri_double(PyObject * self, PyObject *args)
     int am[4];
     double ABCD[4][3];
 
-    if(!PyArg_ParseTuple(args, "id(ddd)id(ddd)id(ddd)id(ddd)",
-                         &(am[0]), &(alpha[0]), &(ABCD[0][0]), &(ABCD[0][1]), &(ABCD[0][2]),
-                         &(am[1]), &(alpha[1]), &(ABCD[1][0]), &(ABCD[1][1]), &(ABCD[1][2]),
-                         &(am[2]), &(alpha[2]), &(ABCD[2][0]), &(ABCD[2][1]), &(ABCD[2][2]),
-                         &(am[3]), &(alpha[3]), &(ABCD[3][0]), &(ABCD[3][1]), &(ABCD[3][2])))
+    if(!PyArg_ParseTuple(args, "i(ddd)di(ddd)i(ddd)di(ddd)d",
+                         &(am[0]), &(ABCD[0][0]), &(ABCD[0][1]), &(ABCD[0][2]), &(alpha[0]),
+                         &(am[1]), &(ABCD[1][0]), &(ABCD[1][1]), &(ABCD[1][2]), &(alpha[1]),
+                         &(am[2]), &(ABCD[2][0]), &(ABCD[2][1]), &(ABCD[2][2]), &(alpha[2]),
+                         &(am[3]), &(ABCD[3][0]), &(ABCD[3][1]), &(ABCD[3][2]), &(alpha[3])))
         return NULL;
 
 
@@ -57,10 +57,10 @@ PyObject * export_mirp_prim_eri_double(PyObject * self, PyObject *args)
     double * result = (double *)malloc(size * sizeof(double));
 
     mirp_prim_eri_double(result,
-                         am[0], alpha[0], ABCD[0],
-                         am[1], alpha[1], ABCD[1],
-                         am[2], alpha[2], ABCD[2],
-                         am[3], alpha[3], ABCD[3]);
+                         am[0], ABCD[0], alpha[0],
+                         am[1], ABCD[1], alpha[1],
+                         am[2], ABCD[2], alpha[2],
+                         am[3], ABCD[3], alpha[3]);
 
     PyObject * ret = PyList_New(size);
     for(size_t i = 0; i < size; i++)

@@ -95,31 +95,31 @@ static void mirp_G_interval(arb_t G, arb_t fp, arb_t fq,
 }
 
 void mirp_single_eri_interval(arb_t result,
-                              int l1, int m1, int n1, const arb_t alpha1, const arb_t A[3],
-                              int l2, int m2, int n2, const arb_t alpha2, const arb_t B[3],
-                              int l3, int m3, int n3, const arb_t alpha3, const arb_t C[3],
-                              int l4, int m4, int n4, const arb_t alpha4, const arb_t D[3],
+                              const int * lmn1, const arb_t * A, const arb_t alpha1,
+                              const int * lmn2, const arb_t * B, const arb_t alpha2,
+                              const int * lmn3, const arb_t * C, const arb_t alpha3,
+                              const int * lmn4, const arb_t * D, const arb_t alpha4,
                               slong working_prec)
 {
-    const int L_l = l1+l2+l3+l4;
-    const int L_m = m1+m2+m3+m4;
-    const int L_n = n1+n2+n3+n4;
+    const int L_l = lmn1[0]+lmn2[0]+lmn3[0]+lmn4[0];
+    const int L_m = lmn1[1]+lmn2[1]+lmn3[1]+lmn4[1];
+    const int L_n = lmn1[2]+lmn2[2]+lmn3[2]+lmn4[2];
     const int L = L_l + L_m + L_n;
 
     arb_t F[L+1];
-    arb_t flp[l1+l2+1];
-    arb_t fmp[m1+m2+1];
-    arb_t fnp[n1+n2+1];
-    arb_t flq[l3+l4+1];
-    arb_t fmq[m3+m4+1];
-    arb_t fnq[n3+n4+1];
+    arb_t flp[lmn1[0]+lmn2[0]+1];
+    arb_t fmp[lmn1[1]+lmn2[1]+1];
+    arb_t fnp[lmn1[2]+lmn2[2]+1];
+    arb_t flq[lmn3[0]+lmn4[0]+1];
+    arb_t fmq[lmn3[1]+lmn4[1]+1];
+    arb_t fnq[lmn3[2]+lmn4[2]+1];
     mirp_init_arb_arr(F,   L+1    );
-    mirp_init_arb_arr(flp, l1+l2+1);
-    mirp_init_arb_arr(fmp, m1+m2+1);
-    mirp_init_arb_arr(fnp, n1+n2+1);
-    mirp_init_arb_arr(flq, l3+l4+1);
-    mirp_init_arb_arr(fmq, m3+m4+1);
-    mirp_init_arb_arr(fnq, n3+n4+1);
+    mirp_init_arb_arr(flp, lmn1[0]+lmn2[0]+1);
+    mirp_init_arb_arr(fmp, lmn1[1]+lmn2[1]+1);
+    mirp_init_arb_arr(fnp, lmn1[2]+lmn2[2]+1);
+    mirp_init_arb_arr(flq, lmn3[0]+lmn4[0]+1);
+    mirp_init_arb_arr(fmq, lmn3[1]+lmn4[1]+1);
+    mirp_init_arb_arr(fnq, lmn3[2]+lmn4[2]+1);
 
     /* Zero the result (we will be summing into it) */
     arb_zero(result);
@@ -177,12 +177,12 @@ void mirp_single_eri_interval(arb_t result,
     arb_addmul(PQ2, PQ[2], PQ[2], working_prec);
 
 
-    mirp_farr_interval(flp, l1, l2, PA[0], PB[0], working_prec);
-    mirp_farr_interval(fmp, m1, m2, PA[1], PB[1], working_prec);
-    mirp_farr_interval(fnp, n1, n2, PA[2], PB[2], working_prec);
-    mirp_farr_interval(flq, l3, l4, QC[0], QD[0], working_prec);
-    mirp_farr_interval(fmq, m3, m4, QC[1], QD[1], working_prec);
-    mirp_farr_interval(fnq, n3, n4, QC[2], QD[2], working_prec);
+    mirp_farr_interval(flp, lmn1[0], lmn2[0], PA[0], PB[0], working_prec);
+    mirp_farr_interval(fmp, lmn1[1], lmn2[1], PA[1], PB[1], working_prec);
+    mirp_farr_interval(fnp, lmn1[2], lmn2[2], PA[2], PB[2], working_prec);
+    mirp_farr_interval(flq, lmn3[0], lmn4[0], QC[0], QD[0], working_prec);
+    mirp_farr_interval(fmq, lmn3[1], lmn4[1], QC[1], QD[1], working_prec);
+    mirp_farr_interval(fnq, lmn3[2], lmn4[2], QC[2], QD[2], working_prec);
 
 
     /*
@@ -202,15 +202,15 @@ void mirp_single_eri_interval(arb_t result,
     arb_init(Gxy);
     arb_init(Gxyz);
 
-    for(int lp = 0; lp <= l1 + l2; lp++)
-    for(int lq = 0; lq <= l3 + l4; lq++)
+    for(int lp = 0; lp <= lmn1[0] + lmn2[0]; lp++)
+    for(int lq = 0; lq <= lmn3[0] + lmn4[0]; lq++)
     for(int u1 = 0; u1 <= (lp/2); u1++)
     for(int u2 = 0; u2 <= (lq/2); u2++)
     {
         mirp_G_interval(Gx, flp[lp], flq[lq], lp, lq, u1, u2, gammap, gammaq, gammapq, working_prec);
 
-        for(int mp = 0; mp <= m1 + m2; mp++)
-        for(int mq = 0; mq <= m3 + m4; mq++)
+        for(int mp = 0; mp <= lmn1[1] + lmn2[1]; mp++)
+        for(int mq = 0; mq <= lmn3[1] + lmn4[1]; mq++)
         for(int v1 = 0; v1 <= (mp/2); v1++)
         for(int v2 = 0; v2 <= (mq/2); v2++)
         {
@@ -219,8 +219,8 @@ void mirp_single_eri_interval(arb_t result,
             /* Gxy = Gx * Gy */
             arb_mul(Gxy, Gx, Gy, working_prec);
 
-            for(int np = 0; np <= n1 + n2; np++)
-            for(int nq = 0; nq <= n3 + n4; nq++)
+            for(int np = 0; np <= lmn1[2] + lmn2[2]; np++)
+            for(int nq = 0; nq <= lmn3[2] + lmn4[2]; nq++)
             for(int w1 = 0; w1 <= (np/2); w1++)
             for(int w2 = 0; w2 <= (nq/2); w2++)
             {
@@ -333,12 +333,12 @@ void mirp_single_eri_interval(arb_t result,
 
     /* cleanup */
     mirp_clear_arb_arr(F,   L+1);
-    mirp_clear_arb_arr(flp, l1+l2+1);
-    mirp_clear_arb_arr(fmp, m1+m2+1);
-    mirp_clear_arb_arr(fnp, n1+n2+1);
-    mirp_clear_arb_arr(flq, l3+l4+1);
-    mirp_clear_arb_arr(fmq, m3+m4+1);
-    mirp_clear_arb_arr(fnq, n3+n4+1);
+    mirp_clear_arb_arr(flp, lmn1[0]+lmn2[0]+1);
+    mirp_clear_arb_arr(fmp, lmn1[1]+lmn2[1]+1);
+    mirp_clear_arb_arr(fnp, lmn1[2]+lmn2[2]+1);
+    mirp_clear_arb_arr(flq, lmn3[0]+lmn4[0]+1);
+    mirp_clear_arb_arr(fmq, lmn3[1]+lmn4[1]+1);
+    mirp_clear_arb_arr(fnq, lmn3[2]+lmn4[2]+1);
     mirp_clear_arb_arr(P,  3);
     mirp_clear_arb_arr(PA, 3);
     mirp_clear_arb_arr(PB, 3);
@@ -391,10 +391,10 @@ size_t mirp_prim_eri_interval(arb_t * result,
                 for(size_t l = 0; l < ncart4; l++)
                 {
                     mirp_single_eri_interval(*(result + idx),
-                                             lmn1[0], lmn1[1], lmn1[2], alpha1, A,
-                                             lmn2[0], lmn2[1], lmn2[2], alpha2, B,
-                                             lmn3[0], lmn3[1], lmn3[2], alpha3, C,
-                                             lmn4[0], lmn4[1], lmn4[2], alpha4, D,
+                                             lmn1, A, alpha1,
+                                             lmn2, B, alpha2,
+                                             lmn3, C, alpha3,
+                                             lmn4, D, alpha4,
                                              working_prec);
 
                     idx++;
@@ -416,10 +416,10 @@ size_t mirp_prim_eri_interval(arb_t * result,
 
 
 size_t mirp_eri_interval(arb_t * result,
-                         int am1, const arb_t A[3], int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,
-                         int am2, const arb_t B[3], int nprim2, int ngeneral2, const arb_t * alpha2, const arb_t * coeff2,
-                         int am3, const arb_t C[3], int nprim3, int ngeneral3, const arb_t * alpha3, const arb_t * coeff3,
-                         int am4, const arb_t D[4], int nprim4, int ngeneral4, const arb_t * alpha4, const arb_t * coeff4,
+                         int am1, const arb_t * A, int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,
+                         int am2, const arb_t * B, int nprim2, int ngeneral2, const arb_t * alpha2, const arb_t * coeff2,
+                         int am3, const arb_t * C, int nprim3, int ngeneral3, const arb_t * alpha3, const arb_t * coeff3,
+                         int am4, const arb_t * D, int nprim4, int ngeneral4, const arb_t * alpha4, const arb_t * coeff4,
                          slong working_prec)
 {
     const size_t ncart1 = MIRP_NCART(am1);

@@ -31,25 +31,25 @@ static void compute_farr(double * f, int lmn1, int lmn2, double xyz1, double xyz
 }
 
 void mirp_single_eri_double(double * result,
-                            int l1, int m1, int n1, double alpha1, const double A[3],
-                            int l2, int m2, int n2, double alpha2, const double B[3],
-                            int l3, int m3, int n3, double alpha3, const double C[3],
-                            int l4, int m4, int n4, double alpha4, const double D[3])
+                            const int * lmn1, const double * A, double alpha1,
+                            const int * lmn2, const double * B, double alpha2,
+                            const int * lmn3, const double * C, double alpha3,
+                            const int * lmn4, const double * D, double alpha4)
 {
-    const int L_l = l1+l2+l3+l4;
-    const int L_m = m1+m2+m3+m4;
-    const int L_n = n1+n2+n3+n4;
+    const int L_l = lmn1[0]+lmn2[0]+lmn3[0]+lmn4[0];
+    const int L_m = lmn1[1]+lmn2[1]+lmn3[1]+lmn4[1];
+    const int L_n = lmn1[2]+lmn2[2]+lmn3[2]+lmn4[2];
     const int L = L_l + L_m + L_n;
 
     *result = 0.0;
 
     double F[L+1];
-    double flp[l1+l2+1];
-    double fmp[m1+m2+1];
-    double fnp[n1+n2+1];
-    double flq[l3+l4+1];
-    double fmq[m3+m4+1];
-    double fnq[n3+n4+1];
+    double flp[lmn1[0]+lmn2[0]+1];
+    double fmp[lmn1[1]+lmn2[1]+1];
+    double fnp[lmn1[2]+lmn2[2]+1];
+    double flq[lmn3[0]+lmn4[0]+1];
+    double fmq[lmn3[1]+lmn4[1]+1];
+    double fnq[lmn3[2]+lmn4[2]+1];
 
     double gammap, P[3], PA[3], PB[3], AB2;
     double gammaq, Q[3], QC[3], QD[3], CD2;
@@ -64,17 +64,17 @@ void mirp_single_eri_double(double * result,
 
     const double PQ2 = PQ[0]*PQ[0] + PQ[1]*PQ[1] + PQ[2]*PQ[2];
 
-    compute_farr(flp, l1, l2, PA[0], PB[0]);
-    compute_farr(fmp, m1, m2, PA[1], PB[1]);
-    compute_farr(fnp, n1, n2, PA[2], PB[2]);
-    compute_farr(flq, l3, l4, QC[0], QD[0]);
-    compute_farr(fmq, m3, m4, QC[1], QD[1]);
-    compute_farr(fnq, n3, n4, QC[2], QD[2]);
+    compute_farr(flp, lmn1[0], lmn2[0], PA[0], PB[0]);
+    compute_farr(fmp, lmn1[1], lmn2[1], PA[1], PB[1]);
+    compute_farr(fnp, lmn1[2], lmn2[2], PA[2], PB[2]);
+    compute_farr(flq, lmn3[0], lmn4[0], QC[0], QD[0]);
+    compute_farr(fmq, lmn3[1], lmn4[1], QC[1], QD[1]);
+    compute_farr(fnq, lmn3[2], lmn4[2], QC[2], QD[2]);
 
     mirp_boys_double(F, L, PQ2 * gammapq);
 
-    for(int lp = 0; lp <= l1 + l2; lp++)
-    for(int lq = 0; lq <= l3 + l4; lq++)
+    for(int lp = 0; lp <= lmn1[0] + lmn2[0]; lp++)
+    for(int lq = 0; lq <= lmn3[0] + lmn4[0]; lq++)
     for(int u1 = 0; u1 <= (lp/2); u1++)
     for(int u2 = 0; u2 <= (lq/2); u2++)
     {
@@ -83,8 +83,8 @@ void mirp_single_eri_double(double * result,
                   * pow(gammapq, lp + lq - 2 * (u1 + u2));
         Gx /= (mirp_factorial(u1) * mirp_factorial(u2) * mirp_factorial(lp - 2 * u1) * mirp_factorial(lq - 2 * u2));
 
-        for(int mp = 0; mp <= m1 + m2; mp++)
-        for(int mq = 0; mq <= m3 + m4; mq++)
+        for(int mp = 0; mp <= lmn1[1] + lmn2[1]; mp++)
+        for(int mq = 0; mq <= lmn3[1] + lmn4[1]; mq++)
         for(int v1 = 0; v1 <= (mp/2); v1++)
         for(int v2 = 0; v2 <= (mq/2); v2++)
         {
@@ -93,8 +93,8 @@ void mirp_single_eri_double(double * result,
                       * pow(gammapq, mp + mq - 2 * (v1 + v2));
             Gy /= (mirp_factorial(v1) * mirp_factorial(v2) * mirp_factorial(mp - 2 * v1) * mirp_factorial(mq - 2 * v2));
 
-            for(int np = 0; np <= n1 + n2; np++)
-            for(int nq = 0; nq <= n3 + n4; nq++)
+            for(int np = 0; np <= lmn1[2] + lmn2[2]; np++)
+            for(int nq = 0; nq <= lmn3[2] + lmn4[2]; nq++)
             for(int w1 = 0; w1 <= (np/2); w1++)
             for(int w2 = 0; w2 <= (nq/2); w2++)
             {
@@ -139,10 +139,10 @@ void mirp_single_eri_double(double * result,
 }
 
 size_t mirp_prim_eri_double(double * result,
-                            int am1, double alpha1, const double A[3],
-                            int am2, double alpha2, const double B[3],
-                            int am3, double alpha3, const double C[3],
-                            int am4, double alpha4, const double D[3])
+                            int am1, const double * A, double alpha1,
+                            int am2, const double * B, double alpha2,
+                            int am3, const double * C, double alpha3,
+                            int am4, const double * D, double alpha4)
 {
 
     const size_t ncart1 = MIRP_NCART(am1);
@@ -165,10 +165,10 @@ size_t mirp_prim_eri_double(double * result,
                 for(size_t l = 0; l < ncart4; l++)
                 {
                     mirp_single_eri_double(result + idx,
-                                           lmn1[0], lmn1[1], lmn1[2], alpha1, A,
-                                           lmn2[0], lmn2[1], lmn2[2], alpha2, B,
-                                           lmn3[0], lmn3[1], lmn3[2], alpha3, C,
-                                           lmn4[0], lmn4[1], lmn4[2], alpha4, D);
+                                           lmn1, A, alpha1,
+                                           lmn2, B, alpha2,
+                                           lmn3, C, alpha3,
+                                           lmn4, D, alpha4);
 
                     idx++;
 
@@ -189,10 +189,10 @@ size_t mirp_prim_eri_double(double * result,
 
 
 size_t mirp_eri_double(double * result,
-                       int am1, const double A[3], int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
-                       int am2, const double B[3], int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
-                       int am3, const double C[3], int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
-                       int am4, const double D[4], int nprim4, int ngeneral4, const double * alpha4, const double * coeff4)
+                       int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
+                       int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
+                       int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
+                       int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4)
 {
 
     const size_t ncart1 = MIRP_NCART(am1);
@@ -212,10 +212,10 @@ size_t mirp_eri_double(double * result,
     for(int l = 0; l < nprim4; l++)
     {
         mirp_prim_eri_double(result_buffer,
-                             am1, alpha1[i], A,
-                             am2, alpha2[j], B,
-                             am3, alpha3[k], C,
-                             am4, alpha4[l], D);
+                             am1, A, alpha1[i],
+                             am2, B, alpha2[j],
+                             am3, C, alpha3[k],
+                             am4, D, alpha4[l]);
 
         size_t ntotal = 0;
         for(int m = 0; m < ngeneral1; m++)

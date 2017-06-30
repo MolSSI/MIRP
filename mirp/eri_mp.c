@@ -92,31 +92,31 @@ static void mirp_G_mp(mpfr_t G, mpfr_t fp, mpfr_t fq,
 
 
 void mirp_single_eri_mp(mpfr_t result,
-                        int l1, int m1, int n1, const mpfr_t alpha1, const mpfr_t A[3],
-                        int l2, int m2, int n2, const mpfr_t alpha2, const mpfr_t B[3],
-                        int l3, int m3, int n3, const mpfr_t alpha3, const mpfr_t C[3],
-                        int l4, int m4, int n4, const mpfr_t alpha4, const mpfr_t D[3],
+                        const int * lmn1, const mpfr_t * A, const mpfr_t alpha1,
+                        const int * lmn2, const mpfr_t * B, const mpfr_t alpha2,
+                        const int * lmn3, const mpfr_t * C, const mpfr_t alpha3,
+                        const int * lmn4, const mpfr_t * D, const mpfr_t alpha4,
                         mpfr_prec_t working_prec)
 {
-    const int L_l = l1+l2+l3+l4;
-    const int L_m = m1+m2+m3+m4;
-    const int L_n = n1+n2+n3+n4;
+    const int L_l = lmn1[0]+lmn2[0]+lmn3[0]+lmn4[0];
+    const int L_m = lmn1[1]+lmn2[1]+lmn3[1]+lmn4[1];
+    const int L_n = lmn1[2]+lmn2[2]+lmn3[2]+lmn4[2];
     const int L = L_l + L_m + L_n;
 
     mpfr_t F[L+1];
-    mpfr_t flp[l1+l2+1];
-    mpfr_t fmp[m1+m2+1];
-    mpfr_t fnp[n1+n2+1];
-    mpfr_t flq[l3+l4+1];
-    mpfr_t fmq[m3+m4+1];
-    mpfr_t fnq[n3+n4+1];
+    mpfr_t flp[lmn1[0]+lmn2[0]+1];
+    mpfr_t fmp[lmn1[1]+lmn2[1]+1];
+    mpfr_t fnp[lmn1[2]+lmn2[2]+1];
+    mpfr_t flq[lmn3[0]+lmn4[0]+1];
+    mpfr_t fmq[lmn3[1]+lmn4[1]+1];
+    mpfr_t fnq[lmn3[2]+lmn4[2]+1];
     mirp_init_mpfr_arr(F,   L+1,     working_prec);
-    mirp_init_mpfr_arr(flp, l1+l2+1, working_prec);
-    mirp_init_mpfr_arr(fmp, m1+m2+1, working_prec);
-    mirp_init_mpfr_arr(fnp, n1+n2+1, working_prec);
-    mirp_init_mpfr_arr(flq, l3+l4+1, working_prec);
-    mirp_init_mpfr_arr(fmq, m3+m4+1, working_prec);
-    mirp_init_mpfr_arr(fnq, n3+n4+1, working_prec);
+    mirp_init_mpfr_arr(flp, lmn1[0]+lmn2[0]+1, working_prec);
+    mirp_init_mpfr_arr(fmp, lmn1[1]+lmn2[1]+1, working_prec);
+    mirp_init_mpfr_arr(fnp, lmn1[2]+lmn2[2]+1, working_prec);
+    mirp_init_mpfr_arr(flq, lmn3[0]+lmn4[0]+1, working_prec);
+    mirp_init_mpfr_arr(fmq, lmn3[1]+lmn4[1]+1, working_prec);
+    mirp_init_mpfr_arr(fnq, lmn3[2]+lmn4[2]+1, working_prec);
 
     /* We need a temporary result variable in our working precision
      * We accumulate there, only (possibly) rounding at the very end
@@ -171,12 +171,12 @@ void mirp_single_eri_mp(mpfr_t result,
     mpfr_fma(PQ2, PQ[2], PQ[2], PQ2, MPFR_RNDN);
 
 
-    mirp_farr_mp(flp, l1, l2, PA[0], PB[0], working_prec);
-    mirp_farr_mp(fmp, m1, m2, PA[1], PB[1], working_prec);
-    mirp_farr_mp(fnp, n1, n2, PA[2], PB[2], working_prec);
-    mirp_farr_mp(flq, l3, l4, QC[0], QD[0], working_prec);
-    mirp_farr_mp(fmq, m3, m4, QC[1], QD[1], working_prec);
-    mirp_farr_mp(fnq, n3, n4, QC[2], QD[2], working_prec);
+    mirp_farr_mp(flp, lmn1[0], lmn2[0], PA[0], PB[0], working_prec);
+    mirp_farr_mp(fmp, lmn1[1], lmn2[1], PA[1], PB[1], working_prec);
+    mirp_farr_mp(fnp, lmn1[2], lmn2[2], PA[2], PB[2], working_prec);
+    mirp_farr_mp(flq, lmn3[0], lmn4[0], QC[0], QD[0], working_prec);
+    mirp_farr_mp(fmq, lmn3[1], lmn4[1], QC[1], QD[1], working_prec);
+    mirp_farr_mp(fnq, lmn3[2], lmn4[2], QC[2], QD[2], working_prec);
 
 
     /*
@@ -192,15 +192,15 @@ void mirp_single_eri_mp(mpfr_t result,
     mpfr_t Gx, Gy, Gz, Gxy, Gxyz;
     mpfr_inits2(working_prec, Gx, Gy, Gz, Gxy, Gxyz, (mpfr_ptr)0);
 
-    for(int lp = 0; lp <= l1 + l2; lp++)
-    for(int lq = 0; lq <= l3 + l4; lq++)
+    for(int lp = 0; lp <= lmn1[0] + lmn2[0]; lp++)
+    for(int lq = 0; lq <= lmn3[0] + lmn4[0]; lq++)
     for(int u1 = 0; u1 <= (lp/2); u1++)
     for(int u2 = 0; u2 <= (lq/2); u2++)
     {
         mirp_G_mp(Gx, flp[lp], flq[lq], lp, lq, u1, u2, gammap, gammaq, gammapq, working_prec);
 
-        for(int mp = 0; mp <= m1 + m2; mp++)
-        for(int mq = 0; mq <= m3 + m4; mq++)
+        for(int mp = 0; mp <= lmn1[1] + lmn2[1]; mp++)
+        for(int mq = 0; mq <= lmn3[1] + lmn4[1]; mq++)
         for(int v1 = 0; v1 <= (mp/2); v1++)
         for(int v2 = 0; v2 <= (mq/2); v2++)
         {
@@ -209,8 +209,8 @@ void mirp_single_eri_mp(mpfr_t result,
             /* Gxy = Gx * Gy */
             mpfr_mul(Gxy, Gx, Gy, MPFR_RNDN);
 
-            for(int np = 0; np <= n1 + n2; np++)
-            for(int nq = 0; nq <= n3 + n4; nq++)
+            for(int np = 0; np <= lmn1[2] + lmn2[2]; np++)
+            for(int nq = 0; nq <= lmn3[2] + lmn4[2]; nq++)
             for(int w1 = 0; w1 <= (np/2); w1++)
             for(int w2 = 0; w2 <= (nq/2); w2++)
             {
@@ -322,12 +322,12 @@ void mirp_single_eri_mp(mpfr_t result,
 
     /* cleanup */
     mirp_clear_mpfr_arr(F,   L+1);
-    mirp_clear_mpfr_arr(flp, l1+l2+1);
-    mirp_clear_mpfr_arr(fmp, m1+m2+1);
-    mirp_clear_mpfr_arr(fnp, n1+n2+1);
-    mirp_clear_mpfr_arr(flq, l3+l4+1);
-    mirp_clear_mpfr_arr(fmq, m3+m4+1);
-    mirp_clear_mpfr_arr(fnq, n3+n4+1);
+    mirp_clear_mpfr_arr(flp, lmn1[0]+lmn2[0]+1);
+    mirp_clear_mpfr_arr(fmp, lmn1[1]+lmn2[1]+1);
+    mirp_clear_mpfr_arr(fnp, lmn1[2]+lmn2[2]+1);
+    mirp_clear_mpfr_arr(flq, lmn3[0]+lmn4[0]+1);
+    mirp_clear_mpfr_arr(fmq, lmn3[1]+lmn4[1]+1);
+    mirp_clear_mpfr_arr(fnq, lmn3[2]+lmn4[2]+1);
     mirp_clear_mpfr_arr(P,  3);
     mirp_clear_mpfr_arr(PA, 3);
     mirp_clear_mpfr_arr(PB, 3);
@@ -343,10 +343,10 @@ void mirp_single_eri_mp(mpfr_t result,
 
 
 size_t mirp_prim_eri_mp(mpfr_t * result,
-                        int am1, const mpfr_t alpha1, const mpfr_t A[3],
-                        int am2, const mpfr_t alpha2, const mpfr_t B[3],
-                        int am3, const mpfr_t alpha3, const mpfr_t C[3],
-                        int am4, const mpfr_t alpha4, const mpfr_t D[3],
+                        int am1, const mpfr_t * A, const mpfr_t alpha1,
+                        int am2, const mpfr_t * B, const mpfr_t alpha2,
+                        int am3, const mpfr_t * C, const mpfr_t alpha3,
+                        int am4, const mpfr_t * D, const mpfr_t alpha4,
                         mpfr_prec_t working_prec)
 {
 
@@ -370,10 +370,10 @@ size_t mirp_prim_eri_mp(mpfr_t * result,
                 for(size_t l = 0; l < ncart4; l++)
                 {
                     mirp_single_eri_mp(*(result + idx),
-                                       lmn1[0], lmn1[1], lmn1[2], alpha1, A,
-                                       lmn2[0], lmn2[1], lmn2[2], alpha2, B,
-                                       lmn3[0], lmn3[1], lmn3[2], alpha3, C,
-                                       lmn4[0], lmn4[1], lmn4[2], alpha4, D,
+                                       lmn1, A, alpha1,
+                                       lmn2, B, alpha2,
+                                       lmn3, C, alpha3,
+                                       lmn4, D, alpha4,
                                        working_prec);
 
                     idx++;
@@ -394,10 +394,10 @@ size_t mirp_prim_eri_mp(mpfr_t * result,
 }
 
 size_t mirp_eri_mp(mpfr_t * result,
-                   int am1, const mpfr_t A[3], int nprim1, int ngeneral1, const mpfr_t * alpha1, const mpfr_t * coeff1,
-                   int am2, const mpfr_t B[3], int nprim2, int ngeneral2, const mpfr_t * alpha2, const mpfr_t * coeff2,
-                   int am3, const mpfr_t C[3], int nprim3, int ngeneral3, const mpfr_t * alpha3, const mpfr_t * coeff3,
-                   int am4, const mpfr_t D[4], int nprim4, int ngeneral4, const mpfr_t * alpha4, const mpfr_t * coeff4,
+                   int am1, const mpfr_t * A, int nprim1, int ngeneral1, const mpfr_t * alpha1, const mpfr_t * coeff1,
+                   int am2, const mpfr_t * B, int nprim2, int ngeneral2, const mpfr_t * alpha2, const mpfr_t * coeff2,
+                   int am3, const mpfr_t * C, int nprim3, int ngeneral3, const mpfr_t * alpha3, const mpfr_t * coeff3,
+                   int am4, const mpfr_t * D, int nprim4, int ngeneral4, const mpfr_t * alpha4, const mpfr_t * coeff4,
                    mpfr_prec_t working_prec)
 {
     const size_t ncart1 = MIRP_NCART(am1);
@@ -425,10 +425,10 @@ size_t mirp_eri_mp(mpfr_t * result,
     for(int l = 0; l < nprim4; l++)
     {
         mirp_prim_eri_mp(result_buffer,
-                         am1, alpha1[i], A,
-                         am2, alpha2[j], B,
-                         am3, alpha3[k], C,
-                         am4, alpha4[l], D,
+                         am1, A, alpha1[i],
+                         am2, B, alpha2[j],
+                         am3, C, alpha3[k],
+                         am4, D, alpha4[l],
                          working_prec);
 
 
