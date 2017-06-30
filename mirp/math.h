@@ -31,6 +31,9 @@ extern "C" {
 
 /*! \brief The value of the sqrt(pi) in double precision */
 #define MIRP_SQRT_PI 1.7724538509055160273 
+
+/*! \brief The value of the pi**(3/2) in double precision */
+#define MIRP_PI_32 5.5683279968317078453
     
 /* \brief log_10(2)
  * 

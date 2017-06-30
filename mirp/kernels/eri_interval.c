@@ -434,7 +434,22 @@ size_t mirp_eri_interval(arb_t * result,
     arb_init(coeff);
 
     arb_t * result_buffer = (arb_t *)malloc(full_size * sizeof(arb_t));
+    arb_t * coeff1_norm = malloc(nprim1 * ngeneral1 * sizeof(arb_t));
+    arb_t * coeff2_norm = malloc(nprim2 * ngeneral2 * sizeof(arb_t));
+    arb_t * coeff3_norm = malloc(nprim3 * ngeneral3 * sizeof(arb_t));
+    arb_t * coeff4_norm = malloc(nprim4 * ngeneral4 * sizeof(arb_t));
+
     mirp_init_arb_arr(result_buffer, full_size);
+    mirp_init_arb_arr(coeff1_norm, nprim1 * ngeneral1);
+    mirp_init_arb_arr(coeff2_norm, nprim2 * ngeneral2);
+    mirp_init_arb_arr(coeff3_norm, nprim3 * ngeneral3);
+    mirp_init_arb_arr(coeff4_norm, nprim4 * ngeneral4);
+
+    mirp_normalize_shell_interval(am1, nprim1, ngeneral1, alpha1, coeff1, coeff1_norm, working_prec);
+    mirp_normalize_shell_interval(am2, nprim2, ngeneral2, alpha2, coeff2, coeff2_norm, working_prec);
+    mirp_normalize_shell_interval(am3, nprim3, ngeneral3, alpha3, coeff3, coeff3_norm, working_prec);
+    mirp_normalize_shell_interval(am4, nprim4, ngeneral4, alpha4, coeff4, coeff4_norm, working_prec);
+
 
     for(size_t i = 0; i < full_size; i++)
         arb_zero(result[i]);
@@ -457,9 +472,9 @@ size_t mirp_eri_interval(arb_t * result,
         for(int o = 0; o < ngeneral3; o++)
         for(int p = 0; p < ngeneral4; p++)
         {
-            arb_mul(coeff, coeff1[m*nprim1+i], coeff2[n*nprim2+j], working_prec);
-            arb_mul(coeff, coeff,              coeff3[o*nprim3+k], working_prec);
-            arb_mul(coeff, coeff,              coeff4[p*nprim4+l], working_prec);
+            arb_mul(coeff, coeff1_norm[m*nprim1+i], coeff2_norm[n*nprim2+j], working_prec);
+            arb_mul(coeff, coeff,                   coeff3_norm[o*nprim3+k], working_prec);
+            arb_mul(coeff, coeff,                   coeff4_norm[p*nprim4+l], working_prec);
 
             for(size_t q = 0; q < ncart1234; q++)
             {
@@ -472,7 +487,15 @@ size_t mirp_eri_interval(arb_t * result,
 
     arb_clear(coeff);
     mirp_clear_arb_arr(result_buffer, full_size);
+    mirp_clear_arb_arr(coeff1_norm, nprim1 * ngeneral1);
+    mirp_clear_arb_arr(coeff2_norm, nprim2 * ngeneral2);
+    mirp_clear_arb_arr(coeff3_norm, nprim3 * ngeneral3);
+    mirp_clear_arb_arr(coeff4_norm, nprim4 * ngeneral4);
     free(result_buffer);    
+    free(coeff1_norm);
+    free(coeff2_norm);
+    free(coeff3_norm);
+    free(coeff4_norm);
 
     return full_size;
 }

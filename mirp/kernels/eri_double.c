@@ -204,9 +204,19 @@ size_t mirp_eri_double(double * result,
     const size_t ngeneral1234 = ngeneral1*ngeneral2*ngeneral3*ngeneral4;
     const size_t full_size = ncart1234*ngeneral1234;
 
-    double * result_buffer = (double *)malloc(full_size * sizeof(double));
-    memset(result, 0, full_size * sizeof(double));
+    double * result_buffer = malloc(full_size * sizeof(double));
+    double * coeff1_norm = malloc(nprim1 * ngeneral1 * sizeof(double));
+    double * coeff2_norm = malloc(nprim2 * ngeneral2 * sizeof(double));
+    double * coeff3_norm = malloc(nprim3 * ngeneral3 * sizeof(double));
+    double * coeff4_norm = malloc(nprim4 * ngeneral4 * sizeof(double));
 
+    mirp_normalize_shell_double(am1, nprim1, ngeneral1, alpha1, coeff1, coeff1_norm);
+    mirp_normalize_shell_double(am2, nprim2, ngeneral2, alpha2, coeff2, coeff2_norm);
+    mirp_normalize_shell_double(am3, nprim3, ngeneral3, alpha3, coeff3, coeff3_norm);
+    mirp_normalize_shell_double(am4, nprim4, ngeneral4, alpha4, coeff4, coeff4_norm);
+
+
+    memset(result, 0, full_size * sizeof(double));
     for(int i = 0; i < nprim1; i++)
     for(int j = 0; j < nprim2; j++)
     for(int k = 0; k < nprim3; k++)
@@ -224,19 +234,22 @@ size_t mirp_eri_double(double * result,
         for(int o = 0; o < ngeneral3; o++)
         for(int p = 0; p < ngeneral4; p++)
         {
-            const double coeff = coeff1[m*nprim1+i]
-                               * coeff2[n*nprim2+j]
-                               * coeff3[o*nprim3+k]
-                               * coeff4[p*nprim4+l];
+            const double coeff = coeff1_norm[m*nprim1+i]
+                               * coeff2_norm[n*nprim2+j]
+                               * coeff3_norm[o*nprim3+k]
+                               * coeff4_norm[p*nprim4+l];
 
             for(size_t q = 0; q < ncart1234; q++)
                 result[ntotal*ncart1234+q] += result_buffer[q] * coeff;
             ntotal++;
         }
-
     }
 
     free(result_buffer);    
+    free(coeff1_norm);
+    free(coeff2_norm);
+    free(coeff3_norm);
+    free(coeff4_norm);
 
     return full_size;
 }

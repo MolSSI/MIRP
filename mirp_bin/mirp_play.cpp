@@ -12,13 +12,12 @@ int main(void)
     double result[81];
     const double xyz_O[3] = { .1009671920798554, 0.07139585036771477, 0.0 };
     const double alpha_O_s[3] = { 130.7093200, 23.8088610, 6.4436083 };
-    const double coeff_O_s[6] = { 4.2519432829437198, 4.1122937184311841, 1.2816225325813408, 
-                                  4.2519432829437198, 4.1122937184311841, 1.2816225325813408 };
+    const double coeff_O_s[3] = { 0.15432897, 0.53532814,  0.44463454 };
 
-    int ngeneral1 = 2;
-    int ngeneral2 = 2;
-    int ngeneral3 = 2;
-    int ngeneral4 = 2;
+    int ngeneral1 = 1;
+    int ngeneral2 = 1;
+    int ngeneral3 = 1;
+    int ngeneral4 = 1;
     int nprim1 = 3;
     int nprim2 = 3;
     int nprim3 = 3;
