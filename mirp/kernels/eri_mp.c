@@ -1,9 +1,9 @@
+#include "mirp/kernels/boys.h"
+#include "mirp/kernels/eri.h"
+#include "mirp/mpfr_help.h"
 #include "mirp/math.h"
 #include "mirp/shell.h"
-#include "mirp/mpfr_help.h"
-#include "mirp/boys.h"
 #include "mirp/gpt.h"
-#include <stdlib.h>
 
 static void mirp_farr_mp(mpfr_t * f,
                          int lmn1, int lmn2,

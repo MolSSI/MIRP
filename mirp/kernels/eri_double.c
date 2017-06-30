@@ -1,10 +1,11 @@
-#include <string.h> /* for memset */
-#include <math.h>
+#include "mirp/kernels/boys.h"
+#include "mirp/kernels/eri.h"
 #include "mirp/math.h"
 #include "mirp/shell.h"
-#include "mirp/boys.h"
 #include "mirp/gpt.h"
-#include "mirp/eri.h"
+
+#include <string.h> /* for memset */
+#include <math.h>
 
 
 static void compute_farr(double * f, int lmn1, int lmn2, double xyz1, double xyz2)

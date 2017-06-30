@@ -1,5 +1,4 @@
-
-#include "cmdline.hpp"
+#include "mirp_bin/cmdline.hpp"
 #include <algorithm>
 #include <stdexcept>
 #include <sstream>

@@ -1,4 +1,4 @@
 #pragma once
 
-#include "mirp/eri.h"
-#include "mirp/boys.h"
+#include "mirp/kernels/eri.h"
+#include "mirp/kernels/boys.h"

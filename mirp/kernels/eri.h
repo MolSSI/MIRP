@@ -35,10 +35,11 @@ void mirp_single_eri_mp(mpfr_t result,
                         mpfr_prec_t working_precision);
 
 size_t mirp_prim_eri_mp(mpfr_t * result,
-                        int am1, const mpfr_t alpha1, const mpfr_t * A,
-                        int am2, const mpfr_t alpha2, const mpfr_t * B,
-                        int am3, const mpfr_t alpha3, const mpfr_t * C,
-                        int am4, const mpfr_t alpha4, const mpfr_t * D);
+                        int am1, const mpfr_t * A, const mpfr_t alpha1, 
+                        int am2, const mpfr_t * B, const mpfr_t alpha2, 
+                        int am3, const mpfr_t * C, const mpfr_t alpha3, 
+                        int am4, const mpfr_t * D, const mpfr_t alpha4, 
+                        mpfr_prec_t working_prec);
 
 size_t mirp_eri_mp(mpfr_t * result,
                    int am1, const mpfr_t * A, int nprim1, int ngeneral1, const mpfr_t * alpha1, const mpfr_t * coeff1,
@@ -48,10 +49,10 @@ size_t mirp_eri_mp(mpfr_t * result,
                    mpfr_prec_t working_prec);
 
 void mirp_single_eri_interval(arb_t result,
-                              const int * lmn1, const arb_t alpha1, const arb_t * A,
-                              const int * lmn2, const arb_t alpha2, const arb_t * B,
-                              const int * lmn3, const arb_t alpha3, const arb_t * C,
-                              const int * lmn4, const arb_t alpha4, const arb_t * D,
+                              const int * lmn1, const arb_t * A, const arb_t alpha1,
+                              const int * lmn2, const arb_t * B, const arb_t alpha2,
+                              const int * lmn3, const arb_t * C, const arb_t alpha3,
+                              const int * lmn4, const arb_t * D, const arb_t alpha4,
                               slong working_prec);
 
 size_t mirp_prim_eri_interval(arb_t * result,

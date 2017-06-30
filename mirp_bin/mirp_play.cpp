@@ -1,4 +1,4 @@
-#include "cmdline.hpp"
+#include "mirp_bin/cmdline.hpp"
 #include <mirp/mirp.h>
 #include <mirp/mpfr_help.h>
 #include <mirp/arb_help.h>

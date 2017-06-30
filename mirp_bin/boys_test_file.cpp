@@ -1,4 +1,4 @@
-#include "boys_test_file.hpp"
+#include "mirp_bin/boys_test_file.hpp"
 #include <iostream>
 #include <sstream>
 

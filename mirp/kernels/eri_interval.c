@@ -1,9 +1,9 @@
-#include "mirp/math.h"
+#include "mirp/kernels/boys.h"
+#include "mirp/kernels/eri.h"
 #include "mirp/arb_help.h"
+#include "mirp/math.h"
 #include "mirp/shell.h"
-#include "mirp/boys.h"
 #include "mirp/gpt.h"
-#include <stdlib.h>
 
 static void mirp_farr_interval(arb_t * f,
                                int lmn1, int lmn2,
@@ -364,10 +364,10 @@ void mirp_single_eri_interval(arb_t result,
 
 
 size_t mirp_prim_eri_interval(arb_t * result,
-                              int am1, const arb_t alpha1, const arb_t A[3],
-                              int am2, const arb_t alpha2, const arb_t B[3],
-                              int am3, const arb_t alpha3, const arb_t C[3],
-                              int am4, const arb_t alpha4, const arb_t D[3],
+                              int am1, const arb_t * A, const arb_t alpha1,
+                              int am2, const arb_t * B, const arb_t alpha2,
+                              int am3, const arb_t * C, const arb_t alpha3,
+                              int am4, const arb_t * D, const arb_t alpha4,
                               slong working_prec)
 {
 
@@ -445,10 +445,10 @@ size_t mirp_eri_interval(arb_t * result,
     for(int l = 0; l < nprim4; l++)
     {
         mirp_prim_eri_interval(result_buffer,
-                               am1, alpha1[i], A,
-                               am2, alpha2[j], B,
-                               am3, alpha3[k], C,
-                               am4, alpha4[l], D,
+                               am1, A, alpha1[i],
+                               am2, B, alpha2[j],
+                               am3, C, alpha3[k],
+                               am4, D, alpha4[l],
                                working_prec);
 
         size_t ntotal = 0;

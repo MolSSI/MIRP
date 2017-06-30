@@ -1,8 +1,7 @@
-#include "mirp/boys.h"
+#include "mirp/kernels/boys.h"
 #include "mirp/mpfr_help.h"
 #include "mirp/arb_help.h"
 #include <Python.h>
-#include <limits.h>
 
 #define UNUSED(x) (void)(x)
 

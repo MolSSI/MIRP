@@ -4,7 +4,7 @@
  *        and arbitrary precision
  */
 
-#include "mirp/boys.h"
+#include "mirp/kernels/boys.h"
 #include <assert.h>
 
 void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)

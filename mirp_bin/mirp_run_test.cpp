@@ -1,4 +1,4 @@
-#include "cmdline.hpp"
+#include "mirp_bin/cmdline.hpp"
 #include <iostream>
 
 using namespace mirp;

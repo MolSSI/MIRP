@@ -3,7 +3,7 @@
  * \brief Calculation of the boys function in arbitrary precision
  */
 
-#include "mirp/boys.h"
+#include "mirp/kernels/boys.h"
 #include "mirp/mpfr_help.h"
 #include <assert.h>
 

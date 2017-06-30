@@ -1,6 +1,6 @@
 
-#include "boys_test_file.hpp"
-#include <mirp/boys.h>
+#include "mirp_bin/boys_test_file.hpp"
+#include <mirp/mirp.h>
 #include <mirp/math.h>
 #include <memory>
 #include <cmath>
