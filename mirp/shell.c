@@ -7,7 +7,7 @@
 #include "mirp/math.h"
 #include <math.h>
 
-int mirp_iterate_gaussian(int lmn[3])
+int mirp_iterate_gaussian(int * lmn)
 {
     const int am = lmn[0] + lmn[1] + lmn[2];
     if(lmn[2] >= am)

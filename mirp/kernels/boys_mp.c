@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief Calculation of the boys function in arbitrary precision
+ * \brief Calculation of the boys function using arbitrary precision
  */
 
 #include "mirp/kernels/boys.h"

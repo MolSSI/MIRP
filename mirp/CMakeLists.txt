@@ -5,6 +5,9 @@ list(APPEND MIRP_FILELIST
                mpfr_help.c
                arb_help.c
                shell.c
+               loops_double.c
+               loops_mp.c
+               loops_interval.c
 
                kernels/boys_double.c
                kernels/boys_mp.c
