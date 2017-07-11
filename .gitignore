@@ -2,3 +2,6 @@ build*
 __pycache__
 *.swp
 _build
+.DS_Store
+doc/html
+doc/xml

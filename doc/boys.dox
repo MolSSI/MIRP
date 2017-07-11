@@ -1,0 +1,104 @@
+/*! \page boys_function The Boys Function
+
+\section _boys_theory Basic Theory
+
+This is only a brief overview of the Boys function. For more details, see
+
+The Boys function is defined as
+
+\f[
+   F_m(t) = \int_0^1 u^{2m} e^{-tu^2} du \qquad \qquad t \ge 0
+\f]
+
+and is related to the gamma function \f$\Gamma\f$
+
+\f[
+   F_m(t) = \frac{e^{-t}}{2} \Gamma\left(m+\frac{1}{2}\right) \sum_{i=0}^{\infty} \frac{t^i}{\Gamma\left(m+i+\frac{3}{2}\right)}
+\f]
+
+and to the lower incomplete gamma function \f$\gamma\f$
+
+\f[
+   F_m(t) = \frac{1}{2t^{m+\frac{1}{2}}} \gamma\left( m+\frac{1}{2}, t\right)
+\f]
+
+The Boys function has the following downward and upward recurrence relations (respectively)
+
+\f{eqnarray*}{
+   F_m(t) &= \frac{2t F_{m+1}(t) + e^{-t}}{2m+1} \\
+   F_{m+1}(t) &= \frac{(2m+1)F_m(t) - e^{-t}}{2t}
+\f}
+
+It should be noted that under some conditions (small \f$t\f$), upwards recurrence is
+numerically unstable.
+
+Lastly, values for *m=0* and for *t=0* can be calculated
+easily
+
+\f{eqnarray*}{
+   F_m(0) &= \frac{1}{2m+1} \\
+   F_0(t) &= \sqrt{\frac{\pi}{4t}}\mathrm{erf}\left(\sqrt{x}\right)
+\f}
+
+In practice, due to the unbounded nature of \f$t\f$, evaluation is usually split into three regimes
+
+\f{eqnarray*}{
+   F_m(t) &\approx& \frac{1}{2m+1} \qquad\qquad t \approx 0 \\
+   F_m(t) &\approx& \frac{(2m-1)!!}{2^{m+1}} \sqrt{\frac{\pi}{t^{2m+1}}} \qquad \qquad \textrm{large } t
+\f}
+
+with the middle regime being interpolated via Taylor series or Chebyschev polynomials.
+
+\section _boys_calc Accurate Calculation
+
+For very precise computation of the Boys function (for example, for higher precision floating point, or for calculating
+the values for an interpolation grid), a practical (although slow) method is given derived from the formulation given
+by Shavitt.
+
+The first step is to approximate the value of the Boys
+function via the large-\f$t\f$ approximation:
+
+\f[
+   F_m(t) \approx \frac{(2m-1)!!}{2^{m+1}} \sqrt{\frac{\pi}{t^{2m+1}}} \qquad \qquad \textrm{large } t
+\f]
+
+Next, the error associated with this approximation can be estimated by the (finite!) sum
+
+\f{eqnarray*}{
+   \Delta F_m(t) &\approx& \frac{e^{-t}}{2t} \sum_{i=1}^{[N]} a_i \\
+   a_0 &=& 1 \\
+   a_i &=& \frac{2m-2i+1}{2t}a_{i-1}
+\f}
+
+making note of the fact that the summation starts at \f$i=1\f$. The summation continues
+until \f$a_{i} > a_{i-1}\f$, at which point the summation will continue to diverge.
+
+Since it guaranteed that the true error is less than this value, it can then determined if the large-\f$t\f$ approximation is acceptable.
+If it is not, then the small-\f$t\f$ (exact) formulation is used:
+
+\f{eqnarray*}{
+   F_m(t) &=& e^{-t} \frac{1}{2^{m+1}} \sum_{i=1}^{\infty} a_i \\
+   a_0 &=& 1 \\
+   a_i &=& \frac{2t}{2m+2i+1}a_{i-1}
+\f}
+
+again noting that the summation starts at \f$i=1\f$.
+
+The large-\f$t\f$ approximation can be (conservatively) skipped if \f$t < m+\frac{1}{2}\f$, which also prevents a division by zero
+in the large-\f$t\f$ approximation if \f$t=0\f$.
+
+By splitting the calculation this way, there are no pre-calculated thresholds (ie, between large-\f$t\f$ and small-\f$t\f$ formulae), which
+would necessarily depend on the value of \f$m\f$ and the desired precision of the calculation. The downside is that this procedure is quite slow.
+
+In MIRP, the value of the highest value of \f$m\f$ is calculated in this fashion, and then downward recurrence is used to obtain
+the rest.
+
+\section _boys_functions Functions in MIRP
+
+In MIRP, the Boys function can be calculated via the following functions:
+
+- mirp_boys_double()
+- mirp_boys_mp()
+- mirp_boys_interval()
+
+*/

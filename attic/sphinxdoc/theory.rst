@@ -24,3 +24,8 @@ Theory and Algorithms
 
    theory_boys
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Miscellaneous Functions
+
+   theory_gpt

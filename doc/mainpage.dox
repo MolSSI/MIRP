@@ -1,0 +1,22 @@
+/////////////////////////
+// MAINPAGE            //
+/////////////////////////
+/*! \mainpage
+
+\section main_sec Contents
+
+  - Integrals
+    - Electron Repulsion Integrals
+  - Miscellaneous Functionality
+    - [Gaussian Product Theorem](\ref gaussian_product_theorem)
+    - [Boys Function](\ref boys_function)
+
+\section Authors
+
+\todo Authors
+
+\section license_sec License
+
+\todo License info
+
+*/

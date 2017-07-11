@@ -6,8 +6,9 @@ Welcome to MolSSI Integral Reference Project's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   introduction
+   overview
    building
+   conventions
    theory
 
 

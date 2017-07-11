@@ -36,10 +36,11 @@ extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.imgmath',
-    'sphinx.ext.viewcode']
+    'sphinx.ext.viewcode',
+    'breathe']
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+emplates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -94,69 +95,24 @@ html_theme = 'classic'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+#html_theme_options = { "sidebarbgcolor" : "#1A2D51",
+#                       "sidebartextcolor" : "#FFFFFF",
+#                       "sidebarlinkcolor" : "#CBFADD",
+#                       "bgcolor" : "#FFFFFF",
+#}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+# -- Math/Equations --
+imgmath_image_format = 'svg'
+imgmath_font_size = 14
+imgmath_latex_preamble = '\setlength{\jot}{20pt}'
 
-# -- Options for HTMLHelp output ------------------------------------------
-
-# Output file base name for HTML help builder.
-htmlhelp_basename = 'MolSSIIntegralReferenceProjectdoc'
-
-
-# -- Options for LaTeX output ---------------------------------------------
-
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-}
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title,
-#  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-    (master_doc, 'MolSSIIntegralReferenceProject.tex', 'MolSSI Integral Reference Project Documentation',
-     'Benjamin Pritchard', 'manual'),
-]
-
-
-# -- Options for manual page output ---------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'molssiintegralreferenceproject', 'MolSSI Integral Reference Project Documentation',
-     [author], 1)
-]
-
-
-# -- Options for Texinfo output -------------------------------------------
-
-# Grouping the document tree into Texinfo files. List of tuples
-# (source start file, target name, title, author,
-#  dir menu entry, description, category)
-texinfo_documents = [
-    (master_doc, 'MolSSIIntegralReferenceProject', 'MolSSI Integral Reference Project Documentation',
-     author, 'MolSSIIntegralReferenceProject', 'One line description of project.',
-     'Miscellaneous'),
-]
-
+# -- Breathe configuration --
+breathe_projects = { "mirp": "doxygen_output/xml" }
+breathe_default_project = "mirp"
 
 
