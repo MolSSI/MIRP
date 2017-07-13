@@ -1,10 +1,13 @@
+/*! \file
+ *
+ * \brief Calculation of electron repulsion integrals (double precision)
+ */
+
 #include "mirp/kernels/boys.h"
 #include "mirp/kernels/eri.h"
-#include "mirp/math.h"
 #include "mirp/loops.h"
-#include "mirp/shell.h"
+#include "mirp/math.h"
 #include "mirp/gpt.h"
-
 #include <math.h>
 
 
@@ -31,7 +34,7 @@ static void compute_farr(double * f, int lmn1, int lmn2, double xyz1, double xyz
     }
 }
 
-void mirp_single_eri_double(double * result,
+void mirp_single_eri_double(double * output,
                             const int * lmn1, const double * A, double alpha1,
                             const int * lmn2, const double * B, double alpha2,
                             const int * lmn3, const double * C, double alpha3,
@@ -42,7 +45,7 @@ void mirp_single_eri_double(double * result,
     const int L_n = lmn1[2]+lmn2[2]+lmn3[2]+lmn4[2];
     const int L = L_l + L_m + L_n;
 
-    *result = 0.0;
+    *output = 0.0;
 
     double F[L+1];
     double flp[lmn1[0]+lmn2[0]+1];
@@ -125,7 +128,7 @@ void mirp_single_eri_double(double * result,
                          * mirp_factorial(yfac) * mirp_factorial(ty)
                          * mirp_factorial(zfac) * mirp_factorial(tz);
 
-                    *result += tmp;
+                    *output += tmp;
                 }
             }
         }
@@ -136,16 +139,16 @@ void mirp_single_eri_double(double * result,
                 * exp(-alpha3 * alpha4 * CD2 / gammaq);
     pfac /= (gammap * gammaq * sqrt(gammap + gammaq));
 
-    *result *= pfac;
+    *output *= pfac;
 }
 
-void mirp_prim_eri_double(double * result,
+void mirp_prim_eri_double(double * output,
                           int am1, const double * A, double alpha1,
                           int am2, const double * B, double alpha2,
                           int am3, const double * C, double alpha3,
                           int am4, const double * D, double alpha4)
 {
-    mirp_cartloop4_double(result,
+    mirp_cartloop4_double(output,
                           am1, A, alpha1,
                           am2, B, alpha2,
                           am3, C, alpha3,
@@ -154,13 +157,13 @@ void mirp_prim_eri_double(double * result,
 }
 
 
-void mirp_eri_double(double * result,
+void mirp_eri_double(double * output,
                      int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
                      int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
                      int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
                      int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4)
 {
-    mirp_loop4_double(result,
+    mirp_loop4_double(output,
                       am1, A, nprim1, ngeneral1, alpha1, coeff1,
                       am2, B, nprim2, ngeneral2, alpha2, coeff2,
                       am3, C, nprim3, ngeneral3, alpha3, coeff3,

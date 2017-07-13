@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief Some miscellaneous helper functions for arblib data types
+ * \brief Miscellaneous helper functions for arblib data types
  */
 
 #pragma once

@@ -23,7 +23,6 @@ In MIRP, the parameters to the Gaussian Product Theorem can be calculated
 via the following functions:
 
 - mirp_gpt_double()
-- mirp_gpt_mp()
 - mirp_gpt_interval()
 
 */

@@ -17,7 +17,9 @@ extern "C" {
  * of 3 elements.
  *
  * The output parameters \p P, \p PA, and \p PB are also expected
- * to be arrays of length three.
+ * to be arrays 3 elements.
+ *
+ * See \ref gaussian_product_theorem
  *
  * \param [in]  alpha1  Exponent of the first gaussian
  * \param [in]  alpha2  Exponent of the second gaussian

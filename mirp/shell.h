@@ -9,6 +9,8 @@
 extern "C" {
 #endif
 
+/*! \brief Number of cartesian functions for a given angular momentum */
+#define MIRP_NCART(am) ((((am)+1)*((am)+2))/2)
 
 /*! \brief Normalize a shell (double precision)
  *

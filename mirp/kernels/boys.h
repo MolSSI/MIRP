@@ -13,6 +13,8 @@ extern "C" {
 
 /*! \brief Computes the Boys function using double precision
  *
+ * See \ref boys_function
+ *
  * \warning \p F must be large enough to hold (\p m + 1) values, since
  *             this is computing from zero to m.
  *

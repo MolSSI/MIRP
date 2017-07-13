@@ -1,6 +1,6 @@
 #include "mirp/kernels/eri.h"
 #include "mirp/arb_help.h"
-#include "mirp/math.h"
+#include "mirp/shell.h"
 #include <Python.h>
 #include <stdlib.h>
 

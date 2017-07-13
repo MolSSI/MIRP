@@ -47,10 +47,6 @@ extern "C" {
 #define MIRP_LOG_10_2 0.3010299956639812
 
 
-/*! \brief Number of cartesian functions for a given angular momentum */
-#define MIRP_NCART(am) ((((am)+1)*((am)+2))/2)
-
-
 /*! \brief Calculates a factorial using double precision */
 double mirp_factorial(int n);
 
@@ -60,7 +56,7 @@ double mirp_double_factorial(int n);
 
 
 /*! \brief Calculates a double factorial using interval arithmetic */
-void mirp_double_factorial_interval(arb_t result, long int n, slong working_prec);
+void mirp_double_factorial_interval(arb_t output, long int n, slong working_prec);
 
 
 /*! \brief Calculates a binomial coefficient using double precision */
@@ -68,7 +64,7 @@ double mirp_binomial_coefficient(int n, int k);
 
 
 /*! \brief Calculates a binomial coefficient using interval arithmetic */
-void mirp_binomial_coefficient_interval(arb_t result, long int n, long int k, slong working_prec);
+void mirp_binomial_coefficient_interval(arb_t output, long int n, long int k, slong working_prec);
 
 #ifdef __cplusplus
 }

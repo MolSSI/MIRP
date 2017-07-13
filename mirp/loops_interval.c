@@ -5,10 +5,9 @@
 
 #include "mirp/loops.h"
 #include "mirp/shell.h"
-#include "mirp/math.h"
 #include "mirp/arb_help.h"
 
-void mirp_cartloop4_interval(arb_t * result,
+void mirp_cartloop4_interval(arb_t * output,
                              int am1, const arb_t * A, const arb_t alpha1,
                              int am2, const arb_t * B, const arb_t alpha2,
                              int am3, const arb_t * C, const arb_t alpha3,
@@ -33,7 +32,7 @@ void mirp_cartloop4_interval(arb_t * result,
                 int lmn4[3] = {am4, 0, 0};
                 for(long l = 0; l < ncart4; l++)
                 {
-                    cb(result[idx],
+                    cb(output[idx],
                        lmn1, A, alpha1,
                        lmn2, B, alpha2,
                        lmn3, C, alpha3,
@@ -55,7 +54,8 @@ void mirp_cartloop4_interval(arb_t * result,
     }
 }
 
-void mirp_loop4_interval(arb_t * result,
+
+void mirp_loop4_interval(arb_t * output,
                         int am1, const arb_t * A, int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,
                         int am2, const arb_t * B, int nprim2, int ngeneral2, const arb_t * alpha2, const arb_t * coeff2,
                         int am3, const arb_t * C, int nprim3, int ngeneral3, const arb_t * alpha3, const arb_t * coeff3,
@@ -70,16 +70,13 @@ void mirp_loop4_interval(arb_t * result,
     const long ngeneral1234 = ngeneral1*ngeneral2*ngeneral3*ngeneral4;
     const long full_size = ncart1234*ngeneral1234;
 
-    arb_t coeff;
-    arb_init(coeff);
-
-    arb_t * result_buffer = (arb_t *)malloc(full_size * sizeof(arb_t));
+    arb_t * output_buffer = malloc(full_size * sizeof(arb_t));
     arb_t * coeff1_norm = malloc(nprim1 * ngeneral1 * sizeof(arb_t));
     arb_t * coeff2_norm = malloc(nprim2 * ngeneral2 * sizeof(arb_t));
     arb_t * coeff3_norm = malloc(nprim3 * ngeneral3 * sizeof(arb_t));
     arb_t * coeff4_norm = malloc(nprim4 * ngeneral4 * sizeof(arb_t));
 
-    mirp_init_arb_arr(result_buffer, full_size);
+    mirp_init_arb_arr(output_buffer, full_size);
     mirp_init_arb_arr(coeff1_norm, nprim1 * ngeneral1);
     mirp_init_arb_arr(coeff2_norm, nprim2 * ngeneral2);
     mirp_init_arb_arr(coeff3_norm, nprim3 * ngeneral3);
@@ -90,16 +87,19 @@ void mirp_loop4_interval(arb_t * result,
     mirp_normalize_shell_interval(am3, nprim3, ngeneral3, alpha3, coeff3, coeff3_norm, working_prec);
     mirp_normalize_shell_interval(am4, nprim4, ngeneral4, alpha4, coeff4, coeff4_norm, working_prec);
 
-
     for(long i = 0; i < full_size; i++)
-        arb_zero(result[i]);
+        arb_zero(output[i]);
+
+    /* A temporary variable (used to build up the coefficient) */
+    arb_t coeff;
+    arb_init(coeff);
 
     for(int i = 0; i < nprim1; i++)
     for(int j = 0; j < nprim2; j++)
     for(int k = 0; k < nprim3; k++)
     for(int l = 0; l < nprim4; l++)
     {
-        cb(result_buffer,
+        cb(output_buffer,
            am1, A, alpha1[i],
            am2, B, alpha2[j],
            am3, C, alpha3[k],
@@ -119,19 +119,19 @@ void mirp_loop4_interval(arb_t * result,
             for(long q = 0; q < ncart1234; q++)
             {
                 const long idx = ntotal*ncart1234+q;
-                arb_addmul(result[idx], result_buffer[q], coeff, working_prec);
+                arb_addmul(output[idx], output_buffer[q], coeff, working_prec);
             }
             ntotal++;
         }
     }
 
     arb_clear(coeff);
-    mirp_clear_arb_arr(result_buffer, full_size);
+    mirp_clear_arb_arr(output_buffer, full_size);
     mirp_clear_arb_arr(coeff1_norm, nprim1 * ngeneral1);
     mirp_clear_arb_arr(coeff2_norm, nprim2 * ngeneral2);
     mirp_clear_arb_arr(coeff3_norm, nprim3 * ngeneral3);
     mirp_clear_arb_arr(coeff4_norm, nprim4 * ngeneral4);
-    free(result_buffer);    
+    free(output_buffer);    
     free(coeff1_norm);
     free(coeff2_norm);
     free(coeff3_norm);

@@ -1,10 +1,14 @@
+/*! \file
+ *
+ * \brief Calculation of electron repulsion integrals (interval arithmetic)
+ */
+
 #include "mirp/kernels/boys.h"
 #include "mirp/kernels/eri.h"
-#include "mirp/arb_help.h"
 #include "mirp/loops.h"
 #include "mirp/math.h"
-#include "mirp/shell.h"
 #include "mirp/gpt.h"
+#include "mirp/arb_help.h"
 
 static void mirp_farr_interval(arb_t * f,
                                int lmn1, int lmn2,
@@ -95,7 +99,7 @@ static void mirp_G_interval(arb_t G, arb_t fp, arb_t fq,
     arb_clear(tmp2);
 }
 
-void mirp_single_eri_interval(arb_t result,
+void mirp_single_eri_interval(arb_t output,
                               const int * lmn1, const arb_t * A, const arb_t alpha1,
                               const int * lmn2, const arb_t * B, const arb_t alpha2,
                               const int * lmn3, const arb_t * C, const arb_t alpha3,
@@ -122,8 +126,8 @@ void mirp_single_eri_interval(arb_t result,
     mirp_init_arb_arr(fmq, lmn3[1]+lmn4[1]+1);
     mirp_init_arb_arr(fnq, lmn3[2]+lmn4[2]+1);
 
-    /* Zero the result (we will be summing into it) */
-    arb_zero(result);
+    /* Zero the output (we will be summing into it) */
+    arb_zero(output);
 
     /* Temporary variables used in constructing expressions */
     arb_t tmp1, tmp2, tmp3;
@@ -284,7 +288,7 @@ void mirp_single_eri_interval(arb_t result,
 
                     arb_div(tmp1, tmp1, tmp2, working_prec);
 
-                    arb_add(result, result, tmp1, working_prec);
+                    arb_add(output, output, tmp1, working_prec);
                 }
             }
         }
@@ -329,7 +333,7 @@ void mirp_single_eri_interval(arb_t result,
     arb_div(tmp1, tmp1, tmp2, working_prec);
 
     /* apply the prefactor */
-    arb_mul(result, result, tmp1, working_prec);
+    arb_mul(output, output, tmp1, working_prec);
 
 
     /* cleanup */
@@ -364,14 +368,14 @@ void mirp_single_eri_interval(arb_t result,
 }
 
 
-void mirp_prim_eri_interval(arb_t * result,
+void mirp_prim_eri_interval(arb_t * output,
                             int am1, const arb_t * A, const arb_t alpha1,
                             int am2, const arb_t * B, const arb_t alpha2,
                             int am3, const arb_t * C, const arb_t alpha3,
                             int am4, const arb_t * D, const arb_t alpha4,
                             slong working_prec)
 {
-    mirp_cartloop4_interval(result,
+    mirp_cartloop4_interval(output,
                             am1, A, alpha1,
                             am2, B, alpha2,
                             am3, C, alpha3,
@@ -380,14 +384,14 @@ void mirp_prim_eri_interval(arb_t * result,
 }
 
 
-void mirp_eri_interval(arb_t * result,
+void mirp_eri_interval(arb_t * output,
                        int am1, const arb_t * A, int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,
                        int am2, const arb_t * B, int nprim2, int ngeneral2, const arb_t * alpha2, const arb_t * coeff2,
                        int am3, const arb_t * C, int nprim3, int ngeneral3, const arb_t * alpha3, const arb_t * coeff3,
                        int am4, const arb_t * D, int nprim4, int ngeneral4, const arb_t * alpha4, const arb_t * coeff4,
                        slong working_prec)
 {
-    mirp_loop4_interval(result,
+    mirp_loop4_interval(output,
                         am1, A, nprim1, ngeneral1, alpha1, coeff1,
                         am2, B, nprim2, ngeneral2, alpha2, coeff2,
                         am3, C, nprim3, ngeneral3, alpha3, coeff3,

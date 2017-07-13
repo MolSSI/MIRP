@@ -9,6 +9,7 @@
 void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
 {
     assert(m >= 0);
+    assert(t >= 0.0);
     assert(working_prec > 0);
 
     int i;
@@ -81,8 +82,8 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
 
             arb_set(test, sum);
             arb_add(sum, sum, term, working_prec);
-        } while(!arb_contains(sum, test)); /* Is the old term contained completely
-                                              within the new term */
+        } while(!arb_contains(sum, test)); /* Is the old term contained
+                                              completely within the new term */
 
         //printf("Done with long-range test in %d cycles\n", i);
 

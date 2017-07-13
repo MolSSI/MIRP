@@ -10,6 +10,9 @@
 
 void mirp_boys_double(double *F, int m, double t)
 {
+    assert(m >= 0);
+    assert(t >= 0.0);
+
     int i;
     double test;
     double term;

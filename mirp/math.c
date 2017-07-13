@@ -45,16 +45,16 @@ double mirp_double_factorial(int n)
 }
 
 
-void mirp_double_factorial_interval(arb_t result, long int n, slong working_prec)
+void mirp_double_factorial_interval(arb_t output, long int n, slong working_prec)
 {
     /* arblib has a double factorial function, but only for
      * positive values
      */
     
     if(n >= -1 && n <= 1)
-        arb_set_ui(result, 1);
+        arb_set_ui(output, 1);
     else
-        arb_doublefac_ui(result, (unsigned long)n, working_prec);
+        arb_doublefac_ui(output, (unsigned long)n, working_prec);
 }
 
 
@@ -68,7 +68,7 @@ double mirp_binomial_coefficient(int n, int k)
 }
 
 
-void mirp_binomial_coefficient_interval(arb_t result, long int n, long int k, slong working_prec)
+void mirp_binomial_coefficient_interval(arb_t output, long int n, long int k, slong working_prec)
 {
     assert(n >= 0);
     assert(k >= 0);
@@ -78,16 +78,16 @@ void mirp_binomial_coefficient_interval(arb_t result, long int n, long int k, sl
     arb_t f;
     arb_init(f);
 
-    /* put k! in the result */
-    arb_fac_ui(result, k, working_prec);
+    /* put k! in the output */
+    arb_fac_ui(output, k, working_prec);
 
-    /* next, (n-k)! in temporary, and multiply into result */
+    /* next, (n-k)! in temporary, and multiply into output */
     arb_fac_ui(f, n-k, working_prec);
-    arb_mul(result, result, f, working_prec);
+    arb_mul(output, output, f, working_prec);
 
     /* now n! in temporary, and divide */
     arb_fac_ui(f, n, working_prec);
-    arb_div(result, f, result, working_prec);
+    arb_div(output, f, output, working_prec);
 
     arb_clear(f);
 }

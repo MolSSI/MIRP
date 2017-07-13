@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief Some miscellaneous helper functions for arblib data types
+ * \brief Miscellaneous helper functions for arblib data types
  */
 
 #include "mirp/arb_help.h"
