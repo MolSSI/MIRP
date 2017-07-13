@@ -1,14 +1,12 @@
 add_library(test_common OBJECT cmdline.cpp
-                               boys_test_file.cpp
+                               boys_test.cpp
 )
 
 add_executable(mirp_run_test mirp_run_test.cpp
-                             boys_run_test.cpp
                              $<TARGET_OBJECTS:test_common>
 )
 
 add_executable(mirp_create_test mirp_create_test.cpp
-                                boys_create_test.cpp
                                 $<TARGET_OBJECTS:test_common>
 )
 

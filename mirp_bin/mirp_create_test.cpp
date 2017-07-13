@@ -1,15 +1,8 @@
 #include "mirp_bin/cmdline.hpp"
+#include "mirp_bin/boys_test.hpp"
 #include <iostream>
 
 using namespace mirp;
-
-namespace mirp {
-
-// in boys_create_test.cpp
-void boys_create_test(const std::string & infile, const std::string & outfile, long ndigits, const std::string & header);
-
-}
-
 
 int main(int argc, char ** argv)
 {

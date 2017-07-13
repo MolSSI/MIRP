@@ -1,3 +1,8 @@
+/*! \file
+ *
+ * \brief Functions for parsing the command line given to a program
+ */
+
 #include "mirp_bin/cmdline.hpp"
 #include <algorithm>
 #include <stdexcept>
@@ -11,6 +16,7 @@ bool cmdline_has_arg(const std::vector<std::string> & cmdline, const std::string
     auto it = std::find(cmdline.begin(), cmdline.end(), arg);
     return it != cmdline.end();
 }
+
 
 std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const std::string & arg)
 {
