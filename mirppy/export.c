@@ -1,7 +1,6 @@
 #include <Python.h>
 
 /* In export_boys.c */
-PyObject * export_mirp_boys_mp(PyObject *self, PyObject *args);
 PyObject * export_mirp_boys_interval(PyObject *self, PyObject *args);
 PyObject * export_mirp_boys_double(PyObject *self, PyObject *args);
 
@@ -12,8 +11,6 @@ PyObject * export_mirp_eri_double(PyObject *self, PyObject *args);
 
 
 static PyMethodDef mirp_methods[] = {
-    {"boys_mp", export_mirp_boys_mp, METH_VARARGS,
-     "Test function"},
     {"boys_interval", export_mirp_boys_interval, METH_VARARGS,
      "Test function"},
     {"boys_double", export_mirp_boys_double, METH_VARARGS,

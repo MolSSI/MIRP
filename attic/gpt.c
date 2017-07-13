@@ -31,6 +31,67 @@ void mirp_gpt_double(double alpha1, double alpha2,
 }
 
 
+void mirp_gpt_mp(const mpfr_t alpha1, const mpfr_t alpha2,
+                 const mpfr_t * A, const mpfr_t * B,
+                 mpfr_t gamma, mpfr_t * P,
+                 mpfr_t * PA, mpfr_t * PB,
+                 mpfr_t AB2,
+                 mpfr_prec_t working_prec)
+{
+    /* Temporary data */
+    mpfr_t tmp1, tmp2, tmp3;
+    mpfr_inits2(working_prec, tmp1, tmp2, tmp3, (mpfr_ptr)0);
+
+
+    /*
+     * gamma = alpha1 + alpha2
+     *
+     * P[0] = (alpha1*A[0] + alpha2*B[0]) / gamma
+     * and similar for P[1], P[2]
+     */
+    mpfr_add(gamma, alpha1, alpha2, MPFR_RNDN);
+
+    mpfr_mul(tmp1, alpha1, A[0],   MPFR_RNDN);
+    mpfr_mul(tmp2, alpha2, B[0],   MPFR_RNDN);
+    mpfr_add(P[0], tmp1,   tmp2,   MPFR_RNDN);
+    mpfr_div(P[0], P[0],   gamma,  MPFR_RNDN);
+
+    mpfr_mul(tmp1, alpha1, A[1],   MPFR_RNDN);
+    mpfr_mul(tmp2, alpha2, B[1],   MPFR_RNDN);
+    mpfr_add(P[1], tmp1,   tmp2,   MPFR_RNDN);
+    mpfr_div(P[1], P[1],   gamma,  MPFR_RNDN);
+
+    mpfr_mul(tmp1, alpha1, A[2],   MPFR_RNDN);
+    mpfr_mul(tmp2, alpha2, B[2],   MPFR_RNDN);
+    mpfr_add(P[2], tmp1,   tmp2,   MPFR_RNDN);
+    mpfr_div(P[2], P[2],   gamma,  MPFR_RNDN);
+
+    /*
+     *
+     * PA[0] = P[0] - A[0], etc
+     * PB[0] = P[0] - B[0], etc
+     */
+    mpfr_sub(PA[0], P[0], A[0], MPFR_RNDN);
+    mpfr_sub(PA[1], P[1], A[1], MPFR_RNDN);
+    mpfr_sub(PA[2], P[2], A[2], MPFR_RNDN);
+    mpfr_sub(PB[0], P[0], B[0], MPFR_RNDN);
+    mpfr_sub(PB[1], P[1], B[1], MPFR_RNDN);
+    mpfr_sub(PB[2], P[2], B[2], MPFR_RNDN);
+
+    /*
+     * AB2 = (A[0]-B[0])*(A[0]-B[0]) + (A[1]-B[1])*(A[1]-B[1]) + (A[2]-B[2])*(A[2]-B[2]);
+     */
+    mpfr_sub(tmp1, A[0], B[0], MPFR_RNDN);
+    mpfr_sub(tmp2, A[1], B[1], MPFR_RNDN);
+    mpfr_sub(tmp3, A[2], B[2], MPFR_RNDN);
+    mpfr_mul(AB2,  tmp1, tmp1, MPFR_RNDN);
+    mpfr_fma(AB2,  tmp2, tmp2, AB2, MPFR_RNDN);
+    mpfr_fma(AB2,  tmp3, tmp3, AB2, MPFR_RNDN);
+
+    /* clean up temporaries */
+    mpfr_clears(tmp1, tmp2, tmp3, (mpfr_ptr)0);
+}
+
 void mirp_gpt_interval(const arb_t alpha1, const arb_t alpha2,
                        const arb_t * A, const arb_t * B,
                        arb_t gamma, arb_t * P,

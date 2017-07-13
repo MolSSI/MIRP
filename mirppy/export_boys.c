@@ -1,5 +1,4 @@
 #include "mirp/kernels/boys.h"
-#include "mirp/mpfr_help.h"
 #include "mirp/arb_help.h"
 #include <Python.h>
 
@@ -27,43 +26,6 @@ PyObject * export_mirp_boys_double(PyObject * self, PyObject *args)
     return ret;
 }
 
-PyObject * export_mirp_boys_mp(PyObject * self, PyObject *args)
-{
-    UNUSED(self);
-
-    int m;
-    long working_prec, final_prec;
-    const char * t = NULL;
-
-    if(!PyArg_ParseTuple(args, "isll", &m, &t, &final_prec, &working_prec))
-        return NULL;
-
-    mpfr_t t_mp, F_mp[m+1];
-    mpfr_init2(t_mp, working_prec);
-    mirp_init_mpfr_arr(F_mp, m+1, final_prec);
-    mpfr_set_str(t_mp, t, 10, MPFR_RNDN);
-
-    mirp_boys_mp(F_mp, m, t_mp, working_prec);
-
-    PyObject * ret = PyList_New(m+1);
-
-    char * strtmp;
-
-    for(int i = 0; i <= m; i++)
-    {
-        mpfr_asprintf(&strtmp, "%Re", F_mp[i]);
-
-        PyObject * pystr = PyUnicode_FromString(strtmp);
-        PyList_SetItem(ret, i, pystr);
-
-        mpfr_free_str(strtmp);
-    }
-
-    mpfr_clear(t_mp);
-    mirp_clear_mpfr_arr(F_mp, m+1);
-
-    return ret;
-}
 
 PyObject * export_mirp_boys_interval(PyObject *self, PyObject *args)
 {

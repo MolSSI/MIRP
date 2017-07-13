@@ -6,8 +6,6 @@
 
 #pragma once
 
-#include <gmp.h>
-#include <mpfr.h>
 #include <arb.h>
 
 #ifdef __cplusplus
@@ -61,20 +59,12 @@ double mirp_factorial(int n);
 double mirp_double_factorial(int n);
 
 
-/*! \brief Calculates a double factorial using arbitrary precision */
-void mirp_double_factorial_mp(mpfr_t result, long int n);
-
-
 /*! \brief Calculates a double factorial using interval arithmetic */
 void mirp_double_factorial_interval(arb_t result, long int n, slong working_prec);
 
 
 /*! \brief Calculates a binomial coefficient using double precision */
 double mirp_binomial_coefficient(int n, int k);
-
-
-/*! \brief Calculates a binomial coefficient using arbitrary precision */
-void mirp_binomial_coefficient_mp(mpfr_t result, long int n, long int k);
 
 
 /*! \brief Calculates a binomial coefficient using interval arithmetic */

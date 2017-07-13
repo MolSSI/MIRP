@@ -5,10 +5,7 @@
 
 #pragma once
 
-#include <gmp.h>
-#include <mpfr.h>
 #include <arb.h>
-
 
 #ifdef __cplusplus
 extern "C" {
@@ -90,55 +87,6 @@ void mirp_loop4_double(double * result,
                        int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
                        int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
                        cb_prim4_double cb);
-
-
-
-/*******************************************
- * Arbitrary precision
- *******************************************/
-
-/*! \brief A callback for a function that computes a single cartesian integral (arbitrary precision) */
-typedef void (*cb_single4_mp)(mpfr_t,
-                              const int *, const mpfr_t *, const mpfr_t,
-                              const int *, const mpfr_t *, const mpfr_t,
-                              const int *, const mpfr_t *, const mpfr_t,
-                              const int *, const mpfr_t *, const mpfr_t,
-                              mpfr_prec_t);
-
-
-/*! \brief A callback for a function that computes all cartesian integrals for a primitive quartet (arbitrary precision) */
-typedef void (*cb_prim4_mp)(mpfr_t *,
-                            int, const mpfr_t *, const mpfr_t,
-                            int, const mpfr_t *, const mpfr_t,
-                            int, const mpfr_t *, const mpfr_t,
-                            int, const mpfr_t *, const mpfr_t,
-                            mpfr_prec_t);
-
-
-/*! \brief Compute all cartesian components of a single primitive integral (arbitrary precision)
- *
- * \copydetails mirp_cartloop4_double
- * \param [in] working_prec The working precision to use in the calculation
- */
-void mirp_cartloop4_mp(mpfr_t * result,
-                       int am1, const mpfr_t * A, const mpfr_t alpha1,
-                       int am2, const mpfr_t * B, const mpfr_t alpha2,
-                       int am3, const mpfr_t * C, const mpfr_t alpha3,
-                       int am4, const mpfr_t * D, const mpfr_t alpha4,
-                       mpfr_prec_t working_prec, cb_single4_mp cb);
-
-
-/*! \brief Compute all cartesian components of a contracted shell (arbitrary precision)
- *
- * \copydetails mirp_loop4_double
- * \param [in] working_prec The working precision to use in the calculation
- */
-void mirp_loop4_mp(mpfr_t * result,
-                   int am1, const mpfr_t * A, int nprim1, int ngeneral1, const mpfr_t * alpha1, const mpfr_t * coeff1,
-                   int am2, const mpfr_t * B, int nprim2, int ngeneral2, const mpfr_t * alpha2, const mpfr_t * coeff2,
-                   int am3, const mpfr_t * C, int nprim3, int ngeneral3, const mpfr_t * alpha3, const mpfr_t * coeff3,
-                   int am4, const mpfr_t * D, int nprim4, int ngeneral4, const mpfr_t * alpha4, const mpfr_t * coeff4,
-                   mpfr_prec_t working_prec, cb_prim4_mp cb);
 
 
 

@@ -1,6 +1,5 @@
 #include "mirp_bin/cmdline.hpp"
 #include <mirp/mirp.h>
-#include <mirp/mpfr_help.h>
 #include <mirp/arb_help.h>
 #include <mirp/math.h>
 #include <iostream>
@@ -99,37 +98,6 @@ int main(void)
 
     const mpfr_prec_t final_prec = 128;
     const mpfr_prec_t working_prec = 128;
-/*
-    mpfr_t result_mp[81];
-    mpfr_t xyz_O_mp[3], alpha_O_s_mp[3], coeff_O_s_mp[6];
-    mirp_init_mpfr_arr(result_mp, 81, final_prec);
-    mirp_init_mpfr_arr(xyz_O_mp, 3, working_prec);
-    mirp_init_mpfr_arr(alpha_O_s_mp, 3, working_prec);
-    mirp_init_mpfr_arr(coeff_O_s_mp, 6, working_prec);
-
-    for(int i = 0; i < 3; i++)
-        mpfr_set_d(xyz_O_mp[i], xyz_O[i], MPFR_RNDN);
-    for(int i = 0; i < nprim1; i++)
-        mpfr_set_d(alpha_O_s_mp[i], alpha_O_s[i], MPFR_RNDN);
-    for(int i = 0; i < nprim1*ngeneral1; i++)
-        mpfr_set_d(coeff_O_s_mp[i], coeff_O_s[i], MPFR_RNDN);
-
-    mirp_eri_mp(result_mp,
-                am1, xyz_O_mp, nprim1, ngeneral1, alpha_O_s_mp, coeff_O_s_mp,
-                am2, xyz_O_mp, nprim2, ngeneral2, alpha_O_s_mp, coeff_O_s_mp,
-                am3, xyz_O_mp, nprim3, ngeneral3, alpha_O_s_mp, coeff_O_s_mp,
-                am4, xyz_O_mp, nprim4, ngeneral4, alpha_O_s_mp, coeff_O_s_mp,
-                working_prec);
-
-    for(size_t n = 0; n < ngeneral1234; n++)
-    for(size_t i = 0; i < ncart1234; i++)
-        mpfr_printf("MP: General %4lu Element %4lu : %Re\n", n, i, result_mp[n*ncart1234+i]);
-
-    mirp_clear_mpfr_arr(result_mp, 81);
-    mirp_clear_mpfr_arr(xyz_O_mp, 3);
-    mirp_clear_mpfr_arr(alpha_O_s_mp, 3);
-    mirp_clear_mpfr_arr(coeff_O_s_mp, 6);
-*/
 
     arb_t result_interval[1296];
     arb_t xyz_O_interval[3], alpha_O_s_interval[nprim1], coeff_O_s_interval[nprim1*ngeneral1];

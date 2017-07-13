@@ -1,5 +1,4 @@
 #include "mirp/kernels/eri.h"
-#include "mirp/mpfr_help.h"
 #include "mirp/arb_help.h"
 #include "mirp/math.h"
 #include <Python.h>

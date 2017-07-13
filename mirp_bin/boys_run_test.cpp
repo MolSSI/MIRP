@@ -7,43 +7,6 @@
 
 namespace mirp {
 
-static long boys_run_test_mp(const boys_data & data, long extra_m, long target_prec, long working_prec)
-{
-    const int max_m = boys_max_m(data) + extra_m;
-
-    mpfr_t t_mp, vref_mp;
-    mpfr_init2(t_mp, working_prec);
-    mpfr_init2(vref_mp, target_prec);
-
-    auto F_mp = std::unique_ptr<mpfr_t[]>(new mpfr_t[max_m+1]);
-    for(int i = 0; i <= max_m; i++)
-        mpfr_init2(F_mp[i], target_prec);
-
-    long nfailed = 0;
-
-    for(const auto & it : data.values)
-    {
-        mpfr_set_str(t_mp, it.t.c_str(), 10, MPFR_RNDN);
-        mpfr_set_str(vref_mp, it.value.c_str(), 10, MPFR_RNDN);
-        mirp_boys_mp(F_mp.get(), it.m+extra_m, t_mp, working_prec);
-
-        if(!mpfr_equal_p(F_mp[it.m], vref_mp))
-        {
-            std::cout << "Entry failed test: m = " << it.m << " t = " << it.t << "\n";
-            mpfr_printf("  Calculated: %Re\n", F_mp[it.m]);
-            mpfr_printf("   Reference: %Re\n\n", vref_mp);
-            nfailed++;
-        }
-    }
-
-    mpfr_clear(t_mp);
-    mpfr_clear(vref_mp);
-    for(int i = 0; i <= max_m; i++)
-        mpfr_clear(F_mp[i]);
-
-    return nfailed;
-}
-
 static long boys_run_test_interval(const boys_data & data, long extra_m, long target_prec, long working_prec)
 {
     const int max_m = boys_max_m(data) + extra_m;
@@ -138,9 +101,7 @@ long boys_run_test(const std::string & filename, const std::string & floattype, 
 
     long nfailed = 0;
 
-    if(floattype == "mp")
-        nfailed = boys_run_test_mp(data, extra_m, target_prec, working_prec);
-    else if(floattype == "interval")
+    if(floattype == "interval")
         nfailed = boys_run_test_interval(data, extra_m, target_prec, working_prec);
     else if(floattype == "double")
         nfailed = boys_run_test_double(data, extra_m);

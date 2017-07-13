@@ -5,8 +5,6 @@
 
 #pragma once
 
-#include <gmp.h>
-#include <mpfr.h>
 #include <arb.h>
 
 #ifdef __cplusplus
@@ -36,19 +34,6 @@ void mirp_gpt_double(double alpha1, double alpha2,
                      double * gamma, double * P,
                      double * PA, double * PB,
                      double * AB2);
-
-
-/*! \brief Computes factors for the Gaussian Product Theorem using arbitrary precision
- *
- *  \copydetails mirp_gpt_double
- *  \param [in] working_prec The working precision to use in the calculation
- */
-void mirp_gpt_mp(const mpfr_t alpha1, const mpfr_t alpha2,
-                 const mpfr_t * A, const mpfr_t * B,
-                 mpfr_t gamma, mpfr_t * P,
-                 mpfr_t * PA, mpfr_t * PB,
-                 mpfr_t AB2,
-                 mpfr_prec_t working_prec);
 
 
 /*! \brief Computes factors for the Gaussian Product Theorem using interval arithmetic
