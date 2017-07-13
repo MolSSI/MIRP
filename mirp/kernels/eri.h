@@ -96,7 +96,7 @@ void mirp_eri_double(double * output,
  *         (interval arithmetic)
  *
  * \copydetails mirp_single_eri_double
- * \param [in] working_prec The working precision to use in the calculation
+ * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_single_eri_interval(arb_t output,
                               const int * lmn1, const arb_t * A, const arb_t alpha1,
@@ -110,7 +110,7 @@ void mirp_single_eri_interval(arb_t output,
  *         repulsion integral (interval arithmetic)
  *
  * \copydetails mirp_prim_eri_double
- * \param [in] working_prec The working precision to use in the calculation
+ * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_prim_eri_interval(arb_t * output,
                             int am1, const arb_t * A, const arb_t alpha1,
@@ -124,7 +124,7 @@ void mirp_prim_eri_interval(arb_t * output,
            of contracted shell quartet (interval arithmetic)
  *
  * \copydetails mirp_eri_double
- * \param [in] working_prec The working precision to use in the calculation
+ * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_eri_interval(arb_t * output,
                        int am1, const arb_t * A, int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,

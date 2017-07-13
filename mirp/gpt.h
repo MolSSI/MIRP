@@ -40,8 +40,8 @@ void mirp_gpt_double(double alpha1, double alpha2,
 
 /*! \brief Computes factors for the Gaussian Product Theorem using interval arithmetic
  *
- *  \copydetails mirp_gpt_double
- *  \param [in] working_prec The working precision to use in the calculation
+ * \copydetails mirp_gpt_double
+ * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_gpt_interval(const arb_t alpha1, const arb_t alpha2,
                        const arb_t * A, const arb_t * B,

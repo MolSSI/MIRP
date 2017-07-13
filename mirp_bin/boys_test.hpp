@@ -75,10 +75,11 @@ namespace mirp {
      * \param [in] filepath    Path to the file to test
      * \param [in] floattype   Type of floating point to test ("double", for example)
      * \param [in] extra_m     Additional `m` values (used to test recurrence relations)
-     * \param [in] target_prec Desired final precision
+     * \param [in] target_prec Desired final binary precision (in bits)
      * \return The number of tests that have failed   
      */
-    long boys_run_test(const std::string & filepath, const std::string & floattype, long extra_m, long target_prec);
+    long boys_run_test(const std::string & filepath, const std::string & floattype,
+                       long extra_m, long target_prec);
 
 
     /*! \brief Create a test file for the Boys function from a given input file
@@ -90,11 +91,12 @@ namespace mirp {
      *
      * \param [in] input_filepath  Path to the input file
      * \param [in] output_filepath File to write the computed data to
-     * \param [in] ndigits         Number of digits to compute
+     * \param [in] ndigits         Number of decimal digits to compute
      * \param [in] header          Any descriptive header data
      *                             (will be appended to the existing header in the input file)
      */
-    void boys_create_test(const std::string & input_filepath, const std::string & output_filepath,
+    void boys_create_test(const std::string & input_filepath,
+                          const std::string & output_filepath,
                           long ndigits, const std::string & header);
 
 } // close namespace mirp

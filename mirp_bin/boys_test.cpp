@@ -15,6 +15,14 @@
 /* Anonymous namespace for some helper functions */
 namespace {
 
+/* Runs a Boys function test using interval arithmetic
+ *
+ * This just wraps the calculation of Boys function, increasing the
+ * working precision until the desired target precision is reached. It
+ * then handles the comparison with the reference data
+ *
+ * The number of failing tests is returned
+ */
 long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long target_prec)
 {
     using namespace mirp;
@@ -71,6 +79,14 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
     return nfailed;
 }
 
+
+/* Runs a Boys function test using double precision
+ *
+ * This just wraps the calculation of Boys function and the
+ * comparison of the computed data with the reference values.
+ *
+ * The number of failing tests is returned
+ */
 long boys_run_test_double(const mirp::boys_data & data, long extra_m)
 {
     using namespace mirp;
@@ -216,20 +232,20 @@ void boys_write_file(const std::string & filepath, const boys_data & data)
 }
 
 
-long boys_run_test(const std::string & filename, const std::string & floattype, long extra_m, long target_prec)
+long boys_run_test(const std::string & filepath, const std::string & floattype, long extra_m, long target_prec)
 {
     boys_data data;
     try {
-        data = boys_read_file(filename);
+        data = boys_read_file(filepath);
     }
     catch(std::exception & ex)
     {
-        std::cout << "Unable to read data from file \"" << filename << "\": ";
+        std::cout << "Unable to read data from file \"" << filepath << "\": ";
         std::cout << ex.what() << "\n";
         return 2;
     }
 
-    std::cout << "Read " << data.values.size() << " values from " << filename << "\n";
+    std::cout << "Read " << data.values.size() << " values from " << filepath << "\n";
 
     long nfailed = 0;
 
@@ -253,9 +269,11 @@ long boys_run_test(const std::string & filename, const std::string & floattype, 
 }
 
 
-void boys_create_test(const std::string & infile, const std::string & outfile, long ndigits, const std::string & header)
+void boys_create_test(const std::string & input_filepath,
+                      const std::string & output_filepath,
+                      long ndigits, const std::string & header)
 {
-    boys_data data = boys_read_input_file(infile);
+    boys_data data = boys_read_input_file(input_filepath);
     data.ndigits = ndigits;
     data.header += header;
 
@@ -292,7 +310,7 @@ void boys_create_test(const std::string & infile, const std::string & outfile, l
         free(s);
     }
 
-    boys_write_file(outfile, data);
+    boys_write_file(output_filepath, data);
     arb_clear(t_mp);
     for(int i = 0; i <= maxm; i++)
         arb_clear(F_mp[i]);

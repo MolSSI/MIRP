@@ -49,7 +49,7 @@ void mirp_normalize_shell_double(int am, int nprim, int ngeneral,
 /*! \brief Normalize a shell (interval arithmetic)
  *
  * \copydetails mirp_normalize_shell_double
- * \param [in] working_prec The working precision to use in the calculation
+ * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_normalize_shell_interval(int am, int nprim, int ngeneral,
                                    const arb_t * alpha,

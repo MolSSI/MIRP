@@ -130,7 +130,7 @@ typedef void (*cb_prim4_interval)(arb_t *,
  *         (interval arithmetic)
  *
  * \copydetails mirp_cartloop4_double
- * \param [in] working_prec The working precision to use in the calculation
+ * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_cartloop4_interval(arb_t * output,
                              int am1, const arb_t * A, const arb_t alpha1,
@@ -144,7 +144,7 @@ void mirp_cartloop4_interval(arb_t * output,
  *         (interval arithmetic)
  *
  * \copydetails mirp_loop4_double
- * \param [in] working_prec The working precision to use in the calculation
+ * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_loop4_interval(arb_t * output,
                          int am1, const arb_t * A, int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,

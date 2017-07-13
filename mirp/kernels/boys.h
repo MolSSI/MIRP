@@ -28,7 +28,7 @@ void mirp_boys_double(double *F, int m, double t);
 /*! \brief Computes the Boys function using interval arithmetic
  *
  * \copydetails mirp_boys_double
- * \param [in] working_prec The working precision to use in the calculation
+ * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec);
 

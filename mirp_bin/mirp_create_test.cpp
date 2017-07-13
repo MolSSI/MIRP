@@ -1,3 +1,8 @@
+/*! \file
+ *
+ * \brief mirp_create_test main function
+ */
+
 #include "mirp_bin/cmdline.hpp"
 #include "mirp_bin/boys_test.hpp"
 #include <iostream>

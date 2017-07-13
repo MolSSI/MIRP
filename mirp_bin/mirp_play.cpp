@@ -1,3 +1,8 @@
+/*! \file
+ *
+ * \brief Sandbox for testing features
+ */
+
 #include "mirp_bin/cmdline.hpp"
 #include <mirp/mirp.h>
 #include <mirp/arb_help.h>
