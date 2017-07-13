@@ -8,12 +8,12 @@
 #include "mirp/math.h"
 #include "mirp/arb_help.h"
 
-void mirp_prim_cartloop4_interval(arb_t * result,
-                                  int am1, const arb_t * A, const arb_t alpha1,
-                                  int am2, const arb_t * B, const arb_t alpha2,
-                                  int am3, const arb_t * C, const arb_t alpha3,
-                                  int am4, const arb_t * D, const arb_t alpha4,
-                                  mpfr_prec_t working_prec, cb_4gaussians_interval cb)
+void mirp_cartloop4_interval(arb_t * result,
+                             int am1, const arb_t * A, const arb_t alpha1,
+                             int am2, const arb_t * B, const arb_t alpha2,
+                             int am3, const arb_t * C, const arb_t alpha3,
+                             int am4, const arb_t * D, const arb_t alpha4,
+                             slong working_prec, cb_single4_interval cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
@@ -55,12 +55,12 @@ void mirp_prim_cartloop4_interval(arb_t * result,
     }
 }
 
-void mirp_cartloop4_interval(arb_t * result,
-                            int am1, const arb_t * A, int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,
-                            int am2, const arb_t * B, int nprim2, int ngeneral2, const arb_t * alpha2, const arb_t * coeff2,
-                            int am3, const arb_t * C, int nprim3, int ngeneral3, const arb_t * alpha3, const arb_t * coeff3,
-                            int am4, const arb_t * D, int nprim4, int ngeneral4, const arb_t * alpha4, const arb_t * coeff4,
-                            mpfr_prec_t working_prec, cb_4shells_interval cb)
+void mirp_loop4_interval(arb_t * result,
+                        int am1, const arb_t * A, int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,
+                        int am2, const arb_t * B, int nprim2, int ngeneral2, const arb_t * alpha2, const arb_t * coeff2,
+                        int am3, const arb_t * C, int nprim3, int ngeneral3, const arb_t * alpha3, const arb_t * coeff3,
+                        int am4, const arb_t * D, int nprim4, int ngeneral4, const arb_t * alpha4, const arb_t * coeff4,
+                        slong working_prec, cb_prim4_interval cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);

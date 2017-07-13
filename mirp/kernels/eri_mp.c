@@ -350,12 +350,12 @@ void mirp_prim_eri_mp(mpfr_t * result,
                       int am4, const mpfr_t * D, const mpfr_t alpha4,
                       mpfr_prec_t working_prec)
 {
-    mirp_prim_cartloop4_mp(result,
-                           am1, A, alpha1,
-                           am2, B, alpha2,
-                           am3, C, alpha3,
-                           am4, D, alpha4,
-                           working_prec, mirp_single_eri_mp);
+    mirp_cartloop4_mp(result,
+                      am1, A, alpha1,
+                      am2, B, alpha2,
+                      am3, C, alpha3,
+                      am4, D, alpha4,
+                      working_prec, mirp_single_eri_mp);
 }
 
 void mirp_eri_mp(mpfr_t * result,
@@ -365,10 +365,10 @@ void mirp_eri_mp(mpfr_t * result,
                  int am4, const mpfr_t * D, int nprim4, int ngeneral4, const mpfr_t * alpha4, const mpfr_t * coeff4,
                  mpfr_prec_t working_prec)
 {
-    mirp_cartloop4_mp(result,
-                      am1, A, nprim1, ngeneral1, alpha1, coeff1,
-                      am2, B, nprim2, ngeneral2, alpha2, coeff2,
-                      am3, C, nprim3, ngeneral3, alpha3, coeff3,
-                      am4, D, nprim4, ngeneral4, alpha4, coeff4,
-                      working_prec, mirp_prim_eri_mp);
+    mirp_loop4_mp(result,
+                  am1, A, nprim1, ngeneral1, alpha1, coeff1,
+                  am2, B, nprim2, ngeneral2, alpha2, coeff2,
+                  am3, C, nprim3, ngeneral3, alpha3, coeff3,
+                  am4, D, nprim4, ngeneral4, alpha4, coeff4,
+                  working_prec, mirp_prim_eri_mp);
 }

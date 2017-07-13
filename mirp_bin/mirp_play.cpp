@@ -130,7 +130,7 @@ int main(void)
     mirp_clear_mpfr_arr(alpha_O_s_mp, 3);
     mirp_clear_mpfr_arr(coeff_O_s_mp, 6);
 */
-/*
+
     arb_t result_interval[1296];
     arb_t xyz_O_interval[3], alpha_O_s_interval[nprim1], coeff_O_s_interval[nprim1*ngeneral1];
     mirp_init_arb_arr(result_interval, 1296);
@@ -164,7 +164,7 @@ int main(void)
     mirp_clear_arb_arr(xyz_O_interval, 3);
     mirp_clear_arb_arr(alpha_O_s_interval, nprim1);
     mirp_clear_arb_arr(coeff_O_s_interval, nprim1*ngeneral1);
-*/
+
     return 0;
 }
 

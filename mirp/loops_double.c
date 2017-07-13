@@ -9,12 +9,12 @@
 
 #include <string.h> /* for memset */
 
-void mirp_prim_cartloop4_double(double * result,
-                                int am1, const double * A, double alpha1,
-                                int am2, const double * B, double alpha2,
-                                int am3, const double * C, double alpha3,
-                                int am4, const double * D, double alpha4,
-                                cb_4gaussians_double cb)
+void mirp_cartloop4_double(double * result,
+                           int am1, const double * A, double alpha1,
+                           int am2, const double * B, double alpha2,
+                           int am3, const double * C, double alpha3,
+                           int am4, const double * D, double alpha4,
+                           cb_single4_double cb)
 {
 
     const long ncart1 = MIRP_NCART(am1);
@@ -57,12 +57,12 @@ void mirp_prim_cartloop4_double(double * result,
 }
 
 
-void mirp_cartloop4_double(double * result,
-                           int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
-                           int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
-                           int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
-                           int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
-                           cb_4shells_double cb)
+void mirp_loop4_double(double * result,
+                       int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
+                       int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
+                       int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
+                       int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
+                       cb_prim4_double cb)
 {
 
     const long ncart1 = MIRP_NCART(am1);

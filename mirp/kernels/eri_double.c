@@ -145,12 +145,12 @@ void mirp_prim_eri_double(double * result,
                           int am3, const double * C, double alpha3,
                           int am4, const double * D, double alpha4)
 {
-    mirp_prim_cartloop4_double(result,
-                               am1, A, alpha1,
-                               am2, B, alpha2,
-                               am3, C, alpha3,
-                               am4, D, alpha4,
-                               mirp_single_eri_double); // callback
+    mirp_cartloop4_double(result,
+                          am1, A, alpha1,
+                          am2, B, alpha2,
+                          am3, C, alpha3,
+                          am4, D, alpha4,
+                          mirp_single_eri_double); // callback
 }
 
 
@@ -160,11 +160,11 @@ void mirp_eri_double(double * result,
                      int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
                      int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4)
 {
-    mirp_cartloop4_double(result,
-                          am1, A, nprim1, ngeneral1, alpha1, coeff1,
-                          am2, B, nprim2, ngeneral2, alpha2, coeff2,
-                          am3, C, nprim3, ngeneral3, alpha3, coeff3,
-                          am4, D, nprim4, ngeneral4, alpha4, coeff4,
-                          mirp_prim_eri_double);
+    mirp_loop4_double(result,
+                      am1, A, nprim1, ngeneral1, alpha1, coeff1,
+                      am2, B, nprim2, ngeneral2, alpha2, coeff2,
+                      am3, C, nprim3, ngeneral3, alpha3, coeff3,
+                      am4, D, nprim4, ngeneral4, alpha4, coeff4,
+                      mirp_prim_eri_double);
 }
 

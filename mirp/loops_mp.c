@@ -8,12 +8,12 @@
 #include "mirp/math.h"
 #include "mirp/mpfr_help.h"
 
-void mirp_prim_cartloop4_mp(mpfr_t * result,
-                            int am1, const mpfr_t * A, const mpfr_t alpha1,
-                            int am2, const mpfr_t * B, const mpfr_t alpha2,
-                            int am3, const mpfr_t * C, const mpfr_t alpha3,
-                            int am4, const mpfr_t * D, const mpfr_t alpha4,
-                            mpfr_prec_t working_prec, cb_4gaussians_mp cb)
+void mirp_cartloop4_mp(mpfr_t * result,
+                       int am1, const mpfr_t * A, const mpfr_t alpha1,
+                       int am2, const mpfr_t * B, const mpfr_t alpha2,
+                       int am3, const mpfr_t * C, const mpfr_t alpha3,
+                       int am4, const mpfr_t * D, const mpfr_t alpha4,
+                       mpfr_prec_t working_prec, cb_single4_mp cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
@@ -55,12 +55,12 @@ void mirp_prim_cartloop4_mp(mpfr_t * result,
     }
 }
 
-void mirp_cartloop4_mp(mpfr_t * result,
-                       int am1, const mpfr_t * A, int nprim1, int ngeneral1, const mpfr_t * alpha1, const mpfr_t * coeff1,
-                       int am2, const mpfr_t * B, int nprim2, int ngeneral2, const mpfr_t * alpha2, const mpfr_t * coeff2,
-                       int am3, const mpfr_t * C, int nprim3, int ngeneral3, const mpfr_t * alpha3, const mpfr_t * coeff3,
-                       int am4, const mpfr_t * D, int nprim4, int ngeneral4, const mpfr_t * alpha4, const mpfr_t * coeff4,
-                       mpfr_prec_t working_prec, cb_4shells_mp cb)
+void mirp_loop4_mp(mpfr_t * result,
+                   int am1, const mpfr_t * A, int nprim1, int ngeneral1, const mpfr_t * alpha1, const mpfr_t * coeff1,
+                   int am2, const mpfr_t * B, int nprim2, int ngeneral2, const mpfr_t * alpha2, const mpfr_t * coeff2,
+                   int am3, const mpfr_t * C, int nprim3, int ngeneral3, const mpfr_t * alpha3, const mpfr_t * coeff3,
+                   int am4, const mpfr_t * D, int nprim4, int ngeneral4, const mpfr_t * alpha4, const mpfr_t * coeff4,
+                   mpfr_prec_t working_prec, cb_prim4_mp cb)
 {
 
     const long ncart1 = MIRP_NCART(am1);
