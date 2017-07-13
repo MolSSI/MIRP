@@ -3,20 +3,53 @@
 /////////////////////////
 /*! \mainpage
 
-\section main_sec Contents
+\section overview_sec Overview
 
+The MolSSI Integral Reference Project (MIRP) is a project overseen by the Molecular
+Sciences Software Institute (MolSSI). Its primary goal is to create and maintain reference
+implementations for integrals commonly found in quantum chemistry software.
+
+MIRP has two main parts. The first is the reference implementations themselves. These
+implementations are generally slow algorithms, however they tend to be simple and
+easier to understand than algorithms typically found in production.
+In addition, the reference implementation is also written using both the
+usual double-precision floating point numbers, as well as using an
+arbitrary-precision interval arithmetic library (arblib - http://arblib.org).
+This library allows for estimation of the amount of error (such as roundoff error)
+accumulated throughout the computation. The precision can be specified at runtime
+as well.
+
+The second part of MIRP is a set of precomputed values that new and existing integral
+packages can test against to detect deficiencies in their algorithms. These values
+are computed using the functionality described above. Due to the use of the interval
+arithmetic library, the value of the integrals can be computed to a given target
+precision and ensured to be accurate to the last printed place (unit of least precision, ulp).
+
+\section source_sec Source Code
+
+The source code of MIRP is available at GitHub at https://github.com/MolSSI/MIRP
+
+\section main_sec Building, Installing, and Using
+
+  - \ref conventions
+  - \ref filesystem
+  - \ref building
+
+\section algo_sec Integrals and Algorithms
   - Integrals
-    - Electron Repulsion Integrals
+    - \ref kernel_eri
   - Miscellaneous Functionality
-    - [Gaussian Product Theorem](\ref gaussian_product_theorem)
-    - [Boys Function](\ref boys_function)
+    - \ref gaussian_product_theorem
+    - \ref boys_function
 
 \section Authors
 
-\todo Authors
+MIRP is primarily written by Benjamin Pritchard \<bpp4@vt.edu\>, a Software Scientist at
+MolSSI.
 
 \section license_sec License
 
-\todo License info
+MIRP is released under the 3-Clause BSD License. See the LICENSE file for
+more details.
 
 */

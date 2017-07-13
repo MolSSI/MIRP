@@ -1,0 +1,24 @@
+/*! \page filesystem Files and Directory Layout
+
+\section _files_source Source Layout
+
+Starting from the top level of the source directory
+
+- **attic** - A place for old, deprecated code that is no longer included
+              in the package (but may be useful to someone at some point).
+- **doc** - Documentation (including generated documentation)
+- **mirp** - The main source directory. This directory itself contains some
+             common functions, such as math and shell functions.
+  - **kernels** - Actual functions for computing integrals 
+- **mirp_bin** - Source code for binaries related to MIRP (testing, test creation, etc)
+- **mirppy** - Python bindings for MIRP
+- **test_data** - Pre-generated test data
+- **tests** - Internal testing of MIRP
+
+Files dealing explicitly with double precision are given the suffix `_double`, while
+files dealing explicitly with interval arithmetic are given the suffix `_interval`.
+If a file deals with both, or contains more general functionality, then
+no suffix is given.
+
+
+*/

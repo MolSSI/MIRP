@@ -1,0 +1,36 @@
+/*! \page conventions Programming and Naming Conventions
+
+\section _conventions_naming Naming Conventions
+
+In general, MIRP uses the following naming convention
+
+- All C functions are prefixed with `mirp_` (except for static functions)
+- All C++ functions are within the namespace `mirp` and lacking the prefix
+  (except for functions in an anonymous namespace)
+- Functions that work with double-precision have a `_double` suffix
+- Functions that work with the arb library have a `_interval` suffix 
+- Files dealing solely with double precision/interval arithmetic
+  also have the `_double`/`_interval` suffix, respectively.
+- Files that deal with both double precision and interval arithmetic,
+  or contain more general functions, are not given a suffix.
+  
+
+
+\section _conventions_passing Passing Data to/from Functions
+
+- In general, functions do not pass data via `return` (except for small math
+  functions). Functions may return some sort of status.
+- Data is output to pointers passed in as arguments rather than through the
+  return value.
+- Documentation should be explicit about the size of arrays passed into
+  functions
+- Single objects of type `arb_t` can be passed as output references without a pointer
+  - `arb_t` contains an internal pointer, and structures are pass-by-copy. This
+    is how the arblib library works, so that convention was adopted by MIRP
+- Arrays should always be passed by pointer, of course
+- All output variables passed to a function MUST be initialized first
+  - Then there is a clear, consistent location for `clear`ing an object
+    (within the same function that `init`ialized it).
+  - They should not be required to be zeroed, except in rare cases
+
+*/

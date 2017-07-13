@@ -1,0 +1,18 @@
+/*! \page kernel_eri Electron Repulsion Integrals
+
+\section _eri_functions Functions in MIRP
+
+In MIRP, electron repulsion integrals can be calculated
+via the following functions:
+
+- Double Precision
+  - mirp_single_eri_double()
+  - mirp_prim_eri_double()
+  - mirp_eri_double()
+
+- Interval arithmetic
+  - mirp_single_eri_interval()
+  - mirp_prim_eri_interval()
+  - mirp_eri_interval()
+
+*/
