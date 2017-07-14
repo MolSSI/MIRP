@@ -42,6 +42,11 @@ The source code of MIRP is available at GitHub at https://github.com/MolSSI/MIRP
     - \ref gaussian_product_theorem
     - \ref boys_function
 
+\section prog_sec MIRP Technical Details
+
+  - \ref fileformat
+  - \ref tests
+
 \section Authors
 
 MIRP is primarily written by Benjamin Pritchard \<bpp4@vt.edu\>, a Software Scientist at

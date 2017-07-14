@@ -1,0 +1,22 @@
+/*! \page tests Creating Test Files
+
+\section _tests_general General Test Information
+
+See \ref fileformat for information about the file formatting for test files.
+
+To create a new test file, an input file must first be created. This can be created
+by any means, although it must conform to the input test file format.
+
+Then, the reference data file can be created via the `mirp_create_test` command.
+
+\section _tests_verify Test Verification
+
+The reference test data must be verified by another means. Scripts, Mathematica notebooks, etc,
+should be placed in the `verify` subdirectory of the `test_data` directory.
+
+\section _tests_shasum Checksumming
+
+Once a test has been created and verified, its sha256sum should be added to the `sha256sums`
+file in the `test_data` directory.
+
+*/

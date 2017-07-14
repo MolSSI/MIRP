@@ -13,6 +13,8 @@ In general, MIRP uses the following naming convention
   also have the `_double`/`_interval` suffix, respectively.
 - Files that deal with both double precision and interval arithmetic,
   or contain more general functions, are not given a suffix.
+- Inputs for creating test files are given a `.inp` extension, while
+  files with generated data are given a `.dat` extension.
   
 
 

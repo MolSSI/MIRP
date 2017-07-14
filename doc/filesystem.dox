@@ -13,6 +13,7 @@ Starting from the top level of the source directory
 - **mirp_bin** - Source code for binaries related to MIRP (testing, test creation, etc)
 - **mirppy** - Python bindings for MIRP
 - **test_data** - Pre-generated test data
+  - **verify** - Verification scripts, programs, notebooks, etc
 - **tests** - Internal testing of MIRP
 
 Files dealing explicitly with double precision are given the suffix `_double`, while

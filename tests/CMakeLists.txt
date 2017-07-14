@@ -5,6 +5,7 @@ macro(add_boys_test filename floattype prec extra_m)
     )
 endmacro()
 
+add_test(NAME example_simple_eri COMMAND simple_eri)
 add_boys_test(boys_large_range.dat interval 128  0)
 add_boys_test(boys_large_range.dat interval 128 10)
 add_boys_test(boys_large_range.dat interval 315  0)
