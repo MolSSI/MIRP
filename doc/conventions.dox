@@ -32,5 +32,8 @@ In general, MIRP uses the following naming convention
   - Then there is a clear, consistent location for `clear`ing an object
     (within the same function that `init`ialized it).
   - They should not be required to be zeroed, except in rare cases
+- Indexing of coefficient arrays for general contractions: the index of the
+  primitive/exponent is the fastest index. (The index is `[g*nprim+p]` where
+  `g` is the index of the general contraction and `p` the index of the primitive).
 
 */

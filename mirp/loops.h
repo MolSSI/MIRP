@@ -70,6 +70,11 @@ void mirp_cartloop4_double(double * output,
  * The \p output buffer is expected to be able to hold all the resulting
  * integrals
  *
+ * For the coefficient arrays, the index of the primitive/exponent is the fastest index.
+ * (The index is `[g*nprim+p]` where `g` is the index of the general contraction and `p`
+ * the index of the primitive).
+ *
+ *
  * \param [out] output
  *              Completed integral output
  * \param [in]  am1,am2,am3,am4
