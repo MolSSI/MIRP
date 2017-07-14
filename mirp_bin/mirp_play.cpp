@@ -6,7 +6,6 @@
 #include "mirp_bin/cmdline.hpp"
 #include <mirp/mirp.h>
 #include <mirp/arb_help.h>
-#include <mirp/math.h>
 #include <iostream>
 
 using namespace mirp;
