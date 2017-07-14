@@ -250,16 +250,13 @@ void mirp_single_eri_interval(arb_t output,
 
                     arb_mul(tmp1, tmp1, F[zeta], working_prec);
 
-                    arb_set_si(tmp2, xfac);
-                    arb_pow(tmp2, PQ[0], tmp2, working_prec);
+                    arb_pow_ui(tmp2, PQ[0], xfac, working_prec);
                     arb_mul(tmp1, tmp1, tmp2, working_prec);
 
-                    arb_set_si(tmp2, yfac);
-                    arb_pow(tmp2, PQ[1], tmp2, working_prec);
+                    arb_pow_ui(tmp2, PQ[1], yfac, working_prec);
                     arb_mul(tmp1, tmp1, tmp2, working_prec);
 
-                    arb_set_si(tmp2, zfac);
-                    arb_pow(tmp2, PQ[2], tmp2, working_prec);
+                    arb_pow_ui(tmp2, PQ[2], zfac, working_prec);
                     arb_mul(tmp1, tmp1, tmp2, working_prec);
 
                     arb_set_ui(tmp2, 4);
