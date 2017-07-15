@@ -4,32 +4,42 @@ import argparse
 import sys
 from mpmath import mp
 
+from common import construct_basis
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--filename", type=str, required=True, help="Output file name")
-parser.add_argument("--basis",    type=str, required=True, help="Basis set file")
-parser.add_argument("--geo",      type=str, required=True, help="XYZ Geometry file")
+parser.add_argument("--basis",    type=str, required=True, help="Path to basis set file")
+parser.add_argument("--geo",      type=str, required=True, help="Path to XYZ geometry file")
 parser.add_argument("--ndigits",  type=int, required=True, help="Number of digits for the value of the eri")
 args = parser.parse_args()
-
-mtlist = []
-with mp.workdps(args.ndigits+4):
-    for i in range(0, args.ntest):
-        m = random.randint(0, args.max_m)
-        t = random.uniform(-args.power, args.power)
-        t = mp.mpf(t)    
-        t = mp.power(mp.mpf(10), t)
-
-        # min_fixed > max_fixed forces scientific notation
-        t = mp.nstr(t, args.ndigits, min_fixed=1, max_fixed=0)
-        mtlist.append((m,t))
 
 # Write out the file
 with open(args.filename, 'w') as f:
     f.write("# THIS FILE IS GENERATED VIA A SCRIPT. DO NOT EDIT\n")
     f.write("#\n")
-    f.write("# Values for m and t generated with:\n")
+    f.write("# Input parameters for ERI generated with:\n")
     f.write("#   " + " ".join(sys.argv[:]) + "\n")
     f.write("#\n")
 
-    for m,t in mtlist:
-        f.write("{} {}\n".format(m, t))
+    with mp.workdps(args.ndigits+4):
+        basis = construct_basis(args.geometry, args.basis)
+
+        for shell1 in basis:
+          for shell2 in basis:
+            for shell3 in basis:
+              for shell4 in basis:
+
+                alpha4 = []
+                for p1 in shell1['nprim']:
+                  for p2 in shell2['nprim']:
+                    for p3 in shell3['nprim']:
+                      for p4 in shell4['nprim']:
+                        alpha4.append((p1, p2, p3, p4))
+
+                for c1 in all_cartesian_components(shell1['am']):
+                  for c2 in all_cartesian_components(shell2['am']):
+                    for c3 in all_cartesian_components(shell3['am']):
+                      for c4 in all_cartesian_components(shell4['am']):
+                        for p in alpha4:
+                            print("{} {} {} {} {} {} {}".format(c1[0], c1[1], c1[2], xyz
+                                 

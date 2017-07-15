@@ -1,10 +1,10 @@
 /*! \file
  *
- * \brief Functions related to testing the Boys function
+ * \brief Functions related to testing single ERI
  */
 
-#include "mirp_bin/boys_test.hpp"
-#include <mirp/kernels/boys.h>
+#include "mirp_bin/eri_single_test.hpp"
+#include <mirp/kernels/eri.h>
 #include <mirp/math.h>
 #include <mirp/arb_help.h>
 #include <cmath>
@@ -16,6 +16,7 @@
 /* Anonymous namespace for some helper functions */
 namespace {
 
+#if 0
 /* Runs a Boys function test using interval arithmetic
  *
  * This just wraps the calculation of Boys function, increasing the
@@ -35,7 +36,8 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
     arb_init(vref_mp);
 
     auto F_mp = std::unique_ptr<arb_t[]>(new arb_t[max_m+1]);
-    mirp_init_arb_arr(F_mp.get(), max_m+1);
+    for(int i = 0; i <= max_m; i++)
+        arb_init(F_mp[i]);
 
     long nfailed = 0;
 
@@ -73,7 +75,8 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
 
     arb_clear(t_mp);
     arb_clear(vref_mp);
-    mirp_clear_arb_arr(F_mp.get(), max_m+1);
+    for(int i = 0; i <= max_m; i++)
+        arb_clear(F_mp[i]);
 
     return nfailed;
 }
@@ -120,22 +123,14 @@ long boys_run_test_double(const mirp::boys_data & data, long extra_m)
 
     return nfailed;
 }
+#endif
 
 } // close anonymous namespace
 
 
 namespace mirp {
 
-int boys_max_m(const boys_data & data)
-{  
-    int max_m = 0;
-    for(auto & it : data.values)
-        max_m = std::max(max_m, it.m);
-    return max_m;
-}
-    
-
-boys_data boys_read_input_file(const std::string & filepath)
+eri_single_data eri_single_read_input_file(const std::string & filepath)
 {
     using std::ifstream;
 
@@ -146,7 +141,11 @@ boys_data boys_read_input_file(const std::string & filepath)
     infile.exceptions(ifstream::failbit);
 
     std::string line;
-    boys_data ret;
+    eri_single_data ret;
+    int ngaussians = 0;
+
+    // We will fill in the shells here, then add to ret
+    eri_single_data_entry ent;
 
     while(std::getline(infile, line).good())
     {
@@ -156,12 +155,21 @@ boys_data boys_read_input_file(const std::string & filepath)
             ret.header += line + "\n";
         else
         {
+            // read in a gaussian_single
             std::stringstream ss(line);
             ss.exceptions(std::stringstream::failbit);
 
-            boys_data_entry ent;
-            ss >> ent.m >> ent.t;
-            ret.values.push_back(ent);
+            gaussian_single & g = ent.g[ngaussians];
+            ss >> g.lmn[0] >> g.lmn[1] >> g.lmn[2]
+               >> g.xyz[0] >> g.xyz[1] >> g.xyz[2]
+               >> g.alpha;
+
+            ngaussians++;
+            if(ngaussians > 3)
+            {
+                ret.values.push_back(ent);
+                ngaussians = 0;
+            }
         }
     }
 
@@ -169,8 +177,10 @@ boys_data boys_read_input_file(const std::string & filepath)
 }
 
 
-boys_data boys_read_file(const std::string & filepath)
+eri_single_data eri_single_read_file(const std::string & filepath)
 {
+    throw std::runtime_error("TODO");
+/*
     using std::ifstream;
 
     ifstream infile(filepath, ifstream::in);
@@ -209,11 +219,14 @@ boys_data boys_read_file(const std::string & filepath)
     }
 
     return ret;
+*/
 }
     
 
-void boys_write_file(const std::string & filepath, const boys_data & data)
+void eri_single_write_file(const std::string & filepath, const eri_single_data & data)
 {
+    throw std::runtime_error("TODO");
+/*
     using std::ofstream;
 
     ofstream outfile;
@@ -228,11 +241,14 @@ void boys_write_file(const std::string & filepath, const boys_data & data)
     outfile << data.ndigits << "\n";
     for(const auto & it : data.values)
         outfile << it.m << " " << it.t << " " << it.value << "\n";
+*/
 }
 
 
-long boys_run_test(const std::string & filepath, const std::string & floattype, long extra_m, long target_prec)
+long eri_single_run_test(const std::string & filepath, const std::string & floattype, long extra_m, long target_prec)
 {
+    throw std::runtime_error("TODO");
+/*
     boys_data data;
     try {
         data = boys_read_file(filepath);
@@ -265,23 +281,33 @@ long boys_run_test(const std::string & filepath, const std::string & floattype, 
               << percent_passed << "% passed)\n";
 
     return nfailed;
+*/
 }
 
 
-void boys_create_test(const std::string & input_filepath,
-                      const std::string & output_filepath,
-                      long ndigits, const std::string & header)
+void eri_single_create_test(const std::string & input_filepath,
+                            const std::string & output_filepath,
+                            long ndigits, const std::string & header)
 {
-    boys_data data = boys_read_input_file(input_filepath);
+    eri_single_data data = eri_single_read_input_file(input_filepath);
     data.ndigits = ndigits;
     data.header += header;
 
-    const int max_m = boys_max_m(data);
+    /* Temporaries */
+    arb_t xyz1[3], xyz2[3], xyz3[3], xyz4[3];
+    arb_t alpha1, alpha2, alpha3, alpha4;
+    mirp_init_arb_arr(xyz1, 3);
+    mirp_init_arb_arr(xyz2, 3);
+    mirp_init_arb_arr(xyz3, 3);
+    mirp_init_arb_arr(xyz4, 3);
+    arb_init(alpha1);
+    arb_init(alpha2);
+    arb_init(alpha3);
+    arb_init(alpha4);
 
-    arb_t t_mp;
-    auto F_mp = std::unique_ptr<arb_t[]>(new arb_t[max_m+1]);
-    arb_init(t_mp);
-    mirp_init_arb_arr(F_mp.get(), max_m+1);
+    /* Actual computed integral */
+    arb_t integral;
+    arb_init(integral);
 
     /* Target precision/accuracy, in bits, with a safety factor
        of 4 extra decimal digits */
@@ -291,26 +317,50 @@ void boys_create_test(const std::string & input_filepath,
     {
         slong working_prec = target_prec;
         bool sufficient_accuracy = false;
-        
+
         do {
             working_prec += 16;
 
-            arb_set_str(t_mp, it.t.c_str(), working_prec);
-            mirp_boys_interval(F_mp.get(), it.m, t_mp, working_prec); 
+            for(int i = 0; i < 3; i++)
+            {
+                arb_set_str(xyz1[i], it.g[0].xyz[i].c_str(), working_prec); 
+                arb_set_str(xyz2[i], it.g[1].xyz[i].c_str(), working_prec); 
+                arb_set_str(xyz3[i], it.g[2].xyz[i].c_str(), working_prec); 
+                arb_set_str(xyz4[i], it.g[3].xyz[i].c_str(), working_prec); 
+            }
 
-            if(arb_rel_accuracy_bits(F_mp[it.m]) >= target_prec)
+            arb_set_str(alpha1, it.g[0].alpha.c_str(), working_prec);
+            arb_set_str(alpha2, it.g[1].alpha.c_str(), working_prec);
+            arb_set_str(alpha3, it.g[2].alpha.c_str(), working_prec);
+            arb_set_str(alpha4, it.g[3].alpha.c_str(), working_prec);
+
+
+            mirp_single_eri_interval(integral,
+                                     it.g[0].lmn.data(), xyz1, alpha1, 
+                                     it.g[1].lmn.data(), xyz2, alpha2, 
+                                     it.g[2].lmn.data(), xyz3, alpha3, 
+                                     it.g[3].lmn.data(), xyz4, alpha4,
+                                     working_prec);
+
+            if(arb_rel_accuracy_bits(integral) >= target_prec)
                 sufficient_accuracy = true;
                 
         } while(!sufficient_accuracy);
 
-        char * s = arb_get_str(F_mp[it.m], ndigits, ARB_STR_NO_RADIUS);
-        it.value = s;
+        char * s = arb_get_str(integral, ndigits, ARB_STR_NO_RADIUS);
+        it.integral = s;
         free(s);
     }
 
-    boys_write_file(output_filepath, data);
-    arb_clear(t_mp);
-    mirp_clear_arb_arr(F_mp.get(), max_m+1);
+    //boys_write_file(output_filepath, data);
+    mirp_clear_arb_arr(xyz1, 3);
+    mirp_clear_arb_arr(xyz2, 3);
+    mirp_clear_arb_arr(xyz3, 3);
+    mirp_clear_arb_arr(xyz4, 3);
+    arb_clear(alpha1);
+    arb_clear(alpha2);
+    arb_clear(alpha3);
+    arb_clear(alpha4);
 }
 
     

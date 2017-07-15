@@ -52,7 +52,7 @@ int main(void)
 
     /* Geometry, in bohr
      * Taken from CCCBDB (water HF/STO-3G) and converted to
-     * bohr (keeping to the 4 sig figs shown in the CCCBDB)
+     * bohr (keeping to the 4 decimal places shown in the CCCBDB)
      */
     const char * xyz_O[3] =  { "0.0",     "0.0",  "0.2402" };
     const char * xyz_H1[3] = { "0.0",  "1.4324", "-0.9609" };

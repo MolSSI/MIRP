@@ -1,38 +1,30 @@
 /*! \file
  *
- * \brief Functions related to testing the Boys function
+ * \brief Functions related to testing single ERI
  */
 
 #pragma once
 
+#include "mirp_bin/shell.hpp"
 #include <arb.h>
-#include <vector>
-#include <string>
 
 namespace mirp {
 
-    /*! \brief An single entry for a Boys function test */ 
-    struct boys_data_entry
+    struct eri_single_data_entry
     {
-        int m;              //!< The order of the Boys function
-        std::string t;      //!< The value at which the function is evaluated
-        std::string value;  //!< The expected (reference) value
+        std::array<gaussian_single, 4> g;    //!< Shell for which the data is calculated
+        std::string integral; //!< Actual data (integral) for this gaussian
     };
 
-    /*! \brief A collection of data for testing the Boys function */
-    struct boys_data
+    struct eri_single_data
     {
-        long ndigits;                         //!< The number of digits of accuracy in the file 
-        std::string header;                   //!< Header or comments about the test
-        std::vector<boys_data_entry> values;  //!< Actual data for the tests
+        long ndigits;                        //!< The number of digits of accuracy in the file 
+        std::string header;                  //!< Header or comments about the test
+        std::vector<eri_single_data_entry> values;  //!< Actual data for the integrals
     };
 
 
-    /*! \brief Finds the maximum value of `m` in a Boys test data structure */
-    int boys_max_m(const boys_data & data);
-
-
-    /*! \brief Read a file with reference data for the Boys function
+    /*! \brief Read a file with reference data for ERI
      *
      * \throw std::runtime_error if the file does not exist or there
      *        there is a problem reading/parsing the file
@@ -40,12 +32,12 @@ namespace mirp {
      * \param [in] filepath Path to the file to read
      * \return The data in the file
      */
-    boys_data boys_read_file(const std::string & filepath);
+    eri_single_data eri_single_read_file(const std::string & filepath);
 
 
-    /*! \brief Read an input file for creating a Boys function test
+    /*! \brief Read an input file for creating an ERI test
      *
-     * This reads in `m` and `t` values for the Boys function, as
+     * This reads in all the shell information for the ERI, as
      * well as a descriptive header.
      * 
      * \throw std::runtime_error if the file does not exist or there
@@ -54,10 +46,10 @@ namespace mirp {
      * \param [in] filepath Path to the file to read
      * \return The data in the file, with the `values` member empty
      */
-    boys_data boys_read_input_file(const std::string & filepath);
+    eri_single_data eri_single_read_input_file(const std::string & filepath);
 
 
-    /*! \brief Write a file with reference data for the Boys function
+    /*! \brief Write a file with reference data for ERI
      *
      * Any existing file will be overrwitten
      *
@@ -67,10 +59,10 @@ namespace mirp {
      * \param [in] filepath Path to the file to write to
      * \param [in] data     The data to write to the file
      */
-    void boys_write_file(const std::string & filepath, const boys_data & data);
+    void eri_single_write_file(const std::string & filepath, const eri_single_data & data);
 
 
-    /*! \brief Run a test of the Boys function
+    /*! \brief Run a test of the ERI functions
      *
      * \param [in] filepath    Path to the file to test
      * \param [in] floattype   Type of floating point to test ("double", for example)
@@ -78,11 +70,11 @@ namespace mirp {
      * \param [in] target_prec Desired final binary precision (in bits)
      * \return The number of tests that have failed   
      */
-    long boys_run_test(const std::string & filepath, const std::string & floattype,
-                       long extra_m, long target_prec);
+    long eri_single_run_test(const std::string & filepath, const std::string & floattype,
+                             long extra_m, long target_prec);
 
 
-    /*! \brief Create a test file for the Boys function from a given input file
+    /*! \brief Create a test file for ERI from a given input file
      *
      * Any existing output file (given by \p output_filepath) will be overwritten.
      *
@@ -95,9 +87,9 @@ namespace mirp {
      * \param [in] header          Any descriptive header data
      *                             (will be appended to the existing header in the input file)
      */
-    void boys_create_test(const std::string & input_filepath,
-                          const std::string & output_filepath,
-                          long ndigits, const std::string & header);
+    void eri_single_create_test(const std::string & input_filepath,
+                                const std::string & output_filepath,
+                                long ndigits, const std::string & header);
 
 } // close namespace mirp
 

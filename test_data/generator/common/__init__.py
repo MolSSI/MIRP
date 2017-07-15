@@ -1,2 +1,4 @@
-from .read_basis import *
-from .read_xyz import *
+#!/usr/bin/env python3
+
+from .read_files import *
+from .shell import *
