@@ -11,7 +11,8 @@ parser.add_argument("--max-am",      type=int, required=True, help="Maximum AM o
 parser.add_argument("--alpha-power", type=int, required=True, help="Maximum power of the exponent (range will be 1e-x to 1e+x)")
 parser.add_argument("--xyz-power",   type=int, required=True, help="Maximum power of the coordinates (range will be -1e+x to 1e+x)")
 parser.add_argument("--seed",        type=int, required=True, help="Seed to use for the pseudo-random number generator")
-parser.add_argument("--ndigits",     type=int, required=True, help="Number of digits for the value of the eri")
+parser.add_argument("--ndigits",     type=int, required=True, help="Number of digits for the value of the integral")
+parser.add_argument("--ncenter",     type=int, required=True, help="Number of centers in the integral (typically 2 or 4)")
 parser.add_argument("--ntest",       type=int, required=True, help="Number of tests to generate")
 args = parser.parse_args()
 
@@ -53,14 +54,8 @@ with open(args.filename, 'w') as f:
     f.write("#   " + " ".join(sys.argv[:]) + "\n")
     f.write("#\n")
 
-    for i in range(0, args.ntest):
-        bf1 = generate_basis_function()
-        bf2 = generate_basis_function()
-        bf3 = generate_basis_function()
-        bf4 = generate_basis_function()
-     
-        f.write("{} {} {} {} {} {} {}\n".format(*bf1))  
-        f.write("{} {} {} {} {} {} {}\n".format(*bf2))  
-        f.write("{} {} {} {} {} {} {}\n".format(*bf3))  
-        f.write("{} {} {} {} {} {} {}\n".format(*bf4))  
+    for i in range(args.ntest):
+        for n in range(args.ncenter):
+            bf = generate_basis_function()
+            f.write("{} {} {} {} {} {} {}\n".format(*bf))  
         f.write("\n")

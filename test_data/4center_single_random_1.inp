@@ -1,7 +1,7 @@
 # THIS FILE IS GENERATED VIA A SCRIPT. DO NOT EDIT
 #
 # Input parameters for ERI generated with:
-#   generator/generate_single_eri_random.py --seed 64020964 --alpha-power 10 --xyz-power 1 --max-am 3 --ntest 2000 --ndigits 20 --filename eri_single_random_1.inp
+#   generator/generate_integral_single_random.py --seed 64020964 --ncenter 4 --alpha-power 10 --xyz-power 1 --max-am 3 --ntest 2000 --ndigits 20 --filename 4center_single_random_1.inp
 #
 0 1 2 -5.7782830979678659805e-1 1.6714818283645718704 -5.3736992727182673441e-1 3.8896316216127537561e-10
 0 2 1 1.3964821898808286793e-1 -1.5576441415069626131e-1 9.145028989776312421e-1 1.6101163852963488199e+3

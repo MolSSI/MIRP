@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief Helper functions for reading from a file
+ * \brief Helper functions for reading/writing test files
  */
 
 #include "mirp_bin/file_io.hpp"

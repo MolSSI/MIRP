@@ -16,6 +16,8 @@
 namespace mirp {
 namespace detail {
 
+
+/*! \brief A function that computes single 4-center integrals with interval arithmetic */
 typedef void (*cb_single4_interval)(arb_t,
                                     const int *, const arb_t *, const arb_t,
                                     const int *, const arb_t *, const arb_t,
@@ -24,13 +26,11 @@ typedef void (*cb_single4_interval)(arb_t,
                                     slong);
 
 
-inline
-void call_callback(arb_t integral,
-                   const int * lmn,
-                   const arb_t * xyz,
-                   const arb_t * alpha,
-                   slong working_prec,
-                   cb_single4_interval cb)
+/*! \brief Unpacks the arguments for a call to a function that
+ *         computes single 4-center integrals
+ */
+inline void call_callback(arb_t integral, const int * lmn, const arb_t * xyz,
+                          const arb_t * alpha, slong working_prec, cb_single4_interval cb)
 {
     cb(integral,
        lmn + 0, xyz + 0, alpha[0],
@@ -201,6 +201,19 @@ void integral_single_create_test(const std::string & input_filepath,
 }
 
 
+/*! \brief Run tests located in a test file using interval arithmetic
+ *
+ * \throw std::runtime_error if there is a problem opening the file or there
+ *        there is a problem reading or writing the data
+ *
+ * \tparam N             Number of centers for the integral
+ * \tparam callback_type The type of the function that computes the integrals
+ *
+ * \param [in] filepath    Path to the test data file
+ * \param [in] target_prec The target precision (binary precision) to calculate
+ * \param [in] cb          Function that computes single integrals
+ * \return The number of tests that have failed
+ */
 template<unsigned int N, typename callback_type>
 long integral_single_run_test_interval(const std::string & filepath,
                                        long target_prec,

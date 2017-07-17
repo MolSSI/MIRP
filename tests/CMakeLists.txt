@@ -5,7 +5,16 @@ macro(add_boys_test filename floattype prec extra_m)
     )
 endmacro()
 
+macro(add_integral_single_test filename integral floattype prec)
+    add_test(NAME ${integral}_${filename}_${floattype}_${prec}
+             COMMAND mirp_run_test --integral ${integral} --file ${CMAKE_SOURCE_DIR}/test_data/${filename} --float ${floattype} --prec ${prec}
+    )
+endmacro()
+
+# Testing of examples
 add_test(NAME example_simple_eri COMMAND simple_eri)
+
+# Boys function
 add_boys_test(boys_large_range.dat interval 128  0)
 add_boys_test(boys_large_range.dat interval 128 10)
 add_boys_test(boys_large_range.dat interval 315  0)
@@ -14,3 +23,7 @@ add_boys_test(boys_large_random.dat interval 128  0)
 add_boys_test(boys_large_random.dat interval 128 10)
 add_boys_test(boys_large_random.dat interval 315  0)
 add_boys_test(boys_large_random.dat interval 315 10)
+
+# ERI
+add_integral_single_test(eri_single_random_1.dat eri_single interval 128)
+add_integral_single_test(eri_single_random_1.dat eri_single interval 315)

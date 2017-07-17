@@ -11,6 +11,7 @@
 
 namespace mirp {
 
+/*! \brief A single cartesian gaussian function */
 struct gaussian_single
 {
     std::array<int, 3> lmn;         //!< AM exponents
@@ -19,6 +20,7 @@ struct gaussian_single
 };
 
 
+/*! \brief A shell of cartesian gaussian functions */
 struct gaussian_shell
 {
     int am;                          //!< Angular momentum
@@ -29,6 +31,11 @@ struct gaussian_shell
 };
 
 
+/*! \brief Data for a single cartesian integral
+ *
+ * The length of integral_single_data_entry::g represents the number of
+ * centers for the integral. 
+ */
 struct integral_single_data_entry
 {
     std::vector<gaussian_single> g;  //!< Shell array for which the data is calculated
@@ -36,6 +43,11 @@ struct integral_single_data_entry
 };
 
 
+/*! \brief Contents of a data file for a single cartesian integral
+ *
+ * The data file holds data for multiple integrals, plus a descriptive
+ * header and some metadata.
+ */
 struct integral_single_data
 {
     long ndigits;                        //!< The number of digits of accuracy in the file 
