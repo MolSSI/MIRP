@@ -1,6 +1,6 @@
 add_library(test_common OBJECT cmdline.cpp
+                               file_io.cpp
                                boys_test.cpp
-                               eri_single_test.cpp
 )
 
 add_executable(mirp_run_test mirp_run_test.cpp

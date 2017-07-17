@@ -6,7 +6,7 @@
 
 #define UNUSED(x) (void)(x)
 
-PyObject * export_mirp_single_eri_double(PyObject * self, PyObject *args)
+PyObject * export_mirp_eri_single_double(PyObject * self, PyObject *args)
 {
     UNUSED(self);
 
@@ -24,7 +24,7 @@ PyObject * export_mirp_single_eri_double(PyObject * self, PyObject *args)
 
 
     double result;
-    mirp_single_eri_double(&result,
+    mirp_eri_single_double(&result,
                            lmn[0], ABCD[0], alpha[0], 
                            lmn[1], ABCD[1], alpha[1], 
                            lmn[2], ABCD[2], alpha[2], 

@@ -5,7 +5,8 @@
 
 #include "mirp_bin/cmdline.hpp"
 #include "mirp_bin/boys_test.hpp"
-#include "mirp_bin/eri_single_test.hpp"
+#include "mirp_bin/test_common.hpp"
+#include <mirp/kernels/all.h>
 #include <iostream>
 
 using namespace mirp;
@@ -43,8 +44,11 @@ int main(int argc, char ** argv)
     {
         if(integral == "boys")
             boys_create_test(infile, outfile, ndigits, header);
-        if(integral == "eri_single")
-            eri_single_create_test(infile, outfile, ndigits, header);
+        else if(integral == "eri_single")
+        {
+            integral_single_create_test<4>(infile, outfile,
+                                           ndigits, header, mirp_eri_single_interval);
+        }
         else
         {
             std::cout << "Integral \"" << integral << "\" is not valid\n";

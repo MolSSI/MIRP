@@ -22,26 +22,26 @@ std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const 
 {
     if(!cmdline_has_arg(cmdline, arg))
     {
-        std::string errmsg;
-        errmsg = "Required argument " + arg + " is missing";
-        throw std::runtime_error(errmsg);
+        std::string err;
+        err = "Required argument " + arg + " is missing";
+        throw std::runtime_error(err);
     }
 
     auto it = std::find(cmdline.begin(), cmdline.end(), arg);
     if(it == cmdline.end())
     {
-        std::string errmsg;
-        errmsg = "Required argument " + arg + " is missing, but cmdline_has_arg found it. ";
-        errmsg += "Please contact the developer";
-        throw std::logic_error(errmsg);
+        std::string err;
+        err = "Required argument " + arg + " is missing, but cmdline_has_arg found it. ";
+        err += "Please contact the developer";
+        throw std::logic_error(err);
     }
 
     it++;
     if(it == cmdline.end())
     {
-        std::string errmsg;
-        errmsg = arg + " expects an argument";
-        throw std::runtime_error(errmsg);
+        std::string err;
+        err = arg + " expects an argument";
+        throw std::runtime_error(err);
     }
 
     return *it; 
@@ -65,9 +65,9 @@ long cmdline_get_arg_long(const std::vector<std::string> & cmdline, const std::s
     // If the argument is a valid integer, it will be consumed completely
     if(!ss.eof())
     {
-        std::string errmsg;
-        errmsg = "Argument to " + arg + " is not a valid integer";
-        throw std::runtime_error(errmsg);
+        std::string err;
+        err = "Argument to " + arg + " is not a valid integer";
+        throw std::runtime_error(err);
     }
 
     return ret;

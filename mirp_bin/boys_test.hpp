@@ -34,30 +34,26 @@ namespace mirp {
 
     /*! \brief Read a file with reference data for the Boys function
      *
-     * \throw std::runtime_error if the file does not exist or there
-     *        there is a problem reading/parsing the file
-     *
-     * \param [in] filepath Path to the file to read
-     * \return The data in the file
-     */
-    boys_data boys_read_file(const std::string & filepath);
-
-
-    /*! \brief Read an input file for creating a Boys function test
-     *
      * This reads in `m` and `t` values for the Boys function, as
      * well as a descriptive header.
-     * 
+     *
+     * If \p is_input is true, then then `ndigits` and the reference
+     * values are also read.
+     *
      * \throw std::runtime_error if the file does not exist or there
      *        there is a problem reading/parsing the file
      *
      * \param [in] filepath Path to the file to read
-     * \return The data in the file, with the `values` member empty
+     * \param [in] is_input Set to true when reading an input file
+     * \return The data in the file
      */
-    boys_data boys_read_input_file(const std::string & filepath);
+    boys_data boys_read_file(const std::string & filepath, bool is_input);
 
 
     /*! \brief Write a file with reference data for the Boys function
+     *
+     * This writes reference data files only. It can not be used to write
+     * input files.
      *
      * Any existing file will be overrwitten
      *

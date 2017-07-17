@@ -1,7 +1,7 @@
 
 macro(add_boys_test filename floattype prec extra_m)
     add_test(NAME boys_${filename}_${floattype}_${prec}_extra_${extra_m}
-             COMMAND mirp_run_test --integral boys --filename ${CMAKE_SOURCE_DIR}/test_data/${filename} --float ${floattype} --prec ${prec} --extra-m ${extra_m}
+             COMMAND mirp_run_test --integral boys --file ${CMAKE_SOURCE_DIR}/test_data/${filename} --float ${floattype} --prec ${prec} --extra-m ${extra_m}
     )
 endmacro()
 

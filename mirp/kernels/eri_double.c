@@ -34,7 +34,7 @@ static void compute_farr(double * f, int lmn1, int lmn2, double xyz1, double xyz
     }
 }
 
-void mirp_single_eri_double(double * output,
+void mirp_eri_single_double(double * output,
                             const int * lmn1, const double * A, double alpha1,
                             const int * lmn2, const double * B, double alpha2,
                             const int * lmn3, const double * C, double alpha3,
@@ -153,7 +153,7 @@ void mirp_prim_eri_double(double * output,
                           am2, B, alpha2,
                           am3, C, alpha3,
                           am4, D, alpha4,
-                          mirp_single_eri_double); // callback
+                          mirp_eri_single_double); // callback
 }
 
 

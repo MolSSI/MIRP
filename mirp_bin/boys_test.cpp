@@ -28,6 +28,8 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
 {
     using namespace mirp;
 
+    long nfailed = 0;
+
     const int max_m = boys_max_m(data) + extra_m;
 
     arb_t t_mp, vref_mp;
@@ -37,9 +39,7 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
     auto F_mp = std::unique_ptr<arb_t[]>(new arb_t[max_m+1]);
     mirp_init_arb_arr(F_mp.get(), max_m+1);
 
-    long nfailed = 0;
-
-    for(const auto & it : data.values)
+    for(const auto & ent : data.values)
     {
         slong working_prec = target_prec;
 
@@ -47,21 +47,21 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
             /* Increase the precision until we have achieved the target accuracy
                (with a bit of a safety factor */
             working_prec += 16;
-            arb_set_str(t_mp, it.t.c_str(), working_prec);
-            mirp_boys_interval(F_mp.get(), it.m+extra_m, t_mp, working_prec);
+            arb_set_str(t_mp, ent.t.c_str(), working_prec);
+            mirp_boys_interval(F_mp.get(), ent.m+extra_m, t_mp, working_prec);
 
 
-        } while(arb_rel_accuracy_bits(F_mp[it.m]) < (target_prec + 4));
+        } while(arb_rel_accuracy_bits(F_mp[ent.m]) < (target_prec + 4));
 
         /* Round the calculated value and the reference value to the
            target precision */
-        arb_set_round(F_mp[it.m], F_mp[it.m], target_prec);
-        arb_set_str(vref_mp, it.value.c_str(), target_prec);
+        arb_set_round(F_mp[ent.m], F_mp[ent.m], target_prec);
+        arb_set_str(vref_mp, ent.value.c_str(), target_prec);
 
-        if(!arb_overlaps(F_mp[it.m], vref_mp))
+        if(!arb_overlaps(F_mp[ent.m], vref_mp))
         {
-            std::cout << "Entry failed test: m = " << it.m << " t = " << it.t << "\n";
-            char * s1 = arb_get_str(F_mp[it.m], 1000, 0);
+            std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
+            char * s1 = arb_get_str(F_mp[ent.m], 1000, 0);
             char * s2 = arb_get_str(vref_mp, 1000, 0);
             std::cout << "   Calculated: " << s1 << "\n";
             std::cout << "    Reference: " << s2 << "\n\n";
@@ -90,27 +90,26 @@ long boys_run_test_double(const mirp::boys_data & data, long extra_m)
 {
     using namespace mirp;
 
-    const int max_m = boys_max_m(data) + extra_m;
-
-    std::vector<double> F_dbl(max_m+1);
-
     long nfailed = 0;
 
-    for(const auto & it : data.values)
+    const int max_m = boys_max_m(data) + extra_m;
+    std::vector<double> F_dbl(max_m+1);
+
+    for(const auto & ent : data.values)
     {
-        double t_dbl = std::strtod(it.t.c_str(), nullptr);
-        double vref_dbl = std::strtod(it.value.c_str(), nullptr);
+        double t_dbl = std::strtod(ent.t.c_str(), nullptr);
+        double vref_dbl = std::strtod(ent.value.c_str(), nullptr);
 
-        mirp_boys_double(F_dbl.data(), it.m+extra_m, t_dbl);
+        mirp_boys_double(F_dbl.data(), ent.m+extra_m, t_dbl);
 
-        if(vref_dbl != F_dbl[it.m])
+        if(vref_dbl != F_dbl[ent.m])
         {
-            std::cout << "Entry failed test: m = " << it.m << " t = " << it.t << "\n";
-            double reldiff = std::fabs(vref_dbl - F_dbl[it.m]);
-            reldiff /= std::max(std::fabs(vref_dbl), std::fabs(F_dbl[it.m]));
+            std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
+            double reldiff = std::fabs(vref_dbl - F_dbl[ent.m]);
+            reldiff /= std::max(std::fabs(vref_dbl), std::fabs(F_dbl[ent.m]));
 
             auto old_cout_prec = std::cout.precision(17);
-            std::cout << "   Calculated: " << F_dbl[it.m] << "\n";
+            std::cout << "   Calculated: " << F_dbl[ent.m] << "\n";
             std::cout << "    Reference: " << vref_dbl << "\n";
             std::cout << "Relative Diff: " << reldiff << "\n\n";
             std::cout.precision(old_cout_prec);
@@ -129,13 +128,13 @@ namespace mirp {
 int boys_max_m(const boys_data & data)
 {  
     int max_m = 0;
-    for(auto & it : data.values)
-        max_m = std::max(max_m, it.m);
+    for(auto & ent : data.values)
+        max_m = std::max(max_m, ent.m);
     return max_m;
 }
     
 
-boys_data boys_read_input_file(const std::string & filepath)
+boys_data boys_read_file(const std::string & filepath, bool is_input)
 {
     using std::ifstream;
 
@@ -146,41 +145,7 @@ boys_data boys_read_input_file(const std::string & filepath)
     infile.exceptions(ifstream::failbit);
 
     std::string line;
-    boys_data ret;
-
-    while(std::getline(infile, line).good())
-    {
-        if(line.length() == 0)
-            continue;
-        else if(line[0] == '#')
-            ret.header += line + "\n";
-        else
-        {
-            std::stringstream ss(line);
-            ss.exceptions(std::stringstream::failbit);
-
-            boys_data_entry ent;
-            ss >> ent.m >> ent.t;
-            ret.values.push_back(ent);
-        }
-    }
-
-    return ret;
-}
-
-
-boys_data boys_read_file(const std::string & filepath)
-{
-    using std::ifstream;
-
-    ifstream infile(filepath, ifstream::in);
-    if(!infile.is_open())
-        throw std::runtime_error(std::string("Unable to open file \"") + filepath + "\" for reading");
-
-    infile.exceptions(ifstream::failbit);
-
-    std::string line;
-    boys_data ret;
+    boys_data data;
     bool have_ndigits = false;
 
     while(std::getline(infile, line).good())
@@ -188,27 +153,31 @@ boys_data boys_read_file(const std::string & filepath)
         if(line.length() == 0)
             continue;
         else if(line[0] == '#')
-            ret.header += line + "\n";
+            data.header += line + "\n";
         else
         {
             std::stringstream ss(line);
             ss.exceptions(std::stringstream::failbit);
 
-            if(!have_ndigits)
+            if(!is_input && !have_ndigits)
             {
-                ss >> ret.ndigits;
+                ss >> data.ndigits;
                 have_ndigits = true;    
             }
             else
             {
                 boys_data_entry ent;
-                ss >> ent.m >> ent.t >> ent.value;
-                ret.values.push_back(ent);
+                ss >> ent.m >> ent.t;
+
+                if(!is_input)
+                    ss  >> ent.value;
+
+                data.values.push_back(ent);
             }
         }
     }
 
-    return ret;
+    return data;
 }
     
 
@@ -226,8 +195,8 @@ void boys_write_file(const std::string & filepath, const boys_data & data)
 
     outfile << data.header;
     outfile << data.ndigits << "\n";
-    for(const auto & it : data.values)
-        outfile << it.m << " " << it.t << " " << it.value << "\n";
+    for(const auto & ent : data.values)
+        outfile << ent.m << " " << ent.t << " " << ent.value << "\n";
 }
 
 
@@ -235,7 +204,7 @@ long boys_run_test(const std::string & filepath, const std::string & floattype, 
 {
     boys_data data;
     try {
-        data = boys_read_file(filepath);
+        data = boys_read_file(filepath, false);
     }
     catch(std::exception & ex)
     {
@@ -254,9 +223,9 @@ long boys_run_test(const std::string & filepath, const std::string & floattype, 
         nfailed = boys_run_test_double(data, extra_m);
     else
     {
-        std::string errmsg;
-        errmsg = "Unknown floating-point type \"" + floattype + "\"";
-        throw std::runtime_error(errmsg);
+        std::string err;
+        err = "Unknown floating-point type \"" + floattype + "\"";
+        throw std::runtime_error(err);
     }
 
 
@@ -272,7 +241,7 @@ void boys_create_test(const std::string & input_filepath,
                       const std::string & output_filepath,
                       long ndigits, const std::string & header)
 {
-    boys_data data = boys_read_input_file(input_filepath);
+    boys_data data = boys_read_file(input_filepath, true);
     data.ndigits = ndigits;
     data.header += header;
 
@@ -287,7 +256,7 @@ void boys_create_test(const std::string & input_filepath,
        of 4 extra decimal digits */
     const slong target_prec = (ndigits+4) / MIRP_LOG_10_2;
 
-    for(auto & it : data.values)
+    for(auto & ent : data.values)
     {
         slong working_prec = target_prec;
         bool sufficient_accuracy = false;
@@ -295,16 +264,16 @@ void boys_create_test(const std::string & input_filepath,
         do {
             working_prec += 16;
 
-            arb_set_str(t_mp, it.t.c_str(), working_prec);
-            mirp_boys_interval(F_mp.get(), it.m, t_mp, working_prec); 
+            arb_set_str(t_mp, ent.t.c_str(), working_prec);
+            mirp_boys_interval(F_mp.get(), ent.m, t_mp, working_prec); 
 
-            if(arb_rel_accuracy_bits(F_mp[it.m]) >= target_prec)
+            if(arb_rel_accuracy_bits(F_mp[ent.m]) >= target_prec)
                 sufficient_accuracy = true;
                 
         } while(!sufficient_accuracy);
 
-        char * s = arb_get_str(F_mp[it.m], ndigits, ARB_STR_NO_RADIUS);
-        it.value = s;
+        char * s = arb_get_str(F_mp[ent.m], ndigits, ARB_STR_NO_RADIUS);
+        ent.value = s;
         free(s);
     }
 

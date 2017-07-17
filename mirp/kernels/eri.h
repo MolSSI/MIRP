@@ -29,7 +29,7 @@ extern "C" {
  * \param [in]  alpha1,alpha2,alpha3,alpha4
  *              Exponents of the gaussian on the four centers
  */
-void mirp_single_eri_double(double * output,
+void mirp_eri_single_double(double * output,
                             const int * lmn1, const double * A, double alpha1,
                             const int * lmn2, const double * B, double alpha2,
                             const int * lmn3, const double * C, double alpha3,
@@ -100,10 +100,10 @@ void mirp_eri_double(double * output,
 /*! \brief Computes a single cartesian electron repulsion integral
  *         (interval arithmetic)
  *
- * \copydetails mirp_single_eri_double
+ * \copydetails mirp_eri_single_double
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_single_eri_interval(arb_t output,
+void mirp_eri_single_interval(arb_t output,
                               const int * lmn1, const arb_t * A, const arb_t alpha1,
                               const int * lmn2, const arb_t * B, const arb_t alpha2,
                               const int * lmn3, const arb_t * C, const arb_t alpha3,

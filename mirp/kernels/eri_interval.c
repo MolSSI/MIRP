@@ -99,7 +99,7 @@ static void mirp_G_interval(arb_t G, arb_t fp, arb_t fq,
     arb_clear(tmp2);
 }
 
-void mirp_single_eri_interval(arb_t output,
+void mirp_eri_single_interval(arb_t output,
                               const int * lmn1, const arb_t * A, const arb_t alpha1,
                               const int * lmn2, const arb_t * B, const arb_t alpha2,
                               const int * lmn3, const arb_t * C, const arb_t alpha3,
@@ -377,7 +377,7 @@ void mirp_prim_eri_interval(arb_t * output,
                             am2, B, alpha2,
                             am3, C, alpha3,
                             am4, D, alpha4,
-                            working_prec, mirp_single_eri_interval);
+                            working_prec, mirp_eri_single_interval);
 }
 
 
