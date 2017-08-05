@@ -48,8 +48,7 @@ if ndigits >= test_digits:
     print("! WARNING: number of digits you want to test >= number stored in the test file")
     print("!-----------------------------------------------------------------------------")
 
-bad_vals = []
-failed = 0
+nfailed = 0
 ntest = len(test_vals)
 
 with mp.workdps(test_digits+8):
@@ -66,19 +65,17 @@ with mp.workdps(test_digits+8):
 
         if not same:
             reldiff = (mp.fabs(v-vtest))/max(mp.fabs(v), mp.fabs(vtest))
-            bad_vals.append((m, t, str(vtest), str(v), reldiff))
+            nfailed += 1
 
-    for m,t,vtest,v,reldiff in bad_vals:
-        print("Bad value: {} {}".format(m, t))
-        print("  In test file: {}".format(str(vtest)))
-        print("        MPMath: {}".format(str(v)))
-        print(" Relative diff: {}".format(str(reldiff)))
-        print()
+            print("Bad value: {} {}".format(m, t))
+            print("  In test file: {}".format(str(vtest)))
+            print("        MPMath: {}".format(str(v)))
+            print(" Relative diff: {}".format(str(reldiff)))
+            print()
 
-failed = len(bad_vals)
-passed = ntest - failed
+passed = ntest - nfailed
 percent = 100.0*float(passed)/float(ntest)
-print("{} / {} failed ({:.2f}% passed)".format(failed, len(test_vals), percent))
-if len(bad_vals) > 0:
+print("{} / {} failed ({:.2f}% passed)".format(nfailed, len(test_vals), percent))
+if nfailed > 0:
     quit(1)
 
