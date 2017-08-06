@@ -9,7 +9,7 @@
 void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
 {
     assert(m >= 0);
-    assert(t >= 0.0);
+    assert(!(arb_is_negative(t)));
     assert(working_prec > 0);
 
     int i;
