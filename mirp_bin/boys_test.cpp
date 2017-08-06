@@ -143,8 +143,6 @@ boys_data boys_read_file(const std::string & filepath, bool is_input)
     if(!infile.is_open())
         throw std::runtime_error(std::string("Unable to open file \"") + filepath + "\" for reading");
 
-    infile.exceptions(ifstream::failbit);
-
     std::string line;
     boys_data data;
     bool have_ndigits = false;

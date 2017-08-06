@@ -19,8 +19,6 @@ integral_single_data integral_single_read_file(const std::string & filepath, int
     if(!infile.is_open())
         throw std::runtime_error(std::string("Unable to open file \"") + filepath + "\" for reading");
 
-    infile.exceptions(ifstream::failbit);
-
     std::string line;
     integral_single_data data;
     int ngaussians = 0;
