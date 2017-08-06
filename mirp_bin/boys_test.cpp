@@ -12,6 +12,7 @@
 #include <sstream>
 #include <fstream>
 #include <stdexcept>
+#include <memory>
 
 /* Anonymous namespace for some helper functions */
 namespace {
