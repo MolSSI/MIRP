@@ -1,3 +1,18 @@
+#######################################
+# Check the sha sums on the test data #
+#######################################
+
+find_program(SHASUM_PROG shasum)
+if(NOT SHASUM_PROG)
+    message(STATUS "shasum not found. I wont check the data files")
+else()
+    add_test(NAME test_data_checksum
+             COMMAND ${SHASUM_PROG} -c sha256sums
+             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/test_data
+    )
+              
+endif()
+
 
 macro(add_boys_test filename floattype prec extra_m)
     add_test(NAME boys_${filename}_${floattype}_${prec}_extra_${extra_m}
