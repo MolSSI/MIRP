@@ -104,10 +104,10 @@ void mirp_eri_double(double * output,
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_eri_single_interval(arb_t output,
-                              const int * lmn1, const arb_t * A, const arb_t alpha1,
-                              const int * lmn2, const arb_t * B, const arb_t alpha2,
-                              const int * lmn3, const arb_t * C, const arb_t alpha3,
-                              const int * lmn4, const arb_t * D, const arb_t alpha4,
+                              const int * lmn1, arb_srcptr A, const arb_t alpha1,
+                              const int * lmn2, arb_srcptr B, const arb_t alpha2,
+                              const int * lmn3, arb_srcptr C, const arb_t alpha3,
+                              const int * lmn4, arb_srcptr D, const arb_t alpha4,
                               slong working_prec);
 
 
@@ -117,11 +117,11 @@ void mirp_eri_single_interval(arb_t output,
  * \copydetails mirp_prim_eri_double
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_prim_eri_interval(arb_t * output,
-                            int am1, const arb_t * A, const arb_t alpha1,
-                            int am2, const arb_t * B, const arb_t alpha2,
-                            int am3, const arb_t * C, const arb_t alpha3,
-                            int am4, const arb_t * D, const arb_t alpha4,
+void mirp_prim_eri_interval(arb_ptr output,
+                            int am1, arb_srcptr A, const arb_t alpha1,
+                            int am2, arb_srcptr B, const arb_t alpha2,
+                            int am3, arb_srcptr C, const arb_t alpha3,
+                            int am4, arb_srcptr D, const arb_t alpha4,
                             slong working_prec);
 
 
@@ -131,11 +131,11 @@ void mirp_prim_eri_interval(arb_t * output,
  * \copydetails mirp_eri_double
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_eri_interval(arb_t * output,
-                       int am1, const arb_t * A, int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,
-                       int am2, const arb_t * B, int nprim2, int ngeneral2, const arb_t * alpha2, const arb_t * coeff2,
-                       int am3, const arb_t * C, int nprim3, int ngeneral3, const arb_t * alpha3, const arb_t * coeff3,
-                       int am4, const arb_t * D, int nprim4, int ngeneral4, const arb_t * alpha4, const arb_t * coeff4,
+void mirp_eri_interval(arb_ptr output,
+                       int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
+                       int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
+                       int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
+                       int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
                        slong working_prec);
 
 #ifdef __cplusplus

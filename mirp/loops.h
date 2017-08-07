@@ -113,21 +113,21 @@ void mirp_loop4_double(double * output,
  *         (four center, arbitrary precision)
  */
 typedef void (*cb_single4_interval)(arb_t,
-                                    const int *, const arb_t *, const arb_t,
-                                    const int *, const arb_t *, const arb_t,
-                                    const int *, const arb_t *, const arb_t,
-                                    const int *, const arb_t *, const arb_t,
+                                    const int *, arb_srcptr, const arb_t,
+                                    const int *, arb_srcptr, const arb_t,
+                                    const int *, arb_srcptr, const arb_t,
+                                    const int *, arb_srcptr, const arb_t,
                                     slong);
 
 
 /*! \brief A callback for a function that computes all cartesian integrals for a
  *         primitive quartet (four center, arbitrary precision)
  */
-typedef void (*cb_prim4_interval)(arb_t *,
-                                  int, const arb_t *, const arb_t,
-                                  int, const arb_t *, const arb_t,
-                                  int, const arb_t *, const arb_t,
-                                  int, const arb_t *, const arb_t,
+typedef void (*cb_prim4_interval)(arb_ptr,
+                                  int, arb_srcptr, const arb_t,
+                                  int, arb_srcptr, const arb_t,
+                                  int, arb_srcptr, const arb_t,
+                                  int, arb_srcptr, const arb_t,
                                   slong);
 
 
@@ -137,11 +137,11 @@ typedef void (*cb_prim4_interval)(arb_t *,
  * \copydetails mirp_cartloop4_double
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_cartloop4_interval(arb_t * output,
-                             int am1, const arb_t * A, const arb_t alpha1,
-                             int am2, const arb_t * B, const arb_t alpha2,
-                             int am3, const arb_t * C, const arb_t alpha3,
-                             int am4, const arb_t * D, const arb_t alpha4,
+void mirp_cartloop4_interval(arb_ptr output,
+                             int am1, arb_srcptr A, const arb_t alpha1,
+                             int am2, arb_srcptr B, const arb_t alpha2,
+                             int am3, arb_srcptr C, const arb_t alpha3,
+                             int am4, arb_srcptr D, const arb_t alpha4,
                              slong working_prec, cb_single4_interval cb);
 
 
@@ -151,11 +151,11 @@ void mirp_cartloop4_interval(arb_t * output,
  * \copydetails mirp_loop4_double
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_loop4_interval(arb_t * output,
-                         int am1, const arb_t * A, int nprim1, int ngeneral1, const arb_t * alpha1, const arb_t * coeff1,
-                         int am2, const arb_t * B, int nprim2, int ngeneral2, const arb_t * alpha2, const arb_t * coeff2,
-                         int am3, const arb_t * C, int nprim3, int ngeneral3, const arb_t * alpha3, const arb_t * coeff3,
-                         int am4, const arb_t * D, int nprim4, int ngeneral4, const arb_t * alpha4, const arb_t * coeff4,
+void mirp_loop4_interval(arb_ptr output,
+                         int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
+                         int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
+                         int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
+                         int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
                          slong working_prec, cb_prim4_interval cb);
 
 

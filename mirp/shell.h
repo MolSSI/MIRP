@@ -52,9 +52,9 @@ void mirp_normalize_shell_double(int am, int nprim, int ngeneral,
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_normalize_shell_interval(int am, int nprim, int ngeneral,
-                                   const arb_t * alpha,
-                                   const arb_t * coeff,
-                                   arb_t * coeff_out,
+                                   arb_srcptr alpha,
+                                   arb_srcptr coeff,
+                                   arb_ptr coeff_out,
                                    slong working_prec);
 
 

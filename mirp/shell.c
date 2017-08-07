@@ -72,9 +72,9 @@ void mirp_normalize_shell_double(int am, int nprim, int ngeneral,
 
 
 void mirp_normalize_shell_interval(int am, int nprim, int ngeneral,
-                                   const arb_t * alpha,
-                                   const arb_t * coeff,
-                                   arb_t * coeff_out,
+                                   arb_srcptr alpha,
+                                   arb_srcptr coeff,
+                                   arb_ptr coeff_out,
                                    slong working_prec)
 {
     arb_t tmp1, tmp2;
@@ -119,14 +119,14 @@ void mirp_normalize_shell_interval(int am, int nprim, int ngeneral,
             for(int j = 0; j < nprim; j++)
             {
                 /* tmp1 = coeff1 * coeff2 */
-                arb_mul(tmp1, coeff[n*nprim+i], coeff[n*nprim+j], working_prec);
+                arb_mul(tmp1, coeff+(n*nprim+i), coeff+(n*nprim+j), working_prec);
                 /* tmp2 = pow(alpha1 * alpha2, m2) */
-                arb_mul(tmp2, alpha[i], alpha[j], working_prec);
+                arb_mul(tmp2, alpha+i, alpha+j, working_prec);
                 arb_pow(tmp2, tmp2, m2, working_prec);
                 arb_mul(tmp1, tmp1, tmp2, working_prec);
 
                 /* tmp2 = pow(alpha2+alpha2, m) */
-                arb_add(tmp2, alpha[i], alpha[j], working_prec);
+                arb_add(tmp2, alpha+i, alpha+j, working_prec);
                 arb_pow(tmp2, tmp2, m, working_prec);
                 arb_div(tmp1, tmp1, tmp2, working_prec);
 
@@ -143,11 +143,19 @@ void mirp_normalize_shell_interval(int am, int nprim, int ngeneral,
 
         for (int i = 0; i < nprim; ++i)
         {
-            arb_pow(tmp2, alpha[i], m2, working_prec);
+            arb_pow(tmp2, alpha+i, m2, working_prec);
             arb_mul(tmp2, tmp2, tmp1, working_prec);
-            arb_mul(coeff_out[n*nprim+i], coeff[n*nprim+i], tmp2, working_prec);
+            arb_mul(coeff_out+(n*nprim+i), coeff+(n*nprim+i), tmp2, working_prec);
         }
     }
+
+
+    arb_clear(tmp1);
+    arb_clear(tmp2);
+    arb_clear(norm_fac);
+    arb_clear(sum);
+    arb_clear(m);
+    arb_clear(m2);
 }
 
 #ifdef __cplusplus

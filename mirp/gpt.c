@@ -32,9 +32,9 @@ void mirp_gpt_double(double alpha1, double alpha2,
 
 
 void mirp_gpt_interval(const arb_t alpha1, const arb_t alpha2,
-                       const arb_t * A, const arb_t * B,
-                       arb_t gamma, arb_t * P,
-                       arb_t * PA, arb_t * PB,
+                       arb_srcptr A, arb_srcptr B,
+                       arb_t gamma, arb_ptr P,
+                       arb_ptr PA, arb_ptr PB,
                        arb_t AB2,
                        slong working_prec)
 {
@@ -52,39 +52,39 @@ void mirp_gpt_interval(const arb_t alpha1, const arb_t alpha2,
      */
     arb_add(gamma, alpha1, alpha2, working_prec);
 
-    arb_mul(tmp1, alpha1, A[0],   working_prec);
-    arb_mul(tmp2, alpha2, B[0],   working_prec);
-    arb_add(P[0], tmp1,   tmp2,   working_prec);
-    arb_div(P[0], P[0],   gamma,  working_prec);
+    arb_mul(tmp1, alpha1, A+0,   working_prec);
+    arb_mul(tmp2, alpha2, B+0,   working_prec);
+    arb_add(P+0, tmp1,   tmp2,   working_prec);
+    arb_div(P+0, P+0,   gamma,  working_prec);
 
-    arb_mul(tmp1, alpha1, A[1],   working_prec);
-    arb_mul(tmp2, alpha2, B[1],   working_prec);
-    arb_add(P[1], tmp1,   tmp2,   working_prec);
-    arb_div(P[1], P[1],   gamma,  working_prec);
+    arb_mul(tmp1, alpha1, A+1,   working_prec);
+    arb_mul(tmp2, alpha2, B+1,   working_prec);
+    arb_add(P+1, tmp1,   tmp2,   working_prec);
+    arb_div(P+1, P+1,   gamma,  working_prec);
 
-    arb_mul(tmp1, alpha1, A[2],   working_prec);
-    arb_mul(tmp2, alpha2, B[2],   working_prec);
-    arb_add(P[2], tmp1,   tmp2,   working_prec);
-    arb_div(P[2], P[2],   gamma,  working_prec);
+    arb_mul(tmp1, alpha1, A+2,   working_prec);
+    arb_mul(tmp2, alpha2, B+2,   working_prec);
+    arb_add(P+2, tmp1,   tmp2,   working_prec);
+    arb_div(P+2, P+2,   gamma,  working_prec);
 
     /*
      *
      * PA[0] = P[0] - A[0], etc
      * PB[0] = P[0] - B[0], etc
      */
-    arb_sub(PA[0], P[0], A[0], working_prec);
-    arb_sub(PA[1], P[1], A[1], working_prec);
-    arb_sub(PA[2], P[2], A[2], working_prec);
-    arb_sub(PB[0], P[0], B[0], working_prec);
-    arb_sub(PB[1], P[1], B[1], working_prec);
-    arb_sub(PB[2], P[2], B[2], working_prec);
+    arb_sub(PA+0, P+0, A+0, working_prec);
+    arb_sub(PA+1, P+1, A+1, working_prec);
+    arb_sub(PA+2, P+2, A+2, working_prec);
+    arb_sub(PB+0, P+0, B+0, working_prec);
+    arb_sub(PB+1, P+1, B+1, working_prec);
+    arb_sub(PB+2, P+2, B+2, working_prec);
 
     /*
      * AB2 = (A[0]-B[0])*(A[0]-B[0]) + (A[1]-B[1])*(A[1]-B[1]) + (A[2]-B[2])*(A[2]-B[2]);
      */
-    arb_sub(tmp1, A[0], B[0], working_prec);
-    arb_sub(tmp2, A[1], B[1], working_prec);
-    arb_sub(tmp3, A[2], B[2], working_prec);
+    arb_sub(tmp1, A+0, B+0, working_prec);
+    arb_sub(tmp2, A+1, B+1, working_prec);
+    arb_sub(tmp3, A+2, B+2, working_prec);
     arb_mul(AB2,  tmp1, tmp1, working_prec);
     arb_addmul(AB2, tmp2, tmp2, working_prec);
     arb_addmul(AB2, tmp3, tmp3, working_prec);

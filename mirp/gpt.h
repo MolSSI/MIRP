@@ -44,9 +44,9 @@ void mirp_gpt_double(double alpha1, double alpha2,
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 void mirp_gpt_interval(const arb_t alpha1, const arb_t alpha2,
-                       const arb_t * A, const arb_t * B,
+                       arb_srcptr A, arb_srcptr B,
                        arb_t gamma,
-                       arb_t * P, arb_t * PA, arb_t * PB,
+                       arb_ptr P, arb_ptr PA, arb_ptr PB,
                        arb_t AB2,
                        slong working_prec);
 

@@ -2,7 +2,6 @@
 list(APPEND MIRP_FILELIST
                math.c
                gpt.c
-               arb_help.c
                shell.c
                loops_double.c
                loops_interval.c

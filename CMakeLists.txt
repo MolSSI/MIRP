@@ -34,6 +34,6 @@ mirp_find_library(gmp)
 
 add_subdirectory(mirp)
 add_subdirectory(mirp_bin)
-add_subdirectory(mirppy)
+#add_subdirectory(mirppy)
 add_subdirectory(examples)
 add_subdirectory(tests)

@@ -6,7 +6,7 @@
 #include "mirp/kernels/boys.h"
 #include <assert.h>
 
-void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
+void mirp_boys_interval(arb_ptr F, int m, const arb_t t, slong working_prec)
 {
     assert(m >= 0);
     assert(!(arb_is_negative(t)));
@@ -63,7 +63,7 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
             arb_mul(tmp1, tmp1, tmp2, working_prec);
         }
 
-        arb_set(F[m], tmp1);
+        arb_set(F + m, tmp1);
 
         /* Determine the error associated with the long-range approximation */
         arb_zero(sum);
@@ -94,8 +94,8 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
          * Determine if this error is satisfactory
          * If not, mark that we have to do the short-range version
          */
-        arb_sub(test, F[m], sum, working_prec);
-        if(!arb_overlaps(F[m], test))
+        arb_sub(test, F+m, sum, working_prec);
+        if(!arb_overlaps(F+m, test))
             do_short = 1;
     }
 
@@ -117,18 +117,18 @@ void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec)
         } while(!arb_contains(sum, test)); /* Is the old term contained completely
                                               within the new term */
 
-        arb_mul(F[m], sum, et, working_prec);
-        arb_div_si(F[m], F[m], 2*m+1, working_prec);
+        arb_mul(F+m, sum, et, working_prec);
+        arb_div_si(F+m, F+m, 2*m+1, working_prec);
         //printf("Done with short-range approximation in %d cycles\n", i);
     }
     
     /* Now do downwards recursion */
     for(i = m - 1; i >= 0; i--)
     {
-        /* F[m] = (t2 * F[m + 1] + et) / (2 * m + 1) */
-        arb_mul(F[i], t2, F[i + 1], working_prec);
-        arb_add(F[i], F[i], et, working_prec);
-        arb_div_ui(F[i], F[i], 2 * i + 1, working_prec);
+        /* F+m = (t2 * F[m + 1] + et) / (2 * m + 1) */
+        arb_mul(F+i, t2, F + (i + 1), working_prec);
+        arb_add(F+i, F+i, et, working_prec);
+        arb_div_ui(F+i, F+i, 2 * i + 1, working_prec);
     }
 
     arb_clear(t2);

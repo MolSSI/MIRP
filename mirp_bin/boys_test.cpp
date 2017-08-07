@@ -6,7 +6,6 @@
 #include "mirp_bin/boys_test.hpp"
 #include <mirp/kernels/boys.h>
 #include <mirp/math.h>
-#include <mirp/arb_help.h>
 #include <cmath>
 #include <iostream>
 #include <sstream>
@@ -17,6 +16,8 @@
 /* Anonymous namespace for some helper functions */
 namespace {
 
+
+
 /* Runs a Boys function test using interval arithmetic
  *
  * This just wraps the calculation of Boys function, increasing the
@@ -24,6 +25,8 @@ namespace {
  * then handles the comparison with the reference data
  *
  * The number of failing tests is returned
+ *
+ * \todo This function is not exception safe
  */
 long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long target_prec)
 {
@@ -37,8 +40,7 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
     arb_init(t_mp);
     arb_init(vref_mp);
 
-    auto F_mp = std::unique_ptr<arb_t[]>(new arb_t[max_m+1]);
-    mirp_init_arb_arr(F_mp.get(), max_m+1);
+    arb_ptr F_mp = _arb_vec_init(max_m+1);
 
     for(const auto & ent : data.values)
     {
@@ -49,20 +51,20 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
                (with a bit of a safety factor */
             working_prec += 16;
             arb_set_str(t_mp, ent.t.c_str(), working_prec);
-            mirp_boys_interval(F_mp.get(), ent.m+extra_m, t_mp, working_prec);
+            mirp_boys_interval(F_mp, ent.m+extra_m, t_mp, working_prec);
 
 
-        } while(arb_rel_accuracy_bits(F_mp[ent.m]) < (target_prec + 4));
+        } while(arb_rel_accuracy_bits(F_mp + ent.m) < (target_prec + 4));
 
         /* Round the calculated value and the reference value to the
            target precision */
-        arb_set_round(F_mp[ent.m], F_mp[ent.m], target_prec);
+        arb_set_round(F_mp + ent.m, F_mp + ent.m, target_prec);
         arb_set_str(vref_mp, ent.value.c_str(), target_prec);
 
-        if(!arb_overlaps(F_mp[ent.m], vref_mp))
+        if(!arb_overlaps(F_mp + ent.m, vref_mp))
         {
             std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
-            char * s1 = arb_get_str(F_mp[ent.m], 1000, 0);
+            char * s1 = arb_get_str(F_mp + ent.m, 1000, 0);
             char * s2 = arb_get_str(vref_mp, 1000, 0);
             std::cout << "   Calculated: " << s1 << "\n";
             std::cout << "    Reference: " << s2 << "\n\n";
@@ -74,7 +76,7 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
 
     arb_clear(t_mp);
     arb_clear(vref_mp);
-    mirp_clear_arb_arr(F_mp.get(), max_m+1);
+    _arb_vec_clear(F_mp, max_m+1);
 
     return nfailed;
 }
@@ -247,9 +249,8 @@ void boys_create_test(const std::string & input_filepath,
     const int max_m = boys_max_m(data);
 
     arb_t t_mp;
-    auto F_mp = std::unique_ptr<arb_t[]>(new arb_t[max_m+1]);
+    arb_ptr F_mp = _arb_vec_init(max_m+1);
     arb_init(t_mp);
-    mirp_init_arb_arr(F_mp.get(), max_m+1);
 
     /* Target precision/accuracy, in bits, with a safety factor
        of 4 extra decimal digits */
@@ -264,21 +265,21 @@ void boys_create_test(const std::string & input_filepath,
             working_prec += 16;
 
             arb_set_str(t_mp, ent.t.c_str(), working_prec);
-            mirp_boys_interval(F_mp.get(), ent.m, t_mp, working_prec); 
+            mirp_boys_interval(F_mp, ent.m, t_mp, working_prec); 
 
-            if(arb_rel_accuracy_bits(F_mp[ent.m]) >= target_prec)
+            if(arb_rel_accuracy_bits(F_mp + ent.m) >= target_prec)
                 sufficient_accuracy = true;
                 
         } while(!sufficient_accuracy);
 
-        char * s = arb_get_str(F_mp[ent.m], ndigits, ARB_STR_NO_RADIUS);
+        char * s = arb_get_str(F_mp + ent.m, ndigits, ARB_STR_NO_RADIUS);
         ent.value = s;
         free(s);
     }
 
     boys_write_file(output_filepath, data);
     arb_clear(t_mp);
-    mirp_clear_arb_arr(F_mp.get(), max_m+1);
+    _arb_vec_clear(F_mp, max_m+1);
 }
 
     

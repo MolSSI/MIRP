@@ -4,7 +4,6 @@
  */
 
 #include <mirp/mirp.h>
-#include <mirp/arb_help.h>
 #include <stdio.h>
 
 static void strarr_to_double(const char ** strarr, double * darr, int length)
@@ -13,15 +12,15 @@ static void strarr_to_double(const char ** strarr, double * darr, int length)
         darr[i] = atof(strarr[i]);
 }
 
-static void strarr_to_interval(const char ** strarr, arb_t * iarr, int length, slong prec)
+static void strarr_to_interval(const char ** strarr, arb_ptr iarr, int length, slong prec)
 {
     for(int i = 0; i < length; i++)
-        arb_set_str(iarr[i], strarr[i], prec);
+        arb_set_str(iarr + i, strarr[i], prec);
 }
 
 static void print_integrals(const char * title,
                             const double * integrals_double,
-                            const arb_t * integrals_interval,
+                            arb_srcptr integrals_interval,
                             int length)
 {
     printf("\n-- %s --\n", title);
@@ -29,7 +28,7 @@ static void print_integrals(const char * title,
     for(int i = 0; i < length; i++)
     {
         /* We will max out at 100 digits. Should be enough for this example */
-        char * arbstr = arb_get_str(integrals_interval[i], 100, 0);
+        char * arbstr = arb_get_str(integrals_interval + i, 100, 0);
         printf("[%5d] %30.17e   %s\n", i, integrals_double[i], arbstr);
         free(arbstr);
     }
@@ -47,8 +46,7 @@ int main(void)
      * be 81, since we only have up to p shells
      */
     double integrals_double[81];
-    arb_t integrals_interval[81];
-    mirp_init_arb_arr(integrals_interval, 81);
+    arb_ptr integrals_interval = _arb_vec_init(81);
 
     /* Geometry, in bohr
      * Taken from CCCBDB (water HF/STO-3G) and converted to
@@ -65,11 +63,11 @@ int main(void)
      * with different angular momentum (ie, sp and spd shells). So we have to
      * split up the sp shell in STO-3G */
     const char * alpha_O_s1[3] = { "130.7093200", "23.8088610", "6.4436083" };
-    const char * coeff_O_s1[3] = { "0.15432897", "0.53532814", "0.44463454" };
-    const char * alpha_O_s2[3] = { "5.0331513", "1.1695961", "0.3803890" };
+    const char * coeff_O_s1[3] = { "0.15432897",  "0.53532814", "0.44463454" };
+    const char * alpha_O_s2[3] = { "5.0331513",   "1.1695961",  "0.3803890" };
     const char * coeff_O_s2[3] = { "-0.09996723", "0.39951283", "0.70011547" };
-    const char * alpha_O_p[3] = { "5.0331513", "1.1695961", "0.3803890" };
-    const char * coeff_O_p[3] = { "0.15591627", "0.60768372", "0.39195739" };
+    const char * alpha_O_p[3] =  { "5.0331513",   "1.1695961",  "0.3803890" };
+    const char * coeff_O_p[3] =  { "0.15591627",  "0.60768372", "0.39195739" };
 
     const char * alpha_H1_s[3] = { "3.42525091", "0.62391373", "0.16885540" };
     const char * coeff_H1_s[3] = { "0.15432897", "0.53532814", "0.44463454" };
@@ -108,25 +106,19 @@ int main(void)
     /**********************************************
      * Conversion of the above to arb_t
      **********************************************/
-    arb_t xyz_O_interval[3];
-    arb_t xyz_H1_interval[3];
-    arb_t xyz_H2_interval[3];
-    mirp_init_arb_arr(xyz_O_interval,  3);
-    mirp_init_arb_arr(xyz_H1_interval, 3);
-    mirp_init_arb_arr(xyz_H2_interval, 3);
+    arb_ptr xyz_O_interval  = _arb_vec_init(3);
+    arb_ptr xyz_H1_interval = _arb_vec_init(3);
+    arb_ptr xyz_H2_interval = _arb_vec_init(3);
     strarr_to_interval(xyz_O,  xyz_O_interval,  3, 256);
     strarr_to_interval(xyz_H1, xyz_H2_interval, 3, 256);
     strarr_to_interval(xyz_H2, xyz_H1_interval, 3, 256);
 
-    arb_t alpha_O_s1_interval[3], coeff_O_s1_interval[3];
-    arb_t alpha_O_s2_interval[3], coeff_O_s2_interval[3];
-    arb_t alpha_O_p_interval[3],  coeff_O_p_interval[3];
-    mirp_init_arb_arr(alpha_O_s1_interval, 3);
-    mirp_init_arb_arr(alpha_O_s2_interval, 3);
-    mirp_init_arb_arr(alpha_O_p_interval,  3);
-    mirp_init_arb_arr(coeff_O_s1_interval, 3);
-    mirp_init_arb_arr(coeff_O_s2_interval, 3);
-    mirp_init_arb_arr(coeff_O_p_interval,  3);
+    arb_ptr alpha_O_s1_interval = _arb_vec_init(3);
+    arb_ptr alpha_O_s2_interval = _arb_vec_init(3);
+    arb_ptr alpha_O_p_interval  = _arb_vec_init(3);
+    arb_ptr coeff_O_s1_interval = _arb_vec_init(3);
+    arb_ptr coeff_O_s2_interval = _arb_vec_init(3);
+    arb_ptr coeff_O_p_interval  = _arb_vec_init(3);
     strarr_to_interval(alpha_O_s1, alpha_O_s1_interval, 3, 256);
     strarr_to_interval(alpha_O_s2, alpha_O_s2_interval, 3, 256);
     strarr_to_interval(alpha_O_p,  alpha_O_p_interval,  3, 256);
@@ -134,12 +126,10 @@ int main(void)
     strarr_to_interval(coeff_O_s2, coeff_O_s2_interval, 3, 256);
     strarr_to_interval(coeff_O_p,  coeff_O_p_interval,  3, 256);
 
-    arb_t alpha_H1_s_interval[3], coeff_H1_s_interval[3];
-    arb_t alpha_H2_s_interval[3], coeff_H2_s_interval[3];
-    mirp_init_arb_arr(alpha_H1_s_interval, 3);
-    mirp_init_arb_arr(alpha_H2_s_interval, 3);
-    mirp_init_arb_arr(coeff_H1_s_interval, 3);
-    mirp_init_arb_arr(coeff_H2_s_interval, 3);
+    arb_ptr alpha_H1_s_interval = _arb_vec_init(3);
+    arb_ptr alpha_H2_s_interval = _arb_vec_init(3);
+    arb_ptr coeff_H1_s_interval = _arb_vec_init(3);
+    arb_ptr coeff_H2_s_interval = _arb_vec_init(3);
     strarr_to_interval(alpha_H1_s, alpha_H1_s_interval, 3, 256);
     strarr_to_interval(alpha_H2_s, alpha_H2_s_interval, 3, 256);
     strarr_to_interval(coeff_H1_s, coeff_H1_s_interval, 3, 256);
@@ -224,20 +214,20 @@ int main(void)
 
 
     /* Cleanup */
-    mirp_clear_arb_arr(integrals_interval, 81);
-    mirp_clear_arb_arr(xyz_O_interval, 3);
-    mirp_clear_arb_arr(xyz_H1_interval, 3);
-    mirp_clear_arb_arr(xyz_H2_interval, 3);
-    mirp_clear_arb_arr(alpha_O_s1_interval, 3);
-    mirp_clear_arb_arr(alpha_O_s2_interval, 3);
-    mirp_clear_arb_arr(alpha_O_p_interval,  3);
-    mirp_clear_arb_arr(coeff_O_s1_interval, 3);
-    mirp_clear_arb_arr(coeff_O_s2_interval, 3);
-    mirp_clear_arb_arr(coeff_O_p_interval,  3);
-    mirp_clear_arb_arr(alpha_H1_s_interval, 3);
-    mirp_clear_arb_arr(alpha_H2_s_interval, 3);
-    mirp_clear_arb_arr(coeff_H1_s_interval, 3);
-    mirp_clear_arb_arr(coeff_H2_s_interval, 3);
+    _arb_vec_clear(integrals_interval, 81);
+    _arb_vec_clear(xyz_O_interval, 3);
+    _arb_vec_clear(xyz_H1_interval, 3);
+    _arb_vec_clear(xyz_H2_interval, 3);
+    _arb_vec_clear(alpha_O_s1_interval, 3);
+    _arb_vec_clear(alpha_O_s2_interval, 3);
+    _arb_vec_clear(alpha_O_p_interval,  3);
+    _arb_vec_clear(coeff_O_s1_interval, 3);
+    _arb_vec_clear(coeff_O_s2_interval, 3);
+    _arb_vec_clear(coeff_O_p_interval,  3);
+    _arb_vec_clear(alpha_H1_s_interval, 3);
+    _arb_vec_clear(alpha_H2_s_interval, 3);
+    _arb_vec_clear(coeff_H1_s_interval, 3);
+    _arb_vec_clear(coeff_H2_s_interval, 3);
 
     return 0;
 }

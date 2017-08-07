@@ -8,7 +8,6 @@
 #include "mirp_bin/file_io.hpp"
 #include "mirp_bin/data_entry.hpp"
 
-#include <mirp/arb_help.h>
 #include <mirp/math.h>
 #include <iostream>
 #include <stdexcept>
@@ -19,24 +18,25 @@ namespace detail {
 
 /*! \brief A function that computes single 4-center integrals with interval arithmetic */
 typedef void (*cb_single4_interval)(arb_t,
-                                    const int *, const arb_t *, const arb_t,
-                                    const int *, const arb_t *, const arb_t,
-                                    const int *, const arb_t *, const arb_t,
-                                    const int *, const arb_t *, const arb_t,
+                                    const int *, arb_srcptr, const arb_t,
+                                    const int *, arb_srcptr, const arb_t,
+                                    const int *, arb_srcptr, const arb_t,
+                                    const int *, arb_srcptr, const arb_t,
                                     slong);
 
 
 /*! \brief Unpacks the arguments for a call to a function that
  *         computes single 4-center integrals
  */
-inline void call_callback(arb_t integral, const int * lmn, const arb_t * xyz,
-                          const arb_t * alpha, slong working_prec, cb_single4_interval cb)
+inline void call_callback(arb_t integral, const int * lmn,
+                          arb_srcptr xyz, arb_srcptr alpha,
+                          slong working_prec, cb_single4_interval cb)
 {
     cb(integral,
-       lmn + 0, xyz + 0, alpha[0],
-       lmn + 3, xyz + 3, alpha[1],
-       lmn + 6, xyz + 6, alpha[2],
-       lmn + 9, xyz + 9, alpha[3],
+       lmn+0, xyz+0, alpha+0,
+       lmn+3, xyz+3, alpha+1,
+       lmn+6, xyz+6, alpha+2,
+       lmn+9, xyz+9, alpha+3,
        working_prec);
 }
                       
@@ -75,11 +75,9 @@ void integral_single_interval(arb_t integral,
         
     /* Temporaries */
     int lmn[N*3];
-    arb_t xyz[N*3];
-    arb_t alpha[N];
 
-    mirp_init_arb_arr(xyz, N*3);
-    mirp_init_arb_arr(alpha, N);
+    arb_ptr xyz = _arb_vec_init(N*3);
+    arb_ptr alpha = _arb_vec_init(N);
 
     slong working_prec = target_prec;
     bool sufficient_accuracy = false;
@@ -89,10 +87,10 @@ void integral_single_interval(arb_t integral,
 
         for(unsigned int n = 0; n < N; n++)
         {
-            arb_set_str(alpha[n], ent.g[n].alpha.c_str(), working_prec);
-            arb_set_str(xyz[n*3+0], ent.g[n].xyz[0].c_str(), working_prec);
-            arb_set_str(xyz[n*3+1], ent.g[n].xyz[1].c_str(), working_prec);
-            arb_set_str(xyz[n*3+2], ent.g[n].xyz[2].c_str(), working_prec);
+            arb_set_str(alpha + n, ent.g[n].alpha.c_str(), working_prec);
+            arb_set_str(xyz + (n*3+0), ent.g[n].xyz[0].c_str(), working_prec);
+            arb_set_str(xyz + (n*3+1), ent.g[n].xyz[1].c_str(), working_prec);
+            arb_set_str(xyz + (n*3+2), ent.g[n].xyz[2].c_str(), working_prec);
             lmn[n*3+0] = ent.g[n].lmn[0];
             lmn[n*3+1] = ent.g[n].lmn[1];
             lmn[n*3+2] = ent.g[n].lmn[2];
@@ -105,8 +103,8 @@ void integral_single_interval(arb_t integral,
             
     } while(!sufficient_accuracy);
 
-    mirp_clear_arb_arr(xyz, N*3);
-    mirp_clear_arb_arr(alpha, N);
+    _arb_vec_clear(xyz, N*3);
+    _arb_vec_clear(alpha, N);
 }
 
 

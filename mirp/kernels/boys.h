@@ -30,7 +30,7 @@ void mirp_boys_double(double *F, int m, double t);
  * \copydetails mirp_boys_double
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_boys_interval(arb_t *F, int m, const arb_t t, slong working_prec);
+void mirp_boys_interval(arb_ptr F, int m, const arb_t t, slong working_prec);
 
 #ifdef __cplusplus
 }

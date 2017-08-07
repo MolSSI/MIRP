@@ -5,13 +5,13 @@
 
 #include "mirp_bin/cmdline.hpp"
 #include <mirp/mirp.h>
-#include <mirp/arb_help.h>
 #include <iostream>
 
 using namespace mirp;
 
 int main(void)
 {
+#if 0
     double result[1296];
     const double xyz_O[3] = { 0.0, 0.0, 0.0 };
     const double alpha_O_s[26] = { 54451891.10000000,
@@ -136,7 +136,7 @@ int main(void)
     mirp_clear_arb_arr(xyz_O_interval, 3);
     mirp_clear_arb_arr(alpha_O_s_interval, nprim1);
     mirp_clear_arb_arr(coeff_O_s_interval, nprim1*ngeneral1);
-
+#endif
     return 0;
 }
 
