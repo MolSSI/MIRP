@@ -14,4 +14,4 @@ list(APPEND MIRP_FILELIST
                kernels/eri_interval.c
 )
 
-add_library(mirp ${MIRP_FILELIST})
+add_library(mirp SHARED ${MIRP_FILELIST})

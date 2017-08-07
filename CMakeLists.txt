@@ -5,6 +5,11 @@ enable_testing()
 
 macro(mirp_find_library libname)
     find_library(MIRP_${libname}_LIBRARY ${libname})
+
+    if(NOT MIRP_${libname}_LIBRARY)
+        message(FATAL_ERROR "Library ${libname} not found!")
+    endif()
+
     get_filename_component(MIRP_${libname}_DIR ${MIRP_${libname}_LIBRARY} DIRECTORY)
     get_filename_component(MIRP_${libname}_DIR ${MIRP_${libname}_DIR} DIRECTORY)
     message(STATUS "Found ${libname} library: ${MIRP_${libname}_LIBRARY}")

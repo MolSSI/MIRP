@@ -1,3 +1,4 @@
+find_package(PythonInterp 3.5 REQUIRED)
 find_package(PythonLibs REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
 
