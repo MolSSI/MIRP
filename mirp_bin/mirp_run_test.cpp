@@ -16,7 +16,8 @@ int main(int argc, char ** argv)
     std::string file;
     std::string integral;
     std::string floattype;
-    long target_prec, extra_m;
+    long target_prec = 0;
+    long extra_m = 0;
     
     try {
         auto cmdline = convert_cmdline(argc, argv);
