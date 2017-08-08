@@ -142,20 +142,6 @@ void mirp_eri_single_double(double * output,
     *output *= pfac;
 }
 
-void mirp_prim_eri_double(double * output,
-                          int am1, const double * A, double alpha1,
-                          int am2, const double * B, double alpha2,
-                          int am3, const double * C, double alpha3,
-                          int am4, const double * D, double alpha4)
-{
-    mirp_cartloop4_double(output,
-                          am1, A, alpha1,
-                          am2, B, alpha2,
-                          am3, C, alpha3,
-                          am4, D, alpha4,
-                          mirp_eri_single_double); // callback
-}
-
 
 void mirp_eri_double(double * output,
                      int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
@@ -168,6 +154,6 @@ void mirp_eri_double(double * output,
                       am2, B, nprim2, ngeneral2, alpha2, coeff2,
                       am3, C, nprim3, ngeneral3, alpha3, coeff3,
                       am4, D, nprim4, ngeneral4, alpha4, coeff4,
-                      mirp_prim_eri_double);
+                      mirp_eri_single_double);
 }
 

@@ -356,22 +356,6 @@ void mirp_eri_single_interval(arb_t output,
 }
 
 
-void mirp_prim_eri_interval(arb_ptr output,
-                            int am1, arb_srcptr A, const arb_t alpha1,
-                            int am2, arb_srcptr B, const arb_t alpha2,
-                            int am3, arb_srcptr C, const arb_t alpha3,
-                            int am4, arb_srcptr D, const arb_t alpha4,
-                            slong working_prec)
-{
-    mirp_cartloop4_interval(output,
-                            am1, A, alpha1,
-                            am2, B, alpha2,
-                            am3, C, alpha3,
-                            am4, D, alpha4,
-                            working_prec, mirp_eri_single_interval);
-}
-
-
 void mirp_eri_interval(arb_ptr output,
                        int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
                        int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
@@ -384,5 +368,5 @@ void mirp_eri_interval(arb_ptr output,
                         am2, B, nprim2, ngeneral2, alpha2, coeff2,
                         am3, C, nprim3, ngeneral3, alpha3, coeff3,
                         am4, D, nprim4, ngeneral4, alpha4, coeff4,
-                        working_prec, mirp_prim_eri_interval); 
+                        working_prec, mirp_eri_single_interval); 
 }

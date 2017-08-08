@@ -6,12 +6,18 @@
 #include "mirp/loops.h"
 #include "mirp/shell.h"
 
-void mirp_cartloop4_interval(arb_ptr output,
-                             int am1, arb_srcptr A, const arb_t alpha1,
-                             int am2, arb_srcptr B, const arb_t alpha2,
-                             int am3, arb_srcptr C, const arb_t alpha3,
-                             int am4, arb_srcptr D, const arb_t alpha4,
-                             slong working_prec, cb_single4_interval cb)
+/*! \brief Compute all cartesian components of a single primitive integral
+ *         (interval arithmetic)
+ *
+ * \copydetails mirp_cartloop4_double
+ * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
+ */
+static void mirp_cartloop4_interval(arb_ptr output,
+                                    int am1, arb_srcptr A, const arb_t alpha1,
+                                    int am2, arb_srcptr B, const arb_t alpha2,
+                                    int am3, arb_srcptr C, const arb_t alpha3,
+                                    int am4, arb_srcptr D, const arb_t alpha4,
+                                    slong working_prec, cb_single4_interval cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
@@ -59,7 +65,7 @@ void mirp_loop4_interval(arb_ptr output,
                         int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
                         int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
                         int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
-                        slong working_prec, cb_prim4_interval cb)
+                        slong working_prec, cb_single4_interval cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
@@ -91,12 +97,12 @@ void mirp_loop4_interval(arb_ptr output,
     for(int k = 0; k < nprim3; k++)
     for(int l = 0; l < nprim4; l++)
     {
-        cb(output_buffer,
-           am1, A, alpha1 + i,
-           am2, B, alpha2 + j,
-           am3, C, alpha3 + k,
-           am4, D, alpha4 + l,
-           working_prec);
+        mirp_cartloop4_interval(output_buffer,
+                                am1, A, alpha1 + i,
+                                am2, B, alpha2 + j,
+                                am3, C, alpha3 + k,
+                                am4, D, alpha4 + l,
+                                working_prec, cb);
 
         long ntotal = 0;
         for(int m = 0; m < ngeneral1; m++)

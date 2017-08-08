@@ -25,16 +25,6 @@ typedef void (*cb_single4_double)(double *,
                                   const int *, const double *, double);
 
 
-/*! \brief A callback for a function that computes all cartesian integrals for a
- *         primitive quartet (four center, double precision)
- */
-typedef void (*cb_prim4_double)(double *,
-                                int, const double *, double,
-                                int, const double *, double,
-                                int, const double *, double,
-                                int, const double *, double);
-
-
 /*! \brief A callback for a function that computes all cartesian integrals for an
  *         entire shell (four center, double precision)
  */
@@ -59,17 +49,6 @@ typedef void (*cb_single4_interval)(arb_t,
                                     const int *, arb_srcptr, const arb_t,
                                     const int *, arb_srcptr, const arb_t,
                                     slong);
-
-
-/*! \brief A callback for a function that computes all cartesian integrals for a
- *         primitive quartet (four center, interval arithmetic)
- */
-typedef void (*cb_prim4_interval)(arb_ptr,
-                                  int, arb_srcptr, const arb_t,
-                                  int, arb_srcptr, const arb_t,
-                                  int, arb_srcptr, const arb_t,
-                                  int, arb_srcptr, const arb_t,
-                                  slong);
 
 
 /*! \brief A callback for a function that computes all cartesian integrals for an

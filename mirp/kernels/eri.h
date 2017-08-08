@@ -36,28 +36,6 @@ void mirp_eri_single_double(double * output,
                             const int * lmn4, const double * D, double alpha4);
 
 
-/*! \brief Compute all cartesian components of a single primitive electron
- *         repulsion integral (double precision)
- *
- * The \p output buffer is expected to be able to hold all primitive integrals
- * (ie, it can hold ncart(am1) * ncart(am2) * ncart(am3) * ncart(am4) elements).
- *
- * \param [out] output 
- *              Resulting integral output
- * \param [in]  am1,am2,am3,am4
- *              Angular momentum of the four centers
- * \param [in]  A,B,C,D
- *              XYZ coordinates of the four centers (each of length 3)
- * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four centers
- */
-void mirp_prim_eri_double(double * output,
-                          int am1, const double * A, double alpha1,
-                          int am2, const double * B, double alpha2,
-                          int am3, const double * C, double alpha3,
-                          int am4, const double * D, double alpha4);
-
-
 /*! \brief Compute all cartesian components of the electron repulsion integral
            of contracted shell quartet (four center, double precision)
  *
@@ -109,20 +87,6 @@ void mirp_eri_single_interval(arb_t output,
                               const int * lmn3, arb_srcptr C, const arb_t alpha3,
                               const int * lmn4, arb_srcptr D, const arb_t alpha4,
                               slong working_prec);
-
-
-/*! \brief Compute all cartesian components of a single primitive electron
- *         repulsion integral (interval arithmetic)
- *
- * \copydetails mirp_prim_eri_double
- * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
- */
-void mirp_prim_eri_interval(arb_ptr output,
-                            int am1, arb_srcptr A, const arb_t alpha1,
-                            int am2, arb_srcptr B, const arb_t alpha2,
-                            int am3, arb_srcptr C, const arb_t alpha3,
-                            int am4, arb_srcptr D, const arb_t alpha4,
-                            slong working_prec);
 
 
 /*! \brief Compute all cartesian components of the electron repulsion integral

@@ -15,32 +15,6 @@ extern "C" {
  * Double precision
  *******************************************/
 
-/*! \brief Compute all cartesian components of a single primitive integral
- *         (four center, double precision)
- *
- * The \p output buffer is expected to be able to hold all primitive integrals
- * (ie, it can hold ncart(am1) * ncart(am2) * ncart(am3) * ncart(am4) elements).
- *
- * \param [out] output 
- *              Resulting integral output
- * \param [in]  am1,am2,am3,am4
- *              Angular momentum of the four centers
- * \param [in]  A,B,C,D
- *              XYZ coordinates of the four centers (each of length 3)
- * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four centers
- * \param [in]  cb
- *              Callback that calculates a single cartesian component of a
- *              primitive integral
- */
-void mirp_cartloop4_double(double * output,
-                           int am1, const double * A, double alpha1,
-                           int am2, const double * B, double alpha2,
-                           int am3, const double * C, double alpha3,
-                           int am4, const double * D, double alpha4,
-                           cb_single4_double cb);
-
-
 /*! \brief Compute all cartesian components of a contracted shell quartet
  *         (four center, double precision)
  *
@@ -73,7 +47,7 @@ void mirp_cartloop4_double(double * output,
  *              (\p nprim1 * \p ngeneral1, \p nprim2 * \p ngeneral2,
  *              \p nprim3 * \p ngeneral3, \p nprim4 * \p ngeneral4)
  * \param [in]  cb
- *              Callback that calculates all cartesian components of a single
+ *              Callback that calculates a single cartesian component of a
  *              primitive integral
  */
 void mirp_loop4_double(double * output,
@@ -81,27 +55,13 @@ void mirp_loop4_double(double * output,
                        int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
                        int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
                        int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
-                       cb_prim4_double cb);
+                       cb_single4_double cb);
 
 
 
 /*******************************************
  * Interval arithmetic
  *******************************************/
-
-/*! \brief Compute all cartesian components of a single primitive integral
- *         (interval arithmetic)
- *
- * \copydetails mirp_cartloop4_double
- * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
- */
-void mirp_cartloop4_interval(arb_ptr output,
-                             int am1, arb_srcptr A, const arb_t alpha1,
-                             int am2, arb_srcptr B, const arb_t alpha2,
-                             int am3, arb_srcptr C, const arb_t alpha3,
-                             int am4, arb_srcptr D, const arb_t alpha4,
-                             slong working_prec, cb_single4_interval cb);
-
 
 /*! \brief Compute all cartesian components of a contracted shell quartet
  *         (interval arithmetic)
@@ -114,7 +74,7 @@ void mirp_loop4_interval(arb_ptr output,
                          int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
                          int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
                          int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
-                         slong working_prec, cb_prim4_interval cb);
+                         slong working_prec, cb_single4_interval cb);
 
 
 #ifdef __cplusplus

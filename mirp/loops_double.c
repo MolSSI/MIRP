@@ -7,12 +7,31 @@
 #include "mirp/shell.h"
 #include <string.h> /* for memset */
 
-void mirp_cartloop4_double(double * output,
-                           int am1, const double * A, double alpha1,
-                           int am2, const double * B, double alpha2,
-                           int am3, const double * C, double alpha3,
-                           int am4, const double * D, double alpha4,
-                           cb_single4_double cb)
+
+/*! \brief Compute all cartesian components of a single primitive integral
+ *         (four center, double precision)
+ *
+ * The \p output buffer is expected to be able to hold all primitive integrals
+ * (ie, it can hold ncart(am1) * ncart(am2) * ncart(am3) * ncart(am4) elements).
+ *
+ * \param [out] output 
+ *              Resulting integral output
+ * \param [in]  am1,am2,am3,am4
+ *              Angular momentum of the four centers
+ * \param [in]  A,B,C,D
+ *              XYZ coordinates of the four centers (each of length 3)
+ * \param [in]  alpha1,alpha2,alpha3,alpha4
+ *              Exponents of the gaussian on the four centers
+ * \param [in]  cb
+ *              Callback that calculates a single cartesian component of a
+ *              primitive integral
+ */
+static void mirp_cartloop4_double(double * output,
+                                  int am1, const double * A, double alpha1,
+                                  int am2, const double * B, double alpha2,
+                                  int am3, const double * C, double alpha3,
+                                  int am4, const double * D, double alpha4,
+                                  cb_single4_double cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
@@ -59,7 +78,7 @@ void mirp_loop4_double(double * output,
                        int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
                        int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
                        int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
-                       cb_prim4_double cb)
+                       cb_single4_double cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
@@ -86,11 +105,12 @@ void mirp_loop4_double(double * output,
     for(int k = 0; k < nprim3; k++)
     for(int l = 0; l < nprim4; l++)
     {
-        cb(output_buffer,
-           am1, A, alpha1[i],
-           am2, B, alpha2[j],
-           am3, C, alpha3[k],
-           am4, D, alpha4[l]);
+        mirp_cartloop4_double(output_buffer,
+                              am1, A, alpha1[i],
+                              am2, B, alpha2[j],
+                              am3, C, alpha3[k],
+                              am4, D, alpha4[l],
+                              cb);
 
         long ntotal = 0;
         for(int m = 0; m < ngeneral1; m++)
