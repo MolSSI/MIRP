@@ -8,7 +8,7 @@
 #include <assert.h>
 
 
-int mirp_test_zero_prec(arb_t n, slong prec)
+int mirp_test_zero_prec(const arb_t n, slong prec)
 {
     /* This function is meant to be used if n does not
        have any significant bits (ie, is 0 +/- some number)

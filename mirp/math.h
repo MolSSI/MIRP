@@ -1,7 +1,7 @@
 /*! \file
  *
  * \brief Some miscellaneous mathematical functions in double
- *        precision and arbitrary precision
+ *        precision and interval arithmetic
  */
 
 #pragma once
@@ -63,7 +63,7 @@ extern "C" {
  * \return Nonzero if the test value has no signifcant bits and is zero
  *         to the given precision
  */
-int mirp_test_zero_prec(arb_t n, slong prec);
+int mirp_test_zero_prec(const arb_t n, slong prec);
 
 
 /*! \brief Calculates a factorial using double precision */

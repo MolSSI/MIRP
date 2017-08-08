@@ -12,6 +12,19 @@ extern "C" {
 #endif
 
 
+/*! \brief Computes the Boys function to double precision using interval arithmetic
+ *
+ * This function takes double precision as input and returns double precision
+ * as output. Internally, it uses interval arithmetic to ensure that no
+ * precision is lost
+ *
+ * \param [out] F The computed values of the Boys function
+ * \param [in]  m The maximum order to calculate
+ * \param [in]  t Teh value at which to evaluate 
+ */
+void mirp_boys_exact(double *F, int m, double t);
+
+
 /*! \brief Computes a single 4-center integral to double precision using interval arithmetic
  *
  * This function takes double precision as input and returns double precision

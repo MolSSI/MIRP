@@ -6,6 +6,55 @@
 #include "mirp/wrappers.h"
 #include "mirp/math.h"
 #include "mirp/shell.h"
+#include "mirp/kernels/boys.h"
+
+/*! \brief Checks all elements of a vector for sufficient accuracy
+ *
+ * \param [in] v Vector to check
+ * \param [in] n Length of the vector
+ * \param [in] target_prec Precision required of all the elements
+ * \return Nonzero if all elements are of sufficient accuracy, zero otherwise
+ */
+static int all_sufficient_accuracy(arb_srcptr v, size_t n, slong target_prec)
+{
+    for(size_t i = 0; i < n; i++)
+    {
+        if(arb_rel_accuracy_bits(v+i) < target_prec &&
+           !mirp_test_zero_prec(v+i, target_prec))
+            return 0;;
+    }
+
+    return 1;
+}
+
+void mirp_boys_exact(double *F, int m, double t)
+{
+    /* convert the input to arb_t */
+    arb_t t_mp;
+    arb_init(t_mp);
+    arb_set_d(t_mp, t);
+   
+    arb_ptr F_mp = _arb_vec_init(m+1);
+ 
+    /* The target precision is the number of bits in double precision (53) + safety */
+    const slong target_prec = 64;
+
+    slong working_prec = target_prec;
+
+    do {
+
+        working_prec += 16;
+        mirp_boys_interval(F_mp, m, t_mp, working_prec);
+
+    } while(!all_sufficient_accuracy(F_mp, m+1, target_prec));
+  
+    /* convert back to double precision */
+    for(int i = 0; i <= m; i++)
+        F[i] = arf_get_d(arb_midref(F_mp + i), ARF_RND_NEAR);
+ 
+    arb_clear(t_mp);
+    _arb_vec_clear(F_mp, m+1);
+}
 
 void mirp_integral4_single_exact(double * integral,
                                  const int * lmn1, const double * A, double alpha1,
@@ -47,7 +96,6 @@ void mirp_integral4_single_exact(double * integral,
     const slong target_prec = 64;
 
     slong working_prec = target_prec;
-    int sufficient_accuracy = 0;
 
     do {
 
@@ -61,11 +109,7 @@ void mirp_integral4_single_exact(double * integral,
            lmn4, D_mp, alpha4_mp,
            working_prec);
 
-        if(arb_rel_accuracy_bits(integral_mp) >= target_prec ||
-           mirp_test_zero_prec(integral_mp, target_prec))
-            sufficient_accuracy = 1;
-
-    } while(!sufficient_accuracy);
+    } while(!all_sufficient_accuracy(integral_mp, 1, target_prec));
 
     /* We get the value from the midpoint of the arb struct */
     *integral = arf_get_d(arb_midref(integral_mp), ARF_RND_NEAR);
@@ -142,7 +186,6 @@ void mirp_integral4_exact(double * integral,
     const slong target_prec = 64;
 
     slong working_prec = target_prec;
-    int sufficient_accuracy = 0;
 
     do {
 
@@ -156,17 +199,7 @@ void mirp_integral4_exact(double * integral,
            am4, A_mp, nprim4, ngeneral4, alpha4_mp, coeff4_mp,
            working_prec);
 
-        /* Check if all values have sufficient accuracy */
-        sufficient_accuracy = 1;
-
-        for(size_t j = 0; j < nintegrals; j++)
-        {
-            if(arb_rel_accuracy_bits(integral_mp + j) < target_prec &&
-               !mirp_test_zero_prec(integral_mp, target_prec))
-                sufficient_accuracy = 0;
-        }
-
-    } while(!sufficient_accuracy);
+    } while(!all_sufficient_accuracy(integral_mp, nintegrals, target_prec));
 
     /* We get the value from the midpoint of the arb struct */
     for(size_t i = 0; i < nintegrals; i++)
