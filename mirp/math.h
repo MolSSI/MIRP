@@ -47,6 +47,25 @@ extern "C" {
 #define MIRP_LOG_10_2 0.3010299956639812
 
 
+/*! \brief Tests if a value with no significant bits is zero to a given precision
+ *
+ * If a number does not have significant bits, that means that it is 0 +/- [error].
+ * This function first checks if there are significant bits. If there isn't,
+ * it then checks whether or not the error associated with
+ * this zero value is small enough that it would be completely zero
+ * when represented with the given (binary) precision.
+ *
+ * \note This function uses an internal safety factor, so the results may be
+ *       unexpected if you are testing.
+ *
+ * \param [in] n The value to test
+ * \param [in] prec The binary precision to test to
+ * \return Nonzero if the test value has no signifcant bits and is zero
+ *         to the given precision
+ */
+int mirp_test_zero_prec(arb_t n, slong prec);
+
+
 /*! \brief Calculates a factorial using double precision */
 double mirp_factorial(int n);
 

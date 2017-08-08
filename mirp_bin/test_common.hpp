@@ -82,6 +82,8 @@ void integral_single_interval(arb_t integral,
     slong working_prec = target_prec;
     bool sufficient_accuracy = false;
 
+    
+
     do {
         working_prec += 16;
 
@@ -98,7 +100,10 @@ void integral_single_interval(arb_t integral,
 
         /* Run the call back function using the converted values */
         call_callback(integral, lmn, xyz, alpha, working_prec, cb);
-        if(arb_rel_accuracy_bits(integral) >= target_prec)
+
+        /* Test for sufficient accuracy */
+        if(arb_rel_accuracy_bits(integral) >= target_prec ||
+           mirp_test_zero_prec(integral, target_prec))
             sufficient_accuracy = true;
             
     } while(!sufficient_accuracy);
@@ -189,9 +194,14 @@ void integral_single_create_test(const std::string & input_filepath,
     for(auto & ent : data.values)
     {
         detail::integral_single_interval<4>(integral, ent, target_prec, cb);
-        char * s = arb_get_str(integral, ndigits, ARB_STR_NO_RADIUS);
-        ent.integral = s;
-        free(s);
+        if(mirp_test_zero_prec(integral, target_prec))
+            ent.integral = "0";
+        else
+        {
+            char * s = arb_get_str(integral, ndigits, ARB_STR_NO_RADIUS);
+            ent.integral = s;
+            free(s);
+        }
     }
 
     integral_single_write_file(output_filepath, data);

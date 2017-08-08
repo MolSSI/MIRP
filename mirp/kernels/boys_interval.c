@@ -85,6 +85,11 @@ void mirp_boys_interval(arb_ptr F, int m, const arb_t t, slong working_prec)
         } while(!arb_contains(sum, test)); /* Is the old term contained
                                               completely within the new term */
 
+        /* Note about the above test: If the old term is contained within
+           the new term, all we have done is added error. Ie, we've
+           added such a small number that the midpoint hasn't changed (much),
+           but the error has increased */
+
         //printf("Done with long-range test in %d cycles\n", i);
 
         arb_mul(sum, sum, et, working_prec);

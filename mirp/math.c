@@ -7,6 +7,38 @@
 #include "mirp/math.h"
 #include <assert.h>
 
+
+int mirp_test_zero_prec(arb_t n, slong prec)
+{
+    /* This function is meant to be used if n does not
+       have any significant bits (ie, is 0 +/- some number)
+     */
+    if(arb_rel_accuracy_bits(n) > 0)
+        return 0;
+
+    /* This is needed to test if the result is zero to the number of digits
+       we want (plus a safety factor, of course)
+    
+       The safety factor is 16 decimal digits / 53 binary digits
+    */
+    arb_t zero, zero_err;
+    arb_init(zero);
+    arb_init(zero_err);
+    arb_zero(zero);
+    arb_ui_pow_ui(zero_err, 10, 16, prec+53);
+    arb_mul_2exp_si(zero_err, zero_err, prec+53);
+    arb_ui_div(zero_err, 1, zero_err, prec+53);
+    arb_add_error(zero, zero_err);
+
+    int is_zero = arb_contains(zero, n);
+
+    arb_clear(zero);
+    arb_clear(zero_err);
+
+    return is_zero;
+}
+
+
 double mirp_factorial(int n)
 {
     assert(n >= 0);
