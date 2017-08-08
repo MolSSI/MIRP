@@ -1,43 +1,14 @@
 #!/usr/bin/env python3
 
-#
-# A quick script to read an XYZ file
-# Also converts the coordinates to bohr
-#
-
 from mpmath import mp
-
+from .geometry import read_xyz 
 
 def amchar_to_int(amchar):
     lookup = 'spdfghijklmnoqrtuvwxyzabce'
     return lookup.index(amchar)
 
 
-def read_xyz(xyzfile_path):
-    # NIST CODATA 2014 value for a bohr is used below
-    ang_to_bohr = 1.0/0.52917721067
-
-    geo = []
-
-    with open(xyzfile_path, 'r') as f:
-        # skips the first two lines
-        tmp = [l.strip() for l in f.readlines()[2:]]
-
-    # splits each line into tuples (and ignores blank lines)
-    tmp = [l.split() for l in tmp if l]
-
-    # convert to bohr
-    for g in tmp:
-        geo.append((g[0],
-                    mp.mpf(g[1]) * ang_to_bohr,
-                    mp.mpf(g[2]) * ang_to_bohr,
-                    mp.mpf(g[3]) * ang_to_bohr))
-
-    return geo
-
-
 def read_basis(basisfile_path):
-    # Read basis set
     with open(basisfile_path, 'r') as f:
         flines = [l.strip() for l in f.readlines()]
 
@@ -115,4 +86,18 @@ def apply_basis(geometry, atombasis):
 def construct_basis(xyzfile_path, basisfile_path):
     geo = read_xyz(xyzfile_path)
     bas = read_basis(basisfile_path)
-    return apply_basis(geo, bas)
+    mol = apply_basis(geo, bas)
+    return mol
+       
+ 
+def uncontract_basis(basis):
+    shells = []
+    for shell in basis:
+        for a in shell[1]['alpha']:
+            shells.append((shell[0], { 'am': shell[1]['am'],
+                                       'alpha': [a],
+                                       'coeff': [mp.mpf("1.0")],
+                                       'nprim': 1,
+                                       'ngeneral' : 1
+                                      }))
+    return shells
