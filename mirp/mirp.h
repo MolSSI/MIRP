@@ -8,3 +8,4 @@
 #include "mirp/shell.h"
 #include "mirp/kernels/eri.h"
 #include "mirp/kernels/boys.h"
+#include "mirp/wrappers.h"

@@ -82,8 +82,6 @@ void integral_single_interval(arb_t integral,
     slong working_prec = target_prec;
     bool sufficient_accuracy = false;
 
-    
-
     do {
         working_prec += 16;
 
