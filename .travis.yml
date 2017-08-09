@@ -1,0 +1,51 @@
+language: C++
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - cmake
+            - g++-5
+      env:
+        - MATRIX_EVAL="CC=gcc-5 CXX=g++-5"
+
+#    - os: linux
+#      addons:
+#        apt:
+#          sources:
+#            - ubuntu-toolchain-r-test
+#          packages:
+#            - cmake
+#            - patchelf
+#            - g++-6
+#      env:
+#        - MATRIX_EVAL="CC=gcc-6 CXX=g++-6"
+
+before_install:
+  - eval "${MATRIX_EVAL}"
+
+sudo: false
+dist: trusty
+
+install:
+  # Print out some info
+  - uname -r
+  - cmake --version
+  #- cat /proc/cpuinfo
+
+  # Build dependencies
+  - bash travis/build_deps.sh
+  - export DEPDIR="$(pwd)/mirp_deps"
+  - export LD_LIBRARY_PATH="${DEPDIR}/lib:${DEPDIR}/lib64:${LD_LIBRARY_PATH}"
+
+script:
+  # Build MIRP
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${DEPDIR} ../
+  - make
+  - ctest

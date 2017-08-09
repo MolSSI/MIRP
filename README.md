@@ -1,6 +1,8 @@
 MolSSI Integral Reference Project (MIRP)
 ========================================
 
+[![Build Status](https://www.travis-ci.org/MolSSI/MIRP.svg?branch=master)](https://www.travis-ci.org/MolSSI/MIRP)
+
 ## Overview
 
 The goal of the MolSSI Integral Reference Project is to provide both reference
