@@ -8,36 +8,47 @@
 #include "mirp_bin/file_io.hpp"
 #include "mirp_bin/data_entry.hpp"
 
+#include <mirp/kernels/integral4_wrappers.h>
 #include <mirp/math.h>
+#include <mirp/typedefs.h>
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
+#include <limits>
 
 namespace mirp {
 namespace detail {
 
 
-/*! \brief A function that computes single 4-center integrals with interval arithmetic */
-typedef void (*cb_single4_interval)(arb_t,
-                                    const int *, arb_srcptr, const arb_t,
-                                    const int *, arb_srcptr, const arb_t,
-                                    const int *, arb_srcptr, const arb_t,
-                                    const int *, arb_srcptr, const arb_t,
-                                    slong);
+/*! \brief Compare two double-precision numbers for equality within a tolerance */
+inline bool almost_equal(double a, double b, double tol)
+{
+    using std::fabs;
+    using std::fmax;
+
+    double diff = fabs(a-b);
+
+    if(diff == 0)
+        return true;
+
+    double denominator = fmax(fabs(a), fabs(b));
+    return (diff / denominator) < tol;
+}
 
 
 /*! \brief Unpacks the arguments for a call to a function that
  *         computes single 4-center integrals
  */
 inline void call_callback(arb_t integral, const int * lmn,
-                          arb_srcptr xyz, arb_srcptr alpha,
-                          slong working_prec, cb_single4_interval cb)
+                          const char ** xyz, const char ** alpha,
+                          slong target_prec, cb_single4_interval cb)
 {
-    cb(integral,
-       lmn+0, xyz+0, alpha+0,
-       lmn+3, xyz+3, alpha+1,
-       lmn+6, xyz+6, alpha+2,
-       lmn+9, xyz+9, alpha+3,
-       working_prec);
+    mirp_integral4_single_target_prec_str(integral,
+       lmn+0, xyz+0, alpha[0],
+       lmn+3, xyz+3, alpha[1],
+       lmn+6, xyz+6, alpha[2],
+       lmn+9, xyz+9, alpha[3],
+       target_prec, cb);
 }
                       
 
@@ -75,39 +86,22 @@ void integral_single_interval(arb_t integral,
         
     /* Temporaries */
     int lmn[N*3];
+    const char * ABCD[N*3];
+    const char * alpha[N];
 
-    arb_ptr xyz = _arb_vec_init(N*3);
-    arb_ptr alpha = _arb_vec_init(N);
+    for(unsigned int n = 0; n < N; n++)
+    {
+        alpha[n] = ent.g[n].alpha.c_str();
 
-    slong working_prec = target_prec;
-    bool sufficient_accuracy = false;
-
-    do {
-        working_prec += 16;
-
-        for(unsigned int n = 0; n < N; n++)
+        for(int i = 0; i < 3; i++)
         {
-            arb_set_str(alpha + n, ent.g[n].alpha.c_str(), working_prec);
-            arb_set_str(xyz + (n*3+0), ent.g[n].xyz[0].c_str(), working_prec);
-            arb_set_str(xyz + (n*3+1), ent.g[n].xyz[1].c_str(), working_prec);
-            arb_set_str(xyz + (n*3+2), ent.g[n].xyz[2].c_str(), working_prec);
-            lmn[n*3+0] = ent.g[n].lmn[0];
-            lmn[n*3+1] = ent.g[n].lmn[1];
-            lmn[n*3+2] = ent.g[n].lmn[2];
+            lmn[n*3+i] = ent.g[n].lmn[i];
+            ABCD[n*3+i] = ent.g[n].xyz[i].c_str();
         }
+    }
 
-        /* Run the call back function using the converted values */
-        call_callback(integral, lmn, xyz, alpha, working_prec, cb);
-
-        /* Test for sufficient accuracy */
-        if(arb_rel_accuracy_bits(integral) >= target_prec ||
-           mirp_test_zero_prec(integral, target_prec))
-            sufficient_accuracy = true;
-            
-    } while(!sufficient_accuracy);
-
-    _arb_vec_clear(xyz, N*3);
-    _arb_vec_clear(alpha, N);
+    /* Run the call back function using the converted values */
+    call_callback(integral, lmn, ABCD, alpha, target_prec, cb);
 }
 
 
@@ -235,16 +229,23 @@ long integral_single_run_test_interval(const std::string & filepath,
 
     for(const auto & ent : data.values)
     {
-        detail::integral_single_interval<N>(integral, ent, target_prec, cb); 
+        detail::integral_single_interval<N>(integral, ent, target_prec+16, cb); 
 
         /* The computed precision is guaranteed to be at least target_prec,
-           but will likely be greater. Therefore, we have to round the
-           calculated value and the reference value to the target precision
+           but will likely be greater. Round the reference value,
+           introducing error. Is the more precise calculated value
+           within those error bounds?
          */
-        arb_set_round(integral, integral, target_prec);
         arb_set_str(integral_ref, ent.integral.c_str(), target_prec);
 
-        if(!arb_overlaps(integral, integral_ref))
+        /* 1.) Test if the calculated value is within the error of the reference
+         * 2.) If it's not, test if the calculated value is [0 +/ value] and is
+         *     that zero within the target precision
+         * 3.) If (2) is true, and the reference integral is exactly zero, then
+         *     they are considered equal (and this block is not entered)
+         */
+        if(!arb_contains(integral_ref, integral) &&
+           !(arb_is_zero(integral_ref) && mirp_test_zero_prec(integral, target_prec)))
         {
             std::cout << "Entry failed test:\n";
             char * s1 = arb_get_str(integral, 1000, 0);

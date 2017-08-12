@@ -1,13 +1,7 @@
 # THIS FILE IS GENERATED VIA A SCRIPT. DO NOT EDIT
 #
-# Generated with:
+# Values for m and t generated with:
 #   generator/generate_boys_range.py --filename boys_large_range.inp --max-m 100 --power 32
-#
-#------------------------------------
-# Options for generator/generate_boys_range.py
-#      Power: 32
-#      Max m: 100
-#------------------------------------
 #
 0 0
 1 0

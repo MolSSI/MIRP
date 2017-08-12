@@ -47,6 +47,25 @@ extern "C" {
 #define MIRP_LOG_10_2 0.3010299956639812
 
 
+/*! \brief Finds the minimum relative accuracy bit of a vector
+ *
+ * \param [in] v Vector to check
+ * \param [in] n Length of the vector
+ * \return The minimum value of arb_rel_accuracy_bits of the entire vector
+ */
+slong mirp_min_rel_accuracy_bits(arb_srcptr v, size_t n);
+
+
+/*! \brief Checks all elements of a vector for sufficient accuracy
+ *
+ * \param [in] v Vector to check
+ * \param [in] n Length of the vector
+ * \param [in] target_prec Precision required of all the elements
+ * \return Nonzero if all elements are of sufficient accuracy, zero otherwise
+ */
+int mirp_all_sufficient_accuracy(arb_srcptr v, size_t n, slong target_prec);
+
+
 /*! \brief Tests if a value with no significant bits is zero to a given precision
  *
  * If a number does not have significant bits, that means that it is 0 +/- [error].

@@ -12,6 +12,21 @@ extern "C" {
 /*! \brief Number of cartesian functions for a given angular momentum */
 #define MIRP_NCART(am) ((((am)+1)*((am)+2))/2)
 
+/*! \brief Number of cartesian functions for 2 shells */
+#define MIRP_NCART2(am1, am2) (MIRP_NCART((am1)) * MIRP_NCART((am2)))
+
+/*! \brief Number of cartesian functions for 4 shells */
+#define MIRP_NCART4(am1, am2, am3, am4) (MIRP_NCART2((am1),(am2)) * MIRP_NCART2((am3),(am4)))
+
+/*! \brief Number of cartesian functions for an lmn triplet */
+#define MIRP_NCART_LMN(lmn)  (MIRP_NCART((lmn[0])+(lmn[1])+(lmn[2])))
+
+/*! \brief Number of cartesian functions for 2 lmn triplets */
+#define MIRP_NCART_LMN2(lmn1, lmn2)  (MIRP_NCART_LMN((lmn1)) * MIRP_NCART_LMN((lmn2)))
+
+/*! \brief Number of cartesian functions for 4 lmn triplets */
+#define MIRP_NCART_LMN4(lmn1, lmn2, lmn3, lmn4)  (MIRP_NCART_LMN2((lmn1),(lmn2)) * MIRP_NCART_LMN2((lmn3),(lmn4)))
+
 /*! \brief Normalize a shell (double precision)
  *
  * Obtain the next l, m, and n parameters of a gaussian in the internal MIRP ordering

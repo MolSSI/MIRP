@@ -4,6 +4,7 @@
  */
 
 #include "mirp/kernels/boys.h"
+#include "mirp/math.h"
 #include <assert.h>
 
 void mirp_boys_interval(arb_ptr F, int m, const arb_t t, slong working_prec)
@@ -108,7 +109,7 @@ void mirp_boys_interval(arb_ptr F, int m, const arb_t t, slong working_prec)
     {
         arb_set_ui(sum, 1);
         arb_set_ui(term, 1);
-    
+
         i = 0;
         do
         {
@@ -126,7 +127,7 @@ void mirp_boys_interval(arb_ptr F, int m, const arb_t t, slong working_prec)
         arb_div_si(F+m, F+m, 2*m+1, working_prec);
         //printf("Done with short-range approximation in %d cycles\n", i);
     }
-    
+
     /* Now do downwards recursion */
     for(i = m - 1; i >= 0; i--)
     {
@@ -145,5 +146,101 @@ void mirp_boys_interval(arb_ptr F, int m, const arb_t t, slong working_prec)
     arb_clear(tmp1);
     arb_clear(tmp2);
     arb_clear(tmp3);
+}
+
+
+int mirp_boys_target_prec(arb_ptr F, int m, const arb_t t, slong target_prec)
+{
+    /* We run the boys function once, checking for the minimum
+     * relative accuracy bits. If that is ok, we return.
+     * If not, we enter a loop, increasing the working precision
+     * until we reach our goal.
+     *
+     * We check if we enter an infinite loop, which can happen
+     * if the precision of the inputs is not enough to
+     * match the target prec. This is indicated by returning
+     * nonzero
+     */
+    slong min_bits, last_min_bits;
+    slong working_prec = target_prec + 16;
+
+    mirp_boys_interval(F, m, t, working_prec);
+    min_bits = mirp_min_rel_accuracy_bits(F, m+1);
+
+    /* Are we already there? */
+    if(min_bits >= target_prec)
+        return 0;
+
+    last_min_bits = min_bits;
+
+    while(min_bits < target_prec)
+    {
+        working_prec += 16;
+        mirp_boys_interval(F, m, t, working_prec);
+        min_bits = mirp_min_rel_accuracy_bits(F, m+1);
+
+        /* Does increasing the working precision actually have an effect?
+         * If not, we have reached an infinite loop */
+        if(min_bits <= last_min_bits)
+            return 1;
+
+        last_min_bits = min_bits;
+    }
+
+    /* All elements of F should contain values
+     * with enough accuracy */
+    return 0;
+}
+
+
+void mirp_boys_target_prec_str(arb_ptr F, int m, const char * t, slong target_prec)
+{
+    /* Procedure is similar to mirp_boys_target_prec, however
+     * this should always be guaranteed to succeed */
+    arb_t t_mp;
+    arb_init(t_mp);
+
+    slong working_prec = target_prec;
+    slong min_bits = 0;
+
+    do
+    {
+        working_prec += 16;
+        arb_set_str(t_mp, t, working_prec);
+        mirp_boys_interval(F, m, t_mp, working_prec);
+
+        min_bits = mirp_min_rel_accuracy_bits(F, m+1);
+
+    } while(min_bits < target_prec);
+
+    arb_clear(t_mp);
+}
+
+
+void mirp_boys_exact(double *F, int m, double t)
+{
+    /* The target precision is the number of bits in
+     * double precision (53) + safety */
+    const slong target_prec = 72;
+
+    /* convert the input to arb_t
+     * Since we are converting from binary (double precision)
+     * to binary (arb_t), this conversion is exact
+     */
+    arb_t t_mp;
+    arb_init(t_mp);
+    arb_set_d(t_mp, t);
+    assert(arb_is_exact(t_mp));
+
+    arb_ptr F_mp = _arb_vec_init(m+1);
+
+    mirp_boys_target_prec(F_mp, m, t_mp, target_prec);
+
+    /* convert back to double precision */
+    for(int i = 0; i <= m; i++)
+        F[i] = arf_get_d(arb_midref(F_mp + i), ARF_RND_NEAR);
+
+    arb_clear(t_mp);
+    _arb_vec_clear(F_mp, m+1);
 }
 

@@ -3,9 +3,10 @@ list(APPEND MIRP_FILELIST
                math.c
                gpt.c
                shell.c
-               wrappers.c
                loops_double.c
                loops_interval.c
+
+               kernels/integral4_wrappers.c
 
                kernels/boys_double.c
                kernels/boys_interval.c

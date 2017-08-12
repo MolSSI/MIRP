@@ -4,6 +4,7 @@
  */
 
 #include "mirp_bin/boys_test.hpp"
+#include "mirp_bin/test_common.hpp"
 #include <mirp/kernels/boys.h>
 #include <mirp/math.h>
 #include <cmath>
@@ -15,7 +16,6 @@
 
 /* Anonymous namespace for some helper functions */
 namespace {
-
 
 
 /* Runs a Boys function test using interval arithmetic
@@ -44,24 +44,23 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
 
     for(const auto & ent : data.values)
     {
-        slong working_prec = target_prec;
+        /* 16 extra bits (~4-5 decimal digits) for safety */
+        mirp_boys_target_prec_str(F_mp, ent.m + extra_m, ent.t.c_str(), target_prec+16);
 
-        do {
-            /* Increase the precision until we have achieved the target accuracy
-               (with a bit of a safety factor */
-            working_prec += 16;
-            arb_set_str(t_mp, ent.t.c_str(), working_prec);
-            mirp_boys_interval(F_mp, ent.m+extra_m, t_mp, working_prec);
-
-
-        } while(arb_rel_accuracy_bits(F_mp + ent.m) < (target_prec + 4));
-
-        /* Round the calculated value and the reference value to the
-           target precision */
-        arb_set_round(F_mp + ent.m, F_mp + ent.m, target_prec);
+        /* Round the reference value to the target precision */
         arb_set_str(vref_mp, ent.value.c_str(), target_prec);
 
-        if(!arb_overlaps(F_mp + ent.m, vref_mp))
+        /* Rounding the reference value to the target precision results in
+         * an interval. Does that interval contain our (more precise) result?
+         */
+        /* 1.) Test if the calculated value is within the error of the reference
+         * 2.) If it's not, test if the calculated value is [0 +/ value] and is
+         *     that zero within the target precision
+         * 3.) If (2) is true, and the reference integral is exactly zero, then
+         *     they are considered equal (and this block is not entered)
+         */
+        if(!arb_contains(vref_mp, F_mp + ent.m) &&
+           !(arb_is_zero(vref_mp) && mirp_test_zero_prec(F_mp + ent.m, target_prec)))
         {
             std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
             char * s1 = arb_get_str(F_mp + ent.m, 1000, 0);
@@ -109,7 +108,53 @@ long boys_run_test_double(const mirp::boys_data & data, long extra_m)
         {
             std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
             double reldiff = std::fabs(vref_dbl - F_dbl[ent.m]);
-            reldiff /= std::max(std::fabs(vref_dbl), std::fabs(F_dbl[ent.m]));
+            reldiff /= std::fmax(std::fabs(vref_dbl), std::fabs(F_dbl[ent.m]));
+
+            auto old_cout_prec = std::cout.precision(17);
+            std::cout << "   Calculated: " << F_dbl[ent.m] << "\n";
+            std::cout << "    Reference: " << vref_dbl << "\n";
+            std::cout << "Relative Diff: " << reldiff << "\n\n";
+            std::cout.precision(old_cout_prec);
+            nfailed++;
+        }
+    }
+
+    return nfailed;
+}
+
+
+/* Runs a Boys function test using 'exact' double precision
+ *
+ * This is just a simple test of the wrapper. The comparison
+ * is not expected to be exact, since the inputs are in greater
+ * than double precision. This results in rounding of the inputs,
+ * and therefore the result as calculated in mirp_boys_exact
+ * will differ from that calulcated purely in interval arithmetic.
+ *
+ * This, therefore, just ensures that the wrappers are written correctly.
+ */
+long boys_run_test_exact(const mirp::boys_data & data, long extra_m)
+{
+    using namespace mirp;
+    using mirp::detail::almost_equal;
+
+    long nfailed = 0;
+
+    const int max_m = boys_max_m(data) + extra_m;
+    std::vector<double> F_dbl(max_m+1);
+
+    for(const auto & ent : data.values)
+    {
+        double t_dbl = std::strtod(ent.t.c_str(), nullptr);
+        double vref_dbl = std::strtod(ent.value.c_str(), nullptr);
+
+        mirp_boys_exact(F_dbl.data(), ent.m+extra_m, t_dbl);
+
+        if(!almost_equal(vref_dbl, F_dbl[ent.m], 1e-13))
+        {
+            std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
+            double reldiff = std::fabs(vref_dbl - F_dbl[ent.m]);
+            reldiff /= std::fmax(std::fabs(vref_dbl), std::fabs(F_dbl[ent.m]));
 
             auto old_cout_prec = std::cout.precision(17);
             std::cout << "   Calculated: " << F_dbl[ent.m] << "\n";
@@ -129,13 +174,13 @@ long boys_run_test_double(const mirp::boys_data & data, long extra_m)
 namespace mirp {
 
 int boys_max_m(const boys_data & data)
-{  
+{
     int max_m = 0;
     for(auto & ent : data.values)
-        max_m = std::max(max_m, ent.m);
+        max_m = std::fmax(max_m, ent.m);
     return max_m;
 }
-    
+
 
 boys_data boys_read_file(const std::string & filepath, bool is_input)
 {
@@ -163,7 +208,7 @@ boys_data boys_read_file(const std::string & filepath, bool is_input)
             if(!is_input && !have_ndigits)
             {
                 ss >> data.ndigits;
-                have_ndigits = true;    
+                have_ndigits = true;
             }
             else
             {
@@ -180,7 +225,7 @@ boys_data boys_read_file(const std::string & filepath, bool is_input)
 
     return data;
 }
-    
+
 
 void boys_write_file(const std::string & filepath, const boys_data & data)
 {
@@ -220,6 +265,8 @@ long boys_run_test(const std::string & filepath, const std::string & floattype, 
 
     if(floattype == "interval")
         nfailed = boys_run_test_interval(data, extra_m, target_prec);
+    else if(floattype == "exact")
+        nfailed = boys_run_test_exact(data, extra_m);
     else if(floattype == "double")
         nfailed = boys_run_test_double(data, extra_m);
     else
@@ -253,24 +300,12 @@ void boys_create_test(const std::string & input_filepath,
     arb_init(t_mp);
 
     /* Target precision/accuracy, in bits, with a safety factor
-       of 4 extra decimal digits */
-    const slong target_prec = (ndigits+4) / MIRP_LOG_10_2;
+       of 5 extra decimal digits */
+    const slong target_prec = (ndigits+5) / MIRP_LOG_10_2;
 
     for(auto & ent : data.values)
     {
-        slong working_prec = target_prec;
-        bool sufficient_accuracy = false;
-        
-        do {
-            working_prec += 16;
-
-            arb_set_str(t_mp, ent.t.c_str(), working_prec);
-            mirp_boys_interval(F_mp, ent.m, t_mp, working_prec); 
-
-            if(arb_rel_accuracy_bits(F_mp + ent.m) >= target_prec)
-                sufficient_accuracy = true;
-                
-        } while(!sufficient_accuracy);
+        mirp_boys_target_prec_str(F_mp, ent.m, ent.t.c_str(), target_prec);
 
         char * s = arb_get_str(F_mp + ent.m, ndigits, ARB_STR_NO_RADIUS);
         ent.value = s;
@@ -282,6 +317,6 @@ void boys_create_test(const std::string & input_filepath,
     _arb_vec_clear(F_mp, max_m+1);
 }
 
-    
+
 } // closing namespace mirp
 

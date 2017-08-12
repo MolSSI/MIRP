@@ -32,7 +32,7 @@ void mirp_boys_double(double *F, int m, double t)
      */
     if(t < ((double)m + 0.5))
         do_short = 1;
-     
+
     if(!do_short)
     {
         /* Attempt the long-range approximation */
@@ -52,7 +52,7 @@ void mirp_boys_double(double *F, int m, double t)
 
             test = fabs(term);
             if(test > oldterm)
-               break; 
+               break;
 
             test = sum;
             sum += term;
