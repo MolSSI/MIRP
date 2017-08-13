@@ -5,7 +5,7 @@
 
 #include "mirp/gpt.h"
 
-void mirp_gpt_double(double alpha1, double alpha2,
+void mirp_gpt_d(double alpha1, double alpha2,
                      const double * A, const double * B,
                      double * gamma, double * P,
                      double * PA, double * PB,
@@ -31,7 +31,7 @@ void mirp_gpt_double(double alpha1, double alpha2,
 }
 
 
-void mirp_gpt_interval(const arb_t alpha1, const arb_t alpha2,
+void mirp_gpt(const arb_t alpha1, const arb_t alpha2,
                        arb_srcptr A, arb_srcptr B,
                        arb_t gamma, arb_ptr P,
                        arb_ptr PA, arb_ptr PB,

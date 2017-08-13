@@ -14,7 +14,7 @@ int mirp_integral4_single_target_prec(arb_t integral,
                                       const int * lmn2, arb_srcptr B, const arb_t alpha2,
                                       const int * lmn3, arb_srcptr C, const arb_t alpha3,
                                       const int * lmn4, arb_srcptr D, const arb_t alpha4,
-                                      slong target_prec, cb_single4_interval cb)
+                                      slong target_prec, cb_integral4_single cb)
 {
     /* We run the callback function once, checking for the minimum
      * relative accuracy bits. If that is ok, we return.
@@ -28,6 +28,7 @@ int mirp_integral4_single_target_prec(arb_t integral,
      */
 
     slong min_bits, last_min_bits;
+    int sufficient_accuracy = 0;
     slong working_prec = target_prec + 16;
     
     cb(integral,
@@ -39,12 +40,12 @@ int mirp_integral4_single_target_prec(arb_t integral,
 
     min_bits = arb_rel_accuracy_bits(integral);
 
-    if(min_bits >= target_prec) 
-        return 0;
+    if(min_bits >= target_prec || mirp_test_zero_prec(integral, target_prec))
+       sufficient_accuracy = 1;
 
     last_min_bits = min_bits;
 
-    while(min_bits < target_prec)
+    while(!sufficient_accuracy)
     {
         working_prec += 16;
         cb(integral,
@@ -56,10 +57,13 @@ int mirp_integral4_single_target_prec(arb_t integral,
 
         min_bits = arb_rel_accuracy_bits(integral);
 
+        if(min_bits >= target_prec || mirp_test_zero_prec(integral, target_prec))
+           sufficient_accuracy = 1;
+
         /* Does increasing the working precision actually have an effect?
          * if not, we have reached an infinite loop
          */
-        if(min_bits <= last_min_bits)
+        if(!sufficient_accuracy && min_bits <= last_min_bits)
             return 1;
 
         last_min_bits = min_bits;
@@ -75,7 +79,7 @@ void mirp_integral4_single_target_prec_str(arb_t integral,
                                            const int * lmn2, const char ** B, const char * alpha2,
                                            const int * lmn3, const char ** C, const char * alpha3,
                                            const int * lmn4, const char ** D, const char * alpha4,
-                                           slong target_prec, cb_single4_interval cb)
+                                           slong target_prec, cb_integral4_single cb)
 {
     /* Similar to mirp_integral4_single_target_prec, but should
      * always succeed */
@@ -91,6 +95,8 @@ void mirp_integral4_single_target_prec_str(arb_t integral,
 
     slong working_prec = target_prec;
     slong min_bits = 0;
+
+    int sufficient_accuracy = 0;
 
     do
     {
@@ -116,7 +122,10 @@ void mirp_integral4_single_target_prec_str(arb_t integral,
 
         min_bits = arb_rel_accuracy_bits(integral);
 
-    } while(min_bits < target_prec);
+        if(min_bits >= target_prec || mirp_test_zero_prec(integral, target_prec))
+           sufficient_accuracy = 1;
+
+    } while(!sufficient_accuracy);
 
 
     _arb_vec_clear(A_mp, 3);
@@ -135,7 +144,7 @@ void mirp_integral4_single_exact(double * integral,
                                  const int * lmn2, const double * B, double alpha2,
                                  const int * lmn3, const double * C, double alpha3,
                                  const int * lmn4, const double * D, double alpha4,
-                                 cb_single4_interval cb)
+                                 cb_integral4_single cb)
 {
     /* convert arguments to arb_t */
     arb_ptr A_mp = _arb_vec_init(3);
@@ -206,7 +215,7 @@ void mirp_integral4_exact(double * integral,
                           int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2, 
                           int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3, 
                           int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
-                          cb_integral4_interval cb)
+                          cb_integral4 cb)
 {
     /* convert arguments to arb_t */
     arb_ptr A_mp = _arb_vec_init(3);

@@ -3,16 +3,16 @@ list(APPEND MIRP_FILELIST
                math.c
                gpt.c
                shell.c
-               loops_double.c
-               loops_interval.c
+               loops_d.c
+               loops.c
 
                kernels/integral4_wrappers.c
 
-               kernels/boys_double.c
-               kernels/boys_interval.c
+               kernels/boys_d.c
+               kernels/boys.c
 
-               kernels/eri_double.c
-               kernels/eri_interval.c
+               kernels/eri_d.c
+               kernels/eri.c
 )
 
 add_library(mirp SHARED ${MIRP_FILELIST})

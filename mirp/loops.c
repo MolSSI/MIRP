@@ -9,15 +9,15 @@
 /*! \brief Compute all cartesian components of a single primitive integral
  *         (interval arithmetic)
  *
- * \copydetails mirp_cartloop4_double
+ * \copydetails mirp_cartloop4_d
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-static void mirp_cartloop4_interval(arb_ptr output,
-                                    int am1, arb_srcptr A, const arb_t alpha1,
-                                    int am2, arb_srcptr B, const arb_t alpha2,
-                                    int am3, arb_srcptr C, const arb_t alpha3,
-                                    int am4, arb_srcptr D, const arb_t alpha4,
-                                    slong working_prec, cb_single4_interval cb)
+static void mirp_cartloop4(arb_ptr output,
+                           int am1, arb_srcptr A, const arb_t alpha1,
+                           int am2, arb_srcptr B, const arb_t alpha2,
+                           int am3, arb_srcptr C, const arb_t alpha3,
+                           int am4, arb_srcptr D, const arb_t alpha4,
+                           slong working_prec, cb_integral4_single cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
@@ -60,12 +60,12 @@ static void mirp_cartloop4_interval(arb_ptr output,
 }
 
 
-void mirp_loop4_interval(arb_ptr output,
-                        int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
-                        int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
-                        int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
-                        int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
-                        slong working_prec, cb_single4_interval cb)
+void mirp_loop4(arb_ptr output,
+                int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
+                int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
+                int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
+                int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
+                slong working_prec, cb_integral4_single cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
@@ -81,10 +81,10 @@ void mirp_loop4_interval(arb_ptr output,
     arb_ptr coeff3_norm = _arb_vec_init(nprim3 * ngeneral3);
     arb_ptr coeff4_norm = _arb_vec_init(nprim4 * ngeneral4);
 
-    mirp_normalize_shell_interval(am1, nprim1, ngeneral1, alpha1, coeff1, coeff1_norm, working_prec);
-    mirp_normalize_shell_interval(am2, nprim2, ngeneral2, alpha2, coeff2, coeff2_norm, working_prec);
-    mirp_normalize_shell_interval(am3, nprim3, ngeneral3, alpha3, coeff3, coeff3_norm, working_prec);
-    mirp_normalize_shell_interval(am4, nprim4, ngeneral4, alpha4, coeff4, coeff4_norm, working_prec);
+    mirp_normalize_shell(am1, nprim1, ngeneral1, alpha1, coeff1, coeff1_norm, working_prec);
+    mirp_normalize_shell(am2, nprim2, ngeneral2, alpha2, coeff2, coeff2_norm, working_prec);
+    mirp_normalize_shell(am3, nprim3, ngeneral3, alpha3, coeff3, coeff3_norm, working_prec);
+    mirp_normalize_shell(am4, nprim4, ngeneral4, alpha4, coeff4, coeff4_norm, working_prec);
 
     _arb_vec_zero(output, full_size);
 
@@ -97,7 +97,7 @@ void mirp_loop4_interval(arb_ptr output,
     for(int k = 0; k < nprim3; k++)
     for(int l = 0; l < nprim4; l++)
     {
-        mirp_cartloop4_interval(output_buffer,
+        mirp_cartloop4(output_buffer,
                                 am1, A, alpha1 + i,
                                 am2, B, alpha2 + j,
                                 am3, C, alpha3 + k,

@@ -22,7 +22,7 @@ int main(void)
                          0, A, 3, 1, alpha1, coeff1,
                          0, A, 3, 1, alpha1, coeff1,
                          0, A, 3, 1, alpha1, coeff1,
-                         mirp_eri_interval);
+                         mirp_eri);
 
     printf("Value: %32.18e\n", integral);
 

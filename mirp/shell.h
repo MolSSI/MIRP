@@ -55,22 +55,22 @@ int mirp_iterate_gaussian(int * lmn);
  * \param [out] coeff_out Normalized contraction coefficients
  *                        (length \p nprim * \p ngeneral)
  */
-void mirp_normalize_shell_double(int am, int nprim, int ngeneral,
-                                 const double * alpha,
-                                 const double * coeff,
-                                 double * coeff_out);
+void mirp_normalize_shell_d(int am, int nprim, int ngeneral,
+                            const double * alpha,
+                            const double * coeff,
+                            double * coeff_out);
 
 
 /*! \brief Normalize a shell (interval arithmetic)
  *
- * \copydetails mirp_normalize_shell_double
+ * \copydetails mirp_normalize_shell_d
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_normalize_shell_interval(int am, int nprim, int ngeneral,
-                                   arb_srcptr alpha,
-                                   arb_srcptr coeff,
-                                   arb_ptr coeff_out,
-                                   slong working_prec);
+void mirp_normalize_shell(int am, int nprim, int ngeneral,
+                          arb_srcptr alpha,
+                          arb_srcptr coeff,
+                          arb_ptr coeff_out,
+                          slong working_prec);
 
 
 #ifdef __cplusplus

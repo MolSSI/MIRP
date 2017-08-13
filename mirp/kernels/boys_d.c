@@ -8,7 +8,7 @@
 #include <math.h>
 #include <assert.h>
 
-void mirp_boys_double(double *F, int m, double t)
+void mirp_boys_d(double *F, int m, double t)
 {
     assert(m >= 0);
     assert(t >= 0.0);

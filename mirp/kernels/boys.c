@@ -7,7 +7,7 @@
 #include "mirp/math.h"
 #include <assert.h>
 
-void mirp_boys_interval(arb_ptr F, int m, const arb_t t, slong working_prec)
+void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec)
 {
     assert(m >= 0);
     assert(!(arb_is_negative(t)));
@@ -164,7 +164,7 @@ int mirp_boys_target_prec(arb_ptr F, int m, const arb_t t, slong target_prec)
     slong min_bits, last_min_bits;
     slong working_prec = target_prec + 16;
 
-    mirp_boys_interval(F, m, t, working_prec);
+    mirp_boys(F, m, t, working_prec);
     min_bits = mirp_min_rel_accuracy_bits(F, m+1);
 
     /* Are we already there? */
@@ -176,7 +176,7 @@ int mirp_boys_target_prec(arb_ptr F, int m, const arb_t t, slong target_prec)
     while(min_bits < target_prec)
     {
         working_prec += 16;
-        mirp_boys_interval(F, m, t, working_prec);
+        mirp_boys(F, m, t, working_prec);
         min_bits = mirp_min_rel_accuracy_bits(F, m+1);
 
         /* Does increasing the working precision actually have an effect?
@@ -207,7 +207,7 @@ void mirp_boys_target_prec_str(arb_ptr F, int m, const char * t, slong target_pr
     {
         working_prec += 16;
         arb_set_str(t_mp, t, working_prec);
-        mirp_boys_interval(F, m, t_mp, working_prec);
+        mirp_boys(F, m, t_mp, working_prec);
 
         min_bits = mirp_min_rel_accuracy_bits(F, m+1);
 

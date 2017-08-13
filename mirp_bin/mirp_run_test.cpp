@@ -44,11 +44,11 @@ int main(int argc, char ** argv)
     {
         long nfailed = -1;
         if(integral == "boys")
-            nfailed = boys_run_test(file, floattype, extra_m, target_prec);
+            nfailed = boys_run_test_main(file, floattype, extra_m, target_prec);
         else if(integral == "eri_single")
         {
             if(floattype == "interval")
-                nfailed = integral_single_run_test_interval<4>(file, target_prec, mirp_eri_single_interval);
+                nfailed = integral_single_run_test_main<4>(file, target_prec, mirp_eri_single);
         }
         else
         {

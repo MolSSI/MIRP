@@ -42,7 +42,7 @@ int mirp_integral4_single_target_prec(arb_t integral,
                                       const int * lmn2, arb_srcptr B, const arb_t alpha2,
                                       const int * lmn3, arb_srcptr C, const arb_t alpha3,
                                       const int * lmn4, arb_srcptr D, const arb_t alpha4,
-                                      slong target_prec, cb_single4_interval cb);
+                                      slong target_prec, cb_integral4_single cb);
 
 
 /*! \brief Compute a single 4-center integral to a target precision (string input)
@@ -76,7 +76,7 @@ void mirp_integral4_single_target_prec_str(arb_t integral,
                                            const int * lmn2, const char ** B, const char * alpha2,
                                            const int * lmn3, const char ** C, const char * alpha3,
                                            const int * lmn4, const char ** D, const char * alpha4,
-                                           slong target_prec, cb_single4_interval cb);
+                                           slong target_prec, cb_integral4_single cb);
 
 
 /*! \brief Computes a single 4-center integral to double precision using interval arithmetic
@@ -102,7 +102,7 @@ void mirp_integral4_single_exact(double * integral,
                                  const int * lmn2, const double * B, double alpha2,
                                  const int * lmn3, const double * C, double alpha3,
                                  const int * lmn4, const double * D, double alpha4,
-                                 cb_single4_interval cb);
+                                 cb_integral4_single cb);
 
 
 
@@ -138,7 +138,7 @@ void mirp_integral4_exact(double * integral,
                           int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2, 
                           int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3, 
                           int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
-                          cb_integral4_interval cb);
+                          cb_integral4 cb);
 
 #ifdef __cplusplus
 }

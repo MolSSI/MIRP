@@ -86,23 +86,23 @@ int mirp_test_zero_prec(const arb_t n, slong prec);
 
 
 /*! \brief Calculates a factorial using double precision */
-double mirp_factorial(int n);
+double mirp_factorial_d(int n);
 
 
 /*! \brief Calculates a double factorial using double precision */
-double mirp_double_factorial(int n);
+double mirp_factorial2_d(int n);
 
 
 /*! \brief Calculates a double factorial using interval arithmetic */
-void mirp_double_factorial_interval(arb_t output, long int n, slong working_prec);
+void mirp_factorial2(arb_t output, long int n, slong working_prec);
 
 
 /*! \brief Calculates a binomial coefficient using double precision */
-double mirp_binomial_coefficient(int n, int k);
+double mirp_binomial_d(int n, int k);
 
 
 /*! \brief Calculates a binomial coefficient using interval arithmetic */
-void mirp_binomial_coefficient_interval(arb_t output, long int n, long int k, slong working_prec);
+void mirp_binomial(arb_t output, long int n, long int k, slong working_prec);
 
 #ifdef __cplusplus
 }

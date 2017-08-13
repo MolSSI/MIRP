@@ -38,10 +38,13 @@ inline bool almost_equal(double a, double b, double tol)
 
 /*! \brief Unpacks the arguments for a call to a function that
  *         computes single 4-center integrals
+ *
+ * This wraps the call to the callback \p cb
+ * in a call to mirp_integral4_single_target_prec_str
  */
 inline void call_callback(arb_t integral, const int * lmn,
                           const char ** xyz, const char ** alpha,
-                          slong target_prec, cb_single4_interval cb)
+                          slong target_prec, cb_integral4_single cb)
 {
     mirp_integral4_single_target_prec_str(integral,
        lmn+0, xyz+0, alpha[0],
@@ -72,10 +75,10 @@ inline void call_callback(arb_t integral, const int * lmn,
  * \param [in]  cb           Function to use to compute the integrals
  */
 template<unsigned int N, typename callback_type>
-void integral_single_interval(arb_t integral,
-                              const integral_single_data_entry & ent,
-                              slong target_prec,
-                              callback_type cb)
+void integral_single(arb_t integral,
+                     const integral_single_data_entry & ent,
+                     slong target_prec,
+                     callback_type cb)
 {
     if(ent.g.size() != N)
     {
@@ -121,9 +124,9 @@ void integral_single_interval(arb_t integral,
  * \param [in]  cb           Function to use to compute the integrals
  */
 template<unsigned int N, typename callback_type>
-void integral_single_double(double * integral,
-                            const integral_single_data_entry & ent,
-                            callback_type cb)
+void integral_single_d(double * integral,
+                       const integral_single_data_entry & ent,
+                       callback_type cb)
 {
     if(ent.g.size() != N)
     {
@@ -185,7 +188,7 @@ void integral_single_create_test(const std::string & input_filepath,
 
     for(auto & ent : data.values)
     {
-        detail::integral_single_interval<4>(integral, ent, target_prec, cb);
+        detail::integral_single<4>(integral, ent, target_prec, cb);
         if(mirp_test_zero_prec(integral, target_prec))
             ent.integral = "0";
         else
@@ -215,9 +218,9 @@ void integral_single_create_test(const std::string & input_filepath,
  * \return The number of tests that have failed
  */
 template<unsigned int N, typename callback_type>
-long integral_single_run_test_interval(const std::string & filepath,
-                                       long target_prec,
-                                       callback_type cb)
+long integral_single_run_test_main(const std::string & filepath,
+                                  long target_prec,
+                                  callback_type cb)
 {
     integral_single_data data = integral_single_read_file(filepath, N, false);
 
@@ -229,7 +232,7 @@ long integral_single_run_test_interval(const std::string & filepath,
 
     for(const auto & ent : data.values)
     {
-        detail::integral_single_interval<N>(integral, ent, target_prec+16, cb); 
+        detail::integral_single<N>(integral, ent, target_prec+16, cb); 
 
         /* The computed precision is guaranteed to be at least target_prec,
            but will likely be greater. Round the reference value,

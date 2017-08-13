@@ -47,7 +47,7 @@ int main(int argc, char ** argv)
         else if(integral == "eri_single")
         {
             integral_single_create_test<4>(infile, outfile,
-                                           ndigits, header, mirp_eri_single_interval);
+                                           ndigits, header, mirp_eri_single);
         }
         else
         {

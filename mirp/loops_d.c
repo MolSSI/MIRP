@@ -26,12 +26,12 @@
  *              Callback that calculates a single cartesian component of a
  *              primitive integral
  */
-static void mirp_cartloop4_double(double * output,
-                                  int am1, const double * A, double alpha1,
-                                  int am2, const double * B, double alpha2,
-                                  int am3, const double * C, double alpha3,
-                                  int am4, const double * D, double alpha4,
-                                  cb_single4_double cb)
+static void mirp_cartloop4_d(double * output,
+                             int am1, const double * A, double alpha1,
+                             int am2, const double * B, double alpha2,
+                             int am3, const double * C, double alpha3,
+                             int am4, const double * D, double alpha4,
+                             cb_integral4_single_d cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
@@ -73,12 +73,12 @@ static void mirp_cartloop4_double(double * output,
 }
 
 
-void mirp_loop4_double(double * output,
-                       int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
-                       int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
-                       int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
-                       int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
-                       cb_single4_double cb)
+void mirp_loop4_d(double * output,
+                  int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
+                  int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
+                  int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
+                  int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
+                  cb_integral4_single_d cb)
 {
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
@@ -94,10 +94,10 @@ void mirp_loop4_double(double * output,
     double * coeff3_norm = malloc(nprim3 * ngeneral3 * sizeof(double));
     double * coeff4_norm = malloc(nprim4 * ngeneral4 * sizeof(double));
 
-    mirp_normalize_shell_double(am1, nprim1, ngeneral1, alpha1, coeff1, coeff1_norm);
-    mirp_normalize_shell_double(am2, nprim2, ngeneral2, alpha2, coeff2, coeff2_norm);
-    mirp_normalize_shell_double(am3, nprim3, ngeneral3, alpha3, coeff3, coeff3_norm);
-    mirp_normalize_shell_double(am4, nprim4, ngeneral4, alpha4, coeff4, coeff4_norm);
+    mirp_normalize_shell_d(am1, nprim1, ngeneral1, alpha1, coeff1, coeff1_norm);
+    mirp_normalize_shell_d(am2, nprim2, ngeneral2, alpha2, coeff2, coeff2_norm);
+    mirp_normalize_shell_d(am3, nprim3, ngeneral3, alpha3, coeff3, coeff3_norm);
+    mirp_normalize_shell_d(am4, nprim4, ngeneral4, alpha4, coeff4, coeff4_norm);
 
     memset(output, 0, full_size * sizeof(double));
     for(int i = 0; i < nprim1; i++)
@@ -105,7 +105,7 @@ void mirp_loop4_double(double * output,
     for(int k = 0; k < nprim3; k++)
     for(int l = 0; l < nprim4; l++)
     {
-        mirp_cartloop4_double(output_buffer,
+        mirp_cartloop4_d(output_buffer,
                               am1, A, alpha1[i],
                               am2, B, alpha2[j],
                               am3, C, alpha3[k],

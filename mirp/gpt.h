@@ -31,24 +31,24 @@ extern "C" {
  * \param [out] PB      XYZ distances between the new gaussian and the second gaussian
  * \param [out] AB2     Total distances between the first and second gaussians
  */
-void mirp_gpt_double(double alpha1, double alpha2,
-                     const double * A, const double * B,
-                     double * gamma, double * P,
-                     double * PA, double * PB,
-                     double * AB2);
+void mirp_gpt_d(double alpha1, double alpha2,
+                const double * A, const double * B,
+                double * gamma, double * P,
+                double * PA, double * PB,
+                double * AB2);
 
 
 /*! \brief Computes factors for the Gaussian Product Theorem using interval arithmetic
  *
- * \copydetails mirp_gpt_double
+ * \copydetails mirp_gpt_d
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_gpt_interval(const arb_t alpha1, const arb_t alpha2,
-                       arb_srcptr A, arb_srcptr B,
-                       arb_t gamma,
-                       arb_ptr P, arb_ptr PA, arb_ptr PB,
-                       arb_t AB2,
-                       slong working_prec);
+void mirp_gpt(const arb_t alpha1, const arb_t alpha2,
+              arb_srcptr A, arb_srcptr B,
+              arb_t gamma,
+              arb_ptr P, arb_ptr PA, arb_ptr PB,
+              arb_t AB2,
+              slong working_prec);
 
 #ifdef __cplusplus
 }

@@ -74,8 +74,8 @@ namespace mirp {
      * \param [in] target_prec Desired final binary precision (in bits)
      * \return The number of tests that have failed   
      */
-    long boys_run_test(const std::string & filepath, const std::string & floattype,
-                       long extra_m, long target_prec);
+    long boys_run_test_main(const std::string & filepath, const std::string & floattype,
+                            long extra_m, long target_prec);
 
 
     /*! \brief Create a test file for the Boys function from a given input file

@@ -6,7 +6,7 @@
 #include <mirp/mirp.h>
 #include <stdio.h>
 
-static void strarr_to_double(const char ** strarr, double * darr, int length)
+static void strarr_to_d(const char ** strarr, double * darr, int length)
 {
     for(int i = 0; i < length; i++)
         darr[i] = atof(strarr[i]);
@@ -19,7 +19,7 @@ static void strarr_to_interval(const char ** strarr, arb_ptr iarr, int length, s
 }
 
 static void print_integrals(const char * title,
-                            const double * integrals_double,
+                            const double * integrals_d,
                             arb_srcptr integrals_interval,
                             int length)
 {
@@ -29,7 +29,7 @@ static void print_integrals(const char * title,
     {
         /* We will max out at 100 digits. Should be enough for this example */
         char * arbstr = arb_get_str(integrals_interval + i, 100, 0);
-        printf("[%5d] %30.17e   %s\n", i, integrals_double[i], arbstr);
+        printf("[%5d] %30.17e   %s\n", i, integrals_d[i], arbstr);
         free(arbstr);
     }
 
@@ -45,7 +45,7 @@ int main(void)
     /* Holds only one shell quartet at a time. Only needs to
      * be 81, since we only have up to p shells
      */
-    double integrals_double[81];
+    double integrals_d[81];
     arb_ptr integrals_interval = _arb_vec_init(81);
 
     /* Geometry, in bohr
@@ -78,29 +78,29 @@ int main(void)
     /**********************************************
      * Conversion of the above to double precision
      **********************************************/
-    double xyz_O_double[3];
-    double xyz_H1_double[3];
-    double xyz_H2_double[3];
-    strarr_to_double(xyz_O,  xyz_O_double,  3);
-    strarr_to_double(xyz_H1, xyz_H2_double, 3);
-    strarr_to_double(xyz_H2, xyz_H1_double, 3);
+    double xyz_O_d[3];
+    double xyz_H1_d[3];
+    double xyz_H2_d[3];
+    strarr_to_d(xyz_O,  xyz_O_d,  3);
+    strarr_to_d(xyz_H1, xyz_H2_d, 3);
+    strarr_to_d(xyz_H2, xyz_H1_d, 3);
 
-    double alpha_O_s1_double[3], coeff_O_s1_double[3];
-    double alpha_O_s2_double[3], coeff_O_s2_double[3];
-    double alpha_O_p_double[3],  coeff_O_p_double[3];
-    strarr_to_double(alpha_O_s1, alpha_O_s1_double, 3);
-    strarr_to_double(alpha_O_s2, alpha_O_s2_double, 3);
-    strarr_to_double(alpha_O_p,  alpha_O_p_double,  3);
-    strarr_to_double(coeff_O_s1, coeff_O_s1_double, 3);
-    strarr_to_double(coeff_O_s2, coeff_O_s2_double, 3);
-    strarr_to_double(coeff_O_p,  coeff_O_p_double,  3);
+    double alpha_O_s1_d[3], coeff_O_s1_d[3];
+    double alpha_O_s2_d[3], coeff_O_s2_d[3];
+    double alpha_O_p_d[3],  coeff_O_p_d[3];
+    strarr_to_d(alpha_O_s1, alpha_O_s1_d, 3);
+    strarr_to_d(alpha_O_s2, alpha_O_s2_d, 3);
+    strarr_to_d(alpha_O_p,  alpha_O_p_d,  3);
+    strarr_to_d(coeff_O_s1, coeff_O_s1_d, 3);
+    strarr_to_d(coeff_O_s2, coeff_O_s2_d, 3);
+    strarr_to_d(coeff_O_p,  coeff_O_p_d,  3);
 
-    double alpha_H1_s_double[3], coeff_H1_s_double[3];
-    double alpha_H2_s_double[3], coeff_H2_s_double[3];
-    strarr_to_double(alpha_H1_s, alpha_H1_s_double, 3);
-    strarr_to_double(alpha_H2_s, alpha_H2_s_double, 3);
-    strarr_to_double(coeff_H1_s, coeff_H1_s_double, 3);
-    strarr_to_double(coeff_H2_s, coeff_H2_s_double, 3);
+    double alpha_H1_s_d[3], coeff_H1_s_d[3];
+    double alpha_H2_s_d[3], coeff_H2_s_d[3];
+    strarr_to_d(alpha_H1_s, alpha_H1_s_d, 3);
+    strarr_to_d(alpha_H2_s, alpha_H2_s_d, 3);
+    strarr_to_d(coeff_H1_s, coeff_H1_s_d, 3);
+    strarr_to_d(coeff_H2_s, coeff_H2_s_d, 3);
 
 
     /**********************************************
@@ -150,67 +150,67 @@ int main(void)
 
 
     /* {0, 0, 0, 0} */ 
-    mirp_eri_double(integrals_double,
-                    0, xyz_O_double, 3, 1, alpha_O_s1_double, coeff_O_s1_double,
-                    0, xyz_O_double, 3, 1, alpha_O_s1_double, coeff_O_s1_double,
-                    0, xyz_O_double, 3, 1, alpha_O_s1_double, coeff_O_s1_double,
-                    0, xyz_O_double, 3, 1, alpha_O_s1_double, coeff_O_s1_double);
+    mirp_eri_d(integrals_d,
+                    0, xyz_O_d, 3, 1, alpha_O_s1_d, coeff_O_s1_d,
+                    0, xyz_O_d, 3, 1, alpha_O_s1_d, coeff_O_s1_d,
+                    0, xyz_O_d, 3, 1, alpha_O_s1_d, coeff_O_s1_d,
+                    0, xyz_O_d, 3, 1, alpha_O_s1_d, coeff_O_s1_d);
 
-    mirp_eri_interval(integrals_interval,
+    mirp_eri(integrals_interval,
                       0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
                       0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
                       0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
                       0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval, 512);
 
-    print_integrals("{0, 0, 0, 0}", integrals_double, integrals_interval, 1);
+    print_integrals("{0, 0, 0, 0}", integrals_d, integrals_interval, 1);
 
 
     /* {0, 1, 0, 1} */
-    mirp_eri_double(integrals_double,
-                    0, xyz_O_double, 3, 1, alpha_O_s1_double, coeff_O_s1_double,
-                    0, xyz_O_double, 3, 1, alpha_O_s2_double, coeff_O_s2_double,
-                    0, xyz_O_double, 3, 1, alpha_O_s1_double, coeff_O_s1_double,
-                    0, xyz_O_double, 3, 1, alpha_O_s2_double, coeff_O_s2_double);
+    mirp_eri_d(integrals_d,
+                    0, xyz_O_d, 3, 1, alpha_O_s1_d, coeff_O_s1_d,
+                    0, xyz_O_d, 3, 1, alpha_O_s2_d, coeff_O_s2_d,
+                    0, xyz_O_d, 3, 1, alpha_O_s1_d, coeff_O_s1_d,
+                    0, xyz_O_d, 3, 1, alpha_O_s2_d, coeff_O_s2_d);
 
-    mirp_eri_interval(integrals_interval,
+    mirp_eri(integrals_interval,
                       0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
                       0, xyz_O_interval, 3, 1, alpha_O_s2_interval, coeff_O_s2_interval,
                       0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
                       0, xyz_O_interval, 3, 1, alpha_O_s2_interval, coeff_O_s2_interval, 512);
 
-    print_integrals("{0, 1, 0, 1}", integrals_double, integrals_interval, 1);
+    print_integrals("{0, 1, 0, 1}", integrals_d, integrals_interval, 1);
 
 
     /* {3, 2, 4, 1} */
-    mirp_eri_double(integrals_double,
-                    0, xyz_H1_double, 3, 1, alpha_H1_s_double, coeff_H1_s_double,
-                    1, xyz_O_double,  3, 1, alpha_O_p_double,  coeff_O_p_double,
-                    0, xyz_H2_double, 3, 1, alpha_H2_s_double, coeff_H2_s_double,
-                    0, xyz_O_double,  3, 1, alpha_O_s2_double, coeff_O_s2_double);
+    mirp_eri_d(integrals_d,
+                    0, xyz_H1_d, 3, 1, alpha_H1_s_d, coeff_H1_s_d,
+                    1, xyz_O_d,  3, 1, alpha_O_p_d,  coeff_O_p_d,
+                    0, xyz_H2_d, 3, 1, alpha_H2_s_d, coeff_H2_s_d,
+                    0, xyz_O_d,  3, 1, alpha_O_s2_d, coeff_O_s2_d);
 
-    mirp_eri_interval(integrals_interval,
+    mirp_eri(integrals_interval,
                       0, xyz_H1_interval, 3, 1, alpha_H1_s_interval, coeff_H1_s_interval,
                       1, xyz_O_interval,  3, 1, alpha_O_p_interval,  coeff_O_p_interval,
                       0, xyz_H2_interval, 3, 1, alpha_H2_s_interval, coeff_H2_s_interval,
                       0, xyz_O_interval,  3, 1, alpha_O_s2_interval, coeff_O_s2_interval, 512);
 
-    print_integrals("{3, 2, 4, 1}", integrals_double, integrals_interval, 3);
+    print_integrals("{3, 2, 4, 1}", integrals_d, integrals_interval, 3);
 
 
     /* {2, 2, 2, 2} (this is the (pp|pp) quartet */ 
-    mirp_eri_double(integrals_double,
-                    1, xyz_O_double, 3, 1, alpha_O_p_double, coeff_O_p_double,
-                    1, xyz_O_double, 3, 1, alpha_O_p_double, coeff_O_p_double,
-                    1, xyz_O_double, 3, 1, alpha_O_p_double, coeff_O_p_double,
-                    1, xyz_O_double, 3, 1, alpha_O_p_double, coeff_O_p_double);
+    mirp_eri_d(integrals_d,
+                    1, xyz_O_d, 3, 1, alpha_O_p_d, coeff_O_p_d,
+                    1, xyz_O_d, 3, 1, alpha_O_p_d, coeff_O_p_d,
+                    1, xyz_O_d, 3, 1, alpha_O_p_d, coeff_O_p_d,
+                    1, xyz_O_d, 3, 1, alpha_O_p_d, coeff_O_p_d);
 
-    mirp_eri_interval(integrals_interval,
+    mirp_eri(integrals_interval,
                       1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval,
                       1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval,
                       1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval,
                       1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval, 512);
 
-    print_integrals("{2, 2, 2, 2}", integrals_double, integrals_interval, 81);
+    print_integrals("{2, 2, 2, 2}", integrals_d, integrals_interval, 81);
 
 
     /* Cleanup */

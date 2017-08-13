@@ -9,10 +9,10 @@
 #include "mirp/math.h"
 #include "mirp/gpt.h"
 
-static void mirp_farr_interval(arb_ptr f,
-                               int lmn1, int lmn2,
-                               arb_t xyz1, arb_t xyz2,
-                               slong working_prec)
+static void mirp_farr(arb_ptr f,
+                      int lmn1, int lmn2,
+                      arb_t xyz1, arb_t xyz2,
+                      slong working_prec)
 {
     int i, j, k;
 
@@ -30,8 +30,8 @@ static void mirp_farr_interval(arb_ptr f,
             if (j > lmn2)
                 continue;
 
-            mirp_binomial_coefficient_interval(tmp1, lmn1, i, working_prec);
-            mirp_binomial_coefficient_interval(tmp2, lmn2, j, working_prec);
+            mirp_binomial(tmp1, lmn1, i, working_prec);
+            mirp_binomial(tmp2, lmn2, j, working_prec);
             arb_mul(tmp1, tmp1, tmp2, working_prec);
 
             if (lmn1 - i > 0)
@@ -53,10 +53,10 @@ static void mirp_farr_interval(arb_ptr f,
 }
 
 
-static void mirp_G_interval(arb_t G, arb_t fp, arb_t fq,
-                            int np, int nq, int w1, int w2,
-                            arb_t gammap, arb_t gammaq, arb_t gammapq,
-                            slong working_prec)
+static void mirp_G(arb_t G, arb_t fp, arb_t fq,
+                   int np, int nq, int w1, int w2,
+                   arb_t gammap, arb_t gammaq, arb_t gammapq,
+                   slong working_prec)
 {
     arb_t tmp1, tmp2;
     arb_init(tmp1);
@@ -98,12 +98,12 @@ static void mirp_G_interval(arb_t G, arb_t fp, arb_t fq,
     arb_clear(tmp2);
 }
 
-void mirp_eri_single_interval(arb_t output,
-                              const int * lmn1, arb_srcptr A, const arb_t alpha1,
-                              const int * lmn2, arb_srcptr B, const arb_t alpha2,
-                              const int * lmn3, arb_srcptr C, const arb_t alpha3,
-                              const int * lmn4, arb_srcptr D, const arb_t alpha4,
-                              slong working_prec)
+void mirp_eri_single(arb_t output,
+                     const int * lmn1, arb_srcptr A, const arb_t alpha1,
+                     const int * lmn2, arb_srcptr B, const arb_t alpha2,
+                     const int * lmn3, arb_srcptr C, const arb_t alpha3,
+                     const int * lmn4, arb_srcptr D, const arb_t alpha4,
+                     slong working_prec)
 {
     const int L_l = lmn1[0]+lmn2[0]+lmn3[0]+lmn4[0];
     const int L_m = lmn1[1]+lmn2[1]+lmn3[1]+lmn4[1];
@@ -148,8 +148,8 @@ void mirp_eri_single_interval(arb_t output,
     arb_init(PQ2);
 
     /* Gaussian Product Theorem */
-    mirp_gpt_interval(alpha1, alpha2, A, B, gammap, P, PA, PB, AB2, working_prec);
-    mirp_gpt_interval(alpha3, alpha4, C, D, gammaq, Q, QC, QD, CD2, working_prec);
+    mirp_gpt(alpha1, alpha2, A, B, gammap, P, PA, PB, AB2, working_prec);
+    mirp_gpt(alpha3, alpha4, C, D, gammaq, Q, QC, QD, CD2, working_prec);
 
 
     /*
@@ -173,19 +173,19 @@ void mirp_eri_single_interval(arb_t output,
     arb_addmul(PQ2, PQ+2, PQ+2, working_prec);
 
 
-    mirp_farr_interval(flp, lmn1[0], lmn2[0], PA+0, PB+0, working_prec);
-    mirp_farr_interval(fmp, lmn1[1], lmn2[1], PA+1, PB+1, working_prec);
-    mirp_farr_interval(fnp, lmn1[2], lmn2[2], PA+2, PB+2, working_prec);
-    mirp_farr_interval(flq, lmn3[0], lmn4[0], QC+0, QD+0, working_prec);
-    mirp_farr_interval(fmq, lmn3[1], lmn4[1], QC+1, QD+1, working_prec);
-    mirp_farr_interval(fnq, lmn3[2], lmn4[2], QC+2, QD+2, working_prec);
+    mirp_farr(flp, lmn1[0], lmn2[0], PA+0, PB+0, working_prec);
+    mirp_farr(fmp, lmn1[1], lmn2[1], PA+1, PB+1, working_prec);
+    mirp_farr(fnp, lmn1[2], lmn2[2], PA+2, PB+2, working_prec);
+    mirp_farr(flq, lmn3[0], lmn4[0], QC+0, QD+0, working_prec);
+    mirp_farr(fmq, lmn3[1], lmn4[1], QC+1, QD+1, working_prec);
+    mirp_farr(fnq, lmn3[2], lmn4[2], QC+2, QD+2, working_prec);
 
 
     /*
      *  Calculate the Boys function
      */
     arb_mul(tmp1, PQ2, gammapq, working_prec);
-    mirp_boys_interval(F, L, tmp1, working_prec);
+    mirp_boys(F, L, tmp1, working_prec);
 
 
     /*
@@ -203,14 +203,14 @@ void mirp_eri_single_interval(arb_t output,
     for(int u1 = 0; u1 <= (lp/2); u1++)
     for(int u2 = 0; u2 <= (lq/2); u2++)
     {
-        mirp_G_interval(Gx, flp + lp, flq + lq, lp, lq, u1, u2, gammap, gammaq, gammapq, working_prec);
+        mirp_G(Gx, flp + lp, flq + lq, lp, lq, u1, u2, gammap, gammaq, gammapq, working_prec);
 
         for(int mp = 0; mp <= lmn1[1] + lmn2[1]; mp++)
         for(int mq = 0; mq <= lmn3[1] + lmn4[1]; mq++)
         for(int v1 = 0; v1 <= (mp/2); v1++)
         for(int v2 = 0; v2 <= (mq/2); v2++)
         {
-            mirp_G_interval(Gy, fmp + mp, fmq + mq, mp, mq, v1, v2, gammap, gammaq, gammapq, working_prec);
+            mirp_G(Gy, fmp + mp, fmq + mq, mp, mq, v1, v2, gammap, gammaq, gammapq, working_prec);
 
             /* Gxy = Gx * Gy */
             arb_mul(Gxy, Gx, Gy, working_prec);
@@ -220,7 +220,7 @@ void mirp_eri_single_interval(arb_t output,
             for(int w1 = 0; w1 <= (np/2); w1++)
             for(int w2 = 0; w2 <= (nq/2); w2++)
             {
-                mirp_G_interval(Gz, fnp + np, fnq + nq, np, nq, w1, w2, gammap, gammaq, gammapq, working_prec);
+                mirp_G(Gz, fnp + np, fnq + nq, np, nq, w1, w2, gammap, gammaq, gammapq, working_prec);
 
                 /* Gxyz = Gx * Gy * Gz */
                 arb_mul(Gxyz, Gxy, Gz, working_prec);
@@ -356,17 +356,17 @@ void mirp_eri_single_interval(arb_t output,
 }
 
 
-void mirp_eri_interval(arb_ptr output,
-                       int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
-                       int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
-                       int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
-                       int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
-                       slong working_prec)
+void mirp_eri(arb_ptr output,
+              int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
+              int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
+              int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
+              int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
+              slong working_prec)
 {
-    mirp_loop4_interval(output,
-                        am1, A, nprim1, ngeneral1, alpha1, coeff1,
-                        am2, B, nprim2, ngeneral2, alpha2, coeff2,
-                        am3, C, nprim3, ngeneral3, alpha3, coeff3,
-                        am4, D, nprim4, ngeneral4, alpha4, coeff4,
-                        working_prec, mirp_eri_single_interval); 
+    mirp_loop4(output,
+               am1, A, nprim1, ngeneral1, alpha1, coeff1,
+               am2, B, nprim2, ngeneral2, alpha2, coeff2,
+               am3, C, nprim3, ngeneral3, alpha3, coeff3,
+               am4, D, nprim4, ngeneral4, alpha4, coeff4,
+               working_prec, mirp_eri_single); 
 }

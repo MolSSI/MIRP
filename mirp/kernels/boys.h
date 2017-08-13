@@ -22,15 +22,15 @@ extern "C" {
  * \param [in] m The maximum order to calculate
  * \param [in] t The value at which to evaluate
  */
-void mirp_boys_double(double *F, int m, double t);
+void mirp_boys_d(double *F, int m, double t);
 
 
 /*! \brief Computes the Boys function using interval arithmetic
  *
- * \copydetails mirp_boys_double
+ * \copydetails mirp_boys_d
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_boys_interval(arb_ptr F, int m, const arb_t t, slong working_prec);
+void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec);
 
 
 /*! \brief Compute the Boys function to a target precision

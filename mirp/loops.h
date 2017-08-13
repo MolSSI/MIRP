@@ -50,12 +50,12 @@ extern "C" {
  *              Callback that calculates a single cartesian component of a
  *              primitive integral
  */
-void mirp_loop4_double(double * output,
-                       int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
-                       int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
-                       int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
-                       int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
-                       cb_single4_double cb);
+void mirp_loop4_d(double * output,
+                  int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
+                  int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
+                  int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
+                  int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
+                  cb_integral4_single_d cb);
 
 
 
@@ -66,15 +66,15 @@ void mirp_loop4_double(double * output,
 /*! \brief Compute all cartesian components of a contracted shell quartet
  *         (interval arithmetic)
  *
- * \copydetails mirp_loop4_double
+ * \copydetails mirp_loop4_d
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_loop4_interval(arb_ptr output,
-                         int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
-                         int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
-                         int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
-                         int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
-                         slong working_prec, cb_single4_interval cb);
+void mirp_loop4(arb_ptr output,
+                int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
+                int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
+                int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
+                int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
+                slong working_prec, cb_integral4_single cb);
 
 
 #ifdef __cplusplus

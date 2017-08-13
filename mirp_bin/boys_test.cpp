@@ -28,7 +28,7 @@ namespace {
  *
  * \todo This function is not exception safe
  */
-long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long target_prec)
+long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
 {
     using namespace mirp;
 
@@ -88,7 +88,7 @@ long boys_run_test_interval(const mirp::boys_data & data, long extra_m, long tar
  *
  * The number of failing tests is returned
  */
-long boys_run_test_double(const mirp::boys_data & data, long extra_m)
+long boys_run_test_d(const mirp::boys_data & data, long extra_m)
 {
     using namespace mirp;
 
@@ -102,7 +102,7 @@ long boys_run_test_double(const mirp::boys_data & data, long extra_m)
         double t_dbl = std::strtod(ent.t.c_str(), nullptr);
         double vref_dbl = std::strtod(ent.value.c_str(), nullptr);
 
-        mirp_boys_double(F_dbl.data(), ent.m+extra_m, t_dbl);
+        mirp_boys_d(F_dbl.data(), ent.m+extra_m, t_dbl);
 
         if(vref_dbl != F_dbl[ent.m])
         {
@@ -246,7 +246,10 @@ void boys_write_file(const std::string & filepath, const boys_data & data)
 }
 
 
-long boys_run_test(const std::string & filepath, const std::string & floattype, long extra_m, long target_prec)
+long boys_run_test_main(const std::string & filepath,
+                        const std::string & floattype,
+                        long extra_m,
+                        long target_prec)
 {
     boys_data data;
     try {
@@ -264,11 +267,11 @@ long boys_run_test(const std::string & filepath, const std::string & floattype, 
     long nfailed = 0;
 
     if(floattype == "interval")
-        nfailed = boys_run_test_interval(data, extra_m, target_prec);
+        nfailed = boys_run_test(data, extra_m, target_prec);
     else if(floattype == "exact")
         nfailed = boys_run_test_exact(data, extra_m);
     else if(floattype == "double")
-        nfailed = boys_run_test_double(data, extra_m);
+        nfailed = boys_run_test_d(data, extra_m);
     else
     {
         std::string err;

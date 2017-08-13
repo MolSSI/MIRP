@@ -29,10 +29,10 @@ int mirp_iterate_gaussian(int * lmn)
 
 
 
-void mirp_normalize_shell_double(int am, int nprim, int ngeneral,
-                                 const double * alpha,
-                                 const double * coeff,
-                                 double * coeff_out)
+void mirp_normalize_shell_d(int am, int nprim, int ngeneral,
+                            const double * alpha,
+                            const double * coeff,
+                            double * coeff_out)
 {
     const double dam = (double)am;
     const double m = dam + 1.5;
@@ -71,11 +71,11 @@ void mirp_normalize_shell_double(int am, int nprim, int ngeneral,
 }
 
 
-void mirp_normalize_shell_interval(int am, int nprim, int ngeneral,
-                                   arb_srcptr alpha,
-                                   arb_srcptr coeff,
-                                   arb_ptr coeff_out,
-                                   slong working_prec)
+void mirp_normalize_shell(int am, int nprim, int ngeneral,
+                          arb_srcptr alpha,
+                          arb_srcptr coeff,
+                          arb_ptr coeff_out,
+                          slong working_prec)
 {
     arb_t tmp1, tmp2;
     arb_t norm_fac, sum;
