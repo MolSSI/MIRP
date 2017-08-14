@@ -26,7 +26,7 @@ int main(int argc, char ** argv)
         integral = cmdline_get_arg_str(cmdline, "--integral");
         floattype = cmdline_get_arg_str(cmdline, "--float");
 
-        if(floattype != "double")
+        if(floattype != "double" && floattype != "exact")
             target_prec = cmdline_get_arg_long(cmdline, "--prec");
 
         if(integral == "boys")

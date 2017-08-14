@@ -8,7 +8,7 @@
 #include <math.h>
 #include <assert.h>
 
-void mirp_boys_d(double *F, int m, double t)
+static void mirp_boys_d_single(double *F, int m, double t)
 {
     assert(m >= 0);
     assert(t >= 0.0);
@@ -87,9 +87,19 @@ void mirp_boys_d(double *F, int m, double t)
 
         F[m] = sum * et / (2*m+1);
     }
-
-    /* Now do downwards recursion */
-    for(i = m - 1; i >= 0; i--)
-        F[i] = (t2 * F[i + 1] + et) / (2 * i + 1);
 }
 
+
+void mirp_boys_d(double *F, int m, double t)
+{
+    /* We don't do recursion with double precision. The reason is
+     * that for some values, the value for the highest m value
+     * is zero due to underflow. Then, due to the recursion,
+     * all F[m] values would be zero, which certainly isn't the case
+     *
+     * So for maximum accuracy, skip recurrence and do it the
+     * slow way: one by one
+     */
+    for(int i = 0; i <= m; i++)
+        mirp_boys_d_single(F, i, t);
+}

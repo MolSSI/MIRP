@@ -36,8 +36,7 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
 
     const int max_m = boys_max_m(data) + extra_m;
 
-    arb_t t_mp, vref_mp;
-    arb_init(t_mp);
+    arb_t vref_mp;
     arb_init(vref_mp);
 
     arb_ptr F_mp = _arb_vec_init(max_m+1);
@@ -73,7 +72,6 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
         }
     }
 
-    arb_clear(t_mp);
     arb_clear(vref_mp);
     _arb_vec_clear(F_mp, max_m+1);
 
@@ -91,6 +89,7 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
 long boys_run_test_d(const mirp::boys_data & data, long extra_m)
 {
     using namespace mirp;
+    using detail::almost_equal;
 
     long nfailed = 0;
 
@@ -104,12 +103,12 @@ long boys_run_test_d(const mirp::boys_data & data, long extra_m)
 
         mirp_boys_d(F_dbl.data(), ent.m+extra_m, t_dbl);
 
-        if(vref_dbl != F_dbl[ent.m])
+        if(!almost_equal(F_dbl[ent.m], vref_dbl, 1e-13))
         {
-            std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
             double reldiff = std::fabs(vref_dbl - F_dbl[ent.m]);
             reldiff /= std::fmax(std::fabs(vref_dbl), std::fabs(F_dbl[ent.m]));
 
+            std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
             auto old_cout_prec = std::cout.precision(17);
             std::cout << "   Calculated: " << F_dbl[ent.m] << "\n";
             std::cout << "    Reference: " << vref_dbl << "\n";
@@ -125,45 +124,60 @@ long boys_run_test_d(const mirp::boys_data & data, long extra_m)
 
 /* Runs a Boys function test using 'exact' double precision
  *
- * This is just a simple test of the wrapper. The comparison
- * is not expected to be exact, since the inputs are in greater
- * than double precision. This results in rounding of the inputs,
- * and therefore the result as calculated in mirp_boys_exact
- * will differ from that calulcated purely in interval arithmetic.
+ * This is just a simple test of the wrapper. The function compares
+ * the 'exact' version with the result of an interval version
+ * with a high working precision.
  *
  * This, therefore, just ensures that the wrappers are written correctly.
  */
 long boys_run_test_exact(const mirp::boys_data & data, long extra_m)
 {
     using namespace mirp;
-    using mirp::detail::almost_equal;
 
     long nfailed = 0;
 
     const int max_m = boys_max_m(data) + extra_m;
     std::vector<double> F_dbl(max_m+1);
 
+    /* For comparison */
+    arb_t t_mp;
+    arb_init(t_mp);
+
+    arb_ptr F_mp = _arb_vec_init(max_m+1);
+
     for(const auto & ent : data.values)
     {
         double t_dbl = std::strtod(ent.t.c_str(), nullptr);
         double vref_dbl = std::strtod(ent.value.c_str(), nullptr);
 
+        /* Compute using the "exact" code */
         mirp_boys_exact(F_dbl.data(), ent.m+extra_m, t_dbl);
 
-        if(!almost_equal(vref_dbl, F_dbl[ent.m], 1e-13))
+        /* Compute using the interval arithmetic code */
+        /* 256 bits should be enough for testing... */
+        arb_set_d(t_mp, t_dbl);
+        mirp_boys(F_mp, ent.m+extra_m, t_mp, 256);
+
+        /* Make sure we really didn't lose a whole bunch of precision */
+        if(arb_rel_accuracy_bits(F_mp + ent.m) < 64)
+            throw std::logic_error("Error - not enough bits in testing boys exact function");
+
+        double vref2_dbl = arf_get_d(arb_midref(F_mp + ent.m), ARF_RND_NEAR);
+
+        if(F_dbl[ent.m] != vref_dbl && F_dbl[ent.m] != vref2_dbl)
         {
             std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
-            double reldiff = std::fabs(vref_dbl - F_dbl[ent.m]);
-            reldiff /= std::fmax(std::fabs(vref_dbl), std::fabs(F_dbl[ent.m]));
-
             auto old_cout_prec = std::cout.precision(17);
-            std::cout << "   Calculated: " << F_dbl[ent.m] << "\n";
-            std::cout << "    Reference: " << vref_dbl << "\n";
-            std::cout << "Relative Diff: " << reldiff << "\n\n";
+            std::cout << "     Calculated: " << F_dbl[ent.m] << "\n";
+            std::cout << "      Reference: " << vref2_dbl << "\n";
+            std::cout << " File Reference: " << vref_dbl << "\n\n";
             std::cout.precision(old_cout_prec);
             nfailed++;
         }
     }
+
+    arb_clear(t_mp);
+    _arb_vec_clear(F_mp, max_m+1);
 
     return nfailed;
 }
