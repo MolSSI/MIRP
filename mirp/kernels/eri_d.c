@@ -5,7 +5,6 @@
 
 #include "mirp/kernels/boys.h"
 #include "mirp/kernels/eri.h"
-#include "mirp/loops.h"
 #include "mirp/math.h"
 #include "mirp/gpt.h"
 #include <math.h>
@@ -140,20 +139,5 @@ void mirp_eri_single_d(double * output,
     pfac /= (gammap * gammaq * sqrt(gammap + gammaq));
 
     *output *= pfac;
-}
-
-
-void mirp_eri_d(double * output,
-                int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
-                int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
-                int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
-                int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4)
-{
-    mirp_loop4_d(output,
-                      am1, A, nprim1, ngeneral1, alpha1, coeff1,
-                      am2, B, nprim2, ngeneral2, alpha2, coeff2,
-                      am3, C, nprim3, ngeneral3, alpha3, coeff3,
-                      am4, D, nprim4, ngeneral4, alpha4, coeff4,
-                      mirp_eri_single_d);
 }
 

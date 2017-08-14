@@ -5,7 +5,6 @@
 
 #include "mirp/kernels/boys.h"
 #include "mirp/kernels/eri.h"
-#include "mirp/loops.h"
 #include "mirp/math.h"
 #include "mirp/gpt.h"
 
@@ -355,18 +354,3 @@ void mirp_eri_single(arb_t output,
     arb_clear(Gxyz);
 }
 
-
-void mirp_eri(arb_ptr output,
-              int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
-              int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
-              int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
-              int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
-              slong working_prec)
-{
-    mirp_loop4(output,
-               am1, A, nprim1, ngeneral1, alpha1, coeff1,
-               am2, B, nprim2, ngeneral2, alpha2, coeff2,
-               am3, C, nprim3, ngeneral3, alpha3, coeff3,
-               am4, D, nprim4, ngeneral4, alpha4, coeff4,
-               working_prec, mirp_eri_single); 
-}

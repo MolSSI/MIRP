@@ -149,7 +149,7 @@ void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec)
 }
 
 
-int mirp_boys_target_prec(arb_ptr F, int m, const arb_t t, slong target_prec)
+int mirp_boys_target(arb_ptr F, int m, const arb_t t, slong target_prec)
 {
     /* We run the boys function once, checking for the minimum
      * relative accuracy bits. If that is ok, we return.
@@ -193,9 +193,9 @@ int mirp_boys_target_prec(arb_ptr F, int m, const arb_t t, slong target_prec)
 }
 
 
-void mirp_boys_target_prec_str(arb_ptr F, int m, const char * t, slong target_prec)
+void mirp_boys_target_str(arb_ptr F, int m, const char * t, slong target_prec)
 {
-    /* Procedure is similar to mirp_boys_target_prec, however
+    /* Procedure is similar to mirp_boys_target, however
      * this should always be guaranteed to succeed */
     arb_t t_mp;
     arb_init(t_mp);
@@ -234,7 +234,7 @@ void mirp_boys_exact(double *F, int m, double t)
 
     arb_ptr F_mp = _arb_vec_init(m+1);
 
-    mirp_boys_target_prec(F_mp, m, t_mp, target_prec);
+    mirp_boys_target(F_mp, m, t_mp, target_prec);
 
     /* convert back to double precision */
     for(int i = 0; i <= m; i++)

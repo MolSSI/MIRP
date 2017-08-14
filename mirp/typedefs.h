@@ -51,6 +51,28 @@ typedef void (*cb_integral4_single)(arb_t,
                                     slong);
 
 
+typedef int (*cb_integral4_single_target)(arb_t,
+                                          const int *, arb_srcptr, const arb_t,
+                                          const int *, arb_srcptr, const arb_t,
+                                          const int *, arb_srcptr, const arb_t,
+                                          const int *, arb_srcptr, const arb_t,
+                                          slong);
+
+
+typedef void (*cb_integral4_single_target_str)(arb_t,
+                                               const int *, const char **, const char *,
+                                               const int *, const char **, const char *,
+                                               const int *, const char **, const char *,
+                                               const int *, const char **, const char *,
+                                               slong);
+
+typedef void (*cb_integral4_single_exact)(double * integral,
+                                          const int * lmn1, const double * A, double alpha1,
+                                          const int * lmn2, const double * B, double alpha2,
+                                          const int * lmn3, const double * C, double alpha3,
+                                          const int * lmn4, const double * D, double alpha4);
+
+
 /*! \brief A callback for a function that computes all cartesian integrals for an
  *         entire shell (four center, interval arithmetic)
  */

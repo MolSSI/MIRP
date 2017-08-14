@@ -46,8 +46,9 @@ int main(int argc, char ** argv)
             boys_create_test(infile, outfile, ndigits, header);
         else if(integral == "eri_single")
         {
-            integral_single_create_test<4>(infile, outfile,
-                                           ndigits, header, mirp_eri_single);
+            detail::integral4_single_create_test(infile, outfile,
+                                                 ndigits, header,
+                                                 mirp_eri_single_target_str);
         }
         else
         {

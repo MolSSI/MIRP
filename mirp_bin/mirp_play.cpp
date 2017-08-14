@@ -12,6 +12,7 @@ using namespace mirp;
 
 int main(void)
 {
+/*
     double alpha1[3] = { 130.7093200, 23.8088610, 6.4436083 };
     double coeff1[3] = { 0.15432897, 0.53532814, 0.44463454 };
     double A[3] = { 0.0, 0.0, 0.0 };
@@ -38,6 +39,6 @@ int main(void)
     std::cout << arb_contains(tmp3, tmp1) << "\n";
 
 
-
+*/
     return 0;
 }

@@ -44,11 +44,28 @@ int main(int argc, char ** argv)
     {
         long nfailed = -1;
         if(integral == "boys")
+        {
             nfailed = boys_run_test_main(file, floattype, extra_m, target_prec);
+        }
         else if(integral == "eri_single")
         {
             if(floattype == "interval")
-                nfailed = integral_single_run_test_main<4>(file, target_prec, mirp_eri_single);
+            {
+                nfailed = detail::integral4_single_run_test(file, target_prec, mirp_eri_single_target_str);
+            }
+            else if(floattype == "double")
+            {
+                nfailed = detail::integral4_single_run_test_d(file, mirp_eri_single_d);
+            }
+            else if(floattype == "exact")
+            {
+                nfailed = detail::integral4_single_run_test_exact(file, mirp_eri_single_exact, mirp_eri_single_target);
+            }
+            else
+            {
+                std::cout << "Float type \"" << floattype << " not valid for integral \"" << integral << "\"\n";
+                return 1;
+            }
         }
         else
         {

@@ -55,7 +55,7 @@ void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec);
  * \return 0 If the function is successful, nonzero if the target
  *           precision can not be reached.
  */
-int mirp_boys_target_prec(arb_ptr F, int m, const arb_t t, slong target_prec);
+int mirp_boys_target(arb_ptr F, int m, const arb_t t, slong target_prec);
 
 
 /*! \brief Compute the Boys function to a target precision (string input)
@@ -76,7 +76,7 @@ int mirp_boys_target_prec(arb_ptr F, int m, const arb_t t, slong target_prec);
  * \param [in] t The value at which to evaluate
  * \param [in] target_prec The desired precision we want in the computed values
  */
-void mirp_boys_target_prec_str(arb_ptr F, int m, const char * t, slong target_prec);
+void mirp_boys_target_str(arb_ptr F, int m, const char * t, slong target_prec);
 
 
 /*! \brief Computes the Boys function to double precision using interval arithmetic

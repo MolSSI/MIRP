@@ -62,5 +62,7 @@ add_boys_test(boys_large_random.dat interval 315 10)
 # ERI
 add_integral4_single_test(eri_single_random_1.dat eri_single interval 128)
 add_integral4_single_test(eri_single_random_1.dat eri_single interval 315)
+add_integral4_single_test(eri_single_random_1.dat eri_single exact 0)
 add_integral4_single_test(eri_single_water_sto3g.dat eri_single interval 128)
 add_integral4_single_test(eri_single_water_sto3g.dat eri_single interval 315)
+add_integral4_single_test(eri_single_water_sto3g.dat eri_single exact 0)

@@ -3,8 +3,6 @@ list(APPEND MIRP_FILELIST
                math.c
                gpt.c
                shell.c
-               loops_d.c
-               loops.c
 
                kernels/integral4_wrappers.c
 

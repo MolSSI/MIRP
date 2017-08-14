@@ -77,6 +77,13 @@ integral_single_data integral_single_read_file(const std::string & filepath, int
         }
     }
 
+    // sanity check
+    for(const auto & ent : data.values)
+    {
+        if(ent.g.size() != static_cast<size_t>(n))
+            throw std::runtime_error("Inconsistent number of gaussians");
+    }
+
     return data;
 }
 

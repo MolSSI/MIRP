@@ -44,7 +44,7 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
     for(const auto & ent : data.values)
     {
         /* 16 extra bits (~4-5 decimal digits) for safety */
-        mirp_boys_target_prec_str(F_mp, ent.m + extra_m, ent.t.c_str(), target_prec+16);
+        mirp_boys_target_str(F_mp, ent.m + extra_m, ent.t.c_str(), target_prec+16);
 
         /* Round the reference value to the target precision */
         arb_set_str(vref_mp, ent.value.c_str(), target_prec);
@@ -148,7 +148,6 @@ long boys_run_test_exact(const mirp::boys_data & data, long extra_m)
     for(const auto & ent : data.values)
     {
         double t_dbl = std::strtod(ent.t.c_str(), nullptr);
-        double vref_dbl = std::strtod(ent.value.c_str(), nullptr);
 
         /* Compute using the "exact" code */
         mirp_boys_exact(F_dbl.data(), ent.m+extra_m, t_dbl);
@@ -160,8 +159,9 @@ long boys_run_test_exact(const mirp::boys_data & data, long extra_m)
 
         /* Make sure we really didn't lose a whole bunch of precision */
         if(arb_rel_accuracy_bits(F_mp + ent.m) < 64)
-            throw std::logic_error("Error - not enough bits in testing boys exact function");
+            throw std::logic_error("Not enough bits in testing boys exact function. Contact the developer");
 
+        double vref_dbl = std::strtod(ent.value.c_str(), nullptr);
         double vref2_dbl = arf_get_d(arb_midref(F_mp + ent.m), ARF_RND_NEAR);
 
         if(F_dbl[ent.m] != vref_dbl && F_dbl[ent.m] != vref2_dbl)
@@ -265,16 +265,7 @@ long boys_run_test_main(const std::string & filepath,
                         long extra_m,
                         long target_prec)
 {
-    boys_data data;
-    try {
-        data = boys_read_file(filepath, false);
-    }
-    catch(std::exception & ex)
-    {
-        std::cout << "Unable to read data from file \"" << filepath << "\": ";
-        std::cout << ex.what() << "\n";
-        return 2;
-    }
+    boys_data data = boys_read_file(filepath, false);
 
     std::cout << "Read " << data.values.size() << " values from " << filepath << "\n";
 
@@ -322,7 +313,7 @@ void boys_create_test(const std::string & input_filepath,
 
     for(auto & ent : data.values)
     {
-        mirp_boys_target_prec_str(F_mp, ent.m, ent.t.c_str(), target_prec);
+        mirp_boys_target_str(F_mp, ent.m, ent.t.c_str(), target_prec);
 
         char * s = arb_get_str(F_mp + ent.m, ndigits, ARB_STR_NO_RADIUS);
         ent.value = s;
