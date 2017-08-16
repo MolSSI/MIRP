@@ -16,7 +16,7 @@
  * \copydetails mirp_cartloop4_d
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-static void mirp_cartloop4(arb_ptr output,
+static void mirp_cartloop4(arb_ptr integral,
                            int am1, arb_srcptr A, const arb_t alpha1,
                            int am2, arb_srcptr B, const arb_t alpha2,
                            int am3, arb_srcptr C, const arb_t alpha3,
@@ -41,7 +41,7 @@ static void mirp_cartloop4(arb_ptr output,
                 int lmn4[3] = {am4, 0, 0};
                 for(long l = 0; l < ncart4; l++)
                 {
-                    cb(output + idx,
+                    cb(integral + idx,
                        lmn1, A, alpha1,
                        lmn2, B, alpha2,
                        lmn3, C, alpha3,
@@ -67,11 +67,11 @@ static void mirp_cartloop4(arb_ptr output,
 /*! \brief Compute all cartesian components of a single primitive integral
  *         (four center, double precision)
  *
- * The \p output buffer is expected to be able to hold all primitive integrals
+ * The \p integral buffer is expected to be able to hold all primitive integrals
  * (ie, it can hold ncart(am1) * ncart(am2) * ncart(am3) * ncart(am4) elements).
  *
- * \param [out] output 
- *              Resulting integral output
+ * \param [out] integral 
+ *              Resulting integral integral
  * \param [in]  am1,am2,am3,am4
  *              Angular momentum of the four centers
  * \param [in]  A,B,C,D
@@ -82,7 +82,7 @@ static void mirp_cartloop4(arb_ptr output,
  *              Callback that calculates a single cartesian component of a
  *              primitive integral
  */
-static void mirp_cartloop4_d(double * output,
+static void mirp_cartloop4_d(double * integral,
                              int am1, const double * A, double alpha1,
                              int am2, const double * B, double alpha2,
                              int am3, const double * C, double alpha3,
@@ -107,7 +107,7 @@ static void mirp_cartloop4_d(double * output,
                 int lmn4[3] = {am4, 0, 0};
                 for(long l = 0; l < ncart4; l++)
                 {
-                    cb(output + idx,
+                    cb(integral + idx,
                        lmn1, A, alpha1,
                        lmn2, B, alpha2,
                        lmn3, C, alpha3,
@@ -129,22 +129,18 @@ static void mirp_cartloop4_d(double * output,
 }
 
 
-void mirp_loop_shell4(arb_ptr output,
+void mirp_loop_shell4(arb_ptr integral,
                       int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
                       int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
                       int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
                       int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
                       slong working_prec, cb_integral4_single cb)
 {
-    const long ncart1 = MIRP_NCART(am1);
-    const long ncart2 = MIRP_NCART(am2);
-    const long ncart3 = MIRP_NCART(am3);
-    const long ncart4 = MIRP_NCART(am4);
-    const long ncart1234 = ncart1*ncart2*ncart3*ncart4;
+    const long ncart1234 = MIRP_NCART4(am1, am2, am3, am4);
     const long ngeneral1234 = ngeneral1*ngeneral2*ngeneral3*ngeneral4;
     const long full_size = ncart1234*ngeneral1234;
 
-    arb_ptr output_buffer = _arb_vec_init(full_size);
+    arb_ptr integral_buffer = _arb_vec_init(full_size);
     arb_ptr coeff1_norm = _arb_vec_init(nprim1 * ngeneral1);
     arb_ptr coeff2_norm = _arb_vec_init(nprim2 * ngeneral2);
     arb_ptr coeff3_norm = _arb_vec_init(nprim3 * ngeneral3);
@@ -155,7 +151,7 @@ void mirp_loop_shell4(arb_ptr output,
     mirp_normalize_shell(am3, nprim3, ngeneral3, alpha3, coeff3, coeff3_norm, working_prec);
     mirp_normalize_shell(am4, nprim4, ngeneral4, alpha4, coeff4, coeff4_norm, working_prec);
 
-    _arb_vec_zero(output, full_size);
+    _arb_vec_zero(integral, full_size);
 
     /* A temporary variable (used to build up the coefficient) */
     arb_t coeff;
@@ -166,7 +162,7 @@ void mirp_loop_shell4(arb_ptr output,
     for(int k = 0; k < nprim3; k++)
     for(int l = 0; l < nprim4; l++)
     {
-        mirp_cartloop4(output_buffer,
+        mirp_cartloop4(integral_buffer,
                        am1, A, alpha1 + i,
                        am2, B, alpha2 + j,
                        am3, C, alpha3 + k,
@@ -186,28 +182,28 @@ void mirp_loop_shell4(arb_ptr output,
             for(long q = 0; q < ncart1234; q++)
             {
                 const long idx = ntotal*ncart1234 + q;
-                arb_addmul(output+idx, output_buffer+q, coeff, working_prec);
+                arb_addmul(integral+idx, integral_buffer+q, coeff, working_prec);
             }
             ntotal++;
         }
     }
 
     arb_clear(coeff);
-    _arb_vec_clear(output_buffer, full_size);
-    _arb_vec_clear(coeff1_norm, nprim1 * ngeneral1);
-    _arb_vec_clear(coeff2_norm, nprim2 * ngeneral2);
-    _arb_vec_clear(coeff3_norm, nprim3 * ngeneral3);
-    _arb_vec_clear(coeff4_norm, nprim4 * ngeneral4);
+    _arb_vec_clear(integral_buffer, full_size);
+    _arb_vec_clear(coeff1_norm, nprim1*ngeneral1);
+    _arb_vec_clear(coeff2_norm, nprim2*ngeneral2);
+    _arb_vec_clear(coeff3_norm, nprim3*ngeneral3);
+    _arb_vec_clear(coeff4_norm, nprim4*ngeneral4);
 }
 
 
 
 int mirp_integral4_single_target(arb_t integral,
-                                      const int * lmn1, arb_srcptr A, const arb_t alpha1,
-                                      const int * lmn2, arb_srcptr B, const arb_t alpha2,
-                                      const int * lmn3, arb_srcptr C, const arb_t alpha3,
-                                      const int * lmn4, arb_srcptr D, const arb_t alpha4,
-                                      slong target_prec, cb_integral4_single cb)
+                                 const int * lmn1, arb_srcptr A, const arb_t alpha1,
+                                 const int * lmn2, arb_srcptr B, const arb_t alpha2,
+                                 const int * lmn3, arb_srcptr C, const arb_t alpha3,
+                                 const int * lmn4, arb_srcptr D, const arb_t alpha4,
+                                 slong target_prec, cb_integral4_single cb)
 {
     /* We run the callback function once, checking for the minimum
      * relative accuracy bits. If that is ok, we return.
@@ -220,9 +216,7 @@ int mirp_integral4_single_target(arb_t integral,
      * nonzero
      */
 
-    slong min_bits, last_min_bits;
-    int sufficient_accuracy = 0;
-    slong working_prec = target_prec + 16;
+    slong working_prec = target_prec + MIRP_BITS_INCREMENT;
     
     cb(integral,
        lmn1, A, alpha1,
@@ -231,16 +225,17 @@ int mirp_integral4_single_target(arb_t integral,
        lmn4, D, alpha4,
        working_prec);
 
-    min_bits = arb_rel_accuracy_bits(integral);
 
-    if(min_bits >= target_prec || mirp_test_zero_prec(integral, target_prec))
-       sufficient_accuracy = 1;
+    slong cur_bits = arb_rel_accuracy_bits(integral);
+    int suff_acc = (cur_bits >= target_prec);
 
-    last_min_bits = min_bits;
+    slong last_bits;
 
-    while(!sufficient_accuracy)
+    while(!suff_acc)
     {
-        working_prec += 16;
+        last_bits = cur_bits;
+        working_prec += MIRP_BITS_INCREMENT;
+
         cb(integral,
            lmn1, A, alpha1,
            lmn2, B, alpha2,
@@ -248,22 +243,73 @@ int mirp_integral4_single_target(arb_t integral,
            lmn4, D, alpha4,
            working_prec);
 
-        min_bits = arb_rel_accuracy_bits(integral);
+        cur_bits = arb_rel_accuracy_bits(integral);
 
-        if(min_bits >= target_prec || mirp_test_zero_prec(integral, target_prec))
-           sufficient_accuracy = 1;
+        if(cur_bits >= target_prec)
+           suff_acc = 1;
 
-        /* Does increasing the working precision actually have an effect?
-         * if not, we have reached an infinite loop
-         */
-        if(!sufficient_accuracy && min_bits <= last_min_bits)
-            return 1;
-
-        last_min_bits = min_bits;
+        /*
+         * Does increasing the working precision actually have an effect?
+         * if not, we have reached an infinite loop.
+         * This leaves suff_acc as 0 */
+        if(cur_bits < target_prec && cur_bits <= last_bits)
+            break;
     }
 
-    /* All elements of 'integral' are now of sufficient accuracy */
-    return 0;
+    return !suff_acc;
+}
+
+
+int mirp_integral4_target(arb_ptr integrals,
+                          int am1, arb_srcptr A, int nprim1, int ngeneral1, arb_srcptr alpha1, arb_srcptr coeff1,
+                          int am2, arb_srcptr B, int nprim2, int ngeneral2, arb_srcptr alpha2, arb_srcptr coeff2,
+                          int am3, arb_srcptr C, int nprim3, int ngeneral3, arb_srcptr alpha3, arb_srcptr coeff3,
+                          int am4, arb_srcptr D, int nprim4, int ngeneral4, arb_srcptr alpha4, arb_srcptr coeff4,
+                          slong target_prec, cb_integral4 cb)
+{
+    const size_t nintegrals = MIRP_NCART4(am1, am2, am3, am4);
+
+    slong working_prec = target_prec + MIRP_BITS_INCREMENT;
+    
+    cb(integrals,
+       am1, A, nprim1, ngeneral1, alpha1, coeff1,
+       am2, B, nprim2, ngeneral2, alpha2, coeff2,
+       am3, C, nprim3, ngeneral3, alpha3, coeff3,
+       am4, D, nprim4, ngeneral4, alpha4, coeff4,
+       working_prec);
+
+    slong cur_bits = mirp_min_accuracy_bits(integrals, nintegrals);
+    int suff_acc = (cur_bits >= target_prec);
+
+    slong last_bits;
+
+    while(!suff_acc)
+    {
+        last_bits = cur_bits;
+        working_prec += MIRP_BITS_INCREMENT;
+
+        cb(integrals,
+           am1, A, nprim1, ngeneral1, alpha1, coeff1,
+           am2, B, nprim2, ngeneral2, alpha2, coeff2,
+           am3, C, nprim3, ngeneral3, alpha3, coeff3,
+           am4, D, nprim4, ngeneral4, alpha4, coeff4,
+           working_prec);
+
+
+        cur_bits = mirp_min_accuracy_bits(integrals, nintegrals);
+
+        if(cur_bits >= target_prec)
+            suff_acc = 1;
+
+        /*
+         * Does increasing the working precision actually have an effect?
+         * if not, we have reached an infinite loop.
+         * This leaves suff_acc as 0 */
+        if(cur_bits < target_prec && cur_bits <= last_bits)
+            break;
+    }
+
+    return !suff_acc;
 }
 
 
@@ -289,11 +335,9 @@ void mirp_integral4_single_target_str(arb_t integral,
     slong working_prec = target_prec;
     slong min_bits = 0;
 
-    int sufficient_accuracy = 0;
-
     do
     {
-        working_prec += 16;
+        working_prec += MIRP_BITS_INCREMENT;
         for(int i = 0; i < 3; i++)
         {
             arb_set_str(A_mp + i, A[i], working_prec);
@@ -315,11 +359,7 @@ void mirp_integral4_single_target_str(arb_t integral,
 
         min_bits = arb_rel_accuracy_bits(integral);
 
-        if(min_bits >= target_prec || mirp_test_zero_prec(integral, target_prec))
-           sufficient_accuracy = 1;
-
-    } while(!sufficient_accuracy);
-
+    } while(min_bits < target_prec);
 
     _arb_vec_clear(A_mp, 3);
     _arb_vec_clear(B_mp, 3);
@@ -337,7 +377,7 @@ void mirp_integral4_single_exact(double * integral,
                                  const int * lmn2, const double * B, double alpha2,
                                  const int * lmn3, const double * C, double alpha3,
                                  const int * lmn4, const double * D, double alpha4,
-                                 cb_integral4_single cb)
+                                 cb_integral4_single_target cb)
 {
     /* convert arguments to arb_t */
     arb_ptr A_mp = _arb_vec_init(3);
@@ -368,25 +408,17 @@ void mirp_integral4_single_exact(double * integral,
     arb_t integral_mp;
     arb_init(integral_mp);
 
-    /* The target precision is the number of bits in double precision (53) + safety */
+    /* The target precision is the number of bits in
+     * double precision (53) + lots of safety */
     const slong target_prec = 64;
 
-    slong working_prec = target_prec;
-
-    do {
-
-        working_prec += 16;
-
-        /* Call the callback */
-        cb(integral_mp,
-           lmn1, A_mp, alpha1_mp,
-           lmn2, B_mp, alpha2_mp,
-           lmn3, C_mp, alpha3_mp,
-           lmn4, D_mp, alpha4_mp,
-           working_prec);
-
-    } while(arb_rel_accuracy_bits(integral_mp) < target_prec &&
-            !mirp_test_zero_prec(integral_mp, target_prec));
+    /* Call the callback */
+    cb(integral_mp,
+       lmn1, A_mp, alpha1_mp,
+       lmn2, B_mp, alpha2_mp,
+       lmn3, C_mp, alpha3_mp,
+       lmn4, D_mp, alpha4_mp,
+       target_prec);
 
     /* We get the value from the midpoint of the arb struct */
     *integral = arf_get_d(arb_midref(integral_mp), ARF_RND_NEAR);
@@ -409,7 +441,7 @@ void mirp_integral4_exact(double * integral,
                           int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2, 
                           int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3, 
                           int am4, const double * D, int nprim4, int ngeneral4, const double * alpha4, const double * coeff4,
-                          cb_integral4 cb)
+                          cb_integral4_target cb)
 {
     /* convert arguments to arb_t */
     arb_ptr A_mp = _arb_vec_init(3);
@@ -462,21 +494,13 @@ void mirp_integral4_exact(double * integral,
     /* The target precision is the number of bits in double precision (53) + safety */
     const slong target_prec = 64;
 
-    slong working_prec = target_prec;
-
-    do {
-
-        working_prec += 16;
-
-        /* Call the callback */
-        cb(integral_mp,
-           am1, A_mp, nprim1, ngeneral1, alpha1_mp, coeff1_mp,
-           am2, A_mp, nprim2, ngeneral2, alpha2_mp, coeff2_mp,
-           am3, A_mp, nprim3, ngeneral3, alpha3_mp, coeff3_mp,
-           am4, A_mp, nprim4, ngeneral4, alpha4_mp, coeff4_mp,
-           working_prec);
-
-    } while(!mirp_all_sufficient_accuracy(integral_mp, nintegrals, target_prec));
+    /* Call the callback */
+    cb(integral_mp,
+       am1, A_mp, nprim1, ngeneral1, alpha1_mp, coeff1_mp,
+       am2, A_mp, nprim2, ngeneral2, alpha2_mp, coeff2_mp,
+       am3, A_mp, nprim3, ngeneral3, alpha3_mp, coeff3_mp,
+       am4, A_mp, nprim4, ngeneral4, alpha4_mp, coeff4_mp,
+       target_prec);
 
     /* We get the value from the midpoint of the arb struct */
     for(size_t i = 0; i < nintegrals; i++)
@@ -499,7 +523,7 @@ void mirp_integral4_exact(double * integral,
 }
 
 
-void mirp_loop_shell4_d(double * output,
+void mirp_loop_shell4_d(double * integral,
                         int am1, const double * A, int nprim1, int ngeneral1, const double * alpha1, const double * coeff1,
                         int am2, const double * B, int nprim2, int ngeneral2, const double * alpha2, const double * coeff2,
                         int am3, const double * C, int nprim3, int ngeneral3, const double * alpha3, const double * coeff3,
@@ -514,7 +538,7 @@ void mirp_loop_shell4_d(double * output,
     const long ngeneral1234 = ngeneral1*ngeneral2*ngeneral3*ngeneral4;
     const long full_size = ncart1234*ngeneral1234;
 
-    double * output_buffer = malloc(full_size * sizeof(double));
+    double * integral_buffer = malloc(full_size * sizeof(double));
     double * coeff1_norm = malloc(nprim1 * ngeneral1 * sizeof(double));
     double * coeff2_norm = malloc(nprim2 * ngeneral2 * sizeof(double));
     double * coeff3_norm = malloc(nprim3 * ngeneral3 * sizeof(double));
@@ -525,13 +549,13 @@ void mirp_loop_shell4_d(double * output,
     mirp_normalize_shell_d(am3, nprim3, ngeneral3, alpha3, coeff3, coeff3_norm);
     mirp_normalize_shell_d(am4, nprim4, ngeneral4, alpha4, coeff4, coeff4_norm);
 
-    memset(output, 0, full_size * sizeof(double));
+    memset(integral, 0, full_size * sizeof(double));
     for(int i = 0; i < nprim1; i++)
     for(int j = 0; j < nprim2; j++)
     for(int k = 0; k < nprim3; k++)
     for(int l = 0; l < nprim4; l++)
     {
-        mirp_cartloop4_d(output_buffer,
+        mirp_cartloop4_d(integral_buffer,
                               am1, A, alpha1[i],
                               am2, B, alpha2[j],
                               am3, C, alpha3[k],
@@ -550,12 +574,12 @@ void mirp_loop_shell4_d(double * output,
                                * coeff4_norm[p*nprim4+l];
 
             for(long q = 0; q < ncart1234; q++)
-                output[ntotal*ncart1234+q] += output_buffer[q] * coeff;
+                integral[ntotal*ncart1234+q] += integral_buffer[q] * coeff;
             ntotal++;
         }
     }
 
-    free(output_buffer);    
+    free(integral_buffer);    
     free(coeff1_norm);
     free(coeff2_norm);
     free(coeff3_norm);

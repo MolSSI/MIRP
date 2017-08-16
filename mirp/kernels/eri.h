@@ -20,8 +20,8 @@ extern "C" {
  * angular momentum being the sum of the three components. For example,
  * { 1, 2, 0 } is the \f$f_{xy^2}\f$ cartesian integral.
  *
- * \param [out] output 
- *              Resulting integral output
+ * \param [out] integral 
+ *              Resulting integral integral
  * \param [in]  lmn1,lmn2,lmn3,lmn4
  *              Exponents of x, y, and z that signify angular momentum. Required
  *              to be 3 elements.
@@ -30,7 +30,7 @@ extern "C" {
  * \param [in]  alpha1,alpha2,alpha3,alpha4
  *              Exponents of the gaussian on the four centers
  */
-void mirp_eri_single_d(double * output,
+void mirp_eri_single_d(double * integral,
                        const int * lmn1, const double * A, double alpha1,
                        const int * lmn2, const double * B, double alpha2,
                        const int * lmn3, const double * C, double alpha3,
@@ -43,7 +43,7 @@ void mirp_eri_single_d(double * output,
  * \copydetails mirp_eri_single_d
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
-void mirp_eri_single(arb_t output,
+void mirp_eri_single(arb_t integral,
                      const int * lmn1, arb_srcptr A, const arb_t alpha1,
                      const int * lmn2, arb_srcptr B, const arb_t alpha2,
                      const int * lmn3, arb_srcptr C, const arb_t alpha3,
@@ -56,10 +56,12 @@ void mirp_eri_single(arb_t output,
  ****************************************/
 MIRP_WRAP_SHELL4(eri)
 MIRP_WRAP_SHELL4_D(eri)
-MIRP_WRAP_SINGLE4_TARGET_PREC(eri)
-MIRP_WRAP_SINGLE4_TARGET_PREC_STR(eri)
+MIRP_WRAP_SINGLE4_TARGET(eri)
+MIRP_WRAP_SINGLE4_TARGET_STR(eri)
 MIRP_WRAP_SINGLE4_EXACT(eri)
 
+MIRP_WRAP_TARGET(eri)
+MIRP_WRAP_EXACT(eri)
 
 
 #ifdef __cplusplus

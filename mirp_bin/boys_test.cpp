@@ -32,6 +32,12 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
 {
     using namespace mirp;
 
+    /* Number of binary digits contained in the reference value strings
+       (and the number of binary digits of accuracy, taking into account
+       that the number printed is +/- 1 decimal ulp) */
+    long integral_bits = data.ndigits / MIRP_LOG_10_2;
+    long round_bits = (data.ndigits-1) / MIRP_LOG_10_2;
+
     long nfailed = 0;
 
     const int max_m = boys_max_m(data) + extra_m;
@@ -46,24 +52,18 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
         /* 16 extra bits (~4-5 decimal digits) for safety */
         mirp_boys_target_str(F_mp, ent.m + extra_m, ent.t.c_str(), target_prec+16);
 
-        /* Round the reference value to the target precision */
-        arb_set_str(vref_mp, ent.value.c_str(), target_prec);
+        /* Convert the reference to arb_t. The reference is printed to +/- 1 ulp (decimal). */
+        arb_set_str(vref_mp, ent.value.c_str(), integral_bits + 16);
+        arf_mag_add_ulp(arb_radref(vref_mp), arb_radref(vref_mp), arb_midref(vref_mp), round_bits);
+        arb_set_round(vref_mp, vref_mp, target_prec);
 
         /* Rounding the reference value to the target precision results in
-         * an interval. Does that interval contain our (more precise) result?
-         */
-        /* 1.) Test if the calculated value is within the error of the reference
-         * 2.) If it's not, test if the calculated value is [0 +/ value] and is
-         *     that zero within the target precision
-         * 3.) If (2) is true, and the reference integral is exactly zero, then
-         *     they are considered equal (and this block is not entered)
-         */
-        if(!arb_contains(vref_mp, F_mp + ent.m) &&
-           !(arb_is_zero(vref_mp) && mirp_test_zero_prec(F_mp + ent.m, target_prec)))
+         * an interval. Does that interval contain our (more precise) result? */
+        if(!arb_contains(vref_mp, F_mp + ent.m))
         {
             std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
-            char * s1 = arb_get_str(F_mp + ent.m, 1000, 0);
-            char * s2 = arb_get_str(vref_mp, 1000, 0);
+            char * s1 = arb_get_str(F_mp + ent.m, 2*data.ndigits, 0);
+            char * s2 = arb_get_str(vref_mp, 2*data.ndigits, 0);
             std::cout << "   Calculated: " << s1 << "\n";
             std::cout << "    Reference: " << s2 << "\n\n";
             free(s1);

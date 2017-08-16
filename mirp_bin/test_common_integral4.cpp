@@ -74,15 +74,9 @@ void integral4_single_create_test(const std::string & input_filepath,
            ent.g[3].lmn.data(), D, ent.g[3].alpha.c_str(),
            target_prec);
 
-        
-        if(mirp_test_zero_prec(integral, target_prec))
-            ent.integral = "0";
-        else
-        {
-            char * s = arb_get_str(integral, ndigits, ARB_STR_NO_RADIUS);
-            ent.integral = s;
-            free(s);
-        }
+        char * s = arb_get_str(integral, ndigits, ARB_STR_NO_RADIUS);
+        ent.integral = s;
+        free(s);
     }
 
     integral_single_write_file(output_filepath, data);
@@ -115,6 +109,12 @@ long integral4_single_run_test(const std::string & filepath,
     arb_init(integral);
     arb_init(integral_ref);
 
+    /* Number of binary digits contained in the reference value strings
+       (and the number of binary digits of accuracy, taking into account
+       that the number printed is +/- 1 decimal ulp) */
+    const long integral_bits = data.ndigits / MIRP_LOG_10_2;
+    const long round_bits = (data.ndigits - 1) / MIRP_LOG_10_2;
+
     /* We need to unpack XYZ */
     const char * A[3];
     const char * B[3];
@@ -138,26 +138,23 @@ long integral4_single_run_test(const std::string & filepath,
            ent.g[3].lmn.data(), D, ent.g[3].alpha.c_str(),
            target_prec + 16);
 
-        /*
-           The computed precision is guaranteed to be at least target_prec,
-           but will likely be greater. Round the reference value,
-           introducing error. Is the more precise calculated value
-           within those error bounds?
-         */
-        arb_set_str(integral_ref, ent.integral.c_str(), target_prec);
+        /* Convert the reference to arb_t. The reference is printed to +/- 1 ulp (decimal). */
+        if(ent.integral == "0")
+            arb_zero(integral_ref);
+        else
+        {
+            arb_set_str(integral_ref, ent.integral.c_str(), integral_bits + 16);
+            arf_mag_add_ulp(arb_radref(integral_ref), arb_radref(integral_ref), arb_midref(integral_ref), round_bits);
+            arb_set_round(integral_ref, integral_ref, target_prec);
+        }
 
-        /* 1.) Test if the calculated value is within the error of the reference
-         * 2.) If it's not, test if the calculated value is [0 +/ value] and is
-         *     that zero within the target precision
-         * 3.) If (2) is true, and the reference integral is exactly zero, then
-         *     they are considered equal (and this block is not entered)
-         */
-        if(!arb_contains(integral_ref, integral) &&
-           !(arb_is_zero(integral_ref) && mirp_test_zero_prec(integral, target_prec)))
+        /* Rounding the reference value to the target precision results in
+         * an interval. Does that interval contain our (more precise) result? */
+        if(!arb_equal(integral_ref, integral) && !arb_contains(integral_ref, integral))
         {
             std::cout << "Entry failed test:\n";
-            char * s1 = arb_get_str(integral, 1000, 0);
-            char * s2 = arb_get_str(integral_ref, 1000, 0);
+            char * s1 = arb_get_str(integral, 2*data.ndigits, 0);
+            char * s2 = arb_get_str(integral_ref, 2*data.ndigits, 0);
             std::cout << "   Calculated: " << s1 << "\n";
             std::cout << "    Reference: " << s2 << "\n\n";
             free(s1);

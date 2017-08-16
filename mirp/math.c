@@ -8,16 +8,10 @@
 #include <assert.h>
 
 
-/*! \brief Finds the minimum relative accuracy bit of a vector
- *
- * \param [in] v Vector to check
- * \param [in] n Length of the vector
- * \return The minimum value of arb_rel_accuracy_bits of the entire vector
- */
-slong mirp_min_rel_accuracy_bits(arb_srcptr v, size_t n)
+slong mirp_min_accuracy_bits(arb_srcptr v, size_t n)
 {
     if(n == 0)
-        return -1;
+        return 0;
 
     slong min = arb_rel_accuracy_bits(v+0);
 
@@ -28,20 +22,7 @@ slong mirp_min_rel_accuracy_bits(arb_srcptr v, size_t n)
 }
 
 
-/*! \brief Checks all elements of a vector for sufficient accuracy
- *
- * \param [in] v Vector to check
- * \param [in] n Length of the vector
- * \param [in] target_prec Precision required of all the elements
- * \return Nonzero if all elements are of sufficient accuracy, zero otherwise
- */
-int mirp_all_sufficient_accuracy(arb_srcptr v, size_t n, slong target_prec)
-{
-    slong min_bits = mirp_min_rel_accuracy_bits(v, n);
-    return min_bits >= target_prec;
-}
-
-
+#if 0
 int mirp_test_zero_prec(const arb_t n, slong prec)
 {
     /* This function is meant to be used if n does not
@@ -71,7 +52,7 @@ int mirp_test_zero_prec(const arb_t n, slong prec)
 
     return is_zero;
 }
-
+#endif
 
 double mirp_factorial_d(int n)
 {

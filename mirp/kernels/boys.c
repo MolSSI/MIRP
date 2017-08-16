@@ -161,35 +161,33 @@ int mirp_boys_target(arb_ptr F, int m, const arb_t t, slong target_prec)
      * match the target prec. This is indicated by returning
      * nonzero
      */
-    slong min_bits, last_min_bits;
-    slong working_prec = target_prec + 16;
+    slong working_prec = target_prec + MIRP_BITS_INCREMENT;
 
     mirp_boys(F, m, t, working_prec);
-    min_bits = mirp_min_rel_accuracy_bits(F, m+1);
 
-    /* Are we already there? */
-    if(min_bits >= target_prec)
-        return 0;
+    slong cur_bits = mirp_min_accuracy_bits(F, m+1);
+    int suff_acc = (cur_bits >= target_prec);
+    slong last_bits;
 
-    last_min_bits = min_bits;
-
-    while(min_bits < target_prec)
+    while(!suff_acc)
     {
-        working_prec += 16;
+        last_bits = cur_bits;
+        working_prec += MIRP_BITS_INCREMENT;
+
         mirp_boys(F, m, t, working_prec);
-        min_bits = mirp_min_rel_accuracy_bits(F, m+1);
 
-        /* Does increasing the working precision actually have an effect?
-         * If not, we have reached an infinite loop */
-        if(min_bits <= last_min_bits)
-            return 1;
+        cur_bits = mirp_min_accuracy_bits(F, m+1);
 
-        last_min_bits = min_bits;
+        if(cur_bits >= target_prec)
+           suff_acc = 1;
+
+        if(cur_bits < target_prec && cur_bits <= last_bits)
+            break;
     }
 
     /* All elements of F should contain values
      * with enough accuracy */
-    return 0;
+    return !suff_acc;
 }
 
 
@@ -201,17 +199,14 @@ void mirp_boys_target_str(arb_ptr F, int m, const char * t, slong target_prec)
     arb_init(t_mp);
 
     slong working_prec = target_prec;
-    slong min_bits = 0;
 
     do
     {
-        working_prec += 16;
+        working_prec += MIRP_BITS_INCREMENT;
         arb_set_str(t_mp, t, working_prec);
         mirp_boys(F, m, t_mp, working_prec);
 
-        min_bits = mirp_min_rel_accuracy_bits(F, m+1);
-
-    } while(min_bits < target_prec);
+    } while(mirp_min_accuracy_bits(F, m+1) < target_prec);
 
     arb_clear(t_mp);
 }

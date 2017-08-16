@@ -97,7 +97,7 @@ static void mirp_G(arb_t G, arb_t fp, arb_t fq,
     arb_clear(tmp2);
 }
 
-void mirp_eri_single(arb_t output,
+void mirp_eri_single(arb_t integral,
                      const int * lmn1, arb_srcptr A, const arb_t alpha1,
                      const int * lmn2, arb_srcptr B, const arb_t alpha2,
                      const int * lmn3, arb_srcptr C, const arb_t alpha3,
@@ -117,8 +117,8 @@ void mirp_eri_single(arb_t output,
     arb_ptr fmq = _arb_vec_init(lmn3[1]+lmn4[1]+1);
     arb_ptr fnq = _arb_vec_init(lmn3[2]+lmn4[2]+1);
 
-    /* Zero the output (we will be summing into it) */
-    arb_zero(output);
+    /* Zero the integral (we will be summing into it) */
+    arb_zero(integral);
 
     /* Temporary variables used in constructing expressions */
     arb_t tmp1, tmp2, tmp3;
@@ -275,7 +275,7 @@ void mirp_eri_single(arb_t output,
 
                     arb_div(tmp1, tmp1, tmp2, working_prec);
 
-                    arb_add(output, output, tmp1, working_prec);
+                    arb_add(integral, integral, tmp1, working_prec);
                 }
             }
         }
@@ -320,7 +320,12 @@ void mirp_eri_single(arb_t output,
     arb_div(tmp1, tmp1, tmp2, working_prec);
 
     /* apply the prefactor */
-    arb_mul(output, output, tmp1, working_prec);
+    arb_mul(integral, integral, tmp1, working_prec);
+
+
+    /* Check if this has no accuracy. This means the integral is zero */
+    if(arb_rel_accuracy_bits(integral) < 0)
+        arb_zero(integral);
 
 
     /* cleanup */

@@ -33,7 +33,7 @@ static void compute_farr(double * f, int lmn1, int lmn2, double xyz1, double xyz
     }
 }
 
-void mirp_eri_single_d(double * output,
+void mirp_eri_single_d(double * integral,
                        const int * lmn1, const double * A, double alpha1,
                        const int * lmn2, const double * B, double alpha2,
                        const int * lmn3, const double * C, double alpha3,
@@ -44,7 +44,7 @@ void mirp_eri_single_d(double * output,
     const int L_n = lmn1[2]+lmn2[2]+lmn3[2]+lmn4[2];
     const int L = L_l + L_m + L_n;
 
-    *output = 0.0;
+    *integral = 0.0;
 
     double F[L+1];
     double flp[lmn1[0]+lmn2[0]+1];
@@ -127,7 +127,7 @@ void mirp_eri_single_d(double * output,
                          * mirp_factorial_d(yfac) * mirp_factorial_d(ty)
                          * mirp_factorial_d(zfac) * mirp_factorial_d(tz);
 
-                    *output += tmp;
+                    *integral += tmp;
                 }
             }
         }
@@ -138,6 +138,6 @@ void mirp_eri_single_d(double * output,
                 * exp(-alpha3 * alpha4 * CD2 / gammaq);
     pfac /= (gammap * gammaq * sqrt(gammap + gammaq));
 
-    *output *= pfac;
+    *integral *= pfac;
 }
 

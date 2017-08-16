@@ -47,43 +47,14 @@ extern "C" {
 #define MIRP_LOG_10_2 0.3010299956639812
 
 
-/*! \brief Finds the minimum relative accuracy bit of a vector
- *
- * \param [in] v Vector to check
- * \param [in] n Length of the vector
- * \return The minimum value of arb_rel_accuracy_bits of the entire vector
+/*! \brief Number of binary bits to increment when attempting to
+ *  reach a given target precision
  */
-slong mirp_min_rel_accuracy_bits(arb_srcptr v, size_t n);
+#define MIRP_BITS_INCREMENT 32
 
 
-/*! \brief Checks all elements of a vector for sufficient accuracy
- *
- * \param [in] v Vector to check
- * \param [in] n Length of the vector
- * \param [in] target_prec Precision required of all the elements
- * \return Nonzero if all elements are of sufficient accuracy, zero otherwise
- */
-int mirp_all_sufficient_accuracy(arb_srcptr v, size_t n, slong target_prec);
-
-
-/*! \brief Tests if a value with no significant bits is zero to a given precision
- *
- * If a number does not have significant bits, that means that it is 0 +/- [error].
- * This function first checks if there are significant bits. If there isn't,
- * it then checks whether or not the error associated with
- * this zero value is small enough that it would be completely zero
- * when represented with the given (binary) precision.
- *
- * \note This function uses an internal safety factor, so the results may be
- *       unexpected if you are testing.
- *
- * \param [in] n The value to test
- * \param [in] prec The binary precision to test to
- * \return Nonzero if the test value has no signifcant bits and is zero
- *         to the given precision
- */
-int mirp_test_zero_prec(const arb_t n, slong prec);
-
+/* \brief Finds the least number of accuracy bits in a vector */
+slong mirp_min_accuracy_bits(arb_srcptr v, size_t n);
 
 /*! \brief Calculates a factorial using double precision */
 double mirp_factorial_d(int n);

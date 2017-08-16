@@ -83,6 +83,26 @@ typedef void (*cb_integral4)(arb_ptr,
                              int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
                              slong);
 
+typedef int (*cb_integral4_target)(arb_ptr,
+                                   int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
+                                   int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
+                                   int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
+                                   int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
+                                   slong);
+
+typedef void (*cb_integral4_target_str)(arb_ptr,
+                                        int, const char **, int, int, const char **, const char **,
+                                        int, const char **, int, int, const char **, const char **,
+                                        int, const char **, int, int, const char **, const char **,
+                                        int, const char **, int, int, const char **, const char **,
+                                        slong);
+
+typedef int (*cb_integral4_exact)(double *,
+                                  int, const double *, int, int, const double *, const double *,
+                                  int, const double *, int, int, const double *, const double *,
+                                  int, const double *, int, int, const double *, const double *,
+                                  int, const double *, int, int, const double *, const double *);
+
 #ifdef __cplusplus
 }
 #endif
