@@ -181,12 +181,10 @@ int mirp_boys_target(arb_ptr F, int m, const arb_t t, slong target_prec)
         if(cur_bits >= target_prec)
            suff_acc = 1;
 
-        if(cur_bits < target_prec && cur_bits <= last_bits)
+        if(!suff_acc && cur_bits <= last_bits)
             break;
     }
 
-    /* All elements of F should contain values
-     * with enough accuracy */
     return !suff_acc;
 }
 

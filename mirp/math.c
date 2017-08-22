@@ -1,7 +1,7 @@
 /*! \file
  *
  * \brief Some miscellaneous mathematical functions in double
- *        precision and arbitrary precision
+ *        precision and interval arithmetic
  */
 
 #include "mirp/math.h"
@@ -33,7 +33,7 @@ int mirp_test_zero_prec(const arb_t n, slong prec)
 
     /* This is needed to test if the result is zero to the number of digits
        we want (plus a safety factor, of course)
-    
+
        The safety factor is 16 decimal digits / 53 binary digits
     */
     arb_t zero, zero_err;
@@ -97,7 +97,7 @@ void mirp_factorial2(arb_t output, long int n, slong working_prec)
     /* arblib has a double factorial function, but only for
      * positive values
      */
-    
+
     if(n >= -1 && n <= 1)
         arb_set_ui(output, 1);
     else

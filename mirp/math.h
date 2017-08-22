@@ -32,15 +32,15 @@ extern "C" {
 
 
 /*! \brief The value of the sqrt(pi) in double precision */
-#define MIRP_SQRT_PI 1.7724538509055160273 
+#define MIRP_SQRT_PI 1.7724538509055160273
 
 
 /*! \brief The value of the pi**(3/2) in double precision */
 #define MIRP_PI_32 5.5683279968317078453
-    
+
 
 /*! \brief log_10(2)
- * 
+ *
  * For conversion between binary precision and decimal precision (number of digits)
  * ndigits = log10(2) * precision (in bits)
  */
@@ -53,8 +53,14 @@ extern "C" {
 #define MIRP_BITS_INCREMENT 32
 
 
-/* \brief Finds the least number of accuracy bits in a vector */
+/*! \brief Finds the least number of accuracy bits in a vector
+ *
+ * \param [in] v The vector to search the minimum accuracy of
+ * \param [in] n The length of the vector
+ * \return The minimum accuracy found of all elements of the vector
+ */
 slong mirp_min_accuracy_bits(arb_srcptr v, size_t n);
+
 
 /*! \brief Calculates a factorial using double precision */
 double mirp_factorial_d(int n);

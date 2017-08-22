@@ -12,7 +12,7 @@ extern "C" {
 #endif
 
 /*! \brief Computes factors for the Gaussian Product Theorem using double precision
- * 
+ *
  * The input parameters \p A and \p B, are expected to be arrays
  * of 3 elements.
  *

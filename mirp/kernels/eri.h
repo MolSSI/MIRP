@@ -20,7 +20,7 @@ extern "C" {
  * angular momentum being the sum of the three components. For example,
  * { 1, 2, 0 } is the \f$f_{xy^2}\f$ cartesian integral.
  *
- * \param [out] integral 
+ * \param [out] integral
  *              Resulting integral integral
  * \param [in]  lmn1,lmn2,lmn3,lmn4
  *              Exponents of x, y, and z that signify angular momentum. Required

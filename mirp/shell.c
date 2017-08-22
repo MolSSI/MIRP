@@ -40,7 +40,7 @@ void mirp_normalize_shell_d(int am, int nprim, int ngeneral,
 
     /* Normalization factor
      *
-     * norm_fac = pi^(3/2) * (2l-1)!! / 2^l 
+     * norm_fac = pi^(3/2) * (2l-1)!! / 2^l
      */
     double norm_fac = MIRP_PI_32;
     for(int i = 1; i <= am; i++)
@@ -91,7 +91,7 @@ void mirp_normalize_shell(int am, int nprim, int ngeneral,
     /* m = am + 1.5 */
     arb_set_si(m, am);
     arb_set_si(tmp1, 3);
-    arb_div_si(tmp1, tmp1, 2, working_prec); 
+    arb_div_si(tmp1, tmp1, 2, working_prec);
     arb_add(m, m, tmp1, working_prec);
 
     /* m2 = 0.5 * m */
@@ -99,7 +99,7 @@ void mirp_normalize_shell(int am, int nprim, int ngeneral,
 
     /* Normalization factor
      *
-     * norm_fac = pi^(3/2) * (2l-1)!! / 2^l 
+     * norm_fac = pi^(3/2) * (2l-1)!! / 2^l
      */
     arb_const_sqrt_pi(norm_fac, working_prec);
     arb_pow_ui(norm_fac, norm_fac, 3, working_prec);

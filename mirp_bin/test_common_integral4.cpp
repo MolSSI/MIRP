@@ -181,8 +181,6 @@ long integral4_single_run_test(const std::string & filepath,
  * \tparam callback_type The type of the function that computes the integrals
  *
  * \param [in] filepath    Path to the test data file
- * \param [in] target_prec The target precision (binary precision) to calculate
- * \param [in] cb          Function that computes single integrals
  * \return The number of tests that have failed
  */
 long integral4_single_run_test_d(const std::string & filepath,

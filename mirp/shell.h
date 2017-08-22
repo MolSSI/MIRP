@@ -27,6 +27,7 @@ extern "C" {
 /*! \brief Number of cartesian functions for 4 lmn triplets */
 #define MIRP_NCART_LMN4(lmn1, lmn2, lmn3, lmn4)  (MIRP_NCART_LMN2((lmn1),(lmn2)) * MIRP_NCART_LMN2((lmn3),(lmn4)))
 
+
 /*! \brief Normalize a shell (double precision)
  *
  * Obtain the next l, m, and n parameters of a gaussian in the internal MIRP ordering
