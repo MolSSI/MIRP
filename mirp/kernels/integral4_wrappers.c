@@ -65,7 +65,7 @@ static void mirp_cartloop4(arb_ptr integral,
 
 
 /*! \brief Compute all cartesian components of a single primitive integral
- *         (four center, double precision)
+ *         (four-center, double precision)
  *
  * The \p integral buffer is expected to be able to hold all primitive integrals
  * (ie, it can hold ncart(am1) * ncart(am2) * ncart(am3) * ncart(am4) elements).
@@ -73,11 +73,11 @@ static void mirp_cartloop4(arb_ptr integral,
  * \param [out] integral
  *              Resulting integral integral
  * \param [in]  am1,am2,am3,am4
- *              Angular momentum of the four centers
+ *              Angular momentum of the four-centers
  * \param [in]  A,B,C,D
- *              XYZ coordinates of the four centers (each of length 3)
+ *              XYZ coordinates of the four-centers (each of length 3)
  * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four centers
+ *              Exponents of the gaussian on the four-centers
  * \param [in]  cb
  *              Callback that calculates a single cartesian component of a
  *              primitive integral

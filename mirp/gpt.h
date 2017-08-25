@@ -11,7 +11,8 @@
 extern "C" {
 #endif
 
-/*! \brief Computes factors for the Gaussian Product Theorem using double precision
+/*! \brief Computes terms from the Gaussian Product Theorem using
+ *         double precision
  *
  * The input parameters \p A and \p B, are expected to be arrays
  * of 3 elements.
@@ -27,9 +28,11 @@ extern "C" {
  * \param [in]  B       XYZ coordinates of the second gaussian
  * \param [out] gamma   Combined exponent (\p alpha1 + \p alpha2)
  * \param [out] P       Coordinates of the new gaussian
- * \param [out] PA      XYZ distances between the new gaussian and the first gaussian
- * \param [out] PB      XYZ distances between the new gaussian and the second gaussian
- * \param [out] AB2     Total distances between the first and second gaussians
+ * \param [out] PA      XYZ distances between the new gaussian
+ *                      and the first gaussian
+ * \param [out] PB      XYZ distances between the new gaussian
+ *                      and the second gaussian
+ * \param [out] AB2     Total distance between the first and second gaussians
  */
 void mirp_gpt_d(double alpha1, double alpha2,
                 const double * A, const double * B,
@@ -38,10 +41,13 @@ void mirp_gpt_d(double alpha1, double alpha2,
                 double * AB2);
 
 
-/*! \brief Computes factors for the Gaussian Product Theorem using interval arithmetic
+/*! \brief Computes terms from the Gaussian Product Theorem using
+ *         interval arithmetic
  *
  * \copydetails mirp_gpt_d
- * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
+ *
+ * \param [in] working_prec The working precision (binary digits/bits) to use
+ *                          in the calculation
  */
 void mirp_gpt(const arb_t alpha1, const arb_t alpha2,
               arb_srcptr A, arb_srcptr B,
@@ -49,6 +55,7 @@ void mirp_gpt(const arb_t alpha1, const arb_t alpha2,
               arb_ptr P, arb_ptr PA, arb_ptr PB,
               arb_t AB2,
               slong working_prec);
+
 
 #ifdef __cplusplus
 }

@@ -5,14 +5,11 @@
 
 #include "mirp/kernels/boys.h"
 #include "mirp/math.h"
+#include <arb_hypgeom.h>
 #include <assert.h>
 
 void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec)
 {
-    assert(m >= 0);
-    assert(!(arb_is_negative(t)));
-    assert(working_prec > 0);
-
     int i;
 
     arb_t t2, et, sum, term, lastterm, test;
@@ -30,9 +27,7 @@ void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec)
     /* t2 = 2*t */
     arb_mul_ui(t2, t, 2, working_prec);
 
-    /* et = exp(-x)
-       Note: x is always positive, so we can use arb_neg
-     */
+    /* et = exp(-x) */
     arb_neg(et, t);
     arb_exp(et, et, working_prec);
 
@@ -120,8 +115,8 @@ void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec)
             /* store the old term, then update and calculate the difference */
             arb_set(test, sum);
             arb_add(sum, sum, term, working_prec);
-        } while(!arb_contains(sum, test)); /* Is the old term contained
-                                              completely within the new term */
+        } while(!arb_contains(sum, test)); /* Is the old term contained completely
+                                              within the new term */
 
         arb_mul(F+m, sum, et, working_prec);
         arb_div_si(F+m, F+m, 2*m+1, working_prec);

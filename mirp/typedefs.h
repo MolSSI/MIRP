@@ -17,7 +17,7 @@ extern "C" {
  *******************************************/
 
 /*! \brief Pointer to a function that computes a single cartesian integral
- *         (four center, double precision)
+ *         (four-center, double precision)
  */
 typedef void (*cb_integral4_single_d)(double *,
                                       const int *, const double *, double,
@@ -27,7 +27,7 @@ typedef void (*cb_integral4_single_d)(double *,
 
 
 /*! \brief Pointer to a function that computes all cartesian integrals
- *         for an entire shell (four center, double precision)
+ *         for a contracted shell quartet (four-center, double precision)
  */
 typedef void (*cb_integral4_d)(double *,
                                int, const double *, int, int, const double *, const double *,
@@ -42,7 +42,7 @@ typedef void (*cb_integral4_d)(double *,
  *******************************************/
 
 /*! \brief Pointer to a function that computes a single cartesian integral
- *         (four center, interval arithmetic)
+ *         (four-center, interval arithmetic)
  */
 typedef void (*cb_integral4_single)(arb_t,
                                     const int *, arb_srcptr, const arb_t,
@@ -53,7 +53,7 @@ typedef void (*cb_integral4_single)(arb_t,
 
 
 /*! \brief Pointer to a function that computes a single cartesian integral
- *         to a specified accuracy (four center)
+ *         to a specified accuracy (four-center)
  */
 typedef int (*cb_integral4_single_target)(arb_t,
                                           const int *, arb_srcptr, const arb_t,
@@ -64,7 +64,7 @@ typedef int (*cb_integral4_single_target)(arb_t,
 
 
 /*! \brief Pointer to a function that computes a single cartesian integral
- *         to a specified accuracy (four center, with string inputs)
+ *         to a specified accuracy (four-center, with string inputs)
  */
 typedef void (*cb_integral4_single_target_str)(arb_t,
                                                const int *, const char **, const char *,
@@ -75,7 +75,7 @@ typedef void (*cb_integral4_single_target_str)(arb_t,
 
 
 /*! \brief Pointer to a function that computes a single cartesian integral
- *         to exact double precision (four center)
+ *         to exact double precision (four-center)
  */
 typedef void (*cb_integral4_single_exact)(double * integral,
                                           const int * lmn1, const double * A, double alpha1,
@@ -85,7 +85,7 @@ typedef void (*cb_integral4_single_exact)(double * integral,
 
 
 /*! \brief Pointer to a function that computes all cartesian integrals
- *         for an entire shell (four center, interval arithmetic)
+ *         for a contracted shell quartet (four-center, interval arithmetic)
  */
 typedef void (*cb_integral4)(arb_ptr,
                              int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
@@ -96,8 +96,7 @@ typedef void (*cb_integral4)(arb_ptr,
 
 
 /*! \brief Pointer to a function that computes all cartesian integrals
- *         for an entire shell to a specified accuracy (four center)
- *
+ *         for a contracted shell quartet to a specified accuracy (four-center)
  */
 typedef int (*cb_integral4_target)(arb_ptr,
                                    int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
@@ -108,7 +107,7 @@ typedef int (*cb_integral4_target)(arb_ptr,
 
 
 /*! \brief Pointer to a function that computes all cartesian integrals
- *         for an entire shell to a specified accuracy (four center, with string inputs)
+ *         for a contracted shell quartet to a specified accuracy (four-center, with string inputs)
  */
 typedef void (*cb_integral4_target_str)(arb_ptr,
                                         int, const char **, int, int, const char **, const char **,
@@ -119,7 +118,7 @@ typedef void (*cb_integral4_target_str)(arb_ptr,
 
 
 /*! \brief Pointer to a function that computes all cartesian integrals
- *         for an entire shell to exact double precision (four center)
+ *         for a contracted shell quartet to exact double precision (four-center)
  */
 typedef int (*cb_integral4_exact)(double *,
                                   int, const double *, int, int, const double *, const double *,

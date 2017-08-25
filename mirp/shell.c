@@ -1,11 +1,12 @@
 /*! \file
  *
- * \brief Functions for manipulating shell structures
+ * \brief Functions related to gaussians and shells
  */
 
 #include "mirp/shell.h"
 #include "mirp/math.h"
 #include <math.h>
+
 
 int mirp_iterate_gaussian(int * lmn)
 {
@@ -26,7 +27,6 @@ int mirp_iterate_gaussian(int * lmn)
     }
     return 1;
 }
-
 
 
 void mirp_normalize_shell_d(int am, int nprim, int ngeneral,

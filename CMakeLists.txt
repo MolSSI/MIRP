@@ -14,7 +14,7 @@ macro(mirp_find_library libname)
     get_filename_component(MIRP_${libname}_DIR ${MIRP_${libname}_DIR} DIRECTORY)
     message(STATUS "Found ${libname} library: ${MIRP_${libname}_LIBRARY}")
     message(STATUS "Found ${libname} path: ${MIRP_${libname}_DIR}")
-    include_directories(${MIRP_${libname}_DIR}/include)
+    include_directories(SYSTEM ${MIRP_${libname}_DIR}/include)
 endmacro()
 
 add_definitions("-Wall")

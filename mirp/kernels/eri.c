@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief Calculation of electron repulsion integrals (interval arithmetic)
+ * \brief Kernel for electron repulsion integrals (interval arithmetic)
  */
 
 #include "mirp/kernels/boys.h"

@@ -80,7 +80,9 @@ void mirp_gpt(const arb_t alpha1, const arb_t alpha2,
     arb_sub(PB+2, P+2, B+2, working_prec);
 
     /*
-     * AB2 = (A[0]-B[0])*(A[0]-B[0]) + (A[1]-B[1])*(A[1]-B[1]) + (A[2]-B[2])*(A[2]-B[2]);
+     * AB2 = (A[0]-B[0])*(A[0]-B[0])
+     *     + (A[1]-B[1])*(A[1]-B[1])
+     *     + (A[2]-B[2])*(A[2]-B[2])
      */
     arb_sub(tmp1, A+0, B+0, working_prec);
     arb_sub(tmp2, A+1, B+1, working_prec);

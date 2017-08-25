@@ -22,38 +22,6 @@ slong mirp_min_accuracy_bits(arb_srcptr v, size_t n)
 }
 
 
-#if 0
-int mirp_test_zero_prec(const arb_t n, slong prec)
-{
-    /* This function is meant to be used if n does not
-       have any significant bits (ie, is 0 +/- some number)
-     */
-    if(arb_rel_accuracy_bits(n) > 0)
-        return 0;
-
-    /* This is needed to test if the result is zero to the number of digits
-       we want (plus a safety factor, of course)
-
-       The safety factor is 16 decimal digits / 53 binary digits
-    */
-    arb_t zero, zero_err;
-    arb_init(zero);
-    arb_init(zero_err);
-    arb_zero(zero);
-    arb_ui_pow_ui(zero_err, 10, 16, prec+53);
-    arb_mul_2exp_si(zero_err, zero_err, prec+53);
-    arb_ui_div(zero_err, 1, zero_err, prec+53);
-    arb_add_error(zero, zero_err);
-
-    int is_zero = arb_contains(zero, n);
-
-    arb_clear(zero);
-    arb_clear(zero_err);
-
-    return is_zero;
-}
-#endif
-
 double mirp_factorial_d(int n)
 {
     assert(n >= 0);
@@ -76,11 +44,7 @@ double mirp_factorial2_d(int n)
 {
     assert(n >= -1);
 
-    if(n == -1)
-        return 1.0;
-    if(n == 0)
-        return 1.0;
-    if(n == 1)
+    if(n >= -1 && n <= 1)
         return 1.0;
     else
     {
@@ -95,8 +59,7 @@ double mirp_factorial2_d(int n)
 void mirp_factorial2(arb_t output, long int n, slong working_prec)
 {
     /* arblib has a double factorial function, but only for
-     * positive values
-     */
+     * positive values */
 
     if(n >= -1 && n <= 1)
         arb_set_ui(output, 1);

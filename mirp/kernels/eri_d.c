@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief Calculation of electron repulsion integrals (double precision)
+ * \brief Kernel for electron repulsion integrals (double precision)
  */
 
 #include "mirp/kernels/boys.h"

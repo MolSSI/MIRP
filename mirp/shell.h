@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief Functions for manipulating shell structures
+ * \brief Functions related to gaussians and shells
  */
 
 #include <arb.h>
@@ -13,32 +13,40 @@ extern "C" {
 #define MIRP_NCART(am) ((((am)+1)*((am)+2))/2)
 
 /*! \brief Number of cartesian functions for 2 shells */
-#define MIRP_NCART2(am1, am2) (MIRP_NCART((am1)) * MIRP_NCART((am2)))
+#define MIRP_NCART2(am1, am2) \
+        (MIRP_NCART((am1)) * MIRP_NCART((am2)))
 
 /*! \brief Number of cartesian functions for 4 shells */
-#define MIRP_NCART4(am1, am2, am3, am4) (MIRP_NCART2((am1),(am2)) * MIRP_NCART2((am3),(am4)))
+#define MIRP_NCART4(am1, am2, am3, am4) \
+        (MIRP_NCART2((am1),(am2)) * MIRP_NCART2((am3),(am4)))
 
 /*! \brief Number of cartesian functions for an lmn triplet */
-#define MIRP_NCART_LMN(lmn)  (MIRP_NCART((lmn[0])+(lmn[1])+(lmn[2])))
+#define MIRP_NCART_LMN(lmn) \
+        (MIRP_NCART((lmn[0])+(lmn[1])+(lmn[2])))
 
 /*! \brief Number of cartesian functions for 2 lmn triplets */
-#define MIRP_NCART_LMN2(lmn1, lmn2)  (MIRP_NCART_LMN((lmn1)) * MIRP_NCART_LMN((lmn2)))
+#define MIRP_NCART_LMN2(lmn1, lmn2) \
+        (MIRP_NCART_LMN((lmn1)) * MIRP_NCART_LMN((lmn2)))
 
 /*! \brief Number of cartesian functions for 4 lmn triplets */
-#define MIRP_NCART_LMN4(lmn1, lmn2, lmn3, lmn4)  (MIRP_NCART_LMN2((lmn1),(lmn2)) * MIRP_NCART_LMN2((lmn3),(lmn4)))
+#define MIRP_NCART_LMN4(lmn1, lmn2, lmn3, lmn4)  \
+        (MIRP_NCART_LMN2((lmn1),(lmn2)) * MIRP_NCART_LMN2((lmn3),(lmn4)))
 
 
 /*! \brief Normalize a shell (double precision)
  *
- * Obtain the next l, m, and n parameters of a gaussian in the internal MIRP ordering
+ * Obtain the next l, m, and n parameters of a gaussian in the internal MIRP
+ * ordering
  *
  * For example, if \p lmn = {2, 1, 0} is input, the result will be {2, 0, 1}.
  *
- * If the return value of this function is 0, the contents of \p lmn are not defined.
+ * If the return value of this function is 0, the contents of \p lmn are not
+ * defined.
  *
  * \param [inout] lmn The l, m, and n parameters of a gaussian basis function
- * \return 1 if the new \p lmn is a valid gaussian, 0 if it is not
- *         (i.e., we have iterated past the end)
+ * \return Nonzero if the new \p lmn is a valid gaussian, 0 if it is not
+ *         (i.e., we have iterated past the end of the complete set of
+ *         gaussians)
  */
 int mirp_iterate_gaussian(int * lmn);
 
@@ -65,7 +73,8 @@ void mirp_normalize_shell_d(int am, int nprim, int ngeneral,
 /*! \brief Normalize a shell (interval arithmetic)
  *
  * \copydetails mirp_normalize_shell_d
- * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
+ * \param [in] working_prec The working precision (binary digits/bits) to use
+ *                          in the calculation
  */
 void mirp_normalize_shell(int am, int nprim, int ngeneral,
                           arb_srcptr alpha,

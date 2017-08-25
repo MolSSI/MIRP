@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief Calculation of electron repulsion integrals
+ * \brief Kernel for electron repulsion integrals
  */
 
 #pragma once
@@ -16,7 +16,7 @@ extern "C" {
 /*! \brief Computes a single cartesian electron repulsion integral
  *         (double precision)
  *
- * The \p lmn paramters are the exponents on x, y, and z, with the total
+ * The \p lmn parameters are the exponents on x, y, and z, with the total
  * angular momentum being the sum of the three components. For example,
  * { 1, 2, 0 } is the \f$f_{xy^2}\f$ cartesian integral.
  *
@@ -26,9 +26,9 @@ extern "C" {
  *              Exponents of x, y, and z that signify angular momentum. Required
  *              to be 3 elements.
  * \param [in]  A,B,C,D
- *              XYZ coordinates of the four centers (each of length 3)
+ *              XYZ coordinates of the four-centers (each of length 3)
  * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four centers
+ *              Exponents of the gaussian on the four-centers
  */
 void mirp_eri_single_d(double * integral,
                        const int * lmn1, const double * A, double alpha1,
@@ -41,7 +41,9 @@ void mirp_eri_single_d(double * integral,
  *         (interval arithmetic)
  *
  * \copydetails mirp_eri_single_d
- * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
+ *
+ * \param [in] working_prec The working precision (binary digits/bits) to use
+ *                          in the calculation
  */
 void mirp_eri_single(arb_t integral,
                      const int * lmn1, arb_srcptr A, const arb_t alpha1,
@@ -51,17 +53,17 @@ void mirp_eri_single(arb_t integral,
                      slong working_prec);
 
 
-/****************************************
+/*******************
  * Wrappings
- ****************************************/
+ *******************/
 MIRP_WRAP_SHELL4(eri)
 MIRP_WRAP_SHELL4_D(eri)
 MIRP_WRAP_SINGLE4_TARGET(eri)
 MIRP_WRAP_SINGLE4_TARGET_STR(eri)
 MIRP_WRAP_SINGLE4_EXACT(eri)
-
-MIRP_WRAP_TARGET(eri)
-MIRP_WRAP_EXACT(eri)
+MIRP_WRAP_SHELL4_TARGET(eri)
+MIRP_WRAP_SHELL4_TARGET_STR(eri)
+MIRP_WRAP_SHELL4_EXACT(eri)
 
 
 #ifdef __cplusplus

@@ -41,14 +41,16 @@ extern "C" {
 
 /*! \brief log_10(2)
  *
- * For conversion between binary precision and decimal precision (number of digits)
+ * For conversion between binary precision and decimal precision
+ * (number of decimal digits)
+ *
  * ndigits = log10(2) * precision (in bits)
  */
 #define MIRP_LOG_10_2 0.3010299956639812
 
 
 /*! \brief Number of binary bits to increment when attempting to
- *  reach a given target precision
+ *         reach a given target precision
  */
 #define MIRP_BITS_INCREMENT 32
 
@@ -80,6 +82,7 @@ double mirp_binomial_d(int n, int k);
 
 /*! \brief Calculates a binomial coefficient using interval arithmetic */
 void mirp_binomial(arb_t output, long int n, long int k, slong working_prec);
+
 
 #ifdef __cplusplus
 }
