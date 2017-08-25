@@ -301,7 +301,7 @@ void mirp_integral4_exact(double * integrals,
 
 
 /*! \brief Create a function that computes single cartesian integrals
- *         to a target precision (four-center) 
+ *         to a target precision (four-center)
  *
  *  A function computing single cartesian integrals is expected to exist and
  *  be named `mirp_{name}_single`
@@ -359,7 +359,7 @@ void mirp_integral4_exact(double * integrals,
 
 
 /*! \brief Create a function that computes single cartesian integrals
- *         to a target precision (four-center, string inputs) 
+ *         to a target precision (four-center, string inputs)
  *
  *  A function computing single cartesian integrals is expected to exist and
  *  be named `mirp_{name}_single`

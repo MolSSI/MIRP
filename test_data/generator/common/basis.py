@@ -79,7 +79,7 @@ def apply_basis(geometry, atombasis):
     for atom in geometry:
         b = atombasis[atom[0]]
         for bshell in b:
-            shells.append(((atom[1], atom[2], atom[3]), bshell))
+            shells.append((tuple(atom[:4]), bshell))
     return shells
 
 

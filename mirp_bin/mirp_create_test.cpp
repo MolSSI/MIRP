@@ -11,12 +11,13 @@
 
 using namespace mirp;
 
+/*! \brief Main function */
 int main(int argc, char ** argv)
 {
     std::string infile, outfile;
     std::string integral;
     long ndigits;
-    
+
     try {
         auto cmdline = convert_cmdline(argc, argv);
 
@@ -44,6 +45,12 @@ int main(int argc, char ** argv)
     {
         if(integral == "boys")
             boys_create_test(infile, outfile, ndigits, header);
+        else if(integral == "eri")
+        {
+            detail::integral4_create_test(infile, outfile,
+                                          ndigits, header,
+                                          mirp_eri_target_str);
+        }
         else if(integral == "eri_single")
         {
             detail::integral4_single_create_test(infile, outfile,
@@ -55,7 +62,7 @@ int main(int argc, char ** argv)
             std::cout << "Integral \"" << integral << "\" is not valid\n";
             return 3;
         }
-            
+
         return 0;
     }
     catch(std::exception & ex)

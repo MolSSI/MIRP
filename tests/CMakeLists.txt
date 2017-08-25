@@ -30,9 +30,9 @@ macro(add_boys_test filename floattype prec extra_m)
 endmacro()
 
 ##############################################
-# Creates a test of single 4-center integrals
+# Creates a test of general integrals
 ##############################################
-macro(add_integral4_single_test filename integral floattype prec)
+macro(add_integral_test filename integral floattype prec)
     add_test(NAME ${integral}_${filename}_${floattype}_${prec}
              COMMAND mirp_run_test --integral ${integral} --file ${CMAKE_SOURCE_DIR}/test_data/${filename} --float ${floattype} --prec ${prec}
     )
@@ -64,9 +64,16 @@ add_boys_test(boys_large_random.dat interval 332  0)
 add_boys_test(boys_large_random.dat interval 332 10)
 
 # ERI
-add_integral4_single_test(eri_single_random_1.dat eri_single interval 128)
-add_integral4_single_test(eri_single_random_1.dat eri_single interval 332)
-add_integral4_single_test(eri_single_random_1.dat eri_single exact 0)
-add_integral4_single_test(eri_single_water_sto3g.dat eri_single interval 128)
-add_integral4_single_test(eri_single_water_sto3g.dat eri_single interval 332)
-add_integral4_single_test(eri_single_water_sto3g.dat eri_single exact 0)
+add_integral_test(eri_single_random_1.dat eri_single interval 128)
+add_integral_test(eri_single_random_1.dat eri_single interval 332)
+add_integral_test(eri_single_random_1.dat eri_single exact 0)
+add_integral_test(eri_single_water_sto3g.dat eri_single interval 128)
+add_integral_test(eri_single_water_sto3g.dat eri_single interval 332)
+add_integral_test(eri_single_water_sto3g.dat eri_single exact 0)
+
+add_integral_test(eri_random_1.dat eri interval 128)
+add_integral_test(eri_random_1.dat eri interval 332)
+add_integral_test(eri_random_1.dat eri exact 0)
+add_integral_test(eri_water_sto3g.dat eri interval 128)
+add_integral_test(eri_water_sto3g.dat eri interval 332)
+add_integral_test(eri_water_sto3g.dat eri exact 0)

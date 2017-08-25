@@ -182,7 +182,13 @@ void mirp_loop_shell4(arb_ptr integral,
             for(long q = 0; q < ncart1234; q++)
             {
                 const long idx = ntotal*ncart1234 + q;
-                arb_addmul(integral+idx, integral_buffer+q, coeff, working_prec);
+
+                /* Only apply the coefficient if the integral is nonzero.
+                 * Otherwise, we end up with 0 +/- error */
+                if(arb_is_zero(integral_buffer+q))
+                    arb_zero(integral+idx);
+                else
+                    arb_addmul(integral+idx, integral_buffer+q, coeff, working_prec);
             }
             ntotal++;
         }
@@ -295,7 +301,6 @@ int mirp_integral4_target(arb_ptr integrals,
            am4, D, nprim4, ngen4, alpha4, coeff4,
            working_prec);
 
-
         cur_bits = mirp_min_accuracy_bits(integrals, nintegrals);
 
         if(cur_bits >= target_prec)
@@ -333,7 +338,7 @@ void mirp_integral4_single_target_str(arb_t integral,
     arb_init(alpha4_mp);
 
     slong working_prec = target_prec;
-    slong min_bits = 0;
+    slong cur_bits = 0;
 
     do
     {
@@ -357,9 +362,9 @@ void mirp_integral4_single_target_str(arb_t integral,
            lmn4, D_mp, alpha4_mp,
            working_prec);
 
-        min_bits = arb_rel_accuracy_bits(integral);
+        cur_bits = arb_rel_accuracy_bits(integral);
 
-    } while(min_bits < target_prec);
+    } while(cur_bits < target_prec);
 
     _arb_vec_clear(A_mp, 3);
     _arb_vec_clear(B_mp, 3);
@@ -370,6 +375,93 @@ void mirp_integral4_single_target_str(arb_t integral,
     arb_clear(alpha3_mp);
     arb_clear(alpha4_mp);
 }
+
+
+void mirp_integral4_target_str(arb_ptr integrals,
+                               int am1, const char ** A, int nprim1, int ngen1, const char ** alpha1, const char ** coeff1,
+                               int am2, const char ** B, int nprim2, int ngen2, const char ** alpha2, const char ** coeff2,
+                               int am3, const char ** C, int nprim3, int ngen3, const char ** alpha3, const char ** coeff3,
+                               int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4,
+                               slong target_prec, cb_integral4 cb)
+{
+    arb_ptr A_mp = _arb_vec_init(3);
+    arb_ptr B_mp = _arb_vec_init(3);
+    arb_ptr C_mp = _arb_vec_init(3);
+    arb_ptr D_mp = _arb_vec_init(3);
+    arb_ptr alpha1_mp = _arb_vec_init(nprim1);
+    arb_ptr alpha2_mp = _arb_vec_init(nprim2);
+    arb_ptr alpha3_mp = _arb_vec_init(nprim3);
+    arb_ptr alpha4_mp = _arb_vec_init(nprim4);
+    arb_ptr coeff1_mp = _arb_vec_init(nprim1*ngen1);
+    arb_ptr coeff2_mp = _arb_vec_init(nprim2*ngen2);
+    arb_ptr coeff3_mp = _arb_vec_init(nprim3*ngen3);
+    arb_ptr coeff4_mp = _arb_vec_init(nprim4*ngen4);
+
+    const size_t ncart = MIRP_NCART4(am1, am2, am3, am4);
+
+    slong working_prec = target_prec;
+    slong min_bits = 0;
+
+    do
+    {
+        working_prec += MIRP_BITS_INCREMENT;
+        for(int i = 0; i < 3; i++)
+        {
+            arb_set_str(A_mp + i, A[i], working_prec);
+            arb_set_str(B_mp + i, B[i], working_prec);
+            arb_set_str(C_mp + i, C[i], working_prec);
+            arb_set_str(D_mp + i, D[i], working_prec);
+        }
+
+        for(int i = 0; i < nprim1; i++)
+            arb_set_str(alpha1_mp + i, alpha1[i], working_prec);
+
+        for(int i = 0; i < nprim2; i++)
+            arb_set_str(alpha2_mp + i, alpha2[i], working_prec);
+
+        for(int i = 0; i < nprim3; i++)
+            arb_set_str(alpha3_mp + i, alpha3[i], working_prec);
+
+        for(int i = 0; i < nprim4; i++)
+            arb_set_str(alpha4_mp + i, alpha4[i], working_prec);
+
+        for(int i = 0; i < nprim1*ngen1; i++)
+            arb_set_str(coeff1_mp + i, coeff1[i], working_prec);
+
+        for(int i = 0; i < nprim2*ngen2; i++)
+            arb_set_str(coeff2_mp + i, coeff2[i], working_prec);
+
+        for(int i = 0; i < nprim3*ngen3; i++)
+            arb_set_str(coeff3_mp + i, coeff3[i], working_prec);
+
+        for(int i = 0; i < nprim4*ngen4; i++)
+            arb_set_str(coeff4_mp + i, coeff4[i], working_prec);
+
+
+        cb(integrals,
+           am1, A_mp, nprim1, ngen1, alpha1_mp, coeff1_mp,
+           am2, B_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
+           am3, C_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
+           am4, D_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
+           working_prec);
+
+        min_bits = mirp_min_accuracy_bits(integrals, ncart);
+    } while(min_bits < target_prec);
+
+    _arb_vec_clear(A_mp, 3);
+    _arb_vec_clear(B_mp, 3);
+    _arb_vec_clear(C_mp, 3);
+    _arb_vec_clear(D_mp, 3);
+    _arb_vec_clear(alpha1_mp, nprim1);
+    _arb_vec_clear(alpha2_mp, nprim2);
+    _arb_vec_clear(alpha3_mp, nprim3);
+    _arb_vec_clear(alpha4_mp, nprim4);
+    _arb_vec_clear(coeff1_mp, nprim1*ngen1);
+    _arb_vec_clear(coeff2_mp, nprim2*ngen2);
+    _arb_vec_clear(coeff3_mp, nprim3*ngen3);
+    _arb_vec_clear(coeff4_mp, nprim4*ngen4);
+}
+
 
 
 void mirp_integral4_single_exact(double * integral,
@@ -475,13 +567,13 @@ void mirp_integral4_exact(double * integral,
     for(int i = 0; i < nprim4; i++)
         arb_set_d(alpha4_mp + i, alpha4[i]);
 
-    for(int i = 0; i < nprim1 * ngen1; i++)
+    for(int i = 0; i < nprim1*ngen1; i++)
         arb_set_d(coeff1_mp + i, coeff1[i]);
-    for(int i = 0; i < nprim2 * ngen2; i++)
+    for(int i = 0; i < nprim2*ngen2; i++)
         arb_set_d(coeff2_mp + i, coeff2[i]);
-    for(int i = 0; i < nprim3 * ngen3; i++)
+    for(int i = 0; i < nprim3*ngen3; i++)
         arb_set_d(coeff3_mp + i, coeff3[i]);
-    for(int i = 0; i < nprim4 * ngen4; i++)
+    for(int i = 0; i < nprim4*ngen4; i++)
         arb_set_d(coeff4_mp + i, coeff4[i]);
 
 
@@ -497,9 +589,9 @@ void mirp_integral4_exact(double * integral,
     /* Call the callback */
     cb(integral_mp,
        am1, A_mp, nprim1, ngen1, alpha1_mp, coeff1_mp,
-       am2, A_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
-       am3, A_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
-       am4, A_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
+       am2, B_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
+       am3, C_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
+       am4, D_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
        target_prec);
 
     /* We get the value from the midpoint of the arb struct */

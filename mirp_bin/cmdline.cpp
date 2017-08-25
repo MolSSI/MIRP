@@ -44,7 +44,7 @@ std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const 
         throw std::runtime_error(err);
     }
 
-    return *it; 
+    return *it;
 }
 
 std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const std::string & arg, const std::string & def)
@@ -58,7 +58,7 @@ std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const 
 long cmdline_get_arg_long(const std::vector<std::string> & cmdline, const std::string & arg)
 {
     std::string strarg = cmdline_get_arg_str(cmdline, arg);
-    std::stringstream ss(strarg); 
+    std::stringstream ss(strarg);
     long ret;
     ss >> ret;
 
@@ -92,7 +92,7 @@ std::vector<std::string> convert_cmdline(int argc, char ** argv)
 
         if(equal_pos != std::string::npos)
         {
-            ret.push_back(arg.substr(0, equal_pos)); 
+            ret.push_back(arg.substr(0, equal_pos));
             ret.push_back(arg.substr(equal_pos+1, std::string::npos));
         }
         else

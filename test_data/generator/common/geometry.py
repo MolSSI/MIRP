@@ -7,6 +7,12 @@
 
 from mpmath import mp
 
+z_map = { "h" : 1,
+          "he" : 2,
+          "o" : 8
+        }
+
+
 def read_xyz(xyzfile_path):
     # NIST CODATA 2014 value for a bohr is used below
     ang_to_bohr = 1.0/0.52917721067

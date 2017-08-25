@@ -1,0 +1,88 @@
+/*! \page functiontypes Various Types of Functions for Integrals
+
+\section _functiontypes_overview Overview
+
+Each integral implemented in MIRP has a few different functions for computing them.
+
+\note The phrase 'single cartesian integral' refers to a single number. For example,
+      a (px|px) overlap integral.
+
+\subsection _functiontypes_single_d mirp_name_single_d
+
+Computes a single cartesian integral 
+
+\subsection _functiontypes_single mirp_name_single
+
+Functions with the pattern `mirp_{name}_single` compute a single cartesian component of
+an integral using arbitrary precision. These functions take arbitrary precision types
+as input and output.
+
+A working precision is specified as an argument, along with all the parameters required for the integral.
+
+
+\subsection _functiontypes_single_target mirp_name_single_target
+
+Functions with the pattern `mirp_{name}_single_target` are similar to `mirp_{name}_single`, except that
+a target precision is specified, rather than a working precision. Internally, interval arithmetic
+is used with increasingly higher working precision until the final integrals
+have the desired target precision.
+
+Sometimes, the desired target precision cannot be obtained if the precision of
+the inputs is too low. If that happens, the function returns nonzero, indicating
+error.
+
+These types of functions can be created from other functions with
+the \ref mirp_integral4_single_target wrapper.
+
+\subsection _functiontypes_single_target_str mirp_name_single_target_str
+
+These are similar to `mirp_{name}_single_target`, except the inputs are strings. The
+strings are interpreted to have infinite precision, so this function should always succeed
+in reaching the desired target precision.
+
+These types of functions can be created from other functions with
+the \ref mirp_integral4_single_target_str wrapper.
+
+\subsection _functiontypes_single_exact mirp_name_single_exact
+
+Computes single cartesian integrals *exact* double precision. These functions take
+double precision inputs and output double precision. Internally, interval arithmetic is
+used such that there is no roundoff error in the final result. Therefore, the integral
+is 'exact' to double precision.
+
+These types of functions can be created from other functions with
+the \ref mirp_integral4_single_exact wrapper.
+
+\subsection _functiontypes_int mirp_name, mirp_name_target, mirp_name_target_str, mirp_name_exact
+
+These functions are analogous to their 'single' counterparts, however they take in contracted shells
+(both segmented and general) as inputs and return a complete set of integral.
+
+Functions with the pattern `mirp_{name}` are created with \ref mirp_loop_shell4 (and `mirp_{name}_d`
+can be created via \ref mirp_loop_shell4_d). The others are created via \ref mirp_integral4_target,
+\ref mirp_integral4_target_str, and \ref mirp_integral4_exact.
+
+
+\section _functiontypes_wrap Wrapping functions and macros
+
+The wrapping functions mentioned above are used to create the higher-level functions from
+(typically) the `mirp_{name}_single` and `mirp_{name}_single_d` functions. This can be done
+even easier with the `MIRP_WRAP_` macros.
+
+\subsection _functiontypes_wrap4 Four-center integrals
+
+Macro                              | Creates                     | Requires                | Calls
+-----------------------------------|-----------------------------|-------------------------|-----------------------------------
+MIRP_WRAP_SHELL4(name)             | mirp_name                   | mirp_name_single        | \ref mirp_loop_shell4
+MIRP_WRAP_SHELL4_D(name)           | mirp_name_d                 | mirp_name_single_d      | \ref mirp_loop_shell4_d
+MIRP_WRAP_SINGLE4_TARGET(name)     | mirp_name_single_target     | mirp_name_single        | \ref mirp_integral4_single_target
+MIRP_WRAP_SINGLE4_TARGET_STR(name) | mirp_name_single_target_str | mirp_name_single        | \ref mirp_integral4_single_target_str
+MIRP_WRAP_SINGLE4_EXACT(name)      | mirp_name_single_exact      | mirp_name_single_target | \ref mirp_integral4_single_exact
+MIRP_WRAP_SHELL4_TARGET(name)      | mirp_name_target            | mirp_name               | \ref mirp_integral4_target
+MIRP_WRAP_SHELL4_TARGET_STR(name)  | mirp_name_target_str        | mirp_name               | \ref mirp_integral4_target_str
+MIRP_WRAP_SHELL4_EXACT(name)       | mirp_name_exact             | mirp_name_target        | \ref mirp_integral4_exact
+
+
+See \ref eri.h for an example
+
+*/

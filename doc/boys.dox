@@ -97,7 +97,10 @@ the rest.
 
 In MIRP, the Boys function can be calculated via the following functions:
 
-- mirp_boys_double()
-- mirp_boys_interval()
+- \ref mirp_boys_d
+- \ref mirp_boys
+- \ref mirp_boys_target
+- \ref mirp_boys_target_str
+- \ref mirp_boys_exact
 
 */

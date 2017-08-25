@@ -4,19 +4,11 @@
 
 In general, MIRP uses the following naming convention
 
-- All C functions are prefixed with `mirp_` (except for static functions)
-- All C++ functions are within the namespace `mirp` and lacking the prefix
+- All C functions are prefixed with `mirp_` (except local, static functions)
+- All C++ functions are within the namespace `mirp` and (and therefore lacking the `mirp_` prefix)
   (except for functions in an anonymous namespace)
-- Functions that work with double-precision have a `_double` suffix
-- Functions that work with the arb library have a `_interval` suffix 
-- Files dealing solely with double precision/interval arithmetic
-  also have the `_double`/`_interval` suffix, respectively.
-- Files that deal with both double precision and interval arithmetic,
-  or contain more general functions, are not given a suffix.
 - Inputs for creating test files are given a `.inp` extension, while
   files with generated data are given a `.dat` extension.
-  
-
 
 \section _conventions_passing Passing Data to/from Functions
 
@@ -30,10 +22,15 @@ In general, MIRP uses the following naming convention
   - `arb_t` contains an internal pointer, and structures are pass-by-copy. This
     is how the arblib library works, so that convention was adopted by MIRP
 - Arrays should always be passed by pointer, of course
+- Arrays of interval arithmetic types should be passed as `arb_ptr` or `arb_srcptr`
 - All output variables passed to a function MUST be initialized first
   - Then there is a clear, consistent location for `clear`ing an object
     (within the same function that `init`ialized it).
   - They should not be required to be zeroed, except in rare cases
+
+
+\section _conventions Indexing
+
 - Indexing of coefficient arrays for general contractions: the index of the
   primitive/exponent is the fastest index. (The index is `[g*nprim+p]` where
   `g` is the index of the general contraction and `p` the index of the primitive).

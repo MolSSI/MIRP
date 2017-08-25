@@ -21,9 +21,9 @@ chemistry.
 * GMP (http://gmplib.org)
   * MPIR (http://mpir.org) may work, but is untested
 
-## Building and Testing
+## Documentation
 
-MIRP is built using CMake build system.
+Complete documentation can be found at https://molssi.github.io/MIRP/index.html
 
 ## License
 

@@ -120,11 +120,11 @@ typedef void (*cb_integral4_target_str)(arb_ptr,
 /*! \brief Pointer to a function that computes all cartesian integrals
  *         for a contracted shell quartet to exact double precision (four-center)
  */
-typedef int (*cb_integral4_exact)(double *,
-                                  int, const double *, int, int, const double *, const double *,
-                                  int, const double *, int, int, const double *, const double *,
-                                  int, const double *, int, int, const double *, const double *,
-                                  int, const double *, int, int, const double *, const double *);
+typedef void (*cb_integral4_exact)(double *,
+                                   int, const double *, int, int, const double *, const double *,
+                                   int, const double *, int, int, const double *, const double *,
+                                   int, const double *, int, int, const double *, const double *,
+                                   int, const double *, int, int, const double *, const double *);
 
 #ifdef __cplusplus
 }

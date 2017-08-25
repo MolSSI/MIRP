@@ -10,6 +10,7 @@
 
 using namespace mirp;
 
+/*! \brief Main function */
 int main(void)
 {
     double alpha1[3] = { 130.7093200, 23.8088610, 6.4436083 };

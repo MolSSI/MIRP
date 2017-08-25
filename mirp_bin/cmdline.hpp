@@ -36,7 +36,7 @@ std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const 
  *
  * If the argument key is not given on the command line, the default
  * parameter \p def is returned instead.
- 
+
  * \param [in] cmdline The command line to use (should be converted already)
  * \param [in] arg     The argument key to look up
  * \param [in] def     A default value of the argument to use if \p arg is not

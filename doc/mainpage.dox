@@ -16,8 +16,7 @@ In addition, the reference implementation is also written using both the
 usual double-precision floating point numbers, as well as using an
 arbitrary-precision interval arithmetic library (arblib - http://arblib.org).
 This library allows for estimation of the amount of error (such as roundoff error)
-accumulated throughout the computation. The precision can be specified at runtime
-as well.
+accumulated throughout the computation.
 
 The second part of MIRP is a set of precomputed values that new and existing integral
 packages can test against to detect deficiencies in their algorithms. These values
@@ -36,6 +35,7 @@ The source code of MIRP is available at GitHub at https://github.com/MolSSI/MIRP
   - \ref building
 
 \section algo_sec Integrals and Algorithms
+  - \ref functiontypes
   - Integrals
     - \ref kernel_eri
   - Miscellaneous Functionality

@@ -11,7 +11,7 @@
 
 namespace mirp {
 
-    /*! \brief An single entry for a Boys function test */ 
+    /*! \brief An single entry for a Boys function test */
     struct boys_data_entry
     {
         int m;              //!< The order of the Boys function
@@ -22,7 +22,7 @@ namespace mirp {
     /*! \brief A collection of data for testing the Boys function */
     struct boys_data
     {
-        long ndigits;                         //!< The number of digits of accuracy in the file 
+        long ndigits;                         //!< The number of digits of accuracy in the file
         std::string header;                   //!< Header or comments about the test
         std::vector<boys_data_entry> values;  //!< Actual data for the tests
     };
@@ -72,7 +72,7 @@ namespace mirp {
      * \param [in] floattype   Type of floating point to test ("double", for example)
      * \param [in] extra_m     Additional `m` values (used to test recurrence relations)
      * \param [in] target_prec Desired final binary precision (in bits)
-     * \return The number of tests that have failed   
+     * \return The number of tests that have failed
      */
     long boys_run_test_main(const std::string & filepath, const std::string & floattype,
                             long extra_m, long target_prec);

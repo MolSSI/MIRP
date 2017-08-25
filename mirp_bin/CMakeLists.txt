@@ -3,6 +3,7 @@ add_library(test_common OBJECT cmdline.cpp
                                boys_test.cpp
                                test_common.cpp
                                test_common_integral4.cpp
+                               test_common_integral4_single.cpp
 )
 
 add_executable(mirp_run_test mirp_run_test.cpp

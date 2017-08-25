@@ -5,7 +5,7 @@ import random
 import sys
 from mpmath import mp
 
-from common import uncontract_basis, construct_basis, all_cartesian_components
+from common import uncontract_basis, construct_basis, all_cartesian_components, print_integral_single_input
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--filename", type=str, required=True, help="Output file name")
@@ -13,6 +13,7 @@ parser.add_argument("--basis",    type=str, required=True, help="Path to basis s
 parser.add_argument("--geometry", type=str, required=True, help="Path to XYZ geometry file")
 parser.add_argument("--ndigits",  type=int, required=True, help="Number of digits for the value of the eri")
 parser.add_argument("--ntests",   type=int, required=True, help="Number of tests to create")
+parser.add_argument("--ncenter",  type=int, required=True, help="Number of centers in the integral (typically 2 or 4)")
 parser.add_argument("--seed",     type=int, required=True, help="Seed to use for the pseudo-random number generator")
 args = parser.parse_args()
 
@@ -26,7 +27,7 @@ with open(args.filename, 'w') as f:
     f.write("#   " + " ".join(sys.argv[:]) + "\n")
     f.write("#\n")
 
-    created_quartets = []
+    created_ntets = []
 
     with mp.workdps(args.ndigits+4):
         basis = construct_basis(args.geometry, args.basis)
@@ -38,26 +39,16 @@ with open(args.filename, 'w') as f:
             for c in all_cartesian_components(shell[1]['am']):
                 allprim.append((c, shell[0], shell[1]))
 
+        for i in range(args.ntests):
+            ntet = []
+            entry = []
+            for n in range(args.ncenter):
+                idx = random.randint(0, len(allprim)-1)
+                ntet.append(idx)
 
-        for n in range(args.ntests):
-            i = random.randint(0, len(allprim)-1)
-            j = random.randint(0, len(allprim)-1)
-            k = random.randint(0, len(allprim)-1)
-            l = random.randint(0, len(allprim)-1)
-            ijkl = (i, j, k, l)
+                pidx = allprim[idx]
+                entry.append((*pidx[0], *pidx[1][1:], pidx[2]['alpha'][0]))
 
-            if ijkl in created_quartets:
-                continue
-
-            pi = allprim[i]
-            pj = allprim[j]
-            pk = allprim[k]
-            pl = allprim[l]
-
-            f.write("{} {} {} {} {} {} {}\n".format(*pi[0], *pi[1], pi[2]['alpha'][0]))
-            f.write("{} {} {} {} {} {} {}\n".format(*pj[0], *pj[1], pj[2]['alpha'][0]))
-            f.write("{} {} {} {} {} {} {}\n".format(*pk[0], *pk[1], pk[2]['alpha'][0]))
-            f.write("{} {} {} {} {} {} {}\n".format(*pl[0], *pl[1], pl[2]['alpha'][0]))
-            f.write("\n")
-
-            created_quartets.append(ijkl)
+            if not ntet in created_ntets:
+                print_integral_single_input(f, entry)
+                created_ntets.append(ntet)

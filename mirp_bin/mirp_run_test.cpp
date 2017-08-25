@@ -11,6 +11,7 @@
 
 using namespace mirp;
 
+/*! \brief Main function */
 int main(int argc, char ** argv)
 {
     std::string file;
@@ -18,7 +19,7 @@ int main(int argc, char ** argv)
     std::string floattype;
     long target_prec = 0;
     long extra_m = 0;
-    
+
     try {
         auto cmdline = convert_cmdline(argc, argv);
 
@@ -31,7 +32,7 @@ int main(int argc, char ** argv)
 
         if(integral == "boys")
             extra_m = cmdline_get_arg_long(cmdline, "--extra-m", 0);
-        
+
     }
     catch(std::exception & ex)
     {
@@ -67,6 +68,26 @@ int main(int argc, char ** argv)
                 return 1;
             }
         }
+        else if(integral == "eri")
+        {
+            if(floattype == "interval")
+            {
+                nfailed = detail::integral4_run_test(file, target_prec, mirp_eri_target_str);
+            }
+            else if(floattype == "double")
+            {
+                nfailed = detail::integral4_run_test_d(file, mirp_eri_d);
+            }
+            else if(floattype == "exact")
+            {
+                nfailed = detail::integral4_run_test_exact(file, mirp_eri_exact, mirp_eri_target);
+            }
+            else
+            {
+                std::cout << "Float type \"" << floattype << " not valid for integral \"" << integral << "\"\n";
+                return 1;
+            }
+        }
         else
         {
             std::cout << "Integral \"" << integral << "\" is not valid\n";
@@ -74,7 +95,7 @@ int main(int argc, char ** argv)
         }
 
         std::cout << nfailed << " tests failed\n";
-            
+
         if(nfailed)
             return 1;
         else
