@@ -1,0 +1,19 @@
+\form#0:\[ F_m(t) = \int_0^1 u^{2m} e^{-tu^2} du \qquad \qquad t \ge 0 \]
+\form#1:$\Gamma$
+\form#2:\[ F_m(t) = \frac{e^{-t}}{2} \Gamma\left(m+\frac{1}{2}\right) \sum_{i=0}^{\infty} \frac{t^i}{\Gamma\left(m+i+\frac{3}{2}\right)} \]
+\form#3:$\gamma$
+\form#4:\[ F_m(t) = \frac{1}{2t^{m+\frac{1}{2}}} \gamma\left( m+\frac{1}{2}, t\right) \]
+\form#5:\begin{eqnarray*} F_m(t) &= \frac{2t F_{m+1}(t) + e^{-t}}{2m+1} \\ F_{m+1}(t) &= \frac{(2m+1)F_m(t) - e^{-t}}{2t} \end{eqnarray*}
+\form#6:$t$
+\form#7:\begin{eqnarray*} F_m(0) &= \frac{1}{2m+1} \\ F_0(t) &= \sqrt{\frac{\pi}{4t}}\mathrm{erf}\left(\sqrt{x}\right) \end{eqnarray*}
+\form#8:\begin{eqnarray*} F_m(t) &\approx& \frac{1}{2m+1} \qquad\qquad t \approx 0 \\ F_m(t) &\approx& \frac{(2m-1)!!}{2^{m+1}} \sqrt{\frac{\pi}{t^{2m+1}}} \qquad \qquad \textrm{large } t \end{eqnarray*}
+\form#9:\[ F_m(t) \approx \frac{(2m-1)!!}{2^{m+1}} \sqrt{\frac{\pi}{t^{2m+1}}} \qquad \qquad \textrm{large } t \]
+\form#10:\begin{eqnarray*} \Delta F_m(t) &\approx& \frac{e^{-t}}{2t} \sum_{i=1}^{[N]} a_i \\ a_0 &=& 1 \\ a_i &=& \frac{2m-2i+1}{2t}a_{i-1} \end{eqnarray*}
+\form#11:$i=1$
+\form#12:$a_{i} > a_{i-1}$
+\form#13:\begin{eqnarray*} F_m(t) &=& e^{-t} \frac{1}{2^{m+1}} \sum_{i=1}^{\infty} a_i \\ a_0 &=& 1 \\ a_i &=& \frac{2t}{2m+2i+1}a_{i-1} \end{eqnarray*}
+\form#14:$t < m+\frac{1}{2}$
+\form#15:$t=0$
+\form#16:$m$
+\form#17:\begin{eqnarray*} \gamma &= \alpha_1 + \alpha_2 \\ \overline{AB}^2 &= (A_x - B_x)^2 + (A_y - B_y)^2 + (A_z - B_z)^2 \\ P_x &= \frac{(\alpha_1 A_x + \alpha_2 B_x)}{\gamma} \\ P_y &= \frac{(\alpha_1 A_y + \alpha_2 B_y)}{\gamma} \\ P_z &= \frac{(\alpha_1 A_z + \alpha_2 B_z)}{\gamma} \\ \overline{PA}_x &= P_x - A_x \qquad\qquad \overline{PA}_y = P_y - A_y \qquad\qquad \overline{PA}_z = P_z - A_z \\ \overline{PB}_x &= P_x - B_x \qquad\qquad \overline{PB}_y = P_y - B_y \qquad\qquad \overline{PB}_z = P_z - B_z \end{eqnarray*}
+\form#18:$f_{xy^2}$

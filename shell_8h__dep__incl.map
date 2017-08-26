@@ -1,0 +1,8 @@
+<map id="mirp/shell.h" name="mirp/shell.h">
+<area shape="rect" id="node2" href="$integral4__wrappers_8c.html" title="Some useful wrapping of functionality. " alt="" coords="5,81,152,122"/>
+<area shape="rect" id="node3" href="$mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="177,88,263,115"/>
+<area shape="rect" id="node5" href="$shell_8c.html" title="Functions related to gaussians and shells. " alt="" coords="287,88,376,115"/>
+<area shape="rect" id="node6" href="$file__io_8cpp.html" title="Helper functions for reading/writing test files. " alt="" coords="401,88,535,115"/>
+<area shape="rect" id="node7" href="$test__common__integral4_8cpp.html" title="Functions related to testing single ERI. " alt="" coords="560,81,715,122"/>
+<area shape="rect" id="node4" href="$mirp__play_8cpp.html" title="Sandbox for testing features. " alt="" coords="142,171,297,197"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="mirp/math.h" name="mirp/math.h">
+<area shape="rect" id="node2" href="$boys_8c.html" title="Calculation of the boys function using interval arithmetic. " alt="" coords="5,88,141,115"/>
+<area shape="rect" id="node3" href="$boys__d_8c.html" title="Calculation of the boys function using double precision. " alt="" coords="166,88,316,115"/>
+<area shape="rect" id="node4" href="$eri_8c.html" title="Kernel for electron repulsion integrals (interval arithmetic) " alt="" coords="341,88,464,115"/>
+<area shape="rect" id="node5" href="$eri__d_8c.html" title="Kernel for electron repulsion integrals (double precision) " alt="" coords="488,88,624,115"/>
+<area shape="rect" id="node6" href="$integral4__wrappers_8c.html" title="Some useful wrapping of functionality. " alt="" coords="648,81,795,122"/>
+<area shape="rect" id="node7" href="$math_8c.html" title="Some miscellaneous mathematical functions in double precision and interval arithmetic. " alt="" coords="819,88,909,115"/>
+<area shape="rect" id="node8" href="$shell_8c.html" title="Functions related to gaussians and shells. " alt="" coords="934,88,1023,115"/>
+<area shape="rect" id="node9" href="$boys__test_8cpp.html" title="Functions related to testing the Boys function. " alt="" coords="1048,88,1205,115"/>
+<area shape="rect" id="node10" href="$test__common__integral4_8cpp.html" title="Functions related to testing single ERI. " alt="" coords="1229,81,1384,122"/>
+<area shape="rect" id="node11" href="$test__common__integral4__single_8cpp.html" title="Functions related to testing single ERI. " alt="" coords="1408,81,1563,122"/>
+</map>
