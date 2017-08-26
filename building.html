@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: Programming and Naming Conventions</title>
+<title>MIRP: Building MIRP</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -59,40 +59,12 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Programming and Naming Conventions </div>  </div>
+<div class="title">Building MIRP </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="_conventions_naming"></a>
-Naming Conventions</h1>
-<p>In general, MIRP uses the following naming convention</p>
-<ul>
-<li>All C functions are prefixed with <code>mirp_</code> (except local, static functions)</li>
-<li>All C++ functions are within the namespace <code>mirp</code> and (and therefore lacking the <code>mirp_</code> prefix) (except for functions in an anonymous namespace)</li>
-<li>Inputs for creating test files are given a <code>.inp</code> extension, while files with generated data are given a <code>.dat</code> extension.</li>
-</ul>
-<h1><a class="anchor" id="_conventions_passing"></a>
-Passing Data to/from Functions</h1>
-<ul>
-<li>In general, functions do not pass data via <code>return</code> (except for small math functions). Functions may return some sort of status.</li>
-<li>Data is output to pointers passed in as arguments rather than through the return value.</li>
-<li>Documentation should be explicit about the size of arrays passed into functions</li>
-<li>Single objects of type <code>arb_t</code> can be passed as output references without a pointer<ul>
-<li><code>arb_t</code> contains an internal pointer, and structures are pass-by-copy. This is how the arblib library works, so that convention was adopted by MIRP</li>
-</ul>
-</li>
-<li>Arrays should always be passed by pointer, of course</li>
-<li>Arrays of interval arithmetic types should be passed as <code>arb_ptr</code> or <code>arb_srcptr</code></li>
-<li>All output variables passed to a function MUST be initialized first<ul>
-<li>Then there is a clear, consistent location for <code>clear</code>ing an object (within the same function that <code>init</code>ialized it).</li>
-<li>They should not be required to be zeroed, except in rare cases</li>
-</ul>
-</li>
-</ul>
-<h1><a class="anchor" id="_conventions"></a>
-Indexing</h1>
-<ul>
-<li>Indexing of coefficient arrays for general contractions: the index of the primitive/exponent is the fastest index. (The index is <code>[g*nprim+p]</code> where <code>g</code> is the index of the general contraction and <code>p</code> the index of the primitive). </li>
-</ul>
+<div class="textblock"><h1><a class="anchor" id="_build_requirements"></a>
+Requirements</h1>
+<p>TODO </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

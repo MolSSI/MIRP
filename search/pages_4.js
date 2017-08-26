@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['programming_20and_20naming_20conventions',['Programming and Naming Conventions',['../conventions.html',1,'']]]
+  ['gaussian_20product_20theorem',['Gaussian Product Theorem',['../gaussian_product_theorem.html',1,'']]]
 ];

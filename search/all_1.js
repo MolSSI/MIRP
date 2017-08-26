@@ -11,5 +11,6 @@ var searchData=
   ['boys_5frun_5ftest_5fmain',['boys_run_test_main',['../namespacemirp.html#a50579e04fef75495acb684684335ec58',1,'mirp']]],
   ['boys_5ftest_2ecpp',['boys_test.cpp',['../boys__test_8cpp.html',1,'']]],
   ['boys_5ftest_2ehpp',['boys_test.hpp',['../boys__test_8hpp.html',1,'']]],
-  ['boys_5fwrite_5ffile',['boys_write_file',['../namespacemirp.html#a24bc3e121f04df0e0a21551194ae3cb8',1,'mirp']]]
+  ['boys_5fwrite_5ffile',['boys_write_file',['../namespacemirp.html#a24bc3e121f04df0e0a21551194ae3cb8',1,'mirp']]],
+  ['building_20mirp',['Building MIRP',['../building.html',1,'']]]
 ];

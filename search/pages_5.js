@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['the_20boys_20function',['The Boys Function',['../boys_function.html',1,'']]]
+  ['programming_20and_20naming_20conventions',['Programming and Naming Conventions',['../conventions.html',1,'']]]
 ];
