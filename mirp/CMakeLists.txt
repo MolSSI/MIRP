@@ -15,9 +15,7 @@ list(APPEND MIRP_FILELIST
 
 add_library(mirp SHARED ${MIRP_FILELIST})
 
-target_include_directories(mirp PUBLIC ${MIRP_DEPS_INCLUDE_DIRS})
-
-target_link_libraries(mirp PUBLIC ${MIRP_DEPS_LIBRARIES})
+target_link_libraries(mirp "${MIRP_DEPS_TARGETS}")
 
 
 # Installing the library

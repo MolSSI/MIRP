@@ -20,11 +20,6 @@ else()
     set(mirp_static_FOUND 1)
 endif()
 
-set(mirp_LIBRARY "${mirp_LIBRARY_BASE}/${mirp_LIBRARY_NAME}")
-set(mirp_LIBRARIES "${mirp_LIBRARY};${MIRP_DEPS_LIBRARIES}")
-set(mirp_INCLUDE_DIR "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_INCLUDEDIR@")
-set(mirp_INCLUDE_DIRS "${mirp_INCLUDE_DIR};${MIRP_DEPS_INCLUDE_DIRS}")
-
 
 # Check for invalid components
 foreach(_comp IN LISTS mirp_FIND_COMPONENTS)
