@@ -14,9 +14,21 @@ list(APPEND MIRP_FILELIST
 )
 
 add_library(mirp SHARED ${MIRP_FILELIST})
-target_link_libraries(mirp PRIVATE
-                           ${MIRP_arb_LIBRARY}
-                           ${MIRP_flint_LIBRARY}
-                           ${MIRP_mpfr_LIBRARY}
-                           ${MIRP_gmp_LIBRARY}
+
+target_include_directories(mirp PUBLIC ${MIRP_DEPS_INCLUDE_DIRS})
+
+target_link_libraries(mirp PUBLIC ${MIRP_DEPS_LIBRARIES})
+
+
+# Installing the library
+install(TARGETS mirp
+        EXPORT mirpTargets
+        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+)
+        
+# Install the header files
+install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}"
+        DESTINATION include
+        FILES_MATCHING REGEX ".*\.h$"
 )

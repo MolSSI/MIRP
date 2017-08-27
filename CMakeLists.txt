@@ -1,38 +1,63 @@
-cmake_minimum_required(VERSION 3.0)
-project(Arbint LANGUAGES C CXX)
+cmake_minimum_required(VERSION 3.2)
+cmake_policy(SET CMP0048 NEW) # project VERSION* variables populated from VERSION given below
+project(MIRP
+        VERSION 0.1
+        LANGUAGES C CXX)
+
 enable_testing()
 
+# Standard install locations and cmake helpers
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+set(PN ${PROJECT_NAME})
+set(CMAKECONFIG_INSTALL_DIR "share/cmake/mirp")
 
-macro(mirp_find_library libname)
-    find_library(MIRP_${libname}_LIBRARY ${libname})
 
-    if(NOT MIRP_${libname}_LIBRARY)
-        message(FATAL_ERROR "Library ${libname} not found!")
-    endif()
+# Find the dependencies
+include(cmake/mirpDependencies.cmake)
 
-    get_filename_component(MIRP_${libname}_DIR ${MIRP_${libname}_LIBRARY} DIRECTORY)
-    get_filename_component(MIRP_${libname}_DIR ${MIRP_${libname}_DIR} DIRECTORY)
-    message(STATUS "Found ${libname} library: ${MIRP_${libname}_LIBRARY}")
-    message(STATUS "Found ${libname} path: ${MIRP_${libname}_DIR}")
-    include_directories(SYSTEM ${MIRP_${libname}_DIR}/include)
-endmacro()
-
-add_definitions("-Wall")
-add_definitions("-Wextra")
-add_definitions("-pedantic")
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS Off)
 set(CMAKE_C_EXTENSIONS Off)
+add_definitions("-Wall")
+add_definitions("-Wextra")
+add_definitions("-pedantic")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-mirp_find_library(arb)
-mirp_find_library(flint)
-mirp_find_library(mpfr)
-mirp_find_library(gmp)
 
 add_subdirectory(mirp)
 add_subdirectory(mirp_bin)
 add_subdirectory(examples)
 add_subdirectory(tests)
+
+##########################################
+# Installation and config files
+##########################################
+# Write out the cmake config file
+configure_package_config_file(cmake/mirpConfig.cmake.in
+                              "${CMAKE_CURRENT_BINARY_DIR}/mirpConfig.cmake"
+                              INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/mirpConfigVersion.cmake
+                                 VERSION ${mirp_VERSION}
+                                 COMPATIBILITY AnyNewerVersion
+)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/mirpConfig.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/mirpConfigVersion.cmake
+        DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install(EXPORT "mirpTargets"
+        NAMESPACE "mirp::"
+        DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+# Install the dependency-finding script
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mirpDependencies.cmake
+        DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
