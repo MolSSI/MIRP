@@ -122,9 +122,14 @@ void mirp_eri_single(arb_t integral,
 
     /* Temporary variables used in constructing expressions */
     arb_t tmp1, tmp2, tmp3;
+    arb_t tmp4x, tmp4y, tmp4xy, tmp4z;
     arb_init(tmp1);
     arb_init(tmp2);
     arb_init(tmp3);
+    arb_init(tmp4x);
+    arb_init(tmp4y);
+    arb_init(tmp4xy);
+    arb_init(tmp4z);
 
 
     /*************************************************
@@ -225,57 +230,56 @@ void mirp_eri_single(arb_t integral,
                 arb_mul(Gxyz, Gxy, Gz, working_prec);
 
                 for(int tx = 0; tx <= ((lp + lq - 2 * (u1 + u2)) / 2); tx++)
-                for(int ty = 0; ty <= ((mp + mq - 2 * (v1 + v2)) / 2); ty++)
-                for(int tz = 0; tz <= ((np + nq - 2 * (w1 + w2)) / 2); tz++)
                 {
-                    const int zeta = lp + lq + mp + mq + np + nq - 2*(u1 + u2 + v1 + v2 + w1 + w2) - tx - ty - tz;
-
                     const int xfac = lp + lq - 2*(u1 + u2 + tx);
-                    const int yfac = mp + mq - 2*(v1 + v2 + ty);
-                    const int zfac = np + nq - 2*(w1 + w2 + tz);
-
-
-                    arb_set_si(tmp1, NEG1_POW(tx + ty + tz));
-                    arb_mul(tmp1, tmp1, Gxyz, working_prec);
-
-                    arb_mul(tmp1, tmp1, F + zeta, working_prec);
-
-                    arb_pow_ui(tmp2, PQ+0, xfac, working_prec);
-                    arb_mul(tmp1, tmp1, tmp2, working_prec);
-
-                    arb_pow_ui(tmp2, PQ+1, yfac, working_prec);
-                    arb_mul(tmp1, tmp1, tmp2, working_prec);
-
-                    arb_pow_ui(tmp2, PQ+2, zfac, working_prec);
-                    arb_mul(tmp1, tmp1, tmp2, working_prec);
-
-                    arb_set_ui(tmp2, 4);
-                    arb_pow_ui(tmp2, tmp2, u1 + u2 + tx + v1 + v2 + ty + w1 + w2 + tz, working_prec);
-
-                    arb_pow_ui(tmp3, gammapq, tx + ty + tz, working_prec);
-                    arb_mul(tmp2, tmp2, tmp3, working_prec);
-
+                    arb_pow_ui(tmp4x, PQ+0, xfac, working_prec);
                     arb_fac_ui(tmp3, xfac, working_prec);
-                    arb_mul(tmp2, tmp2, tmp3, working_prec);
+                    arb_div(tmp4x, tmp4x, tmp3, working_prec);
 
-                    arb_fac_ui(tmp3, yfac, working_prec);
-                    arb_mul(tmp2, tmp2, tmp3, working_prec);
 
-                    arb_fac_ui(tmp3, zfac, working_prec);
-                    arb_mul(tmp2, tmp2, tmp3, working_prec);
+                    for(int ty = 0; ty <= ((mp + mq - 2 * (v1 + v2)) / 2); ty++)
+                    {
+                        const int yfac = mp + mq - 2*(v1 + v2 + ty);
+                        arb_pow_ui(tmp4y, PQ+1, yfac, working_prec);
+                        arb_fac_ui(tmp3, yfac, working_prec);
+                        arb_div(tmp4y, tmp4y, tmp3, working_prec);
+                        arb_mul(tmp4xy, tmp4x, tmp4y, working_prec);
 
-                    arb_fac_ui(tmp3, tx, working_prec);
-                    arb_mul(tmp2, tmp2, tmp3, working_prec);
+                        for(int tz = 0; tz <= ((np + nq - 2 * (w1 + w2)) / 2); tz++)
+                        {
+                            const int zfac = np + nq - 2*(w1 + w2 + tz);
+                            arb_pow_ui(tmp4z, PQ+2, zfac, working_prec);
+                            arb_fac_ui(tmp3, zfac, working_prec);
+                            arb_div(tmp4z, tmp4z, tmp3, working_prec);
 
-                    arb_fac_ui(tmp3, ty, working_prec);
-                    arb_mul(tmp2, tmp2, tmp3, working_prec);
+                            const int zeta = lp + lq + mp + mq + np + nq - 2*(u1 + u2 + v1 + v2 + w1 + w2) - tx - ty - tz;
 
-                    arb_fac_ui(tmp3, tz, working_prec);
-                    arb_mul(tmp2, tmp2, tmp3, working_prec);
+                            arb_mul_si(tmp1, Gxyz, NEG1_POW(tx+ty+tz), working_prec);
 
-                    arb_div(tmp1, tmp1, tmp2, working_prec);
+                            arb_mul(tmp1, tmp1, F + zeta, working_prec);
+                            arb_mul(tmp1, tmp1, tmp4xy, working_prec);
+                            arb_mul(tmp1, tmp1, tmp4z, working_prec);
 
-                    arb_add(integral, integral, tmp1, working_prec);
+                            arb_set_ui(tmp2, 4);
+                            arb_pow_ui(tmp2, tmp2, u1 + u2 + tx + v1 + v2 + ty + w1 + w2 + tz, working_prec);
+
+                            arb_pow_ui(tmp3, gammapq, tx + ty + tz, working_prec);
+                            arb_mul(tmp2, tmp2, tmp3, working_prec);
+
+                            arb_fac_ui(tmp3, tx, working_prec);
+                            arb_mul(tmp2, tmp2, tmp3, working_prec);
+
+                            arb_fac_ui(tmp3, ty, working_prec);
+                            arb_mul(tmp2, tmp2, tmp3, working_prec);
+
+                            arb_fac_ui(tmp3, tz, working_prec);
+                            arb_mul(tmp2, tmp2, tmp3, working_prec);
+
+                            arb_div(tmp1, tmp1, tmp2, working_prec);
+
+                            arb_add(integral, integral, tmp1, working_prec);
+                        }
+                    }
                 }
             }
         }
@@ -346,6 +350,10 @@ void mirp_eri_single(arb_t integral,
     arb_clear(tmp1);
     arb_clear(tmp2);
     arb_clear(tmp3);
+    arb_clear(tmp4x);
+    arb_clear(tmp4y);
+    arb_clear(tmp4xy);
+    arb_clear(tmp4z);
     arb_clear(gammap);
     arb_clear(gammaq);
     arb_clear(gammapq);
