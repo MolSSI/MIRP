@@ -2,19 +2,19 @@
 
 \section _tests_general General Test Information
 
-Test data resides in the `test_data` subdirectory of the MIRP repo.
+Test data resides in the `tests` subdirectory of the MIRP repo.
 
 To create a new test file, an input file must first be created. This can be created
 by any means, although it must conform to the input test file format (see \ref _tests_formats).
 Scripts that generate test inputs should be placed in the `generator` subdirectory
-of the `test_data` directory.
+of the `tests` directory.
 
 Once an input is created, the reference data file can be created via the `mirp_create_test` command.
 Typically, input files have a `.inp` suffix, while the reference data generated from inputs
 has a `.dat` suffix.
 
 Once a test has been created and verified, its sha256sum should be added to the `sha256sums`
-file in the `test_data` directory. This will help protect against inadvertent changes.
+file in the `tests` directory. This will help protect against inadvertent changes.
 
 Functionality in MIRP can then be tested using the `mirp_run_test` command. This is
 typically added to a CMake script in the `tests` directory of the MIRP repo.
@@ -24,7 +24,7 @@ typically added to a CMake script in the `tests` directory of the MIRP repo.
 \section _tests_verify Test Verification
 
 When possible, the reference test data must be verified by another means. Scripts, Mathematica notebooks, etc,
-that do this should be placed in the `verify` subdirectory of the `test_data` directory.
+that do this should be placed in the `verify` subdirectory of the `tests` directory.
 
 
 \section _tests_formats Test file formats

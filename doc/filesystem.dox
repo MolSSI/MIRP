@@ -12,10 +12,9 @@ Starting from the top level of the source directory
              common functions, such as math and shell functions.
   - **kernels** - Actual functions for computing integrals 
 - **mirp_bin** - Source code for binaries related to MIRP (testing, test creation, etc)
-- **test_data** - Generated reference data for testing
+- **tests** - Generated reference data and scripts for testing MIRP
   - **generator** - Scripts and data for generating test inputs
   - **verify** - Verification scripts, programs, notebooks, etc
-- **tests** - Internal testing of MIRP
 - **travis** - Helper scripts for Travis Continuous Integration
 
 */

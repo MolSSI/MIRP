@@ -12,9 +12,9 @@ endif()
 if(NOT SHASUM_PROG)
     message(STATUS "shasum or sha256sum not found. I wont check the data files")
 else()
-    add_test(NAME test_data_checksum
+    add_test(NAME tests_checksum
              COMMAND ${SHASUM_PROG} -c sha256sums
-             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/test_data
+             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/tests
     )
 endif()
 
@@ -25,7 +25,7 @@ endif()
 ######################################
 macro(add_boys_test filename floattype prec extra_m)
     add_test(NAME boys_${filename}_${floattype}_${prec}_extra_${extra_m}
-             COMMAND mirp_run_test --integral boys --file ${CMAKE_SOURCE_DIR}/test_data/${filename} --float ${floattype} --prec ${prec} --extra-m ${extra_m}
+             COMMAND mirp_run_test --integral boys --file ${CMAKE_CURRENT_LIST_DIR}/${filename} --float ${floattype} --prec ${prec} --extra-m ${extra_m}
     )
 endmacro()
 
@@ -34,7 +34,7 @@ endmacro()
 ##############################################
 macro(add_integral_test filename integral floattype prec)
     add_test(NAME ${integral}_${filename}_${floattype}_${prec}
-             COMMAND mirp_run_test --integral ${integral} --file ${CMAKE_SOURCE_DIR}/test_data/${filename} --float ${floattype} --prec ${prec}
+             COMMAND mirp_run_test --integral ${integral} --file ${CMAKE_CURRENT_LIST_DIR}/${filename} --float ${floattype} --prec ${prec}
     )
 endmacro()
 
