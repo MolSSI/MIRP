@@ -1,22 +1,51 @@
-/*! \page tests Creating Test Files
+/*! \page tests Testing and Test Files
 
 \section _tests_general General Test Information
 
-See \ref fileformat for information about the file formatting for test files.
+Test data resides in the `test_data` subdirectory of the MIRP repo.
 
 To create a new test file, an input file must first be created. This can be created
-by any means, although it must conform to the input test file format.
+by any means, although it must conform to the input test file format (see \ref _tests_formats).
+Scripts that generate test inputs should be placed in the `generator` subdirectory
+of the `test_data` directory.
 
-Then, the reference data file can be created via the `mirp_create_test` command.
+Once an input is created, the reference data file can be created via the `mirp_create_test` command.
+Typically, input files have a `.inp` suffix, while the reference data generated from inputs
+has a `.dat` suffix.
+
+Once a test has been created and verified, its sha256sum should be added to the `sha256sums`
+file in the `test_data` directory. This will help protect against inadvertent changes.
+
+Functionality in MIRP can then be tested using the `mirp_run_test` command. This is
+typically added to a CMake script in the `tests` directory of the MIRP repo.
+
+
 
 \section _tests_verify Test Verification
 
-The reference test data must be verified by another means. Scripts, Mathematica notebooks, etc,
-should be placed in the `verify` subdirectory of the `test_data` directory.
+When possible, the reference test data must be verified by another means. Scripts, Mathematica notebooks, etc,
+that do this should be placed in the `verify` subdirectory of the `test_data` directory.
 
-\section _tests_shasum Checksumming
 
-Once a test has been created and verified, its sha256sum should be added to the `sha256sums`
-file in the `test_data` directory.
+\section _tests_formats Test file formats
+
+In both test input and reference files, lines beginning with `#` are treated as comments.
+Generally, input files should have a header with a brief description and/or the generator
+command used to create them. The reference data files should repeat this information and add
+the command used to generate the data.
+
+\note Numbers in the input files are treated as if they are exact to an infinite number of decimal places.
+
+
+\section _tests_formats Boys Function Test Files
+
+Test files for the boys function are fairly simple. The input for
+generating tests contain the `m` value and the `t` value, space separated,
+on each line.
+
+Reference data files are similar, containing `m`, `t`, and the value of `F(m,t)` on each line.
+In addition, the first non-comment line contains the number of decimal digits that the value
+of `F(m,t)` is accurately computed to.
+
 
 */

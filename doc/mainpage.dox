@@ -44,7 +44,6 @@ The source code of MIRP is available at GitHub at https://github.com/MolSSI/MIRP
 
 \section prog_sec MIRP Technical Details
 
-  - \ref fileformat
   - \ref tests
 
 \section Authors

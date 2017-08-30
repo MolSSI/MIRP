@@ -2,6 +2,61 @@
 
 \section _build_requirements Requirements
 
-TODO
+\todo Determine some reasonable minimum version requirements
+
+- C/C++ compiler (supporting C++11)
+- CMake (http://cmake.org)
+
+- Arb (http://arblib.org)
+- Flint (http://flintlib.org)
+- MPFR (http://mpfr.org)
+- GMP (http://gmplib.org)
+  - MPIR (http://mpir.org) may work, but is untested
+
+\section _build_building Building and Installing
+
+MIRP is built with CMake, and in general uses the standard options.
+No files are modified within the source tree, so multiple out-of-source
+builds can share the same source directory.
+
+The most common options are:
+
+- **CMAKE_BUILD_TYPE**     - Set to `Release`, `Debug`, or `RelWithDebInfo`.
+- **CMAKE_C_COMPILER**     - Which compiler to use for building C source files
+                             (ie, `icc`, `/usr/bin/gcc`, etc)
+- **CMAKE_CXX_COMPILER**   - Which compiler to use for building C++ source files
+                             (ie, `icpc`, `/usr/bin/g++`, etc)
+- **CMAKE_INSTALL_PREFIX** - Destination for installing MIRP
+- **CMAKE_PREFIX_PATH**    - Extra paths to search for dependencies (like those listed
+                             above). This path is expected to have subdirectories
+                             such as `bin`, `share`, etc.
+
+
+An example of configuring, building, and installing:
+
+\code{.sh}
+cd /path/to/mirp
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ \
+      -DCMAKE_PREFIX_PATH=/path/to/mirp_deps \
+      -DCMAKE_INSTALL_PREFIX=/home/user/mirp_install \
+      ../
+ctest
+make install
+\endcode
+
+
+\section _build_testing Testing MIRP
+
+Testing of the library is done using the `ctest` command. The tests
+are designed to thoroughly cover all the functionality of the library.
+
+Currently, the tests take less than 5 minutes on reasonably modern hardware.
+
+If you have a failing test, please file a bug report using github issues or by
+emailing the main author directly.
+
 
 */
