@@ -140,7 +140,7 @@ void mirp_loop_shell4(arb_ptr integral,
     const long ngen1234 = ngen1*ngen2*ngen3*ngen4;
     const long full_size = ncart1234*ngen1234;
 
-    arb_ptr integral_buffer = _arb_vec_init(full_size);
+    arb_ptr integral_buffer = _arb_vec_init(ncart1234);
     arb_ptr coeff1_norm = _arb_vec_init(nprim1 * ngen1);
     arb_ptr coeff2_norm = _arb_vec_init(nprim2 * ngen2);
     arb_ptr coeff3_norm = _arb_vec_init(nprim3 * ngen3);
@@ -195,7 +195,7 @@ void mirp_loop_shell4(arb_ptr integral,
     }
 
     arb_clear(coeff);
-    _arb_vec_clear(integral_buffer, full_size);
+    _arb_vec_clear(integral_buffer, ncart1234);
     _arb_vec_clear(coeff1_norm, nprim1*ngen1);
     _arb_vec_clear(coeff2_norm, nprim2*ngen2);
     _arb_vec_clear(coeff3_norm, nprim3*ngen3);
