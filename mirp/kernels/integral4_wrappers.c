@@ -185,13 +185,20 @@ void mirp_loop_shell4(arb_ptr integral,
 
                 /* Only apply the coefficient if the integral is nonzero.
                  * Otherwise, we end up with 0 +/- error */
-                if(arb_is_zero(integral_buffer+q))
-                    arb_zero(integral+idx);
-                else
+                if(!arb_is_zero(integral_buffer+q))
                     arb_addmul(integral+idx, integral_buffer+q, coeff, working_prec);
             }
             ntotal++;
         }
+    }
+
+    for(long i = 0; i < full_size; i++)
+    {
+        /* Clamp to zero if needed
+         * Required for contracted shell quartets that are
+         * zero by symmetry */
+         if(arb_rel_accuracy_bits(integral+i) < 0)
+             arb_zero(integral+i);
     }
 
     arb_clear(coeff);
