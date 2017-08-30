@@ -24,18 +24,40 @@ endif()
 # Creates a test of the boys function
 ######################################
 macro(add_boys_test filename floattype prec extra_m)
-    add_test(NAME boys_${filename}_${floattype}_${prec}_extra_${extra_m}
-             COMMAND mirp_run_test --integral boys --file ${CMAKE_CURRENT_LIST_DIR}/${filename} --float ${floattype} --prec ${prec} --extra-m ${extra_m}
-    )
+    if(${prec} EQUAL 0)
+        add_test(NAME boys_${filename}_${floattype}_extra_${extra_m}
+                 COMMAND mirp_run_test --integral boys
+                                       --file ${CMAKE_CURRENT_LIST_DIR}/${filename}
+                                       --float ${floattype}
+                                       --extra-m ${extra_m}
+        )
+    else()
+        add_test(NAME boys_${filename}_${floattype}_${prec}_extra_${extra_m}
+                 COMMAND mirp_run_test --integral boys
+                                       --file ${CMAKE_CURRENT_LIST_DIR}/${filename}
+                                       --float ${floattype} --prec ${prec}
+                                       --extra-m ${extra_m}
+        )
+    endif()
 endmacro()
 
 ##############################################
 # Creates a test of general integrals
 ##############################################
 macro(add_integral_test filename integral floattype prec)
-    add_test(NAME ${integral}_${filename}_${floattype}_${prec}
-             COMMAND mirp_run_test --integral ${integral} --file ${CMAKE_CURRENT_LIST_DIR}/${filename} --float ${floattype} --prec ${prec}
-    )
+    if(${prec} EQUAL 0)
+        add_test(NAME ${integral}_${filename}_${floattype}
+                 COMMAND mirp_run_test --integral ${integral} 
+                                       --file ${CMAKE_CURRENT_LIST_DIR}/${filename}
+                                       --float ${floattype}
+        )
+    else()
+        add_test(NAME ${integral}_${filename}_${floattype}_${prec}
+                 COMMAND mirp_run_test --integral ${integral} 
+                                       --file ${CMAKE_CURRENT_LIST_DIR}/${filename}
+                                       --float ${floattype} --prec ${prec}
+        )
+    endif()
 endmacro()
 
 # Testing of examples

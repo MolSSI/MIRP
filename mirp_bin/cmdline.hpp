@@ -19,8 +19,21 @@ namespace mirp {
 bool cmdline_has_arg(const std::vector<std::string> & cmdline, const std::string & arg);
 
 
+/*! \brief See if the command line has a switch
+ *
+ * \note After seeing if the switch exists, it is removed from \p cmdline
+ *
+ * \param [in] cmdline The command line to check (should be converted already)
+ * \param [in] arg     The argument to check for
+ * \return True if \p cmdline contains the switch, false otherwise
+ */
+bool cmdline_get_switch(std::vector<std::string> & cmdline, const std::string & arg);
+
+
 /*! \brief Obtain the value of an argument from the command line
  *         as a string
+ *
+ * \note After obtaining the argument, the key and value are removed from \p cmdline
  *
  * \throw std::runtime_error if the argument key or the value is not found
  *
@@ -28,7 +41,7 @@ bool cmdline_has_arg(const std::vector<std::string> & cmdline, const std::string
  * \param [in] arg     The argument key to look up
  * \return The value of the argument given on the command line
  */
-std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const std::string & arg);
+std::string cmdline_get_arg_str(std::vector<std::string> & cmdline, const std::string & arg);
 
 
 /*! \brief Obtain the value of an argument from the command line
@@ -36,6 +49,8 @@ std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const 
  *
  * If the argument key is not given on the command line, the default
  * parameter \p def is returned instead.
+ *
+ * \note After obtaining the argument, the key and value are removed from \p cmdline
 
  * \param [in] cmdline The command line to use (should be converted already)
  * \param [in] arg     The argument key to look up
@@ -43,23 +58,23 @@ std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const 
                        given on the command line
  * \return The value of the argument given on the command line, or the value of \p def
  */
-std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const std::string & arg, const std::string & def);
+std::string cmdline_get_arg_str(std::vector<std::string> & cmdline, const std::string & arg, const std::string & def);
 
 
 /*! \brief Obtain the value of an argument from the command line
  *         as a long integer
  *
- * \copydetails cmdline_get_arg_str(const std::vector<std::string> &, const std::string &)
+ * \copydetails cmdline_get_arg_str(std::vector<std::string> &, const std::string &)
  */
-long cmdline_get_arg_long(const std::vector<std::string> & cmdline, const std::string & arg);
+long cmdline_get_arg_long(std::vector<std::string> & cmdline, const std::string & arg);
 
 
 /*! \brief Obtain the value of an argument from the command line
  *         as a long integer, with a default
  *
- * \copydetails cmdline_get_arg_str(const std::vector<std::string> &, const std::string &, const std::string &)
+ * \copydetails cmdline_get_arg_str(std::vector<std::string> &, const std::string &, const std::string &)
  */
-long cmdline_get_arg_long(const std::vector<std::string> & cmdline, const std::string & arg, long def);
+long cmdline_get_arg_long(std::vector<std::string> & cmdline, const std::string & arg, long def);
 
 
 /*! \brief Convert the command line passed to a program into a vector of strings
@@ -70,7 +85,7 @@ long cmdline_get_arg_long(const std::vector<std::string> & cmdline, const std::s
  * \param [in] argv The command line arguments
  * \return The command line, split into a vector of strings and lightly processed.
  */
-
 std::vector<std::string> convert_cmdline(int argc, char ** argv);
+
 
 } // close namespace mirp

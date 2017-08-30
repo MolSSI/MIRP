@@ -7,9 +7,40 @@
 #include "mirp_bin/boys_test.hpp"
 #include "mirp_bin/test_common.hpp"
 #include <mirp/kernels/all.h>
+#include <sstream>
 #include <iostream>
 
 using namespace mirp;
+
+static void print_help(void)
+{
+    std::cout << "\n"
+              << "mirp_run_test - Test MIRP functionality using test data\n"
+              << "\n"
+              << "\n"
+              << "Required arguments:\n"
+              << "    --file         File to test with\n"
+              << "    --integral     The type of integral to compute. Possibilities are:\n"
+              << "                       boys\n"
+              << "                       eri\n"
+              << "                       eri_single\n"
+              << "    --float        Type of floating-point to test with. Possibilities are:\n"
+              << "                       interval\n"
+              << "                       double\n"
+              << "                       exact\n"
+              << "    --prec         Number of binary digits (bits) to test (required for --float interval)\n"
+              << "\n"
+              << "\n"
+              << "Integral-dependent options:\n"
+              << "\n"
+              << "  Boys Function:\n"
+              << "    --extra-m      Initially compute this many more m values (to test recursion)\n"
+              << "\n"
+              << "\n"
+              << "Other arguments:\n"
+              << "    -h, --help     Display this help screen\n"
+              << "\n";
+}
 
 /*! \brief Main function */
 int main(int argc, char ** argv)
@@ -22,6 +53,11 @@ int main(int argc, char ** argv)
 
     try {
         auto cmdline = convert_cmdline(argc, argv);
+        if(cmdline.size() == 0 || cmdline_has_arg(cmdline, "-h") || cmdline_has_arg(cmdline, "--help"))
+        {
+            print_help();
+            return 0;
+        }
 
         file = cmdline_get_arg_str(cmdline, "--file");
         integral = cmdline_get_arg_str(cmdline, "--integral");
@@ -29,14 +65,28 @@ int main(int argc, char ** argv)
 
         if(floattype != "double" && floattype != "exact")
             target_prec = cmdline_get_arg_long(cmdline, "--prec");
+        else if(cmdline_has_arg(cmdline, "--prec"))
+            throw std::runtime_error("--prec is not valid for this floating-point type");
 
         if(integral == "boys")
             extra_m = cmdline_get_arg_long(cmdline, "--extra-m", 0);
+        else if(cmdline_has_arg(cmdline, "--extra-m"))
+            throw std::runtime_error("--extra-m is not valid for this integral type");
+
+        if(cmdline.size() != 0)
+        {
+            std::stringstream ss;
+            ss << "Unknown command line arguments:\n";
+            for(const auto & it : cmdline)
+                ss << "  " << it << "\n";
+            throw std::runtime_error(ss.str());
+        }
 
     }
     catch(std::exception & ex)
     {
-        std::cout << "Error parsing command line: " << ex.what() << "\n";
+        std::cout << "\nError parsing command line: " << ex.what() << "\n\n";
+        std::cout << "Run \"mirp_run_test -h\" for help\n\n";
         return 1;
     }
 

@@ -18,7 +18,21 @@ bool cmdline_has_arg(const std::vector<std::string> & cmdline, const std::string
 }
 
 
-std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const std::string & arg)
+bool cmdline_get_switch(std::vector<std::string> & cmdline, const std::string & arg)
+{
+    auto it = std::find(cmdline.begin(), cmdline.end(), arg);
+
+    if(it != cmdline.end())
+    {
+        cmdline.erase(it, it+1);
+        return true;
+    }
+    else
+        return false;
+}
+
+
+std::string cmdline_get_arg_str(std::vector<std::string> & cmdline, const std::string & arg)
 {
     if(!cmdline_has_arg(cmdline, arg))
     {
@@ -36,7 +50,7 @@ std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const 
         throw std::logic_error(err);
     }
 
-    it++;
+    auto arg_it = it+1;
     if(it == cmdline.end())
     {
         std::string err;
@@ -44,10 +58,14 @@ std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const 
         throw std::runtime_error(err);
     }
 
-    return *it;
+    std::string ret = *arg_it;
+    cmdline.erase(it, arg_it+1);
+
+    return ret;
 }
 
-std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const std::string & arg, const std::string & def)
+
+std::string cmdline_get_arg_str(std::vector<std::string> & cmdline, const std::string & arg, const std::string & def)
 {
     if(!cmdline_has_arg(cmdline, arg))
         return def;
@@ -55,7 +73,8 @@ std::string cmdline_get_arg_str(const std::vector<std::string> & cmdline, const 
         return cmdline_get_arg_str(cmdline, arg);
 }
 
-long cmdline_get_arg_long(const std::vector<std::string> & cmdline, const std::string & arg)
+
+long cmdline_get_arg_long(std::vector<std::string> & cmdline, const std::string & arg)
 {
     std::string strarg = cmdline_get_arg_str(cmdline, arg);
     std::stringstream ss(strarg);
@@ -73,13 +92,15 @@ long cmdline_get_arg_long(const std::vector<std::string> & cmdline, const std::s
     return ret;
 }
 
-long cmdline_get_arg_long(const std::vector<std::string> & cmdline, const std::string & arg, long def)
+
+long cmdline_get_arg_long(std::vector<std::string> & cmdline, const std::string & arg, long def)
 {
     if(!cmdline_has_arg(cmdline, arg))
         return def;
     else
         return cmdline_get_arg_long(cmdline, arg);
 }
+
 
 std::vector<std::string> convert_cmdline(int argc, char ** argv)
 {
