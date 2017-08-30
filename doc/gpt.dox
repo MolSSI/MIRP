@@ -1,6 +1,19 @@
 /*! \page gaussian_product_theorem Gaussian Product Theorem
 
 \section _gpt_theory Theory
+
+The Gaussian Product Theorem (GPT) states that the product of two gaussians G1,G2
+can be represented as a third gaussian G3 with a center a line connecting G1 and G2.
+This theorem is used extensively in quantum chemistry to simplify integrals.
+
+MIRP contains functionality to compute some of the terms from the GPT which
+will be used within integral kernels.
+
+Given two gaussians \f$G_1(R) = e^{-\alpha_1 r_{AR}^2}\f$ and
+\f$G_2(R) = e^{-\alpha_2 r_{BR}^2}\f$ centered on \f$A\f$ and \f$B\f$, respectively,
+and with \f$r_{AR}\f$ and \f$r_{BR}\f$ representing the distance between the center
+of the gaussian and a given point \f$R\f$
+
 \f{eqnarray*}{
 
    \gamma &= \alpha_1 + \alpha_2 \\
@@ -22,7 +35,7 @@
 In MIRP, the parameters to the Gaussian Product Theorem can be calculated
 via the following functions:
 
-- mirp_gpt_double()
-- mirp_gpt_interval()
+- mirp_gpt_d()
+- mirp_gpt()
 
 */
