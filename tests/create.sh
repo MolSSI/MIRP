@@ -44,7 +44,7 @@ generator/generate_integral_single_random.py \
 generator/generate_integral_single_frombasis.py \
            --filename 4center_single_water_sto3g.inp \
            --geo generator/geometry/water.xyz \
-           --basis generator/basis/sto-3g.gbs \
+           --basis generator/basis/sto-3g.bas \
            --ncenter 4 --ndigits 20 --ntests 2000 --seed 770225234
 
 generator/generate_integral_random.py \
@@ -56,7 +56,7 @@ generator/generate_integral_random.py \
 
 generator/generate_integral_frombasis.py \
            --filename 4center_water_sto3g.inp \
-           --basis generator/basis/sto-3g.gbs \
+           --basis generator/basis/sto-3g.bas \
            --geometry generator/geometry/water.xyz \
            --ndigits 20 --ncenter 4 --ntests 1000 --seed 661232124
 

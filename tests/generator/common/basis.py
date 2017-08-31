@@ -13,62 +13,59 @@ def read_basis(basisfile_path):
         flines = [l.strip() for l in f.readlines()]
 
     # Strip out comments and blank lines
-    flines = [l for l in flines if l and not l.startswith('!')]
+    flines = [l for l in flines if l and not l.startswith('#') and not l.startswith('BASIS')]
 
     # atom -> basis mapping
     atom_basis = {}
 
-    i = 1  # skip initial **** separator
-    while i < len(flines):
-        atom_symbol = flines[i].split()[0]
-        atom = []
+    i = 0
+    while flines[i] != "END":
+        lsplt = flines[i].split()
+        stype = lsplt[1].lower()
+        atom_symbol = lsplt[0]
 
         i += 1
-        while flines[i] != '****':
+
+        alpha = []
+        coeff = []
+        while flines[i][0].isdigit():
             lsplt = flines[i].split()
-            stype = lsplt[0].lower()
-            nshell = int(lsplt[1])
-
-            alpha = []
-            coeff = []
+            alpha.append(mp.mpf(lsplt[0]))
+            coeff.append([mp.mpf(c) for c in lsplt[1:]])
             i += 1
-            for j in range(0, nshell):
-                lsplt = flines[i].split()
-                alpha.append(mp.mpf(lsplt[0]))
-                coeff.append([mp.mpf(c) for c in lsplt[1:]])
-                i += 1
 
-            nprim = len(alpha)
+        nprim = len(alpha)
 
-            # Transposes the coefficient matrix
-            coeff = list(map(list, zip(*coeff)))
+        # Transposes the coefficient matrix
+        coeff = list(map(list, zip(*coeff)))
 
-            # Handle sp, spd, etc
-            if len(stype) > 1:
-                for j, s in enumerate(stype):
-                    shell = {'am': amchar_to_int(s),
-                             'alpha': alpha,
-                             'coeff': coeff[j],
-                             'nprim': nprim,
-                             'ngeneral': 1
-                             }
-
-                    atom.append(shell)
-
-            else:
-                shell = {'am': amchar_to_int(stype),
+        # Handle sp, spd, etc
+        if len(stype) > 1:
+            for j, s in enumerate(stype):
+                shell = {'am': amchar_to_int(s),
                          'alpha': alpha,
-                         'coeff': coeff[0],
+                         'coeff': coeff[j],
                          'nprim': nprim,
-                         'ngeneral': len(coeff[0]) // nprim
+                         'ngeneral': 1
                          }
 
-                atom.append(shell)
+                if not atom_symbol in atom_basis:
+                    atom_basis[atom_symbol] = [shell]
+                else:
+                    atom_basis[atom_symbol].append(shell)
 
-        i += 1
+        else:
+            shell = {'am': amchar_to_int(stype),
+                     'alpha': alpha,
+                     'coeff': coeff[0],
+                     'nprim': nprim,
+                     'ngeneral': len(coeff[0]) // nprim
+                     }
 
-        # add atom to basis set
-        atom_basis[atom_symbol] = atom
+            if not atom_symbol in atom_basis:
+                atom_basis[atom_symbol] = [shell]
+            else:
+                atom_basis[atom_symbol].append(shell)
 
     return atom_basis
 

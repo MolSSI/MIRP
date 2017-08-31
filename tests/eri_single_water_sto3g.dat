@@ -1,7 +1,7 @@
 # THIS FILE IS GENERATED VIA A SCRIPT. DO NOT EDIT
 #
 # Input parameters for ERI generated with:
-#   generator/generate_integral_single_frombasis.py --filename 4center_single_water_sto3g.inp --geo generator/geometry/water.xyz --basis generator/basis/sto-3g.gbs --ncenter 4 --ndigits 20 --ntests 2000 --seed 770225234
+#   generator/generate_integral_single_frombasis.py --filename 4center_single_water_sto3g.inp --geo generator/geometry/water.xyz --basis generator/basis/sto-3g.bas --ncenter 4 --ndigits 20 --ntests 2000 --seed 770225234
 #
 # Reference values for the eri_single integral generated with:
 #   ../build/mirp_bin/mirp_create_test --infile 4center_single_water_sto3g.inp --outfile eri_single_water_sto3g.dat --integral eri_single --ndigits 101
