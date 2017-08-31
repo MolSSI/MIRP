@@ -108,7 +108,7 @@ int main(int argc, char ** argv)
     }
     catch(std::exception & ex)
     {
-        std::cout << "Error while running tests: " << ex.what() << "\n";
+        std::cout << "Error while creating tests: " << ex.what() << "\n";
         return 1;
     }
 
