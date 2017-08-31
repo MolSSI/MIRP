@@ -3,16 +3,18 @@
  * \brief Functions related to testing the Boys function
  */
 
-#include "mirp_bin/boys_test.hpp"
+#include "mirp_bin/test_boys.hpp"
 #include "mirp_bin/test_common.hpp"
+
 #include <mirp/kernels/boys.h>
 #include <mirp/math.h>
-#include <cmath>
+
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <stdexcept>
-#include <memory>
+
+namespace mirp {
 
 /* Anonymous namespace for some helper functions */
 namespace {
@@ -30,8 +32,6 @@ namespace {
  */
 long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
 {
-    using namespace mirp;
-
     /* Number of binary digits contained in the reference value strings
        (and the number of binary digits of accuracy, taking into account
        that the number printed is +/- 1 decimal ulp) */
@@ -88,9 +88,6 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
  */
 long boys_run_test_d(const mirp::boys_data & data, long extra_m)
 {
-    using namespace mirp;
-    using detail::almost_equal;
-
     long nfailed = 0;
 
     const int max_m = boys_max_m(data) + extra_m;
@@ -132,8 +129,6 @@ long boys_run_test_d(const mirp::boys_data & data, long extra_m)
  */
 long boys_run_test_exact(const mirp::boys_data & data, long extra_m)
 {
-    using namespace mirp;
-
     long nfailed = 0;
 
     const int max_m = boys_max_m(data) + extra_m;
@@ -184,8 +179,6 @@ long boys_run_test_exact(const mirp::boys_data & data, long extra_m)
 
 } // close anonymous namespace
 
-
-namespace mirp {
 
 int boys_max_m(const boys_data & data)
 {

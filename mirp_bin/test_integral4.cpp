@@ -1,20 +1,19 @@
 /*! \file
  *
- * \brief Functions related to testing single ERI
+ * \brief Functions related to testing four-center integrals
  */
 
-#include "mirp_bin/file_io.hpp"
-#include "mirp_bin/data_entry.hpp"
-#include "mirp/shell.h"
-#include "mirp/typedefs.h"
-#include "mirp/math.h"
+#include "mirp_bin/testfile_io.hpp"
+#include "mirp_bin/test_integral4.hpp"
+#include "mirp_bin/test_common.hpp"
 
-#include "test_common.hpp"
+#include <mirp/math.h>
+#include <mirp/shell.h>
 
 #include <iostream>
+#include <fstream>
 
 namespace mirp {
-namespace detail {
 
 /*! \brief The number of integrals computed in an entry */
 static size_t nintegrals(const integral_data_entry & ent)
@@ -31,7 +30,7 @@ void integral4_create_test(const std::string & input_filepath,
                            long ndigits, const std::string & header,
                            cb_integral4_target_str cb)
 {
-    integral_data data = integral_read_file(input_filepath, 4, true);
+    integral_data data = testfile_read_integral(input_filepath, 4, true);
 
     data.ndigits = ndigits;
     data.header += header;
@@ -81,7 +80,7 @@ void integral4_create_test(const std::string & input_filepath,
         _arb_vec_clear(integrals, nint);
     }
 
-    integral_write_file(output_filepath, data);
+    testfile_write_integral(output_filepath, data);
 }
 
 
@@ -91,7 +90,7 @@ long integral4_run_test(const std::string & filepath,
 {
     long nfailed = 0;
 
-    integral_data data = integral_read_file(filepath, 4, false);
+    integral_data data = testfile_read_integral(filepath, 4, false);
 
     /* Number of binary digits contained in the reference value strings
        (and the number of binary digits of accuracy, taking into account
@@ -182,7 +181,7 @@ long integral4_run_test_d(const std::string & filepath,
 {
     long nfailed = 0;
 
-    integral_data data = integral_read_file(filepath, 4, false);
+    integral_data data = testfile_read_integral(filepath, 4, false);
 
     /* Needed to unpack XYZ */
     double ABCD[4][3];
@@ -261,7 +260,7 @@ long integral4_run_test_exact(const std::string & filepath,
 {
     long nfailed = 0;
 
-    integral_data data = integral_read_file(filepath, 4, false);
+    integral_data data = testfile_read_integral(filepath, 4, false);
 
     /* Needed to unpack XYZ */
     double ABCD[4][3];
@@ -382,6 +381,5 @@ long integral4_run_test_exact(const std::string & filepath,
 }
 
 
-} // close namespace detail
 } // close namespace mirp
 

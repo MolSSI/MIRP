@@ -4,9 +4,11 @@
  */
 
 #include "mirp_bin/cmdline.hpp"
-#include "mirp_bin/boys_test.hpp"
-#include "mirp_bin/test_common.hpp"
+#include "mirp_bin/test_boys.hpp"
+#include "mirp_bin/test_integral4.hpp"
+
 #include <mirp/kernels/all.h>
+
 #include <sstream>
 #include <iostream>
 
@@ -102,15 +104,15 @@ int main(int argc, char ** argv)
         {
             if(floattype == "interval")
             {
-                nfailed = detail::integral4_single_run_test(file, target_prec, mirp_eri_single_target_str);
+                nfailed = integral4_single_run_test(file, target_prec, mirp_eri_single_target_str);
             }
             else if(floattype == "double")
             {
-                nfailed = detail::integral4_single_run_test_d(file, mirp_eri_single_d);
+                nfailed = integral4_single_run_test_d(file, mirp_eri_single_d);
             }
             else if(floattype == "exact")
             {
-                nfailed = detail::integral4_single_run_test_exact(file, mirp_eri_single_exact, mirp_eri_single_target);
+                nfailed = integral4_single_run_test_exact(file, mirp_eri_single_exact, mirp_eri_single_target);
             }
             else
             {
@@ -122,15 +124,15 @@ int main(int argc, char ** argv)
         {
             if(floattype == "interval")
             {
-                nfailed = detail::integral4_run_test(file, target_prec, mirp_eri_target_str);
+                nfailed = integral4_run_test(file, target_prec, mirp_eri_target_str);
             }
             else if(floattype == "double")
             {
-                nfailed = detail::integral4_run_test_d(file, mirp_eri_d);
+                nfailed = integral4_run_test_d(file, mirp_eri_d);
             }
             else if(floattype == "exact")
             {
-                nfailed = detail::integral4_run_test_exact(file, mirp_eri_exact, mirp_eri_target);
+                nfailed = integral4_run_test_exact(file, mirp_eri_exact, mirp_eri_target);
             }
             else
             {

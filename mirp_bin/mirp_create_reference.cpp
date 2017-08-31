@@ -1,11 +1,10 @@
 /*! \file
  *
- * \brief mirp_create_test main function
+ * \brief mirp_create_reference main function
  */
 
 #include "mirp_bin/cmdline.hpp"
-#include "mirp_bin/test_boys.hpp"
-#include "mirp_bin/test_integral4.hpp"
+#include "mirp_bin/ref_integral4.hpp"
 
 #include <mirp/kernels/all.h>
 
@@ -18,18 +17,16 @@ using namespace mirp;
 static void print_help(void)
 {
     std::cout << "\n"
-              << "mirp_create_test - Create a test with reference data for MIRP given an input\n"
+              << "mirp_create_reference - Create a reference data file for use with other programs\n"
               << "\n"
               << "\n"
               << "Required arguments:\n"
-              << "    --infile       Input file to use (usually ends in .inp)\n"
+              << "    --basis        Path to a basis set file (usually ends in .bas)\n"
+              << "    --geometry     Path to an XYZ file(usually ends in .xyz)\n"
               << "    --outfile      Output file (usually ends in .dat). Existing data will\n"
               << "                       be overwritten\n"
               << "    --integral     The type of integral to compute. Possibilities are:\n"
-              << "                       boys\n"
               << "                       eri\n"
-              << "                       eri_single\n"
-              << "    --ndigits      Number of decimal digits to write to the output file\n"
               << "\n"
               << "\n"
               << "Other arguments:\n"
@@ -42,9 +39,8 @@ static void print_help(void)
 /*! \brief Main function */
 int main(int argc, char ** argv)
 {
-    std::string infile, outfile;
+    std::string basfile, xyzfile, outfile;
     std::string integral;
-    long ndigits;
 
     try {
         auto cmdline = convert_cmdline(argc, argv);
@@ -54,10 +50,10 @@ int main(int argc, char ** argv)
             return 0;
         }
 
-        infile = cmdline_get_arg_str(cmdline, "--infile");
+        basfile = cmdline_get_arg_str(cmdline, "--basis");
+        xyzfile = cmdline_get_arg_str(cmdline, "--geometry");
         outfile = cmdline_get_arg_str(cmdline, "--outfile");
         integral = cmdline_get_arg_str(cmdline, "--integral");
-        ndigits = cmdline_get_arg_long(cmdline, "--ndigits");
 
         if(cmdline.size() != 0)
         {
@@ -71,7 +67,7 @@ int main(int argc, char ** argv)
     catch(std::exception & ex)
     {
         std::cout << "\nError parsing command line: " << ex.what() << "\n\n";
-        std::cout << "Run \"mirp_create_test -h\" for help\n\n";
+        std::cout << "Run \"mirp_create_reference -h\" for help\n\n";
         return 1;
     }
 
@@ -86,19 +82,10 @@ int main(int argc, char ** argv)
 
     try
     {
-        if(integral == "boys")
-            boys_create_test(infile, outfile, ndigits, header);
-        else if(integral == "eri")
+        if(integral == "eri")
         {
-            integral4_create_test(infile, outfile,
-                                          ndigits, header,
-                                          mirp_eri_target_str);
-        }
-        else if(integral == "eri_single")
-        {
-            integral4_single_create_test(infile, outfile,
-                                                 ndigits, header,
-                                                 mirp_eri_single_target_str);
+            integral4_create_reference(xyzfile, basfile, outfile, header,
+                                          mirp_eri_exact);
         }
         else
         {
@@ -110,7 +97,7 @@ int main(int argc, char ** argv)
     }
     catch(std::exception & ex)
     {
-        std::cout << "Error while creating tests: " << ex.what() << "\n";
+        std::cout << "Error while running tests: " << ex.what() << "\n";
         return 1;
     }
 

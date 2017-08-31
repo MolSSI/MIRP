@@ -1,19 +1,17 @@
 /*! \file
  *
- * \brief Functions related to testing single ERI
+ * \brief Functions related to testing four-center single integrals
  */
 
-#include "mirp_bin/file_io.hpp"
-#include "mirp_bin/data_entry.hpp"
-#include "mirp/typedefs.h"
-#include "mirp/math.h"
+#include "mirp_bin/testfile_io.hpp"
+#include "mirp_bin/test_integral4.hpp"
+#include "mirp_bin/test_common.hpp"
 
-#include "test_common.hpp"
+#include <mirp/math.h>
 
 #include <iostream>
 
 namespace mirp {
-namespace detail {
 
 
 void integral4_single_create_test(const std::string & input_filepath,
@@ -21,7 +19,7 @@ void integral4_single_create_test(const std::string & input_filepath,
                                   long ndigits, const std::string & header,
                                   cb_integral4_single_target_str cb)
 {
-    integral_single_data data = integral_single_read_file(input_filepath, 4, true);
+    integral_single_data data = testfile_read_integral_single(input_filepath, 4, true);
 
 
 
@@ -64,7 +62,7 @@ void integral4_single_create_test(const std::string & input_filepath,
         free(s);
     }
 
-    integral_single_write_file(output_filepath, data);
+    testfile_write_integral_single(output_filepath, data);
     arb_clear(integral);
 }
 
@@ -75,7 +73,7 @@ long integral4_single_run_test(const std::string & filepath,
 {
     long nfailed = 0;
 
-    integral_single_data data = integral_single_read_file(filepath, 4, false);
+    integral_single_data data = testfile_read_integral_single(filepath, 4, false);
 
     arb_t integral, integral_ref;
     arb_init(integral);
@@ -152,7 +150,7 @@ long integral4_single_run_test_d(const std::string & filepath,
 {
     long nfailed = 0;
 
-    integral_single_data data = integral_single_read_file(filepath, 4, false);
+    integral_single_data data = testfile_read_integral_single(filepath, 4, false);
 
     /* Needed to unpack XYZ */
     double A[3];
@@ -222,7 +220,7 @@ long integral4_single_run_test_exact(const std::string & filepath,
 {
     long nfailed = 0;
 
-    integral_single_data data = integral_single_read_file(filepath, 4, false);
+    integral_single_data data = testfile_read_integral_single(filepath, 4, false);
 
     /* Needed to unpack XYZ */
     double A[3];
@@ -323,6 +321,5 @@ long integral4_single_run_test_exact(const std::string & filepath,
     return nfailed;
 }
 
-} // close namespace detail
 } // close namespace mirp
 

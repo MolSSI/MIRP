@@ -1,27 +1,38 @@
 /*! \file
  *
- * \brief Common data structures for testing
+ * \brief Common data structures (shells, entries, etc)
  */
 
 #pragma once
 
 #include <array>
-#include <string>
 #include <vector>
+#include <string>
 
 namespace mirp {
 
-/*! \brief A single cartesian gaussian function */
-struct gaussian_single
+
+/*! \brief A shell of cartesian gaussian functions (double precision) 
+ *
+ * This shell holds information as double precision
+ */
+struct gaussian_shell
 {
-    std::array<int, 3> lmn;         //!< AM exponents
-    std::array<std::string, 3> xyz; //!< Coordinates (in bohr)
-    std::string alpha;              //!< Exponent of the gaussian
+    int Z;                      //!< Z-number of the center
+    int am;                     //!< Angular momentum
+    int nprim;                  //!< Number of primitives (segmented contraction)
+    int ngeneral;               //!< Number of general contractions
+    std::array<double, 3> xyz;  //!< Coordinates (in bohr)
+    std::vector<double> alpha;  //!< Exponents of the gaussians
+    std::vector<double> coeff;  //!< Contraction coefficients (unnormalized)
 };
 
 
-/*! \brief A shell of cartesian gaussian functions */
-struct gaussian_shell
+/*! \brief A shell of cartesian gaussian functions (strings) 
+ *
+ * This shell holds information as a string to allow for higher precision
+ */
+struct gaussian_shell_str
 {
     int Z;                           //!< Z-number of the center
     int am;                          //!< Angular momentum
@@ -30,6 +41,15 @@ struct gaussian_shell
     std::array<std::string, 3> xyz;  //!< Coordinates (in bohr)
     std::vector<std::string> alpha;  //!< Exponents of the gaussians
     std::vector<std::string> coeff;  //!< Contraction coefficients (unnormalized)
+};
+
+
+/*! \brief A single cartesian gaussian function */
+struct gaussian_single
+{
+    std::array<int, 3> lmn;         //!< AM exponents
+    std::array<std::string, 3> xyz; //!< Coordinates (in bohr)
+    std::string alpha;              //!< Exponent of the gaussian
 };
 
 
@@ -62,7 +82,7 @@ struct integral_single_data
 /*! \brief Data for a single contracted integral */
 struct integral_data_entry
 {
-    std::vector<gaussian_shell> g;      //!< Shells for which the integrals are calculated
+    std::vector<gaussian_shell_str> g;      //!< Shells for which the integrals are calculated
     std::vector<int> idx;               //!< Indices of the shells
     std::vector<std::string> integrals; //!< Computed integrals
 };
@@ -79,6 +99,20 @@ struct integral_data
     std::string header;                       //!< Header or comments about the test
     std::vector<integral_data_entry> entries; //!< Actual data for the integrals
 };
+
+
+/*! \brief Creates a basis from an XYZ file and a basis set file
+ *
+ * \throw std::runtime_error if there is a problem reading or parsing
+ *        the files
+ *
+ * \param [in] xyzfile Path to a file containing atomic coordinates
+ * \param [in] basfile Path to an NWChem-formatted basis set file
+ * \return A vector of shells obtained from applying the basis to the coordinate file
+ */
+std::vector<gaussian_shell> read_construct_basis(const std::string & xyzfile,
+                                                 const std::string & basfile);
+
 
 } // close namespace mirp
 
