@@ -21,13 +21,21 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
     if(!infile.is_open())
         throw std::runtime_error(std::string("Unable to open file \"") + filepath + "\" for reading");
 
-    std::string line;
     integral_single_data data;
 
+    // read in the header
+    while(infile.peek() == '#')
+    {
+        std::string line;
+        std::getline(infile, line);
+        data.header += line + "\n";
+    }
 
     // Read in the number of digits
+    if(!is_input)
+        infile >> data.ndigits;
+
     file_skip_comments(infile, '#');
-    infile >> data.ndigits;
 
     while(true)
     {
@@ -104,12 +112,21 @@ integral_data testfile_read_integral(const std::string & filepath,
     if(!infile.is_open())
         throw std::runtime_error(std::string("Unable to open file \"") + filepath + "\" for reading");
 
-    std::string line;
     integral_data data;
 
+    // read in the header
+    while(infile.peek() == '#')
+    {
+        std::string line;
+        std::getline(infile, line);
+        data.header += line + "\n";
+    }
+
     // Read in the number of digits
+    if(!is_input)
+        infile >> data.ndigits;
+
     file_skip_comments(infile, '#');
-    infile >> data.ndigits;
 
     while(true)
     {
