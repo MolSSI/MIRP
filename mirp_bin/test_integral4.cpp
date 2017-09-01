@@ -10,6 +10,7 @@
 #include <mirp/math.h>
 #include <mirp/shell.h>
 
+#include <cmath>
 #include <iostream>
 #include <fstream>
 

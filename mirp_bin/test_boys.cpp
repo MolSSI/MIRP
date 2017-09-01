@@ -9,6 +9,7 @@
 #include <mirp/kernels/boys.h>
 #include <mirp/math.h>
 
+#include <cmath>
 #include <iostream>
 #include <sstream>
 #include <fstream>

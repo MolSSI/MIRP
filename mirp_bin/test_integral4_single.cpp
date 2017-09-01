@@ -9,6 +9,7 @@
 
 #include <mirp/math.h>
 
+#include <cmath>
 #include <iostream>
 
 namespace mirp {
