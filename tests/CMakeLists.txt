@@ -60,12 +60,21 @@ macro(add_integral_test filename integral floattype prec)
     endif()
 endmacro()
 
+
+##############################################
+# Creates a test of reference files
+##############################################
+macro(add_integral_reftest filename integral)
+    add_test(NAME reftest_${integral}_${filename}
+             COMMAND mirp_test_reference --integral ${integral} 
+                                         --file ${CMAKE_CURRENT_LIST_DIR}/${filename}
+    )
+endmacro()
+
+
 # Testing of examples
 add_test(NAME example_simple_eri COMMAND simple_eri)
 
-
-# We test to 332 bits. Why not 332 or so (for 100 decimal places)?
-# Because of the rounding when reading the reference. 
 
 # Boys function
 add_boys_test(boys_large_range.dat double 0 0)
@@ -99,3 +108,5 @@ add_integral_test(eri_random_1.dat eri exact 0)
 add_integral_test(eri_water_sto3g.dat eri interval 128)
 add_integral_test(eri_water_sto3g.dat eri interval 332)
 add_integral_test(eri_water_sto3g.dat eri exact 0)
+
+add_integral_reftest(eri_water_sto3g.ref eri)
