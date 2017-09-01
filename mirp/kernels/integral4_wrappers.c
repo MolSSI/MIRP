@@ -10,6 +10,7 @@
 #include <string.h> /* for memset */
 
 
+
 /*! \brief Compute all cartesian components of a single primitive integral
  *         (interval arithmetic)
  *
@@ -28,38 +29,36 @@ static void mirp_cartloop4(arb_ptr integral,
     const long ncart3 = MIRP_NCART(am3);
     const long ncart4 = MIRP_NCART(am4);
 
-    long idx = 0;
-    int lmn1[3] = {am1, 0, 0};
+    int lmn1[ncart1][3];
+    int lmn2[ncart2][3];
+    int lmn3[ncart3][3];
+    int lmn4[ncart4][3];
+
+    mirp_gaussian_fill_lmn(am1, (int*)lmn1);
+    mirp_gaussian_fill_lmn(am2, (int*)lmn2);
+    mirp_gaussian_fill_lmn(am3, (int*)lmn3);
+    mirp_gaussian_fill_lmn(am4, (int*)lmn4);
+
+
+    #ifdef _OPENMP
+    #pragma omp parallel for collapse(4)
+    #endif
     for(long i = 0; i < ncart1; i++)
+    for(long j = 0; j < ncart2; j++)
+    for(long k = 0; k < ncart3; k++)
+    for(long l = 0; l < ncart4; l++)
     {
-        int lmn2[3] = {am2, 0, 0};
-        for(long j = 0; j < ncart2; j++)
-        {
-            int lmn3[3] = {am3, 0, 0};
-            for(long k = 0; k < ncart3; k++)
-            {
-                int lmn4[3] = {am4, 0, 0};
-                for(long l = 0; l < ncart4; l++)
-                {
-                    cb(integral + idx,
-                       lmn1, A, alpha1,
-                       lmn2, B, alpha2,
-                       lmn3, C, alpha3,
-                       lmn4, D, alpha4,
-                       working_prec);
+        const long idx = i*ncart4*ncart3*ncart2
+                       + j*ncart4*ncart3
+                       + k*ncart4
+                       + l;
 
-                    idx++;
-
-                    mirp_iterate_gaussian(lmn4);
-                }
-
-                mirp_iterate_gaussian(lmn3);
-            }
-
-            mirp_iterate_gaussian(lmn2);
-        }
-
-        mirp_iterate_gaussian(lmn1);
+        cb(integral + idx,
+           lmn1[i], A, alpha1,
+           lmn2[j], B, alpha2,
+           lmn3[k], C, alpha3,
+           lmn4[l], D, alpha4,
+           working_prec);
     }
 }
 
@@ -94,37 +93,35 @@ static void mirp_cartloop4_d(double * integral,
     const long ncart3 = MIRP_NCART(am3);
     const long ncart4 = MIRP_NCART(am4);
 
-    long idx = 0;
-    int lmn1[3] = {am1, 0, 0};
+    int lmn1[ncart1][3];
+    int lmn2[ncart2][3];
+    int lmn3[ncart3][3];
+    int lmn4[ncart4][3];
+
+    mirp_gaussian_fill_lmn(am1, (int*)lmn1);
+    mirp_gaussian_fill_lmn(am2, (int*)lmn2);
+    mirp_gaussian_fill_lmn(am3, (int*)lmn3);
+    mirp_gaussian_fill_lmn(am4, (int*)lmn4);
+
+
+    #ifdef _OPENMP
+    #pragma omp parallel for collapse(4)
+    #endif
     for(long i = 0; i < ncart1; i++)
+    for(long j = 0; j < ncart2; j++)
+    for(long k = 0; k < ncart3; k++)
+    for(long l = 0; l < ncart4; l++)
     {
-        int lmn2[3] = {am2, 0, 0};
-        for(long j = 0; j < ncart2; j++)
-        {
-            int lmn3[3] = {am3, 0, 0};
-            for(long k = 0; k < ncart3; k++)
-            {
-                int lmn4[3] = {am4, 0, 0};
-                for(long l = 0; l < ncart4; l++)
-                {
-                    cb(integral + idx,
-                       lmn1, A, alpha1,
-                       lmn2, B, alpha2,
-                       lmn3, C, alpha3,
-                       lmn4, D, alpha4);
+        const long idx = i*ncart4*ncart3*ncart2
+                       + j*ncart4*ncart3
+                       + k*ncart4
+                       + l;
 
-                    idx++;
-
-                    mirp_iterate_gaussian(lmn4);
-                }
-
-                mirp_iterate_gaussian(lmn3);
-            }
-
-            mirp_iterate_gaussian(lmn2);
-        }
-
-        mirp_iterate_gaussian(lmn1);
+        cb(integral + idx,
+           lmn1[i], A, alpha1,
+           lmn2[j], B, alpha2,
+           lmn3[k], C, alpha3,
+           lmn4[l], D, alpha4);
     }
 }
 

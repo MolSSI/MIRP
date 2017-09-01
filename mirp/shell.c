@@ -29,6 +29,21 @@ int mirp_iterate_gaussian(int * lmn)
 }
 
 
+void mirp_gaussian_fill_lmn(int am, int * lmn)
+{
+    const long ncart = MIRP_NCART(am);
+
+    int g[3] = {am, 0, 0};
+    for(long i = 0; i < ncart; i++)
+    {
+        lmn[i*3+0] = g[0];
+        lmn[i*3+1] = g[1];
+        lmn[i*3+2] = g[2];
+        mirp_iterate_gaussian(g);
+    }
+}
+
+
 void mirp_normalize_shell_d(int am, int nprim, int ngeneral,
                             const double * alpha,
                             const double * coeff,

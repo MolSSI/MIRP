@@ -33,7 +33,7 @@ extern "C" {
         (MIRP_NCART_LMN2((lmn1),(lmn2)) * MIRP_NCART_LMN2((lmn3),(lmn4)))
 
 
-/*! \brief Normalize a shell (double precision)
+/*! \brief Find the next gaussian in the ordering
  *
  * Obtain the next l, m, and n parameters of a gaussian in the internal MIRP
  * ordering
@@ -49,6 +49,20 @@ extern "C" {
  *         gaussians)
  */
 int mirp_iterate_gaussian(int * lmn);
+
+
+/*! \brief Create all lmn combinations for a given angular momentum
+ *
+ * This fills in the \p lmn parameter will all combinations of l,m, and n
+ * that are valid for the given angular momentum. They will be in order.
+ *
+ * \warning The \p lmn parameter must be allocated and large enough
+ *          to hold 3*number of cartesian components for the given \p am
+ *
+ * \param [in] am   The angular momentum
+ * \param [out] lmn Place to put all the lmn combinations
+ */
+void mirp_gaussian_fill_lmn(int am, int * lmn);
 
 
 /*! \brief Normalize a shell (double precision)
