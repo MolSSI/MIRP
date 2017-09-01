@@ -51,10 +51,16 @@ std::string cmdline_get_arg_str(std::vector<std::string> & cmdline, const std::s
     }
 
     auto arg_it = it+1;
-    if(it == cmdline.end())
+    if(arg_it == cmdline.end())
     {
         std::string err;
         err = arg + " expects an argument";
+        throw std::runtime_error(err);
+    }
+    if(arg_it->length() > 2 && arg_it->substr(0, 2) == "--")
+    {
+        std::string err;
+        err = arg + " expects an argument, but found flag " + *arg_it;
         throw std::runtime_error(err);
     }
 
