@@ -1,7 +1,7 @@
 # THIS FILE IS GENERATED VIA A SCRIPT. DO NOT EDIT
 #
 # Input parameters for ERI generated with:
-#   generator/generate_integral_single_frombasis.py --filename 4center_single_water_sto3g.inp --geo generator/geometry/water.xyz --basis generator/basis/sto-3g.bas --ncenter 4 --ndigits 20 --ntests 2000 --seed 770225234
+#   generator/generate_integral_single_frombasis.py --filename 4center_single_water_sto-3g.inp --geo generator/geometry/water.xyz --basis generator/basis/sto-3g.bas --ncenter 4 --ndigits 20 --ntests 2000 --seed 770225234
 #
 1 0 0 0.0 0.0 0.240184190545689956985953 5.0331513
 0 1 0 0.0 0.0 0.240184190545689956985953 5.0331513

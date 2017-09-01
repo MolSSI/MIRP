@@ -42,7 +42,7 @@ generator/generate_integral_single_random.py \
            --ntest 2000 --ndigits 20
 
 generator/generate_integral_single_frombasis.py \
-           --filename 4center_single_water_sto3g.inp \
+           --filename 4center_single_water_sto-3g.inp \
            --geo generator/geometry/water.xyz \
            --basis generator/basis/sto-3g.bas \
            --ncenter 4 --ndigits 20 --ntests 2000 --seed 770225234
@@ -55,14 +55,14 @@ generator/generate_integral_random.py \
            --max-z 30 --ntest 1000 --ndigits 20
 
 generator/generate_integral_frombasis.py \
-           --filename 4center_water_sto3g.inp \
+           --filename 4center_water_sto-3g.inp \
            --basis generator/basis/sto-3g.bas \
            --geometry generator/geometry/water.xyz \
            --ndigits 20 --ncenter 4 --ntests 1000 --seed 661232124
 
 
 ##########################
-# ERI References
+# ERI Test files
 ##########################
 ../build/mirp_bin/mirp_create_test \
            --infile 4center_single_random_1.inp \
@@ -70,8 +70,8 @@ generator/generate_integral_frombasis.py \
            --integral eri_single --ndigits 101
 
 ../build/mirp_bin/mirp_create_test \
-           --infile 4center_single_water_sto3g.inp \
-           --outfile eri_single_water_sto3g.dat \
+           --infile 4center_single_water_sto-3g.inp \
+           --outfile eri_single_water_sto-3g.dat \
            --integral eri_single --ndigits 101
 
 ../build/mirp_bin/mirp_create_test \
@@ -80,6 +80,12 @@ generator/generate_integral_frombasis.py \
            --integral eri --ndigits 101
 
 ../build/mirp_bin/mirp_create_test \
-           --infile 4center_water_sto3g.inp \
-           --outfile eri_water_sto3g.dat \
+           --infile 4center_water_sto-3g.inp \
+           --outfile eri_water_sto-3g.dat \
            --integral eri --ndigits 101
+
+../build/mirp_bin/mirp_create_reference \
+           --integral eri \
+           --basis generator/basis/sto-3g.bas \
+           --geometry generator/geometry/water.xyz \
+           --outfile eri_water_sto-3g.ref
