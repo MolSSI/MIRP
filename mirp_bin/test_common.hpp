@@ -35,8 +35,30 @@ bool almost_equal(double a, double b, double tol);
 void print_results(unsigned long nfailed, unsigned long ntests);
 
 
+/*! \brief Convert a character representing an angular momentum to an integer
+ *
+ * Converts s,p,d,f,... to 0,1,2,3,...
+ *
+ * The character is case insensitive
+ *
+ * \throw std::runtime_error if the character cannot be converted to an integer
+ */
+int amchar_to_int(char am);
+
+
+/*! \brief Convert a string representing an element to its atomic Z number
+ *
+ * Converts H to 1, He to 2, etc
+ *
+ * The element string is case insensitive
+ *
+ * \throw std::runtime_error if the character cannot be converted to an integer
+ */
+int element_to_z(const std::string & element);
+
+
 /*! \brief Converts a string to lower case, returning a copy */
-std::string to_lower(const std::string & s);
+std::string str_tolower(const std::string & s);
 
 
 /*! \brief Trims spaces and tabs from both ends of a string, returning a copy */
@@ -45,9 +67,9 @@ std::string trim(const std::string & s);
 
 /*! \brief Splits a string into components
  *
- * The components must be separated by a space
+ * The components must be separated by the character \p sep
  */
-std::vector<std::string> split(const std::string & s);
+std::vector<std::string> split(const std::string & s, char sep = ' ');
 
 
 /*! \brief Advances the stream past any comment lines */

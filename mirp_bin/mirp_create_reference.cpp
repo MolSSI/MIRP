@@ -4,6 +4,7 @@
  */
 
 #include "mirp_bin/cmdline.hpp"
+#include "mirp_bin/test_common.hpp"
 #include "mirp_bin/ref_integral4.hpp"
 
 #include <mirp/kernels/all.h>
@@ -29,6 +30,12 @@ static void print_help(void)
               << "                       eri\n"
               << "\n"
               << "\n"
+              << "Optional arguments:\n"
+              << "    --am           Comma-separated list of AM classes to calculate.\n"
+              << "                   The AM should be represented by their letters.\n"
+              << "                   (for example, for ERI: --am ssss,psps,dddd)\n"
+              << "\n"
+              << "\n"
               << "Other arguments:\n"
               << "    -h, --help     Display this help screen\n"
               << "\n";
@@ -41,6 +48,7 @@ int main(int argc, char ** argv)
 {
     std::string basfile, xyzfile, outfile;
     std::string integral;
+    std::vector<std::vector<int>> amlist;
 
     try {
         auto cmdline = convert_cmdline(argc, argv);
@@ -54,6 +62,21 @@ int main(int argc, char ** argv)
         xyzfile = cmdline_get_arg_str(cmdline, "--geometry");
         outfile = cmdline_get_arg_str(cmdline, "--outfile");
         integral = cmdline_get_arg_str(cmdline, "--integral");
+
+        if(cmdline_has_arg(cmdline, "--am"))
+        {
+            std::string amlist_str = cmdline_get_arg_str(cmdline, "--am");
+            std::vector<std::string> amlist_split = split(amlist_str, ',');
+
+            for(const auto & s : amlist_split)
+            {
+                std::vector<int> am_ntet;
+                for(char c : s)
+                    am_ntet.push_back(amchar_to_int(c));
+                amlist.push_back(std::move(am_ntet));
+            }
+
+        }
 
         if(cmdline.size() != 0)
         {
@@ -85,7 +108,7 @@ int main(int argc, char ** argv)
         if(integral == "eri")
         {
             integral4_create_reference(xyzfile, basfile, outfile, header,
-                                          mirp_eri_exact);
+                                       amlist, mirp_eri_exact);
         }
         else
         {

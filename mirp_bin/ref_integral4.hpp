@@ -7,6 +7,7 @@
 
 #include <mirp/typedefs.h>
 #include <string>
+#include <vector>
 
 namespace mirp {
 
@@ -23,6 +24,7 @@ namespace mirp {
  * \param [in] output_filepath The output file to write the computed integrals to
  * \param [in] header          Header information to add to the file
  *                             (appended to the input file header)
+ * \param [in] amlist          Vector of AM classes to compute. If empty, all will be computed
  * \param [in] cb              Function that computes contracted integrals
  *                             to exact double precision
  */
@@ -30,6 +32,7 @@ void integral4_create_reference(const std::string & xyz_filepath,
                                 const std::string & basis_filepath,
                                 const std::string & output_filepath,
                                 const std::string & header,
+                                const std::vector<std::vector<int>> & amlist,
                                 cb_integral4_exact cb);
 
 

@@ -10,6 +10,7 @@
 #include <mirp/shell.h>
 
 #include <fstream>
+#include <algorithm>
 
 namespace mirp {
 
@@ -17,6 +18,7 @@ void integral4_create_reference(const std::string & xyz_filepath,
                                 const std::string & basis_filepath,
                                 const std::string & output_filepath,
                                 const std::string & header,
+                                const std::vector<std::vector<int>> & amlist,
                                 cb_integral4_exact cb)
 {
     std::vector<gaussian_shell> shells = read_construct_basis(xyz_filepath, basis_filepath);
@@ -49,6 +51,11 @@ void integral4_create_reference(const std::string & xyz_filepath,
         const auto & s3 = shells[r];
         const auto & s4 = shells[s];
 
+        // skip if this isn't in the amlist
+        // (if amlist is empty, always compute)
+        std::vector<int> my_quartet{s1.am, s2.am, s3.am, s4.am};
+        if(amlist.size() > 0 && std::find(amlist.begin(), amlist.end(), my_quartet) == amlist.end())
+            continue;
 
         const size_t ncart = MIRP_NCART4(s1.am, s2.am, s3.am, s4.am);
         const size_t ngen = s1.ngeneral * s2.ngeneral * s3.ngeneral * s4.ngeneral;
