@@ -150,9 +150,6 @@ void mirp_loop_shell4(arb_ptr integral,
 
     _arb_vec_zero(integral, full_size);
 
-    /* A temporary variable (used to build up the coefficient) */
-    arb_t coeff;
-    arb_init(coeff);
 
     for(int i = 0; i < nprim1; i++)
     for(int j = 0; j < nprim2; j++)
@@ -166,26 +163,37 @@ void mirp_loop_shell4(arb_ptr integral,
                        am4, D, alpha4 + l,
                        working_prec, cb);
 
-        long ntotal = 0;
+        #ifdef _OPENMP
+        #pragma omp parallel for collapse(4)
+        #endif
         for(int m = 0; m < ngen1; m++)
         for(int n = 0; n < ngen2; n++)
         for(int o = 0; o < ngen3; o++)
         for(int p = 0; p < ngen4; p++)
         {
+            /* A temporary variable (used to build up the coefficient) */
+            arb_t coeff;
+            arb_init(coeff);
+
             arb_mul(coeff, coeff1_norm+(m*nprim1+i), coeff2_norm+(n*nprim2+j), working_prec);
             arb_mul(coeff, coeff,                    coeff3_norm+(o*nprim3+k), working_prec);
             arb_mul(coeff, coeff,                    coeff4_norm+(p*nprim4+l), working_prec);
 
+            const long start = ncart1234*(
+                               m*ngen4*ngen3*ngen2
+                             + n*ngen4*ngen3
+                             + o*ngen4
+                             + p);
+
             for(long q = 0; q < ncart1234; q++)
             {
-                const long idx = ntotal*ncart1234 + q;
-
                 /* Only apply the coefficient if the integral is nonzero.
                  * Otherwise, we end up with 0 +/- error */
                 if(!arb_is_zero(integral_buffer+q))
-                    arb_addmul(integral+idx, integral_buffer+q, coeff, working_prec);
+                    arb_addmul(integral+start+q, integral_buffer+q, coeff, working_prec);
             }
-            ntotal++;
+
+            arb_clear(coeff);
         }
     }
 
@@ -198,7 +206,6 @@ void mirp_loop_shell4(arb_ptr integral,
              arb_zero(integral+i);
     }
 
-    arb_clear(coeff);
     _arb_vec_clear(integral_buffer, ncart1234);
     _arb_vec_clear(coeff1_norm, nprim1*ngen1);
     _arb_vec_clear(coeff2_norm, nprim2*ngen2);
@@ -658,7 +665,9 @@ void mirp_loop_shell4_d(double * integral,
                               am4, D, alpha4[l],
                               cb);
 
-        long ntotal = 0;
+        #ifdef _OPENMP
+        #pragma omp parallel for collapse(4)
+        #endif
         for(int m = 0; m < ngen1; m++)
         for(int n = 0; n < ngen2; n++)
         for(int o = 0; o < ngen3; o++)
@@ -669,9 +678,14 @@ void mirp_loop_shell4_d(double * integral,
                                * coeff3_norm[o*nprim3+k]
                                * coeff4_norm[p*nprim4+l];
 
+            const long start = ncart1234*(
+                               m*ngen4*ngen3*ngen2
+                             + n*ngen4*ngen3
+                             + o*ngen4
+                             + p);
+
             for(long q = 0; q < ncart1234; q++)
-                integral[ntotal*ncart1234+q] += integral_buffer[q] * coeff;
-            ntotal++;
+                integral[start*ncart1234+q] += integral_buffer[q] * coeff;
         }
     }
 
