@@ -5,15 +5,9 @@
 
 #include "mirp_bin/reffile_io.hpp"
 
-namespace {
+namespace mirp {
 
-/*! \brief Reads a double precision number from an ASCII file
- *
- * The main purpose of this is to convert hexfloat to doubles,
- * since it seems streams can't read hexfloat
- *
- * One double is extracted, and the stream advanced
- */
+
 double read_double(std::istream & fs)
 {
     std::string tmp;
@@ -21,10 +15,6 @@ double read_double(std::istream & fs)
     return std::strtod(tmp.c_str(), nullptr);
 }
 
-} // close anonymous namespace
-
-
-namespace mirp {
 
 void reffile_write_basis(const std::vector<gaussian_shell> & shells, std::ostream & fs)
 {

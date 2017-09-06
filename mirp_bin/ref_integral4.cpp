@@ -112,13 +112,9 @@ long integral4_test_reference(const std::string & ref_filepath,
 
         std::vector<double> integrals(nintegrals);
         std::vector<double> integrals_file(nintegrals);
-        std::string strtmp;
 
         for(size_t i = 0; i < nintegrals; i++)
-        {
-            fs >> strtmp;
-            integrals_file[i] = std::strtod(strtmp.c_str(), nullptr);
-        }
+            integrals_file[i] = read_double(fs);
 
         cb(integrals.data(),
            s1.am, s1.xyz.data(), s1.nprim, s1.ngeneral, s1.alpha.data(), s1.coeff.data(),

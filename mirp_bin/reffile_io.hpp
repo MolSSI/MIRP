@@ -11,6 +11,16 @@
 namespace mirp {
 
 
+/*! \brief Reads a double precision number from an ASCII file
+ *
+ * The main purpose of this is to convert hexfloat to doubles,
+ * since it seems streams can't read hexfloat
+ *
+ * One double is extracted, and the stream advanced
+ */
+double read_double(std::istream & fs);
+
+
 /*! \brief Write basis information to a file
  *
  * \param [in] shells The basis information to write
