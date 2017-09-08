@@ -23,42 +23,39 @@ namespace {
 
 /* Runs a Boys function test using interval arithmetic
  *
- * This just wraps the calculation of Boys function, increasing the
- * working precision until the desired target precision is reached. It
- * then handles the comparison with the reference data
+ * This just wraps the calculation of Boys function
  *
  * The number of failing tests is returned
  *
  * \todo This function is not exception safe
  */
-long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
+long boys_run_test(const mirp::boys_data & data, long extra_m, slong working_prec)
 {
-    /* Number of binary digits contained in the reference value strings
-       (and the number of binary digits of accuracy, taking into account
-       that the number printed is +/- 1 decimal ulp) */
-    long integral_bits = data.ndigits / MIRP_LOG_10_2;
+    /* The number of binary digits of accuracy, taking into account
+       that the number printed is +/- 1 decimal ulp */
     long round_bits = (data.ndigits-1) / MIRP_LOG_10_2;
 
     long nfailed = 0;
 
     const int max_m = boys_max_m(data) + extra_m;
 
-    arb_t vref_mp;
+    arb_t t_mp, vref_mp;
     arb_init(vref_mp);
+    arb_init(t_mp);  
 
     arb_ptr F_mp = _arb_vec_init(max_m+1);
 
     for(const auto & ent : data.values)
     {
-        /* 16 extra bits (~4-5 decimal digits) for safety */
-        mirp_boys_target_str(F_mp, ent.m + extra_m, ent.t.c_str(), target_prec+16);
+        arb_set_str(t_mp, ent.t.c_str(), working_prec);
+        mirp_boys(F_mp, ent.m + extra_m, t_mp, working_prec);
 
-        /* Convert the reference to arb_t. The reference is printed to +/- 1 ulp (decimal). */
-        arb_set_str(vref_mp, ent.value.c_str(), integral_bits + 16);
+        /* Convert the reference to arb_t. Add error corresponding to +/- 1 ulp (decimal). */
+        arb_set_str(vref_mp, ent.value.c_str(), working_prec);
         arf_mag_add_ulp(arb_radref(vref_mp), arb_radref(vref_mp), arb_midref(vref_mp), round_bits);
-        arb_set_round(vref_mp, vref_mp, target_prec);
+        arb_set_round(vref_mp, vref_mp, working_prec);
 
-        /* Rounding the reference value to the target precision results in
+        /* Rounding the reference value to the working precision results in
          * an interval. Does that interval contain our (more precise) result? */
         if(!arb_contains(vref_mp, F_mp + ent.m))
         {
@@ -73,6 +70,7 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, long target_prec)
         }
     }
 
+    arb_clear(t_mp);
     arb_clear(vref_mp);
     _arb_vec_clear(F_mp, max_m+1);
 
@@ -257,7 +255,7 @@ void boys_write_file(const std::string & filepath, const boys_data & data)
 long boys_run_test_main(const std::string & filepath,
                         const std::string & floattype,
                         long extra_m,
-                        long target_prec)
+                        slong working_prec)
 {
     boys_data data = boys_read_file(filepath, false);
 
@@ -266,7 +264,7 @@ long boys_run_test_main(const std::string & filepath,
     long nfailed = 0;
 
     if(floattype == "interval")
-        nfailed = boys_run_test(data, extra_m, target_prec);
+        nfailed = boys_run_test(data, extra_m, working_prec);
     else if(floattype == "exact")
         nfailed = boys_run_test_exact(data, extra_m);
     else if(floattype == "double")
@@ -289,7 +287,8 @@ long boys_run_test_main(const std::string & filepath,
 
 void boys_create_test(const std::string & input_filepath,
                       const std::string & output_filepath,
-                      long ndigits, const std::string & header)
+                      slong working_prec, long ndigits,
+                      const std::string & header)
 {
     boys_data data = boys_read_file(input_filepath, true);
     data.ndigits = ndigits;
@@ -298,16 +297,14 @@ void boys_create_test(const std::string & input_filepath,
     const int max_m = boys_max_m(data);
 
     arb_t t_mp;
-    arb_ptr F_mp = _arb_vec_init(max_m+1);
     arb_init(t_mp);
 
-    /* Target precision/accuracy, in bits, with a safety factor
-       of 5 extra decimal digits */
-    const slong target_prec = (ndigits+5) / MIRP_LOG_10_2;
+    arb_ptr F_mp = _arb_vec_init(max_m+1);
 
     for(auto & ent : data.values)
     {
-        mirp_boys_target_str(F_mp, ent.m, ent.t.c_str(), target_prec);
+        arb_set_str(t_mp, ent.t.c_str(), working_prec);
+        mirp_boys(F_mp, ent.m, t_mp, working_prec);
 
         char * s = arb_get_str(F_mp + ent.m, ndigits, ARB_STR_NO_RADIUS);
         ent.value = s;

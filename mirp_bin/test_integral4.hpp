@@ -24,16 +24,17 @@ namespace mirp {
  *
  * \param [in] input_filepath  The input file to use for integral parameters
  * \param [in] output_filepath The output file to write the computed integrals to
- * \param [in] ndigits         Number of digits to calculate the integral to
+ * \param [in] working_prec    Internal working precision to use
+ * \param [in] ndigits         Maximum number of digits to print
  * \param [in] header          Header information to add to the file
  *                             (appended to the input file header)
  * \param [in] cb              Function that computes single cartesian integrals
- *                             to a target precision using string inputs
  */
 void integral4_single_create_test(const std::string & input_filepath,
                                   const std::string & output_filepath,
-                                  long ndigits, const std::string & header,
-                                  cb_integral4_single_target_str cb);
+                                  slong working_prec, long ndigits,
+                                  const std::string & header,
+                                  cb_integral4_single_str cb);
 
 
 /*! \brief Runs a test of single cartesian integrals using interval math
@@ -41,15 +42,14 @@ void integral4_single_create_test(const std::string & input_filepath,
  * \throw std::runtime_error if there is a problem opening the file or there
  *        there is a problem reading or writing the data
  *
- * \param [in] filepath    Path to the file with the reference data
- * \param [in] target_prec The precision (binary/bits) to test to
- * \param [in] cb          Function that computes single cartesian integrals
- *                         to a target precision using string inputs
+ * \param [in] filepath     Path to the file with the reference data
+ * \param [in] working_prec Internal working precision to use
+ * \param [in] cb           Function that computes single cartesian integrals
  * \return Number of failed tests
  */
 long integral4_single_run_test(const std::string & filepath,
-                               long target_prec,
-                               cb_integral4_single_target_str cb);
+                               slong working_prec,
+                               cb_integral4_single_str cb);
 
 
 /*! \brief Test single cartesian integrals in double precision
@@ -75,12 +75,12 @@ long integral4_single_run_test_d(const std::string & filepath,
  * \param [in] cb        Function that computes single cartesian integrals
  *                       in exact double precision
  * \param [in] cb_mp     Function that computes single cartesian integrals
- *                       to a target precision
+ *                       using interval arithmetic
  * \return Number of failed tests
  */
 long integral4_single_run_test_exact(const std::string & filepath,
                                      cb_integral4_single_exact cb,
-                                     cb_integral4_single_target cb_mp);
+                                     cb_integral4_single cb_mp);
 
 
 /************************************************
@@ -96,16 +96,17 @@ long integral4_single_run_test_exact(const std::string & filepath,
  *
  * \param [in] input_filepath  The input file to use for integral parameters
  * \param [in] output_filepath The output file to write the computed integrals to
- * \param [in] ndigits         Number of digits to calculate the integral to
+ * \param [in] working_prec    Internal working precision to use
+ * \param [in] ndigits         Maximum number of digits to print
  * \param [in] header          Header information to add to the file
  *                             (appended to the input file header)
  * \param [in] cb              Function that computes contracted integrals
- *                             to a target precision using string inputs
  */
 void integral4_create_test(const std::string & input_filepath,
                            const std::string & output_filepath,
-                           long ndigits, const std::string & header,
-                           cb_integral4_target_str cb);
+                           slong working_prec, long ndigits,
+                           const std::string & header,
+                           cb_integral4_str cb);
 
 
 /*! \brief Runs a test of single cartesian integrals
@@ -113,15 +114,14 @@ void integral4_create_test(const std::string & input_filepath,
  * \throw std::runtime_error if there is a problem opening the file or there
  *        there is a problem reading or writing the data
  *
- * \param [in] filepath    Path to the file with the reference data
- * \param [in] target_prec The precision (binary/bits) to test to
- * \param [in] cb          Function that computes contracted integrals
- *                         to a target precision using string inputs
+ * \param [in] filepath     Path to the file with the reference data
+ * \param [in] working_prec Internal working precision to use
+ * \param [in] cb           Function that computes contracted integrals
  * \return Number of failed tests
  */
 long integral4_run_test(const std::string & filepath,
-                        long target_prec,
-                        cb_integral4_target_str cb);
+                        slong working_prec,
+                        cb_integral4_str cb);
 
 
 /*! \brief Test contracted integrals in double precision
@@ -147,12 +147,12 @@ long integral4_run_test_d(const std::string & filepath,
  * \param [in] cb        Function that computes contracted integrals
  *                       in exact double precision
  * \param [in] cb_mp     Function that computes contracted integrals
- *                       to a target precision
+ *                       using interval arithmetic
  * \return Number of failed tests
  */
 long integral4_run_test_exact(const std::string & filepath,
                               cb_integral4_exact cb,
-                              cb_integral4_target cb_mp);
+                              cb_integral4 cb_mp);
 
 
 

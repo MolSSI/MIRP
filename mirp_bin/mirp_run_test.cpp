@@ -30,7 +30,7 @@ static void print_help(void)
               << "                       interval\n"
               << "                       double\n"
               << "                       exact\n"
-              << "    --prec         Number of binary digits (bits) to test (required for --float interval)\n"
+              << "    --prec         Working precision in binary digits (bits) to test (required for --float interval)\n"
               << "\n"
               << "\n"
               << "Integral-dependent options:\n"
@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
     std::string file;
     std::string integral;
     std::string floattype;
-    long target_prec = 0;
+    long working_prec = 0;
     long extra_m = 0;
 
     try {
@@ -66,7 +66,7 @@ int main(int argc, char ** argv)
         floattype = cmdline_get_arg_str(cmdline, "--float");
 
         if(floattype != "double" && floattype != "exact")
-            target_prec = cmdline_get_arg_long(cmdline, "--prec");
+            working_prec = cmdline_get_arg_long(cmdline, "--prec");
         else if(cmdline_has_arg(cmdline, "--prec"))
             throw std::runtime_error("--prec is not valid for this floating-point type");
 
@@ -98,13 +98,13 @@ int main(int argc, char ** argv)
         long nfailed = -1;
         if(integral == "boys")
         {
-            nfailed = boys_run_test_main(file, floattype, extra_m, target_prec);
+            nfailed = boys_run_test_main(file, floattype, extra_m, working_prec);
         }
         else if(integral == "eri_single")
         {
             if(floattype == "interval")
             {
-                nfailed = integral4_single_run_test(file, target_prec, mirp_eri_single_target_str);
+                nfailed = integral4_single_run_test(file, working_prec, mirp_eri_single_str);
             }
             else if(floattype == "double")
             {
@@ -112,7 +112,7 @@ int main(int argc, char ** argv)
             }
             else if(floattype == "exact")
             {
-                nfailed = integral4_single_run_test_exact(file, mirp_eri_single_exact, mirp_eri_single_target);
+                nfailed = integral4_single_run_test_exact(file, mirp_eri_single_exact, mirp_eri_single);
             }
             else
             {
@@ -124,7 +124,7 @@ int main(int argc, char ** argv)
         {
             if(floattype == "interval")
             {
-                nfailed = integral4_run_test(file, target_prec, mirp_eri_target_str);
+                nfailed = integral4_run_test(file, working_prec, mirp_eri_str);
             }
             else if(floattype == "double")
             {
@@ -132,7 +132,7 @@ int main(int argc, char ** argv)
             }
             else if(floattype == "exact")
             {
-                nfailed = integral4_run_test_exact(file, mirp_eri_exact, mirp_eri_target);
+                nfailed = integral4_run_test_exact(file, mirp_eri_exact, mirp_eri);
             }
             else
             {

@@ -53,25 +53,14 @@ typedef void (*cb_integral4_single)(arb_t,
 
 
 /*! \brief Pointer to a function that computes a single cartesian integral
- *         to a specified accuracy (four-center)
+ *         from string inputs (four-center)
  */
-typedef int (*cb_integral4_single_target)(arb_t,
-                                          const int *, arb_srcptr, const arb_t,
-                                          const int *, arb_srcptr, const arb_t,
-                                          const int *, arb_srcptr, const arb_t,
-                                          const int *, arb_srcptr, const arb_t,
-                                          slong);
-
-
-/*! \brief Pointer to a function that computes a single cartesian integral
- *         to a specified accuracy (four-center, with string inputs)
- */
-typedef void (*cb_integral4_single_target_str)(arb_t,
-                                               const int *, const char **, const char *,
-                                               const int *, const char **, const char *,
-                                               const int *, const char **, const char *,
-                                               const int *, const char **, const char *,
-                                               slong);
+typedef void (*cb_integral4_single_str)(arb_t,
+                                        const int *, const char **, const char *,
+                                        const int *, const char **, const char *,
+                                        const int *, const char **, const char *,
+                                        const int *, const char **, const char *,
+                                        slong);
 
 
 /*! \brief Pointer to a function that computes a single cartesian integral
@@ -96,25 +85,14 @@ typedef void (*cb_integral4)(arb_ptr,
 
 
 /*! \brief Pointer to a function that computes all cartesian integrals
- *         for a contracted shell quartet to a specified accuracy (four-center)
+ *         for a contracted shell quartet from string inputs (four-center)
  */
-typedef int (*cb_integral4_target)(arb_ptr,
-                                   int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
-                                   int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
-                                   int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
-                                   int, arb_srcptr, int, int, arb_srcptr, arb_srcptr,
-                                   slong);
-
-
-/*! \brief Pointer to a function that computes all cartesian integrals
- *         for a contracted shell quartet to a specified accuracy (four-center, with string inputs)
- */
-typedef void (*cb_integral4_target_str)(arb_ptr,
-                                        int, const char **, int, int, const char **, const char **,
-                                        int, const char **, int, int, const char **, const char **,
-                                        int, const char **, int, int, const char **, const char **,
-                                        int, const char **, int, int, const char **, const char **,
-                                        slong);
+typedef void (*cb_integral4_str)(arb_ptr,
+                                 int, const char **, int, int, const char **, const char **,
+                                 int, const char **, int, int, const char **, const char **,
+                                 int, const char **, int, int, const char **, const char **,
+                                 int, const char **, int, int, const char **, const char **,
+                                 slong);
 
 
 /*! \brief Pointer to a function that computes all cartesian integrals

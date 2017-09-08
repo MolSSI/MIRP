@@ -28,15 +28,14 @@ static size_t nintegrals(const integral_data_entry & ent)
 
 void integral4_create_test(const std::string & input_filepath,
                            const std::string & output_filepath,
-                           long ndigits, const std::string & header,
-                           cb_integral4_target_str cb)
+                           slong working_prec, long ndigits,
+                           const std::string & header,
+                           cb_integral4_str cb)
 {
     integral_data data = testfile_read_integral(input_filepath, 4, true);
 
     data.ndigits = ndigits;
     data.header += header;
-
-    const slong target_prec = (ndigits+8) / MIRP_LOG_10_2;
 
     /* Needed to unpack everything into char pointers */
     const char * ABCD[4][3];
@@ -68,7 +67,7 @@ void integral4_create_test(const std::string & input_filepath,
            ent.g[1].am, ABCD[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha[1].data(), coeff[1].data(),
            ent.g[2].am, ABCD[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha[2].data(), coeff[2].data(),
            ent.g[3].am, ABCD[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha[3].data(), coeff[3].data(),
-           target_prec);
+           working_prec);
 
 
         for(size_t i = 0; i < nint; i++)
@@ -86,17 +85,15 @@ void integral4_create_test(const std::string & input_filepath,
 
 
 long integral4_run_test(const std::string & filepath,
-                        long target_prec,
-                        cb_integral4_target_str cb)
+                        slong working_prec,
+                        cb_integral4_str cb)
 {
     long nfailed = 0;
 
     integral_data data = testfile_read_integral(filepath, 4, false);
 
-    /* Number of binary digits contained in the reference value strings
-       (and the number of binary digits of accuracy, taking into account
-       that the number printed is +/- 1 decimal ulp) */
-    const long integral_bits = data.ndigits / MIRP_LOG_10_2;
+    /* The number of binary digits of accuracy, taking into account
+       that the number printed is +/- 1 decimal ulp */
     const long round_bits = (data.ndigits - 1) / MIRP_LOG_10_2;
 
     arb_t integral_ref;
@@ -132,25 +129,20 @@ long integral4_run_test(const std::string & filepath,
            ent.g[1].am, ABCD[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha[1].data(), coeff[1].data(),
            ent.g[2].am, ABCD[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha[2].data(), coeff[2].data(),
            ent.g[3].am, ABCD[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha[3].data(), coeff[3].data(),
-           target_prec+16);
+           working_prec);
 
 
         for(size_t i = 0; i < nint; i++)
         {
-            /* Convert the reference to arb_t. The reference is printed to +/- 1 ulp (decimal). */
-            if(ent.integrals[i] == "0")
-                arb_zero(integral_ref);
-            else
-            {
-                arb_set_str(integral_ref, ent.integrals[i].c_str(), integral_bits + 16);
-                arf_mag_add_ulp(arb_radref(integral_ref),
-                                arb_radref(integral_ref),
-                                arb_midref(integral_ref),
-                                round_bits);
-                arb_set_round(integral_ref, integral_ref, target_prec);
-            }
+            /* Convert the reference to arb_t, adding error equal to +/- 1 ulp (decimal). */
+            arb_set_str(integral_ref, ent.integrals[i].c_str(), round_bits + 16);
+            arf_mag_add_ulp(arb_radref(integral_ref),
+                            arb_radref(integral_ref),
+                            arb_midref(integral_ref),
+                            round_bits);
+            arb_set_round(integral_ref, integral_ref, working_prec);
 
-            /* Rounding the reference value to the target precision results in
+            /* Rounding the reference value to the working precision results in
              * an interval. Does that interval contain our (more precise) result? */
             if(!arb_equal(integral_ref, integrals+i) && !arb_contains(integral_ref, integrals+i))
             {
@@ -256,8 +248,8 @@ long integral4_run_test_d(const std::string & filepath,
 
 
 long integral4_run_test_exact(const std::string & filepath,
-                                     cb_integral4_exact cb,
-                                     cb_integral4_target cb_mp)
+                              cb_integral4_exact cb,
+                              cb_integral4 cb_mp)
 {
     long nfailed = 0;
 
@@ -335,7 +327,7 @@ long integral4_run_test_exact(const std::string & filepath,
 
         slong acc_bits = mirp_min_accuracy_bits(integrals_mp, nint);
 
-        if(acc_bits < 64)
+        if(acc_bits > 0 && acc_bits < 64)
             throw std::logic_error("Not enough bits in testing exact integral function. Contact the developer");
 
         bool failed_shell = false;

@@ -17,20 +17,17 @@ namespace mirp {
 
 void integral4_single_create_test(const std::string & input_filepath,
                                   const std::string & output_filepath,
-                                  long ndigits, const std::string & header,
-                                  cb_integral4_single_target_str cb)
+                                  slong working_prec, long ndigits,
+                                  const std::string & header,
+                                  cb_integral4_single_str cb)
 {
     integral_single_data data = testfile_read_integral_single(input_filepath, 4, true);
-
-
 
     data.ndigits = ndigits;
     data.header += header;
 
     arb_t integral;
     arb_init(integral);
-
-    const slong target_prec = (ndigits+8) / MIRP_LOG_10_2;
 
     /* Needed to unpack XYZ */
     const char * A[3];
@@ -56,7 +53,7 @@ void integral4_single_create_test(const std::string & input_filepath,
            ent.g[1].lmn.data(), B, ent.g[1].alpha.c_str(),
            ent.g[2].lmn.data(), C, ent.g[2].alpha.c_str(),
            ent.g[3].lmn.data(), D, ent.g[3].alpha.c_str(),
-           target_prec);
+           working_prec);
 
         char * s = arb_get_str(integral, ndigits, ARB_STR_NO_RADIUS);
         ent.integral = s;
@@ -69,8 +66,8 @@ void integral4_single_create_test(const std::string & input_filepath,
 
 
 long integral4_single_run_test(const std::string & filepath,
-                               long target_prec,
-                               cb_integral4_single_target_str cb)
+                               slong working_prec,
+                               cb_integral4_single_str cb)
 {
     long nfailed = 0;
 
@@ -80,10 +77,8 @@ long integral4_single_run_test(const std::string & filepath,
     arb_init(integral);
     arb_init(integral_ref);
 
-    /* Number of binary digits contained in the reference value strings
-       (and the number of binary digits of accuracy, taking into account
-       that the number printed is +/- 1 decimal ulp) */
-    const long integral_bits = data.ndigits / MIRP_LOG_10_2;
+    /* The number of binary digits of accuracy, taking into account
+       that the number printed is +/- 1 decimal ulp */
     const long round_bits = (data.ndigits - 1) / MIRP_LOG_10_2;
 
     /* Needed to unpack XYZ */
@@ -107,22 +102,17 @@ long integral4_single_run_test(const std::string & filepath,
            ent.g[1].lmn.data(), B, ent.g[1].alpha.c_str(),
            ent.g[2].lmn.data(), C, ent.g[2].alpha.c_str(),
            ent.g[3].lmn.data(), D, ent.g[3].alpha.c_str(),
-           target_prec + 16);
+           working_prec + 16);
 
-        /* Convert the reference to arb_t. The reference is printed to +/- 1 ulp (decimal). */
-        if(ent.integral == "0")
-            arb_zero(integral_ref);
-        else
-        {
-            arb_set_str(integral_ref, ent.integral.c_str(), integral_bits + 16);
-            arf_mag_add_ulp(arb_radref(integral_ref),
-                            arb_radref(integral_ref),
-                            arb_midref(integral_ref),
-                            round_bits);
-            arb_set_round(integral_ref, integral_ref, target_prec);
-        }
+        /* Convert the reference to arb_t, adding error equal to +/- 1 ulp (decimal). */
+        arb_set_str(integral_ref, ent.integral.c_str(), working_prec + 16);
+        arf_mag_add_ulp(arb_radref(integral_ref),
+                        arb_radref(integral_ref),
+                        arb_midref(integral_ref),
+                        round_bits);
+        arb_set_round(integral_ref, integral_ref, working_prec);
 
-        /* Rounding the reference value to the target precision results in
+        /* Rounding the reference value to the working precision results in
          * an interval. Does that interval contain our (more precise) result? */
         if(!arb_equal(integral_ref, integral) && !arb_contains(integral_ref, integral))
         {
@@ -217,7 +207,7 @@ long integral4_single_run_test_d(const std::string & filepath,
 
 long integral4_single_run_test_exact(const std::string & filepath,
                                      cb_integral4_single_exact cb,
-                                     cb_integral4_single_target cb_mp)
+                                     cb_integral4_single cb_mp)
 {
     long nfailed = 0;
 

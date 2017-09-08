@@ -35,52 +35,15 @@ void mirp_boys_d(double *F, int m, double t);
 void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec);
 
 
-/*! \brief Compute the Boys function to a target precision
+/*! \brief Computes the Boys function using interval arithmetic
+ *         from string inputs
  *
- * This function seeks to calculate the Boys function to a given
- * precision. This works by increasing the working precision
- * until the result is the desired precision (\p target_prec).
+ * \copydetails mirp_boys
  *
- * Note that the result may be of higher precision that the
- * desired target precision.
- *
- * \warning If the inputs are not of high enough precision to reach the target
- *          precision, the function will return nonzero, indicating that
- *          reaching the target precision is impossible. Otherwise, the
- *          function returns zero.
- *
- * \param [out] F The computed values of the Boys function
- * \param [in]  m The maximum order to calculate
- * \param [in]  t The value at which to evaluate
- * \param [in]  target_prec The desired precision we want in the computed values
- *                          (binary digits/bits)
- *
- * \return 0 If the function is successful, nonzero if the target
- *           precision can not be reached.
+ * \param [in] working_prec The working precision (binary digits/bits)
+ *                          to use in the calculation
  */
-int mirp_boys_target(arb_ptr F, int m, const arb_t t, slong target_prec);
-
-
-/*! \brief Compute the Boys function to a target precision (string input)
- *
- * This function seeks to calculate the Boys function to a given
- * precision. This works by increasing the working precision
- * until the result is the desired precision (\p target_prec).
- *
- * Note that the result may be of higher precision that the
- * desired target precision.
- *
- * The input is interpreted to be to infinite precision (ie,
- * there are an infinite number of trailing zeroes after the
- * decimal point).
- *
- * \param [out] F The computed values of the Boys function
- * \param [in]  m The maximum order to calculate
- * \param [in]  t The value at which to evaluate
- * \param [in]  target_prec The desired precision we want in the computed values
- *                          (binary digits/bits)
- */
-void mirp_boys_target_str(arb_ptr F, int m, const char * t, slong target_prec);
+void mirp_boys_str(arb_ptr F, int m, const char * t, slong working_prec);
 
 
 /*! \brief Computes the Boys function to exact double precision using

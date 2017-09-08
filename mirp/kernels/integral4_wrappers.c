@@ -186,24 +186,10 @@ void mirp_loop_shell4(arb_ptr integral,
                              + p);
 
             for(long q = 0; q < ncart1234; q++)
-            {
-                /* Only apply the coefficient if the integral is nonzero.
-                 * Otherwise, we end up with 0 +/- error */
-                if(!arb_is_zero(integral_buffer+q))
-                    arb_addmul(integral+start+q, integral_buffer+q, coeff, working_prec);
-            }
+                arb_addmul(integral+start+q, integral_buffer+q, coeff, working_prec);
 
             arb_clear(coeff);
         }
-    }
-
-    for(long i = 0; i < full_size; i++)
-    {
-        /* Clamp to zero if needed
-         * Required for contracted shell quartets that are
-         * zero by symmetry */
-         if(arb_rel_accuracy_bits(integral+i) < 0)
-             arb_zero(integral+i);
     }
 
     _arb_vec_clear(integral_buffer, ncart1234);
@@ -213,128 +199,12 @@ void mirp_loop_shell4(arb_ptr integral,
     _arb_vec_clear(coeff4_norm, nprim4*ngen4);
 }
 
-
-
-int mirp_integral4_single_target(arb_t integral,
-                                 const int * lmn1, arb_srcptr A, const arb_t alpha1,
-                                 const int * lmn2, arb_srcptr B, const arb_t alpha2,
-                                 const int * lmn3, arb_srcptr C, const arb_t alpha3,
-                                 const int * lmn4, arb_srcptr D, const arb_t alpha4,
-                                 slong target_prec, cb_integral4_single cb)
-{
-    /* We run the callback function once, checking for the minimum
-     * relative accuracy bits. If that is ok, we return.
-     * If not, we enter a loop, increasing the working precision
-     * until we reach our goal.
-     *
-     * We check if we enter an infinite loop, which can happen
-     * if the precision of the inputs is not enough to
-     * match the target prec. This is indicated by returning
-     * nonzero
-     */
-
-    slong working_prec = target_prec + MIRP_BITS_INCREMENT;
-
-    cb(integral,
-       lmn1, A, alpha1,
-       lmn2, B, alpha2,
-       lmn3, C, alpha3,
-       lmn4, D, alpha4,
-       working_prec);
-
-
-    slong cur_bits = arb_rel_accuracy_bits(integral);
-    int suff_acc = (cur_bits >= target_prec);
-
-    slong last_bits;
-
-    while(!suff_acc)
-    {
-        last_bits = cur_bits;
-        working_prec += MIRP_BITS_INCREMENT;
-
-        cb(integral,
-           lmn1, A, alpha1,
-           lmn2, B, alpha2,
-           lmn3, C, alpha3,
-           lmn4, D, alpha4,
-           working_prec);
-
-        cur_bits = arb_rel_accuracy_bits(integral);
-
-        if(cur_bits >= target_prec)
-           suff_acc = 1;
-
-        /*
-         * Does increasing the working precision actually have an effect?
-         * if not, we have reached an infinite loop.
-         * This leaves suff_acc as 0 */
-        if(cur_bits < target_prec && cur_bits <= last_bits)
-            break;
-    }
-
-    return !suff_acc;
-}
-
-
-int mirp_integral4_target(arb_ptr integrals,
-                          int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1,
-                          int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2,
-                          int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3,
-                          int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4,
-                          slong target_prec, cb_integral4 cb)
-{
-    const size_t nintegrals = MIRP_NCART4(am1, am2, am3, am4);
-
-    slong working_prec = target_prec + MIRP_BITS_INCREMENT;
-
-    cb(integrals,
-       am1, A, nprim1, ngen1, alpha1, coeff1,
-       am2, B, nprim2, ngen2, alpha2, coeff2,
-       am3, C, nprim3, ngen3, alpha3, coeff3,
-       am4, D, nprim4, ngen4, alpha4, coeff4,
-       working_prec);
-
-    slong cur_bits = mirp_min_accuracy_bits(integrals, nintegrals);
-    int suff_acc = (cur_bits >= target_prec);
-
-    slong last_bits;
-
-    while(!suff_acc)
-    {
-        last_bits = cur_bits;
-        working_prec += MIRP_BITS_INCREMENT;
-
-        cb(integrals,
-           am1, A, nprim1, ngen1, alpha1, coeff1,
-           am2, B, nprim2, ngen2, alpha2, coeff2,
-           am3, C, nprim3, ngen3, alpha3, coeff3,
-           am4, D, nprim4, ngen4, alpha4, coeff4,
-           working_prec);
-
-        cur_bits = mirp_min_accuracy_bits(integrals, nintegrals);
-
-        if(cur_bits >= target_prec)
-            suff_acc = 1;
-
-        /*
-         * Does increasing the working precision actually have an effect?
-         * if not, we have reached an infinite loop.
-         * This leaves suff_acc as 0 */
-        if(cur_bits < target_prec && cur_bits <= last_bits)
-            break;
-    }
-
-    return !suff_acc;
-}
-
-
-void mirp_integral4_single_target_str(arb_t integral,
-                                           const int * lmn1, const char ** A, const char * alpha1,
-                                           const int * lmn2, const char ** B, const char * alpha2,
-                                           const int * lmn3, const char ** C, const char * alpha3,
-                                           const int * lmn4, const char ** D, const char * alpha4,
-                                           slong target_prec, cb_integral4_single cb)
+void mirp_integral4_single_str(arb_t integral,
+                               const int * lmn1, const char ** A, const char * alpha1,
+                               const int * lmn2, const char ** B, const char * alpha2,
+                               const int * lmn3, const char ** C, const char * alpha3,
+                               const int * lmn4, const char ** D, const char * alpha4,
+                               slong working_prec, cb_integral4_single cb)
 {
     /* Similar to mirp_integral4_single_target, but should
      * always succeed */
@@ -348,34 +218,26 @@ void mirp_integral4_single_target_str(arb_t integral,
     arb_init(alpha3_mp);
     arb_init(alpha4_mp);
 
-    slong working_prec = target_prec;
-    slong cur_bits = 0;
-
-    do
+    for(int i = 0; i < 3; i++)
     {
-        working_prec += MIRP_BITS_INCREMENT;
-        for(int i = 0; i < 3; i++)
-        {
-            arb_set_str(A_mp + i, A[i], working_prec);
-            arb_set_str(B_mp + i, B[i], working_prec);
-            arb_set_str(C_mp + i, C[i], working_prec);
-            arb_set_str(D_mp + i, D[i], working_prec);
-        }
-        arb_set_str(alpha1_mp, alpha1, working_prec);
-        arb_set_str(alpha2_mp, alpha2, working_prec);
-        arb_set_str(alpha3_mp, alpha3, working_prec);
-        arb_set_str(alpha4_mp, alpha4, working_prec);
+        arb_set_str(A_mp + i, A[i], working_prec);
+        arb_set_str(B_mp + i, B[i], working_prec);
+        arb_set_str(C_mp + i, C[i], working_prec);
+        arb_set_str(D_mp + i, D[i], working_prec);
+    }
 
-        cb(integral,
-           lmn1, A_mp, alpha1_mp,
-           lmn2, B_mp, alpha2_mp,
-           lmn3, C_mp, alpha3_mp,
-           lmn4, D_mp, alpha4_mp,
-           working_prec);
+    arb_set_str(alpha1_mp, alpha1, working_prec);
+    arb_set_str(alpha2_mp, alpha2, working_prec);
+    arb_set_str(alpha3_mp, alpha3, working_prec);
+    arb_set_str(alpha4_mp, alpha4, working_prec);
 
-        cur_bits = arb_rel_accuracy_bits(integral);
+    cb(integral,
+       lmn1, A_mp, alpha1_mp,
+       lmn2, B_mp, alpha2_mp,
+       lmn3, C_mp, alpha3_mp,
+       lmn4, D_mp, alpha4_mp,
+       working_prec);
 
-    } while(cur_bits < target_prec);
 
     _arb_vec_clear(A_mp, 3);
     _arb_vec_clear(B_mp, 3);
@@ -388,12 +250,12 @@ void mirp_integral4_single_target_str(arb_t integral,
 }
 
 
-void mirp_integral4_target_str(arb_ptr integrals,
-                               int am1, const char ** A, int nprim1, int ngen1, const char ** alpha1, const char ** coeff1,
-                               int am2, const char ** B, int nprim2, int ngen2, const char ** alpha2, const char ** coeff2,
-                               int am3, const char ** C, int nprim3, int ngen3, const char ** alpha3, const char ** coeff3,
-                               int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4,
-                               slong target_prec, cb_integral4 cb)
+void mirp_integral4_str(arb_ptr integrals,
+                        int am1, const char ** A, int nprim1, int ngen1, const char ** alpha1, const char ** coeff1,
+                        int am2, const char ** B, int nprim2, int ngen2, const char ** alpha2, const char ** coeff2,
+                        int am3, const char ** C, int nprim3, int ngen3, const char ** alpha3, const char ** coeff3,
+                        int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4,
+                        slong working_prec, cb_integral4 cb)
 {
     arb_ptr A_mp = _arb_vec_init(3);
     arb_ptr B_mp = _arb_vec_init(3);
@@ -408,56 +270,46 @@ void mirp_integral4_target_str(arb_ptr integrals,
     arb_ptr coeff3_mp = _arb_vec_init(nprim3*ngen3);
     arb_ptr coeff4_mp = _arb_vec_init(nprim4*ngen4);
 
-    const size_t ncart = MIRP_NCART4(am1, am2, am3, am4);
-
-    slong working_prec = target_prec;
-    slong min_bits = 0;
-
-    do
+    for(int i = 0; i < 3; i++)
     {
-        working_prec += MIRP_BITS_INCREMENT;
-        for(int i = 0; i < 3; i++)
-        {
-            arb_set_str(A_mp + i, A[i], working_prec);
-            arb_set_str(B_mp + i, B[i], working_prec);
-            arb_set_str(C_mp + i, C[i], working_prec);
-            arb_set_str(D_mp + i, D[i], working_prec);
-        }
+        arb_set_str(A_mp + i, A[i], working_prec);
+        arb_set_str(B_mp + i, B[i], working_prec);
+        arb_set_str(C_mp + i, C[i], working_prec);
+        arb_set_str(D_mp + i, D[i], working_prec);
+    }
 
-        for(int i = 0; i < nprim1; i++)
-            arb_set_str(alpha1_mp + i, alpha1[i], working_prec);
+    for(int i = 0; i < nprim1; i++)
+        arb_set_str(alpha1_mp + i, alpha1[i], working_prec);
 
-        for(int i = 0; i < nprim2; i++)
-            arb_set_str(alpha2_mp + i, alpha2[i], working_prec);
+    for(int i = 0; i < nprim2; i++)
+        arb_set_str(alpha2_mp + i, alpha2[i], working_prec);
 
-        for(int i = 0; i < nprim3; i++)
-            arb_set_str(alpha3_mp + i, alpha3[i], working_prec);
+    for(int i = 0; i < nprim3; i++)
+        arb_set_str(alpha3_mp + i, alpha3[i], working_prec);
 
-        for(int i = 0; i < nprim4; i++)
-            arb_set_str(alpha4_mp + i, alpha4[i], working_prec);
+    for(int i = 0; i < nprim4; i++)
+        arb_set_str(alpha4_mp + i, alpha4[i], working_prec);
 
-        for(int i = 0; i < nprim1*ngen1; i++)
-            arb_set_str(coeff1_mp + i, coeff1[i], working_prec);
+    for(int i = 0; i < nprim1*ngen1; i++)
+        arb_set_str(coeff1_mp + i, coeff1[i], working_prec);
 
-        for(int i = 0; i < nprim2*ngen2; i++)
-            arb_set_str(coeff2_mp + i, coeff2[i], working_prec);
+    for(int i = 0; i < nprim2*ngen2; i++)
+        arb_set_str(coeff2_mp + i, coeff2[i], working_prec);
 
-        for(int i = 0; i < nprim3*ngen3; i++)
-            arb_set_str(coeff3_mp + i, coeff3[i], working_prec);
+    for(int i = 0; i < nprim3*ngen3; i++)
+        arb_set_str(coeff3_mp + i, coeff3[i], working_prec);
 
-        for(int i = 0; i < nprim4*ngen4; i++)
-            arb_set_str(coeff4_mp + i, coeff4[i], working_prec);
+    for(int i = 0; i < nprim4*ngen4; i++)
+        arb_set_str(coeff4_mp + i, coeff4[i], working_prec);
 
 
-        cb(integrals,
-           am1, A_mp, nprim1, ngen1, alpha1_mp, coeff1_mp,
-           am2, B_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
-           am3, C_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
-           am4, D_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
-           working_prec);
+    cb(integrals,
+       am1, A_mp, nprim1, ngen1, alpha1_mp, coeff1_mp,
+       am2, B_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
+       am3, C_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
+       am4, D_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
+       working_prec);
 
-        min_bits = mirp_min_accuracy_bits(integrals, ncart);
-    } while(min_bits < target_prec);
 
     _arb_vec_clear(A_mp, 3);
     _arb_vec_clear(B_mp, 3);
@@ -475,12 +327,15 @@ void mirp_integral4_target_str(arb_ptr integrals,
 
 
 
+
+
+
 void mirp_integral4_single_exact(double * integral,
                                  const int * lmn1, const double * A, double alpha1,
                                  const int * lmn2, const double * B, double alpha2,
                                  const int * lmn3, const double * C, double alpha3,
                                  const int * lmn4, const double * D, double alpha4,
-                                 cb_integral4_single_target cb)
+                                 cb_integral4_single cb)
 {
     /* convert arguments to arb_t */
     arb_ptr A_mp = _arb_vec_init(3);
@@ -515,13 +370,38 @@ void mirp_integral4_single_exact(double * integral,
      * double precision (53) + lots of safety */
     const slong target_prec = 64;
 
-    /* Call the callback */
-    cb(integral_mp,
-       lmn1, A_mp, alpha1_mp,
-       lmn2, B_mp, alpha2_mp,
-       lmn3, C_mp, alpha3_mp,
-       lmn4, D_mp, alpha4_mp,
-       target_prec);
+    slong working_prec = target_prec;
+    int suff_acc = 0;
+
+    while(!suff_acc)
+    {
+        working_prec += target_prec;
+
+        /* Call the callback */
+        cb(integral_mp,
+           lmn1, A_mp, alpha1_mp,
+           lmn2, B_mp, alpha2_mp,
+           lmn3, C_mp, alpha3_mp,
+           lmn4, D_mp, alpha4_mp,
+           working_prec);
+
+        /* Do we have sufficient accuracy? We need at least
+         * 53 bits + 11 bits safety OR the value is zero (has zero precision)
+         * and the error bounds is exactly zero when converted to double precision */
+        slong bits = arb_rel_accuracy_bits(integral_mp);
+
+        suff_acc = 1;
+        if(bits > 0 && bits < 64)
+        {
+            suff_acc = 0;
+        }
+        else if(bits <= 0)
+        {
+            double bound = mag_get_d(arb_radref(integral_mp));
+            if(bound > 0.0)
+                suff_acc = 0; 
+        }
+    }
 
     /* We get the value from the midpoint of the arb struct */
     *integral = arf_get_d(arb_midref(integral_mp), ARF_RND_NEAR);
@@ -544,7 +424,7 @@ void mirp_integral4_exact(double * integral,
                           int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
                           int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
                           int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
-                          cb_integral4_target cb)
+                          cb_integral4 cb)
 {
     /* convert arguments to arb_t */
     arb_ptr A_mp = _arb_vec_init(3);
@@ -597,13 +477,40 @@ void mirp_integral4_exact(double * integral,
     /* The target precision is the number of bits in double precision (53) + safety */
     const slong target_prec = 64;
 
-    /* Call the callback */
-    cb(integral_mp,
-       am1, A_mp, nprim1, ngen1, alpha1_mp, coeff1_mp,
-       am2, B_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
-       am3, C_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
-       am4, D_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
-       target_prec);
+    slong working_prec = target_prec;
+    int suff_acc = 0;
+
+    while(!suff_acc)
+    {
+        working_prec += target_prec;
+
+        /* Call the callback */
+        cb(integral_mp,
+           am1, A_mp, nprim1, ngen1, alpha1_mp, coeff1_mp,
+           am2, B_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
+           am3, C_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
+           am4, D_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
+           working_prec);
+
+        suff_acc = 1;
+        for(size_t i = 0; i < nintegrals; i++)
+        {
+            /* Do we have sufficient accuracy? We need at least
+             * 53 bits + 11 bits safety OR the value is zero (has zero precision)
+             * and the error bounds is exactly zero when converted to double precision */
+            slong bits = arb_rel_accuracy_bits(integral_mp + i);
+
+            if(bits > 0 && bits < 64)
+                suff_acc = 0;
+            else if(bits <= 0)
+            {
+                double bound = mag_get_d(arb_radref(integral_mp + i));
+                if(bound > 0.0)
+                    suff_acc = 0; 
+            }
+        }
+    }
+
 
     /* We get the value from the midpoint of the arb struct */
     for(size_t i = 0; i < nintegrals; i++)

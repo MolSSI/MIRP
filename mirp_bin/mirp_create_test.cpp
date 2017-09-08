@@ -29,7 +29,8 @@ static void print_help(void)
               << "                       boys\n"
               << "                       eri\n"
               << "                       eri_single\n"
-              << "    --ndigits      Number of decimal digits to write to the output file\n"
+              << "    --prec         Working precision to use in the calculation\n"
+              << "    --ndigits      Max number of decimal digits to write to the output file\n"
               << "\n"
               << "\n"
               << "Other arguments:\n"
@@ -45,6 +46,7 @@ int main(int argc, char ** argv)
     std::string infile, outfile;
     std::string integral;
     long ndigits;
+    long working_prec;
 
     try {
         auto cmdline = convert_cmdline(argc, argv);
@@ -58,6 +60,7 @@ int main(int argc, char ** argv)
         outfile = cmdline_get_arg_str(cmdline, "--outfile");
         integral = cmdline_get_arg_str(cmdline, "--integral");
         ndigits = cmdline_get_arg_long(cmdline, "--ndigits");
+        working_prec = cmdline_get_arg_long(cmdline, "--prec");
 
         if(cmdline.size() != 0)
         {
@@ -87,18 +90,18 @@ int main(int argc, char ** argv)
     try
     {
         if(integral == "boys")
-            boys_create_test(infile, outfile, ndigits, header);
+            boys_create_test(infile, outfile, working_prec, ndigits, header);
         else if(integral == "eri")
         {
             integral4_create_test(infile, outfile,
-                                          ndigits, header,
-                                          mirp_eri_target_str);
+                                          working_prec, ndigits, header,
+                                          mirp_eri_str);
         }
         else if(integral == "eri_single")
         {
             integral4_single_create_test(infile, outfile,
-                                                 ndigits, header,
-                                                 mirp_eri_single_target_str);
+                                                 working_prec, ndigits, header,
+                                                 mirp_eri_single_str);
         }
         else
         {

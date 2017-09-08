@@ -149,62 +149,13 @@ void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec)
 }
 
 
-int mirp_boys_target(arb_ptr F, int m, const arb_t t, slong target_prec)
+void mirp_boys_str(arb_ptr F, int m, const char * t, slong working_prec)
 {
-    /* We run the boys function once, checking for the minimum
-     * relative accuracy bits. If that is ok, we return.
-     * If not, we enter a loop, increasing the working precision
-     * until we reach our goal.
-     *
-     * We check if we enter an infinite loop, which can happen
-     * if the precision of the inputs is not enough to
-     * match the target prec. This is indicated by returning
-     * nonzero
-     */
-    slong working_prec = target_prec + MIRP_BITS_INCREMENT;
-
-    mirp_boys(F, m, t, working_prec);
-
-    slong cur_bits = mirp_min_accuracy_bits(F, m+1);
-    int suff_acc = (cur_bits >= target_prec);
-    slong last_bits;
-
-    while(!suff_acc)
-    {
-        last_bits = cur_bits;
-        working_prec += MIRP_BITS_INCREMENT;
-
-        mirp_boys(F, m, t, working_prec);
-
-        cur_bits = mirp_min_accuracy_bits(F, m+1);
-
-        if(cur_bits >= target_prec)
-           suff_acc = 1;
-
-        if(!suff_acc && cur_bits <= last_bits)
-            break;
-    }
-
-    return !suff_acc;
-}
-
-
-void mirp_boys_target_str(arb_ptr F, int m, const char * t, slong target_prec)
-{
-    /* Procedure is similar to mirp_boys_target, however
-     * this should always be guaranteed to succeed */
     arb_t t_mp;
     arb_init(t_mp);
 
-    slong working_prec = target_prec;
-
-    do
-    {
-        working_prec += MIRP_BITS_INCREMENT;
-        arb_set_str(t_mp, t, working_prec);
-        mirp_boys(F, m, t_mp, working_prec);
-
-    } while(mirp_min_accuracy_bits(F, m+1) < target_prec);
+    arb_set_str(t_mp, t, working_prec);
+    mirp_boys(F, m, t_mp, working_prec);
 
     arb_clear(t_mp);
 }
@@ -214,7 +165,7 @@ void mirp_boys_exact(double *F, int m, double t)
 {
     /* The target precision is the number of bits in
      * double precision (53) + safety */
-    const slong target_prec = 72;
+    const slong target_prec = 64;
 
     /* convert the input to arb_t
      * Since we are converting from binary (double precision)
@@ -227,7 +178,34 @@ void mirp_boys_exact(double *F, int m, double t)
 
     arb_ptr F_mp = _arb_vec_init(m+1);
 
-    mirp_boys_target(F_mp, m, t_mp, target_prec);
+    slong working_prec = target_prec;
+    int suff_acc = 0;
+
+    while(!suff_acc)
+    {
+        working_prec += target_prec;
+        suff_acc = 1;
+
+        mirp_boys(F_mp, m, t_mp, working_prec);
+
+        suff_acc = 1;
+        for(int i = 0; i <= m; i++)
+        {
+            /* Do we have sufficient accuracy? We need at least
+             * 53 bits + 11 bits safety OR the value is zero (has zero precision)
+             * and the error bounds is exactly zero when converted to double precision */
+            slong bits = arb_rel_accuracy_bits(F_mp + i);
+
+            if(bits > 0 && bits < 64)
+                suff_acc = 0;
+            else if(bits <= 0)
+            {
+                double bound = mag_get_d(arb_radref(F_mp + i));
+                if(bound > 0.0)
+                    suff_acc = 0; 
+            }
+        }
+    }
 
     /* convert back to double precision */
     for(int i = 0; i <= m; i++)
