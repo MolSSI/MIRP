@@ -33,44 +33,40 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, slong working_pre
 {
     /* The number of binary digits of accuracy, taking into account
        that the number printed is +/- 1 decimal ulp */
+    long integral_bits = data.ndigits / MIRP_LOG_10_2;
     long round_bits = (data.ndigits-1) / MIRP_LOG_10_2;
 
     long nfailed = 0;
 
     const int max_m = boys_max_m(data) + extra_m;
 
-    arb_t t_mp, vref_mp;
+    arb_t vref_mp;
     arb_init(vref_mp);
-    arb_init(t_mp);  
 
     arb_ptr F_mp = _arb_vec_init(max_m+1);
 
     for(const auto & ent : data.values)
     {
-        arb_set_str(t_mp, ent.t.c_str(), working_prec);
-        mirp_boys(F_mp, ent.m + extra_m, t_mp, working_prec);
+        mirp_boys_str(F_mp, ent.m + extra_m, ent.t.c_str(), working_prec);
 
         /* Convert the reference to arb_t. Add error corresponding to +/- 1 ulp (decimal). */
-        arb_set_str(vref_mp, ent.value.c_str(), working_prec);
+        arb_set_str(vref_mp, ent.value.c_str(), integral_bits + 16);
         arf_mag_add_ulp(arb_radref(vref_mp), arb_radref(vref_mp), arb_midref(vref_mp), round_bits);
-        arb_set_round(vref_mp, vref_mp, working_prec);
 
-        /* Rounding the reference value to the working precision results in
-         * an interval. Does that interval contain our (more precise) result? */
-        if(!arb_contains(vref_mp, F_mp + ent.m))
+        /* Do the intervals overlap? */
+        if(!arb_overlaps(F_mp + ent.m, vref_mp))
         {
             std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
-            char * s1 = arb_get_str(F_mp + ent.m, 2*data.ndigits, 0);
-            char * s2 = arb_get_str(vref_mp, 2*data.ndigits, 0);
+            char * s1 = arb_get_str(F_mp + ent.m, data.ndigits+5, ARB_STR_MORE);
+            char * s2 = arb_get_str(vref_mp, data.ndigits+5, ARB_STR_MORE);
             std::cout << "   Calculated: " << s1 << "\n";
-            std::cout << "    Reference: " << s2 << "\n\n";
+            std::cout << "    Reference: " << s2 << "\n";
             free(s1);
             free(s2);
             nfailed++;
         }
     }
 
-    arb_clear(t_mp);
     arb_clear(vref_mp);
     _arb_vec_clear(F_mp, max_m+1);
 

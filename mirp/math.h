@@ -19,6 +19,9 @@ extern "C" {
 /*! \brief Calculates the maximum value of two variables */
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
+/*! \brief Smallest subnormal double-precision value */
+#define MIRP_DBL_TRUE_MIN 4.9406564584124654e-324
+
 
 /*! \brief Calculates (-1) to a given power
  *

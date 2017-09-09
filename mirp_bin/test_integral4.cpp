@@ -135,16 +135,19 @@ long integral4_run_test(const std::string & filepath,
         for(size_t i = 0; i < nint; i++)
         {
             /* Convert the reference to arb_t, adding error equal to +/- 1 ulp (decimal). */
-            arb_set_str(integral_ref, ent.integrals[i].c_str(), round_bits + 16);
-            arf_mag_add_ulp(arb_radref(integral_ref),
-                            arb_radref(integral_ref),
-                            arb_midref(integral_ref),
-                            round_bits);
-            arb_set_round(integral_ref, integral_ref, working_prec);
+            if(ent.integrals[i] == "0")
+                arb_zero(integral_ref);
+            else
+            {
+                arb_set_str(integral_ref, ent.integrals[i].c_str(), round_bits + 16);
+                arf_mag_add_ulp(arb_radref(integral_ref),
+                                arb_radref(integral_ref),
+                                arb_midref(integral_ref),
+                                round_bits);
+            }
 
-            /* Rounding the reference value to the working precision results in
-             * an interval. Does that interval contain our (more precise) result? */
-            if(!arb_equal(integral_ref, integrals+i) && !arb_contains(integral_ref, integrals+i))
+            /* Do the intervals overlap? */
+            if(!arb_overlaps(integral_ref, integrals+i))
             {
                 std::cout << "Entry failed test:\n";
                 char * s1 = arb_get_str(integrals+i, 2*data.ndigits, 0);
@@ -317,6 +320,7 @@ long integral4_run_test_exact(const std::string & filepath,
               ent.g[2].am, ABCD_mp[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha_mp[2], coeff_mp[2],
               ent.g[3].am, ABCD_mp[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha_mp[3], coeff_mp[3],
               512);
+
 
         for(int n = 0; n < 4; n++)
         {

@@ -105,16 +105,20 @@ long integral4_single_run_test(const std::string & filepath,
            working_prec + 16);
 
         /* Convert the reference to arb_t, adding error equal to +/- 1 ulp (decimal). */
-        arb_set_str(integral_ref, ent.integral.c_str(), working_prec + 16);
-        arf_mag_add_ulp(arb_radref(integral_ref),
-                        arb_radref(integral_ref),
-                        arb_midref(integral_ref),
-                        round_bits);
-        arb_set_round(integral_ref, integral_ref, working_prec);
+        if(ent.integral == "0")
+            arb_zero(integral_ref);
+        else
+        {
+            arb_set_str(integral_ref, ent.integral.c_str(), working_prec + 16);
+            arf_mag_add_ulp(arb_radref(integral_ref),
+                            arb_radref(integral_ref),
+                            arb_midref(integral_ref),
+                            round_bits);
+        }
 
         /* Rounding the reference value to the working precision results in
          * an interval. Does that interval contain our (more precise) result? */
-        if(!arb_equal(integral_ref, integral) && !arb_contains(integral_ref, integral))
+        if(!arb_overlaps(integral_ref, integral))
         {
             std::cout << "Entry failed test:\n";
             char * s1 = arb_get_str(integral, 2*data.ndigits, 0);

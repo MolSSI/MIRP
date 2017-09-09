@@ -373,6 +373,11 @@ void mirp_integral4_single_exact(double * integral,
     slong working_prec = target_prec;
     int suff_acc = 0;
 
+    /* for comparisons */
+    arf_t ubound, lbound;
+    arf_init(ubound);
+    arf_init(lbound);
+
     while(!suff_acc)
     {
         working_prec += target_prec;
@@ -391,14 +396,14 @@ void mirp_integral4_single_exact(double * integral,
         slong bits = arb_rel_accuracy_bits(integral_mp);
 
         suff_acc = 1;
-        if(bits > 0 && bits < 64)
-        {
+        if(bits > 0 && bits < target_prec)
             suff_acc = 0;
-        }
         else if(bits <= 0)
         {
-            double bound = mag_get_d(arb_radref(integral_mp));
-            if(bound > 0.0)
+            arb_get_ubound_arf(ubound, integral_mp, working_prec);
+            arb_get_lbound_arf(lbound, integral_mp, working_prec);
+            if(arf_cmpabs_d(lbound, MIRP_DBL_TRUE_MIN) > 0 || 
+                arf_cmpabs_d(ubound, MIRP_DBL_TRUE_MIN) > 0)
                 suff_acc = 0; 
         }
     }
@@ -407,6 +412,8 @@ void mirp_integral4_single_exact(double * integral,
     *integral = arf_get_d(arb_midref(integral_mp), ARF_RND_NEAR);
 
     /* Cleanup */
+    arf_clear(lbound);
+    arf_clear(ubound);
     _arb_vec_clear(A_mp, 3);
     _arb_vec_clear(B_mp, 3);
     _arb_vec_clear(C_mp, 3);
@@ -480,6 +487,11 @@ void mirp_integral4_exact(double * integral,
     slong working_prec = target_prec;
     int suff_acc = 0;
 
+    /* for comparisons */
+    arf_t ubound, lbound;
+    arf_init(ubound);
+    arf_init(lbound);
+
     while(!suff_acc)
     {
         working_prec += target_prec;
@@ -500,12 +512,14 @@ void mirp_integral4_exact(double * integral,
              * and the error bounds is exactly zero when converted to double precision */
             slong bits = arb_rel_accuracy_bits(integral_mp + i);
 
-            if(bits > 0 && bits < 64)
+            if(bits > 0 && bits < target_prec)
                 suff_acc = 0;
             else if(bits <= 0)
             {
-                double bound = mag_get_d(arb_radref(integral_mp + i));
-                if(bound > 0.0)
+                arb_get_ubound_arf(ubound, integral_mp + i, working_prec);
+                arb_get_lbound_arf(lbound, integral_mp + i, working_prec);
+                if(arf_cmpabs_d(lbound, MIRP_DBL_TRUE_MIN) > 0 || 
+                   arf_cmpabs_d(ubound, MIRP_DBL_TRUE_MIN) > 0)
                     suff_acc = 0; 
             }
         }
@@ -514,9 +528,16 @@ void mirp_integral4_exact(double * integral,
 
     /* We get the value from the midpoint of the arb struct */
     for(size_t i = 0; i < nintegrals; i++)
-        integral[i] = arf_get_d(arb_midref(integral_mp + i), ARF_RND_NEAR);
+    {
+        if(arb_rel_accuracy_bits(integral_mp + i) <= 0)
+            integral[i] = 0.0;
+        else
+            integral[i] = arf_get_d(arb_midref(integral_mp + i), ARF_RND_NEAR);
+    }
 
     /* Cleanup */
+    arf_clear(lbound);
+    arf_clear(ubound);
     _arb_vec_clear(A_mp, 3);
     _arb_vec_clear(B_mp, 3);
     _arb_vec_clear(C_mp, 3);

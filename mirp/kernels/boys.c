@@ -188,6 +188,11 @@ void mirp_boys_exact(double *F, int m, double t)
     slong working_prec = target_prec;
     int suff_acc = 0;
 
+    /* for comparisons */
+    arf_t ubound, lbound;
+    arf_init(ubound);
+    arf_init(lbound);
+
     while(!suff_acc)
     {
         working_prec += target_prec;
@@ -203,13 +208,15 @@ void mirp_boys_exact(double *F, int m, double t)
              * and the error bounds is exactly zero when converted to double precision */
             slong bits = arb_rel_accuracy_bits(F_mp + i);
 
-            if(bits > 0 && bits < 64)
+            if(bits > 0 && bits < target_prec)
                 suff_acc = 0;
             else if(bits <= 0)
             {
-                double bound = mag_get_d(arb_radref(F_mp + i));
-                if(bound > 0.0)
-                    suff_acc = 0; 
+                arb_get_ubound_arf(ubound, F_mp + i, working_prec);
+                arb_get_lbound_arf(lbound, F_mp + i, working_prec);
+                if(arf_cmpabs_d(lbound, MIRP_DBL_TRUE_MIN) > 0 || 
+                   arf_cmpabs_d(ubound, MIRP_DBL_TRUE_MIN) > 0)
+                        suff_acc = 0; 
             }
         }
     }
@@ -218,6 +225,8 @@ void mirp_boys_exact(double *F, int m, double t)
     for(int i = 0; i <= m; i++)
         F[i] = arf_get_d(arb_midref(F_mp + i), ARF_RND_NEAR);
 
+    arf_clear(lbound);
+    arf_clear(ubound);
     arb_clear(t_mp);
     _arb_vec_clear(F_mp, m+1);
 }
