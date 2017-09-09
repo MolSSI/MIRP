@@ -86,7 +86,7 @@ void testfile_write_integral_single(const std::string & filepath, const integral
     outfile.exceptions(ofstream::badbit | ofstream::failbit);
 
     outfile << data.header;
-    outfile << data.ndigits << "\n";
+    outfile << data.ndigits << " " << data.working_prec << "\n";
     for(const auto & ent : data.entries)
     {
         for(const auto & g : ent.g)
@@ -124,7 +124,7 @@ integral_data testfile_read_integral(const std::string & filepath,
 
     // Read in the number of digits
     if(!is_input)
-        infile >> data.ndigits;
+        infile >> data.ndigits >> data.working_prec;
 
     file_skip_comments(infile, '#');
 
@@ -200,7 +200,7 @@ void testfile_write_integral(const std::string & filepath, const integral_data &
     outfile.exceptions(ofstream::badbit | ofstream::failbit);
 
     outfile << data.header;
-    outfile << data.ndigits << "\n";
+    outfile << data.ndigits << " " << data.working_prec << "\n";
     for(const auto & ent : data.entries)
     {
         for(const auto & g : ent.g)

@@ -22,10 +22,13 @@ namespace mirp {
  * \throw std::runtime_error if there is a problem opening the file or there
  *        there is a problem reading or writing the data
  *
+ * \throw std::runtime_error if the working precision is not sufficient for
+ *        the specified number of digits
+ *
  * \param [in] input_filepath  The input file to use for integral parameters
  * \param [in] output_filepath The output file to write the computed integrals to
  * \param [in] working_prec    Internal working precision to use
- * \param [in] ndigits         Maximum number of digits to print
+ * \param [in] ndigits         Number of digits to print
  * \param [in] header          Header information to add to the file
  *                             (appended to the input file header)
  * \param [in] cb              Function that computes single cartesian integrals
@@ -94,10 +97,13 @@ long integral4_single_run_test_exact(const std::string & filepath,
  * \throw std::runtime_error if there is a problem opening the file or there
  *        there is a problem reading or writing the data
  *
+ * \throw std::runtime_error if the working precision is not sufficient for
+ *        the specified number of digits
+ *
  * \param [in] input_filepath  The input file to use for integral parameters
  * \param [in] output_filepath The output file to write the computed integrals to
  * \param [in] working_prec    Internal working precision to use
- * \param [in] ndigits         Maximum number of digits to print
+ * \param [in] ndigits         Number of digits to print
  * \param [in] header          Header information to add to the file
  *                             (appended to the input file header)
  * \param [in] cb              Function that computes contracted integrals

@@ -35,7 +35,11 @@ void integral4_create_test(const std::string & input_filepath,
     integral_data data = testfile_read_integral(input_filepath, 4, true);
 
     data.ndigits = ndigits;
+    data.working_prec = working_prec;
     data.header += header;
+
+    /* What we need for the number of digits (plus some safety) */
+    const slong min_prec = (ndigits+5) / MIRP_LOG_10_2;
 
     /* Needed to unpack everything into char pointers */
     const char * ABCD[4][3];
@@ -72,6 +76,10 @@ void integral4_create_test(const std::string & input_filepath,
 
         for(size_t i = 0; i < nint; i++)
         {
+            slong bits = arb_rel_accuracy_bits(integrals+i);
+            if(bits > 0 && bits < min_prec)
+                throw std::runtime_error("Working precision not large enough for the number of digits");
+
             char * s = arb_get_str(integrals+i, ndigits, ARB_STR_NO_RADIUS);
             ent.integrals.push_back(s);
             free(s);

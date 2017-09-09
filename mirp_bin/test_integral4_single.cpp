@@ -24,7 +24,11 @@ void integral4_single_create_test(const std::string & input_filepath,
     integral_single_data data = testfile_read_integral_single(input_filepath, 4, true);
 
     data.ndigits = ndigits;
+    data.working_prec = working_prec;
     data.header += header;
+
+    /* What we need for the number of digits (plus some safety) */
+    const slong min_prec = (ndigits+5) / MIRP_LOG_10_2;
 
     arb_t integral;
     arb_init(integral);
@@ -54,6 +58,10 @@ void integral4_single_create_test(const std::string & input_filepath,
            ent.g[2].lmn.data(), C, ent.g[2].alpha.c_str(),
            ent.g[3].lmn.data(), D, ent.g[3].alpha.c_str(),
            working_prec);
+
+        slong bits = arb_rel_accuracy_bits(integral);
+        if(bits > 0 && bits < min_prec)
+            throw std::runtime_error("Working precision not large enough for the number of digits");
 
         char * s = arb_get_str(integral, ndigits, ARB_STR_NO_RADIUS);
         ent.integral = s;

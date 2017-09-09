@@ -30,7 +30,7 @@ static void print_help(void)
               << "                       eri\n"
               << "                       eri_single\n"
               << "    --prec         Working precision to use in the calculation\n"
-              << "    --ndigits      Max number of decimal digits to write to the output file\n"
+              << "    --ndigits      Number of decimal digits to write for each integral\n"
               << "\n"
               << "\n"
               << "Other arguments:\n"

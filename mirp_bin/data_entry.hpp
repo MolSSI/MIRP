@@ -72,7 +72,8 @@ struct integral_single_data_entry
  */
 struct integral_single_data
 {
-    long ndigits;                                    //!< The number of digits of accuracy in the file
+    long ndigits;                                    //!< The number of decimal digits of accuracy in the file
+    long working_prec;                               //!< Working precision used for the integrals
     std::string header;                              //!< Header or comments about the test
     std::vector<integral_single_data_entry> entries; //!< Actual data for the integrals
 };
@@ -95,7 +96,8 @@ struct integral_data_entry
  */
 struct integral_data
 {
-    long ndigits;                             //!< The number of digits of accuracy in the file
+    long ndigits;                             //!< The number of decimal digits of accuracy in the file
+    long working_prec;                        //!< Working precision used for the integrals
     std::string header;                       //!< Header or comments about the test
     std::vector<integral_data_entry> entries; //!< Actual data for the integrals
 };
