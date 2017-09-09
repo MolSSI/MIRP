@@ -52,22 +52,29 @@ static void mirp_boys_d_single(double *F, int m, double t)
 
             test = fabs(term);
             if(test > oldterm)
-               break;
+            {
+                do_short = 1;
+                break;
+            }
 
             test = sum;
             sum += term;
             test -= sum;
         } while(test != 0.0);
 
-        sum *= et / t2;
 
-        /*
-         * Determine if this error is satisfactory
-         * If not, mark that we have to do the short-range version
-         */
-        test = F[m] - sum;
-        if( (test - F[m]) != 0.0 )
-            do_short = 1;
+        if(!do_short)
+        {
+            sum *= et / t2;
+
+            /*
+             * Determine if this error is satisfactory
+             * If not, mark that we have to do the short-range version
+             */
+            test = F[m] - sum;
+            if( (test - F[m]) != 0.0 )
+                do_short = 1;
+        }
     }
 
     if(do_short)

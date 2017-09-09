@@ -78,8 +78,12 @@ void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec)
             arb_div(term, term, t2, working_prec);
             arb_abs(test, term);
 
-            if(arb_gt(test, lastterm))
+            if(arf_cmpabs(arb_midref(test), arb_midref(lastterm)) > 0)
+            {
+                /* Has not converged. Force short-range */
+                do_short = 1;
                 break;
+            }
 
             arb_set(test, sum);
             arb_add(sum, sum, term, working_prec);
@@ -93,16 +97,19 @@ void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec)
 
         //printf("Done with long-range test in %d cycles\n", i);
 
-        arb_mul(sum, sum, et, working_prec);
-        arb_div(sum, sum, t2, working_prec);
+        if(!do_short)
+        {
+            arb_mul(sum, sum, et, working_prec);
+            arb_div(sum, sum, t2, working_prec);
 
-        /*
-         * Determine if this error is satisfactory
-         * If not, mark that we have to do the short-range version
-         */
-        arb_sub(test, F+m, sum, working_prec);
-        if(!arb_overlaps(F+m, test))
-            do_short = 1;
+            /*
+             * Determine if this error is satisfactory
+             * If not, mark that we have to do the short-range version
+             */
+            arb_sub(test, F+m, sum, working_prec);
+            if(!arb_contains(test, F+m))
+                do_short = 1;
+        }
     }
 
     if(do_short)
