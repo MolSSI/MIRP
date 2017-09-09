@@ -31,11 +31,6 @@ namespace {
  */
 long boys_run_test(const mirp::boys_data & data, long extra_m, slong working_prec)
 {
-    /* The number of binary digits of accuracy, taking into account
-       that the number printed is +/- 1 decimal ulp */
-    long integral_bits = data.ndigits / MIRP_LOG_10_2;
-    long round_bits = (data.ndigits-1) / MIRP_LOG_10_2;
-
     long nfailed = 0;
 
     const int max_m = boys_max_m(data) + extra_m;
@@ -49,9 +44,7 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, slong working_pre
     {
         mirp_boys_str(F_mp, ent.m + extra_m, ent.t.c_str(), working_prec);
 
-        /* Convert the reference to arb_t. Add error corresponding to +/- 1 ulp (decimal). */
-        arb_set_str(vref_mp, ent.value.c_str(), integral_bits + 16);
-        arf_mag_add_ulp(arb_radref(vref_mp), arb_radref(vref_mp), arb_midref(vref_mp), round_bits);
+        arb_set_str(vref_mp, ent.value.c_str(), working_prec);
 
         /* Do the intervals overlap? */
         if(!arb_overlaps(F_mp + ent.m, vref_mp))
@@ -88,10 +81,15 @@ long boys_run_test_d(const mirp::boys_data & data, long extra_m)
     const int max_m = boys_max_m(data) + extra_m;
     std::vector<double> F_dbl(max_m+1);
 
+    arb_t vref_mp;
+    arb_init(vref_mp);
+
     for(const auto & ent : data.values)
     {
         double t_dbl = std::strtod(ent.t.c_str(), nullptr);
-        double vref_dbl = std::strtod(ent.value.c_str(), nullptr);
+
+        arb_set_str(vref_mp, ent.value.c_str(), 72); /* 53 bits + more */
+        double vref_dbl = arf_get_d(arb_midref(vref_mp), ARF_RND_NEAR);
 
         mirp_boys_d(F_dbl.data(), ent.m+extra_m, t_dbl);
 
@@ -109,6 +107,8 @@ long boys_run_test_d(const mirp::boys_data & data, long extra_m)
             nfailed++;
         }
     }
+
+    arb_clear(vref_mp);
 
     return nfailed;
 }
@@ -290,6 +290,9 @@ void boys_create_test(const std::string & input_filepath,
     data.ndigits = ndigits;
     data.header += header;
 
+    /* What we need for the number of digits (plus some safety) */
+    const slong min_prec = (ndigits+5) / MIRP_LOG_10_2;
+
     const int max_m = boys_max_m(data);
 
     arb_t t_mp;
@@ -302,7 +305,11 @@ void boys_create_test(const std::string & input_filepath,
         arb_set_str(t_mp, ent.t.c_str(), working_prec);
         mirp_boys(F_mp, ent.m, t_mp, working_prec);
 
-        char * s = arb_get_str(F_mp + ent.m, ndigits, ARB_STR_NO_RADIUS);
+        slong bits = arb_rel_accuracy_bits(F_mp + ent.m);
+        if(bits > 0 && bits < min_prec)
+            throw std::runtime_error("Working precision not large enough for the number of digits");
+
+        char * s = arb_get_str(F_mp + ent.m, ndigits, 0);
         ent.value = s;
         free(s);
     }

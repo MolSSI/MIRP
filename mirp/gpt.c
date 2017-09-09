@@ -52,20 +52,20 @@ void mirp_gpt(const arb_t alpha1, const arb_t alpha2,
      */
     arb_add(gamma, alpha1, alpha2, working_prec);
 
-    arb_mul(tmp1, alpha1, A+0,   working_prec);
-    arb_mul(tmp2, alpha2, B+0,   working_prec);
-    arb_add(P+0, tmp1,   tmp2,   working_prec);
-    arb_div(P+0, P+0,   gamma,  working_prec);
+    arb_mul(tmp1, alpha1, A+0, working_prec);
+    arb_mul(tmp2, alpha2, B+0, working_prec);
+    arb_add(P+0, tmp1,   tmp2, working_prec);
+    arb_div(P+0, P+0,   gamma, working_prec);
 
-    arb_mul(tmp1, alpha1, A+1,   working_prec);
-    arb_mul(tmp2, alpha2, B+1,   working_prec);
-    arb_add(P+1, tmp1,   tmp2,   working_prec);
-    arb_div(P+1, P+1,   gamma,  working_prec);
+    arb_mul(tmp1, alpha1, A+1, working_prec);
+    arb_mul(tmp2, alpha2, B+1, working_prec);
+    arb_add(P+1, tmp1,   tmp2, working_prec);
+    arb_div(P+1, P+1,   gamma, working_prec);
 
-    arb_mul(tmp1, alpha1, A+2,   working_prec);
-    arb_mul(tmp2, alpha2, B+2,   working_prec);
-    arb_add(P+2, tmp1,   tmp2,   working_prec);
-    arb_div(P+2, P+2,   gamma,  working_prec);
+    arb_mul(tmp1, alpha1, A+2, working_prec);
+    arb_mul(tmp2, alpha2, B+2, working_prec);
+    arb_add(P+2, tmp1,   tmp2, working_prec);
+    arb_div(P+2, P+2,   gamma, working_prec);
 
     /*
      *

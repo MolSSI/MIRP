@@ -80,7 +80,7 @@ void integral4_create_test(const std::string & input_filepath,
             if(bits > 0 && bits < min_prec)
                 throw std::runtime_error("Working precision not large enough for the number of digits");
 
-            char * s = arb_get_str(integrals+i, ndigits, ARB_STR_NO_RADIUS);
+            char * s = arb_get_str(integrals+i, ndigits, 0);
             ent.integrals.push_back(s);
             free(s);
         }
@@ -99,10 +99,6 @@ long integral4_run_test(const std::string & filepath,
     long nfailed = 0;
 
     integral_data data = testfile_read_integral(filepath, 4, false);
-
-    /* The number of binary digits of accuracy, taking into account
-       that the number printed is +/- 1 decimal ulp */
-    const long round_bits = (data.ndigits - 1) / MIRP_LOG_10_2;
 
     arb_t integral_ref;
     arb_init(integral_ref);
@@ -142,17 +138,7 @@ long integral4_run_test(const std::string & filepath,
 
         for(size_t i = 0; i < nint; i++)
         {
-            /* Convert the reference to arb_t, adding error equal to +/- 1 ulp (decimal). */
-            if(ent.integrals[i] == "0")
-                arb_zero(integral_ref);
-            else
-            {
-                arb_set_str(integral_ref, ent.integrals[i].c_str(), round_bits + 16);
-                arf_mag_add_ulp(arb_radref(integral_ref),
-                                arb_radref(integral_ref),
-                                arb_midref(integral_ref),
-                                round_bits);
-            }
+            arb_set_str(integral_ref, ent.integrals[i].c_str(), working_prec);
 
             /* Do the intervals overlap? */
             if(!arb_overlaps(integral_ref, integrals+i))
@@ -192,6 +178,9 @@ long integral4_run_test_d(const std::string & filepath,
     std::vector<double> alpha[4], coeff[4];
     std::vector<double> integrals;
 
+    arb_t integral_ref_mp;
+    arb_init(integral_ref_mp);
+
     for(const auto & ent : data.entries)
     {
         const size_t nint = nintegrals(ent);
@@ -222,7 +211,8 @@ long integral4_run_test_d(const std::string & filepath,
         bool failed_shell = false;
         for(size_t i = 0; i < nint; i++)
         {
-            double integral_ref = std::strtod(ent.integrals[i].c_str(), nullptr);
+            arb_set_str(integral_ref_mp, ent.integrals[i].c_str(), 72); /* 53 bits + more */
+            double integral_ref = arf_get_d(arb_midref(integral_ref_mp), ARF_RND_NEAR);
 
             if(!almost_equal(integrals[i], integral_ref, 1e-13))
             {
@@ -251,6 +241,8 @@ long integral4_run_test_d(const std::string & filepath,
         if(failed_shell)
             nfailed++;
     }
+
+    arb_clear(integral_ref_mp);
 
     print_results(nfailed, data.entries.size());
 

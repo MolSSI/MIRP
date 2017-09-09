@@ -63,7 +63,7 @@ void integral4_single_create_test(const std::string & input_filepath,
         if(bits > 0 && bits < min_prec)
             throw std::runtime_error("Working precision not large enough for the number of digits");
 
-        char * s = arb_get_str(integral, ndigits, ARB_STR_NO_RADIUS);
+        char * s = arb_get_str(integral, ndigits, 0);
         ent.integral = s;
         free(s);
     }
@@ -84,10 +84,6 @@ long integral4_single_run_test(const std::string & filepath,
     arb_t integral, integral_ref;
     arb_init(integral);
     arb_init(integral_ref);
-
-    /* The number of binary digits of accuracy, taking into account
-       that the number printed is +/- 1 decimal ulp */
-    const long round_bits = (data.ndigits - 1) / MIRP_LOG_10_2;
 
     /* Needed to unpack XYZ */
     const char * A[3];
@@ -112,17 +108,7 @@ long integral4_single_run_test(const std::string & filepath,
            ent.g[3].lmn.data(), D, ent.g[3].alpha.c_str(),
            working_prec + 16);
 
-        /* Convert the reference to arb_t, adding error equal to +/- 1 ulp (decimal). */
-        if(ent.integral == "0")
-            arb_zero(integral_ref);
-        else
-        {
-            arb_set_str(integral_ref, ent.integral.c_str(), working_prec + 16);
-            arf_mag_add_ulp(arb_radref(integral_ref),
-                            arb_radref(integral_ref),
-                            arb_midref(integral_ref),
-                            round_bits);
-        }
+        arb_set_str(integral_ref, ent.integral.c_str(), working_prec);
 
         /* Rounding the reference value to the working precision results in
          * an interval. Does that interval contain our (more precise) result? */
@@ -161,6 +147,9 @@ long integral4_single_run_test_d(const std::string & filepath,
     double C[3];
     double D[3];
 
+    arb_t integral_ref_mp;
+    arb_init(integral_ref_mp);
+
     for(const auto & ent : data.entries)
     {
         for(int i = 0; i < 3; i++)
@@ -183,7 +172,8 @@ long integral4_single_run_test_d(const std::string & filepath,
            ent.g[2].lmn.data(), C, alpha3_d,
            ent.g[3].lmn.data(), D, alpha4_d);
 
-        double integral_ref = std::strtod(ent.integral.c_str(), nullptr);
+        arb_set_str(integral_ref_mp, ent.integral.c_str(), 72); /* 53 bits + more */
+        double integral_ref = arf_get_d(arb_midref(integral_ref_mp), ARF_RND_NEAR);
 
         if(!almost_equal(integral, integral_ref, 1e-13))
         {
@@ -210,6 +200,8 @@ long integral4_single_run_test_d(const std::string & filepath,
             nfailed++;
         }
     }
+
+    arb_clear(integral_ref_mp);
 
     print_results(nfailed, data.entries.size());
 

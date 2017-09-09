@@ -327,11 +327,6 @@ void mirp_eri_single(arb_t integral,
     arb_mul(integral, integral, tmp1, working_prec);
 
 
-    /* Check if this has no accuracy. This means the integral is zero */
-    if(arb_rel_accuracy_bits(integral) < 0)
-        arb_zero(integral);
-
-
     /* cleanup */
     _arb_vec_clear(F,   L+1);
     _arb_vec_clear(flp, lmn1[0]+lmn2[0]+1);

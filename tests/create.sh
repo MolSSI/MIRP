@@ -20,7 +20,8 @@ generator/generate_boys_random.py \
 ../build/mirp_bin/mirp_create_test \
            --infile boys_large_random.inp \
            --outfile boys_large_random.dat \
-           --integral boys --ndigits 101
+           --integral boys \
+           --prec 2048 --ndigits 101
 
 generator/generate_boys_range.py \
            --filename boys_large_range.inp \
@@ -29,7 +30,8 @@ generator/generate_boys_range.py \
 ../build/mirp_bin/mirp_create_test \
            --infile boys_large_range.inp \
            --outfile boys_large_range.dat \
-           --integral boys --ndigits 101
+           --integral boys \
+           --prec 2048 --ndigits 101
 
 
 #############################
@@ -67,22 +69,26 @@ generator/generate_integral_frombasis.py \
 ../build/mirp_bin/mirp_create_test \
            --infile 4center_single_random_1.inp \
            --outfile eri_single_random_1.dat \
-           --integral eri_single --ndigits 101
+           --integral eri_single \
+           --prec 2048 --ndigits 101
 
 ../build/mirp_bin/mirp_create_test \
            --infile 4center_single_water_sto-3g.inp \
            --outfile eri_single_water_sto-3g.dat \
-           --integral eri_single --ndigits 101
+           --integral eri_single \
+           --prec 2048 --ndigits 101
 
 ../build/mirp_bin/mirp_create_test \
            --infile 4center_random_1.inp \
            --outfile eri_random_1.dat \
-           --integral eri --ndigits 101
+           --integral eri \
+           --prec 2048 --ndigits 101
 
 ../build/mirp_bin/mirp_create_test \
            --infile 4center_water_sto-3g.inp \
            --outfile eri_water_sto-3g.dat \
-           --integral eri --ndigits 101
+           --integral eri \
+           --prec 2048 --ndigits 101
 
 ../build/mirp_bin/mirp_create_reference \
            --integral eri \
