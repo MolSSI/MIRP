@@ -67,7 +67,7 @@ void mirp_loop_shell4(arb_ptr integral,
 
 /*! \brief Compute a single 4-center integral using interval arithmetic (string input)
  *
- * This function converts string inputs into arblib types and runs the callback \cp
+ * This function converts string inputs into arblib types and runs the callback \c cb
  * 
  * \param [out] integral
  *              Output for the computed integral
@@ -94,7 +94,7 @@ void mirp_integral4_single_str(arb_t integral,
 
 /*! \brief Compute a single 4-center integral to a target precision (string input)
  *
- * This function converts string inputs into arblib types and runs the callback \cp
+ * This function converts string inputs into arblib types and runs the callback \c cb
  *
  * \param [out] integrals
  *              Output for the computed integrals

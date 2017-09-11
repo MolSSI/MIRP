@@ -37,7 +37,7 @@ the command used to generate the data.
 \note Numbers in the input files are treated as if they are exact to an infinite number of decimal places.
 
 
-\section _tests_formats Boys Function Test Files
+\section _tests_formats_boys Boys Function Test Files
 
 Test files for the boys function are fairly simple. The input for
 generating tests contain the `m` value and the `t` value, space separated,

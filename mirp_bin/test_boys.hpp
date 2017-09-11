@@ -90,6 +90,7 @@ long boys_run_test_main(const std::string & filepath, const std::string & floatt
  *
  * \param [in] input_filepath  Path to the input file
  * \param [in] output_filepath File to write the computed data to
+ * \param [in] working_prec    Internal working precision to use
  * \param [in] ndigits         Number of decimal digits to compute
  * \param [in] header          Any descriptive header data
  *                             (will be appended to the existing header in the input file)
