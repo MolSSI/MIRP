@@ -31,6 +31,13 @@ The most common options are:
                              above). This path is expected to have subdirectories
                              such as `bin`, `share`, etc.
 
+Other MIRP-specific options:
+
+- **MIRP_OPENMP** - Enable/disables OpenMP. If enabled, some operations in
+                    computing all the components of an integral and in the
+                    general contraction parts will be threaded. By default,
+                    threading is not enabled.
+
 
 An example of configuring, building, and installing:
 
@@ -42,6 +49,7 @@ cmake -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ \
       -DCMAKE_PREFIX_PATH=/path/to/mirp_deps \
       -DCMAKE_INSTALL_PREFIX=/home/user/mirp_install \
+      -DMIRP_OPENMP=True \
       ../
 ctest
 make install
@@ -55,7 +63,8 @@ are designed to thoroughly cover all the functionality of the library.
 
 Currently, the tests take less than 5 minutes on reasonably modern hardware.
 
-If you have a failing test, please file a bug report using github issues or by
+If you have a failing test, please file a bug report using
+<a href="https://github.com/MolSSI/MIRP/issues">github issues</a> or by
 emailing the main author directly.
 
 
