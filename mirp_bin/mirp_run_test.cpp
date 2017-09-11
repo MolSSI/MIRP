@@ -51,7 +51,7 @@ int main(int argc, char ** argv)
     std::string integral;
     std::string floattype;
     long working_prec = 0;
-    long extra_m = 0;
+    int extra_m = 0;
 
     try {
         auto cmdline = convert_cmdline(argc, argv);
@@ -71,7 +71,7 @@ int main(int argc, char ** argv)
             throw std::runtime_error("--prec is not valid for this floating-point type");
 
         if(integral == "boys")
-            extra_m = cmdline_get_arg_long(cmdline, "--extra-m", 0);
+            extra_m = static_cast<int>(cmdline_get_arg_long(cmdline, "--extra-m", 0));
         else if(cmdline_has_arg(cmdline, "--extra-m"))
             throw std::runtime_error("--extra-m is not valid for this integral type");
 
@@ -158,6 +158,4 @@ int main(int argc, char ** argv)
         std::cout << "Error while running tests: " << ex.what() << "\n";
         return 1;
     }
-
-    return 0;
 }

@@ -89,14 +89,14 @@ void mirp_binomial(arb_t output, long int n, long int k, slong working_prec)
     arb_init(f);
 
     /* put k! in the output */
-    arb_fac_ui(output, k, working_prec);
+    arb_fac_ui(output, (unsigned long)k, working_prec);
 
     /* next, (n-k)! in temporary, and multiply into output */
-    arb_fac_ui(f, n-k, working_prec);
+    arb_fac_ui(f, (unsigned long)(n-k), working_prec);
     arb_mul(output, output, f, working_prec);
 
     /* now n! in temporary, and divide */
-    arb_fac_ui(f, n, working_prec);
+    arb_fac_ui(f, (unsigned long)n, working_prec);
     arb_div(output, f, output, working_prec);
 
     arb_clear(f);

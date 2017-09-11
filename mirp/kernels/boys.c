@@ -3,8 +3,9 @@
  * \brief Calculation of the boys function using interval arithmetic
  */
 
-#include "mirp/kernels/boys.h"
+#include "mirp/pragma.h"
 #include "mirp/math.h"
+#include "mirp/kernels/boys.h"
 #include <assert.h>
 
 void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec)
@@ -141,7 +142,7 @@ void mirp_boys(arb_ptr F, int m, const arb_t t, slong working_prec)
         /* F+m = (t2 * F[m + 1] + et) / (2 * m + 1) */
         arb_mul(F+i, t2, F + (i + 1), working_prec);
         arb_add(F+i, F+i, et, working_prec);
-        arb_div_ui(F+i, F+i, 2 * i + 1, working_prec);
+        arb_div_si(F+i, F+i, 2 * i + 1, working_prec);
     }
 
     arb_clear(t2);
@@ -214,9 +215,15 @@ void mirp_boys_exact(double *F, int m, double t)
             {
                 arb_get_ubound_arf(ubound, F_mp + i, working_prec);
                 arb_get_lbound_arf(lbound, F_mp + i, working_prec);
+
+                PRAGMA_WARNING_PUSH
+                PRAGMA_WARNING_IGNORE_FP_UNDERFLOW
+
                 if(arf_cmpabs_d(lbound, MIRP_DBL_TRUE_MIN) > 0 || 
                    arf_cmpabs_d(ubound, MIRP_DBL_TRUE_MIN) > 0)
                         suff_acc = 0; 
+
+                PRAGMA_WARNING_POP
             }
         }
     }

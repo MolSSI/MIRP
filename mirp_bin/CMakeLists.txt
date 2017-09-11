@@ -12,6 +12,8 @@ add_library(test_common OBJECT cmdline.cpp
 # Add the include directories to the object library
 target_include_directories(test_common PRIVATE
                            $<TARGET_PROPERTY:mirp,INTERFACE_INCLUDE_DIRECTORIES>)
+target_include_directories(test_common SYSTEM PRIVATE
+                           $<TARGET_PROPERTY:mirp,INTERFACE_SYSTEM_INCLUDE_DIRECTORIES>)
 
 # The executables themselves
 add_executable(mirp_run_test         mirp_run_test.cpp         $<TARGET_OBJECTS:test_common>) 
@@ -27,5 +29,5 @@ target_link_libraries(mirp_create_reference PRIVATE mirp)
 target_link_libraries(mirp_test_reference   PRIVATE mirp)
 
 # Occasionally used to play with arb features or something
-#add_executable(mirp_play mirp_play.cpp $<TARGET_OBJECTS:test_common>) 
+#add_executable(mirp_play mirp_play.cpp $<TARGET_OBJECTS:test_common>)
 #target_link_libraries(mirp_play PRIVATE mirp)

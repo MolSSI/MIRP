@@ -8,6 +8,7 @@
 
 #include <mirp/kernels/boys.h>
 #include <mirp/math.h>
+#include <mirp/pragma.h>
 
 #include <cmath>
 #include <iostream>
@@ -29,7 +30,7 @@ namespace {
  *
  * \todo This function is not exception safe
  */
-long boys_run_test(const mirp::boys_data & data, long extra_m, slong working_prec)
+long boys_run_test(const mirp::boys_data & data, int extra_m, slong working_prec)
 {
     long nfailed = 0;
 
@@ -74,7 +75,7 @@ long boys_run_test(const mirp::boys_data & data, long extra_m, slong working_pre
  *
  * The number of failing tests is returned
  */
-long boys_run_test_d(const mirp::boys_data & data, long extra_m)
+long boys_run_test_d(const mirp::boys_data & data, int extra_m)
 {
     long nfailed = 0;
 
@@ -122,7 +123,7 @@ long boys_run_test_d(const mirp::boys_data & data, long extra_m)
  *
  * This, therefore, just ensures that the wrappers are written correctly.
  */
-long boys_run_test_exact(const mirp::boys_data & data, long extra_m)
+long boys_run_test_exact(const mirp::boys_data & data, int extra_m)
 {
     long nfailed = 0;
 
@@ -154,6 +155,9 @@ long boys_run_test_exact(const mirp::boys_data & data, long extra_m)
         double vref_dbl = std::strtod(ent.value.c_str(), nullptr);
         double vref2_dbl = arf_get_d(arb_midref(F_mp + ent.m), ARF_RND_NEAR);
 
+        PRAGMA_WARNING_PUSH
+        PRAGMA_WARNING_IGNORE_FP_EQUALITY
+
         if(F_dbl[ent.m] != vref_dbl && F_dbl[ent.m] != vref2_dbl)
         {
             std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
@@ -164,6 +168,8 @@ long boys_run_test_exact(const mirp::boys_data & data, long extra_m)
             std::cout.precision(old_cout_prec);
             nfailed++;
         }
+
+        PRAGMA_WARNING_POP
     }
 
     arb_clear(t_mp);
@@ -179,7 +185,7 @@ int boys_max_m(const boys_data & data)
 {
     int max_m = 0;
     for(auto & ent : data.values)
-        max_m = std::fmax(max_m, ent.m);
+        max_m = std::max(max_m, ent.m);
     return max_m;
 }
 
@@ -250,7 +256,7 @@ void boys_write_file(const std::string & filepath, const boys_data & data)
 
 long boys_run_test_main(const std::string & filepath,
                         const std::string & floattype,
-                        long extra_m,
+                        int extra_m,
                         slong working_prec)
 {
     boys_data data = boys_read_file(filepath, false);
@@ -291,7 +297,7 @@ void boys_create_test(const std::string & input_filepath,
     data.header += header;
 
     /* What we need for the number of digits (plus some safety) */
-    const slong min_prec = (ndigits+5) / MIRP_LOG_10_2;
+    const slong min_prec = static_cast<slong>( static_cast<double>(ndigits+5) / MIRP_LOG_10_2 );
 
     const int max_m = boys_max_m(data);
 

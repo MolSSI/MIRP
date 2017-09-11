@@ -3,11 +3,13 @@
  * \brief Some useful wrapping of functionality
  */
 
+#include "mirp/pragma.h"
 #include "mirp/math.h"
 #include "mirp/shell.h"
 #include "mirp/kernels/boys.h"
 #include "mirp/kernels/integral4_wrappers.h"
 #include <string.h> /* for memset */
+#include <assert.h>
 
 
 
@@ -24,6 +26,11 @@ static void mirp_cartloop4(arb_ptr integral,
                            int am4, arb_srcptr D, const arb_t alpha4,
                            slong working_prec, cb_integral4_single cb)
 {
+    assert(am1 >= 0);
+    assert(am2 >= 0);
+    assert(am3 >= 0);
+    assert(am4 >= 0);
+
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
     const long ncart3 = MIRP_NCART(am3);
@@ -88,6 +95,11 @@ static void mirp_cartloop4_d(double * integral,
                              int am4, const double * D, double alpha4,
                              cb_integral4_single_d cb)
 {
+    assert(am1 >= 0);
+    assert(am2 >= 0);
+    assert(am3 >= 0);
+    assert(am4 >= 0);
+
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
     const long ncart3 = MIRP_NCART(am3);
@@ -133,6 +145,11 @@ void mirp_loop_shell4(arb_ptr integral,
                       int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4,
                       slong working_prec, cb_integral4_single cb)
 {
+    assert(am1 >= 0); assert(nprim1 > 0); assert(ngen1 > 0);
+    assert(am2 >= 0); assert(nprim2 > 0); assert(ngen2 > 0);
+    assert(am3 >= 0); assert(nprim3 > 0); assert(ngen3 > 0);
+    assert(am4 >= 0); assert(nprim4 > 0); assert(ngen4 > 0);
+
     const long ncart1234 = MIRP_NCART4(am1, am2, am3, am4);
     const long ngen1234 = ngen1*ngen2*ngen3*ngen4;
     const long full_size = ncart1234*ngen1234;
@@ -206,6 +223,11 @@ void mirp_integral4_single_str(arb_t integral,
                                const int * lmn4, const char ** D, const char * alpha4,
                                slong working_prec, cb_integral4_single cb)
 {
+    assert(lmn1[0] > 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
+    assert(lmn2[0] > 0); assert(lmn2[1] >= 0); assert(lmn2[2] >= 0);
+    assert(lmn3[0] > 0); assert(lmn3[1] >= 0); assert(lmn3[2] >= 0);
+    assert(lmn4[0] > 0); assert(lmn4[1] >= 0); assert(lmn4[2] >= 0);
+
     /* Similar to mirp_integral4_single_target, but should
      * always succeed */
     arb_ptr A_mp = _arb_vec_init(3);
@@ -257,6 +279,11 @@ void mirp_integral4_str(arb_ptr integrals,
                         int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4,
                         slong working_prec, cb_integral4 cb)
 {
+    assert(am1 >= 0); assert(nprim1 > 0); assert(ngen1 > 0);
+    assert(am2 >= 0); assert(nprim2 > 0); assert(ngen2 > 0);
+    assert(am3 >= 0); assert(nprim3 > 0); assert(ngen3 > 0);
+    assert(am4 >= 0); assert(nprim4 > 0); assert(ngen4 > 0);
+
     arb_ptr A_mp = _arb_vec_init(3);
     arb_ptr B_mp = _arb_vec_init(3);
     arb_ptr C_mp = _arb_vec_init(3);
@@ -327,9 +354,6 @@ void mirp_integral4_str(arb_ptr integrals,
 
 
 
-
-
-
 void mirp_integral4_single_exact(double * integral,
                                  const int * lmn1, const double * A, double alpha1,
                                  const int * lmn2, const double * B, double alpha2,
@@ -337,6 +361,11 @@ void mirp_integral4_single_exact(double * integral,
                                  const int * lmn4, const double * D, double alpha4,
                                  cb_integral4_single cb)
 {
+    assert(lmn1[0] > 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
+    assert(lmn2[0] > 0); assert(lmn2[1] >= 0); assert(lmn2[2] >= 0);
+    assert(lmn3[0] > 0); assert(lmn3[1] >= 0); assert(lmn3[2] >= 0);
+    assert(lmn4[0] > 0); assert(lmn4[1] >= 0); assert(lmn4[2] >= 0);
+
     /* convert arguments to arb_t */
     arb_ptr A_mp = _arb_vec_init(3);
     arb_ptr B_mp = _arb_vec_init(3);
@@ -402,9 +431,16 @@ void mirp_integral4_single_exact(double * integral,
         {
             arb_get_ubound_arf(ubound, integral_mp, working_prec);
             arb_get_lbound_arf(lbound, integral_mp, working_prec);
+
+
+            PRAGMA_WARNING_PUSH
+            PRAGMA_WARNING_IGNORE_FP_UNDERFLOW
+
             if(arf_cmpabs_d(lbound, MIRP_DBL_TRUE_MIN) > 0 || 
                 arf_cmpabs_d(ubound, MIRP_DBL_TRUE_MIN) > 0)
                 suff_acc = 0; 
+
+            PRAGMA_WARNING_POP
         }
     }
 
@@ -433,6 +469,11 @@ void mirp_integral4_exact(double * integral,
                           int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
                           cb_integral4 cb)
 {
+    assert(am1 >= 0); assert(nprim1 > 0); assert(ngen1 > 0);
+    assert(am2 >= 0); assert(nprim2 > 0); assert(ngen2 > 0);
+    assert(am3 >= 0); assert(nprim3 > 0); assert(ngen3 > 0);
+    assert(am4 >= 0); assert(nprim4 > 0); assert(ngen4 > 0);
+
     /* convert arguments to arb_t */
     arb_ptr A_mp = _arb_vec_init(3);
     arb_ptr B_mp = _arb_vec_init(3);
@@ -476,9 +517,9 @@ void mirp_integral4_exact(double * integral,
 
 
     /* Final integral output */
-    const size_t ngen = ngen1 * ngen2 * ngen3 * ngen4;
-    const size_t ncart = MIRP_NCART4(am1, am2, am3, am4);
-    const size_t nintegrals = ngen*ncart;
+    const long ngen = ngen1 * ngen2 * ngen3 * ngen4;
+    const long ncart = MIRP_NCART4(am1, am2, am3, am4);
+    const long nintegrals = ngen*ncart;
     arb_ptr integral_mp = _arb_vec_init(nintegrals);
 
     /* The target precision is the number of bits in double precision (53) + safety */
@@ -505,7 +546,7 @@ void mirp_integral4_exact(double * integral,
            working_prec);
 
         suff_acc = 1;
-        for(size_t i = 0; i < nintegrals; i++)
+        for(long i = 0; i < nintegrals; i++)
         {
             /* Do we have sufficient accuracy? We need at least
              * 53 bits + 11 bits safety OR the value is zero (has zero precision)
@@ -518,16 +559,22 @@ void mirp_integral4_exact(double * integral,
             {
                 arb_get_ubound_arf(ubound, integral_mp + i, working_prec);
                 arb_get_lbound_arf(lbound, integral_mp + i, working_prec);
+
+                PRAGMA_WARNING_PUSH
+                PRAGMA_WARNING_IGNORE_FP_UNDERFLOW
+
                 if(arf_cmpabs_d(lbound, MIRP_DBL_TRUE_MIN) > 0 || 
                    arf_cmpabs_d(ubound, MIRP_DBL_TRUE_MIN) > 0)
                     suff_acc = 0; 
+
+                PRAGMA_WARNING_POP
             }
         }
     }
 
 
     /* We get the value from the midpoint of the arb struct */
-    for(size_t i = 0; i < nintegrals; i++)
+    for(long i = 0; i < nintegrals; i++)
     {
         if(arb_rel_accuracy_bits(integral_mp + i) <= 0)
             integral[i] = 0.0;
@@ -561,19 +608,24 @@ void mirp_loop_shell4_d(double * integral,
                         int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
                         cb_integral4_single_d cb)
 {
+    assert(am1 >= 0); assert(nprim1 > 0); assert(ngen1 > 0);
+    assert(am2 >= 0); assert(nprim2 > 0); assert(ngen2 > 0);
+    assert(am3 >= 0); assert(nprim3 > 0); assert(ngen3 > 0);
+    assert(am4 >= 0); assert(nprim4 > 0); assert(ngen4 > 0);
+
     const long ncart1 = MIRP_NCART(am1);
     const long ncart2 = MIRP_NCART(am2);
     const long ncart3 = MIRP_NCART(am3);
     const long ncart4 = MIRP_NCART(am4);
     const long ncart1234 = ncart1*ncart2*ncart3*ncart4;
     const long ngen1234 = ngen1*ngen2*ngen3*ngen4;
-    const long full_size = ncart1234*ngen1234;
+    const size_t full_size = (size_t)(ncart1234*ngen1234);
 
     double * integral_buffer = malloc(full_size * sizeof(double));
-    double * coeff1_norm = malloc(nprim1 * ngen1 * sizeof(double));
-    double * coeff2_norm = malloc(nprim2 * ngen2 * sizeof(double));
-    double * coeff3_norm = malloc(nprim3 * ngen3 * sizeof(double));
-    double * coeff4_norm = malloc(nprim4 * ngen4 * sizeof(double));
+    double * coeff1_norm = malloc((size_t)(nprim1*ngen1) * sizeof(double));
+    double * coeff2_norm = malloc((size_t)(nprim2*ngen2) * sizeof(double));
+    double * coeff3_norm = malloc((size_t)(nprim3*ngen3) * sizeof(double));
+    double * coeff4_norm = malloc((size_t)(nprim4*ngen4) * sizeof(double));
 
     mirp_normalize_shell_d(am1, nprim1, ngen1, alpha1, coeff1, coeff1_norm);
     mirp_normalize_shell_d(am2, nprim2, ngen2, alpha2, coeff2, coeff2_norm);

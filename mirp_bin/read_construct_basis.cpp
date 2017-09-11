@@ -141,7 +141,7 @@ read_basfile(const std::string & basfile)
             line = trim(line);
         } 
 
-        sh.nprim = sh.alpha.size();
+        sh.nprim = static_cast<int>(sh.alpha.size());
 
         // reorder the coefficients
         sh.coeff.resize(coeff_tmp.size());

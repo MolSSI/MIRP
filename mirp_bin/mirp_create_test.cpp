@@ -108,8 +108,6 @@ int main(int argc, char ** argv)
             std::cout << "Integral \"" << integral << "\" is not valid\n";
             return 3;
         }
-
-        return 0;
     }
     catch(std::exception & ex)
     {

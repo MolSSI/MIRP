@@ -147,11 +147,11 @@ integral_data testfile_read_integral(const std::string & filepath,
             g.alpha.resize(g.nprim);
             g.coeff.resize(g.nprim*g.ngeneral);
 
-            for(int i = 0; i < g.nprim; i++)
+            for(int j = 0; j < g.nprim; j++)
             {
-                infile >> g.alpha[i];
-                for(int j = 0; j < g.ngeneral; j++)
-                    infile >> g.coeff[j*g.nprim+i];
+                infile >> g.alpha[j];
+                for(int k = 0; k < g.ngeneral; k++)
+                    infile >> g.coeff[k*g.nprim+j];
             }
 
             ent.g.push_back(std::move(g));

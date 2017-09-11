@@ -3,10 +3,13 @@
  * \brief Calculation of the boys function using double precision
  */
 
-#include "mirp/kernels/boys.h"
+#include "mirp/pragma.h"
 #include "mirp/math.h"
+#include "mirp/kernels/boys.h"
 #include <math.h>
 #include <assert.h>
+
+PRAGMA_WARNING_IGNORE_FP_EQUALITY
 
 static void mirp_boys_d_single(double *F, int m, double t)
 {

@@ -75,7 +75,7 @@ void boys_write_file(const std::string & filepath, const boys_data & data);
  * \return The number of tests that have failed
  */
 long boys_run_test_main(const std::string & filepath, const std::string & floattype,
-                        long extra_m, slong working_prec);
+                        int extra_m, slong working_prec);
 
 
 /*! \brief Create a test file for the Boys function from a given input file

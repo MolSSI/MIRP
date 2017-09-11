@@ -7,6 +7,7 @@
 #include "mirp_bin/reffile_io.hpp"
 #include "mirp_bin/test_common.hpp"
 
+#include <mirp/pragma.h>
 #include <mirp/shell.h>
 
 #include <fstream>
@@ -124,6 +125,9 @@ long integral4_test_reference(const std::string & ref_filepath,
 
         for(size_t i = 0; i < nintegrals; i++)
         {
+            PRAGMA_WARNING_PUSH
+            PRAGMA_WARNING_IGNORE_FP_EQUALITY
+
             if(integrals[i] != integrals_file[i])
             {
                 printf("Failed entry: ( %2d %2d | %2d %2d ) %4lu %4lu %4lu %4lu %7lu  -> %26.18e %26.18e\n",
@@ -132,6 +136,8 @@ long integral4_test_reference(const std::string & ref_filepath,
                      integrals[i], integrals_file[i]);
                 nfailed++;
             }
+
+            PRAGMA_WARNING_POP
         }
         ncomputed += nintegrals;
     }

@@ -5,6 +5,8 @@
 
 #include "test_common.hpp"
 
+#include <mirp/pragma.h>
+
 #include <cmath>
 #include <algorithm>
 #include <locale> // for std::tolower
@@ -66,8 +68,13 @@ bool almost_equal(double a, double b, double tol)
 
     double diff = fabs(a-b);
 
-    if(diff == 0)
+    PRAGMA_WARNING_PUSH
+    PRAGMA_WARNING_IGNORE_FP_EQUALITY
+
+    if(diff == 0.0)
         return true;
+
+    PRAGMA_WARNING_POP
 
     double denominator = fmax(fabs(a), fabs(b));
     return (diff / denominator) < tol;
@@ -84,7 +91,7 @@ void print_results(unsigned long nfailed, unsigned long ntests)
 
 int amchar_to_int(char am)
 {
-    am = std::tolower(am);
+    am = static_cast<char>(std::tolower(am));
 
     if(amchar_map.find(am) == amchar_map.end())
     {

@@ -90,6 +90,4 @@ int main(int argc, char ** argv)
         std::cout << "Error while running tests: " << ex.what() << "\n";
         return 1;
     }
-
-    return 0;
 }

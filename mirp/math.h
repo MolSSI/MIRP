@@ -52,12 +52,6 @@ extern "C" {
 #define MIRP_LOG_10_2 0.3010299956639812
 
 
-/*! \brief Number of binary bits to increment when attempting to
- *         reach a given target precision
- */
-#define MIRP_BITS_INCREMENT 32
-
-
 /*! \brief Finds the least number of accuracy bits in a vector
  *
  * \param [in] v The vector to search the minimum accuracy of

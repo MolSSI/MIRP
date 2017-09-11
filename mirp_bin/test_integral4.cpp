@@ -7,6 +7,7 @@
 #include "mirp_bin/test_integral4.hpp"
 #include "mirp_bin/test_common.hpp"
 
+#include <mirp/pragma.h>
 #include <mirp/math.h>
 #include <mirp/shell.h>
 
@@ -39,7 +40,7 @@ void integral4_create_test(const std::string & input_filepath,
     data.header += header;
 
     /* What we need for the number of digits (plus some safety) */
-    const slong min_prec = (ndigits+5) / MIRP_LOG_10_2;
+    const slong min_prec = static_cast<slong>( static_cast<double>(ndigits+5) / MIRP_LOG_10_2 );
 
     /* Needed to unpack everything into char pointers */
     const char * ABCD[4][3];
@@ -220,13 +221,13 @@ long integral4_run_test_d(const std::string & filepath,
                 reldiff /= std::fmax(std::fabs(integral_ref), std::fabs(integrals[i]));
 
                 std::cout << "Entry failed test:\n";
-                for(int i = 0; i < 4; i++)
+                for(int j = 0; j < 4; j++)
                 {
-                    std::cout << ent.g[i].Z << " "
-                              << ent.g[i].am << " "
-                              << ent.g[i].xyz[0] << " "
-                              << ent.g[i].xyz[1] << " "
-                              << ent.g[i].xyz[2] << "\n";
+                    std::cout << ent.g[j].Z << " "
+                              << ent.g[j].am << " "
+                              << ent.g[j].xyz[0] << " "
+                              << ent.g[j].xyz[1] << " "
+                              << ent.g[j].xyz[2] << "\n";
                 }
 
                 auto old_cout_prec = std::cout.precision(17);
@@ -340,16 +341,19 @@ long integral4_run_test_exact(const std::string & filepath,
             double vref_dbl = std::strtod(ent.integrals[i].c_str(), nullptr);
             double vref2_dbl = arf_get_d(arb_midref(integrals_mp+i), ARF_RND_NEAR);
 
+            PRAGMA_WARNING_PUSH
+            PRAGMA_WARNING_IGNORE_FP_EQUALITY
+
             if(integrals[i] != vref_dbl && integrals[i] != vref2_dbl)
             {
                 std::cout << "Entry failed test:\n";
-                for(int i = 0; i < 4; i++)
+                for(int j = 0; j < 4; j++)
                 {
-                    std::cout << ent.g[i].Z << " "
-                              << ent.g[i].am << " "
-                              << ent.g[i].xyz[0] << " "
-                              << ent.g[i].xyz[1] << " "
-                              << ent.g[i].xyz[2] << "\n";
+                    std::cout << ent.g[j].Z << " "
+                              << ent.g[j].am << " "
+                              << ent.g[j].xyz[0] << " "
+                              << ent.g[j].xyz[1] << " "
+                              << ent.g[j].xyz[2] << "\n";
                 }
 
                 auto old_cout_prec = std::cout.precision(17);
@@ -359,6 +363,8 @@ long integral4_run_test_exact(const std::string & filepath,
                 std::cout.precision(old_cout_prec);
                 failed_shell = true;
             }
+
+            PRAGMA_WARNING_POP
         }
 
         _arb_vec_clear(integrals_mp, nint);

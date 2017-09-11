@@ -7,6 +7,7 @@
 #include "mirp_bin/test_integral4.hpp"
 #include "mirp_bin/test_common.hpp"
 
+#include <mirp/pragma.h>
 #include <mirp/math.h>
 
 #include <cmath>
@@ -28,7 +29,7 @@ void integral4_single_create_test(const std::string & input_filepath,
     data.header += header;
 
     /* What we need for the number of digits (plus some safety) */
-    const slong min_prec = (ndigits+5) / MIRP_LOG_10_2;
+    const slong min_prec = static_cast<slong>( static_cast<double>(ndigits+5) / MIRP_LOG_10_2 );
 
     arb_t integral;
     arb_init(integral);
@@ -281,6 +282,9 @@ long integral4_single_run_test_exact(const std::string & filepath,
         double vref_dbl = std::strtod(ent.integral.c_str(), nullptr);
         double vref2_dbl = arf_get_d(arb_midref(integral_mp), ARF_RND_NEAR);
 
+        PRAGMA_WARNING_PUSH
+        PRAGMA_WARNING_IGNORE_FP_EQUALITY
+
         if(integral != vref_dbl && integral != vref2_dbl)
         {
             std::cout << "Entry failed test:\n";
@@ -302,6 +306,8 @@ long integral4_single_run_test_exact(const std::string & filepath,
             std::cout.precision(old_cout_prec);
             nfailed++;
         }
+
+        PRAGMA_WARNING_POP
     }
 
     arb_clear(integral_mp);
