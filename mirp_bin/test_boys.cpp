@@ -279,9 +279,7 @@ long boys_run_test_main(const std::string & filepath,
     }
 
 
-    double percent_passed = 100.0 - (100.0 * (double)nfailed / (double)data.values.size());
-    std::cout << nfailed << " / " << data.values.size() << " failed ("
-              << percent_passed << "% passed)\n";
+    print_results(nfailed, data.values.size());
 
     return nfailed;
 }

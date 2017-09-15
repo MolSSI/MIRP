@@ -11,11 +11,6 @@
 #include <assert.h>
 
 
-// The calls to various arb functions often take unsigned
-// types, where we work with signed types
-PRAGMA_WARNING_IGNORE_SIGN_CONVERSION
-
-
 static void mirp_farr(arb_ptr f,
                       int lmn1, int lmn2,
                       arb_t xyz1, arb_t xyz2,

@@ -39,6 +39,7 @@ endif()
 
 
 if("${CMAKE_C_COMPILER_ID}" MATCHES "Intel")
+
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w3")
 
     # Globally-disabled warnings
@@ -46,10 +47,20 @@ if("${CMAKE_C_COMPILER_ID}" MATCHES "Intel")
     # 11074: Inlining inhibited by limit max-size
     # 11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -wd981 -wd11074 -wd11076")
-elseif("${CMAKE_C_COMPILER_ID}" MATCHES "GNU")
+
+elseif("${CMAKE_C_COMPILER_ID}" MATCHES "GNU") 
+
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wfloat-equal -Wshadow")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wswitch-default -Wconversion")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-sign-conversion")
+
+elseif("${CMAKE_C_COMPILER_ID}" MATCHES "Clang")
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Weverything")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion")
+
+
 endif()
 
 
@@ -80,9 +91,20 @@ if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
     #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd1418 -wd1419 -wd383 -wd981 -wd869")
     #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd11074 -wd11076 -wd444")
 elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
+
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wfloat-equal -Wshadow")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wswitch-default -Wconversion")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion")
+
+elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Weverything")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-c++98-compat -Wno-padded")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-documentation -Wno-documentation-unknown-command")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-exit-time-destructors -Wno-global-constructors")
+
 endif()
 
 

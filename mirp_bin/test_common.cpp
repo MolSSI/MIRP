@@ -83,7 +83,9 @@ bool almost_equal(double a, double b, double tol)
 
 void print_results(unsigned long nfailed, unsigned long ntests)
 {
-    double percent_passed = 100.0 - (100.0 * (double)nfailed / (double)ntests);
+    double nfailed_d = static_cast<double>(nfailed);
+    double ntests_d = static_cast<double>(ntests);
+    double percent_passed = 100.0 - (100.0 * nfailed_d / ntests_d);
     std::cout << nfailed << " / " << ntests << " failed ("
               << percent_passed << "% passed)\n";
 }
