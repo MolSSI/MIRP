@@ -21,6 +21,34 @@ slong mirp_min_accuracy_bits(arb_srcptr v, size_t n)
     return min;
 }
 
+void mirp_pow_si(arb_t output, const arb_t b, long e, slong prec)
+{
+    if(e >= 0)
+        arb_pow_ui(output, b, (unsigned long)e, prec);
+    else
+    {
+        arb_pow_ui(output, b, (unsigned long)(-e), prec);
+        arb_ui_div(output, 1, output, prec);
+    }
+}
+
+
+void mirp_factorial(arb_t output, long n)
+{
+    assert(n >= 0);
+
+    if(n == 0 || n == 1)
+        arb_one(output);
+    else
+    {
+        fmpz_t tmp;
+        fmpz_init_set_ui(tmp, 1ul);
+        fmpz_fac_ui(tmp, (unsigned long)n); 
+        arb_set_fmpz(output, tmp);
+        fmpz_clear(tmp);
+    }
+}
+
 
 double mirp_factorial_d(int n)
 {
@@ -56,15 +84,27 @@ double mirp_factorial2_d(int n)
 }
 
 
-void mirp_factorial2(arb_t output, long int n, slong working_prec)
+void mirp_factorial2(arb_t output, long n)
 {
     /* arblib has a double factorial function, but only for
      * positive values */
 
+    assert(n >= -1);
+
     if(n >= -1 && n <= 1)
-        arb_set_ui(output, 1);
+        arb_one(output);
     else
-        arb_doublefac_ui(output, (unsigned long)n, working_prec);
+    {
+        fmpz_t tmp;
+        fmpz_init_set_ui(tmp, 1ul);
+
+        for(long i = n; i > 1; i -= 2)
+            fmpz_mul_ui(tmp, tmp, (unsigned long)i);
+
+        arb_set_fmpz(output, tmp);
+        fmpz_clear(tmp);
+    }
+
 }
 
 
@@ -78,27 +118,15 @@ double mirp_binomial_d(int n, int k)
 }
 
 
-void mirp_binomial(arb_t output, long int n, long int k, slong working_prec)
+void mirp_binomial(arb_t output, long n, long k)
 {
     assert(n >= 0);
     assert(k >= 0);
     assert(k <= n);
 
-    /* A temporary */
-    arb_t f;
-    arb_init(f);
-
-    /* put k! in the output */
-    arb_fac_ui(output, (unsigned long)k, working_prec);
-
-    /* next, (n-k)! in temporary, and multiply into output */
-    arb_fac_ui(f, (unsigned long)(n-k), working_prec);
-    arb_mul(output, output, f, working_prec);
-
-    /* now n! in temporary, and divide */
-    arb_fac_ui(f, (unsigned long)n, working_prec);
-    arb_div(output, f, output, working_prec);
-
-    arb_clear(f);
+    fmpz_t tmp;
+    fmpz_bin_uiui(tmp, (unsigned long)n, (unsigned long)k);
+    arb_set_fmpz(output, tmp);
+    fmpz_clear(tmp);
 }
 

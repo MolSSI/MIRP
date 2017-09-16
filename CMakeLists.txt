@@ -38,6 +38,9 @@ if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
 endif()
 
 
+################################
+# C COMPILE FLAGS
+################################
 if("${CMAKE_C_COMPILER_ID}" MATCHES "Intel")
 
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w3")
@@ -53,17 +56,19 @@ elseif("${CMAKE_C_COMPILER_ID}" MATCHES "GNU")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wfloat-equal -Wshadow")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wswitch-default -Wconversion")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-sign-conversion")
 
 elseif("${CMAKE_C_COMPILER_ID}" MATCHES "Clang")
 
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Weverything")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion")
-
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Weverything")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-vla -Wno-padded")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-documentation -Wno-documentation-unknown-command")
 
 endif()
 
 
+################################
+# C++ COMPILE FLAGS
+################################
 if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w3")
 
@@ -77,33 +82,27 @@ if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
     #  2338  : switch statement does not have a default clause
     #list(APPEND CMAKE_CXX_FLAGS "-ww2338")
 
-    # some useless remarks
-    #  1418  : external function definition with no prior declaration
-    #  1419  : external declaration in primary source file 
-    #   383  : value copied to temporary, reference to temporary used (generally ok in c++)
-    #   981  : operands are evaluated in unspecified order (generally ok in c++)
-    #   869  : parameter "XXX" was never referenced.
-    #          This is due to a bug in Intel before Intel 16 that causes this
-    #          remark to be printed for variadic templates
-    # 11074  : Inlining inhibited by limit max-size (etc)
-    # 11076  : To get full report use -qopt-report=4 -qopt-report-phase ipo
-    #   444  : destructor for base class .. not virtual (even warns for classes without virtual functions)
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd1418 -wd1419 -wd383 -wd981 -wd869")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd11074 -wd11076 -wd444")
 elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wfloat-equal -Wshadow")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wswitch-default -Wconversion")
+
+    # We disable sign conversion - there are lots of false positives when
+    # using STL containers
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion")
 
 elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Weverything")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion")
+
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-c++98-compat -Wno-padded")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-documentation -Wno-documentation-unknown-command")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-exit-time-destructors -Wno-global-constructors")
+
+    # We disable sign conversion - there are lots of false positives when
+    # using STL containers
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion")
 
 endif()
 

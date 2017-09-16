@@ -32,18 +32,18 @@ static void mirp_farr(arb_ptr f,
             if (j > lmn2)
                 continue;
 
-            mirp_binomial(tmp1, lmn1, i, working_prec);
-            mirp_binomial(tmp2, lmn2, j, working_prec);
+            mirp_binomial(tmp1, lmn1, i);
+            mirp_binomial(tmp2, lmn2, j);
             arb_mul(tmp1, tmp1, tmp2, working_prec);
 
             if (lmn1 - i > 0)
             {
-                arb_pow_ui(tmp2, xyz1, lmn1-i, working_prec);
+                mirp_pow_si(tmp2, xyz1, lmn1-i, working_prec);
                 arb_mul(tmp1, tmp1, tmp2, working_prec);
             }
             if (lmn2 - j > 0)
             {
-                arb_pow_ui(tmp2, xyz2, lmn2-j, working_prec);
+                mirp_pow_si(tmp2, xyz2, lmn2-j, working_prec);
                 arb_mul(tmp1, tmp1, tmp2, working_prec);
             }
             arb_add(f + k, f + k, tmp1, working_prec);
@@ -68,9 +68,9 @@ static void mirp_G(arb_t G, arb_t fp, arb_t fq,
     arb_mul(G, G, fp, working_prec);
     arb_mul(G, G, fq, working_prec);
 
-    arb_fac_ui(tmp1, np, working_prec);
+    mirp_factorial(tmp1, np);
     arb_mul(G, G, tmp1, working_prec);
-    arb_fac_ui(tmp1, nq, working_prec);
+    mirp_factorial(tmp1, nq);
     arb_mul(G, G, tmp1, working_prec);
 
     arb_set_si(tmp1, w1 - np);
@@ -81,18 +81,18 @@ static void mirp_G(arb_t G, arb_t fp, arb_t fq,
     arb_pow(tmp1, gammaq, tmp1, working_prec);
     arb_mul(G, G, tmp1, working_prec);
 
-    arb_fac_ui(tmp1, np + nq - 2 * (w1 + w2), working_prec);
+    mirp_factorial(tmp1, np + nq - 2 * (w1 + w2));
     arb_mul(G, G, tmp1, working_prec);
 
-    arb_pow_ui(tmp1, gammapq, np + nq - 2 * (w1 + w2), working_prec);
+    mirp_pow_si(tmp1, gammapq, np + nq - 2 * (w1 + w2), working_prec);
     arb_mul(G, G, tmp1, working_prec);
 
-    arb_fac_ui(tmp1, w1, working_prec);
-    arb_fac_ui(tmp2, w2, working_prec);
+    mirp_factorial(tmp1, w1);
+    mirp_factorial(tmp2, w2);
     arb_mul(tmp1, tmp1, tmp2, working_prec);
-    arb_fac_ui(tmp2, np - 2 * w1, working_prec);
+    mirp_factorial(tmp2, np - 2 * w1);
     arb_mul(tmp1, tmp1, tmp2, working_prec);
-    arb_fac_ui(tmp2, nq - 2 * w2, working_prec);
+    mirp_factorial(tmp2, nq - 2 * w2);
     arb_mul(tmp1, tmp1, tmp2, working_prec);
     arb_div(G, G, tmp1, working_prec);
 
@@ -240,24 +240,24 @@ void mirp_eri_single(arb_t integral,
                 for(int tx = 0; tx <= ((lp + lq - 2 * (u1 + u2)) / 2); tx++)
                 {
                     const int xfac = lp + lq - 2*(u1 + u2 + tx);
-                    arb_pow_ui(tmp4x, PQ+0, xfac, working_prec);
-                    arb_fac_ui(tmp3, xfac, working_prec);
+                    mirp_pow_si(tmp4x, PQ+0, xfac, working_prec);
+                    mirp_factorial(tmp3, xfac);
                     arb_div(tmp4x, tmp4x, tmp3, working_prec);
 
 
                     for(int ty = 0; ty <= ((mp + mq - 2 * (v1 + v2)) / 2); ty++)
                     {
                         const int yfac = mp + mq - 2*(v1 + v2 + ty);
-                        arb_pow_ui(tmp4y, PQ+1, yfac, working_prec);
-                        arb_fac_ui(tmp3, yfac, working_prec);
+                        mirp_pow_si(tmp4y, PQ+1, yfac, working_prec);
+                        mirp_factorial(tmp3, yfac);
                         arb_div(tmp4y, tmp4y, tmp3, working_prec);
                         arb_mul(tmp4xy, tmp4x, tmp4y, working_prec);
 
                         for(int tz = 0; tz <= ((np + nq - 2 * (w1 + w2)) / 2); tz++)
                         {
                             const int zfac = np + nq - 2*(w1 + w2 + tz);
-                            arb_pow_ui(tmp4z, PQ+2, zfac, working_prec);
-                            arb_fac_ui(tmp3, zfac, working_prec);
+                            mirp_pow_si(tmp4z, PQ+2, zfac, working_prec);
+                            mirp_factorial(tmp3, zfac);
                             arb_div(tmp4z, tmp4z, tmp3, working_prec);
 
                             const int zeta = lp + lq + mp + mq + np + nq - 2*(u1 + u2 + v1 + v2 + w1 + w2) - tx - ty - tz;
@@ -269,18 +269,18 @@ void mirp_eri_single(arb_t integral,
                             arb_mul(tmp1, tmp1, tmp4z, working_prec);
 
                             arb_set_ui(tmp2, 4);
-                            arb_pow_ui(tmp2, tmp2, u1 + u2 + tx + v1 + v2 + ty + w1 + w2 + tz, working_prec);
+                            mirp_pow_si(tmp2, tmp2, u1 + u2 + tx + v1 + v2 + ty + w1 + w2 + tz, working_prec);
 
-                            arb_pow_ui(tmp3, gammapq, tx + ty + tz, working_prec);
+                            mirp_pow_si(tmp3, gammapq, tx + ty + tz, working_prec);
                             arb_mul(tmp2, tmp2, tmp3, working_prec);
 
-                            arb_fac_ui(tmp3, tx, working_prec);
+                            mirp_factorial(tmp3, tx);
                             arb_mul(tmp2, tmp2, tmp3, working_prec);
 
-                            arb_fac_ui(tmp3, ty, working_prec);
+                            mirp_factorial(tmp3, ty);
                             arb_mul(tmp2, tmp2, tmp3, working_prec);
 
-                            arb_fac_ui(tmp3, tz, working_prec);
+                            mirp_factorial(tmp3, tz);
                             arb_mul(tmp2, tmp2, tmp3, working_prec);
 
                             arb_div(tmp1, tmp1, tmp2, working_prec);

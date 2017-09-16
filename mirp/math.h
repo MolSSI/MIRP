@@ -61,6 +61,14 @@ extern "C" {
 slong mirp_min_accuracy_bits(arb_srcptr v, size_t n);
 
 
+/*! \brief Calculates b^e with e being a signed integer */
+void mirp_pow_si(arb_t output, const arb_t b, long e, slong prec);
+
+
+/*! \brief Calculates a factorial using interval arithmetic */
+void mirp_factorial(arb_t output, long n);
+
+
 /*! \brief Calculates a factorial using double precision */
 double mirp_factorial_d(int n);
 
@@ -70,7 +78,7 @@ double mirp_factorial2_d(int n);
 
 
 /*! \brief Calculates a double factorial using interval arithmetic */
-void mirp_factorial2(arb_t output, long int n, slong working_prec);
+void mirp_factorial2(arb_t output, long int n);
 
 
 /*! \brief Calculates a binomial coefficient using double precision */
@@ -78,7 +86,7 @@ double mirp_binomial_d(int n, int k);
 
 
 /*! \brief Calculates a binomial coefficient using interval arithmetic */
-void mirp_binomial(arb_t output, long int n, long int k, slong working_prec);
+void mirp_binomial(arb_t output, long int n, long int k);
 
 
 #ifdef __cplusplus
