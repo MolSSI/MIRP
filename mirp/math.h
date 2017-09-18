@@ -78,7 +78,7 @@ double mirp_factorial2_d(int n);
 
 
 /*! \brief Calculates a double factorial using interval arithmetic */
-void mirp_factorial2(arb_t output, long int n);
+void mirp_factorial2(arb_t output, long n);
 
 
 /*! \brief Calculates a binomial coefficient using double precision */
@@ -86,7 +86,7 @@ double mirp_binomial_d(int n, int k);
 
 
 /*! \brief Calculates a binomial coefficient using interval arithmetic */
-void mirp_binomial(arb_t output, long int n, long int k);
+void mirp_binomial(arb_t output, long n, long k);
 
 
 #ifdef __cplusplus
