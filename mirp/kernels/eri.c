@@ -107,10 +107,10 @@ void mirp_eri_single(arb_t integral,
                      const int * lmn4, arb_srcptr D, const arb_t alpha4,
                      slong working_prec)
 {
-    assert(lmn1[0] > 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
-    assert(lmn2[0] > 0); assert(lmn2[1] >= 0); assert(lmn2[2] >= 0);
-    assert(lmn3[0] > 0); assert(lmn3[1] >= 0); assert(lmn3[2] >= 0);
-    assert(lmn4[0] > 0); assert(lmn4[1] >= 0); assert(lmn4[2] >= 0);
+    assert(lmn1[0] >= 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
+    assert(lmn2[0] >= 0); assert(lmn2[1] >= 0); assert(lmn2[2] >= 0);
+    assert(lmn3[0] >= 0); assert(lmn3[1] >= 0); assert(lmn3[2] >= 0);
+    assert(lmn4[0] >= 0); assert(lmn4[1] >= 0); assert(lmn4[2] >= 0);
 
     const int L_l = lmn1[0]+lmn2[0]+lmn3[0]+lmn4[0];
     const int L_m = lmn1[1]+lmn2[1]+lmn3[1]+lmn4[1];

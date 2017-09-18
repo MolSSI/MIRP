@@ -223,10 +223,10 @@ void mirp_integral4_single_str(arb_t integral,
                                const int * lmn4, const char ** D, const char * alpha4,
                                slong working_prec, cb_integral4_single cb)
 {
-    assert(lmn1[0] > 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
-    assert(lmn2[0] > 0); assert(lmn2[1] >= 0); assert(lmn2[2] >= 0);
-    assert(lmn3[0] > 0); assert(lmn3[1] >= 0); assert(lmn3[2] >= 0);
-    assert(lmn4[0] > 0); assert(lmn4[1] >= 0); assert(lmn4[2] >= 0);
+    assert(lmn1[0] >= 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
+    assert(lmn2[0] >= 0); assert(lmn2[1] >= 0); assert(lmn2[2] >= 0);
+    assert(lmn3[0] >= 0); assert(lmn3[1] >= 0); assert(lmn3[2] >= 0);
+    assert(lmn4[0] >= 0); assert(lmn4[1] >= 0); assert(lmn4[2] >= 0);
 
     /* Similar to mirp_integral4_single_target, but should
      * always succeed */
@@ -361,10 +361,10 @@ void mirp_integral4_single_exact(double * integral,
                                  const int * lmn4, const double * D, double alpha4,
                                  cb_integral4_single cb)
 {
-    assert(lmn1[0] > 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
-    assert(lmn2[0] > 0); assert(lmn2[1] >= 0); assert(lmn2[2] >= 0);
-    assert(lmn3[0] > 0); assert(lmn3[1] >= 0); assert(lmn3[2] >= 0);
-    assert(lmn4[0] > 0); assert(lmn4[1] >= 0); assert(lmn4[2] >= 0);
+    assert(lmn1[0] >= 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
+    assert(lmn2[0] >= 0); assert(lmn2[1] >= 0); assert(lmn2[2] >= 0);
+    assert(lmn3[0] >= 0); assert(lmn3[1] >= 0); assert(lmn3[2] >= 0);
+    assert(lmn4[0] >= 0); assert(lmn4[1] >= 0); assert(lmn4[2] >= 0);
 
     /* convert arguments to arb_t */
     arb_ptr A_mp = _arb_vec_init(3);
