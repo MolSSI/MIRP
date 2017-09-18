@@ -31,7 +31,6 @@ void integral4_create_reference(const std::string & xyz_filepath,
         throw std::runtime_error("Error opening output file for writing");
 
     fs << header << "\n";
-    fs << std::hexfloat;
     reffile_write_basis(shells, fs);
 
     std::vector<double> integrals;
@@ -72,7 +71,11 @@ void integral4_create_reference(const std::string & xyz_filepath,
 
         fs << p << " " << q << " " << r << " " << s;
         for(size_t i = 0; i < nintegrals; i++)
-            fs << " " <<  integrals[i];
+        {
+            fs << " ";
+            write_hexdouble(integrals[i], fs);
+        }
+
         fs << "\n";
     }
 }
@@ -115,7 +118,7 @@ long integral4_test_reference(const std::string & ref_filepath,
         std::vector<double> integrals_file(nintegrals);
 
         for(size_t i = 0; i < nintegrals; i++)
-            integrals_file[i] = read_double(fs);
+            integrals_file[i] = read_hexdouble(fs);
 
         cb(integrals.data(),
            s1.am, s1.xyz.data(), s1.nprim, s1.ngeneral, s1.alpha.data(), s1.coeff.data(),

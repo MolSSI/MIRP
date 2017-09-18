@@ -18,7 +18,17 @@ namespace mirp {
  *
  * One double is extracted, and the stream advanced
  */
-double read_double(std::istream & fs);
+double read_hexdouble(std::istream & fs);
+
+
+/*! \brief Writes a double precision number as a hexfloat to an ASCII file
+ *
+ * The main purpose of this is to convert doubles to hexfloat, due to
+ * some standard libraries not supporting std::hexfloat
+ *
+ * One double is written, and the stream advanced
+ */
+void write_hexdouble(double d, std::ostream & fs);
 
 
 /*! \brief Write basis information to a file

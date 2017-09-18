@@ -10,6 +10,7 @@
 
 #include <sstream>
 #include <iostream>
+#include <stdexcept>
 
 using namespace mirp;
 
