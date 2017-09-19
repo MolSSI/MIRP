@@ -1,0 +1,8 @@
+nehalem
+core2
+sandybridge
+ivybridge
+haswell
+broadwell
+skylake
+knl

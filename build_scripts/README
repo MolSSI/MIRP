@@ -1,0 +1,3 @@
+This directory contains scripts for building MIRP and dependencies.
+It is generally only for developers of MIRP, and not its users. Feel
+free to look around though.
