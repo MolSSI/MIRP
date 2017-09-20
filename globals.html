@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: File Members</title>
+<title>MolSSI Integral Reference Project: File Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -60,6 +61,13 @@ $(function() {
 <div class="contents">
 <div class="textblock">Here is a list of all documented file members with links to the documentation:</div>
 
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>ang_to_bohr
+: <a class="el" href="read__construct__basis_8cpp.html#a54eb8594bac71895f523ff72fe08a045">read_construct_basis.cpp</a>
+</li>
+</ul>
+
+
 <h3><a id="index_c"></a>- c -</h3><ul>
 <li>cb_integral4
 : <a class="el" href="typedefs_8h.html#a76686a1618a8f29c7476cac66790e015">typedefs.h</a>
@@ -79,26 +87,21 @@ $(function() {
 <li>cb_integral4_single_exact
 : <a class="el" href="typedefs_8h.html#abbdd9ede505c36325ae6c3910c50512e">typedefs.h</a>
 </li>
-<li>cb_integral4_single_target
-: <a class="el" href="typedefs_8h.html#a9dfffe911fa59a1610ddbcdbc81f08d5">typedefs.h</a>
+<li>cb_integral4_single_str
+: <a class="el" href="typedefs_8h.html#a7f4cf5bacc8ab80124b3ee40e4b1ade1">typedefs.h</a>
 </li>
-<li>cb_integral4_single_target_str
-: <a class="el" href="typedefs_8h.html#a9f50ecae9b76d1f3916ee5c2d4fb177f">typedefs.h</a>
-</li>
-<li>cb_integral4_target
-: <a class="el" href="typedefs_8h.html#a7551ccd994f9820a6a37f0f893b587cd">typedefs.h</a>
-</li>
-<li>cb_integral4_target_str
-: <a class="el" href="typedefs_8h.html#a0656ced46db96e84d98f579ddfd47737">typedefs.h</a>
+<li>cb_integral4_str
+: <a class="el" href="typedefs_8h.html#a637d75cc702635603fa091ad0b4e0cc0">typedefs.h</a>
 </li>
 </ul>
 
 
 <h3><a id="index_m"></a>- m -</h3><ul>
 <li>main()
-: <a class="el" href="mirp__create__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">mirp_create_test.cpp</a>
-, <a class="el" href="mirp__play_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe">mirp_play.cpp</a>
+: <a class="el" href="mirp__create__reference_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">mirp_create_reference.cpp</a>
+, <a class="el" href="mirp__create__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">mirp_create_test.cpp</a>
 , <a class="el" href="mirp__run__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">mirp_run_test.cpp</a>
+, <a class="el" href="mirp__test__reference_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">mirp_test_reference.cpp</a>
 </li>
 <li>MAX
 : <a class="el" href="math_8h.html#afa99ec4acc4ecb2dc3c2d05da15d0e3f">math.h</a>
@@ -107,15 +110,12 @@ $(function() {
 : <a class="el" href="math_8h.html#a3acffbd305ee72dcd4593c0d8af64a4f">math.h</a>
 </li>
 <li>mirp_binomial()
-: <a class="el" href="math_8c.html#ac7e340cf8861efb63895395a0408f1d1">math.c</a>
-, <a class="el" href="math_8h.html#ac7e340cf8861efb63895395a0408f1d1">math.h</a>
+: <a class="el" href="math_8c.html#aaa56196090f920ef07a81d5cbd261a11">math.c</a>
+, <a class="el" href="math_8h.html#aaa56196090f920ef07a81d5cbd261a11">math.h</a>
 </li>
 <li>mirp_binomial_d()
 : <a class="el" href="math_8c.html#a312191feaef20fe66ec1227e04cd52db">math.c</a>
 , <a class="el" href="math_8h.html#a312191feaef20fe66ec1227e04cd52db">math.h</a>
-</li>
-<li>MIRP_BITS_INCREMENT
-: <a class="el" href="math_8h.html#af8c84981c1ff898be127b7ff9074c05d">math.h</a>
 </li>
 <li>mirp_boys()
 : <a class="el" href="boys_8c.html#af56c9646d519018d0e234600dcb61406">boys.c</a>
@@ -126,16 +126,15 @@ $(function() {
 , <a class="el" href="boys__d_8c.html#ad08d94f6398a41e6dfba98ae646fcbe3">boys_d.c</a>
 </li>
 <li>mirp_boys_exact()
-: <a class="el" href="boys_8h.html#af80773eaa5fffb3d3ce789599b0e5321">boys.h</a>
-, <a class="el" href="boys_8c.html#af80773eaa5fffb3d3ce789599b0e5321">boys.c</a>
+: <a class="el" href="boys_8c.html#af80773eaa5fffb3d3ce789599b0e5321">boys.c</a>
+, <a class="el" href="boys_8h.html#af80773eaa5fffb3d3ce789599b0e5321">boys.h</a>
 </li>
-<li>mirp_boys_target()
-: <a class="el" href="boys_8c.html#aa9b74ac749ce378f0922f578de871bc9">boys.c</a>
-, <a class="el" href="boys_8h.html#aa9b74ac749ce378f0922f578de871bc9">boys.h</a>
+<li>mirp_boys_str()
+: <a class="el" href="boys_8c.html#a1c5383f674fc86cba0fee3bef06b04c8">boys.c</a>
+, <a class="el" href="boys_8h.html#a1c5383f674fc86cba0fee3bef06b04c8">boys.h</a>
 </li>
-<li>mirp_boys_target_str()
-: <a class="el" href="boys_8c.html#af6cc23be415ee9c5c12c2eede5dfde4a">boys.c</a>
-, <a class="el" href="boys_8h.html#af6cc23be415ee9c5c12c2eede5dfde4a">boys.h</a>
+<li>MIRP_DBL_TRUE_MIN
+: <a class="el" href="math_8h.html#a7ce8cd50ccff29e46914b419d10903de">math.h</a>
 </li>
 <li>mirp_eri_single()
 : <a class="el" href="eri_8c.html#a0279410e8794eb5124945ce51dd27d9a">eri.c</a>
@@ -145,9 +144,13 @@ $(function() {
 : <a class="el" href="eri_8h.html#a587d824260797fd22c0a4a6d64eb0020">eri.h</a>
 , <a class="el" href="eri__d_8c.html#a587d824260797fd22c0a4a6d64eb0020">eri_d.c</a>
 </li>
+<li>mirp_factorial()
+: <a class="el" href="math_8c.html#aa49d0e99a354d0cdea20c38b12386a32">math.c</a>
+, <a class="el" href="math_8h.html#aa49d0e99a354d0cdea20c38b12386a32">math.h</a>
+</li>
 <li>mirp_factorial2()
-: <a class="el" href="math_8c.html#aaa49b7cff2c4c3bbc0105fb79dba8dcc">math.c</a>
-, <a class="el" href="math_8h.html#aaa49b7cff2c4c3bbc0105fb79dba8dcc">math.h</a>
+: <a class="el" href="math_8c.html#a998ae4fe0edcff4059aa477b17355c4b">math.c</a>
+, <a class="el" href="math_8h.html#a998ae4fe0edcff4059aa477b17355c4b">math.h</a>
 </li>
 <li>mirp_factorial2_d()
 : <a class="el" href="math_8c.html#a895ab9585328443c3d62cebfac58108f">math.c</a>
@@ -157,37 +160,33 @@ $(function() {
 : <a class="el" href="math_8c.html#aa2d68d3dc7f4832616a4e1d781fccc5c">math.c</a>
 , <a class="el" href="math_8h.html#aa2d68d3dc7f4832616a4e1d781fccc5c">math.h</a>
 </li>
+<li>mirp_gaussian_fill_lmn()
+: <a class="el" href="shell_8c.html#aa235848ccb28e6768a2138c800f8439c">shell.c</a>
+, <a class="el" href="shell_8h.html#aa235848ccb28e6768a2138c800f8439c">shell.h</a>
+</li>
 <li>mirp_gpt()
-: <a class="el" href="gpt_8h.html#adb11e7cbbd1e1ff290af38b5d04ad60c">gpt.h</a>
-, <a class="el" href="gpt_8c.html#adb11e7cbbd1e1ff290af38b5d04ad60c">gpt.c</a>
+: <a class="el" href="gpt_8c.html#adb11e7cbbd1e1ff290af38b5d04ad60c">gpt.c</a>
+, <a class="el" href="gpt_8h.html#adb11e7cbbd1e1ff290af38b5d04ad60c">gpt.h</a>
 </li>
 <li>mirp_gpt_d()
 : <a class="el" href="gpt_8c.html#a73a29fa7c094f4862a011387e06ca906">gpt.c</a>
 , <a class="el" href="gpt_8h.html#a73a29fa7c094f4862a011387e06ca906">gpt.h</a>
 </li>
 <li>mirp_integral4_exact()
-: <a class="el" href="integral4__wrappers_8c.html#aee33898a3657ecf9deca93f1d0c579c9">integral4_wrappers.c</a>
-, <a class="el" href="integral4__wrappers_8h.html#ab096fd1a3c48e7472a9f194459278052">integral4_wrappers.h</a>
+: <a class="el" href="integral4__wrappers_8c.html#a6bc9d8f9c5c70a6ed79e8a98da0cbb5c">integral4_wrappers.c</a>
+, <a class="el" href="integral4__wrappers_8h.html#ad7958663e5ffc2fe55b507f203b4a681">integral4_wrappers.h</a>
 </li>
 <li>mirp_integral4_single_exact()
-: <a class="el" href="integral4__wrappers_8c.html#a7ec0db7cdc2168595fcaf8266c42a6ba">integral4_wrappers.c</a>
-, <a class="el" href="integral4__wrappers_8h.html#a7ec0db7cdc2168595fcaf8266c42a6ba">integral4_wrappers.h</a>
+: <a class="el" href="integral4__wrappers_8c.html#a9b00530cc907bdb301e8ec0a25b74aa0">integral4_wrappers.c</a>
+, <a class="el" href="integral4__wrappers_8h.html#a9b00530cc907bdb301e8ec0a25b74aa0">integral4_wrappers.h</a>
 </li>
-<li>mirp_integral4_single_target()
-: <a class="el" href="integral4__wrappers_8c.html#ae53e838af37acb9126bc00e0fe9caf49">integral4_wrappers.c</a>
-, <a class="el" href="integral4__wrappers_8h.html#ae53e838af37acb9126bc00e0fe9caf49">integral4_wrappers.h</a>
+<li>mirp_integral4_single_str()
+: <a class="el" href="integral4__wrappers_8c.html#aa1164660ca4c8874aef023aebbf1b462">integral4_wrappers.c</a>
+, <a class="el" href="integral4__wrappers_8h.html#aa1164660ca4c8874aef023aebbf1b462">integral4_wrappers.h</a>
 </li>
-<li>mirp_integral4_single_target_str()
-: <a class="el" href="integral4__wrappers_8c.html#a463720c78a3159a5a8555b9d0619fe30">integral4_wrappers.c</a>
-, <a class="el" href="integral4__wrappers_8h.html#a463720c78a3159a5a8555b9d0619fe30">integral4_wrappers.h</a>
-</li>
-<li>mirp_integral4_target()
-: <a class="el" href="integral4__wrappers_8c.html#af69fda26504d403390b20f5b0f54acde">integral4_wrappers.c</a>
-, <a class="el" href="integral4__wrappers_8h.html#af69fda26504d403390b20f5b0f54acde">integral4_wrappers.h</a>
-</li>
-<li>mirp_integral4_target_str()
-: <a class="el" href="integral4__wrappers_8c.html#a02060ba5b1a7d6e62ea2fd8f09babe49">integral4_wrappers.c</a>
-, <a class="el" href="integral4__wrappers_8h.html#a02060ba5b1a7d6e62ea2fd8f09babe49">integral4_wrappers.h</a>
+<li>mirp_integral4_str()
+: <a class="el" href="integral4__wrappers_8c.html#a482a45ecd41568883152705d1398dc64">integral4_wrappers.c</a>
+, <a class="el" href="integral4__wrappers_8h.html#a482a45ecd41568883152705d1398dc64">integral4_wrappers.h</a>
 </li>
 <li>mirp_iterate_gaussian()
 : <a class="el" href="shell_8c.html#aea904d70d69eb7ca765f5420b843da8e">shell.c</a>
@@ -201,12 +200,12 @@ $(function() {
 , <a class="el" href="integral4__wrappers_8h.html#af5bf030d0c43746b6ab6cb153c1c3b94">integral4_wrappers.h</a>
 </li>
 <li>mirp_loop_shell4_d()
-: <a class="el" href="integral4__wrappers_8h.html#a2c225d2bc6caa6a73933a779990d9a3a">integral4_wrappers.h</a>
-, <a class="el" href="integral4__wrappers_8c.html#a2c225d2bc6caa6a73933a779990d9a3a">integral4_wrappers.c</a>
+: <a class="el" href="integral4__wrappers_8c.html#a2c225d2bc6caa6a73933a779990d9a3a">integral4_wrappers.c</a>
+, <a class="el" href="integral4__wrappers_8h.html#a2c225d2bc6caa6a73933a779990d9a3a">integral4_wrappers.h</a>
 </li>
 <li>mirp_min_accuracy_bits()
-: <a class="el" href="math_8h.html#aede89af2a0be2379a7247eae18ba3c7e">math.h</a>
-, <a class="el" href="math_8c.html#aede89af2a0be2379a7247eae18ba3c7e">math.c</a>
+: <a class="el" href="math_8c.html#aede89af2a0be2379a7247eae18ba3c7e">math.c</a>
+, <a class="el" href="math_8h.html#aede89af2a0be2379a7247eae18ba3c7e">math.h</a>
 </li>
 <li>MIRP_NCART
 : <a class="el" href="shell_8h.html#a153a217a341b2bf545caacfcfedabc6b">shell.h</a>
@@ -227,8 +226,8 @@ $(function() {
 : <a class="el" href="shell_8h.html#add30eca2b422de138f395d3cce4f2a02">shell.h</a>
 </li>
 <li>mirp_normalize_shell()
-: <a class="el" href="shell_8h.html#a0c42462806b8f7fde32b7ee928a7479e">shell.h</a>
-, <a class="el" href="shell_8c.html#a0c42462806b8f7fde32b7ee928a7479e">shell.c</a>
+: <a class="el" href="shell_8c.html#a0c42462806b8f7fde32b7ee928a7479e">shell.c</a>
+, <a class="el" href="shell_8h.html#a0c42462806b8f7fde32b7ee928a7479e">shell.h</a>
 </li>
 <li>mirp_normalize_shell_d()
 : <a class="el" href="shell_8c.html#a00a3010674e278763c9993847fbb1ab6">shell.c</a>
@@ -239,6 +238,10 @@ $(function() {
 </li>
 <li>MIRP_PI_32
 : <a class="el" href="math_8h.html#a6304cc7c3ebfd34b51f7925ca140b762">math.h</a>
+</li>
+<li>mirp_pow_si()
+: <a class="el" href="math_8c.html#a6c24b113a4943738a02c8a73c0cdf40b">math.c</a>
+, <a class="el" href="math_8h.html#a6c24b113a4943738a02c8a73c0cdf40b">math.h</a>
 </li>
 <li>MIRP_SQRT_PI
 : <a class="el" href="math_8h.html#a6f3f813e29587b5c08ce527fd3104c31">math.h</a>
@@ -252,20 +255,14 @@ $(function() {
 <li>MIRP_WRAP_SHELL4_EXACT
 : <a class="el" href="integral4__wrappers_8h.html#ad29e195c89eb60580e6f61854b26ccc2">integral4_wrappers.h</a>
 </li>
-<li>MIRP_WRAP_SHELL4_TARGET
-: <a class="el" href="integral4__wrappers_8h.html#af2796d0a9569128324385f222342f901">integral4_wrappers.h</a>
-</li>
-<li>MIRP_WRAP_SHELL4_TARGET_STR
-: <a class="el" href="integral4__wrappers_8h.html#a34ce82508ef1736d19417dff2cb22791">integral4_wrappers.h</a>
+<li>MIRP_WRAP_SHELL4_STR
+: <a class="el" href="integral4__wrappers_8h.html#a5b2a43e0e6b181425758562adf7b1dfb">integral4_wrappers.h</a>
 </li>
 <li>MIRP_WRAP_SINGLE4_EXACT
 : <a class="el" href="integral4__wrappers_8h.html#a0ea2ba5104be25900883bb01c5831a28">integral4_wrappers.h</a>
 </li>
-<li>MIRP_WRAP_SINGLE4_TARGET
-: <a class="el" href="integral4__wrappers_8h.html#a9af8e3e987dcf1d94053c0b3ea5bf687">integral4_wrappers.h</a>
-</li>
-<li>MIRP_WRAP_SINGLE4_TARGET_STR
-: <a class="el" href="integral4__wrappers_8h.html#aed818889b5217d51e493071737a51438">integral4_wrappers.h</a>
+<li>MIRP_WRAP_SINGLE4_STR
+: <a class="el" href="integral4__wrappers_8h.html#a12342a66ea78e91d5b1fb52ae082006a">integral4_wrappers.h</a>
 </li>
 </ul>
 
@@ -275,10 +272,24 @@ $(function() {
 : <a class="el" href="math_8h.html#ab1a5294a079dfa27f2886f8c3e5c3e55">math.h</a>
 </li>
 </ul>
+
+
+<h3><a id="index_x"></a>- x -</h3><ul>
+<li>xyz
+: <a class="el" href="read__construct__basis_8cpp.html#af94f7e1416eb135f6da6b36c0b8e7e5a">read_construct_basis.cpp</a>
+</li>
+</ul>
+
+
+<h3><a id="index_z"></a>- z -</h3><ul>
+<li>Z
+: <a class="el" href="read__construct__basis_8cpp.html#a5ed5bfe6933ed8cba853237650cc041b">read_construct_basis.cpp</a>
+</li>
+</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:46 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:01 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

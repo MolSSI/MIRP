@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: mirp/shell.h File Reference</title>
+<title>MolSSI Integral Reference Project: mirp/shell.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -77,8 +78,6 @@ $(function() {
 Include dependency graph for shell.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="shell_8h__incl.png" border="0" usemap="#mirp_2shell_8h" alt=""/></div>
-<map name="mirp_2shell_8h" id="mirp_2shell_8h">
-</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -87,10 +86,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <map name="mirp_2shell_8hdep" id="mirp_2shell_8hdep">
 <area shape="rect" id="node2" href="integral4__wrappers_8c.html" title="Some useful wrapping of functionality. " alt="" coords="5,81,152,122"/>
 <area shape="rect" id="node3" href="mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="177,88,263,115"/>
-<area shape="rect" id="node5" href="shell_8c.html" title="Functions related to gaussians and shells. " alt="" coords="287,88,376,115"/>
-<area shape="rect" id="node6" href="file__io_8cpp.html" title="Helper functions for reading/writing test files. " alt="" coords="401,88,535,115"/>
-<area shape="rect" id="node7" href="test__common__integral4_8cpp.html" title="Functions related to testing single ERI. " alt="" coords="560,81,715,122"/>
-<area shape="rect" id="node4" href="mirp__play_8cpp.html" title="Sandbox for testing features. " alt="" coords="142,171,297,197"/>
+<area shape="rect" id="node4" href="shell_8c.html" title="Functions related to gaussians and shells. " alt="" coords="287,88,376,115"/>
+<area shape="rect" id="node5" href="ref__integral4_8cpp.html" title="Functions related to four&#45;center integral reference files. " alt="" coords="401,88,572,115"/>
+<area shape="rect" id="node6" href="test__integral4_8cpp.html" title="Functions related to testing four&#45;center integrals. " alt="" coords="596,88,775,115"/>
+<area shape="rect" id="node7" href="testfile__io_8cpp.html" title="Helper functions for reading/writing test files. " alt="" coords="799,88,955,115"/>
 </map>
 </div>
 </div>
@@ -126,8 +125,11 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aea904d70d69eb7ca765f5420b843da8e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8h.html#aea904d70d69eb7ca765f5420b843da8e">mirp_iterate_gaussian</a> (int *lmn)</td></tr>
-<tr class="memdesc:aea904d70d69eb7ca765f5420b843da8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalize a shell (double precision)  <a href="#aea904d70d69eb7ca765f5420b843da8e">More...</a><br /></td></tr>
+<tr class="memdesc:aea904d70d69eb7ca765f5420b843da8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the next gaussian in the ordering.  <a href="#aea904d70d69eb7ca765f5420b843da8e">More...</a><br /></td></tr>
 <tr class="separator:aea904d70d69eb7ca765f5420b843da8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa235848ccb28e6768a2138c800f8439c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8h.html#aa235848ccb28e6768a2138c800f8439c">mirp_gaussian_fill_lmn</a> (int am, int *lmn)</td></tr>
+<tr class="memdesc:aa235848ccb28e6768a2138c800f8439c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create all lmn combinations for a given angular momentum.  <a href="#aa235848ccb28e6768a2138c800f8439c">More...</a><br /></td></tr>
+<tr class="separator:aa235848ccb28e6768a2138c800f8439c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00a3010674e278763c9993847fbb1ab6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8h.html#a00a3010674e278763c9993847fbb1ab6">mirp_normalize_shell_d</a> (int am, int nprim, int ngeneral, const double *alpha, const double *coeff, double *coeff_out)</td></tr>
 <tr class="memdesc:a00a3010674e278763c9993847fbb1ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalize a shell (double precision)  <a href="#a00a3010674e278763c9993847fbb1ab6">More...</a><br /></td></tr>
 <tr class="separator:a00a3010674e278763c9993847fbb1ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,6 +140,45 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions related to gaussians and shells. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="aa235848ccb28e6768a2138c800f8439c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa235848ccb28e6768a2138c800f8439c">&#9670;&nbsp;</a></span>mirp_gaussian_fill_lmn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mirp_gaussian_fill_lmn </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>lmn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create all lmn combinations for a given angular momentum. </p>
+<p>This fills in the <code>lmn</code> parameter will all combinations of l,m, and n that are valid for the given angular momentum. They will be in order.</p>
+<dl class="section warning"><dt>Warning</dt><dd>The <code>lmn</code> parameter must be allocated and large enough to hold 3*number of cartesian components for the given <code>am</code> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">am</td><td>The angular momentum </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">lmn</td><td>Place to put all the lmn combinations </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aea904d70d69eb7ca765f5420b843da8e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aea904d70d69eb7ca765f5420b843da8e">&#9670;&nbsp;</a></span>mirp_iterate_gaussian()</h2>
 
@@ -154,7 +195,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Normalize a shell (double precision) </p>
+<p>Find the next gaussian in the ordering. </p>
 <p>Obtain the next l, m, and n parameters of a gaussian in the internal MIRP ordering</p>
 <p>For example, if <code>lmn</code> = {2, 1, 0} is input, the result will be {2, 0, 1}.</p>
 <p>If the return value of this function is 0, the contents of <code>lmn</code> are not defined.</p>
@@ -310,7 +351,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:43 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

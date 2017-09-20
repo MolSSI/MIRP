@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: Main Page</title>
+<title>MolSSI Integral Reference Project: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -59,23 +60,32 @@ $(function() {
 
 <div class="header">
   <div class="headertitle">
-<div class="title">MIRP Documentation</div>  </div>
+<div class="title">MolSSI Integral Reference Project Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="overview_sec"></a>
 Overview</h1>
-<p>The MolSSI Integral Reference Project (MIRP) is a project overseen by the Molecular Sciences Software Institute (MolSSI). Its primary goal is to create and maintain reference implementations for integrals commonly found in quantum chemistry software.</p>
+<p>The MolSSI Integral Reference Project (MIRP) is a project overseen by the <a href="http://molssi.org">Molecular Sciences Software Institute (MolSSI)</a>. Its primary goal is to create and maintain reference implementations for integrals commonly found in quantum chemistry software.</p>
 <p>MIRP has two main parts. The first is the reference implementations themselves. These implementations are generally slow algorithms, however they tend to be simple and easier to understand than algorithms typically found in production. In addition, the reference implementation is also written using both the usual double-precision floating point numbers, as well as using an arbitrary-precision interval arithmetic library (arblib - <a href="http://arblib.org">http://arblib.org</a>). This library allows for estimation of the amount of error (such as roundoff error) accumulated throughout the computation.</p>
 <p>The second part of MIRP is a set of precomputed values that new and existing integral packages can test against to detect deficiencies in their algorithms. These values are computed using the functionality described above. Due to the use of the interval arithmetic library, the value of the integrals can be computed to a given target precision and ensured to be accurate to the last printed place (unit of least precision, ulp).</p>
 <h1><a class="anchor" id="source_sec"></a>
 Source Code</h1>
 <p>The source code of MIRP is available at GitHub at <a href="https://github.com/MolSSI/MIRP">https://github.com/MolSSI/MIRP</a></p>
+<p>MIRP (and dependencies) can be built with most standard C/C++ compilers. In addition, both MIRP (and the dependencies) can be obtained as linux executables and shared libraries.</p>
 <h1><a class="anchor" id="main_sec"></a>
-Building, Installing, and Using</h1>
+Main Documentation</h1>
 <ul>
+<li>Obtaining, building, and installing<ul>
+<li><a class="el" href="binaries.html">Obtaining Binaries of MIRP and Dependencies</a></li>
+<li><a class="el" href="building.html">Building MIRP from Source</a></li>
+</ul>
+</li>
+<li>Using MIRP<ul>
 <li><a class="el" href="conventions.html">Programming and Naming Conventions</a></li>
-<li><a class="el" href="filesystem.html">Files and Directory Layout</a></li>
-<li><a class="el" href="building.html">Building MIRP</a></li>
+<li><a class="el" href="using_library.html">Using the MIRP library</a></li>
+<li><a class="el" href="using_programs.html">Using MIRP programs</a></li>
+</ul>
+</li>
 </ul>
 <h1><a class="anchor" id="algo_sec"></a>
 Integrals and Algorithms</h1>
@@ -94,8 +104,8 @@ Integrals and Algorithms</h1>
 <h1><a class="anchor" id="prog_sec"></a>
 MIRP Technical Details</h1>
 <ul>
-<li><a class="el" href="fileformat.html">File Formats</a></li>
-<li><a class="el" href="tests.html">Creating Test Files</a></li>
+<li><a class="el" href="filesystem.html">Files and Directory Layout</a></li>
+<li><a class="el" href="tests.html">Testing and Test Files</a></li>
 </ul>
 <h1><a class="anchor" id="Authors"></a>
 Authors</h1>
@@ -106,7 +116,7 @@ License</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:46 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:01 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

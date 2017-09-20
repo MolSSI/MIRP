@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: Files and Directory Layout</title>
+<title>MolSSI Integral Reference Project: Files and Directory Layout</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -67,24 +68,24 @@ Source Layout</h1>
 <p>Starting from the top level of the source directory</p>
 <ul>
 <li><b>attic</b> - A place for old, deprecated code that is no longer included in the package (but may be useful to someone at some point).</li>
+<li>** cmake** - Helper scripts for the build system</li>
 <li><b>doc</b> - Documentation (including generated documentation)</li>
 <li><b>mirp</b> - The main source directory. This directory itself contains some common functions, such as math and shell functions.<ul>
 <li><b>kernels</b> - Actual functions for computing integrals</li>
 </ul>
 </li>
 <li><b>mirp_bin</b> - Source code for binaries related to MIRP (testing, test creation, etc)</li>
-<li><b>mirppy</b> - Python bindings for MIRP</li>
-<li><b>test_data</b> - Pre-generated test data<ul>
+<li><b>tests</b> - Generated reference data and scripts for testing MIRP<ul>
+<li><b>generator</b> - Scripts and data for generating test inputs</li>
 <li><b>verify</b> - Verification scripts, programs, notebooks, etc</li>
 </ul>
 </li>
-<li><b>tests</b> - Internal testing of MIRP</li>
+<li><b>travis</b> - Helper scripts for Travis Continuous Integration </li>
 </ul>
-<p>Files dealing explicitly with double precision are given the suffix <code>_double</code>, while files dealing explicitly with interval arithmetic are given the suffix <code>_interval</code>. If a file deals with both, or contains more general functionality, then no suffix is given. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:43 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

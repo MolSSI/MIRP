@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: Gaussian Product Theorem</title>
+<title>MolSSI Integral Reference Project: Gaussian Product Theorem</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -64,20 +65,23 @@ $(function() {
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="_gpt_theory"></a>
 Theory</h1>
+<p>The Gaussian Product Theorem (GPT) states that the product of two gaussians G1,G2 can be represented as a third gaussian G3 with a center a line connecting G1 and G2. This theorem is used extensively in quantum chemistry to simplify integrals.</p>
+<p>MIRP contains functionality to compute some of the terms from the GPT which will be used within integral kernels.</p>
+<p>Given two gaussians <img class="formulaInl" alt="$G_1(R) = e^{-\alpha_1 r_{AR}^2}$" src="form_17.png"/> and <img class="formulaInl" alt="$G_2(R) = e^{-\alpha_2 r_{BR}^2}$" src="form_18.png"/> centered on <img class="formulaInl" alt="$A$" src="form_19.png"/> and <img class="formulaInl" alt="$B$" src="form_20.png"/>, respectively, and with <img class="formulaInl" alt="$r_{AR}$" src="form_21.png"/> and <img class="formulaInl" alt="$r_{BR}$" src="form_22.png"/> representing the distance between the center of the gaussian and a given point <img class="formulaInl" alt="$R$" src="form_23.png"/></p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \gamma &amp;= \alpha_1 + \alpha_2 \\ \overline{AB}^2 &amp;= (A_x - B_x)^2 + (A_y - B_y)^2 + (A_z - B_z)^2 \\ P_x &amp;= \frac{(\alpha_1 A_x + \alpha_2 B_x)}{\gamma} \\ P_y &amp;= \frac{(\alpha_1 A_y + \alpha_2 B_y)}{\gamma} \\ P_z &amp;= \frac{(\alpha_1 A_z + \alpha_2 B_z)}{\gamma} \\ \overline{PA}_x &amp;= P_x - A_x \qquad\qquad \overline{PA}_y = P_y - A_y \qquad\qquad \overline{PA}_z = P_z - A_z \\ \overline{PB}_x &amp;= P_x - B_x \qquad\qquad \overline{PB}_y = P_y - B_y \qquad\qquad \overline{PB}_z = P_z - B_z \end{eqnarray*}" src="form_17.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \gamma &amp;= \alpha_1 + \alpha_2 \\ \overline{AB}^2 &amp;= (A_x - B_x)^2 + (A_y - B_y)^2 + (A_z - B_z)^2 \\ P_x &amp;= \frac{(\alpha_1 A_x + \alpha_2 B_x)}{\gamma} \\ P_y &amp;= \frac{(\alpha_1 A_y + \alpha_2 B_y)}{\gamma} \\ P_z &amp;= \frac{(\alpha_1 A_z + \alpha_2 B_z)}{\gamma} \\ \overline{PA}_x &amp;= P_x - A_x \qquad\qquad \overline{PA}_y = P_y - A_y \qquad\qquad \overline{PA}_z = P_z - A_z \\ \overline{PB}_x &amp;= P_x - B_x \qquad\qquad \overline{PB}_y = P_y - B_y \qquad\qquad \overline{PB}_z = P_z - B_z \end{eqnarray*}" src="form_24.png"/>
 </p>
 <h1><a class="anchor" id="_gpt_functions"></a>
 Functions in MIRP</h1>
 <p>In MIRP, the parameters to the Gaussian Product Theorem can be calculated via the following functions:</p>
 <ul>
-<li>mirp_gpt_double()</li>
-<li>mirp_gpt_interval() </li>
+<li><a class="el" href="gpt_8c.html#a73a29fa7c094f4862a011387e06ca906" title="Computes terms from the Gaussian Product Theorem using double precision. ">mirp_gpt_d()</a></li>
+<li><a class="el" href="gpt_8c.html#adb11e7cbbd1e1ff290af38b5d04ad60c" title="Computes terms from the Gaussian Product Theorem using interval arithmetic. ">mirp_gpt()</a> </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:43 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

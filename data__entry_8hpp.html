@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: mirp_bin/data_entry.hpp File Reference</title>
+<title>MolSSI Integral Reference Project: mirp_bin/data_entry.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -64,32 +65,36 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">data_entry.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Common data structures for testing.  
+<p>Common data structures (shells, entries, etc)  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;array&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for data_entry.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="data__entry_8hpp__incl.png" border="0" usemap="#mirp__bin_2data__entry_8hpp" alt=""/></div>
-<map name="mirp__bin_2data__entry_8hpp" id="mirp__bin_2data__entry_8hpp">
-</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="data__entry_8hpp__dep__incl.png" border="0" usemap="#mirp__bin_2data__entry_8hppdep" alt=""/></div>
 <map name="mirp__bin_2data__entry_8hppdep" id="mirp__bin_2data__entry_8hppdep">
-<area shape="rect" id="node2" href="file__io_8cpp.html" title="Helper functions for reading/writing test files. " alt="" coords="5,88,139,115"/>
-<area shape="rect" id="node3" href="test__common__integral4_8cpp.html" title="Functions related to testing single ERI. " alt="" coords="164,81,319,122"/>
-<area shape="rect" id="node4" href="test__common__integral4__single_8cpp.html" title="Functions related to testing single ERI. " alt="" coords="343,81,497,122"/>
+<area shape="rect" id="node2" href="reffile__io_8hpp.html" title="Helper functions for reading/writing reference data files. " alt="" coords="293,80,443,107"/>
+<area shape="rect" id="node6" href="testfile__io_8cpp.html" title="Helper functions for reading/writing test files. " alt="" coords="559,163,715,189"/>
+<area shape="rect" id="node7" href="testfile__io_8hpp.html" title="Helper functions for reading/writing test files. " alt="" coords="713,80,868,107"/>
+<area shape="rect" id="node3" href="read__construct__basis_8cpp.html" title="Construction of a basis from coordinates and a basis set file. " alt="" coords="5,155,165,197"/>
+<area shape="rect" id="node4" href="ref__integral4_8cpp.html" title="Functions related to four&#45;center integral reference files. " alt="" coords="191,163,361,189"/>
+<area shape="rect" id="node5" href="reffile__io_8cpp.html" title="Helper functions for reading/writing reference data files. " alt="" coords="385,163,535,189"/>
+<area shape="rect" id="node8" href="test__integral4_8cpp.html" title="Functions related to testing four&#45;center integrals. " alt="" coords="740,163,919,189"/>
+<area shape="rect" id="node9" href="test__integral4__single_8cpp.html" title="Functions related to testing four&#45;center single integrals. " alt="" coords="943,155,1096,197"/>
 </map>
 </div>
 </div>
@@ -97,11 +102,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmirp_1_1gaussian__shell.html">mirp::gaussian_shell</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A shell of cartesian gaussian functions (double precision)  <a href="structmirp_1_1gaussian__shell.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmirp_1_1gaussian__shell__str.html">mirp::gaussian_shell_str</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A shell of cartesian gaussian functions (strings)  <a href="structmirp_1_1gaussian__shell__str.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmirp_1_1gaussian__single.html">mirp::gaussian_single</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A single cartesian gaussian function.  <a href="structmirp_1_1gaussian__single.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmirp_1_1gaussian__shell.html">mirp::gaussian_shell</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A shell of cartesian gaussian functions.  <a href="structmirp_1_1gaussian__shell.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmirp_1_1integral__single__data__entry.html">mirp::integral_single_data_entry</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data for a single cartesian integral.  <a href="structmirp_1_1integral__single__data__entry.html#details">More...</a><br /></td></tr>
@@ -120,13 +128,19 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacemirp"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html">mirp</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:acdae67e044b4ee1c9b7a02614b093354"><td class="memItemLeft" align="right" valign="top">std::vector&lt; gaussian_shell &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#acdae67e044b4ee1c9b7a02614b093354">mirp::read_construct_basis</a> (const std::string &amp;xyzfile, const std::string &amp;basfile)</td></tr>
+<tr class="memdesc:acdae67e044b4ee1c9b7a02614b093354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a basis from an XYZ file and a basis set file.  <a href="namespacemirp.html#acdae67e044b4ee1c9b7a02614b093354">More...</a><br /></td></tr>
+<tr class="separator:acdae67e044b4ee1c9b7a02614b093354"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Common data structures for testing. </p>
+<div class="textblock"><p>Common data structures (shells, entries, etc) </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:43 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

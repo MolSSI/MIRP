@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['z',['Z',['../structmirp_1_1gaussian__shell.html#a3769ebb866d5182459d9a358587df0b2',1,'mirp::gaussian_shell']]]
+  ['using_20the_20mirp_20library',['Using the MIRP library',['../using_library.html',1,'']]],
+  ['using_20mirp_20programs',['Using MIRP programs',['../using_programs.html',1,'']]]
 ];

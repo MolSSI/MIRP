@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: mirp/math.c File Reference</title>
+<title>MolSSI Integral Reference Project: mirp/math.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -87,6 +88,14 @@ Functions</h2></td></tr>
 <tr class="memitem:aede89af2a0be2379a7247eae18ba3c7e"><td class="memItemLeft" align="right" valign="top">slong&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8c.html#aede89af2a0be2379a7247eae18ba3c7e">mirp_min_accuracy_bits</a> (arb_srcptr v, size_t n)</td></tr>
 <tr class="memdesc:aede89af2a0be2379a7247eae18ba3c7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the least number of accuracy bits in a vector.  <a href="#aede89af2a0be2379a7247eae18ba3c7e">More...</a><br /></td></tr>
 <tr class="separator:aede89af2a0be2379a7247eae18ba3c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c24b113a4943738a02c8a73c0cdf40b"><td class="memItemLeft" align="right" valign="top"><a id="a6c24b113a4943738a02c8a73c0cdf40b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8c.html#a6c24b113a4943738a02c8a73c0cdf40b">mirp_pow_si</a> (arb_t output, const arb_t b, long e, slong prec)</td></tr>
+<tr class="memdesc:a6c24b113a4943738a02c8a73c0cdf40b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates b^e with e being a signed integer. <br /></td></tr>
+<tr class="separator:a6c24b113a4943738a02c8a73c0cdf40b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa49d0e99a354d0cdea20c38b12386a32"><td class="memItemLeft" align="right" valign="top"><a id="aa49d0e99a354d0cdea20c38b12386a32"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8c.html#aa49d0e99a354d0cdea20c38b12386a32">mirp_factorial</a> (arb_t output, long n)</td></tr>
+<tr class="memdesc:aa49d0e99a354d0cdea20c38b12386a32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a factorial using interval arithmetic. <br /></td></tr>
+<tr class="separator:aa49d0e99a354d0cdea20c38b12386a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2d68d3dc7f4832616a4e1d781fccc5c"><td class="memItemLeft" align="right" valign="top"><a id="aa2d68d3dc7f4832616a4e1d781fccc5c"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8c.html#aa2d68d3dc7f4832616a4e1d781fccc5c">mirp_factorial_d</a> (int n)</td></tr>
 <tr class="memdesc:aa2d68d3dc7f4832616a4e1d781fccc5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a factorial using double precision. <br /></td></tr>
@@ -95,18 +104,18 @@ double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ma
 double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8c.html#a895ab9585328443c3d62cebfac58108f">mirp_factorial2_d</a> (int n)</td></tr>
 <tr class="memdesc:a895ab9585328443c3d62cebfac58108f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a double factorial using double precision. <br /></td></tr>
 <tr class="separator:a895ab9585328443c3d62cebfac58108f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa49b7cff2c4c3bbc0105fb79dba8dcc"><td class="memItemLeft" align="right" valign="top"><a id="aaa49b7cff2c4c3bbc0105fb79dba8dcc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8c.html#aaa49b7cff2c4c3bbc0105fb79dba8dcc">mirp_factorial2</a> (arb_t output, long int n, slong working_prec)</td></tr>
-<tr class="memdesc:aaa49b7cff2c4c3bbc0105fb79dba8dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a double factorial using interval arithmetic. <br /></td></tr>
-<tr class="separator:aaa49b7cff2c4c3bbc0105fb79dba8dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a998ae4fe0edcff4059aa477b17355c4b"><td class="memItemLeft" align="right" valign="top"><a id="a998ae4fe0edcff4059aa477b17355c4b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8c.html#a998ae4fe0edcff4059aa477b17355c4b">mirp_factorial2</a> (arb_t output, long n)</td></tr>
+<tr class="memdesc:a998ae4fe0edcff4059aa477b17355c4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a double factorial using interval arithmetic. <br /></td></tr>
+<tr class="separator:a998ae4fe0edcff4059aa477b17355c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a312191feaef20fe66ec1227e04cd52db"><td class="memItemLeft" align="right" valign="top"><a id="a312191feaef20fe66ec1227e04cd52db"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8c.html#a312191feaef20fe66ec1227e04cd52db">mirp_binomial_d</a> (int n, int k)</td></tr>
 <tr class="memdesc:a312191feaef20fe66ec1227e04cd52db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a binomial coefficient using double precision. <br /></td></tr>
 <tr class="separator:a312191feaef20fe66ec1227e04cd52db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7e340cf8861efb63895395a0408f1d1"><td class="memItemLeft" align="right" valign="top"><a id="ac7e340cf8861efb63895395a0408f1d1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8c.html#ac7e340cf8861efb63895395a0408f1d1">mirp_binomial</a> (arb_t output, long int n, long int k, slong working_prec)</td></tr>
-<tr class="memdesc:ac7e340cf8861efb63895395a0408f1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a binomial coefficient using interval arithmetic. <br /></td></tr>
-<tr class="separator:ac7e340cf8861efb63895395a0408f1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa56196090f920ef07a81d5cbd261a11"><td class="memItemLeft" align="right" valign="top"><a id="aaa56196090f920ef07a81d5cbd261a11"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math_8c.html#aaa56196090f920ef07a81d5cbd261a11">mirp_binomial</a> (arb_t output, long n, long k)</td></tr>
+<tr class="memdesc:aaa56196090f920ef07a81d5cbd261a11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a binomial coefficient using interval arithmetic. <br /></td></tr>
+<tr class="separator:aaa56196090f920ef07a81d5cbd261a11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Some miscellaneous mathematical functions in double precision and interval arithmetic. </p>
@@ -152,7 +161,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="math
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:43 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

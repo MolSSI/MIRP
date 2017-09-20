@@ -1,9 +1,0 @@
-<map id="mirp_bin/mirp_play.cpp" name="mirp_bin/mirp_play.cpp">
-<area shape="rect" id="node2" href="$cmdline_8hpp.html" title="Functions for parsing the command line given to a program. " alt="" coords="37,80,181,107"/>
-<area shape="rect" id="node5" href="$mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="206,80,292,107"/>
-<area shape="rect" id="node6" href="$shell_8h.html" title="Functions related to gaussians and shells. " alt="" coords="59,237,148,264"/>
-<area shape="rect" id="node8" href="$integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="173,230,320,271"/>
-<area shape="rect" id="node10" href="$eri_8h.html" title="Kernel for electron repulsion integrals. " alt="" coords="284,155,407,181"/>
-<area shape="rect" id="node11" href="$boys_8h.html" title="Calculation of the boys function. " alt="" coords="395,320,531,347"/>
-<area shape="rect" id="node9" href="$typedefs_8h.html" title="Typedefs of common function pointers. " alt="" coords="199,320,311,347"/>
-</map>

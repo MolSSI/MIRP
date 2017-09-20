@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: Creating Test Files</title>
+<title>MolSSI Integral Reference Project: Testing and Test Files</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -59,24 +60,31 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Creating Test Files </div>  </div>
+<div class="title">Testing and Test Files </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="_tests_general"></a>
 General Test Information</h1>
-<p>See <a class="el" href="fileformat.html">File Formats</a> for information about the file formatting for test files.</p>
-<p>To create a new test file, an input file must first be created. This can be created by any means, although it must conform to the input test file format.</p>
-<p>Then, the reference data file can be created via the <code>mirp_create_test</code> command.</p>
+<p>Test data resides in the <code>tests</code> subdirectory of the MIRP repo.</p>
+<p>To create a new test file, an input file must first be created. This can be created by any means, although it must conform to the input test file format (see <a class="el" href="tests.html#_tests_formats">Test file formats</a>). Scripts that generate test inputs should be placed in the <code>generator</code> subdirectory of the <code>tests</code> directory.</p>
+<p>Once an input is created, the reference data file can be created via the <code>mirp_create_test</code> command. Typically, input files have a <code>.inp</code> suffix, while the reference data generated from inputs has a <code>.dat</code> suffix.</p>
+<p>Once a test has been created and verified, its sha256sum should be added to the <code>sha256sums</code> file in the <code>tests</code> directory. This will help protect against inadvertent changes.</p>
+<p>Functionality in MIRP can then be tested using the <code>mirp_run_test</code> command. This is typically added to a CMake script in the <code>tests</code> directory of the MIRP repo.</p>
 <h1><a class="anchor" id="_tests_verify"></a>
 Test Verification</h1>
-<p>The reference test data must be verified by another means. Scripts, Mathematica notebooks, etc, should be placed in the <code>verify</code> subdirectory of the <code>test_data</code> directory.</p>
-<h1><a class="anchor" id="_tests_shasum"></a>
-Checksumming</h1>
-<p>Once a test has been created and verified, its sha256sum should be added to the <code>sha256sums</code> file in the <code>test_data</code> directory. </p>
+<p>When possible, the reference test data must be verified by another means. Scripts, Mathematica notebooks, etc, that do this should be placed in the <code>verify</code> subdirectory of the <code>tests</code> directory.</p>
+<h1><a class="anchor" id="_tests_formats"></a>
+Test file formats</h1>
+<p>In both test input and reference files, lines beginning with <code>#</code> are treated as comments. Generally, input files should have a header with a brief description and/or the generator command used to create them. The reference data files should repeat this information and add the command used to generate the data.</p>
+<dl class="section note"><dt>Note</dt><dd>Numbers in the input files are treated as if they are exact to an infinite number of decimal places.</dd></dl>
+<h1><a class="anchor" id="_tests_formats_boys"></a>
+Boys Function Test Files</h1>
+<p>Test files for the boys function are fairly simple. The input for generating tests contain the <code>m</code> value and the <code>t</code> value, space separated, on each line.</p>
+<p>Reference data files are similar, containing <code>m</code>, <code>t</code>, and the value of <code>F(m,t)</code> on each line. In addition, the first non-comment line contains the number of decimal digits that the value of <code>F(m,t)</code> is accurately computed to. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:43 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

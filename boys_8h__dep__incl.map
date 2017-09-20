@@ -1,13 +1,14 @@
 <map id="mirp/kernels/boys.h" name="mirp/kernels/boys.h">
-<area shape="rect" id="node2" href="$all_8h.html" title="Convenience header for including headers for all kernels. " alt="" coords="107,88,228,115"/>
-<area shape="rect" id="node5" href="$boys_8c.html" title="Calculation of the boys function using interval arithmetic. " alt="" coords="253,88,389,115"/>
-<area shape="rect" id="node6" href="$boys__d_8c.html" title="Calculation of the boys function using double precision. " alt="" coords="414,88,564,115"/>
-<area shape="rect" id="node7" href="$eri_8c.html" title="Kernel for electron repulsion integrals (interval arithmetic) " alt="" coords="589,88,712,115"/>
-<area shape="rect" id="node8" href="$eri__d_8c.html" title="Kernel for electron repulsion integrals (double precision) " alt="" coords="736,88,872,115"/>
-<area shape="rect" id="node9" href="$integral4__wrappers_8c.html" title="Some useful wrapping of functionality. " alt="" coords="896,81,1043,122"/>
-<area shape="rect" id="node10" href="$mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="1067,88,1153,115"/>
-<area shape="rect" id="node12" href="$boys__test_8cpp.html" title="Functions related to testing the Boys function. " alt="" coords="1179,88,1336,115"/>
-<area shape="rect" id="node3" href="$mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="5,171,147,213"/>
-<area shape="rect" id="node4" href="$mirp__run__test_8cpp.html" title="mirp_run_test main function " alt="" coords="172,179,351,205"/>
-<area shape="rect" id="node11" href="$mirp__play_8cpp.html" title="Sandbox for testing features. " alt="" coords="1033,179,1188,205"/>
+<area shape="rect" id="node2" href="$all_8h.html" title="Convenience header for including headers for all kernels. " alt="" coords="274,88,395,115"/>
+<area shape="rect" id="node7" href="$boys_8c.html" title="Calculation of the boys function using interval arithmetic. " alt="" coords="420,88,556,115"/>
+<area shape="rect" id="node8" href="$boys__d_8c.html" title="Calculation of the boys function using double precision. " alt="" coords="581,88,731,115"/>
+<area shape="rect" id="node9" href="$eri_8c.html" title="Kernel for electron repulsion integrals (interval arithmetic) " alt="" coords="756,88,879,115"/>
+<area shape="rect" id="node10" href="$eri__d_8c.html" title="Kernel for electron repulsion integrals (double precision) " alt="" coords="903,88,1039,115"/>
+<area shape="rect" id="node11" href="$integral4__wrappers_8c.html" title="Some useful wrapping of functionality. " alt="" coords="1063,81,1209,122"/>
+<area shape="rect" id="node12" href="$mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="1234,88,1320,115"/>
+<area shape="rect" id="node13" href="$test__boys_8cpp.html" title="Functions related to testing the Boys function. " alt="" coords="1345,88,1503,115"/>
+<area shape="rect" id="node3" href="$mirp__create__reference_8cpp.html" title="mirp_create_reference main function " alt="" coords="5,171,147,213"/>
+<area shape="rect" id="node4" href="$mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="171,171,313,213"/>
+<area shape="rect" id="node5" href="$mirp__run__test_8cpp.html" title="mirp_run_test main function " alt="" coords="339,179,517,205"/>
+<area shape="rect" id="node6" href="$mirp__test__reference_8cpp.html" title="mirp_test_reference main function " alt="" coords="542,171,671,213"/>
 </map>

@@ -1,7 +1,10 @@
 <map id="mirp_bin/test_common.hpp" name="mirp_bin/test_common.hpp">
-<area shape="rect" id="node2" href="$boys__test_8cpp.html" title="Functions related to testing the Boys function. " alt="" coords="5,88,163,115"/>
-<area shape="rect" id="node3" href="$mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="187,81,329,122"/>
-<area shape="rect" id="node4" href="$mirp__run__test_8cpp.html" title="mirp_run_test main function " alt="" coords="355,88,533,115"/>
-<area shape="rect" id="node5" href="$test__common__integral4_8cpp.html" title="Functions related to testing single ERI. " alt="" coords="557,81,712,122"/>
-<area shape="rect" id="node6" href="$test__common__integral4__single_8cpp.html" title="Functions related to testing single ERI. " alt="" coords="736,81,891,122"/>
+<area shape="rect" id="node2" href="$mirp__create__reference_8cpp.html" title="mirp_create_reference main function " alt="" coords="5,81,147,122"/>
+<area shape="rect" id="node3" href="$read__construct__basis_8cpp.html" title="Construction of a basis from coordinates and a basis set file. " alt="" coords="171,81,332,122"/>
+<area shape="rect" id="node4" href="$ref__integral4_8cpp.html" title="Functions related to four&#45;center integral reference files. " alt="" coords="357,88,528,115"/>
+<area shape="rect" id="node5" href="$test__boys_8cpp.html" title="Functions related to testing the Boys function. " alt="" coords="552,88,709,115"/>
+<area shape="rect" id="node6" href="$test__common_8cpp.html" title="Miscellaneous testing functions. " alt="" coords="733,88,912,115"/>
+<area shape="rect" id="node7" href="$test__integral4_8cpp.html" title="Functions related to testing four&#45;center integrals. " alt="" coords="936,88,1115,115"/>
+<area shape="rect" id="node8" href="$test__integral4__single_8cpp.html" title="Functions related to testing four&#45;center single integrals. " alt="" coords="1139,81,1292,122"/>
+<area shape="rect" id="node9" href="$testfile__io_8cpp.html" title="Helper functions for reading/writing test files. " alt="" coords="1317,88,1472,115"/>
 </map>

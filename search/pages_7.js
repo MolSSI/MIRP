@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['various_20types_20of_20functions_20for_20integrals',['Various Types of Functions for Integrals',['../functiontypes.html',1,'']]]
+  ['using_20the_20mirp_20library',['Using the MIRP library',['../using_library.html',1,'']]],
+  ['using_20mirp_20programs',['Using MIRP programs',['../using_programs.html',1,'']]]
 ];

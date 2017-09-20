@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: Building MIRP</title>
+<title>MolSSI Integral Reference Project: Building MIRP from Source</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -59,16 +60,65 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Building MIRP </div>  </div>
+<div class="title">Building MIRP from Source </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="_build_requirements"></a>
 Requirements</h1>
-<p>TODO </p>
-</div></div><!-- contents -->
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Intel 2016 needs testing</dd></dl>
+<ul>
+<li>C/C++ compiler (supporting C++11)<ul>
+<li>GCC: 4.9 or greater</li>
+<li>Intel 2016 or greater</li>
+<li>Clang 4.0 or greater</li>
+</ul>
+</li>
+<li>CMake (<a href="http://cmake.org">http://cmake.org</a>)<ul>
+<li>v3.2 or greater</li>
+</ul>
+</li>
+<li>Arb v2.11.1 (<a href="http://arblib.org">http://arblib.org</a>)</li>
+<li>Flint v2.5.2 (<a href="http://flintlib.org">http://flintlib.org</a>)</li>
+<li>MPFR v3.1.5 (<a href="http://mpfr.org">http://mpfr.org</a>)</li>
+<li>GMP 6.1.2 (<a href="http://gmplib.org">http://gmplib.org</a>)<ul>
+<li>MPIR (<a href="http://mpir.org">http://mpir.org</a>) may work, but is untested</li>
+</ul>
+</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>The versions given for Arb, Flint, MPFR, and GMP are the lowest versions that MIRP has been tested with. Other versions are likely to work (particularly for GMP and MPFR).</dd></dl>
+<p>See <a class="el" href="building.html#_build_buildingdeps">Building Dependencies</a> for some info on building the dependencies, or <a class="el" href="binaries.html#_binaries_deps">Binaries of Dependencies</a> for how to obtain dependencies in binary form.</p>
+<h1><a class="anchor" id="_build_building"></a>
+Building and Installing MIRP</h1>
+<p>MIRP is built with CMake, and in general uses the standard options. No files are modified within the source tree, so multiple out-of-source builds can share the same source directory.</p>
+<p>The most common options are:</p>
+<ul>
+<li><b>CMAKE_BUILD_TYPE</b> - Set to <code>Release</code>, <code>Debug</code>, or <code>RelWithDebInfo</code>.</li>
+<li><b>CMAKE_C_COMPILER</b> - Which compiler to use for building C source files (ie, <code>icc</code>, <code>/usr/bin/gcc</code>, etc)</li>
+<li><b>CMAKE_CXX_COMPILER</b> - Which compiler to use for building C++ source files (ie, <code>icpc</code>, <code>/usr/bin/g++</code>, etc)</li>
+<li><b>CMAKE_INSTALL_PREFIX</b> - Destination for installing MIRP</li>
+<li><b>CMAKE_PREFIX_PATH</b> - Extra paths to search for dependencies (like those listed above). This path is expected to have subdirectories such as <code>bin</code>, <code>share</code>, etc.</li>
+</ul>
+<p>Other MIRP-specific options:</p>
+<ul>
+<li><b>MIRP_OPENMP</b> - Enable/disables OpenMP. If enabled, some operations in computing all the components of an integral and in the general contraction parts will be threaded. By default, threading is not enabled.</li>
+</ul>
+<p>An example of configuring, building, and installing:</p>
+<div class="fragment"><div class="line">cd /path/to/mirp</div><div class="line">mkdir build</div><div class="line">cd build</div><div class="line">cmake -DCMAKE_BUILD_TYPE=Release \</div><div class="line">      -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ \</div><div class="line">      -DCMAKE_PREFIX_PATH=/path/to/mirp_deps \</div><div class="line">      -DCMAKE_INSTALL_PREFIX=/home/user/mirp_install \</div><div class="line">      -DMIRP_OPENMP=True \</div><div class="line">      ../</div><div class="line">ctest</div><div class="line">make install</div></div><!-- fragment --><h1><a class="anchor" id="_build_testing"></a>
+Testing MIRP</h1>
+<p>Testing of the library is done using the <code>ctest</code> command. The tests are designed to thoroughly cover all the functionality of the library.</p>
+<p>Currently, the tests take less than 5 minutes on reasonably modern hardware.</p>
+<p>If you have a failing test, please file a bug report using <a href="https://github.com/MolSSI/MIRP/issues">github issues</a> or by emailing the main author directly.</p>
+<h1><a class="anchor" id="_build_buildingdeps"></a>
+Building Dependencies</h1>
+<p>There is a helper script in the <code>build_scripts</code> directory of MIRP. The script is called <code>build_deps.sh</code> and takes a single argument specifying the architecture (for gcc's <code>-march</code> option). If you are unsure what to use, and you are compiling this on the same architecture you are going to use MIRP on, use "native".</p>
+<p>This script will download and compile the dependencies using GCC (which must be in your path). It will create a directory within the current working directory named <code>mirp_deps_${arch}</code> where <code>${arch}</code> is the argument you gave to <code>build_deps.sh</code>. This directory should then be included in the <code>CMAKE_PREFIX_PATH</code> for MIRP.</p>
+<p>The current working directory will be used to store the downloaded files. Compilation will take place in a subdirectory <code>deps_build_${arch}</code>.</p>
+<p>The script is fairly rudimentary, so feel free to modify as you with for your own purposes.</p>
+<p>For example, here could be a complete workflow for downloading/compiling MIRP from scratch:</p>
+<div class="fragment"><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># Abort if an error is encountered or on undefined variables</div><div class="line">set -eu</div><div class="line"></div><div class="line"></div><div class="line"># Download MIRP sources</div><div class="line">git clone https://github.com/MolSSI/MIRP.git</div><div class="line"></div><div class="line"># Build dependencies in a separate directory</div><div class="line">mkdir mirp_deps</div><div class="line">cd mirp_deps</div><div class="line">bash ../MIRP/build_scripts/build_deps.sh native</div><div class="line">cd ../</div><div class="line"></div><div class="line"># mirp_deps directory should now contain</div><div class="line"># mirp_deps_native subdirectory</div><div class="line"></div><div class="line"># Now build MIRP</div><div class="line">mkdir mirp_build</div><div class="line">cd mirp_build</div><div class="line">cmake -DCMAKE_PREFIX_PATH=&quot;$(pwd)/../mirp_deps/mirp_deps_native&quot; \</div><div class="line">      -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ \</div><div class="line">      -DCMAKE_INSTALL_PREFIX=&quot;$(pwd)/../mirp_install&quot; \</div><div class="line">      -DCMAKE_BUILD_TYPE=Release \</div><div class="line">      ../MIRP</div><div class="line"></div><div class="line">make install</div></div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:43 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

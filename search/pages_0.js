@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['building_20mirp',['Building MIRP',['../building.html',1,'']]]
+  ['building_20mirp_20from_20source',['Building MIRP from Source',['../building.html',1,'']]]
 ];

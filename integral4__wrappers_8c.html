@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: mirp/kernels/integral4_wrappers.c File Reference</title>
+<title>MolSSI Integral Reference Project: mirp/kernels/integral4_wrappers.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -71,21 +72,24 @@ $(function() {
 
 <p>Some useful wrapping of functionality.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="math_8h_source.html">mirp/math.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="pragma_8h_source.html">mirp/pragma.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="math_8h_source.html">mirp/math.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="shell_8h_source.html">mirp/shell.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="boys_8h_source.html">mirp/kernels/boys.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="integral4__wrappers_8h_source.html">mirp/kernels/integral4_wrappers.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;assert.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for integral4_wrappers.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="integral4__wrappers_8c__incl.png" border="0" usemap="#mirp_2kernels_2integral4__wrappers_8c" alt=""/></div>
 <map name="mirp_2kernels_2integral4__wrappers_8c" id="mirp_2kernels_2integral4__wrappers_8c">
-<area shape="rect" id="node2" href="math_8h.html" title="Some miscellaneous mathematical functions in double precision and interval arithmetic. " alt="" coords="5,187,96,213"/>
-<area shape="rect" id="node4" href="shell_8h.html" title="Functions related to gaussians and shells. " alt="" coords="121,187,209,213"/>
-<area shape="rect" id="node5" href="boys_8h.html" title="Calculation of the boys function. " alt="" coords="169,104,305,131"/>
-<area shape="rect" id="node6" href="integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="329,97,476,138"/>
-<area shape="rect" id="node7" href="typedefs_8h.html" title="Typedefs of common function pointers. " alt="" coords="300,187,412,213"/>
+<area shape="rect" id="node2" href="pragma_8h.html" title="Pragmas for enabling/disabling compiler warnings. " alt="" coords="14,104,119,131"/>
+<area shape="rect" id="node3" href="math_8h.html" title="Some miscellaneous mathematical functions in double precision and interval arithmetic. " alt="" coords="5,187,96,213"/>
+<area shape="rect" id="node5" href="shell_8h.html" title="Functions related to gaussians and shells. " alt="" coords="121,187,209,213"/>
+<area shape="rect" id="node6" href="boys_8h.html" title="Calculation of the boys function. " alt="" coords="235,187,371,213"/>
+<area shape="rect" id="node7" href="integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="296,97,443,138"/>
+<area shape="rect" id="node8" href="typedefs_8h.html" title="Typedefs of common function pointers. " alt="" coords="395,187,507,213"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -94,24 +98,18 @@ Functions</h2></td></tr>
 <tr class="memitem:af5bf030d0c43746b6ab6cb153c1c3b94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#af5bf030d0c43746b6ab6cb153c1c3b94">mirp_loop_shell4</a> (arb_ptr integral, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, slong working_prec, <a class="el" href="typedefs_8h.html#a98651a570ecb67339faa61f97b169363">cb_integral4_single</a> cb)</td></tr>
 <tr class="memdesc:af5bf030d0c43746b6ab6cb153c1c3b94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian integrals of a contracted shell quartet for an integral (four-center, interval arithmetic)  <a href="#af5bf030d0c43746b6ab6cb153c1c3b94">More...</a><br /></td></tr>
 <tr class="separator:af5bf030d0c43746b6ab6cb153c1c3b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae53e838af37acb9126bc00e0fe9caf49"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#ae53e838af37acb9126bc00e0fe9caf49">mirp_integral4_single_target</a> (arb_t integral, const int *lmn1, arb_srcptr A, const arb_t alpha1, const int *lmn2, arb_srcptr B, const arb_t alpha2, const int *lmn3, arb_srcptr C, const arb_t alpha3, const int *lmn4, arb_srcptr D, const arb_t alpha4, slong target_prec, <a class="el" href="typedefs_8h.html#a98651a570ecb67339faa61f97b169363">cb_integral4_single</a> cb)</td></tr>
-<tr class="memdesc:ae53e838af37acb9126bc00e0fe9caf49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a single integral to a target precision (four-center)  <a href="#ae53e838af37acb9126bc00e0fe9caf49">More...</a><br /></td></tr>
-<tr class="separator:ae53e838af37acb9126bc00e0fe9caf49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af69fda26504d403390b20f5b0f54acde"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#af69fda26504d403390b20f5b0f54acde">mirp_integral4_target</a> (arb_ptr integrals, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, slong target_prec, <a class="el" href="typedefs_8h.html#a76686a1618a8f29c7476cac66790e015">cb_integral4</a> cb)</td></tr>
-<tr class="memdesc:af69fda26504d403390b20f5b0f54acde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes all cartesian integrals of a contracted shell quartet to a target precision (four-center)  <a href="#af69fda26504d403390b20f5b0f54acde">More...</a><br /></td></tr>
-<tr class="separator:af69fda26504d403390b20f5b0f54acde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a463720c78a3159a5a8555b9d0619fe30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a463720c78a3159a5a8555b9d0619fe30">mirp_integral4_single_target_str</a> (arb_t integral, const int *lmn1, const char **A, const char *alpha1, const int *lmn2, const char **B, const char *alpha2, const int *lmn3, const char **C, const char *alpha3, const int *lmn4, const char **D, const char *alpha4, slong target_prec, <a class="el" href="typedefs_8h.html#a98651a570ecb67339faa61f97b169363">cb_integral4_single</a> cb)</td></tr>
-<tr class="memdesc:a463720c78a3159a5a8555b9d0619fe30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a single 4-center integral to a target precision (string input)  <a href="#a463720c78a3159a5a8555b9d0619fe30">More...</a><br /></td></tr>
-<tr class="separator:a463720c78a3159a5a8555b9d0619fe30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02060ba5b1a7d6e62ea2fd8f09babe49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a02060ba5b1a7d6e62ea2fd8f09babe49">mirp_integral4_target_str</a> (arb_ptr integrals, int am1, const char **A, int nprim1, int ngen1, const char **alpha1, const char **coeff1, int am2, const char **B, int nprim2, int ngen2, const char **alpha2, const char **coeff2, int am3, const char **C, int nprim3, int ngen3, const char **alpha3, const char **coeff3, int am4, const char **D, int nprim4, int ngen4, const char **alpha4, const char **coeff4, slong target_prec, <a class="el" href="typedefs_8h.html#a76686a1618a8f29c7476cac66790e015">cb_integral4</a> cb)</td></tr>
-<tr class="memdesc:a02060ba5b1a7d6e62ea2fd8f09babe49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a single 4-center integral to a target precision (string input)  <a href="#a02060ba5b1a7d6e62ea2fd8f09babe49">More...</a><br /></td></tr>
-<tr class="separator:a02060ba5b1a7d6e62ea2fd8f09babe49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ec0db7cdc2168595fcaf8266c42a6ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a7ec0db7cdc2168595fcaf8266c42a6ba">mirp_integral4_single_exact</a> (double *integral, const int *lmn1, const double *A, double alpha1, const int *lmn2, const double *B, double alpha2, const int *lmn3, const double *C, double alpha3, const int *lmn4, const double *D, double alpha4, <a class="el" href="typedefs_8h.html#a9dfffe911fa59a1610ddbcdbc81f08d5">cb_integral4_single_target</a> cb)</td></tr>
-<tr class="memdesc:a7ec0db7cdc2168595fcaf8266c42a6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a single integral to double precision using interval arithmetic (four-center)  <a href="#a7ec0db7cdc2168595fcaf8266c42a6ba">More...</a><br /></td></tr>
-<tr class="separator:a7ec0db7cdc2168595fcaf8266c42a6ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee33898a3657ecf9deca93f1d0c579c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#aee33898a3657ecf9deca93f1d0c579c9">mirp_integral4_exact</a> (double *integral, int am1, const double *A, int nprim1, int ngen1, const double *alpha1, const double *coeff1, int am2, const double *B, int nprim2, int ngen2, const double *alpha2, const double *coeff2, int am3, const double *C, int nprim3, int ngen3, const double *alpha3, const double *coeff3, int am4, const double *D, int nprim4, int ngen4, const double *alpha4, const double *coeff4, <a class="el" href="typedefs_8h.html#a7551ccd994f9820a6a37f0f893b587cd">cb_integral4_target</a> cb)</td></tr>
-<tr class="memdesc:aee33898a3657ecf9deca93f1d0c579c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian integrals of a contracted shell quartet for an integral to exact double precision (four-center)  <a href="#aee33898a3657ecf9deca93f1d0c579c9">More...</a><br /></td></tr>
-<tr class="separator:aee33898a3657ecf9deca93f1d0c579c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1164660ca4c8874aef023aebbf1b462"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#aa1164660ca4c8874aef023aebbf1b462">mirp_integral4_single_str</a> (arb_t integral, const int *lmn1, const char **A, const char *alpha1, const int *lmn2, const char **B, const char *alpha2, const int *lmn3, const char **C, const char *alpha3, const int *lmn4, const char **D, const char *alpha4, slong working_prec, <a class="el" href="typedefs_8h.html#a98651a570ecb67339faa61f97b169363">cb_integral4_single</a> cb)</td></tr>
+<tr class="memdesc:aa1164660ca4c8874aef023aebbf1b462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a single 4-center integral using interval arithmetic (string input)  <a href="#aa1164660ca4c8874aef023aebbf1b462">More...</a><br /></td></tr>
+<tr class="separator:aa1164660ca4c8874aef023aebbf1b462"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a482a45ecd41568883152705d1398dc64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a482a45ecd41568883152705d1398dc64">mirp_integral4_str</a> (arb_ptr integrals, int am1, const char **A, int nprim1, int ngen1, const char **alpha1, const char **coeff1, int am2, const char **B, int nprim2, int ngen2, const char **alpha2, const char **coeff2, int am3, const char **C, int nprim3, int ngen3, const char **alpha3, const char **coeff3, int am4, const char **D, int nprim4, int ngen4, const char **alpha4, const char **coeff4, slong working_prec, <a class="el" href="typedefs_8h.html#a76686a1618a8f29c7476cac66790e015">cb_integral4</a> cb)</td></tr>
+<tr class="memdesc:a482a45ecd41568883152705d1398dc64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a single 4-center integral to a target precision (string input)  <a href="#a482a45ecd41568883152705d1398dc64">More...</a><br /></td></tr>
+<tr class="separator:a482a45ecd41568883152705d1398dc64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b00530cc907bdb301e8ec0a25b74aa0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a9b00530cc907bdb301e8ec0a25b74aa0">mirp_integral4_single_exact</a> (double *integral, const int *lmn1, const double *A, double alpha1, const int *lmn2, const double *B, double alpha2, const int *lmn3, const double *C, double alpha3, const int *lmn4, const double *D, double alpha4, <a class="el" href="typedefs_8h.html#a98651a570ecb67339faa61f97b169363">cb_integral4_single</a> cb)</td></tr>
+<tr class="memdesc:a9b00530cc907bdb301e8ec0a25b74aa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a single integral to exact double precision using interval arithmetic (four-center)  <a href="#a9b00530cc907bdb301e8ec0a25b74aa0">More...</a><br /></td></tr>
+<tr class="separator:a9b00530cc907bdb301e8ec0a25b74aa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bc9d8f9c5c70a6ed79e8a98da0cbb5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a6bc9d8f9c5c70a6ed79e8a98da0cbb5c">mirp_integral4_exact</a> (double *integral, int am1, const double *A, int nprim1, int ngen1, const double *alpha1, const double *coeff1, int am2, const double *B, int nprim2, int ngen2, const double *alpha2, const double *coeff2, int am3, const double *C, int nprim3, int ngen3, const double *alpha3, const double *coeff3, int am4, const double *D, int nprim4, int ngen4, const double *alpha4, const double *coeff4, <a class="el" href="typedefs_8h.html#a76686a1618a8f29c7476cac66790e015">cb_integral4</a> cb)</td></tr>
+<tr class="memdesc:a6bc9d8f9c5c70a6ed79e8a98da0cbb5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian integrals of a contracted shell quartet for an integral to exact double precision (four-center)  <a href="#a6bc9d8f9c5c70a6ed79e8a98da0cbb5c">More...</a><br /></td></tr>
+<tr class="separator:a6bc9d8f9c5c70a6ed79e8a98da0cbb5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c225d2bc6caa6a73933a779990d9a3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a2c225d2bc6caa6a73933a779990d9a3a">mirp_loop_shell4_d</a> (double *integral, int am1, const double *A, int nprim1, int ngen1, const double *alpha1, const double *coeff1, int am2, const double *B, int nprim2, int ngen2, const double *alpha2, const double *coeff2, int am3, const double *C, int nprim3, int ngen3, const double *alpha3, const double *coeff3, int am4, const double *D, int nprim4, int ngen4, const double *alpha4, const double *coeff4, <a class="el" href="typedefs_8h.html#a27bbbd7656a831dd0227322ae8bd7644">cb_integral4_single_d</a> cb)</td></tr>
 <tr class="memdesc:a2c225d2bc6caa6a73933a779990d9a3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian integrals of a contracted shell quartet for an integral (four-center, double precision)  <a href="#a2c225d2bc6caa6a73933a779990d9a3a">More...</a><br /></td></tr>
 <tr class="separator:a2c225d2bc6caa6a73933a779990d9a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,8 +117,8 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Some useful wrapping of functionality. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aee33898a3657ecf9deca93f1d0c579c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee33898a3657ecf9deca93f1d0c579c9">&#9670;&nbsp;</a></span>mirp_integral4_exact()</h2>
+<a id="a6bc9d8f9c5c70a6ed79e8a98da0cbb5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bc9d8f9c5c70a6ed79e8a98da0cbb5c">&#9670;&nbsp;</a></span>mirp_integral4_exact()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -278,7 +276,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a7551ccd994f9820a6a37f0f893b587cd">cb_integral4_target</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="typedefs_8h.html#a76686a1618a8f29c7476cac66790e015">cb_integral4</a>&#160;</td>
           <td class="paramname"><em>cb</em>&#160;</td>
         </tr>
         <tr>
@@ -307,8 +305,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7ec0db7cdc2168595fcaf8266c42a6ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ec0db7cdc2168595fcaf8266c42a6ba">&#9670;&nbsp;</a></span>mirp_integral4_single_exact()</h2>
+<a id="a9b00530cc907bdb301e8ec0a25b74aa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b00530cc907bdb301e8ec0a25b74aa0">&#9670;&nbsp;</a></span>mirp_integral4_single_exact()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -394,7 +392,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a9dfffe911fa59a1610ddbcdbc81f08d5">cb_integral4_single_target</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="typedefs_8h.html#a98651a570ecb67339faa61f97b169363">cb_integral4_single</a>&#160;</td>
           <td class="paramname"><em>cb</em>&#160;</td>
         </tr>
         <tr>
@@ -405,7 +403,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Computes a single integral to double precision using interval arithmetic (four-center) </p>
+<p>Computes a single integral to exact double precision using interval arithmetic (four-center) </p>
 <p>This function takes double precision as input and returns double precision as output. Internally, it uses interval arithmetic to ensure that no precision is lost</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -420,137 +418,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae53e838af37acb9126bc00e0fe9caf49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae53e838af37acb9126bc00e0fe9caf49">&#9670;&nbsp;</a></span>mirp_integral4_single_target()</h2>
+<a id="aa1164660ca4c8874aef023aebbf1b462"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1164660ca4c8874aef023aebbf1b462">&#9670;&nbsp;</a></span>mirp_integral4_single_str()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int mirp_integral4_single_target </td>
-          <td>(</td>
-          <td class="paramtype">arb_t&#160;</td>
-          <td class="paramname"><em>integral</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>lmn1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>A</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const arb_t&#160;</td>
-          <td class="paramname"><em>alpha1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>lmn2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>B</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const arb_t&#160;</td>
-          <td class="paramname"><em>alpha2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>lmn3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>C</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const arb_t&#160;</td>
-          <td class="paramname"><em>alpha3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>lmn4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>D</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const arb_t&#160;</td>
-          <td class="paramname"><em>alpha4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">slong&#160;</td>
-          <td class="paramname"><em>target_prec</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a98651a570ecb67339faa61f97b169363">cb_integral4_single</a>&#160;</td>
-          <td class="paramname"><em>cb</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Compute a single integral to a target precision (four-center) </p>
-<p>This function seeks to calculate the integral to a target precision. This works by increasing the working precision until the result is the desired precision (<code>target_prec</code>).</p>
-<p>If the inputs are not of high enough precision to reach the target precision, the function will return nonzero, indicating that reaching the target precision is impossible. Otherwise, the function returns zero.</p>
-<p>Note that the result may be of higher precision that the desired target precision.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">integral</td><td>Output for the computed integral </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">lmn1,lmn2,lmn3,lmn4</td><td>Exponents of x, y, and z that signify angular momentum. Required to be 3 elements. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the gaussian on the four-centers </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">target_prec</td><td>Desired precision (in bits) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes a single cartesian four-center integral with interval arithmetic </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Nonzero if there is a problem with obtaining the target precision (usually due to a lack of precision in the input parameters) </dd></dl>
-
-</div>
-</div>
-<a id="a463720c78a3159a5a8555b9d0619fe30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a463720c78a3159a5a8555b9d0619fe30">&#9670;&nbsp;</a></span>mirp_integral4_single_target_str()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void mirp_integral4_single_target_str </td>
+          <td class="memname">void mirp_integral4_single_str </td>
           <td>(</td>
           <td class="paramtype">arb_t&#160;</td>
           <td class="paramname"><em>integral</em>, </td>
@@ -631,7 +506,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">slong&#160;</td>
-          <td class="paramname"><em>target_prec</em>, </td>
+          <td class="paramname"><em>working_prec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -647,232 +522,30 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Compute a single 4-center integral to a target precision (string input) </p>
-<p>This function seeks to calculate the integral to a target precision. This works by increasing the working precision until the result is the desired precision (<code>target_prec</code>).</p>
-<p>If the inputs are not of high enough precision to reach the target precision, the function will return nonzero, indicating that reaching the target precision is impossible. Otherwise, the function returns zero.</p>
-<p>Note that the result may be of higher precision that the desired target precision.</p>
+<p>Compute a single 4-center integral using interval arithmetic (string input) </p>
+<p>This function converts string inputs into arblib types and runs the callback <code>cb</code> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">integral</td><td>Output for the computed integral </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">lmn1,lmn2,lmn3,lmn4</td><td>Exponents of x, y, and z that signify angular momentum. Required to be 3 elements. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the gaussian on the four-centers </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">target_prec</td><td>Desired precision (in bits) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>Internal working precision </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes a single cartesian four-center integral with interval arithmetic </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Nonzero if there is a problem with obtaining the target precision (usually due to a lack of precision in the input parameters)</dd></dl>
-<p>Similar to mirp_integral4_single_target, except that the input parameters are strings. The strings are interpreted to have infinite precision. Because of this, this function should not fail due to inability to reach the target precision. </p>
 
 </div>
 </div>
-<a id="af69fda26504d403390b20f5b0f54acde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af69fda26504d403390b20f5b0f54acde">&#9670;&nbsp;</a></span>mirp_integral4_target()</h2>
+<a id="a482a45ecd41568883152705d1398dc64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a482a45ecd41568883152705d1398dc64">&#9670;&nbsp;</a></span>mirp_integral4_str()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int mirp_integral4_target </td>
-          <td>(</td>
-          <td class="paramtype">arb_ptr&#160;</td>
-          <td class="paramname"><em>integrals</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>A</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>alpha1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>coeff1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>B</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>alpha2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>coeff2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>C</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>alpha3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>coeff3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>D</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>alpha4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>coeff4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">slong&#160;</td>
-          <td class="paramname"><em>target_prec</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a76686a1618a8f29c7476cac66790e015">cb_integral4</a>&#160;</td>
-          <td class="paramname"><em>cb</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Computes all cartesian integrals of a contracted shell quartet to a target precision (four-center) </p>
-<p>This function seeks to calculate the integrals to a target precision. This works by increasing the working precision until the result is the desired precision (<code>target_prec</code>).</p>
-<p>If the inputs are not of high enough precision to reach the target precision, the function will return nonzero, indicating that reaching the target precision is impossible. Otherwise, the function returns zero.</p>
-<p>Note that the result may be of higher precision that the desired target precision.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Output for the computed integrals </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">am1,am2,am3,am4</td><td>Angular momentum for the four-centers </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nprim1,nprim2,nprim3,nprim4</td><td>Number of primitive gaussians for each shell </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ngen1,ngen2,ngen3,ngen4</td><td>Number of general contractions for each shell </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the primitive gaussians on the four-centers (of lengths <code>nprim1</code>, <code>nprim2</code>, <code>nprim3</code>, <code>nprim4</code> respectively) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">coeff1,coeff2,coeff3,coeff4</td><td>Coefficients for all primitives and for all general contractions for each shell (of lengths <code>nprim1</code> * <code>ngen1</code>, <code>nprim2</code> * <code>ngen2</code>, <code>nprim3</code> * <code>ngen3</code>, <code>nprim4</code> * <code>ngen4</code> respectively) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">target_prec</td><td>Desired target precision (in bits) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes a single cartesian four-center integral with interval arithmetic </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Nonzero if there is a problem with obtaining the target precision (usually due to a lack of precision in the input parameters) </dd></dl>
-
-</div>
-</div>
-<a id="a02060ba5b1a7d6e62ea2fd8f09babe49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02060ba5b1a7d6e62ea2fd8f09babe49">&#9670;&nbsp;</a></span>mirp_integral4_target_str()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void mirp_integral4_target_str </td>
+          <td class="memname">void mirp_integral4_str </td>
           <td>(</td>
           <td class="paramtype">arb_ptr&#160;</td>
           <td class="paramname"><em>integrals</em>, </td>
@@ -1025,7 +698,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">slong&#160;</td>
-          <td class="paramname"><em>target_prec</em>, </td>
+          <td class="paramname"><em>working_prec</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1042,9 +715,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compute a single 4-center integral to a target precision (string input) </p>
-<p>This function seeks to calculate the integrals to a target precision. This works by increasing the working precision until the result is the desired precision (<code>target_prec</code>).</p>
-<p>If the inputs are not of high enough precision to reach the target precision, the function will return nonzero, indicating that reaching the target precision is impossible. Otherwise, the function returns zero.</p>
-<p>Note that the result may be of higher precision that the desired target precision.</p>
+<p>This function converts string inputs into arblib types and runs the callback <code>cb</code> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Output for the computed integrals </td></tr>
@@ -1054,13 +725,11 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ngen1,ngen2,ngen3,ngen4</td><td>Number of general contractions for each shell </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the primitive gaussians on the four-centers (of lengths <code>nprim1</code>, <code>nprim2</code>, <code>nprim3</code>, <code>nprim4</code> respectively) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">coeff1,coeff2,coeff3,coeff4</td><td>Coefficients for all primitives and for all general contractions for each shell (of lengths <code>nprim1</code> * <code>ngen1</code>, <code>nprim2</code> * <code>ngen2</code>, <code>nprim3</code> * <code>ngen3</code>, <code>nprim4</code> * <code>ngen4</code> respectively) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">target_prec</td><td>Desired target precision (in bits) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>Internal working precision (in bits) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes a single cartesian four-center integral with interval arithmetic </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Nonzero if there is a problem with obtaining the target precision (usually due to a lack of precision in the input parameters)</dd></dl>
-<p>Similar to mirp_integral4_target, except that the input parameters are strings. The strings are interpreted to have infinite precision. Because of this, this function should not fail due to inability to reach the target precision. </p>
 
 </div>
 </div>
@@ -1450,7 +1119,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:43 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

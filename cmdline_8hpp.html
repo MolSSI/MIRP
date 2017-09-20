@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MIRP: mirp_bin/cmdline.hpp File Reference</title>
+<title>MolSSI Integral Reference Project: mirp_bin/cmdline.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,8 +20,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="mirp_logo_477x219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MIRP
+   <div id="projectname">MolSSI Integral Reference Project
    </div>
   </td>
  </tr>
@@ -78,8 +79,6 @@ $(function() {
 Include dependency graph for cmdline.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="cmdline_8hpp__incl.png" border="0" usemap="#mirp__bin_2cmdline_8hpp" alt=""/></div>
-<map name="mirp__bin_2cmdline_8hpp" id="mirp__bin_2cmdline_8hpp">
-</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -87,9 +86,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="center"><img src="cmdline_8hpp__dep__incl.png" border="0" usemap="#mirp__bin_2cmdline_8hppdep" alt=""/></div>
 <map name="mirp__bin_2cmdline_8hppdep" id="mirp__bin_2cmdline_8hppdep">
 <area shape="rect" id="node2" href="cmdline_8cpp.html" title="Functions for parsing the command line given to a program. " alt="" coords="5,88,149,115"/>
-<area shape="rect" id="node3" href="mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="174,81,316,122"/>
-<area shape="rect" id="node4" href="mirp__play_8cpp.html" title="Sandbox for testing features. " alt="" coords="341,88,496,115"/>
-<area shape="rect" id="node5" href="mirp__run__test_8cpp.html" title="mirp_run_test main function " alt="" coords="521,88,700,115"/>
+<area shape="rect" id="node3" href="mirp__create__reference_8cpp.html" title="mirp_create_reference main function " alt="" coords="174,81,316,122"/>
+<area shape="rect" id="node4" href="mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="341,81,483,122"/>
+<area shape="rect" id="node5" href="mirp__run__test_8cpp.html" title="mirp_run_test main function " alt="" coords="508,88,687,115"/>
+<area shape="rect" id="node6" href="mirp__test__reference_8cpp.html" title="mirp_test_reference main function " alt="" coords="711,81,840,122"/>
 </map>
 </div>
 </div>
@@ -105,18 +105,21 @@ Functions</h2></td></tr>
 <tr class="memitem:ada07f7317a5c464516b637ff2ea73581"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#ada07f7317a5c464516b637ff2ea73581">mirp::cmdline_has_arg</a> (const std::vector&lt; std::string &gt; &amp;cmdline, const std::string &amp;arg)</td></tr>
 <tr class="memdesc:ada07f7317a5c464516b637ff2ea73581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check to see if the given command line has an argument.  <a href="namespacemirp.html#ada07f7317a5c464516b637ff2ea73581">More...</a><br /></td></tr>
 <tr class="separator:ada07f7317a5c464516b637ff2ea73581"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d349b8a66b994e816ecb84546aef1d4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a5d349b8a66b994e816ecb84546aef1d4">mirp::cmdline_get_arg_str</a> (const std::vector&lt; std::string &gt; &amp;cmdline, const std::string &amp;arg)</td></tr>
-<tr class="memdesc:a5d349b8a66b994e816ecb84546aef1d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the value of an argument from the command line as a string.  <a href="namespacemirp.html#a5d349b8a66b994e816ecb84546aef1d4">More...</a><br /></td></tr>
-<tr class="separator:a5d349b8a66b994e816ecb84546aef1d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80f06a146e930b099623324248d41f91"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a80f06a146e930b099623324248d41f91">mirp::cmdline_get_arg_str</a> (const std::vector&lt; std::string &gt; &amp;cmdline, const std::string &amp;arg, const std::string &amp;def)</td></tr>
-<tr class="memdesc:a80f06a146e930b099623324248d41f91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the value of an argument from the command line as a string, with a default.  <a href="namespacemirp.html#a80f06a146e930b099623324248d41f91">More...</a><br /></td></tr>
-<tr class="separator:a80f06a146e930b099623324248d41f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ca4d773710c8262bf354a4fcb0a0333"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a4ca4d773710c8262bf354a4fcb0a0333">mirp::cmdline_get_arg_long</a> (const std::vector&lt; std::string &gt; &amp;cmdline, const std::string &amp;arg)</td></tr>
-<tr class="memdesc:a4ca4d773710c8262bf354a4fcb0a0333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the value of an argument from the command line as a long integer.  <a href="namespacemirp.html#a4ca4d773710c8262bf354a4fcb0a0333">More...</a><br /></td></tr>
-<tr class="separator:a4ca4d773710c8262bf354a4fcb0a0333"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae6d9649393a0dbd10dbd2a7cb812dce"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#aae6d9649393a0dbd10dbd2a7cb812dce">mirp::cmdline_get_arg_long</a> (const std::vector&lt; std::string &gt; &amp;cmdline, const std::string &amp;arg, long def)</td></tr>
-<tr class="memdesc:aae6d9649393a0dbd10dbd2a7cb812dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the value of an argument from the command line as a long integer, with a default.  <a href="namespacemirp.html#aae6d9649393a0dbd10dbd2a7cb812dce">More...</a><br /></td></tr>
-<tr class="separator:aae6d9649393a0dbd10dbd2a7cb812dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1667b1a3866f9d460c474251c1bf471f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a1667b1a3866f9d460c474251c1bf471f">mirp::cmdline_get_switch</a> (std::vector&lt; std::string &gt; &amp;cmdline, const std::string &amp;arg)</td></tr>
+<tr class="memdesc:a1667b1a3866f9d460c474251c1bf471f"><td class="mdescLeft">&#160;</td><td class="mdescRight">See if the command line has a switch.  <a href="namespacemirp.html#a1667b1a3866f9d460c474251c1bf471f">More...</a><br /></td></tr>
+<tr class="separator:a1667b1a3866f9d460c474251c1bf471f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a958486b749ea0de3331bbc2256574343"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a958486b749ea0de3331bbc2256574343">mirp::cmdline_get_arg_str</a> (std::vector&lt; std::string &gt; &amp;cmdline, const std::string &amp;arg)</td></tr>
+<tr class="memdesc:a958486b749ea0de3331bbc2256574343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the value of an argument from the command line as a string.  <a href="namespacemirp.html#a958486b749ea0de3331bbc2256574343">More...</a><br /></td></tr>
+<tr class="separator:a958486b749ea0de3331bbc2256574343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8c68eccff37c596fcd49b3a234649e6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#ad8c68eccff37c596fcd49b3a234649e6">mirp::cmdline_get_arg_str</a> (std::vector&lt; std::string &gt; &amp;cmdline, const std::string &amp;arg, const std::string &amp;def)</td></tr>
+<tr class="memdesc:ad8c68eccff37c596fcd49b3a234649e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the value of an argument from the command line as a string, with a default.  <a href="namespacemirp.html#ad8c68eccff37c596fcd49b3a234649e6">More...</a><br /></td></tr>
+<tr class="separator:ad8c68eccff37c596fcd49b3a234649e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14c5d6bc1620517cb1dd3038139b222e"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a14c5d6bc1620517cb1dd3038139b222e">mirp::cmdline_get_arg_long</a> (std::vector&lt; std::string &gt; &amp;cmdline, const std::string &amp;arg)</td></tr>
+<tr class="memdesc:a14c5d6bc1620517cb1dd3038139b222e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the value of an argument from the command line as a long integer.  <a href="namespacemirp.html#a14c5d6bc1620517cb1dd3038139b222e">More...</a><br /></td></tr>
+<tr class="separator:a14c5d6bc1620517cb1dd3038139b222e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5339c262fa33a0e966f09c39d9e3c7b8"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a5339c262fa33a0e966f09c39d9e3c7b8">mirp::cmdline_get_arg_long</a> (std::vector&lt; std::string &gt; &amp;cmdline, const std::string &amp;arg, long def)</td></tr>
+<tr class="memdesc:a5339c262fa33a0e966f09c39d9e3c7b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the value of an argument from the command line as a long integer, with a default.  <a href="namespacemirp.html#a5339c262fa33a0e966f09c39d9e3c7b8">More...</a><br /></td></tr>
+<tr class="separator:a5339c262fa33a0e966f09c39d9e3c7b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d1e9d32611a0f001ff3af9cf821ec33"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a5d1e9d32611a0f001ff3af9cf821ec33">mirp::convert_cmdline</a> (int argc, char **argv)</td></tr>
 <tr class="memdesc:a5d1e9d32611a0f001ff3af9cf821ec33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the command line passed to a program into a vector of strings.  <a href="namespacemirp.html#a5d1e9d32611a0f001ff3af9cf821ec33">More...</a><br /></td></tr>
 <tr class="separator:a5d1e9d32611a0f001ff3af9cf821ec33"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,7 +129,7 @@ Functions</h2></td></tr>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 26 2017 19:47:43 for MIRP by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 20 2017 17:14:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
