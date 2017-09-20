@@ -115,14 +115,22 @@ rm -Rf deps_build_$1
 # Remove unneeded .la files
 rm ${PREFIX}/lib/*.la
 
-# Fix the rpaths
-for I in ${PREFIX}/lib/*
-do
-    if [[ ! -L "$I" ]]
-    then 
-        RP1=`patchelf --print-rpath "$I"`
-        patchelf --set-rpath '$ORIGIN' "$I"
-        RP2=`patchelf --print-rpath "$I"`
-        echo "${I}: RPATH changed from ${RP1} to ${RP2}"
-    fi
-done
+# Fix the rpaths (if we have patchelf)
+if [[ $(command -v patchelf 2>&1) ]]
+then
+    for I in ${PREFIX}/lib/*
+    do
+        if [[ ! -L "$I" ]]
+        then 
+            RP1=`patchelf --print-rpath "$I"`
+            patchelf --set-rpath '$ORIGIN' "$I"
+            RP2=`patchelf --print-rpath "$I"`
+            echo "${I}: RPATH changed from ${RP1} to ${RP2}"
+        fi
+    done
+else
+    echo
+    echo "!!! Patchelf not installed. Skipping fixing RPATHS !!!"
+    echo
+fi
+
