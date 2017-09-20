@@ -5,8 +5,8 @@
 
 \section overview_sec Overview
 
-The MolSSI Integral Reference Project (MIRP) is a project overseen by the Molecular
-Sciences Software Institute (MolSSI). Its primary goal is to create and maintain reference
+The MolSSI Integral Reference Project (MIRP) is a project overseen by the <a href="http://molssi.org">Molecular
+Sciences Software Institute (MolSSI)</a>. Its primary goal is to create and maintain reference
 implementations for integrals commonly found in quantum chemistry software.
 
 MIRP has two main parts. The first is the reference implementations themselves. These
@@ -28,11 +28,20 @@ precision and ensured to be accurate to the last printed place (unit of least pr
 
 The source code of MIRP is available at GitHub at https://github.com/MolSSI/MIRP
 
-\section main_sec Building, Installing, and Using
+MIRP (and dependencies) can be built with most standard C/C++ compilers.
+In addition, both MIRP (and the dependencies) can be obtained as linux executables
+and shared libraries.
 
-  - \ref conventions
-  - \ref filesystem
-  - \ref building
+\section main_sec Main Documentation
+
+  - Obtaining, building, and installing
+    - \ref binaries
+    - \ref building
+
+  - Using MIRP
+    - \ref conventions
+    - \ref using_library
+    - \ref using_programs
 
 \section algo_sec Integrals and Algorithms
   - \ref functiontypes
@@ -44,6 +53,7 @@ The source code of MIRP is available at GitHub at https://github.com/MolSSI/MIRP
 
 \section prog_sec MIRP Technical Details
 
+  - \ref filesystem
   - \ref tests
 
 \section Authors

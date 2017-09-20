@@ -1,19 +1,32 @@
-/*! \page building Building MIRP
+/*! \page building Building MIRP from Source
 
 \section _build_requirements Requirements
 
-\todo Determine some reasonable minimum version requirements
+\todo Intel 2016 needs testing
 
 - C/C++ compiler (supporting C++11)
-- CMake (http://cmake.org)
+  - GCC: 4.9 or greater
+  - Intel 2016 or greater
+  - Clang 4.0 or greater
 
-- Arb (http://arblib.org)
-- Flint (http://flintlib.org)
-- MPFR (http://mpfr.org)
-- GMP (http://gmplib.org)
+- CMake (http://cmake.org)
+  - v3.2 or greater
+
+- Arb v2.11.1 (http://arblib.org)
+- Flint v2.5.2 (http://flintlib.org)
+- MPFR v3.1.5 (http://mpfr.org)
+- GMP 6.1.2 (http://gmplib.org)
   - MPIR (http://mpir.org) may work, but is untested
 
-\section _build_building Building and Installing
+\note The versions given for Arb, Flint, MPFR, and GMP are the lowest
+versions that MIRP has been tested with. Other versions are likely
+to work (particularly for GMP and MPFR).
+
+See \ref _build_buildingdeps for some info on building the dependencies,
+or \ref _binaries_deps for how to obtain dependencies in binary form.
+
+
+\section _build_building Building and Installing MIRP
 
 MIRP is built with CMake, and in general uses the standard options.
 No files are modified within the source tree, so multiple out-of-source
@@ -66,6 +79,30 @@ Currently, the tests take less than 5 minutes on reasonably modern hardware.
 If you have a failing test, please file a bug report using
 <a href="https://github.com/MolSSI/MIRP/issues">github issues</a> or by
 emailing the main author directly.
+
+\section _build_buildingdeps Building Dependencies
+
+There is a helper script in the `build_scripts` directory of MIRP. The
+script is called `build_deps.sh` and takes a single argument specifying
+the architecture (for gcc's `-march` option). If you are unsure what to use,
+and you are compiling this on the same architecture you are going to use MIRP on,
+use "native".
+
+This script will download and compile the dependencies using GCC (which must be
+in your path). It will create a directory within the current working directory
+named `mirp_deps_${arch}` where `${arch}` is the argument you gave to `build_deps.sh`.
+This directory should then be included in the `CMAKE_PREFIX_PATH` for MIRP.
+
+The current working directory will be used to store the downloaded files. Compilation
+will take place in a subdirectory `deps_build_${arch}`.
+
+The script is fairly rudimentary, so feel free to modify as you with for your
+own purposes.
+
+For example, here could be a complete workflow for downloading/compiling MIRP
+from scratch:
+
+\include build_install_1.sh
 
 
 */
