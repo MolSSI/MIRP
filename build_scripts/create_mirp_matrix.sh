@@ -1,8 +1,5 @@
 #!/bin/bash
 
-export MIRP_DIR="/home/ben/programming/mirp"
-export DEPS_DIR="/home/ben/programming/mirp_dep_builder"
-
 rm -f matrix.txt
 
 ALL_DEPS_ARCH="haswell"
