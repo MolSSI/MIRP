@@ -38,8 +38,8 @@ install:
   #- cat /proc/cpuinfo
 
   # Build dependencies
-  - bash travis/build_deps.sh
-  - export DEPDIR="$(pwd)/mirp_deps"
+  - bash build_scripts/build_deps.sh native
+  - export DEPDIR="$(pwd)/mirp_deps_native"
   - export LD_LIBRARY_PATH="${DEPDIR}/lib:${DEPDIR}/lib64:${LD_LIBRARY_PATH}"
 
 script:
