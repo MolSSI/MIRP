@@ -37,6 +37,7 @@ CMAKE="$(which cmake)"
 
 FULL_DEPS_DIR="${DEPS_DIR}/mirp_deps_${DEPS_ARCH}"
 BUILD_DIR="$(mktemp -d -p /tmp)"
+CURDIR="$(pwd)"
 
 echo "    Build dir: ${BUILD_DIR}"     >> ${OUTFILE}
 echo " Dependencies: ${FULL_DEPS_DIR}" >> ${OUTFILE}
@@ -56,3 +57,6 @@ ${CMAKE} -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} \
 
 make &>> ${OUTFILE}
 ctest &>> ${OUTFILE}
+
+cd "${CURDIR}"
+rm -Rf "${BUILD_DIR}"
