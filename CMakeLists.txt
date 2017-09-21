@@ -18,7 +18,7 @@ set(CMAKECONFIG_INSTALL_DIR "share/cmake/mirp")
 
 
 # add lib64, etc, to search paths (rather than just plain lib)
-set(FIND_LIBRARY_USE_LIB64_PATHS True)
+set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS True)
 
 
 # Find the dependencies
