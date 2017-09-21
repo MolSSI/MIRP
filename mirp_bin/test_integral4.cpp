@@ -35,6 +35,8 @@ void integral4_create_test(const std::string & input_filepath,
 {
     integral_data data = testfile_read_integral(input_filepath, 4, true);
 
+    std::cout << "Read " << data.entries.size() << " values from " << input_filepath << "\n";
+
     data.ndigits = ndigits;
     data.working_prec = working_prec;
     data.header += header;

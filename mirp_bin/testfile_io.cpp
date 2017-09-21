@@ -7,9 +7,14 @@
 #include "mirp_bin/data_entry.hpp"
 #include "mirp_bin/test_common.hpp"
 #include <mirp/shell.h>
+#include <iostream>
 #include <sstream>
 #include <fstream>
 #include <stdexcept>
+#include <limits>
+
+// Maximum line length
+const std::streamsize max_length = std::numeric_limits<std::streamsize>::max();
 
 namespace mirp {
 
@@ -18,6 +23,7 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
     using std::ifstream;
 
     ifstream infile(filepath, ifstream::in);
+    //infile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
     if(!infile.is_open())
         throw std::runtime_error(std::string("Unable to open file \"") + filepath + "\" for reading");
 
@@ -33,7 +39,7 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
 
     // Read in the number of digits
     if(!is_input)
-        infile >> data.ndigits;
+        infile >> data.ndigits >> data.working_prec;
 
     file_skip_comments(infile, '#');
 
@@ -56,19 +62,25 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
             ent.g.push_back(std::move(g));
         }
 
+        // If this is not an input file, read the integral also
+        if(!is_input)
+        {
+            // the first one reads in the rest of the line (which should
+            // be empty). The second will contain the integral
+            infile.ignore(max_length, '\n');//std::getline(infile, ent.integral);
+            std::getline(infile, ent.integral);
+        }
+
         // did we reach eof in reading the above?
         // if so, don't add what the entry is
         if(!infile.good())
             break;
 
-        // If this is not an input file, read the integral also
-        if(!is_input)
-            infile >> ent.integral;
-
         // add the entry
         data.entries.push_back(std::move(ent));
     }
 
+    std::cout << "Read " << data.entries.size() << " values from " << filepath << "\n";
     return data;
 }
 
@@ -157,14 +169,12 @@ integral_data testfile_read_integral(const std::string & filepath,
             ent.g.push_back(std::move(g));
         }
 
-        // did we reach eof in reading the above?
-        // if so, don't add what the entry is
-        if(!infile.good())
-            break;
-
         // read in the integral values 
         if(!is_input)
         {
+            // Read and discard the rest of the line
+            infile.ignore(max_length, '\n');
+
             // number of integrals we should be reading
             size_t nintegral = 1;
             for(const auto & it : ent.g)
@@ -176,13 +186,22 @@ integral_data testfile_read_integral(const std::string & filepath,
             ent.integrals.resize(nintegral);
 
             for(size_t i = 0; i < nintegral; i++)
-                infile >> dummy >> ent.integrals[i];
+            {
+                infile >> dummy;
+                std::getline(infile, ent.integrals[i]);
+            }
         }
+
+        // did we reach eof in reading the above?
+        // if so, don't add what the entry is
+        if(!infile.good())
+            break;
 
         // add to the entries
         data.entries.push_back(std::move(ent));
     }
 
+    std::cout << "Read " << data.entries.size() << " values from " << filepath << "\n";
     return data;
 }
 

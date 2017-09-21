@@ -147,7 +147,6 @@ int main(int argc, char ** argv)
             return 3;
         }
 
-        std::cout << nfailed << " tests failed\n";
 
         if(nfailed)
             return 1;

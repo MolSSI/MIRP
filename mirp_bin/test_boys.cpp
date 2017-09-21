@@ -224,13 +224,14 @@ boys_data boys_read_file(const std::string & filepath, bool is_input)
                 ss >> ent.m >> ent.t;
 
                 if(!is_input)
-                    ss  >> ent.value;
+                    std::getline(ss, ent.value);
 
                 data.values.push_back(ent);
             }
         }
     }
 
+    std::cout << "Read " << data.values.size() << " values from " << filepath << "\n";
     return data;
 }
 
@@ -260,8 +261,6 @@ long boys_run_test_main(const std::string & filepath,
                         slong working_prec)
 {
     boys_data data = boys_read_file(filepath, false);
-
-    std::cout << "Read " << data.values.size() << " values from " << filepath << "\n";
 
     long nfailed = 0;
 
