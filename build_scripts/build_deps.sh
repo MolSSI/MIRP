@@ -2,6 +2,8 @@
 
 set -eu
 
+MYDIR="$(cd "$(dirname "$0")" && pwd)"
+
 GMP_VER=6.1.2
 MPFR_VER=3.1.5
 FLINT_VER=2.5.2
@@ -134,3 +136,14 @@ else
     echo
 fi
 
+# Create the readme file
+GCC_VER=$(gcc --version | head -n 1 | cut -d" " -f 3)
+BUILD_DATE=$(date -I)
+cp "${MYDIR}/deps_README.in"           "${PREFIX}/README"
+sed -i "s/GCC_VER/${GCC_VER}/g"        "${PREFIX}/README"
+sed -i "s/GMP_VER/${GMP_VER}/g"        "${PREFIX}/README"
+sed -i "s/MPFR_VER/${MPFR_VER}/g"      "${PREFIX}/README"
+sed -i "s/FLINT_VER/${FLINT_VER}/g"    "${PREFIX}/README"
+sed -i "s/ARB_VER/${ARB_VER}/g"        "${PREFIX}/README"
+sed -i "s/ARCH/$1/g"                   "${PREFIX}/README"
+sed -i "s/BUILD_DATE/${BUILD_DATE}/g"  "${PREFIX}/README"

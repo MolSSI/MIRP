@@ -1,0 +1,35 @@
+MolSSI Integral Reference Project
+Precompiled dependencies
+----------------------------------------------
+
+Build Date: BUILD_DATE
+
+This contains precompiled binary libraries
+for the dependencies of MIRP.
+
+All dependencies were built with GCC GCC_VER
+with -march=ARCH
+
+
+GNU Multiple Precision Arithmetic Library
+https://gmplib.org
+Version: GMP_VER
+License: GNU LGPL v3 and GNU GPL v2
+
+
+MPFR
+http://mpfr.org
+Version: MPFR_VER
+License: GNU LGPL v3
+
+
+FLINT: Fast Library for Number Theory
+http://flintlib.org
+Version: FLINT_VER
+License: GPL v2+
+
+
+ARB
+http://arblib.org
+Version: ARB_VER
+License: LGPL v2.1
