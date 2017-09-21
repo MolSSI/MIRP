@@ -3,10 +3,13 @@
 set -eu
 
 export MYDIR="$(cd "$(dirname "$0")" && pwd)"
-export MIRP_DIR="$(dirname ${MYDIR})"
 
 run_build() {
-    MIRP_DIR=${MIRP_DIR} bash "${MYDIR}/build_mirp.sh" $@
+    OUTFILE="${1}_${2}_deps-${3}_omp-${4}-${5}.log"
+    OUTFILE=${OUTFILE//\//_}  # Replace all slashes with underscore
+
+    bash "${MYDIR}/test_mirp.sh" $@ &> ${OUTFILE}
+
     if [[ $? == 0 ]]
     then
       echo "passed : $@"
@@ -16,13 +19,6 @@ run_build() {
 }
 
 export -f run_build
-
-
-if [[ "${DEPS_DIR}" == "" ]]
-then
-  echo "DEPS_DIR variable is not set"
-  exit 1
-fi
 
 cat $1 | parallel --colsep ' ' run_build
 

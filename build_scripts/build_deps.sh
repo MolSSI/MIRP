@@ -4,6 +4,9 @@ set -eu
 
 MYDIR="$(cd "$(dirname "$0")" && pwd)"
 
+ARCH=$1
+PARALLEL=4 # Number of concurrent compilations (use make -j${PARALLEL})
+
 GMP_VER=6.1.2
 MPFR_VER=3.1.5
 FLINT_VER=2.5.2
@@ -24,9 +27,13 @@ MPFR_URL="https://ftp.gnu.org/gnu/mpfr/${MPFR_FILE}"
 FLINT_URL="http://flintlib.org/${FLINT_FILE}"
 ARB_URL="https://github.com/fredrik-johansson/arb/archive/${ARB_VER}.tar.gz"
 
-PREFIX="$(pwd)/mirp_deps_$1"
+BUILD_DIR="deps_build_${ARCH}"
+PREFIX="$(pwd)/mirp_deps_${ARCH}"
 
-mkdir -p deps_build_$1
+rm -Rf ${BUILD_DIR}
+rm -Rf ${PREFIX}
+
+mkdir -p ${BUILD_DIR}
 
 # Download the files (if they don't already exist)
 if [[ ! -f "${GMP_FILE}" ]];   then wget -O "${GMP_FILE}"   "${GMP_URL}";   fi
@@ -34,7 +41,7 @@ if [[ ! -f "${MPFR_FILE}" ]];  then wget -O "${MPFR_FILE}"  "${MPFR_URL}";  fi
 if [[ ! -f "${FLINT_FILE}" ]]; then wget -O "${FLINT_FILE}" "${FLINT_URL}"; fi
 if [[ ! -f "${ARB_FILE}" ]];   then wget -O "${ARB_FILE}"   "${ARB_URL}";   fi
 
-cd deps_build_$1
+cd ${BUILD_DIR}
 
 rm -Rf "${GMP_DIR}"
 rm -Rf "${MPFR_DIR}"
@@ -51,7 +58,7 @@ mkdir -p "${MPFR_DIR}/build"
 ###################
 # Common flags
 ###################
-CFLAGS="-fomit-frame-pointer -O2 -m64 -march=$1"
+CFLAGS="-fomit-frame-pointer -O2 -m64 -march=${ARCH}"
 CC=`which gcc`
 
 ###################
@@ -61,7 +68,7 @@ cd "${GMP_DIR}/build"
 ../configure CFLAGS="${CFLAGS}" CC="${CC}" \
              --disable-static \
              --prefix=${PREFIX}
-make
+make -j${PARALLEL}
 #make check
 make install
 cd ../../
@@ -74,7 +81,7 @@ cd "${MPFR_DIR}/build"
              CFLAGS="${CFLAGS}" CC="${CC}" \
              --disable-static \
              --prefix=${PREFIX}
-make
+make -j${PARALLEL}
 #make check
 make install
 cd ../../
@@ -87,7 +94,7 @@ cd "${FLINT_DIR}"
             CFLAGS="${CFLAGS}" CC="${CC}" \
             --disable-static \
             --prefix=${PREFIX}
-make
+make -j${PARALLEL}
 #make check
 make install
 cd ../
@@ -100,10 +107,11 @@ cd "${ARB_DIR}"
             CFLAGS="${CFLAGS}" CC="${CC}" \
             --disable-static \
             --prefix=${PREFIX}
-make
+make -j${PARALLEL}
 #make check
 make install
 cd ../
+
 
 # Cleanup
 rm -Rf "${GMP_DIR}"   "${GMP_FILE}"
@@ -112,22 +120,25 @@ rm -Rf "${FLINT_DIR}" "${FLINT_FILE}"
 rm -Rf "${ARB_DIR}"   "${ARB_FILE}"
 
 cd ../
-rm -Rf deps_build_$1
+rm -Rf ${BUILD_DIR}
 
 # Remove unneeded .la files
 rm ${PREFIX}/lib/*.la
 
+# Move lib to lib64
+mv ${PREFIX}/lib ${PREFIX}/lib64
+
 # Fix the rpaths (if we have patchelf)
 if [[ $(command -v patchelf 2>&1) ]]
 then
-    for I in ${PREFIX}/lib/*
+    for I in ${PREFIX}/lib64/*
     do
         if [[ ! -L "$I" ]]
         then 
             RP1=`patchelf --print-rpath "$I"`
             patchelf --set-rpath '$ORIGIN' "$I"
             RP2=`patchelf --print-rpath "$I"`
-            echo "${I}: RPATH changed from ${RP1} to ${RP2}"
+            echo "${I}: RPATH changed from \"${RP1}\" to \"${RP2}\""
         fi
     done
 else
@@ -145,5 +156,5 @@ sed -i "s/GMP_VER/${GMP_VER}/g"        "${PREFIX}/README"
 sed -i "s/MPFR_VER/${MPFR_VER}/g"      "${PREFIX}/README"
 sed -i "s/FLINT_VER/${FLINT_VER}/g"    "${PREFIX}/README"
 sed -i "s/ARB_VER/${ARB_VER}/g"        "${PREFIX}/README"
-sed -i "s/ARCH/$1/g"                   "${PREFIX}/README"
+sed -i "s/ARCH/${ARCH}/g"              "${PREFIX}/README"
 sed -i "s/BUILD_DATE/${BUILD_DATE}/g"  "${PREFIX}/README"

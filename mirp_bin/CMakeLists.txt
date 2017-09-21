@@ -31,3 +31,13 @@ target_link_libraries(mirp_test_reference   PRIVATE mirp)
 # Occasionally used to play with arb features or something
 #add_executable(mirp_play mirp_play.cpp $<TARGET_OBJECTS:test_common>)
 #target_link_libraries(mirp_play PRIVATE mirp)
+
+# Installing the executables
+install(TARGETS mirp_run_test
+                mirp_create_test
+                mirp_create_reference
+                mirp_test_reference
+        EXPORT mirpTargets
+        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+)
+

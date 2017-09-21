@@ -1,0 +1,20 @@
+----------------------------------------------
+MolSSI Integral Reference Project
+Version MIRP_VER
+Precompiled binaries
+----------------------------------------------
+
+For more information, see the documentation at https://molssi.github.io/MIRP/index.html
+or the source code at https://github.com/MolSSI/MIRP
+
+Build Date: BUILD_DATE
+
+This contains precompiled binary libraries
+and executables of MIRP.
+
+see README.dependencies for license and build information
+of the dependencies of MIRP.
+
+This package was built with GCC GCC_VER
+with -march=ARCH
+
