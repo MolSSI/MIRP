@@ -66,8 +66,10 @@ CC=`which gcc`
 ###################
 cd "${GMP_DIR}/build"
 ../configure CFLAGS="${CFLAGS}" CC="${CC}" \
+             --build=x86_64-linux-gnu \
              --disable-static \
              --prefix=${PREFIX}
+
 make -j${PARALLEL}
 #make check
 make install
@@ -79,8 +81,10 @@ cd ../../
 cd "${MPFR_DIR}/build"
 ../configure --with-gmp=${PREFIX} \
              CFLAGS="${CFLAGS}" CC="${CC}" \
+             --build=x86_64-linux-gnu \
              --disable-static \
              --prefix=${PREFIX}
+
 make -j${PARALLEL}
 #make check
 make install
@@ -94,6 +98,7 @@ cd "${FLINT_DIR}"
             CFLAGS="${CFLAGS}" CC="${CC}" \
             --disable-static \
             --prefix=${PREFIX}
+
 make -j${PARALLEL}
 #make check
 make install
@@ -107,6 +112,7 @@ cd "${ARB_DIR}"
             CFLAGS="${CFLAGS}" CC="${CC}" \
             --disable-static \
             --prefix=${PREFIX}
+
 make -j${PARALLEL}
 #make check
 make install

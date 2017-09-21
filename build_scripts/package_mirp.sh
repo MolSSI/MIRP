@@ -18,11 +18,14 @@ FULL_DEPS_DIR="${DEPS_DIR}/mirp_deps_${ARCH}"
 PREFIX="${CURDIR}/mirp_v${MIRP_VER}_${ARCH}"
 
 # Copy the dependencies to the install prefix
-cp -R ${FULL_DEPS_DIR} ${PREFIX}
+rm -Rf "${PREFIX}"
+cp -R "${FULL_DEPS_DIR}" "${PREFIX}"
 
 BUILD_DIR="$(mktemp -d -p /tmp)"
 cd "${BUILD_DIR}"
 cmake -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} \
+      -DCMAKE_C_FLAGS="-march=${ARCH}" \
+      -DCMAKE_CXX_FLAGS="-march=${ARCH}" \
       -DCMAKE_BUILD_TYPE=Release \
       -DMIRP_OPENMP=True \
       -DMIRP_STATIC=True \

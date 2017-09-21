@@ -166,3 +166,8 @@ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mirpDependencies.cmake
         DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
+# Install the test files
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/mirp
+)
+
