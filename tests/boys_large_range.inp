@@ -3,6 +3,7 @@
 # Values for m and t generated with:
 #   generator/generate_boys_range.py --filename boys_large_range.inp --max-m 100 --power 32
 #
+59186
 0 0
 1 0
 2 0

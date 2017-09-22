@@ -89,7 +89,7 @@ long integral4_test_reference(const std::string & ref_filepath,
         throw std::runtime_error("Error opening input file");
 
 
-    file_skip_comments(fs, '#');
+    file_skip(fs, '#');
     std::vector<gaussian_shell> shells = reffile_read_basis(fs);
 
     std::string line;

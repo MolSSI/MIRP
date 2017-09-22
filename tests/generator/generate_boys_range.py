@@ -27,6 +27,8 @@ with open(args.filename, 'w') as f:
     f.write("# Values for m and t generated with:\n")
     f.write("#   " + " ".join(sys.argv[:]) + "\n")
     f.write("#\n")
+    f.write(str(len(mtlist)))
+    f.write("\n")
 
     for m,t in mtlist:
         f.write("{} {}\n".format(m, t))

@@ -1,8 +1,9 @@
 # THIS FILE IS GENERATED VIA A SCRIPT. DO NOT EDIT
 #
 # Input parameters for integral generated with:
-#   generator/generate_integral_random.py --filename 4center_random_1.inp --seed 23833210 --ncenter 4 --max-am 1 --max-nprim 2 --max-ngen 2 --xyz-power 1 --alpha-power 10 --coeff-power 5 --max-z 30 --ntest 1000 --ndigits 20
+#   generator/generate_integral_random.py --filename 4center_random_1.inp --seed 23833210 --ncenter 4 --max-am 1 --max-nprim 2 --max-ngen 2 --xyz-power 1 --alpha-power 10 --coeff-power 5 --max-z 30 --ntests 1000 --ndigits 20
 #
+1000
 14 0 2 2 5.6760188823285850168 -8.271950796257952111 -1.1203758210119972341
 1.8001738136266806063e+8 3.042978027883609422e+3 1.145559292483284746e-4
 1.9830314853985925026e+1 1.5160263024726522453e-3 4.8610845994360174395e-1

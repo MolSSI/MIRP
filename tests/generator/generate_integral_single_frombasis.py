@@ -26,6 +26,8 @@ with open(args.filename, 'w') as f:
     f.write("# Input parameters for ERI generated with:\n")
     f.write("#   " + " ".join(sys.argv[:]) + "\n")
     f.write("#\n")
+    f.write(str(args.ntests))
+    f.write("\n")
 
     created_ntets = []
 
@@ -39,7 +41,8 @@ with open(args.filename, 'w') as f:
             for c in all_cartesian_components(shell[1]['am']):
                 allprim.append((c, shell[0], shell[1]))
 
-        for i in range(args.ntests):
+        i = 0
+        while i < args.ntests:
             ntet = []
             entry = []
             for n in range(args.ncenter):
@@ -52,3 +55,4 @@ with open(args.filename, 'w') as f:
             if not ntet in created_ntets:
                 print_integral_single_input(f, entry)
                 created_ntets.append(ntet)
+                i += 1

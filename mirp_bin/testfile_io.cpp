@@ -11,10 +11,6 @@
 #include <sstream>
 #include <fstream>
 #include <stdexcept>
-#include <limits>
-
-// Maximum line length
-const std::streamsize max_length = std::numeric_limits<std::streamsize>::max();
 
 namespace mirp {
 
@@ -22,14 +18,26 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
 {
     using std::ifstream;
 
-    ifstream infile(filepath, ifstream::in);
-    //infile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+    if(n <= 0)
+        throw std::logic_error("Cannot read negative or zero gaussians from a file");
+
+
+    // Used in errors
+    std::stringstream sserr;
+    sserr << "Error reading file " << filepath << ": ";
+
+
+    ifstream infile(filepath);
     if(!infile.is_open())
-        throw std::runtime_error(std::string("Unable to open file \"") + filepath + "\" for reading");
+    {
+        sserr << "Cannot open file";
+        throw std::runtime_error(sserr.str());
+    }
 
     integral_single_data data;
+    size_t nentry = 0;
 
-    // read in the header
+    // read in the header comments
     while(infile.peek() == '#')
     {
         std::string line;
@@ -37,28 +45,63 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
         data.header += line + "\n";
     }
 
-    // Read in the number of digits
+    // Read the expected number of entries
+    infile >> nentry;
+
+    // Read in the number of digits and the working prec
     if(!is_input)
-        infile >> data.ndigits >> data.working_prec;
-
-    file_skip_comments(infile, '#');
-
-    while(true)
     {
+        infile >> data.ndigits >> data.working_prec;
+        if(!infile.good())
+        {
+            sserr << "Error reading metadata (nentry, ndigits, working_prec)";
+            throw std::runtime_error(sserr.str());
+        }
+    }
+
+    // read the actual data
+    while(infile.good())
+    {
+        // check if there is more data
+        if(!file_skip(infile, '#'))
+            break;
+
         // We will fill in the shells here, then add to the data
         integral_single_data_entry ent;
-
-        file_skip_comments(infile, '#');
-        if(!infile.good())
-            break;
 
         // read in n gaussians
         for(int i = 0; i < n; i++)
         {
-            gaussian_single g;
+            if(!file_skip(infile, '#'))
+            {
+                if(infile.eof())
+                {
+                    sserr << "Unexpected end of file while reading gaussian " << i << "/" << n
+                          << " for entry " << (data.entries.size()+1) << "\n";
+                    throw std::runtime_error(sserr.str());
+                }
+                else
+                {
+                    sserr << "Error while reading gaussian " << i << "/" << n
+                          << " for entry " << (data.entries.size()+1) << "\n";
+                    throw std::runtime_error(sserr.str());
+                }
+            } 
+
+
+            gaussian_single_str g;
+
             infile >> g.lmn[0] >> g.lmn[1] >> g.lmn[2]
                    >> g.xyz[0] >> g.xyz[1] >> g.xyz[2]
                    >> g.alpha;
+ 
+            if(infile.bad() || infile.fail())
+            {
+                sserr << "Error while reading gaussian " << i << "/" << n
+                      << " for entry " << (data.entries.size()+1) << "\n";
+                throw std::runtime_error(sserr.str());
+            }
+                
             ent.g.push_back(std::move(g));
         }
 
@@ -67,17 +110,25 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
         {
             // the first one reads in the rest of the line (which should
             // be empty). The second will contain the integral
-            infile.ignore(max_length, '\n');//std::getline(infile, ent.integral);
+            file_skip(infile, '#');
             std::getline(infile, ent.integral);
-        }
 
-        // did we reach eof in reading the above?
-        // if so, don't add what the entry is
-        if(!infile.good())
-            break;
+            if(infile.bad() || infile.fail())
+            {
+                sserr << "Error while integral for entry " << (data.entries.size()+1) << "\n";
+                throw std::runtime_error(sserr.str());
+            }
+        }
 
         // add the entry
         data.entries.push_back(std::move(ent));
+    }
+
+    if(data.entries.size() != nentry)
+    {
+        sserr << "Number of entries not consistent: Expected " << nentry
+              << " but got " << data.entries.size() << "\n";
+        throw std::runtime_error(sserr.str());
     }
 
     std::cout << "Read " << data.entries.size() << " values from " << filepath << "\n";
@@ -98,7 +149,10 @@ void testfile_write_integral_single(const std::string & filepath, const integral
     outfile.exceptions(ofstream::badbit | ofstream::failbit);
 
     outfile << data.header;
-    outfile << data.ndigits << " " << data.working_prec << "\n";
+    outfile << data.entries.size() << " "
+            << data.ndigits << " "
+            << data.working_prec << "\n";
+
     for(const auto & ent : data.entries)
     {
         for(const auto & g : ent.g)
@@ -120,13 +174,26 @@ integral_data testfile_read_integral(const std::string & filepath,
 {
     using std::ifstream;
 
+    if(n <= 0)
+        throw std::logic_error("Cannot read negative or zero gaussians from a file");
+
+
+    // Used in errors
+    std::stringstream sserr;
+    sserr << "Error reading file " << filepath << ": ";
+
+
     ifstream infile(filepath, ifstream::in);
     if(!infile.is_open())
-        throw std::runtime_error(std::string("Unable to open file \"") + filepath + "\" for reading");
+    {
+        sserr << "Cannot open file";
+        throw std::runtime_error(sserr.str());
+    }
 
     integral_data data;
+    size_t nentry = 0;
 
-    // read in the header
+    // read in the header comments
     while(infile.peek() == '#')
     {
         std::string line;
@@ -134,27 +201,61 @@ integral_data testfile_read_integral(const std::string & filepath,
         data.header += line + "\n";
     }
 
-    // Read in the number of digits
+
+    // Read the expected number of entries
+    infile >> nentry;
+
+    // Read in the number of digits and the working prec
     if(!is_input)
-        infile >> data.ndigits >> data.working_prec;
-
-    file_skip_comments(infile, '#');
-
-    while(true)
     {
+        infile >> data.ndigits >> data.working_prec;
+        if(!infile.good())
+        {
+            sserr << "Error reading metadata (nentry, ndigits, working_prec)";
+            throw std::runtime_error(sserr.str());
+        }
+    }
+
+
+    // read the actual data
+    while(infile.good())
+    {
+        // check if there is more data
+        if(!file_skip(infile, '#'))
+            break;
+
         // We will fill in the shells here, then add to the data
         integral_data_entry ent;
-
-        file_skip_comments(infile, '#');
-        if(!infile.good())
-            break;
 
         // read in n gaussians
         for(int i = 0; i < n; i++)
         {
+            if(!file_skip(infile, '#'))
+            {
+                if(infile.eof())
+                {
+                    sserr << "Unexpected end of file while reading gaussian " << i << "/" << n
+                          << " for entry " << (data.entries.size()+1) << "\n";
+                    throw std::runtime_error(sserr.str());
+                }
+                else
+                {
+                    sserr << "Error while reading gaussian " << i << "/" << n
+                          << " for entry " << (data.entries.size()+1) << "\n";
+                    throw std::runtime_error(sserr.str());
+                }
+            } 
+
             gaussian_shell_str g;
             infile >> g.Z >> g.am >> g.nprim >> g.ngeneral
                    >> g.xyz[0] >> g.xyz[1] >> g.xyz[2];
+
+            if(infile.bad() || infile.fail())
+            {
+                sserr << "Error while reading gaussian " << i << "/" << n
+                      << " for entry " << (data.entries.size()+1) << "\n";
+                throw std::runtime_error(sserr.str());
+            }
 
             g.alpha.resize(g.nprim);
             g.coeff.resize(g.nprim*g.ngeneral);
@@ -166,8 +267,16 @@ integral_data testfile_read_integral(const std::string & filepath,
                     infile >> g.coeff[k*g.nprim+j];
             }
 
+            if(infile.bad() || infile.fail())
+            {
+                sserr << "Error while reading exponents and coefficients for gaussian " << i << "/" << n
+                      << " for entry " << (data.entries.size()+1) << "\n";
+                throw std::runtime_error(sserr.str());
+            }
+
             ent.g.push_back(std::move(g));
         }
+
 
         // read in the integral values 
         if(!is_input)
@@ -180,25 +289,33 @@ integral_data testfile_read_integral(const std::string & filepath,
             for(const auto & it : ent.g)
                 nintegral *= MIRP_NCART(it.am)*it.ngeneral;
 
+            ent.integrals.resize(nintegral);
+
             // If this isn't an input file, read the integrals
             int dummy; // integral index (not needed)
-
-            ent.integrals.resize(nintegral);
 
             for(size_t i = 0; i < nintegral; i++)
             {
                 infile >> dummy;
                 std::getline(infile, ent.integrals[i]);
             }
-        }
 
-        // did we reach eof in reading the above?
-        // if so, don't add what the entry is
-        if(!infile.good())
-            break;
+            if(infile.bad() || infile.fail())
+            {
+                sserr << "Error while reading integrals for entry " << (data.entries.size()+1) << "\n";
+                throw std::runtime_error(sserr.str());
+            }
+        }
 
         // add to the entries
         data.entries.push_back(std::move(ent));
+    }
+
+    if(data.entries.size() != nentry)
+    {
+        sserr << "Number of entries not consistent: Expected " << nentry
+              << " but got " << data.entries.size() << "\n";
+        throw std::runtime_error(sserr.str());
     }
 
     std::cout << "Read " << data.entries.size() << " values from " << filepath << "\n";
@@ -219,7 +336,10 @@ void testfile_write_integral(const std::string & filepath, const integral_data &
     outfile.exceptions(ofstream::badbit | ofstream::failbit);
 
     outfile << data.header;
-    outfile << data.ndigits << " " << data.working_prec << "\n";
+    outfile << data.entries.size() << " "
+            << data.ndigits << " "
+            << data.working_prec << "\n";
+
     for(const auto & ent : data.entries)
     {
         for(const auto & g : ent.g)

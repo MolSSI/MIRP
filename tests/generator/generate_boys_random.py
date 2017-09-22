@@ -11,14 +11,14 @@ parser.add_argument("--max-m",    type=int, required=True, help="Maximum m value
 parser.add_argument("--power",    type=int, required=True, help="Maximum power (range will be 1e-x to 1e+x)")
 parser.add_argument("--seed",     type=int, required=True, help="Seed to use for the pseudo-random number generator")
 parser.add_argument("--ndigits",  type=int, required=True, help="Number of digits for the value of t")
-parser.add_argument("--ntest",    type=int, required=True, help="Number of tests to generate")
+parser.add_argument("--ntests",   type=int, required=True, help="Number of tests to generate")
 args = parser.parse_args()
 
 random.seed(args.seed, version=2)
 
 mtlist = []
 with mp.workdps(args.ndigits+4):
-    for i in range(0, args.ntest):
+    for i in range(0, args.ntests):
         m = random.randint(0, args.max_m)
         t = random.uniform(-args.power, args.power)
         t = mp.mpf(t)    
@@ -35,6 +35,8 @@ with open(args.filename, 'w') as f:
     f.write("# Values for m and t generated with:\n")
     f.write("#   " + " ".join(sys.argv[:]) + "\n")
     f.write("#\n")
+    f.write(str(len(mtlist)))
+    f.write("\n")
 
     for m,t in mtlist:
         f.write("{} {}\n".format(m, t))

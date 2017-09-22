@@ -1,8 +1,9 @@
 # THIS FILE IS GENERATED VIA A SCRIPT. DO NOT EDIT
 #
 # Values for m and t generated with:
-#   generator/generate_boys_random.py --filename boys_large_random.inp --max-m 100 --power 32 --seed 828843219 --ndigits 32 --ntest 25000
+#   generator/generate_boys_random.py --filename boys_large_random.inp --max-m 100 --power 32 --seed 828843219 --ndigits 32 --ntests 25000
 #
+25000
 32 1.1654761577288435141645663404123e-12
 10 8.9888959562856475860000732679186e+18
 44 2.003223477321734159545377546748e-9

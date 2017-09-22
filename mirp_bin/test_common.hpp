@@ -8,9 +8,12 @@
 #include <string>
 #include <vector>
 #include <istream>
+#include <limits>
 
 namespace mirp {
 
+ // Maximum line length
+ static const std::streamsize max_length = std::numeric_limits<std::streamsize>::max();
 
 /*! \brief Compare two double-precision numbers for equality within a tolerance
  *
@@ -72,9 +75,17 @@ std::string trim(const std::string & s);
 std::vector<std::string> split(const std::string & s, char sep = ' ');
 
 
-/*! \brief Advances the stream past any comment lines */
-void file_skip_comments(std::istream & fs, char commentchar);
-
+/*! \brief Advances the stream past any comment and blank lines
+ *
+ * The stream will be advanced past the lines that were read.
+ *
+ * If an EOF is encountered, false is returned
+ *
+ * \param [in] fs The stream to read from
+ * \param [in] commentchar Lines beginning with the character will be skipped
+ * \return True if there is additional data in the file, false on EOF
+ */
+bool file_skip(std::istream & fs, char commentchar);
 
 } // close namespace mirp
 

@@ -23,8 +23,9 @@ struct boys_data_entry
 struct boys_data
 {
     long ndigits;                         //!< The number of digits of accuracy in the file
+    long working_prec;                    //!< Working precision used for the integrals
     std::string header;                   //!< Header or comments about the test
-    std::vector<boys_data_entry> values;  //!< Actual data for the tests
+    std::vector<boys_data_entry> entries; //!< Actual data for the tests
 };
 
 
@@ -34,11 +35,11 @@ int boys_max_m(const boys_data & data);
 
 /*! \brief Read a file with reference data for the Boys function
  *
- * This reads in `m` and `t` values for the Boys function, as
+ * This reads in `m` and `t` entries for the Boys function, as
  * well as a descriptive header.
  *
  * If \p is_input is true, then then `ndigits` and the reference
- * values are also read.
+ * entries are also read.
  *
  * \throw std::runtime_error if the file does not exist or there
  *        there is a problem reading/parsing the file
@@ -70,7 +71,7 @@ void boys_write_file(const std::string & filepath, const boys_data & data);
  *
  * \param [in] filepath     Path to the file to test
  * \param [in] floattype    Type of floating point to test ("double", for example)
- * \param [in] extra_m      Additional `m` values (used to test recurrence relations)
+ * \param [in] extra_m      Additional `m` entries (used to test recurrence relations)
  * \param [in] working_prec Internal working precision to use
  * \return The number of tests that have failed
  */

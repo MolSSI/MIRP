@@ -9,7 +9,7 @@
 
 #include <cmath>
 #include <algorithm>
-#include <locale> // for std::tolower
+#include <locale> // for std::tolower and std::isspace
 #include <map>
 #include <iostream>
 
@@ -167,16 +167,24 @@ std::vector<std::string> split(const std::string & s, char sep)
 }
 
 
-void file_skip_comments(std::istream & fs, char commentchar)
+bool file_skip(std::istream & fs, char commentchar)
 {
-    std::string line;
-    while(fs.good())
+    while(true)
     {
-        if(fs.peek() == commentchar)
-            std::getline(fs, line);
-        else
+        int c = fs.peek();
+
+        if(!fs.good())                    // did we reach eof?
             break;
+        else if(c == commentchar)
+            fs.ignore(max_length, '\n');  // skip the rest of the line
+        else if(std::isspace(c))          // is whitespace? (includes \n, \t, etc)
+            fs.get();                     // discard it
+        else
+            break;                        // We found some data
     }
+
+    return fs.good();
 }
+
 
 } // close namespace mirp

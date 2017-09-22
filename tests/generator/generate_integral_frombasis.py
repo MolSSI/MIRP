@@ -28,12 +28,16 @@ with open(args.filename, 'w') as f:
     f.write("#   " + " ".join(sys.argv[:]) + "\n")
     f.write("#\n")
 
+    f.write(str(args.ntests))
+    f.write("\n")
+
     created_ntets = []
 
     with mp.workdps(args.ndigits+4):
         basis = construct_basis(args.geometry, args.basis)
 
-        for i in range(args.ntests):
+        i = 0
+        while i < args.ntests:
             ntet = []
             entry = []
             for n in range(args.ncenter):
@@ -53,3 +57,4 @@ with open(args.filename, 'w') as f:
             if not ntet in created_ntets:
                 print_integral_input(f, entry)
                 created_ntets.append(ntet)
+                i += 1

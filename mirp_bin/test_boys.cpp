@@ -41,7 +41,7 @@ long boys_run_test(const mirp::boys_data & data, int extra_m, slong working_prec
 
     arb_ptr F_mp = _arb_vec_init(max_m+1);
 
-    for(const auto & ent : data.values)
+    for(const auto & ent : data.entries)
     {
         mirp_boys_str(F_mp, ent.m + extra_m, ent.t.c_str(), working_prec);
 
@@ -85,7 +85,7 @@ long boys_run_test_d(const mirp::boys_data & data, int extra_m)
     arb_t vref_mp;
     arb_init(vref_mp);
 
-    for(const auto & ent : data.values)
+    for(const auto & ent : data.entries)
     {
         double t_dbl = std::strtod(ent.t.c_str(), nullptr);
 
@@ -136,7 +136,7 @@ long boys_run_test_exact(const mirp::boys_data & data, int extra_m)
 
     arb_ptr F_mp = _arb_vec_init(max_m+1);
 
-    for(const auto & ent : data.values)
+    for(const auto & ent : data.entries)
     {
         double t_dbl = std::strtod(ent.t.c_str(), nullptr);
 
@@ -184,7 +184,7 @@ long boys_run_test_exact(const mirp::boys_data & data, int extra_m)
 int boys_max_m(const boys_data & data)
 {
     int max_m = 0;
-    for(auto & ent : data.values)
+    for(auto & ent : data.entries)
         max_m = std::max(max_m, ent.m);
     return max_m;
 }
@@ -194,44 +194,74 @@ boys_data boys_read_file(const std::string & filepath, bool is_input)
 {
     using std::ifstream;
 
+    // Used in errors
+    std::stringstream sserr;
+    sserr << "Error reading file " << filepath << ": ";
+
     ifstream infile(filepath, ifstream::in);
     if(!infile.is_open())
-        throw std::runtime_error(std::string("Unable to open file \"") + filepath + "\" for reading");
-
-    std::string line;
-    boys_data data;
-    bool have_ndigits = false;
-
-    while(std::getline(infile, line).good())
     {
-        if(line.length() == 0)
-            continue;
-        else if(line[0] == '#')
-            data.header += line + "\n";
-        else
+        sserr << "Cannot open file";
+        throw std::runtime_error(sserr.str());
+    }
+
+    boys_data data;
+    size_t nentry;
+
+    // read in the header comments
+    while(infile.peek() == '#')
+    {
+        std::string line;
+        std::getline(infile, line);
+        data.header += line + "\n";
+    }
+
+    // Read the expected number of entries
+    infile >> nentry;
+
+    // Read in the number of digits and the working prec
+    if(!is_input)
+    {
+        infile >> data.ndigits >> data.working_prec;
+        if(!infile.good())
         {
-            std::stringstream ss(line);
-            ss.exceptions(std::stringstream::failbit);
-
-            if(!is_input && !have_ndigits)
-            {
-                ss >> data.ndigits;
-                have_ndigits = true;
-            }
-            else
-            {
-                boys_data_entry ent;
-                ss >> ent.m >> ent.t;
-
-                if(!is_input)
-                    std::getline(ss, ent.value);
-
-                data.values.push_back(ent);
-            }
+            sserr << "Error reading metadata (nentry, ndigits, working_prec)";
+            throw std::runtime_error(sserr.str());
         }
     }
 
-    std::cout << "Read " << data.values.size() << " values from " << filepath << "\n";
+
+    // read the actual data
+    while(infile.good())
+    {
+        // check if there is more data
+        if(!file_skip(infile, '#'))
+            break;
+
+        boys_data_entry ent;
+
+        infile >> ent.m >> ent.t;
+
+        if(!is_input)
+            std::getline(infile, ent.value); // get the rest of the line
+
+        if(infile.fail() || infile.bad())
+        {
+            sserr << "Error while reading entry " << (data.entries.size()+1);
+            throw std::runtime_error(sserr.str());
+        }
+
+        data.entries.push_back(ent);
+    }
+
+    if(data.entries.size() != nentry)
+    {
+        sserr << "Number of entries not consistent: Expected " << nentry
+              << " but got " << data.entries.size() << "\n";
+        throw std::runtime_error(sserr.str());
+    }
+
+    std::cout << "Read " << data.entries.size() << " values from " << filepath << "\n";
     return data;
 }
 
@@ -249,8 +279,11 @@ void boys_write_file(const std::string & filepath, const boys_data & data)
     outfile.exceptions(ofstream::badbit | ofstream::failbit);
 
     outfile << data.header;
-    outfile << data.ndigits << "\n";
-    for(const auto & ent : data.values)
+    outfile << data.entries.size() << " "
+            << data.ndigits << " "
+            << data.working_prec << "\n";
+
+    for(const auto & ent : data.entries)
         outfile << ent.m << " " << ent.t << " " << ent.value << "\n";
 }
 
@@ -278,7 +311,7 @@ long boys_run_test_main(const std::string & filepath,
     }
 
 
-    print_results(nfailed, data.values.size());
+    print_results(nfailed, data.entries.size());
 
     return nfailed;
 }
@@ -291,6 +324,7 @@ void boys_create_test(const std::string & input_filepath,
 {
     boys_data data = boys_read_file(input_filepath, true);
     data.ndigits = ndigits;
+    data.working_prec = working_prec;
     data.header += header;
 
     /* What we need for the number of digits (plus some safety) */
@@ -303,7 +337,7 @@ void boys_create_test(const std::string & input_filepath,
 
     arb_ptr F_mp = _arb_vec_init(max_m+1);
 
-    for(auto & ent : data.values)
+    for(auto & ent : data.entries)
     {
         arb_set_str(t_mp, ent.t.c_str(), working_prec);
         mirp_boys(F_mp, ent.m, t_mp, working_prec);

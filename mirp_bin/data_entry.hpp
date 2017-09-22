@@ -45,7 +45,7 @@ struct gaussian_shell_str
 
 
 /*! \brief A single cartesian gaussian function */
-struct gaussian_single
+struct gaussian_single_str
 {
     std::array<int, 3> lmn;         //!< AM exponents
     std::array<std::string, 3> xyz; //!< Coordinates (in bohr)
@@ -60,8 +60,8 @@ struct gaussian_single
  */
 struct integral_single_data_entry
 {
-    std::vector<gaussian_single> g;  //!< Shell array for which the integrals calculated
-    std::string integral;            //!< Actual data (integral) for this gaussian
+    std::vector<gaussian_single_str> g;  //!< Shell array for which the integrals calculated
+    std::string integral;                //!< Actual data (integral) for this gaussian
 };
 
 

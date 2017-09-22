@@ -14,7 +14,7 @@ parser.add_argument("--xyz-power",   type=int, required=True, help="Maximum powe
 parser.add_argument("--seed",        type=int, required=True, help="Seed to use for the pseudo-random number generator")
 parser.add_argument("--ndigits",     type=int, required=True, help="Number of digits for the value of the integral")
 parser.add_argument("--ncenter",     type=int, required=True, help="Number of centers in the integral (typically 2 or 4)")
-parser.add_argument("--ntest",       type=int, required=True, help="Number of tests to generate")
+parser.add_argument("--ntests",      type=int, required=True, help="Number of tests to generate")
 args = parser.parse_args()
 
 random.seed(args.seed, version=2)
@@ -54,8 +54,10 @@ with open(args.filename, 'w') as f:
     f.write("# Input parameters for integral generated with:\n")
     f.write("#   " + " ".join(sys.argv[:]) + "\n")
     f.write("#\n")
+    f.write(str(args.ntests))
+    f.write("\n")
 
-    for i in range(args.ntest):
+    for i in range(args.ntests):
         entry = []
         for n in range(args.ncenter):
             bf = generate_basis_function()
