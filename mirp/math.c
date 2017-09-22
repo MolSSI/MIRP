@@ -125,6 +125,7 @@ void mirp_binomial(arb_t output, long n, long k)
     assert(k <= n);
 
     fmpz_t tmp;
+    fmpz_init(tmp);
     fmpz_bin_uiui(tmp, (unsigned long)n, (unsigned long)k);
     arb_set_fmpz(output, tmp);
     fmpz_clear(tmp);
