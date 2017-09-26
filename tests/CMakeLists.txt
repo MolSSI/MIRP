@@ -72,10 +72,6 @@ macro(add_integral_reftest filename integral)
 endmacro()
 
 
-# Testing of examples
-add_test(NAME example_simple_eri COMMAND simple_eri)
-
-
 # Boys function
 add_boys_test(boys_large_range.dat double 0 0)
 add_boys_test(boys_large_range.dat double 0 10)

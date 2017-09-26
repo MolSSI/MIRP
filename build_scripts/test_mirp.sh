@@ -47,14 +47,36 @@ echo "   BUILD TYPE: ${BTYPE}"
 echo "       OPENMP: ${OMP}"
 
 cd "${BUILD_DIR}"
+
+
+# Build/test the main library
+mkdir mirp_build
+cd mirp_build
 ${CMAKE} -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} \
          -DCMAKE_BUILD_TYPE=${BTYPE} \
          -DMIRP_OPENMP=${OMP} \
          -DCMAKE_PREFIX_PATH=${FULL_DEPS_DIR} \
+         -DCMAKE_INSTALL_PREFIX=${BUILD_DIR}/mirp_install \
          ${MIRP_DIR}
 
-make
+make VERBOSE=1
 ctest
+make install
+cd ../
+
+# Build/test the examples
+mkdir examples_build 
+cd examples_build
+
+${CMAKE} -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} \
+         -DCMAKE_BUILD_TYPE=${BTYPE} \
+         -DCMAKE_PREFIX_PATH="${FULL_DEPS_DIR};${BUILD_DIR}/mirp_install" \
+         ${MIRP_DIR}/examples
+
+make VERBOSE=1
+ctest
+cd ../
+
 
 cd "${CURDIR}"
 rm -Rf "${BUILD_DIR}"

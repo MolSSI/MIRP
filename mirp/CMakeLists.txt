@@ -17,6 +17,10 @@ add_library(mirp SHARED ${MIRP_FILELIST})
 
 target_link_libraries(mirp "${MIRP_DEPS_TARGETS}")
 
+# Set the include directory for installing
+set_target_properties(mirp PROPERTIES
+                      INTERFACE_INCLUDE_DIRECTORIES "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+)
 
 # Installing the library
 install(TARGETS mirp
@@ -27,6 +31,6 @@ install(TARGETS mirp
         
 # Install the header files
 install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}"
-        DESTINATION include
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
         FILES_MATCHING REGEX ".*\.h$"
 )

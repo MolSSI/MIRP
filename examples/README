@@ -1,0 +1,7 @@
+Some examples of using MIRP
+---------------------------
+
+The projects in this directory are meant to be compiled with/linked to
+an installed version of MIRP, rather than with the build directory.
+
+The path to installed MIRP should be passed to CMake via CMAKE_PREFIX_PATH
