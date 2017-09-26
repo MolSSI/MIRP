@@ -16,27 +16,27 @@ target_include_directories(test_common SYSTEM PRIVATE
                            $<TARGET_PROPERTY:mirp,INTERFACE_SYSTEM_INCLUDE_DIRECTORIES>)
 
 # The executables themselves
-add_executable(mirp_run_test         mirp_run_test.cpp         $<TARGET_OBJECTS:test_common>) 
+add_executable(mirp_verify_test         mirp_verify_test.cpp         $<TARGET_OBJECTS:test_common>) 
 add_executable(mirp_create_test      mirp_create_test.cpp      $<TARGET_OBJECTS:test_common>)
 add_executable(mirp_create_reference mirp_create_reference.cpp $<TARGET_OBJECTS:test_common>)
-add_executable(mirp_test_reference   mirp_test_reference.cpp   $<TARGET_OBJECTS:test_common>)
+add_executable(mirp_verify_reference   mirp_verify_reference.cpp   $<TARGET_OBJECTS:test_common>)
 
 # Link these to mirp. The dependency and include directories
 # will be included through here as well (they were added as PUBLIC)
-target_link_libraries(mirp_run_test         PRIVATE mirp)
+target_link_libraries(mirp_verify_test         PRIVATE mirp)
 target_link_libraries(mirp_create_test      PRIVATE mirp)
 target_link_libraries(mirp_create_reference PRIVATE mirp)
-target_link_libraries(mirp_test_reference   PRIVATE mirp)
+target_link_libraries(mirp_verify_reference   PRIVATE mirp)
 
 # Occasionally used to play with arb features or something
 #add_executable(mirp_play mirp_play.cpp $<TARGET_OBJECTS:test_common>)
 #target_link_libraries(mirp_play PRIVATE mirp)
 
 # Installing the executables
-install(TARGETS mirp_run_test
+install(TARGETS mirp_verify_test
                 mirp_create_test
                 mirp_create_reference
-                mirp_test_reference
+                mirp_verify_reference
         EXPORT mirpTargets
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
 )

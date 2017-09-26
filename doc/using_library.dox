@@ -1,5 +1,29 @@
 /*! \page using_library Using the MIRP library
 
-\todo TODO
+\section using_library_cmake Using MIRP from CMake
+
+\note This section assumes that MIRP has been installed - compiling against and linking to
+      the source or build directories is not supported.
+
+MIRP can be included in a CMake project using the usual `find_package`
+facility and specifying the path to the MIRP root directory (that 'include', 'share', etc)
+as a `CMAKE_PREFIX_PATH` variable. The path(s) to dependencies may also need to be included
+as well.
+
+Then, a project can be linked to `mirp::mirp`, which will add the libraries and include
+paths to the target.
+
+
+All header files are in a `mirp` subdirectory. Therefore, the main header is `<mirp/mirp.h>`.
+
+
+Examples can be found in the `examples` subdirectory of the MIRP source.
+
+
+\section using_library_other Using MIRP without CMake
+
+Using MIRP without CMake is straightforward as well. You only need to add the `include` path to your
+compilation command line, and to link against the library in `lib64`. If dependencies are installed
+elsewhere, they must also be added, of course. 
 
 */

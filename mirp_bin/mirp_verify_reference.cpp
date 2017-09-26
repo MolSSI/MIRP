@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief mirp_test_reference main function
+ * \brief mirp_verify_reference main function
  */
 
 #include "mirp_bin/cmdline.hpp"
@@ -18,7 +18,7 @@ using namespace mirp;
 static void print_help(void)
 {
     std::cout << "\n"
-              << "mirp_test_reference - Tests the values in a reference data file\n"
+              << "mirp_verify_reference - Tests the values in a reference data file\n"
               << "\n"
               << "\n"
               << "Required arguments:\n"
@@ -62,7 +62,7 @@ int main(int argc, char ** argv)
     catch(std::exception & ex)
     {
         std::cout << "\nError parsing command line: " << ex.what() << "\n\n";
-        std::cout << "Run \"mirp_test_reference -h\" for help\n\n";
+        std::cout << "Run \"mirp_verify_reference -h\" for help\n\n";
         return 1;
     }
 

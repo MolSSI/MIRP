@@ -10,6 +10,12 @@ In general, MIRP uses the following naming convention
 - Inputs for creating test files are given a `.inp` extension, while
   files with generated data are given a `.dat` extension.
 
+\section _conventions_integralnames Integral Names
+
+- Integral names are all lower case (ie, eri)
+- Where appropriate, integrals that compute single cartesian components
+  should be available and suffixed with an underscore (ie, eri_single)
+
 \section _conventions_passing Passing Data to/from Functions
 
 - In general, functions do not pass data via `return` (except for small math

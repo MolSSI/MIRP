@@ -16,7 +16,7 @@ has a `.dat` suffix.
 Once a test has been created and verified, its sha256sum should be added to the `sha256sums`
 file in the `tests` directory. This will help protect against inadvertent changes.
 
-Functionality in MIRP can then be tested using the `mirp_run_test` command. This is
+Functionality in MIRP can then be tested using the `mirp_verify_test` command. This is
 typically added to a CMake script in the `tests` directory of the MIRP repo.
 
 
@@ -37,15 +37,16 @@ the command used to generate the data.
 \note Numbers in the input files are treated as if they are exact to an infinite number of decimal places.
 
 
-\section _tests_formats_boys Boys Function Test Files
+\subsection _tests_formats_boys Boys Function Test Files
 
 Test files for the boys function are fairly simple. The input for
 generating tests contain the `m` value and the `t` value, space separated,
 on each line.
 
-Reference data files are similar, containing `m`, `t`, and the value of `F(m,t)` on each line.
+Test data files are similar, containing `m`, `t`, and the value of `F(m,t)` on each line.
 In addition, the first non-comment line contains the number of decimal digits that the value
 of `F(m,t)` is accurately computed to.
+
 
 
 */

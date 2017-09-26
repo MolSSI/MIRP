@@ -50,9 +50,9 @@ void integral4_single_create_test(const std::string & input_filepath,
  * \param [in] cb           Function that computes single cartesian integrals
  * \return Number of failed tests
  */
-long integral4_single_run_test(const std::string & filepath,
-                               slong working_prec,
-                               cb_integral4_single_str cb);
+long integral4_single_verify_test(const std::string & filepath,
+                                  slong working_prec,
+                                  cb_integral4_single_str cb);
 
 
 /*! \brief Test single cartesian integrals in double precision
@@ -65,8 +65,8 @@ long integral4_single_run_test(const std::string & filepath,
  *                       in double precision
  * \return Number of failed tests
  */
-long integral4_single_run_test_d(const std::string & filepath,
-                                 cb_integral4_single_d cb);
+long integral4_single_verify_test_d(const std::string & filepath,
+                                    cb_integral4_single_d cb);
 
 
 /*! \brief Test single cartesian integrals in exact double precision
@@ -81,9 +81,9 @@ long integral4_single_run_test_d(const std::string & filepath,
  *                       using interval arithmetic
  * \return Number of failed tests
  */
-long integral4_single_run_test_exact(const std::string & filepath,
-                                     cb_integral4_single_exact cb,
-                                     cb_integral4_single cb_mp);
+long integral4_single_verify_test_exact(const std::string & filepath,
+                                        cb_integral4_single_exact cb,
+                                        cb_integral4_single cb_mp);
 
 
 /************************************************
@@ -125,9 +125,9 @@ void integral4_create_test(const std::string & input_filepath,
  * \param [in] cb           Function that computes contracted integrals
  * \return Number of failed tests
  */
-long integral4_run_test(const std::string & filepath,
-                        slong working_prec,
-                        cb_integral4_str cb);
+long integral4_verify_test(const std::string & filepath,
+                           slong working_prec,
+                           cb_integral4_str cb);
 
 
 /*! \brief Test contracted integrals in double precision
@@ -140,8 +140,8 @@ long integral4_run_test(const std::string & filepath,
  *                       in double precision
  * \return Number of failed tests
  */
-long integral4_run_test_d(const std::string & filepath,
-                          cb_integral4_d cb);
+long integral4_verify_test_d(const std::string & filepath,
+                             cb_integral4_d cb);
 
 
 /*! \brief Test contracted integrals in exact double precision
@@ -156,9 +156,9 @@ long integral4_run_test_d(const std::string & filepath,
  *                       using interval arithmetic
  * \return Number of failed tests
  */
-long integral4_run_test_exact(const std::string & filepath,
-                              cb_integral4_exact cb,
-                              cb_integral4 cb_mp);
+long integral4_verify_test_exact(const std::string & filepath,
+                                 cb_integral4_exact cb,
+                                 cb_integral4 cb_mp);
 
 
 

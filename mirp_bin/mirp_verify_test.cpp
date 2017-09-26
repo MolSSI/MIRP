@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief mirp_run_test main function
+ * \brief mirp_verify_test main function
  */
 
 #include "mirp_bin/cmdline.hpp"
@@ -18,7 +18,7 @@ using namespace mirp;
 static void print_help(void)
 {
     std::cout << "\n"
-              << "mirp_run_test - Test MIRP functionality using test data\n"
+              << "mirp_verify_test - Test MIRP functionality using test data\n"
               << "\n"
               << "\n"
               << "Required arguments:\n"
@@ -89,7 +89,7 @@ int main(int argc, char ** argv)
     catch(std::exception & ex)
     {
         std::cout << "\nError parsing command line: " << ex.what() << "\n\n";
-        std::cout << "Run \"mirp_run_test -h\" for help\n\n";
+        std::cout << "Run \"mirp_verify_test -h\" for help\n\n";
         return 1;
     }
 
@@ -99,21 +99,21 @@ int main(int argc, char ** argv)
         long nfailed = -1;
         if(integral == "boys")
         {
-            nfailed = boys_run_test_main(file, floattype, extra_m, working_prec);
+            nfailed = boys_verify_test_main(file, floattype, extra_m, working_prec);
         }
         else if(integral == "eri_single")
         {
             if(floattype == "interval")
             {
-                nfailed = integral4_single_run_test(file, working_prec, mirp_eri_single_str);
+                nfailed = integral4_single_verify_test(file, working_prec, mirp_eri_single_str);
             }
             else if(floattype == "double")
             {
-                nfailed = integral4_single_run_test_d(file, mirp_eri_single_d);
+                nfailed = integral4_single_verify_test_d(file, mirp_eri_single_d);
             }
             else if(floattype == "exact")
             {
-                nfailed = integral4_single_run_test_exact(file, mirp_eri_single_exact, mirp_eri_single);
+                nfailed = integral4_single_verify_test_exact(file, mirp_eri_single_exact, mirp_eri_single);
             }
             else
             {
@@ -125,15 +125,15 @@ int main(int argc, char ** argv)
         {
             if(floattype == "interval")
             {
-                nfailed = integral4_run_test(file, working_prec, mirp_eri_str);
+                nfailed = integral4_verify_test(file, working_prec, mirp_eri_str);
             }
             else if(floattype == "double")
             {
-                nfailed = integral4_run_test_d(file, mirp_eri_d);
+                nfailed = integral4_verify_test_d(file, mirp_eri_d);
             }
             else if(floattype == "exact")
             {
-                nfailed = integral4_run_test_exact(file, mirp_eri_exact, mirp_eri);
+                nfailed = integral4_verify_test_exact(file, mirp_eri_exact, mirp_eri);
             }
             else
             {

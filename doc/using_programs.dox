@@ -1,5 +1,28 @@
 /*! \page using_programs Using MIRP programs
 
-\todo TODO
+\section using_progs_overview Overview
+
+MIRP contains several programs for generating test data and for verifying the
+generated data. The sources for these programs are located in `mirp_bin`.
+
+In general, MIRP can create two types of files. The first is a *reference* file. These
+files contain contracted integrals and use double precision as input and output,
+but use interval math to ensure that there is no roundoff error in the integral calculation.
+These files are useful for testing other libraries and programs.
+
+The second type of file is a *test* file. These contain integrals that use interval math/arbitrary
+precision as input and output, and are used mostly to test the internal integral code in MIRP.
+
+The executables included with MIRP are:
+
+- **mirp_create_reference** - Creates a reference file (useful for testing other programs)
+- **mirp_create_test** - Creates a test file for internal testing
+- **mirp_verify_reference** - Tests the validity of a reference file
+- **mirp_verify_test** - Tests the validity of a test file for internal testing
+
+Each executable contains a help section, which can be accessed by either passing "-h"
+to the executable, or by running the executable with no options.
+See these individual help screens for more details on the available options
+
 
 */

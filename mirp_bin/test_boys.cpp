@@ -30,7 +30,7 @@ namespace {
  *
  * \todo This function is not exception safe
  */
-long boys_run_test(const mirp::boys_data & data, int extra_m, slong working_prec)
+long boys_verify_test(const mirp::boys_data & data, int extra_m, slong working_prec)
 {
     long nfailed = 0;
 
@@ -75,7 +75,7 @@ long boys_run_test(const mirp::boys_data & data, int extra_m, slong working_prec
  *
  * The number of failing tests is returned
  */
-long boys_run_test_d(const mirp::boys_data & data, int extra_m)
+long boys_verify_test_d(const mirp::boys_data & data, int extra_m)
 {
     long nfailed = 0;
 
@@ -123,7 +123,7 @@ long boys_run_test_d(const mirp::boys_data & data, int extra_m)
  *
  * This, therefore, just ensures that the wrappers are written correctly.
  */
-long boys_run_test_exact(const mirp::boys_data & data, int extra_m)
+long boys_verify_test_exact(const mirp::boys_data & data, int extra_m)
 {
     long nfailed = 0;
 
@@ -288,9 +288,9 @@ void boys_write_file(const std::string & filepath, const boys_data & data)
 }
 
 
-long boys_run_test_main(const std::string & filepath,
-                        const std::string & floattype,
-                        int extra_m,
+long boys_verify_test_main(const std::string & filepath,
+                           const std::string & floattype,
+                           int extra_m,
                         slong working_prec)
 {
     boys_data data = boys_read_file(filepath, false);
@@ -298,11 +298,11 @@ long boys_run_test_main(const std::string & filepath,
     long nfailed = 0;
 
     if(floattype == "interval")
-        nfailed = boys_run_test(data, extra_m, working_prec);
+        nfailed = boys_verify_test(data, extra_m, working_prec);
     else if(floattype == "exact")
-        nfailed = boys_run_test_exact(data, extra_m);
+        nfailed = boys_verify_test_exact(data, extra_m);
     else if(floattype == "double")
-        nfailed = boys_run_test_d(data, extra_m);
+        nfailed = boys_verify_test_d(data, extra_m);
     else
     {
         std::string err;

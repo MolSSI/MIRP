@@ -74,9 +74,9 @@ void integral4_single_create_test(const std::string & input_filepath,
 }
 
 
-long integral4_single_run_test(const std::string & filepath,
-                               slong working_prec,
-                               cb_integral4_single_str cb)
+long integral4_single_verify_test(const std::string & filepath,
+                                  slong working_prec,
+                                  cb_integral4_single_str cb)
 {
     long nfailed = 0;
 
@@ -135,8 +135,8 @@ long integral4_single_run_test(const std::string & filepath,
 }
 
 
-long integral4_single_run_test_d(const std::string & filepath,
-                                 cb_integral4_single_d cb)
+long integral4_single_verify_test_d(const std::string & filepath,
+                                    cb_integral4_single_d cb)
 {
     long nfailed = 0;
 
@@ -210,9 +210,9 @@ long integral4_single_run_test_d(const std::string & filepath,
 }
 
 
-long integral4_single_run_test_exact(const std::string & filepath,
-                                     cb_integral4_single_exact cb,
-                                     cb_integral4_single cb_mp)
+long integral4_single_verify_test_exact(const std::string & filepath,
+                                        cb_integral4_single_exact cb,
+                                        cb_integral4_single cb_mp)
 {
     long nfailed = 0;
 
