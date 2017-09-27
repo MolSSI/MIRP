@@ -41,18 +41,16 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS Off)
 set(CMAKE_C_EXTENSIONS Off)
 
-# CMake doesn't support Intel CXX standard until cmake 3.6
-if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
-  if("${CMAKE_VERSION}" VERSION_LESS "3.6")
-      add_compile_options(-std=c++${CMAKE_CXX_STANDARD})
-  endif()
-endif()
-
 
 ################################
 # C COMPILE FLAGS
 ################################
 if("${CMAKE_C_COMPILER_ID}" MATCHES "Intel")
+
+    # CMake doesn't support Intel C standard until cmake 3.6
+    if("${CMAKE_VERSION}" VERSION_LESS "3.6")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c${CMAKE_C_STANDARD}")
+    endif()
 
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w3")
 
@@ -81,6 +79,12 @@ endif()
 # C++ COMPILE FLAGS
 ################################
 if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
+
+    # CMake doesn't support Intel CXX standard until cmake 3.6
+    if("${CMAKE_VERSION}" VERSION_LESS "3.6")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++${CMAKE_CXX_STANDARD}")
+    endif()
+
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w3")
 
     # Globally-disabled warnings
