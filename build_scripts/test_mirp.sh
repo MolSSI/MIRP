@@ -26,6 +26,10 @@ elif [[ "${COMP_NAME}" == "clang" ]]
 then
   CC="$(which clang)"
   CXX="$(which clang++)"
+elif [[ "${COMP_NAME}" == "intel" ]]
+then
+  CC="$(which icc)"
+  CXX="$(which icpc)"
 else
   echo "Unknown compiler: ${COMP_NAME}"
   exit 1
