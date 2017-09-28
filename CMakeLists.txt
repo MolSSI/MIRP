@@ -37,9 +37,9 @@ endif()
 
 
 set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_EXTENSIONS Off)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS Off)
-set(CMAKE_C_EXTENSIONS Off)
 
 
 ################################
@@ -92,7 +92,7 @@ if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
     #   383: value copied to temporary, reference to temporary used
     # 11074: Inlining inhibited by limit max-size
     # 11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
-    set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -wd981 -wd383 -wd11074 -wd11076")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd981 -wd383 -wd11074 -wd11076")
 
     #  2338  : switch statement does not have a default clause
     #list(APPEND CMAKE_CXX_FLAGS "-ww2338")
