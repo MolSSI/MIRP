@@ -43,7 +43,7 @@ rm -Rf "${BUILD_DIR}"
 # Fix the rpaths (if we have patchelf)
 if [[ $(command -v patchelf 2>&1) ]]
 then
-    for I in ${PREFIX}/bin/*
+    for I in ${PREFIX}/lib64/*
     do
         if [[ ! -L "$I" ]]
         then 
