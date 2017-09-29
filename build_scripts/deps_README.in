@@ -6,7 +6,9 @@ Precompiled dependencies
 Build Date: BUILD_DATE
 
 This contains precompiled binary libraries
-for the dependencies of MIRP.
+for the dependencies of MIRP. It is meant to be used
+with MIRP version MIRP_VER, although it may work with
+others.
 
 All dependencies were built with GCC GCC_VER
 with -march=ARCH

@@ -7,9 +7,9 @@ file(STRINGS "${PARENT_DIR}/VERSION" MIRP_VERSION)
 
 # Compile flags
 set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_EXTENSIONS Off)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS Off)
-set(CMAKE_C_EXTENSIONS Off)
 
 # add lib64, etc, to search paths (rather than just plain lib)
 set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS True)
