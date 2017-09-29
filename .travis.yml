@@ -35,11 +35,13 @@ install:
   # Print out some info
   - uname -r
   - cmake --version
-  #- cat /proc/cpuinfo
 
-  # Build dependencies
-  - bash build_scripts/build_deps.sh native
-  - export DEPDIR="$(pwd)/mirp_deps_native"
+  # Obtain the dependencies
+  - export MIRP_VER=$(cat VERSION)
+  - export DEPS_BASE="mirp_deps_v${MIRP_VER}_ivybridge"
+  - wget https://www.bennyp.org/research/mirp/download/${DEPS_BASE}.tar.bz2
+  - tar -xvf ${DEPS_BASE}.tar.bz2
+  - export DEPDIR="$(pwd)/${DEPS_BASE}"
   - export LD_LIBRARY_PATH="${DEPDIR}/lib:${DEPDIR}/lib64:${LD_LIBRARY_PATH}"
 
 script:
