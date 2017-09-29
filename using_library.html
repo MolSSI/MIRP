@@ -63,11 +63,20 @@ $(function() {
 <div class="title">Using the MIRP library </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>TODO</dd></dl>
+<div class="textblock"><h1><a class="anchor" id="using_library_cmake"></a>
+Using MIRP from CMake</h1>
+<dl class="section note"><dt>Note</dt><dd>This section assumes that MIRP has been installed - compiling against and linking to the source or build directories is not supported.</dd></dl>
+<p>MIRP can be included in a CMake project using the usual <code>find_package</code> facility and specifying the path to the MIRP root directory (that 'include', 'share', etc) as a <code>CMAKE_PREFIX_PATH</code> variable. The path(s) to dependencies may also need to be included as well.</p>
+<p>Then, a project can be linked to <code>mirp::mirp</code>, which will add the libraries and include paths to the target.</p>
+<p>All header files are in a <code>mirp</code> subdirectory. Therefore, the main header is <code>&lt;<a class="el" href="mirp_8h.html" title="Convenience header for including common MIRP functionality. ">mirp/mirp.h</a>&gt;</code>.</p>
+<p>Examples can be found in the <code>examples</code> subdirectory of the MIRP source.</p>
+<h1><a class="anchor" id="using_library_other"></a>
+Using MIRP without CMake</h1>
+<p>Using MIRP without CMake is straightforward as well. You only need to add the <code>include</code> path to your compilation command line, and to link against the library in <code>lib64</code>. If dependencies are installed elsewhere, they must also be added, of course. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 20 2017 17:14:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Sep 29 2017 11:04:58 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

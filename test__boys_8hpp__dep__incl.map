@@ -1,5 +1,5 @@
 <map id="mirp_bin/test_boys.hpp" name="mirp_bin/test_boys.hpp">
 <area shape="rect" id="node2" href="$mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="5,81,147,122"/>
-<area shape="rect" id="node3" href="$mirp__run__test_8cpp.html" title="mirp_run_test main function " alt="" coords="172,88,351,115"/>
-<area shape="rect" id="node4" href="$test__boys_8cpp.html" title="Functions related to testing the Boys function. " alt="" coords="375,88,532,115"/>
+<area shape="rect" id="node3" href="$mirp__verify__test_8cpp.html" title="mirp_verify_test main function " alt="" coords="172,81,311,122"/>
+<area shape="rect" id="node4" href="$test__boys_8cpp.html" title="Functions related to testing the Boys function. " alt="" coords="335,88,492,115"/>
 </map>

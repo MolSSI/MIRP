@@ -1,7 +1,7 @@
 var searchData=
 [
   ['m',['m',['../structmirp_1_1boys__data__entry.html#a52dcf1bf3da21143c0d30a586233caa9',1,'mirp::boys_data_entry']]],
-  ['main',['main',['../mirp__create__reference_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;mirp_create_reference.cpp'],['../mirp__create__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;mirp_create_test.cpp'],['../mirp__run__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;mirp_run_test.cpp'],['../mirp__test__reference_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;mirp_test_reference.cpp']]],
+  ['main',['main',['../mirp__create__reference_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;mirp_create_reference.cpp'],['../mirp__create__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;mirp_create_test.cpp'],['../mirp__verify__reference_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;mirp_verify_reference.cpp'],['../mirp__verify__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;mirp_verify_test.cpp']]],
   ['math_2ec',['math.c',['../math_8c.html',1,'']]],
   ['math_2eh',['math.h',['../math_8h.html',1,'']]],
   ['max',['MAX',['../math_8h.html#afa99ec4acc4ecb2dc3c2d05da15d0e3f',1,'math.h']]],
@@ -46,9 +46,9 @@ var searchData=
   ['mirp_5fpi',['MIRP_PI',['../math_8h.html#a26092ead5579910a9dd46d9a221d3ebf',1,'math.h']]],
   ['mirp_5fpi_5f32',['MIRP_PI_32',['../math_8h.html#a6304cc7c3ebfd34b51f7925ca140b762',1,'math.h']]],
   ['mirp_5fpow_5fsi',['mirp_pow_si',['../math_8c.html#a6c24b113a4943738a02c8a73c0cdf40b',1,'mirp_pow_si(arb_t output, const arb_t b, long e, slong prec):&#160;math.c'],['../math_8h.html#a6c24b113a4943738a02c8a73c0cdf40b',1,'mirp_pow_si(arb_t output, const arb_t b, long e, slong prec):&#160;math.c']]],
-  ['mirp_5frun_5ftest_2ecpp',['mirp_run_test.cpp',['../mirp__run__test_8cpp.html',1,'']]],
   ['mirp_5fsqrt_5fpi',['MIRP_SQRT_PI',['../math_8h.html#a6f3f813e29587b5c08ce527fd3104c31',1,'math.h']]],
-  ['mirp_5ftest_5freference_2ecpp',['mirp_test_reference.cpp',['../mirp__test__reference_8cpp.html',1,'']]],
+  ['mirp_5fverify_5freference_2ecpp',['mirp_verify_reference.cpp',['../mirp__verify__reference_8cpp.html',1,'']]],
+  ['mirp_5fverify_5ftest_2ecpp',['mirp_verify_test.cpp',['../mirp__verify__test_8cpp.html',1,'']]],
   ['mirp_5fwrap_5fshell4',['MIRP_WRAP_SHELL4',['../integral4__wrappers_8h.html#aa9cc8aa5090b76ec224f56293f3a7dac',1,'integral4_wrappers.h']]],
   ['mirp_5fwrap_5fshell4_5fd',['MIRP_WRAP_SHELL4_D',['../integral4__wrappers_8h.html#ad3fa1f45f990cf44b8813e592ee6608b',1,'integral4_wrappers.h']]],
   ['mirp_5fwrap_5fshell4_5fexact',['MIRP_WRAP_SHELL4_EXACT',['../integral4__wrappers_8h.html#ad29e195c89eb60580e6f61854b26ccc2',1,'integral4_wrappers.h']]],

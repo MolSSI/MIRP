@@ -1,6 +1,6 @@
 <map id="mirp/kernels/all.h" name="mirp/kernels/all.h">
 <area shape="rect" id="node2" href="$mirp__create__reference_8cpp.html" title="mirp_create_reference main function " alt="" coords="5,81,147,122"/>
 <area shape="rect" id="node3" href="$mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="171,81,313,122"/>
-<area shape="rect" id="node4" href="$mirp__run__test_8cpp.html" title="mirp_run_test main function " alt="" coords="339,88,517,115"/>
-<area shape="rect" id="node5" href="$mirp__test__reference_8cpp.html" title="mirp_test_reference main function " alt="" coords="542,81,671,122"/>
+<area shape="rect" id="node4" href="$mirp__verify__reference_8cpp.html" title="mirp_verify_reference main function " alt="" coords="339,81,477,122"/>
+<area shape="rect" id="node5" href="$mirp__verify__test_8cpp.html" title="mirp_verify_test main function " alt="" coords="501,81,640,122"/>
 </map>

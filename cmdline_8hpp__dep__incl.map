@@ -2,6 +2,6 @@
 <area shape="rect" id="node2" href="$cmdline_8cpp.html" title="Functions for parsing the command line given to a program. " alt="" coords="5,88,149,115"/>
 <area shape="rect" id="node3" href="$mirp__create__reference_8cpp.html" title="mirp_create_reference main function " alt="" coords="174,81,316,122"/>
 <area shape="rect" id="node4" href="$mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="341,81,483,122"/>
-<area shape="rect" id="node5" href="$mirp__run__test_8cpp.html" title="mirp_run_test main function " alt="" coords="508,88,687,115"/>
-<area shape="rect" id="node6" href="$mirp__test__reference_8cpp.html" title="mirp_test_reference main function " alt="" coords="711,81,840,122"/>
+<area shape="rect" id="node5" href="$mirp__verify__reference_8cpp.html" title="mirp_verify_reference main function " alt="" coords="508,81,647,122"/>
+<area shape="rect" id="node6" href="$mirp__verify__test_8cpp.html" title="mirp_verify_test main function " alt="" coords="671,81,809,122"/>
 </map>
