@@ -216,13 +216,18 @@ boys_data boys_read_file(const std::string & filepath, bool is_input)
         data.header += line + "\n";
     }
 
+    file_skip(infile, '#');
+
     // Read the expected number of entries
     infile >> nentry;
+
+    file_skip(infile, '#');
 
     // Read in the number of digits and the working prec
     if(!is_input)
     {
         infile >> data.ndigits >> data.working_prec;
+
         if(!infile.good())
         {
             sserr << "Error reading metadata (nentry, ndigits, working_prec)";
