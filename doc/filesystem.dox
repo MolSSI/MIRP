@@ -9,6 +9,7 @@ Starting from the top level of the source directory
 - **build_scripts** - Some scripts to help build/test/install MIRP (generally for developers only) 
 - **cmake** - Cmake helper scripts
 - **doc** - Documentation (including generated documentation)
+- **examples** - Examples of using MIRP
 - **mirp** - The main source directory. This directory itself contains some
              common functions, such as math and shell functions.
   - **kernels** - Actual functions for computing integrals 
