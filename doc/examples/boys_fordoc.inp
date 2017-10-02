@@ -1,0 +1,13 @@
+# Values for m and t generated with:
+#   ../../tests/generator/generate_boys_random.py --filename boys_fordoc.inp --max-m 20 --power 32 --seed 395577343 --ndigits 16 --ntests 5
+#
+
+# number of tests = 5
+5
+
+# m, t for the 5 tests
+16 5.872336371807288e-1
+18 3.030396749923203e-13
+11 1.708340675605109e+17
+20 1.538416198979173e-30
+17 1.875362589092793e-19

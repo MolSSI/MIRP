@@ -1,0 +1,16 @@
+# Values for m and t generated with:
+#   ../../tests/generator/generate_boys_random.py --filename boys_fordoc.inp --max-m 20 --power 32 --seed 395577343 --ndigits 16 --ntests 5
+#
+# Reference values for the boys integral generated with:
+#   ../../build/mirp_bin/mirp_create_test --infile boys_fordoc.inp --outfile boys_fordoc.dat --integral boys --prec 256 --ndigits 24
+#
+
+# 5 tests, 24 printed digits (for the value), working precision of 256 bits
+5 24 256
+
+# m, t, and F(m,t) values for the five tests
+16 5.872336371807288e-1 [0.0174280594790437325586672 +/- 3.30e-26]
+18 3.030396749923203e-13 [0.0270270270270192567789503 +/- 1.99e-27]
+11 1.708340675605109e+17 [3.98005773913532233803562e-192 +/- 2.68e-216]
+20 1.538416198979173e-30 [0.0243902439024390243902439 +/- 2.44e-27]
+17 1.875362589092793e-19 [0.0285714285714285714235029 +/- 1.90e-26]

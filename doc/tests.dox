@@ -1,4 +1,4 @@
-/*! \page tests Testing and Test Files
+/*! \page tests Testing, Test Files, and Reference Files
 
 \section _tests_general General Test Information
 
@@ -34,18 +34,44 @@ Generally, input files should have a header with a brief description and/or the 
 command used to create them. The reference data files should repeat this information and add
 the command used to generate the data.
 
-\note Numbers in the input files are treated as if they are exact to an infinite number of decimal places.
+\note Floating point values in the input files are treated as if they are exact to an infinite number of decimal places.
+      Integers always have infinite precision.
+
+The computed values for the various integrals are printed (via the functionality in arb) as
+a value with associated error radius. This is meant to be interpreted again by the `arb_set_str` function,
+although it can certainly be parsed other ways.
 
 
 \subsection _tests_formats_boys Boys Function Test Files
 
-Test files for the boys function are fairly simple. The input for
-generating tests contain the `m` value and the `t` value, space separated,
-on each line.
+In a test file for the Boys function, the first (non-comment) line contains three integers
 
-Test data files are similar, containing `m`, `t`, and the value of `F(m,t)` on each line.
-In addition, the first non-comment line contains the number of decimal digits that the value
-of `F(m,t)` is accurately computed to.
+  1. The number of tests in the file
+  2. The number of significant figures printed for the value of `F(m,t)`
+  3. The working precision used to calculate the value.
+
+After this metadata, each line contains `m`, `t`, and the value of `F(m,t)` for a single integral.
+
+An example of a Boys input file is shown below
+
+\include boys_fordoc.inp 
+
+And here is the corresponding test data file
+
+\include boys_fordoc.dat 
+
+
+\subsection _tests_formats_integrals General Integral Test Files
+
+The format for an input for general types of integrals (ie, eri) are as follows. The first line
+contains the number of tests in the file. Then, there are blocks of inputs containing the shell information for
+a specified number of centers (ie, eri = 4 center, overlap = 2 center).
+
+
+
+
+
+
 
 
 
