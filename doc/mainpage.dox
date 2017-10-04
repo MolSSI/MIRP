@@ -56,6 +56,13 @@ and shared libraries.
   - \ref filesystem
   - \ref tests
 
+
+\section bug_sec Reporting Bugs, Issues, and Improvements
+
+Bugs and suggestions for improvements can be reported via
+<a href="https://github.com/MolSSI/MIRP/issues">github issues</a> or by
+emailing the main author directly.
+
 \section Authors
 
 MIRP is primarily written by Benjamin Pritchard \<bpp4@vt.edu\>, a Software Scientist at

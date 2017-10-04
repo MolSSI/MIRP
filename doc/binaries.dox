@@ -1,7 +1,52 @@
 /*! \page binaries Obtaining Binaries of MIRP and Dependencies
 
-\section _binaries Binaries
+\section _binaries_about About the Binaries
 
-\section _binaries_deps Binaries of Dependencies
+These binaries should be self contained and require no other libraries (other than the common system libraries).
+The packages containing just the dependencies are generally useful only to developers of MIRP, but may be helpful
+to users.
+
+The dependencies packages contain compiled binaries of Arb, Flint, MPFR, and GMP. These are also contained
+in the "MIRP + Dependencies" packages, along with the MIRP library and executables. The executables are statically-linked
+to libstdc++. Each package contains a README explaining the contents, licenses, and how they were compiled.
+
+In both types of packages, the `RUNPATH` for each library and executable are set to search the lib64 directory of the
+package (via `$ORIGIN`, see https://en.wikipedia.org/wiki/Rpath).
+
+Bugs and requests for other architectures can be reported via
+<a href="https://github.com/MolSSI/MIRP/issues">github issues</a> or by
+emailing the main author directly.
+
+\warning These packages are experimental. I don't have all the necessary hardware to test all of these. 
+
+
+\section _binaries Direct Links to Downloads
+
+The binaries are available for different architectures. Currently, only Intel architectures are supported, but more
+will be added in the future. It is usually safe to err on the side of using a binary built for earlier architectures.
+If in doubt, the `core2` binary should run on any processor made after circa 2006.
+
+
+<table>
+<tr><th>Architecture   <th>MIRP + Dependencies    <th>Dependencies only
+<tr><td>core2
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_core2.tar.bz2">mirp_v0.5_core2.tar.bz2</a>
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_core2.tar.bz2">mirp_deps_v0.5_core2.tar.bz2</a>
+<tr><td>nehalem
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_nehalem.tar.bz2">mirp_v0.5_nehalem.tar.bz2</a>
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_nehalem.tar.bz2">mirp_deps_v0.5_nehalem.tar.bz2</a>
+<tr><td>sandybridge
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_sandybridge.tar.bz2">mirp_v0.5_sandybridge.tar.bz2</a>
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_sandybridge.tar.bz2">mirp_deps_v0.5_sandybridge.tar.bz2</a>
+<tr><td>haswell
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_haswell.tar.bz2">mirp_v0.5_haswell.tar.bz2</a>
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_haswell.tar.bz2">mirp_deps_v0.5_haswell.tar.bz2</a>
+<tr><td>skylake
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_skylake.tar.bz2">mirp_v0.5_skylake.tar.bz2</a>
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_skylake.tar.bz2">mirp_deps_v0.5_skylake.tar.bz2</a>
+<tr><td>knl
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_knl.tar.bz2">mirp_v0.5_knl.tar.bz2</a>
+    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_knl.tar.bz2">mirp_deps_v0.5_knl.tar.bz2</a>
+</table>
 
 */

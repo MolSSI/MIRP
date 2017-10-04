@@ -23,7 +23,7 @@ versions that MIRP has been tested with. Other versions are likely
 to work (particularly for GMP and MPFR).
 
 See \ref _build_buildingdeps for some info on building the dependencies,
-or \ref _binaries_deps for how to obtain dependencies in binary form.
+or \ref binaries for how to obtain dependencies in binary form.
 
 
 \section _build_building Building and Installing MIRP
