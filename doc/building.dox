@@ -51,6 +51,9 @@ Other MIRP-specific options:
                     general contraction parts will be threaded. By default,
                     threading is not enabled.
 
+- **MIRP_STATIC** - Statically link external libraries to executables as much
+                    as possible (particularly libstdc++, etc)
+
 
 An example of configuring, building, and installing:
 

@@ -9,6 +9,9 @@ The goal of the MolSSI Integral Reference Project is to provide both reference
 data and reference implementations of common integrals found in computational
 chemistry.
 
+## Documentation
+
+Complete documentation can be found at https://molssi.github.io/MIRP/index.html
 
 ## Requirements
 
@@ -21,9 +24,6 @@ chemistry.
 * GMP (http://gmplib.org)
   * MPIR (http://mpir.org) may work, but is untested
 
-## Documentation
-
-Complete documentation can be found at https://molssi.github.io/MIRP/index.html
 
 ## License
 
