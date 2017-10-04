@@ -86,7 +86,7 @@ Requirements</h1>
 </li>
 </ul>
 <dl class="section note"><dt>Note</dt><dd>The versions given for Arb, Flint, MPFR, and GMP are the lowest versions that MIRP has been tested with. Other versions are likely to work (particularly for GMP and MPFR).</dd></dl>
-<p>See <a class="el" href="building.html#_build_buildingdeps">Building Dependencies</a> for some info on building the dependencies, or <a class="el" href="binaries.html#_binaries_deps">Binaries of Dependencies</a> for how to obtain dependencies in binary form.</p>
+<p>See <a class="el" href="building.html#_build_buildingdeps">Building Dependencies</a> for some info on building the dependencies, or <a class="el" href="binaries.html">Obtaining Binaries of MIRP and Dependencies</a> for how to obtain dependencies in binary form.</p>
 <h1><a class="anchor" id="_build_building"></a>
 Building and Installing MIRP</h1>
 <p>MIRP is built with CMake, and in general uses the standard options. No files are modified within the source tree, so multiple out-of-source builds can share the same source directory.</p>
@@ -101,6 +101,7 @@ Building and Installing MIRP</h1>
 <p>Other MIRP-specific options:</p>
 <ul>
 <li><b>MIRP_OPENMP</b> - Enable/disables OpenMP. If enabled, some operations in computing all the components of an integral and in the general contraction parts will be threaded. By default, threading is not enabled.</li>
+<li><b>MIRP_STATIC</b> - Statically link external libraries to executables as much as possible (particularly libstdc++, etc)</li>
 </ul>
 <p>An example of configuring, building, and installing:</p>
 <div class="fragment"><div class="line">cd /path/to/mirp</div><div class="line">mkdir build</div><div class="line">cd build</div><div class="line">cmake -DCMAKE_BUILD_TYPE=Release \</div><div class="line">      -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ \</div><div class="line">      -DCMAKE_PREFIX_PATH=/path/to/mirp_deps \</div><div class="line">      -DCMAKE_INSTALL_PREFIX=/home/user/mirp_install \</div><div class="line">      -DMIRP_OPENMP=True \</div><div class="line">      ../</div><div class="line">ctest</div><div class="line">make install</div></div><!-- fragment --><h1><a class="anchor" id="_build_testing"></a>
@@ -118,7 +119,7 @@ Building Dependencies</h1>
 <div class="fragment"><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"># Abort if an error is encountered or on undefined variables</div><div class="line">set -eu</div><div class="line"></div><div class="line"></div><div class="line"># Download MIRP sources</div><div class="line">git clone https://github.com/MolSSI/MIRP.git</div><div class="line"></div><div class="line"># Build dependencies in a separate directory</div><div class="line">mkdir mirp_deps</div><div class="line">cd mirp_deps</div><div class="line">bash ../MIRP/build_scripts/build_deps.sh native</div><div class="line">cd ../</div><div class="line"></div><div class="line"># mirp_deps directory should now contain</div><div class="line"># mirp_deps_native subdirectory</div><div class="line"></div><div class="line"># Now build MIRP</div><div class="line">mkdir mirp_build</div><div class="line">cd mirp_build</div><div class="line">cmake -DCMAKE_PREFIX_PATH=&quot;$(pwd)/../mirp_deps/mirp_deps_native&quot; \</div><div class="line">      -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ \</div><div class="line">      -DCMAKE_INSTALL_PREFIX=&quot;$(pwd)/../mirp_install&quot; \</div><div class="line">      -DCMAKE_BUILD_TYPE=Release \</div><div class="line">      ../MIRP</div><div class="line"></div><div class="line">make install</div></div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 29 2017 11:04:58 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 4 2017 13:39:22 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

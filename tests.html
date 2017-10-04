@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MolSSI Integral Reference Project: Testing and Test Files</title>
+<title>MolSSI Integral Reference Project: Testing, Test Files, and Reference Files</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,7 +60,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Testing and Test Files </div>  </div>
+<div class="title">Testing, Test Files, and Reference Files </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="_tests_general"></a>
@@ -76,15 +76,26 @@ Test Verification</h1>
 <h1><a class="anchor" id="_tests_formats"></a>
 Test file formats</h1>
 <p>In both test input and reference files, lines beginning with <code>#</code> are treated as comments. Generally, input files should have a header with a brief description and/or the generator command used to create them. The reference data files should repeat this information and add the command used to generate the data.</p>
-<dl class="section note"><dt>Note</dt><dd>Numbers in the input files are treated as if they are exact to an infinite number of decimal places.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Floating point values in the input files are treated as if they are exact to an infinite number of decimal places. Integers always have infinite precision.</dd></dl>
+<p>The computed values for the various integrals are printed (via the functionality in arb) as a value with associated error radius. This is meant to be interpreted again by the <code>arb_set_str</code> function, although it can certainly be parsed other ways.</p>
 <h2><a class="anchor" id="_tests_formats_boys"></a>
 Boys Function Test Files</h2>
-<p>Test files for the boys function are fairly simple. The input for generating tests contain the <code>m</code> value and the <code>t</code> value, space separated, on each line.</p>
-<p>Test data files are similar, containing <code>m</code>, <code>t</code>, and the value of <code>F(m,t)</code> on each line. In addition, the first non-comment line contains the number of decimal digits that the value of <code>F(m,t)</code> is accurately computed to. </p>
+<p>In a test file for the Boys function, the first (non-comment) line contains three integers</p>
+<ol type="1">
+<li>The number of tests in the file</li>
+<li>The number of significant figures printed for the value of <code>F(m,t)</code></li>
+<li>The working precision used to calculate the value.</li>
+</ol>
+<p>After this metadata, each line contains <code>m</code>, <code>t</code>, and the value of <code>F(m,t)</code> for a single integral.</p>
+<p>An example of a Boys input file is shown below</p>
+<div class="fragment"><div class="line"># Values for m and t generated with:</div><div class="line">#   ../../tests/generator/generate_boys_random.py --filename boys_fordoc.inp --max-m 20 --power 32 --seed 395577343 --ndigits 16 --ntests 5</div><div class="line">#</div><div class="line"></div><div class="line"># number of tests = 5</div><div class="line">5</div><div class="line"></div><div class="line"># m, t for the 5 tests</div><div class="line">16 5.872336371807288e-1</div><div class="line">18 3.030396749923203e-13</div><div class="line">11 1.708340675605109e+17</div><div class="line">20 1.538416198979173e-30</div><div class="line">17 1.875362589092793e-19</div></div><!-- fragment --><p>And here is the corresponding test data file</p>
+<div class="fragment"><div class="line"># Values for m and t generated with:</div><div class="line">#   ../../tests/generator/generate_boys_random.py --filename boys_fordoc.inp --max-m 20 --power 32 --seed 395577343 --ndigits 16 --ntests 5</div><div class="line">#</div><div class="line"># Reference values for the boys integral generated with:</div><div class="line">#   ../../build/mirp_bin/mirp_create_test --infile boys_fordoc.inp --outfile boys_fordoc.dat --integral boys --prec 256 --ndigits 24</div><div class="line">#</div><div class="line"></div><div class="line"># 5 tests, 24 printed digits (for the value), working precision of 256 bits</div><div class="line">5 24 256</div><div class="line"></div><div class="line"># m, t, and F(m,t) values for the five tests</div><div class="line">16 5.872336371807288e-1 [0.0174280594790437325586672 +/- 3.30e-26]</div><div class="line">18 3.030396749923203e-13 [0.0270270270270192567789503 +/- 1.99e-27]</div><div class="line">11 1.708340675605109e+17 [3.98005773913532233803562e-192 +/- 2.68e-216]</div><div class="line">20 1.538416198979173e-30 [0.0243902439024390243902439 +/- 2.44e-27]</div><div class="line">17 1.875362589092793e-19 [0.0285714285714285714235029 +/- 1.90e-26]</div></div><!-- fragment --><h2><a class="anchor" id="_tests_formats_integrals"></a>
+General Integral Test Files</h2>
+<p>The format for an input for general types of integrals (ie, eri) are as follows. The first line contains the number of tests in the file. Then, there are blocks of inputs containing the shell information for a specified number of centers (ie, eri = 4 center, overlap = 2 center). </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 29 2017 11:04:58 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 4 2017 13:39:22 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

@@ -63,14 +63,36 @@ $(function() {
 <div class="title">Obtaining Binaries of MIRP and Dependencies </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="_binaries"></a>
-Binaries</h1>
-<h1><a class="anchor" id="_binaries_deps"></a>
-Binaries of Dependencies</h1>
+<div class="textblock"><h1><a class="anchor" id="_binaries_about"></a>
+About the Binaries</h1>
+<p>These binaries should be self contained and require no other libraries (other than the common system libraries). The packages containing just the dependencies are generally useful only to developers of MIRP, but may be helpful to users.</p>
+<p>The dependencies packages contain compiled binaries of Arb, Flint, MPFR, and GMP. These are also contained in the "MIRP + Dependencies" packages, along with the MIRP library and executables. The executables are statically-linked to libstdc++. Each package contains a README explaining the contents, licenses, and how they were compiled.</p>
+<p>In both types of packages, the <code>RUNPATH</code> for each library and executable are set to search the lib64 directory of the package (via <code>$ORIGIN</code>, see <a href="https://en.wikipedia.org/wiki/Rpath">https://en.wikipedia.org/wiki/Rpath</a>).</p>
+<p>Bugs and requests for other architectures can be reported via <a href="https://github.com/MolSSI/MIRP/issues">github issues</a> or by emailing the main author directly.</p>
+<dl class="section warning"><dt>Warning</dt><dd>These packages are experimental. I don't have all the necessary hardware to test all of these.</dd></dl>
+<h1><a class="anchor" id="_binaries"></a>
+Direct Links to Downloads</h1>
+<p>The binaries are available for different architectures. Currently, only Intel architectures are supported, but more will be added in the future. It is usually safe to err on the side of using a binary built for earlier architectures. If in doubt, the <code>core2</code> binary should run on any processor made after circa 2006.</p>
+<table class="doxtable">
+<tr>
+<th>Architecture </th><th>MIRP + Dependencies </th><th>Dependencies only </th></tr>
+<tr>
+<td>core2 </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_core2.tar.bz2">mirp_v0.5_core2.tar.bz2</a> </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_core2.tar.bz2">mirp_deps_v0.5_core2.tar.bz2</a> </td></tr>
+<tr>
+<td>nehalem </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_nehalem.tar.bz2">mirp_v0.5_nehalem.tar.bz2</a> </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_nehalem.tar.bz2">mirp_deps_v0.5_nehalem.tar.bz2</a> </td></tr>
+<tr>
+<td>sandybridge </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_sandybridge.tar.bz2">mirp_v0.5_sandybridge.tar.bz2</a> </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_sandybridge.tar.bz2">mirp_deps_v0.5_sandybridge.tar.bz2</a> </td></tr>
+<tr>
+<td>haswell </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_haswell.tar.bz2">mirp_v0.5_haswell.tar.bz2</a> </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_haswell.tar.bz2">mirp_deps_v0.5_haswell.tar.bz2</a> </td></tr>
+<tr>
+<td>skylake </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_skylake.tar.bz2">mirp_v0.5_skylake.tar.bz2</a> </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_skylake.tar.bz2">mirp_deps_v0.5_skylake.tar.bz2</a> </td></tr>
+<tr>
+<td>knl </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.5_knl.tar.bz2">mirp_v0.5_knl.tar.bz2</a> </td><td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.5_knl.tar.bz2">mirp_deps_v0.5_knl.tar.bz2</a> </td></tr>
+</table>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 29 2017 11:04:58 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 4 2017 13:39:22 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

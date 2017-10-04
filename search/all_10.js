@@ -15,7 +15,7 @@ var searchData=
   ['testfile_5fread_5fintegral_5fsingle',['testfile_read_integral_single',['../namespacemirp.html#ac9cfb997ce9f6b9062606aa5fb1bc440',1,'mirp']]],
   ['testfile_5fwrite_5fintegral',['testfile_write_integral',['../namespacemirp.html#ac5a6837ba61cdeb32f0fd40a61b2b351',1,'mirp']]],
   ['testfile_5fwrite_5fintegral_5fsingle',['testfile_write_integral_single',['../namespacemirp.html#aa1968d0c11645895c1a3c03a47691db0',1,'mirp']]],
-  ['testing_20and_20test_20files',['Testing and Test Files',['../tests.html',1,'']]],
+  ['testing_2c_20test_20files_2c_20and_20reference_20files',['Testing, Test Files, and Reference Files',['../tests.html',1,'']]],
   ['todo_20list',['Todo List',['../todo.html',1,'']]],
   ['trim',['trim',['../namespacemirp.html#abfa167f623301da5e48af3af24931eb1',1,'mirp']]],
   ['typedefs_2eh',['typedefs.h',['../typedefs_8h.html',1,'']]]
