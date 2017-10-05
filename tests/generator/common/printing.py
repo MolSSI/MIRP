@@ -13,6 +13,6 @@ def print_integral_input(f, shells):
         for j in range(0, nprim):
             f.write("{}".format(bf[7][j]))
             for k in range(0, ngen):
-                f.write(" {}".format(bf[8][k*nprim+j]))
+                f.write(" {}".format(bf[8][k][j]))
             f.write("\n")
     f.write("\n")

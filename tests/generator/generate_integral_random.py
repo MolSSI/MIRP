@@ -50,14 +50,19 @@ def generate_basis_function():
             alpha = mp.nstr(alpha, args.ndigits, min_fixed=1, max_fixed=0)
             alphas.append(alpha)
 
+            coefftmp = []
             for j in range(ngen):
                 coeff = mp.power(mp.mpf(10), random.uniform(-args.coeff_power, args.coeff_power))
                 coeff = mp.nstr(coeff, args.ndigits, min_fixed=1, max_fixed=0)
-                coeffs.append(coeff)
+                coefftmp.append(coeff)
+            coeffs.append(coefftmp)
                 
+        # Transposes the coefficient matrix
+        coeffs = list(map(list, zip(*coeffs)))
 
         nprim = len(alphas)
-        ngen = len(coeffs)//nprim
+        ngen = len(coeffs)
+
 
         return (Z, am, nprim, ngen, x, y, z, alphas, coeffs)
 

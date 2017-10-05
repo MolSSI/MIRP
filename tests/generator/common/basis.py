@@ -44,7 +44,7 @@ def read_basis(basisfile_path):
             for j, s in enumerate(stype):
                 shell = {'am': amchar_to_int(s),
                          'alpha': alpha,
-                         'coeff': coeff[j],
+                         'coeff': [coeff[j]],
                          'nprim': nprim,
                          'ngeneral': 1
                          }
@@ -57,9 +57,9 @@ def read_basis(basisfile_path):
         else:
             shell = {'am': amchar_to_int(stype),
                      'alpha': alpha,
-                     'coeff': coeff[0],
+                     'coeff': coeff,
                      'nprim': nprim,
-                     'ngeneral': len(coeff[0]) // nprim
+                     'ngeneral': len(coeff)
                      }
 
             if not atom_symbol in atom_basis:
