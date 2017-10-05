@@ -18,16 +18,22 @@ def calculate_boys(m, t):
         F_mp = mp.gammainc(M, zero_mp, t_mp) * one_mp/(two_mp * mp.power(t_mp, M))
     return F_mp
 
+
 def read_test_file(filepath):
+
     mtv = []
     with open(filepath, 'r') as f:
         lines = [ l for l in f.readlines() if not l.startswith('#') ] 
-        bits = int(lines[0])
+        ntest, test_digits, working_prec = [ int(i) for i in lines[0].split() ]
         for l in lines[1:]:
-            m,t,v = l.strip().split(' ')
+
+            # Will pull out an opening bracket from the value (ie, the
+            # value is [0.01538... +/- 4.2e-103])
+            m,t,v = l.strip().split()[:3]
+            v = v.replace('[', '')
             mtv.append((m,t,v))
 
-    return (bits, mtv)
+    return (ntest, test_digits, working_prec, mtv)
 
 
 parser = argparse.ArgumentParser()
@@ -35,7 +41,7 @@ parser.add_argument("--filename",     type=str,            required=True,  help=
 parser.add_argument("--ndigits",      type=int, default=0, required=False, help="Number of decimal digits to test")
 args = parser.parse_args()
 
-test_digits, test_vals = read_test_file(args.filename)
+ntest, test_digits, working_prec, test_vals = read_test_file(args.filename)
 
 ndigits = args.ndigits
 if ndigits == 0:

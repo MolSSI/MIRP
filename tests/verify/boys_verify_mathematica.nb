@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     21416,        494]
-NotebookOptionsPosition[     19447,        445]
-NotebookOutlinePosition[     19807,        461]
-CellTagsIndexPosition[     19764,        458]
+NotebookDataLength[     23956,        553]
+NotebookOptionsPosition[     21790,        500]
+NotebookOutlinePosition[     22144,        516]
+CellTagsIndexPosition[     22101,        513]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,19 +26,59 @@ Cell["Validation of the Boys Function", "Title",
 3b0982294458"],
 
 Cell["\<\
-Input values in the test file are assumed to be in infinite precision. The \
-ParsePadNumber converts a string to a number by
-adding zeros after the decimal place, but before the \[OpenCurlyQuote]e\
-\[CloseCurlyQuote]. It then replaces the \[OpenCurlyQuote]e\[CloseCurlyQuote] \
-with \[OpenCurlyQuote]*10^\[CloseCurlyQuote] so that Mathematica will interpret
-it correctly (in ToExpression).
+SplitArbNumber will split a ball and associated radius in the format [1.234 + \
+/- 3.4] and return only the first number. This will not
+affect numbers not written in the Arb format\
+\>", "Text",
+ CellChangeTimes->{{3.716204951173174*^9, 
+  3.716204956236785*^9}},ExpressionUUID->"698e7cdc-c70c-4a34-bf98-\
+665f880a4fa3"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SplitArbNumber", "[", "s_", "]"}], " ", ":=", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", "tmp", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"tmp", " ", "=", " ", 
+      RowBox[{"StringReplace", "[", 
+       RowBox[{"s", ",", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\"\<[\>\"", "\[Rule]", "\"\<\>\""}], ",", " ", 
+          RowBox[{"\"\<]\>\"", "\[Rule]", "\"\<\>\""}]}], "}"}]}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"tmp", "=", 
+      RowBox[{"StringSplit", "[", "tmp", "]"}]}], ";", "\[IndentingNewLine]", 
+     
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"tmp", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], " ", "==", " ", "\"\<+/-\>\""}], ",",
+        " ", "\"\<0.0\>\"", ",", " ", 
+       RowBox[{"tmp", "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",ExpressionUUID->"488846e5-5ab6-437f-9e4d-8997d59459f6"],
+
+Cell["\<\
+
+The ParsePadNumber converts a string to a number by adding zeros after the \
+decimal place, but before the \[OpenCurlyQuote]e\[CloseCurlyQuote].
+It then replaces the \[OpenCurlyQuote]e\[CloseCurlyQuote] with \
+\[OpenCurlyQuote]*10^\[CloseCurlyQuote] so that Mathematica will interpret it \
+correctly (in ToExpression).
 
 ParseNumber is similar, but doesn\[CloseCurlyQuote]t pad with zeros. This \
 should be used to read reference values (rather than the integral input
 parameters).\
 \>", "Text",
- CellChangeTimes->{{3.7094674063635683`*^9, 
-  3.7094675856869783`*^9}},ExpressionUUID->"6436d512-995e-470f-a052-\
+ CellChangeTimes->{{3.7094674063635683`*^9, 3.7094675856869783`*^9}, {
+   3.716203757613389*^9, 3.716203856450088*^9}, 3.716204546845344*^9, {
+   3.7162046119614563`*^9, 3.716204614011373*^9}, 3.71620466759444*^9, {
+   3.71620487995989*^9, 3.7162048961398163`*^9}, {3.7162049343303337`*^9, 
+   3.716204981403268*^9}},ExpressionUUID->"6436d512-995e-470f-a052-\
 3336d92700f3"],
 
 Cell[BoxData[
@@ -46,31 +86,41 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"ParsePadNumber", "[", 
     RowBox[{"s_", ",", " ", "ndigits_"}], "]"}], " ", ":=", " ", 
-   RowBox[{"ToExpression", "[", "\[IndentingNewLine]", 
-    RowBox[{"If", "[", 
+   RowBox[{"Module", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", "a", "}"}], ",", "\[IndentingNewLine]", 
      RowBox[{
-      RowBox[{"StringContainsQ", "[", 
-       RowBox[{"s", ",", " ", "\"\<.\>\""}], "]"}], ",", 
+      RowBox[{"a", " ", "=", " ", 
+       RowBox[{"SplitArbNumber", "[", "s", "]"}]}], ";", 
       "\[IndentingNewLine]", 
-      RowBox[{"StringReplace", "[", 
-       RowBox[{"s", ",", 
-        RowBox[{"\"\<e\>\"", "\[Rule]", 
-         RowBox[{
-          RowBox[{"StringRepeat", "[", 
-           RowBox[{"\"\<0\>\"", ",", "ndigits"}], "]"}], "<>", 
-          "\"\<*10^\>\""}]}]}], "]"}], ",", "\[IndentingNewLine]", 
-      RowBox[{"StringReplace", "[", 
-       RowBox[{"s", ",", 
-        RowBox[{"\"\<e\>\"", "\[Rule]", 
-         RowBox[{"\"\<.\>\"", "<>", 
-          RowBox[{"StringRepeat", "[", 
-           RowBox[{"\"\<0\>\"", ",", "ndigits"}], "]"}], "<>", 
-          "\"\<*10^\>\""}]}]}], "]"}]}], "]"}], "]"}]}], ";"}]], "Input",
+      RowBox[{"ToExpression", "[", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"StringContainsQ", "[", 
+          RowBox[{"a", ",", " ", "\"\<.\>\""}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{"a", ",", 
+           RowBox[{"\"\<e\>\"", "\[Rule]", 
+            RowBox[{
+             RowBox[{"StringRepeat", "[", 
+              RowBox[{"\"\<0\>\"", ",", "ndigits"}], "]"}], "<>", 
+             "\"\<*10^\>\""}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"StringReplace", "[", 
+          RowBox[{"a", ",", 
+           RowBox[{"\"\<e\>\"", "\[Rule]", 
+            RowBox[{"\"\<.\>\"", "<>", 
+             RowBox[{"StringRepeat", "[", 
+              RowBox[{"\"\<0\>\"", ",", "ndigits"}], "]"}], "<>", 
+             "\"\<*10^\>\""}]}]}], "]"}]}], "]"}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
  CellChangeTimes->{{3.709465536007962*^9, 3.709465566498661*^9}, {
   3.709466001018497*^9, 3.709466002368306*^9}, {3.709466163467703*^9, 
   3.709466182772242*^9}, {3.709466330597824*^9, 3.7094664692872868`*^9}, {
   3.7094665034429607`*^9, 3.709466506500807*^9}, {3.709466779291071*^9, 
-  3.709466779695282*^9}},ExpressionUUID->"800dc620-a9c9-4411-a6ce-\
+  3.709466779695282*^9}, {3.716204682284161*^9, 3.716204715486215*^9}, {
+  3.716204846198967*^9, 
+  3.716204858220688*^9}},ExpressionUUID->"800dc620-a9c9-4411-a6ce-\
 8cc0f0923b82"],
 
 Cell[BoxData[
@@ -78,16 +128,18 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"ParseNumber", "[", "s_", "]"}], " ", ":=", " ", 
    RowBox[{"ToExpression", "[", 
-    RowBox[{"StringReplace", "[", 
-     RowBox[{"s", ",", 
-      RowBox[{"\"\<e\>\"", "\[Rule]", "\"\<*10^\>\""}]}], "]"}], "]"}]}], 
-  ";"}]], "Input",
+    RowBox[{"SplitArbNumber", "[", 
+     RowBox[{"StringReplace", "[", 
+      RowBox[{"s", ",", 
+       RowBox[{"\"\<e\>\"", "\[Rule]", "\"\<*10^\>\""}]}], "]"}], "]"}], 
+    "]"}]}], ";"}]], "Input",
  CellFrame->{{0, 0}, {0.5, 0}},
  CellChangeTimes->{{3.709465536007962*^9, 3.709465566498661*^9}, {
-  3.709466001018497*^9, 3.709466002368306*^9}, {3.709466163467703*^9, 
-  3.709466182772242*^9}, {3.709466330597824*^9, 3.7094664692872868`*^9}, {
-  3.7094665034429607`*^9, 3.709466506500807*^9}, {3.709466779291071*^9, 
-  3.709466818169997*^9}},ExpressionUUID->"38795e19-dda2-4e44-bf9d-\
+   3.709466001018497*^9, 3.709466002368306*^9}, {3.709466163467703*^9, 
+   3.709466182772242*^9}, {3.709466330597824*^9, 3.7094664692872868`*^9}, {
+   3.7094665034429607`*^9, 3.709466506500807*^9}, {3.709466779291071*^9, 
+   3.709466818169997*^9}, 3.716204743073326*^9, {3.716204867942515*^9, 
+   3.7162048755939217`*^9}},ExpressionUUID->"38795e19-dda2-4e44-bf9d-\
 dc621259a5c4"],
 
 Cell["\<\
@@ -249,7 +301,7 @@ c15eae899532"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"CompareList", "[", 
+  RowBox[{"TestList", "[", 
    RowBox[{"lst_", ",", " ", "ndigits_"}], "]"}], " ", ":=", " ", 
   RowBox[{"Module", " ", "[", "\[IndentingNewLine]", 
    RowBox[{
@@ -288,8 +340,9 @@ Cell[BoxData[
   3.709465927445051*^9, 3.7094659353182707`*^9}, {3.709466597851972*^9, 
   3.709466606671365*^9}, {3.709466927791545*^9, 3.709466960234941*^9}, {
   3.7094688098636303`*^9, 3.709468830653277*^9}, {3.7094743138569527`*^9, 
-  3.709474315072172*^9}, {3.709476167356882*^9, 
-  3.7094761753653517`*^9}},ExpressionUUID->"2043c984-55cf-4687-bb47-\
+  3.709474315072172*^9}, {3.709476167356882*^9, 3.7094761753653517`*^9}, {
+  3.716205524201804*^9, 
+  3.716205524721262*^9}},ExpressionUUID->"2043c984-55cf-4687-bb47-\
 13e37ecae92e"],
 
 Cell["\<\
@@ -302,7 +355,7 @@ db7899841c19"],
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"filename", " ", "=", " ", "\"\<boys_large_random.dat\>\""}], 
+  RowBox[{"filename", " ", "=", " ", "\"\<boys_large_range.dat\>\""}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"testDir", " ", "=", " ", 
@@ -322,8 +375,8 @@ Cell[BoxData[{
   3.7094672555679703`*^9}, {3.709467325994006*^9, 3.70946732617258*^9}, {
   3.709467976646607*^9, 3.7094680349208937`*^9}, {3.709468491805987*^9, 
   3.7094684923434277`*^9}, {3.709468620999476*^9, 3.7094686228877897`*^9}, {
-  3.709468673559575*^9, 
-  3.7094686789127493`*^9}},ExpressionUUID->"40e83825-baf8-46a6-a0e2-\
+  3.709468673559575*^9, 3.7094686789127493`*^9}, {3.716205625750473*^9, 
+  3.7162056269257307`*^9}},ExpressionUUID->"40e83825-baf8-46a6-a0e2-\
 90bd58d4713c"],
 
 Cell["\<\
@@ -363,7 +416,7 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"bdata", "[", 
       RowBox[{"[", "1", "]"}], "]"}], "[", 
-     RowBox[{"[", "1", "]"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+     RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"bdata", " ", "=", " ", 
    RowBox[{"Delete", "[", 
@@ -404,8 +457,8 @@ Cell[BoxData[{
    3.7094644006004543`*^9}, 3.709464430796686*^9, {3.709464740484138*^9, 
    3.70946474444242*^9}, {3.709465569561042*^9, 3.70946559286938*^9}, {
    3.709466217693492*^9, 3.709466225117858*^9}, 3.709466632232119*^9, {
-   3.709466830140504*^9, 
-   3.7094668357219048`*^9}},ExpressionUUID->"7fb2a781-a01c-4f81-a9b4-\
+   3.709466830140504*^9, 3.7094668357219048`*^9}, {3.7162051342323313`*^9, 
+   3.716205134302423*^9}},ExpressionUUID->"7fb2a781-a01c-4f81-a9b4-\
 fafc0b3f8ac2"],
 
 Cell[BoxData[
@@ -416,21 +469,22 @@ Cell[BoxData[
 
 Cell["\<\
 Run the test. If the CompareList returns an empty list, that means all has \
-succeeded. If the list is not entry, then
+succeeded. If the list does not have any entries, then
 it contains the information for the failed tests
 
-First, test with the incomplete gamma, and then with Mathematica\
-\[CloseCurlyQuote]s magical integration function\
+Test with the incomplete gamma\
 \>", "Text",
  CellChangeTimes->{{3.709468105930695*^9, 3.709468123839519*^9}, {
   3.709468154214293*^9, 3.709468166544252*^9}, {3.7094683594585238`*^9, 
   3.709468381238722*^9}, {3.7094689671822653`*^9, 3.7094689746071*^9}, {
   3.709469051106928*^9, 3.7094690557871943`*^9}, {3.7094741847965803`*^9, 
-  3.70947419334518*^9}},ExpressionUUID->"1a15df08-19da-44a5-88fe-\
+  3.70947419334518*^9}, {3.716205186733032*^9, 3.716205194800634*^9}, {
+  3.716205513284326*^9, 
+  3.716205516474951*^9}},ExpressionUUID->"1a15df08-19da-44a5-88fe-\
 7f84bf22ce9f"],
 
 Cell[BoxData[
- RowBox[{"CompareList", "[", 
+ RowBox[{"TestList", "[", 
   RowBox[{"bdata", ",", " ", "fileDigits"}], "]"}]], "Input",
  CellChangeTimes->{{3.707135443608491*^9, 3.7071354475950327`*^9}, {
    3.709464914228891*^9, 3.7094649182321157`*^9}, {3.709466724885898*^9, 
@@ -438,13 +492,14 @@ Cell[BoxData[
    3.709468198630547*^9, 3.7094682023187943`*^9}, {3.709468257670992*^9, 
    3.7094682632935543`*^9}, {3.7094682983958263`*^9, 
    3.7094682992938843`*^9}, {3.709468347670507*^9, 3.709468352258995*^9}, {
-   3.709468997017447*^9, 3.7094689977822533`*^9}, 
-   3.709476180043968*^9},ExpressionUUID->"f3cc5825-6c0d-488f-92bd-\
+   3.709468997017447*^9, 3.7094689977822533`*^9}, 3.709476180043968*^9, {
+   3.716205520263782*^9, 
+   3.7162055207950583`*^9}},ExpressionUUID->"f3cc5825-6c0d-488f-92bd-\
 4008685b3f0b"]
 }, Open  ]]
 },
 WindowSize->{1680, 955},
-WindowMargins->{{-1917, Automatic}, {145, Automatic}},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"11.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 18, \
 2017)",
 StyleDefinitions->"Default.nb"
@@ -463,37 +518,41 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 176, 3, 92, "Title", "ExpressionUUID" -> \
 "ebdb1d77-0703-4005-8bc7-3b0982294458"],
-Cell[759, 27, 705, 14, 125, "Text", "ExpressionUUID" -> \
+Cell[759, 27, 330, 7, 49, "Text", "ExpressionUUID" -> \
+"698e7cdc-c70c-4a34-bf98-665f880a4fa3"],
+Cell[1092, 36, 1033, 26, 138, "Input", "ExpressionUUID" -> \
+"488846e5-5ab6-437f-9e4d-8997d59459f6"],
+Cell[2128, 64, 880, 17, 125, "Text", "ExpressionUUID" -> \
 "6436d512-995e-470f-a052-3336d92700f3"],
-Cell[1467, 43, 1338, 30, 96, "Input", "ExpressionUUID" -> \
+Cell[3011, 83, 1794, 40, 180, "Input", "ExpressionUUID" -> \
 "800dc620-a9c9-4411-a6ce-8cc0f0923b82"],
-Cell[2808, 75, 682, 15, 41, "Input", "ExpressionUUID" -> \
+Cell[4808, 125, 808, 17, 41, "Input", "ExpressionUUID" -> \
 "38795e19-dda2-4e44-bf9d-dc621259a5c4"],
-Cell[3493, 92, 500, 10, 49, "Text", "ExpressionUUID" -> \
+Cell[5619, 144, 500, 10, 49, "Text", "ExpressionUUID" -> \
 "575f200f-5181-41e7-ac33-7804e5472586"],
-Cell[3996, 104, 2760, 54, 67, "Input", "ExpressionUUID" -> \
+Cell[6122, 156, 2760, 54, 67, "Input", "ExpressionUUID" -> \
 "c94f2ed4-4f9f-4f37-a3e8-031722223af0"],
-Cell[6759, 160, 556, 12, 87, "Text", "ExpressionUUID" -> \
+Cell[8885, 212, 556, 12, 87, "Text", "ExpressionUUID" -> \
 "c351e459-f62c-46cc-a5b7-4aefe39023c8"],
-Cell[7318, 174, 3552, 63, 189, "Input", "ExpressionUUID" -> \
+Cell[9444, 226, 3552, 63, 189, "Input", "ExpressionUUID" -> \
 "5e19414c-edf0-47b6-9d4d-bf64fca50bec"],
-Cell[10873, 239, 463, 8, 30, "Text", "ExpressionUUID" -> \
+Cell[12999, 291, 463, 8, 30, "Text", "ExpressionUUID" -> \
 "23e3834f-c0b9-4fb7-8db9-c15eae899532"],
-Cell[11339, 249, 1949, 43, 127, "Input", "ExpressionUUID" -> \
+Cell[13465, 301, 1995, 44, 127, "Input", "ExpressionUUID" -> \
 "2043c984-55cf-4687-bb47-13e37ecae92e"],
-Cell[13291, 294, 228, 6, 30, "Text", "ExpressionUUID" -> \
+Cell[15463, 347, 228, 6, 30, "Text", "ExpressionUUID" -> \
 "a13f1994-1cbc-4219-a117-db7899841c19"],
-Cell[13522, 302, 1218, 24, 75, "Input", "ExpressionUUID" -> \
+Cell[15694, 355, 1265, 24, 75, "Input", "ExpressionUUID" -> \
 "40e83825-baf8-46a6-a0e2-90bd58d4713c"],
-Cell[14743, 328, 384, 8, 49, "Text", "ExpressionUUID" -> \
+Cell[16962, 381, 384, 8, 49, "Text", "ExpressionUUID" -> \
 "99f3ec31-5c16-42e2-b5fa-5fe436462e3c"],
-Cell[15130, 338, 2764, 70, 117, "Input", "ExpressionUUID" -> \
+Cell[17349, 391, 2812, 70, 117, "Input", "ExpressionUUID" -> \
 "7fb2a781-a01c-4f81-a9b4-fafc0b3f8ac2"],
-Cell[17897, 410, 191, 4, 32, "Input", "ExpressionUUID" -> \
+Cell[20164, 463, 191, 4, 32, "Input", "ExpressionUUID" -> \
 "a7419c27-4604-4991-8cff-03bbf777d84c"],
-Cell[18091, 416, 677, 13, 87, "Text", "ExpressionUUID" -> \
+Cell[20358, 469, 704, 14, 87, "Text", "ExpressionUUID" -> \
 "1a15df08-19da-44a5-88fe-7f84bf22ce9f"],
-Cell[18771, 431, 660, 11, 32, "Input", "ExpressionUUID" -> \
+Cell[21065, 485, 709, 12, 32, "Input", "ExpressionUUID" -> \
 "f3cc5825-6c0d-488f-92bd-4008685b3f0b"]
 }, Open  ]]
 }
