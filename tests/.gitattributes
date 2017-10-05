@@ -1,0 +1,3 @@
+# Ignore some paths from GitHub language statistics
+tests/generator/basis/* linguist-vendored
+tests/generator/geometry/* linguist-vendored
