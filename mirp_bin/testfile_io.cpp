@@ -77,13 +77,13 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
                 if(infile.eof())
                 {
                     sserr << "Unexpected end of file while reading gaussian " << i << "/" << n
-                          << " for entry " << (data.entries.size()+1) << "\n";
+                          << " for entry " << data.entries.size() << "\n";
                     throw std::runtime_error(sserr.str());
                 }
                 else
                 {
                     sserr << "Error while reading gaussian " << i << "/" << n
-                          << " for entry " << (data.entries.size()+1) << "\n";
+                          << " for entry " << data.entries.size() << "\n";
                     throw std::runtime_error(sserr.str());
                 }
             } 
@@ -98,7 +98,7 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
             if(infile.bad() || infile.fail())
             {
                 sserr << "Error while reading gaussian " << i << "/" << n
-                      << " for entry " << (data.entries.size()+1) << "\n";
+                      << " for entry " << data.entries.size() << "\n";
                 throw std::runtime_error(sserr.str());
             }
                 
@@ -115,7 +115,7 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
 
             if(infile.bad() || infile.fail())
             {
-                sserr << "Error while integral for entry " << (data.entries.size()+1) << "\n";
+                sserr << "Error while integral for entry " << data.entries.size() << "\n";
                 throw std::runtime_error(sserr.str());
             }
         }
@@ -235,13 +235,13 @@ integral_data testfile_read_integral(const std::string & filepath,
                 if(infile.eof())
                 {
                     sserr << "Unexpected end of file while reading gaussian " << i << "/" << n
-                          << " for entry " << (data.entries.size()+1) << "\n";
+                          << " for entry " << data.entries.size() << "\n";
                     throw std::runtime_error(sserr.str());
                 }
                 else
                 {
                     sserr << "Error while reading gaussian " << i << "/" << n
-                          << " for entry " << (data.entries.size()+1) << "\n";
+                          << " for entry " << data.entries.size() << "\n";
                     throw std::runtime_error(sserr.str());
                 }
             } 
@@ -253,7 +253,14 @@ integral_data testfile_read_integral(const std::string & filepath,
             if(infile.bad() || infile.fail())
             {
                 sserr << "Error while reading gaussian " << i << "/" << n
-                      << " for entry " << (data.entries.size()+1) << "\n";
+                      << " for entry " << data.entries.size() << "\n";
+                throw std::runtime_error(sserr.str());
+            }
+
+            if(!file_skip(infile, '#'))
+            {
+                sserr << "Unexpected EOF or error after reading info for gaussian " << i << "/" << n
+                      << " for entry " << data.entries.size() << "\n";
                 throw std::runtime_error(sserr.str());
             }
 
@@ -270,7 +277,7 @@ integral_data testfile_read_integral(const std::string & filepath,
             if(infile.bad() || infile.fail())
             {
                 sserr << "Error while reading exponents and coefficients for gaussian " << i << "/" << n
-                      << " for entry " << (data.entries.size()+1) << "\n";
+                      << " for entry " << data.entries.size() << "\n";
                 throw std::runtime_error(sserr.str());
             }
 
@@ -302,7 +309,7 @@ integral_data testfile_read_integral(const std::string & filepath,
 
             if(infile.bad() || infile.fail())
             {
-                sserr << "Error while reading integrals for entry " << (data.entries.size()+1) << "\n";
+                sserr << "Error while reading integrals for entry " << data.entries.size() << "\n";
                 throw std::runtime_error(sserr.str());
             }
         }
