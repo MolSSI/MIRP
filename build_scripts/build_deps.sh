@@ -6,7 +6,7 @@ MYDIR="$(cd "$(dirname "$0")" && pwd)"
 MIRP_DIR="$(dirname ${MYDIR})"
 
 ARCH=$1
-MIRP_VER=$(cat ${MIRP_DIR}/VERSION)
+MIRP_VER=$(cat "${MIRP_DIR}/VERSION")
 PARALLEL=4 # Number of concurrent compilations (use make -j${PARALLEL})
 
 GMP_VER=6.1.2

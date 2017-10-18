@@ -5,7 +5,7 @@ set -eu
 MYDIR="$(cd "$(dirname "$0")" && pwd)"
 MIRP_DIR="$(dirname ${MYDIR})"
 
-MIRP_VER=`cat ${MIRP_DIR}/VERSION`
+MIRP_VER=$(cat "${MIRP_DIR}/VERSION")
 
 ARCH=$1
 
