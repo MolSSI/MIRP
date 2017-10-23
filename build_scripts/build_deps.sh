@@ -60,7 +60,7 @@ mkdir -p "${MPFR_DIR}/build"
 ###################
 # Common flags
 ###################
-CFLAGS="-fomit-frame-pointer -O2 -m64 -march=${ARCH}"
+CFLAGS="-O2 -march=${ARCH}"
 CC=`which gcc`
 
 ###################
