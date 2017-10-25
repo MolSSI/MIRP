@@ -40,6 +40,13 @@ make install
 cd "${CURDIR}"
 rm -Rf "${BUILD_DIR}"
 
+# move from lib to lib64, if necessary
+if [[ -d "${PREFIX}/lib" ]]
+then
+    mv ${PREFIX}/lib/* ${PREFIX}/lib64
+    rm -R "${PREFIX}/lib"
+fi
+
 # Fix the rpaths (if we have patchelf)
 if [[ $(command -v patchelf 2>&1) ]]
 then
