@@ -67,6 +67,9 @@ The format for an input for general types of integrals (ie, eri) are as follows.
 contains the number of tests in the file. Then, there are blocks of inputs containing the shell information for
 a specified number of centers (ie, eri = 4 center, overlap = 2 center).
 
+\include 4center_fordoc.inp
+
+\include eri_fordoc.dat
 
 
 
