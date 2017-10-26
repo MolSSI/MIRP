@@ -46,6 +46,7 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
     }
 
     // Read the expected number of entries
+    file_skip(infile, '#');
     infile >> nentry;
 
     // Read in the number of digits and the working prec
@@ -131,7 +132,7 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
         throw std::runtime_error(sserr.str());
     }
 
-    std::cout << "Read " << data.entries.size() << " values from " << filepath << "\n";
+    std::cout << "Read " << data.entries.size() << " entries from " << filepath << "\n";
     return data;
 }
 
@@ -325,7 +326,7 @@ integral_data testfile_read_integral(const std::string & filepath,
         throw std::runtime_error(sserr.str());
     }
 
-    std::cout << "Read " << data.entries.size() << " values from " << filepath << "\n";
+    std::cout << "Read " << data.entries.size() << " entries from " << filepath << "\n";
     return data;
 }
 

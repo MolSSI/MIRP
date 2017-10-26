@@ -4,6 +4,7 @@
  */
 
 #include "mirp_bin/reffile_io.hpp"
+#include "test_common.hpp"
 #include <cstdio>
 #include <stdexcept>
 
@@ -73,6 +74,8 @@ void reffile_write_basis(const std::vector<gaussian_shell> & shells, std::ostrea
 std::vector<gaussian_shell> reffile_read_basis(std::istream & fs)
 {
     size_t nshell;
+
+    file_skip(fs, '#');
     fs >> nshell;
 
     std::vector<gaussian_shell> shells(nshell);
@@ -80,8 +83,11 @@ std::vector<gaussian_shell> reffile_read_basis(std::istream & fs)
     for(size_t i = 0; i < nshell; i++)
     {
         auto & s = shells[i];
+
+        file_skip(fs, '#');
         fs >> s.am >> s.nprim >> s.ngeneral;
-        
+
+        file_skip(fs, '#');
         s.xyz[0] = read_hexdouble(fs);
         s.xyz[1] = read_hexdouble(fs);
         s.xyz[2] = read_hexdouble(fs);
@@ -89,11 +95,13 @@ std::vector<gaussian_shell> reffile_read_basis(std::istream & fs)
         s.alpha.resize(s.nprim);
         s.coeff.resize(s.nprim*s.ngeneral);
 
+        file_skip(fs, '#');
         for(int j = 0; j < s.nprim; j++)
             s.alpha[j] = read_hexdouble(fs);
 
         for(int n = 0; n < s.ngeneral; n++)
         {
+            file_skip(fs, '#');
             for(int j = 0; j < s.nprim; j++)
                 s.coeff[n*s.nprim+j] = read_hexdouble(fs);
         }

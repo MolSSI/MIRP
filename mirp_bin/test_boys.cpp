@@ -266,7 +266,7 @@ boys_data boys_read_file(const std::string & filepath, bool is_input)
         throw std::runtime_error(sserr.str());
     }
 
-    std::cout << "Read " << data.entries.size() << " values from " << filepath << "\n";
+    std::cout << "Read " << data.entries.size() << " entries from " << filepath << "\n";
     return data;
 }
 
