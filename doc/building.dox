@@ -2,8 +2,6 @@
 
 \section _build_requirements Requirements
 
-\todo Intel 2016 needs testing
-
 - C/C++ compiler (supporting C++11)
   - GCC: 4.9 or greater
   - Intel 2017 or greater
