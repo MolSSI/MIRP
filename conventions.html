@@ -70,6 +70,7 @@ Naming Conventions</h1>
 <li>All C functions are prefixed with <code>mirp_</code> (except local, static functions)</li>
 <li>All C++ functions are within the namespace <code>mirp</code> and (and therefore lacking the <code>mirp_</code> prefix) (except for functions in an anonymous namespace)</li>
 <li>Inputs for creating test files are given a <code>.inp</code> extension, while files with generated data are given a <code>.dat</code> extension.</li>
+<li>Reference files have a <code>.ref</code> extension.</li>
 </ul>
 <h1><a class="anchor" id="_conventions_integralnames"></a>
 Integral Names</h1>
@@ -98,12 +99,13 @@ Passing Data to/from Functions</h1>
 <h1><a class="anchor" id="_conventions"></a>
 Indexing</h1>
 <ul>
-<li>Indexing of coefficient arrays for general contractions: the index of the primitive/exponent is the fastest index. (The index is <code>[g*nprim+p]</code> where <code>g</code> is the index of the general contraction and <code>p</code> the index of the primitive). </li>
+<li>Indexing of coefficient arrays for general contractions: the index of the primitive/exponent is the fastest index. (The index is <code>[g*nprim+p]</code> where <code>g</code> is the index of the general contraction and <code>p</code> the index of the primitive).</li>
+<li>Indexing of the output of integrals for generally contracted shells: The cartesian index is the fastest index, followed by the general contraction indicies (from right to left). </li>
 </ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 4 2017 13:39:22 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 27 2017 17:00:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

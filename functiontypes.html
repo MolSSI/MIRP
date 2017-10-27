@@ -77,15 +77,15 @@ mirp_name_single</h2>
 <h2><a class="anchor" id="_functiontypes_single_str"></a>
 mirp_name_single_str</h2>
 <p>This function also computes a single cartesian component of an integral using arbitrary precision, however takes strings as inputs. The strings are converted to interval arithmetic with the precision given by <code>working_prec</code>.</p>
-<p>These types of functions can be created from other functions with the <a class="el" href="integral4__wrappers_8h.html#aa1164660ca4c8874aef023aebbf1b462">mirp_integral4_single_str</a> wrapper.</p>
+<p>These types of functions can be created from other functions with the <a class="el" href="integral4__wrappers_8h.html#aaa6320f4d37ad5beeda9bdbd78f502ac">mirp_integral4_single_str</a> wrapper.</p>
 <h2><a class="anchor" id="_functiontypes_single_exact"></a>
 mirp_name_single_exact</h2>
 <p>Computes single cartesian integrals <em>exact</em> double precision. These functions take double precision inputs and output double precision. Internally, interval arithmetic is used such that there is no roundoff error in the final result. Therefore, the integral is 'exact' to double precision.</p>
-<p>These types of functions can be created from other functions with the <a class="el" href="integral4__wrappers_8h.html#a9b00530cc907bdb301e8ec0a25b74aa0">mirp_integral4_single_exact</a> wrapper.</p>
+<p>These types of functions can be created from other functions with the <a class="el" href="integral4__wrappers_8h.html#ad3ce2170d70b88e8dad1d423433c8e90">mirp_integral4_single_exact</a> wrapper.</p>
 <h2><a class="anchor" id="_functiontypes_int"></a>
 mirp_name, mirp_name_str, mirp_name_exact</h2>
 <p>These functions are analogous to their 'single' counterparts, however they take in contracted shells (both segmented and general) as inputs and return a complete set of integral.</p>
-<p>Functions with the pattern <code>mirp_{name}</code> are created with <a class="el" href="integral4__wrappers_8h.html#af5bf030d0c43746b6ab6cb153c1c3b94">mirp_loop_shell4</a> (and <code>mirp_{name}_d</code> can be created via <a class="el" href="integral4__wrappers_8h.html#a2c225d2bc6caa6a73933a779990d9a3a">mirp_loop_shell4_d</a>). The others are created via <a class="el" href="integral4__wrappers_8h.html#a482a45ecd41568883152705d1398dc64">mirp_integral4_str</a>, and <a class="el" href="integral4__wrappers_8h.html#ad7958663e5ffc2fe55b507f203b4a681">mirp_integral4_exact</a>.</p>
+<p>Functions with the pattern <code>mirp_{name}</code> are created with <a class="el" href="integral4__wrappers_8h.html#a4cfc2cc65498b8f9490102d43c1bd45c">mirp_loop_shell4</a> (and <code>mirp_{name}_d</code> can be created via <a class="el" href="integral4__wrappers_8h.html#a8dd783ebfe73a83e30dffd1a1241727c">mirp_loop_shell4_d</a>). The others are created via <a class="el" href="integral4__wrappers_8h.html#aaa266dc239978f19c1c09e9e3fcbdc83">mirp_integral4_str</a>, and <a class="el" href="integral4__wrappers_8h.html#a86592690bea2608749cf9155aae67667">mirp_integral4_exact</a>.</p>
 <h1><a class="anchor" id="_functiontypes_wrap"></a>
 Wrapping functions and macros</h1>
 <p>The wrapping functions mentioned above are used to create the higher-level functions from (typically) the <code>mirp_{name}_single</code> and <code>mirp_{name}_single_d</code> functions. This can be done even easier with the <code>MIRP_WRAP_</code> macros.</p>
@@ -95,23 +95,23 @@ Four-center integrals</h2>
 <tr>
 <th>Macro </th><th>Creates </th><th>Requires </th><th>Calls  </th></tr>
 <tr>
-<td><a class="el" href="integral4__wrappers_8h.html#aa9cc8aa5090b76ec224f56293f3a7dac" title="Create a function that computes all cartesian integrals of a contracted shell quartet (four-center...">MIRP_WRAP_SHELL4(name)</a> </td><td>mirp_name </td><td>mirp_name_single </td><td><a class="el" href="integral4__wrappers_8h.html#af5bf030d0c43746b6ab6cb153c1c3b94">mirp_loop_shell4</a> </td></tr>
+<td><a class="el" href="integral4__wrappers_8h.html#aa9cc8aa5090b76ec224f56293f3a7dac" title="Create a function that computes all cartesian integrals of a contracted shell quartet (four-center...">MIRP_WRAP_SHELL4(name)</a> </td><td>mirp_name </td><td>mirp_name_single </td><td><a class="el" href="integral4__wrappers_8h.html#a4cfc2cc65498b8f9490102d43c1bd45c">mirp_loop_shell4</a> </td></tr>
 <tr>
-<td><a class="el" href="integral4__wrappers_8h.html#ad3fa1f45f990cf44b8813e592ee6608b" title="Create a function that computes all cartesian integrals of a contracted shell quartet (four-center...">MIRP_WRAP_SHELL4_D(name)</a> </td><td>mirp_name_d </td><td>mirp_name_single_d </td><td><a class="el" href="integral4__wrappers_8h.html#a2c225d2bc6caa6a73933a779990d9a3a">mirp_loop_shell4_d</a> </td></tr>
+<td><a class="el" href="integral4__wrappers_8h.html#ad3fa1f45f990cf44b8813e592ee6608b" title="Create a function that computes all cartesian integrals of a contracted shell quartet (four-center...">MIRP_WRAP_SHELL4_D(name)</a> </td><td>mirp_name_d </td><td>mirp_name_single_d </td><td><a class="el" href="integral4__wrappers_8h.html#a8dd783ebfe73a83e30dffd1a1241727c">mirp_loop_shell4_d</a> </td></tr>
 <tr>
-<td><a class="el" href="integral4__wrappers_8h.html#a12342a66ea78e91d5b1fb52ae082006a" title="Create a function that computes single cartesian integrals from string arguments (four-center) ...">MIRP_WRAP_SINGLE4_STR(name)</a> </td><td>mirp_name_single_str </td><td>mirp_name_single </td><td><a class="el" href="integral4__wrappers_8h.html#aa1164660ca4c8874aef023aebbf1b462">mirp_integral4_single_str</a> </td></tr>
+<td><a class="el" href="integral4__wrappers_8h.html#a12342a66ea78e91d5b1fb52ae082006a" title="Create a function that computes single cartesian integrals from string arguments (four-center) ...">MIRP_WRAP_SINGLE4_STR(name)</a> </td><td>mirp_name_single_str </td><td>mirp_name_single </td><td><a class="el" href="integral4__wrappers_8h.html#aaa6320f4d37ad5beeda9bdbd78f502ac">mirp_integral4_single_str</a> </td></tr>
 <tr>
-<td><a class="el" href="integral4__wrappers_8h.html#a0ea2ba5104be25900883bb01c5831a28" title="Create a function that computes single cartesian integrals to exact double precision (four-center) ...">MIRP_WRAP_SINGLE4_EXACT(name)</a> </td><td>mirp_name_single_exact </td><td>mirp_name_single </td><td><a class="el" href="integral4__wrappers_8h.html#a9b00530cc907bdb301e8ec0a25b74aa0">mirp_integral4_single_exact</a> </td></tr>
+<td><a class="el" href="integral4__wrappers_8h.html#a0ea2ba5104be25900883bb01c5831a28" title="Create a function that computes single cartesian integrals to exact double precision (four-center) ...">MIRP_WRAP_SINGLE4_EXACT(name)</a> </td><td>mirp_name_single_exact </td><td>mirp_name_single </td><td><a class="el" href="integral4__wrappers_8h.html#ad3ce2170d70b88e8dad1d423433c8e90">mirp_integral4_single_exact</a> </td></tr>
 <tr>
-<td><a class="el" href="integral4__wrappers_8h.html#a5b2a43e0e6b181425758562adf7b1dfb" title="Create a function that computes all cartesian integrals of a contracted shell quartet from string arg...">MIRP_WRAP_SHELL4_STR(name)</a> </td><td>mirp_name_str </td><td>mirp_name </td><td><a class="el" href="integral4__wrappers_8h.html#a482a45ecd41568883152705d1398dc64">mirp_integral4_str</a> </td></tr>
+<td><a class="el" href="integral4__wrappers_8h.html#a5b2a43e0e6b181425758562adf7b1dfb" title="Create a function that computes all cartesian integrals of a contracted shell quartet from string arg...">MIRP_WRAP_SHELL4_STR(name)</a> </td><td>mirp_name_str </td><td>mirp_name </td><td><a class="el" href="integral4__wrappers_8h.html#aaa266dc239978f19c1c09e9e3fcbdc83">mirp_integral4_str</a> </td></tr>
 <tr>
-<td><a class="el" href="integral4__wrappers_8h.html#ad29e195c89eb60580e6f61854b26ccc2" title="Create a function that computes all cartesian integrals of a contracted shell quartet to exact double...">MIRP_WRAP_SHELL4_EXACT(name)</a> </td><td>mirp_name_exact </td><td>mirp_name </td><td><a class="el" href="integral4__wrappers_8h.html#ad7958663e5ffc2fe55b507f203b4a681">mirp_integral4_exact</a> </td></tr>
+<td><a class="el" href="integral4__wrappers_8h.html#ad29e195c89eb60580e6f61854b26ccc2" title="Create a function that computes all cartesian integrals of a contracted shell quartet to exact double...">MIRP_WRAP_SHELL4_EXACT(name)</a> </td><td>mirp_name_exact </td><td>mirp_name </td><td><a class="el" href="integral4__wrappers_8h.html#a86592690bea2608749cf9155aae67667">mirp_integral4_exact</a> </td></tr>
 </table>
 <p>See <a href="eri_8h_source.html">eri.h</a> for an example </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 4 2017 13:39:22 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 27 2017 17:00:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

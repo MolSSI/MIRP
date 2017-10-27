@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MolSSI Integral Reference Project: $title</title>
+<title>MolSSI Integral Reference Project: Using MIRP reference files</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -58,14 +58,24 @@ $(function() {
 </div>
 
 </div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Using MIRP reference files </div>  </div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="examples_boys"></a>
-examples_boys</h1>
-<p>Stuff here </p>
+<div class="textblock"><h1><a class="anchor" id="using_refs_overview"></a>
+Overview</h1>
+<p>Reference files are files created by mirp that contains integrals of a molecule/basis set computed to exact double precision. That is, arbitrary precision interval arithmetic is used to guarantee that the output is know beyond double precision, with the final value truncated.</p>
+<p>These reference files may be quite large, and therefore are distributed separately from MIRP.</p>
+<h1><a class="anchor" id="using_refs_formats"></a>
+Reference File Format</h1>
+<p>The format of the reference files is documented at <a class="el" href="tests_formats.html#_tests_formats_reference">Reference File Format</a>.</p>
+<p>Sample code for reading reference files is available in the <code>examples</code> subdirectory of the MIRP source.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Place to download reference files</dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 4 2017 13:39:22 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 27 2017 17:00:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

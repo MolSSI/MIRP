@@ -64,6 +64,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">eri_d.c File Reference</div>  </div>
@@ -90,17 +91,24 @@ Include dependency graph for eri_d.c:</div>
 </map>
 </div>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a86d500a34c624c2cae56bc25a31b12f3"><td class="memItemLeft" align="right" valign="top"><a id="a86d500a34c624c2cae56bc25a31b12f3"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri__d_8c.html#a86d500a34c624c2cae56bc25a31b12f3">UNUSED</a>(x)&#160;&#160;&#160;(void)(x)</td></tr>
+<tr class="memdesc:a86d500a34c624c2cae56bc25a31b12f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mark a variable as unused (prevents compiler warnings) <br /></td></tr>
+<tr class="separator:a86d500a34c624c2cae56bc25a31b12f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a587d824260797fd22c0a4a6d64eb0020"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri__d_8c.html#a587d824260797fd22c0a4a6d64eb0020">mirp_eri_single_d</a> (double *integral, const int *lmn1, const double *A, double alpha1, const int *lmn2, const double *B, double alpha2, const int *lmn3, const double *C, double alpha3, const int *lmn4, const double *D, double alpha4)</td></tr>
-<tr class="memdesc:a587d824260797fd22c0a4a6d64eb0020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a single cartesian electron repulsion integral (double precision)  <a href="#a587d824260797fd22c0a4a6d64eb0020">More...</a><br /></td></tr>
-<tr class="separator:a587d824260797fd22c0a4a6d64eb0020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3fae5b090ac32f588a3e96d0f1d0ba2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri__d_8c.html#aa3fae5b090ac32f588a3e96d0f1d0ba2">mirp_eri_single_d</a> (double *integral, int Z1, const int *lmn1, const double *A, double alpha1, int Z2, const int *lmn2, const double *B, double alpha2, int Z3, const int *lmn3, const double *C, double alpha3, int Z4, const int *lmn4, const double *D, double alpha4)</td></tr>
+<tr class="memdesc:aa3fae5b090ac32f588a3e96d0f1d0ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a single cartesian electron repulsion integral (double precision)  <a href="#aa3fae5b090ac32f588a3e96d0f1d0ba2">More...</a><br /></td></tr>
+<tr class="separator:aa3fae5b090ac32f588a3e96d0f1d0ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Kernel for electron repulsion integrals (double precision) </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a587d824260797fd22c0a4a6d64eb0020"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a587d824260797fd22c0a4a6d64eb0020">&#9670;&nbsp;</a></span>mirp_eri_single_d()</h2>
+<a id="aa3fae5b090ac32f588a3e96d0f1d0ba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3fae5b090ac32f588a3e96d0f1d0ba2">&#9670;&nbsp;</a></span>mirp_eri_single_d()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -110,6 +118,12 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">double *&#160;</td>
           <td class="paramname"><em>integral</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -132,6 +146,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const int *&#160;</td>
           <td class="paramname"><em>lmn2</em>, </td>
         </tr>
@@ -150,6 +170,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const int *&#160;</td>
           <td class="paramname"><em>lmn3</em>, </td>
         </tr>
@@ -164,6 +190,12 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>alpha3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z4</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -196,6 +228,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">integral</td><td>Resulting integral integral </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Z1,Z2,Z3,Z4</td><td>Atomic Z numbers of the centers (unused in ERI) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">lmn1,lmn2,lmn3,lmn4</td><td>Exponents of x, y, and z that signify angular momentum. Required to be 3 elements. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the gaussian on the four-centers </td></tr>
@@ -208,7 +241,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 4 2017 13:39:22 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 27 2017 17:00:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
