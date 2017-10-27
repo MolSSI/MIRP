@@ -92,7 +92,7 @@ And below is the corresponding data file (when the above input is used in an ERI
 \include 4center_single_example.dat
 
 
-\section _tests_fromats_reference Reference File Format
+\section _tests_formats_reference Reference File Format
 
 
 Reference files are printed using hex-float for floating point precision, so they do not suffer from rounding issues.

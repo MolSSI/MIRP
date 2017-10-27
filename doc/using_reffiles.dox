@@ -2,5 +2,22 @@
 
 \section using_refs_overview Overview
 
+Reference files are files created by mirp that contains integrals of a molecule/basis set
+computed to exact double precision. That is, arbitrary precision interval arithmetic is
+used to guarantee that the output is know beyond double precision, with the final
+value truncated.
+
+These reference files may be quite large, and therefore are distributed separately from
+MIRP.
+
+\section using_refs_formats Reference File Format
+
+The format of the reference files is documented at \ref _tests_formats_reference.
+
+Sample code for reading reference files is available in the `examples` subdirectory
+of the MIRP source.
+
+\todo Place to download reference files
+
 
 */
