@@ -121,7 +121,7 @@ read_basfile(const std::string & basfile)
         std::stringstream ss(line);
         ss >> element_str >> am_str;
 
-        int Z = element_to_z(element_str); 
+        sh.Z = element_to_z(element_str); 
 
         std::getline(infile, line);
         line = trim(line);
@@ -156,6 +156,7 @@ read_basfile(const std::string & basfile)
             for(int i = 0; i < sh.ngeneral; i++)
             {
                 gaussian_shell sh2;
+                sh2.Z = sh.Z;
                 sh2.am = amchar_to_int(am_str.at(i));
                 sh2.nprim = sh.nprim;
                 sh2.ngeneral = 1;
@@ -164,13 +165,13 @@ read_basfile(const std::string & basfile)
                                  sh.coeff.begin() + i*sh.nprim,
                                  sh.coeff.begin() + (i+1)*sh.nprim);
 
-                ret[Z].push_back(sh2);
+                ret[sh.Z].push_back(sh2);
             }
         }
         else
         {
             sh.am = amchar_to_int(am_str.at(0));
-            ret[Z].push_back(sh);
+            ret[sh.Z].push_back(sh);
         }
     }
 

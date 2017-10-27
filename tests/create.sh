@@ -40,7 +40,7 @@ generator/generate_boys_range.py \
 generator/generate_integral_single_random.py \
            --filename 4center_single_random_1.inp \
            --seed 64020964 --ncenter 4 \
-           --alpha-power 10 --xyz-power 1 --max-am 3 \
+           --alpha-power 10 --xyz-power 1 --max-am 3 --max-z 92 \
            --ntests 2000 --ndigits 20
 
 generator/generate_integral_single_frombasis.py \

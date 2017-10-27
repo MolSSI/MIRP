@@ -1,5 +1,5 @@
 # Input parameters for ERI generated with:
-#   ../../tests/generator/generate_integral_single_frombasis.py --filename 4center_single_fordoc.inp --basis ../../tests/generator/basis/ano-rcc.bas --geometry ../../tests/generator/geometry/water.xyz --ncenter 4 --ndigits 16 --ntests 2 --seed 1786233
+#   ../../tests/generator/generate_integral_single_frombasis.py --filename 4center_single_example.inp --basis ../../tests/generator/basis/ano-rcc.bas --geometry ../../tests/generator/geometry/water.xyz --ncenter 4 --ndigits 16 --ntests 2 --seed 1786233
 #
 
 # 2 tests in this file
@@ -9,27 +9,29 @@
 # First test
 #############
 # First center
+#   8 = Oxygen
 #   0 0 1 = pz
 #   Then three coordinates (in bohr)
 #   0.850223 = exponent
-0 0 1 0.0 0.0 0.24018419054568995699 0.850223
+8 0 0 1 0.0 0.0 0.24018419054568995699 0.850223
 
 
 # Second center
+#   8 = Oxygen
 #   1 0 3 = gxz3
 #   Then three coordinates (in bohr)
 #   0.47 = exponent
-1 0 3 0.0 0.0 0.24018419054568995699 0.47
+8 1 0 3 0.0 0.0 0.24018419054568995699 0.47
 
 # Last two centers
-0 1 0 0.0 0.0 0.24018419054568995699 14.621809
-0 3 0 0.0 -1.4324124030970337325 -0.96092573479530561076 0.970109
+8 0 1 0 0.0 0.0 0.24018419054568995699 14.621809
+1 0 3 0 0.0 -1.4324124030970337325 -0.96092573479530561076 0.970109
 
 ##############
 # Second test
 ##############
 # (pz pz | dyy pz) integral
-0 0 1 0.0 0.0 0.24018419054568995699 46.533367
-0 0 1 0.0 0.0 0.24018419054568995699 46.533367
-0 2 0 0.0 -1.4324124030970337325 -0.96092573479530561076 0.29104
-0 0 1 0.0 1.4324124030970337325 -0.96092573479530561076 0.80675
+8 0 0 1 0.0 0.0 0.24018419054568995699 46.533367
+8 0 0 1 0.0 0.0 0.24018419054568995699 46.533367
+1 0 2 0 0.0 -1.4324124030970337325 -0.96092573479530561076 0.29104
+1 0 0 1 0.0 1.4324124030970337325 -0.96092573479530561076 0.80675

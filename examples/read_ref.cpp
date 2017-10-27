@@ -100,7 +100,7 @@ std::vector<gaussian_shell> reffile_read_basis(std::istream & fs)
 
         // angular momentum, # of primitives, # of general contractions
         file_skip(fs, '#');
-        fs >> s.am >> s.nprim >> s.ngeneral;
+        fs >> s.Z >> s.am >> s.nprim >> s.ngeneral;
 
         // coordinates
         file_skip(fs, '#');

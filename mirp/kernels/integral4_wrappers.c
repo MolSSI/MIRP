@@ -20,10 +20,10 @@
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 static void mirp_cartloop4(arb_ptr integral,
-                           int am1, arb_srcptr A, const arb_t alpha1,
-                           int am2, arb_srcptr B, const arb_t alpha2,
-                           int am3, arb_srcptr C, const arb_t alpha3,
-                           int am4, arb_srcptr D, const arb_t alpha4,
+                           int Z1, int am1, arb_srcptr A, const arb_t alpha1,
+                           int Z2, int am2, arb_srcptr B, const arb_t alpha2,
+                           int Z3, int am3, arb_srcptr C, const arb_t alpha3,
+                           int Z4, int am4, arb_srcptr D, const arb_t alpha4,
                            slong working_prec, cb_integral4_single cb)
 {
     assert(am1 >= 0);
@@ -61,10 +61,10 @@ static void mirp_cartloop4(arb_ptr integral,
                        + l;
 
         cb(integral + idx,
-           lmn1[i], A, alpha1,
-           lmn2[j], B, alpha2,
-           lmn3[k], C, alpha3,
-           lmn4[l], D, alpha4,
+           Z1, lmn1[i], A, alpha1,
+           Z2, lmn2[j], B, alpha2,
+           Z3, lmn3[k], C, alpha3,
+           Z4, lmn4[l], D, alpha4,
            working_prec);
     }
 }
@@ -78,6 +78,8 @@ static void mirp_cartloop4(arb_ptr integral,
  *
  * \param [out] integral
  *              Resulting integral integral
+ * \param [in]  Z1, Z2, Z3, Z4
+ *              Atomic Z numbers of the centers
  * \param [in]  am1,am2,am3,am4
  *              Angular momentum of the four-centers
  * \param [in]  A,B,C,D
@@ -89,10 +91,10 @@ static void mirp_cartloop4(arb_ptr integral,
  *              primitive integral
  */
 static void mirp_cartloop4_d(double * integral,
-                             int am1, const double * A, double alpha1,
-                             int am2, const double * B, double alpha2,
-                             int am3, const double * C, double alpha3,
-                             int am4, const double * D, double alpha4,
+                             int Z1, int am1, const double * A, double alpha1,
+                             int Z2, int am2, const double * B, double alpha2,
+                             int Z3, int am3, const double * C, double alpha3,
+                             int Z4, int am4, const double * D, double alpha4,
                              cb_integral4_single_d cb)
 {
     assert(am1 >= 0);
@@ -130,19 +132,19 @@ static void mirp_cartloop4_d(double * integral,
                        + l;
 
         cb(integral + idx,
-           lmn1[i], A, alpha1,
-           lmn2[j], B, alpha2,
-           lmn3[k], C, alpha3,
-           lmn4[l], D, alpha4);
+           Z1, lmn1[i], A, alpha1,
+           Z2, lmn2[j], B, alpha2,
+           Z3, lmn3[k], C, alpha3,
+           Z4, lmn4[l], D, alpha4);
     }
 }
 
 
 void mirp_loop_shell4(arb_ptr integral,
-                      int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1,
-                      int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2,
-                      int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3,
-                      int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4,
+                      int Z1, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1,
+                      int Z2, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2,
+                      int Z3, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3,
+                      int Z4, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4,
                       slong working_prec, cb_integral4_single cb)
 {
     assert(am1 >= 0); assert(nprim1 > 0); assert(ngen1 > 0);
@@ -174,10 +176,10 @@ void mirp_loop_shell4(arb_ptr integral,
     for(int l = 0; l < nprim4; l++)
     {
         mirp_cartloop4(integral_buffer,
-                       am1, A, alpha1 + i,
-                       am2, B, alpha2 + j,
-                       am3, C, alpha3 + k,
-                       am4, D, alpha4 + l,
+                       Z1, am1, A, alpha1 + i,
+                       Z2, am2, B, alpha2 + j,
+                       Z3, am3, C, alpha3 + k,
+                       Z4, am4, D, alpha4 + l,
                        working_prec, cb);
 
         #ifdef _OPENMP
@@ -216,11 +218,12 @@ void mirp_loop_shell4(arb_ptr integral,
     _arb_vec_clear(coeff4_norm, nprim4*ngen4);
 }
 
+
 void mirp_integral4_single_str(arb_t integral,
-                               const int * lmn1, const char ** A, const char * alpha1,
-                               const int * lmn2, const char ** B, const char * alpha2,
-                               const int * lmn3, const char ** C, const char * alpha3,
-                               const int * lmn4, const char ** D, const char * alpha4,
+                               int Z1, const int * lmn1, const char ** A, const char * alpha1,
+                               int Z2, const int * lmn2, const char ** B, const char * alpha2,
+                               int Z3, const int * lmn3, const char ** C, const char * alpha3,
+                               int Z4, const int * lmn4, const char ** D, const char * alpha4,
                                slong working_prec, cb_integral4_single cb)
 {
     assert(lmn1[0] >= 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
@@ -254,10 +257,10 @@ void mirp_integral4_single_str(arb_t integral,
     arb_set_str(alpha4_mp, alpha4, working_prec);
 
     cb(integral,
-       lmn1, A_mp, alpha1_mp,
-       lmn2, B_mp, alpha2_mp,
-       lmn3, C_mp, alpha3_mp,
-       lmn4, D_mp, alpha4_mp,
+       Z1, lmn1, A_mp, alpha1_mp,
+       Z2, lmn2, B_mp, alpha2_mp,
+       Z3, lmn3, C_mp, alpha3_mp,
+       Z4, lmn4, D_mp, alpha4_mp,
        working_prec);
 
 
@@ -273,10 +276,10 @@ void mirp_integral4_single_str(arb_t integral,
 
 
 void mirp_integral4_str(arb_ptr integrals,
-                        int am1, const char ** A, int nprim1, int ngen1, const char ** alpha1, const char ** coeff1,
-                        int am2, const char ** B, int nprim2, int ngen2, const char ** alpha2, const char ** coeff2,
-                        int am3, const char ** C, int nprim3, int ngen3, const char ** alpha3, const char ** coeff3,
-                        int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4,
+                        int Z1, int am1, const char ** A, int nprim1, int ngen1, const char ** alpha1, const char ** coeff1,
+                        int Z2, int am2, const char ** B, int nprim2, int ngen2, const char ** alpha2, const char ** coeff2,
+                        int Z3, int am3, const char ** C, int nprim3, int ngen3, const char ** alpha3, const char ** coeff3,
+                        int Z4, int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4,
                         slong working_prec, cb_integral4 cb)
 {
     assert(am1 >= 0); assert(nprim1 > 0); assert(ngen1 > 0);
@@ -331,10 +334,10 @@ void mirp_integral4_str(arb_ptr integrals,
 
 
     cb(integrals,
-       am1, A_mp, nprim1, ngen1, alpha1_mp, coeff1_mp,
-       am2, B_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
-       am3, C_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
-       am4, D_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
+       Z1, am1, A_mp, nprim1, ngen1, alpha1_mp, coeff1_mp,
+       Z2, am2, B_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
+       Z3, am3, C_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
+       Z4, am4, D_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
        working_prec);
 
 
@@ -355,10 +358,10 @@ void mirp_integral4_str(arb_ptr integrals,
 
 
 void mirp_integral4_single_exact(double * integral,
-                                 const int * lmn1, const double * A, double alpha1,
-                                 const int * lmn2, const double * B, double alpha2,
-                                 const int * lmn3, const double * C, double alpha3,
-                                 const int * lmn4, const double * D, double alpha4,
+                                 int Z1, const int * lmn1, const double * A, double alpha1,
+                                 int Z2, const int * lmn2, const double * B, double alpha2,
+                                 int Z3, const int * lmn3, const double * C, double alpha3,
+                                 int Z4, const int * lmn4, const double * D, double alpha4,
                                  cb_integral4_single cb)
 {
     assert(lmn1[0] >= 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
@@ -413,10 +416,10 @@ void mirp_integral4_single_exact(double * integral,
 
         /* Call the callback */
         cb(integral_mp,
-           lmn1, A_mp, alpha1_mp,
-           lmn2, B_mp, alpha2_mp,
-           lmn3, C_mp, alpha3_mp,
-           lmn4, D_mp, alpha4_mp,
+           Z1, lmn1, A_mp, alpha1_mp,
+           Z2, lmn2, B_mp, alpha2_mp,
+           Z3, lmn3, C_mp, alpha3_mp,
+           Z4, lmn4, D_mp, alpha4_mp,
            working_prec);
 
         /* Do we have sufficient accuracy? We need at least
@@ -463,10 +466,10 @@ void mirp_integral4_single_exact(double * integral,
 
 
 void mirp_integral4_exact(double * integral,
-                          int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
-                          int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
-                          int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
-                          int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
+                          int Z1, int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
+                          int Z2, int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
+                          int Z3, int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
+                          int Z4, int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
                           cb_integral4 cb)
 {
     assert(am1 >= 0); assert(nprim1 > 0); assert(ngen1 > 0);
@@ -539,10 +542,10 @@ void mirp_integral4_exact(double * integral,
 
         /* Call the callback */
         cb(integral_mp,
-           am1, A_mp, nprim1, ngen1, alpha1_mp, coeff1_mp,
-           am2, B_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
-           am3, C_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
-           am4, D_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
+           Z1, am1, A_mp, nprim1, ngen1, alpha1_mp, coeff1_mp,
+           Z2, am2, B_mp, nprim2, ngen2, alpha2_mp, coeff2_mp,
+           Z3, am3, C_mp, nprim3, ngen3, alpha3_mp, coeff3_mp,
+           Z4, am4, D_mp, nprim4, ngen4, alpha4_mp, coeff4_mp,
            working_prec);
 
         suff_acc = 1;
@@ -602,10 +605,10 @@ void mirp_integral4_exact(double * integral,
 
 
 void mirp_loop_shell4_d(double * integral,
-                        int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
-                        int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
-                        int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
-                        int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
+                        int Z1, int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
+                        int Z2, int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
+                        int Z3, int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
+                        int Z4, int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
                         cb_integral4_single_d cb)
 {
     assert(am1 >= 0); assert(nprim1 > 0); assert(ngen1 > 0);
@@ -639,11 +642,11 @@ void mirp_loop_shell4_d(double * integral,
     for(int l = 0; l < nprim4; l++)
     {
         mirp_cartloop4_d(integral_buffer,
-                              am1, A, alpha1[i],
-                              am2, B, alpha2[j],
-                              am3, C, alpha3[k],
-                              am4, D, alpha4[l],
-                              cb);
+                          Z1, am1, A, alpha1[i],
+                          Z2, am2, B, alpha2[j],
+                          Z3, am3, C, alpha3[k],
+                          Z4, am4, D, alpha4[l],
+                          cb);
 
         #ifdef _OPENMP
         #pragma omp parallel for collapse(4)

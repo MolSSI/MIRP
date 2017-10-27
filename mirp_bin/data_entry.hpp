@@ -47,6 +47,7 @@ struct gaussian_shell_str
 /*! \brief A single cartesian gaussian function */
 struct gaussian_single_str
 {
+    int Z;                          //!< Z-number of the center
     std::array<int, 3> lmn;         //!< AM exponents
     std::array<std::string, 3> xyz; //!< Coordinates (in bohr)
     std::string alpha;              //!< Exponent of the gaussian

@@ -1,7 +1,7 @@
 
 def print_integral_single_input(f, primitives):
     for prim in primitives:
-        f.write("{} {} {} {} {} {} {}\n".format(*prim))  
+        f.write("{} {} {} {} {} {} {} {}\n".format(*prim))  
     f.write("\n")
 
 

@@ -5,7 +5,7 @@ import random
 import sys
 from mpmath import mp
 
-from common import uncontract_basis, construct_basis, all_cartesian_components, print_integral_single_input
+from common import uncontract_basis, construct_basis, all_cartesian_components, print_integral_single_input, z_map
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--filename", type=str, required=True, help="Output file name")
@@ -49,8 +49,9 @@ with open(args.filename, 'w') as f:
                 idx = random.randint(0, len(allprim)-1)
                 ntet.append(idx)
 
-                pidx = allprim[idx]
-                entry.append((*pidx[0], *pidx[1][1:], pidx[2]['alpha'][0]))
+                p = allprim[idx]
+                Z = z_map[p[1][0].lower()]
+                entry.append((Z, *p[0], *p[1][1:], p[2]['alpha'][0]))
 
             if not ntet in created_ntets:
                 print_integral_single_input(f, entry)

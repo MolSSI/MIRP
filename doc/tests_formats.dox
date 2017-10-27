@@ -40,15 +40,54 @@ The format for an input for general types of integrals (ie, eri) are as follows.
 contains the number of tests in the file. Then, there are blocks of inputs containing the shell information for
 a specified number of centers (ie, eri = 4 center, overlap = 2 center).
 
+Each shell contains the following information (in order)
+
+  1. The Z number (1 = H, 8 = O, etc)
+  2. The angular momentum (integer)
+  3. The number of primitives in the shell
+  4. The number of general contractions
+  5. The coordinates (in bohr)
+  6. For each primitive, the exponent and the contraction coefficients for each general contraction
+  
+For the test data file, the first line contains the number of tests, number of significant figures,
+and the working precision used to compute the integrals. After specifying the shells, the
+integrals are printed (with the error radius). The integral is prefixed with an index of that
+integral in the shell quartet.
+
+Below is an example of an input file for a 4-center integral
+
 \include 4center_example.inp
+
+And blow is an example of the corresponding test data file (when the above input is used in an ERI calculation)
 
 \include 4center_example.dat
 
 
 \subsection _tests_formats_single_integrals Single Integral Test Files
 
+The formats for single integral test files are simpler than the general integral counterpart.
+
+For an input, the first line is again the number of tests. Then, there are blocks
+of inputs containing information for a single cartesian integral, for the specified
+number of centers.
+
+  1. The Z number (1 = H, 8 = O, etc)
+  2. Values of i,j,k (exponents of x,y,z which control the cartesian component)
+  3. Coordinates (in borh)
+  4. Exponent of the primitive
+
+The ijk specify which cartesian component that center is (for example, ijk=(1,2,0) is is a fxyy orbital).
+
+Similar to the general integrals, the test data file is similar to the input file, except
+that the first line contains the number of tests, number of significant figures,
+and the working precision. The value of the computed integral is given after the specification
+for the centers, and does not have an index number.
+
+Below is an example of an input for a 4-center single integral
 
 \include 4center_single_example.inp
+
+And below is the corresponding data file (when the above input is used in an ERI calculation)
 
 \include 4center_single_example.dat
 
@@ -56,10 +95,31 @@ a specified number of centers (ie, eri = 4 center, overlap = 2 center).
 \section _tests_fromats_reference Reference File Format
 
 
-Reference files are printed using hex-float, so they do not suffer from rounding issues.
+Reference files are printed using hex-float for floating point precision, so they do not suffer from rounding issues.
 
+The first section of the file describes the basis set. First, the number of shells is printed.
+Then, the data for each shell is provided.
+
+  1. The Z number (1 = H, 8 = O, etc)
+  2. The angular momentum (integer)
+  3. The number of primitives in the shell
+  4. The number of general contractions
+  5. The coordinates (in bohr)
+
+The next line contains all the primitives. Then, for each general contraction, the coefficients
+for all the primitives are printed (each general contraction on a separate line).
+
+\note This is different than the test file specification - the contraction coefficients are
+      printed as the transpose in the reference files.
+
+After this basis section, the computed integrals for each (contracted) are printed, with the indices
+of each of the shells printed before the integrals. These (zero-based) indices correspond to the shells
+in the basis section.
+
+A code sample for reading reference files in C++ can be found in the `examples` subdirectory.
+
+Below is an annotated example of a reference file
 
 \include 4center_example.ref
-
 
 */

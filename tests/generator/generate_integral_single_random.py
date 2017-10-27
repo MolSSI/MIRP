@@ -9,6 +9,7 @@ from common import print_integral_single_input
 parser = argparse.ArgumentParser()
 parser.add_argument("--filename",    type=str, required=True, help="Output file name")
 parser.add_argument("--max-am",      type=int, required=True, help="Maximum AM of the basis functions")
+parser.add_argument("--max-z",       type=int, required=True, help="Maximum atomic Z-number for a center")
 parser.add_argument("--alpha-power", type=int, required=True, help="Maximum power of the exponent (range will be 1e-x to 1e+x)")
 parser.add_argument("--xyz-power",   type=int, required=True, help="Maximum power of the coordinates (range will be -1e+x to 1e+x)")
 parser.add_argument("--seed",        type=int, required=True, help="Seed to use for the pseudo-random number generator")
@@ -17,11 +18,17 @@ parser.add_argument("--ncenter",     type=int, required=True, help="Number of ce
 parser.add_argument("--ntests",      type=int, required=True, help="Number of tests to generate")
 args = parser.parse_args()
 
+# We keep these separate to ensure continuity
+# At one point, I added Z number to the file format. Using two
+# separate instances make sure all the values match the previously-generated
+# data
 random.seed(args.seed, version=2)
+rndZ = random.Random(args.seed)
 
 
 def generate_basis_function():
     with mp.workdps(args.ndigits+4):
+        Z = rndZ.randint(0, args.max_z)
         l = random.randint(0, args.max_am)
         m = random.randint(0, args.max_am)
         n = random.randint(0, args.max_am)
@@ -44,7 +51,7 @@ def generate_basis_function():
         y = mp.nstr(y, args.ndigits, min_fixed=1, max_fixed=0)
         z = mp.nstr(z, args.ndigits, min_fixed=1, max_fixed=0)
 
-        return (l, m, n, x, y, z, alpha)
+        return (Z, l, m, n, x, y, z, alpha)
 
 
 # Write out the file

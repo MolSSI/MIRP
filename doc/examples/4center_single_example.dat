@@ -1,8 +1,8 @@
 # Input parameters for ERI generated with:
-#   ../../tests/generator/generate_integral_single_frombasis.py --filename 4center_single_fordoc.inp --basis ../../tests/generator/basis/ano-rcc.bas --geometry ../../tests/generator/geometry/water.xyz --ncenter 4 --ndigits 16 --ntests 2 --seed 1786233
+#   ../../tests/generator/generate_integral_single_frombasis.py --filename 4center_single_example.inp --basis ../../tests/generator/basis/ano-rcc.bas --geometry ../../tests/generator/geometry/water.xyz --ncenter 4 --ndigits 16 --ntests 2 --seed 1786233
 #
 # Reference values for the eri_single integral generated with:
-#   ../../../mirp_build/mirp_bin/mirp_create_test --integral eri_single --prec 256 --ndigits 16 --infile 4center_single_fordoc.inp --outfile eri_single_fordoc.dat
+#   ../../../mirp_build/mirp_bin/mirp_create_test --integral eri_single --prec 256 --ndigits 16 --infile 4center_single_example.inp --outfile 4center_single_example.dat
 #
 
 # Two tests in the file, 16 digits (max) printed, 256-bits working prec 
@@ -10,19 +10,19 @@
 
 # First test
 # Info for 4 centers (same as input file)
-0 0 1 0.0 0.0 0.24018419054568995699 0.850223
-1 0 3 0.0 0.0 0.24018419054568995699 0.47
-0 1 0 0.0 0.0 0.24018419054568995699 14.621809
-0 3 0 0.0 -1.4324124030970337325 -0.96092573479530561076 0.970109
+8 0 0 1 0.0 0.0 0.24018419054568995699 0.850223
+8 1 0 3 0.0 0.0 0.24018419054568995699 0.47
+8 0 1 0 0.0 0.0 0.24018419054568995699 14.621809
+1 0 3 0 0.0 -1.4324124030970337325 -0.96092573479530561076 0.970109
 
 # Value of the integral (exactly zero by symmetry)
 0
 
 # Second test
-0 0 1 0.0 0.0 0.24018419054568995699 46.533367
-0 0 1 0.0 0.0 0.24018419054568995699 46.533367
-0 2 0 0.0 -1.4324124030970337325 -0.96092573479530561076 0.29104
-0 0 1 0.0 1.4324124030970337325 -0.96092573479530561076 0.80675
+8 0 0 1 0.0 0.0 0.24018419054568995699 46.533367
+1 0 0 1 0.0 0.0 0.24018419054568995699 46.533367
+1 0 2 0 0.0 -1.4324124030970337325 -0.96092573479530561076 0.29104
+1 0 0 1 0.0 1.4324124030970337325 -0.96092573479530561076 0.80675
 
 # Value of the integral (with error bounds)
 [1.541710478144206e-5 +/- 2.83e-22]

@@ -54,10 +54,10 @@ void integral4_single_create_test(const std::string & input_filepath,
         }
 
         cb(integral,
-           ent.g[0].lmn.data(), A, ent.g[0].alpha.c_str(),
-           ent.g[1].lmn.data(), B, ent.g[1].alpha.c_str(),
-           ent.g[2].lmn.data(), C, ent.g[2].alpha.c_str(),
-           ent.g[3].lmn.data(), D, ent.g[3].alpha.c_str(),
+           ent.g[0].Z, ent.g[0].lmn.data(), A, ent.g[0].alpha.c_str(),
+           ent.g[1].Z, ent.g[1].lmn.data(), B, ent.g[1].alpha.c_str(),
+           ent.g[2].Z, ent.g[2].lmn.data(), C, ent.g[2].alpha.c_str(),
+           ent.g[3].Z, ent.g[3].lmn.data(), D, ent.g[3].alpha.c_str(),
            working_prec);
 
         slong bits = arb_rel_accuracy_bits(integral);
@@ -103,10 +103,10 @@ long integral4_single_verify_test(const std::string & filepath,
         }
 
         cb(integral,
-           ent.g[0].lmn.data(), A, ent.g[0].alpha.c_str(),
-           ent.g[1].lmn.data(), B, ent.g[1].alpha.c_str(),
-           ent.g[2].lmn.data(), C, ent.g[2].alpha.c_str(),
-           ent.g[3].lmn.data(), D, ent.g[3].alpha.c_str(),
+           ent.g[0].Z, ent.g[0].lmn.data(), A, ent.g[0].alpha.c_str(),
+           ent.g[1].Z, ent.g[1].lmn.data(), B, ent.g[1].alpha.c_str(),
+           ent.g[2].Z, ent.g[2].lmn.data(), C, ent.g[2].alpha.c_str(),
+           ent.g[3].Z, ent.g[3].lmn.data(), D, ent.g[3].alpha.c_str(),
            working_prec + 16);
 
         arb_set_str(integral_ref, ent.integral.c_str(), working_prec);
@@ -168,10 +168,10 @@ long integral4_single_verify_test_d(const std::string & filepath,
         const double alpha4_d = std::strtod(ent.g[3].alpha.c_str(), nullptr);
 
         cb(&integral,
-           ent.g[0].lmn.data(), A, alpha1_d,
-           ent.g[1].lmn.data(), B, alpha2_d,
-           ent.g[2].lmn.data(), C, alpha3_d,
-           ent.g[3].lmn.data(), D, alpha4_d);
+           ent.g[0].Z, ent.g[0].lmn.data(), A, alpha1_d,
+           ent.g[1].Z, ent.g[1].lmn.data(), B, alpha2_d,
+           ent.g[2].Z, ent.g[2].lmn.data(), C, alpha3_d,
+           ent.g[3].Z, ent.g[3].lmn.data(), D, alpha4_d);
 
         arb_set_str(integral_ref_mp, ent.integral.c_str(), 72); /* 53 bits + more */
         double integral_ref = arf_get_d(arb_midref(integral_ref_mp), ARF_RND_NEAR);
@@ -259,17 +259,17 @@ long integral4_single_verify_test_exact(const std::string & filepath,
         arb_set_d(alpha_mp + 3, alpha4_d);
 
         cb(&integral,
-           ent.g[0].lmn.data(), A, alpha1_d,
-           ent.g[1].lmn.data(), B, alpha2_d,
-           ent.g[2].lmn.data(), C, alpha3_d,
-           ent.g[3].lmn.data(), D, alpha4_d);
+           ent.g[0].Z, ent.g[0].lmn.data(), A, alpha1_d,
+           ent.g[1].Z, ent.g[1].lmn.data(), B, alpha2_d,
+           ent.g[2].Z, ent.g[2].lmn.data(), C, alpha3_d,
+           ent.g[3].Z, ent.g[3].lmn.data(), D, alpha4_d);
 
         /* Compute using very high precision */
         cb_mp(integral_mp,
-              ent.g[0].lmn.data(), A_mp, alpha_mp + 0,
-              ent.g[1].lmn.data(), B_mp, alpha_mp + 1,
-              ent.g[2].lmn.data(), C_mp, alpha_mp + 2,
-              ent.g[3].lmn.data(), D_mp, alpha_mp + 3,
+              ent.g[0].Z, ent.g[0].lmn.data(), A_mp, alpha_mp + 0,
+              ent.g[1].Z, ent.g[1].lmn.data(), B_mp, alpha_mp + 1,
+              ent.g[2].Z, ent.g[2].lmn.data(), C_mp, alpha_mp + 2,
+              ent.g[3].Z, ent.g[3].lmn.data(), D_mp, alpha_mp + 3,
               512);
 
 

@@ -9,6 +9,8 @@
 #include "mirp/gpt.h"
 #include <math.h>
 
+/*! \brief Mark a variable as unused (prevents compiler warnings) */
+#define UNUSED(x) (void)(x)
 
 static void compute_farr(double * f, int lmn1, int lmn2, double xyz1, double xyz2)
 {
@@ -34,11 +36,16 @@ static void compute_farr(double * f, int lmn1, int lmn2, double xyz1, double xyz
 }
 
 void mirp_eri_single_d(double * integral,
-                       const int * lmn1, const double * A, double alpha1,
-                       const int * lmn2, const double * B, double alpha2,
-                       const int * lmn3, const double * C, double alpha3,
-                       const int * lmn4, const double * D, double alpha4)
+                       int Z1, const int * lmn1, const double * A, double alpha1,
+                       int Z2, const int * lmn2, const double * B, double alpha2,
+                       int Z3, const int * lmn3, const double * C, double alpha3,
+                       int Z4, const int * lmn4, const double * D, double alpha4)
 {
+    UNUSED(Z1);
+    UNUSED(Z2);
+    UNUSED(Z3);
+    UNUSED(Z4);
+
     const int L_l = lmn1[0]+lmn2[0]+lmn3[0]+lmn4[0];
     const int L_m = lmn1[1]+lmn2[1]+lmn3[1]+lmn4[1];
     const int L_n = lmn1[2]+lmn2[2]+lmn3[2]+lmn4[2];
