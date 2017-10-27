@@ -16,10 +16,10 @@ cd ../
 # mirp_deps directory should now contain
 # mirp_deps_native subdirectory
 
-# Now build MIRP
+# Now build MIRP (change v0.5 to whichever version you have)
 mkdir mirp_build
 cd mirp_build
-cmake -DCMAKE_PREFIX_PATH="$(pwd)/../mirp_deps/mirp_deps_native" \
+cmake -DCMAKE_PREFIX_PATH="$(pwd)/../mirp_deps/mirp_deps_v0.5_native" \
       -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ \
       -DCMAKE_INSTALL_PREFIX="$(pwd)/../mirp_install" \
       -DCMAKE_BUILD_TYPE=Release \

@@ -1,6 +1,12 @@
 /*! \file
  *
- * \brief Sandbox for testing features
+ * \brief A simple example of using MIRP as a library
+ */
+
+
+/* This example computes the ERI of water with HF/STO-3G
+ * using arbitrary precision/interval arithmetic as well
+ * as in double precision
  */
 
 #include <mirp/mirp.h>

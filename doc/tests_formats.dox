@@ -1,0 +1,65 @@
+/*! \page tests_formats Test and Reference File Formats
+
+\section _tests_formats_tests Test Inputs and Outputs
+
+In both test input and test data files, lines beginning with `#` are treated as comments.
+Generally, input files should have a header with a brief description and/or the generator
+command used to create them. The reference data files should repeat this information and add
+the command used to generate the data.
+
+\note In test files, floating point values in the input files are treated as if they are exact to an
+      infinite number of decimal places. Integers always have infinite precision.
+
+The computed values for the various integrals are printed (via the functionality in arb) as
+a value with associated error radius. This is meant to be interpreted again by the `arb_set_str` function,
+although it can certainly be parsed other ways.
+
+
+\subsection _tests_formats_boys Boys Function Test Files
+
+In a test file for the Boys function, the first (non-comment) line contains three integers
+
+  1. The number of tests in the file
+  2. The number of significant figures printed for the value of `F(m,t)`
+  3. The working precision used to calculate the value.
+
+After this metadata, each line contains `m`, `t`, and the value of `F(m,t)` for a single integral.
+
+An annotated example of a Boys input file is shown below
+
+\include boys_example.inp 
+
+And here is the corresponding test data file
+
+\include boys_example.dat 
+
+
+\subsection _tests_formats_integrals General Integral Test Files
+
+The format for an input for general types of integrals (ie, eri) are as follows. The first line
+contains the number of tests in the file. Then, there are blocks of inputs containing the shell information for
+a specified number of centers (ie, eri = 4 center, overlap = 2 center).
+
+\include 4center_example.inp
+
+\include 4center_example.dat
+
+
+\subsection _tests_formats_single_integrals Single Integral Test Files
+
+
+\include 4center_single_example.inp
+
+\include 4center_single_example.dat
+
+
+\section _tests_fromats_reference Reference File Format
+
+
+Reference files are printed using hex-float, so they do not suffer from rounding issues.
+
+
+\include 4center_example.ref
+
+
+*/

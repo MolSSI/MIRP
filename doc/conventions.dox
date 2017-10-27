@@ -9,6 +9,7 @@ In general, MIRP uses the following naming convention
   (except for functions in an anonymous namespace)
 - Inputs for creating test files are given a `.inp` extension, while
   files with generated data are given a `.dat` extension.
+- Reference files have a `.ref` extension.
 
 \section _conventions_integralnames Integral Names
 
@@ -40,5 +41,8 @@ In general, MIRP uses the following naming convention
 - Indexing of coefficient arrays for general contractions: the index of the
   primitive/exponent is the fastest index. (The index is `[g*nprim+p]` where
   `g` is the index of the general contraction and `p` the index of the primitive).
+- Indexing of the output of integrals for generally contracted shells: The cartesian
+  index is the fastest index, followed by the general contraction indicies (from right to left).
+
 
 */

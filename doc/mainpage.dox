@@ -41,6 +41,7 @@ and shared libraries.
   - Using MIRP
     - \ref conventions
     - \ref using_library
+    - \ref using_reffiles
     - \ref using_programs
 
 \section algo_sec Integrals and Algorithms
@@ -55,6 +56,14 @@ and shared libraries.
 
   - \ref filesystem
   - \ref tests
+    - \ref tests_formats
+
+
+\section examples_sec Examples
+
+Some examples of using MIRP can be found in the `examples` subdirectory.
+Examples include using MIRP as a library, as well as how to read from a
+reference file.
 
 
 \section bug_sec Reporting Bugs, Issues, and Improvements

@@ -3,21 +3,23 @@
 \section _binaries_about About the Binaries
 
 These binaries should be self contained and require no other libraries (other than the common system libraries).
-The packages containing just the dependencies are generally useful only to developers of MIRP, but may be helpful
-to users.
 
 The dependencies packages contain compiled binaries of Arb, Flint, MPFR, and GMP. These are also contained
 in the "MIRP + Dependencies" packages, along with the MIRP library and executables. The executables are statically-linked
 to libstdc++. Each package contains a README explaining the contents, licenses, and how they were compiled.
 
 In both types of packages, the `RUNPATH` for each library and executable are set to search the lib64 directory of the
-package (via `$ORIGIN`, see https://en.wikipedia.org/wiki/Rpath).
+package (via `$ORIGIN`, see https://en.wikipedia.org/wiki/Rpath). Therefore, you shouldn't need to set the
+`LD_LIBRARY_PATH` when using.
 
 Bugs and requests for other architectures can be reported via
 <a href="https://github.com/MolSSI/MIRP/issues">github issues</a> or by
 emailing the main author directly.
 
-\warning These packages are experimental. I don't have all the necessary hardware to test all of these. 
+\note The packages containing just the dependencies are generally useful only to developers of MIRP, but may be helpful
+      to users.
+
+\warning These packages are somewhat experimental
 
 
 \section _binaries Direct Links to Downloads

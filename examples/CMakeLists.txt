@@ -23,3 +23,8 @@ find_package(mirp ${MIRP_VERSION} REQUIRED)
 add_executable(simple_eri simple_eri.c)
 target_link_libraries(simple_eri mirp::mirp)
 add_test(NAME simple_eri COMMAND simple_eri)
+
+
+# Example 1 - reading a reference file in C++
+add_executable(read_ref read_ref.cpp)
+add_test(NAME read_ref COMMAND read_ref ${CMAKE_CURRENT_LIST_DIR}/../tests/eri_water_sto-3g.ref)

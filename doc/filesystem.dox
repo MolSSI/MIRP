@@ -17,6 +17,5 @@ Starting from the top level of the source directory
 - **tests** - Generated reference data and scripts for testing MIRP
   - **generator** - Scripts and data for generating test inputs
   - **verify** - Verification scripts, programs, notebooks, etc
-- **travis** - Helper scripts for Travis Continuous Integration
 
 */

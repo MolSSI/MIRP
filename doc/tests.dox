@@ -1,81 +1,51 @@
 /*! \page tests Testing, Test Files, and Reference Files
 
-\section _tests_general General Test Information
+\section _tests_general General Information
 
-Test data resides in the `tests` subdirectory of the MIRP repo.
+MIRP can create two different types of files - reference files and test files.
+While they can both be created and used by MIRP, they serve two different purposes.
 
-To create a new test file, an input file must first be created. This can be created
-by any means, although it must conform to the input test file format (see \ref _tests_formats).
+\note For details on the formats of these files, see \ref tests_formats
+
+
+\section _tests_reffiles Reference Files
+
+Reference files are meant to be used by integral packages to validate their own implementation.
+These files contain integrals derived from a molecule and basis set, and computed
+to 'exact' double precision (see \ref _functiontypes_single_exact).
+Reference files have a `.ref` extension, and are created with the
+`mirp_create_reference` executable. They can also be tested/verified with the
+`mirp_verify_reference` executable.
+
+Examples of how to read a reference file can be found in the `examples` subdirectory of the MIRP source.
+
+
+\section _tests_testfiles Test Files
+
+Test files are meant to verify the internal implementation of MIRP itself.
+The inputs and computed integrals are stored in interval arithmetic (via the Arb library) with
+the calculated error bars. Inputs for test file creation have a `.inp` extension, and
+the actual outputs have a `.dat` extension. The test output files are created
+via `mirp_create_test` and then later tested with `mirp_verify_test`.
+
+To create a new test file, a test input file must first be created. This can be created
+by any means, although it must conform to the input test file format (see \ref _tests_formats_tests).
 Scripts that generate test inputs should be placed in the `generator` subdirectory
 of the `tests` directory.
 
 Once an input is created, the reference data file can be created via the `mirp_create_test` command.
-Typically, input files have a `.inp` suffix, while the reference data generated from inputs
-has a `.dat` suffix.
-
 Once a test has been created and verified, its sha256sum should be added to the `sha256sums`
 file in the `tests` directory. This will help protect against inadvertent changes.
 
-Functionality in MIRP can then be tested using the `mirp_verify_test` command. This is
-typically added to a CMake script in the `tests` directory of the MIRP repo.
+Functionality in MIRP can then be tested using the `mirp_verify_test` command. These types
+of tests are typically added to a CMake script in the `tests` directory of the MIRP repo so
+that they can be run via `ctest`.
 
 
-
-\section _tests_verify Test Verification
+\subsection _tests_verify Test Verification
 
 When possible, the reference test data must be verified by another means. Scripts, Mathematica notebooks, etc,
 that do this should be placed in the `verify` subdirectory of the `tests` directory.
-
-
-\section _tests_formats Test file formats
-
-In both test input and reference files, lines beginning with `#` are treated as comments.
-Generally, input files should have a header with a brief description and/or the generator
-command used to create them. The reference data files should repeat this information and add
-the command used to generate the data.
-
-\note Floating point values in the input files are treated as if they are exact to an infinite number of decimal places.
-      Integers always have infinite precision.
-
-The computed values for the various integrals are printed (via the functionality in arb) as
-a value with associated error radius. This is meant to be interpreted again by the `arb_set_str` function,
-although it can certainly be parsed other ways.
-
-
-\subsection _tests_formats_boys Boys Function Test Files
-
-In a test file for the Boys function, the first (non-comment) line contains three integers
-
-  1. The number of tests in the file
-  2. The number of significant figures printed for the value of `F(m,t)`
-  3. The working precision used to calculate the value.
-
-After this metadata, each line contains `m`, `t`, and the value of `F(m,t)` for a single integral.
-
-An example of a Boys input file is shown below
-
-\include boys_fordoc.inp 
-
-And here is the corresponding test data file
-
-\include boys_fordoc.dat 
-
-
-\subsection _tests_formats_integrals General Integral Test Files
-
-The format for an input for general types of integrals (ie, eri) are as follows. The first line
-contains the number of tests in the file. Then, there are blocks of inputs containing the shell information for
-a specified number of centers (ie, eri = 4 center, overlap = 2 center).
-
-\include 4center_fordoc.inp
-
-\include eri_fordoc.dat
-
-
-
-
-
-
 
 
 */

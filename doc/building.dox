@@ -6,7 +6,7 @@
 
 - C/C++ compiler (supporting C++11)
   - GCC: 4.9 or greater
-  - Intel 2016 or greater
+  - Intel 2017 or greater
   - Clang 4.0 or greater
 
 - CMake (http://cmake.org)
@@ -18,9 +18,12 @@
 - GMP 6.1.2 (http://gmplib.org)
   - MPIR (http://mpir.org) may work, but is untested
 
+\warning There appear to be bugs and instabilities when using Intel 2016. It
+         is strongly recommended that 2017 or newer be used
+
 \note The versions given for Arb, Flint, MPFR, and GMP are the lowest
-versions that MIRP has been tested with. Other versions are likely
-to work (particularly for GMP and MPFR).
+      versions that MIRP has been tested with. Other versions are likely
+      to work (particularly for GMP and MPFR).
 
 See \ref _build_buildingdeps for some info on building the dependencies,
 or \ref binaries for how to obtain dependencies in binary form.
@@ -55,7 +58,7 @@ Other MIRP-specific options:
                     as possible (particularly libstdc++, etc)
 
 
-An example of configuring, building, and installing:
+An example of configuring, building, testing, and installing:
 
 \code{.sh}
 cd /path/to/mirp
@@ -74,8 +77,8 @@ make install
 
 \section _build_testing Testing MIRP
 
-Testing of the library is done using the `ctest` command. The tests
-are designed to thoroughly cover all the functionality of the library.
+Testing of the library is done using the `ctest` command, as shown above.
+The tests are designed to thoroughly cover all the functionality of the library.
 
 Currently, the tests take less than 5 minutes on reasonably modern hardware.
 
@@ -93,19 +96,21 @@ use "native".
 
 This script will download and compile the dependencies using GCC (which must be
 in your path). It will create a directory within the current working directory
-named `mirp_deps_${arch}` where `${arch}` is the argument you gave to `build_deps.sh`.
-This directory should then be included in the `CMAKE_PREFIX_PATH` for MIRP.
+named `mirp_deps_v${version}_${arch}` where `${arch}` is the argument you gave to `build_deps.sh`
+and `${version}` is the current version of MIRP (see the VERSION file).
+The is directory (`mirp_deps_v${version}_${arch}`) should then be included in the `CMAKE_PREFIX_PATH` for MIRP.
 
+If the patchelf program is available, the `RUNPATH` of the dependencies will
+be changed to make the package self contained.
 The current working directory will be used to store the downloaded files. Compilation
 will take place in a subdirectory `deps_build_${arch}`.
 
-The script is fairly rudimentary, so feel free to modify as you with for your
+The script is fairly rudimentary, so feel free to modify as you wish for your
 own purposes.
 
-For example, here could be a complete workflow for downloading/compiling MIRP
+As an example, here could be a complete workflow for downloading/compiling MIRP
 from scratch:
 
 \include build_install_1.sh
-
 
 */
