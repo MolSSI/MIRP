@@ -42,12 +42,22 @@ install:
   - wget https://www.bennyp.org/research/mirp/download/${DEPS_BASE}.tar.bz2
   - tar -xvf ${DEPS_BASE}.tar.bz2
   - export DEPDIR="$(pwd)/${DEPS_BASE}"
+  - export INSTALLDIR="$(pwd)/mirp_install"
   - export LD_LIBRARY_PATH="${DEPDIR}/lib:${DEPDIR}/lib64:${LD_LIBRARY_PATH}"
 
 script:
   # Build MIRP
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${DEPDIR} ../
+  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${DEPDIR} -DCMAKE_INSTALL_PREFIX="${INSTALLDIR}" ../
+  - make install
+  - ctest
+
+  # Build the examples against the installed MIRP library
+  - cd ../
+  - mkdir build_examples
+  - cd build_examples
+  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="${DEPDIR};${INSTALLDIR}" ../examples
   - make
   - ctest
+
