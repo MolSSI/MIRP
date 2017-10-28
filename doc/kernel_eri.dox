@@ -5,14 +5,16 @@
 In MIRP, electron repulsion integrals can be calculated
 via the following functions:
 
-- Double Precision
-  - mirp_single_eri_double()
-  - mirp_prim_eri_double()
-  - mirp_eri_double()
+- Single Integrals
+  - \ref mirp_eri_single
+  - \ref mirp_eri_single_d
+  - \ref mirp_eri_single_str
+  - \ref mirp_eri_single_exact
 
-- Interval arithmetic
-  - mirp_single_eri_interval()
-  - mirp_prim_eri_interval()
-  - mirp_eri_interval()
+- Contracted Shells
+  - \ref mirp_eri
+  - \ref mirp_eri_d
+  - \ref mirp_eri_str
+  - \ref mirp_eri_exact
 
 */

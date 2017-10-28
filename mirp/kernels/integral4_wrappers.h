@@ -19,7 +19,7 @@ extern "C" {
  * primitive cartesian integrals, and uses it to compute all the cartesian
  * components for an contracted shell quartet.
  *
- * \param [out] integral
+ * \param [out] integrals
  *              Output for the computed integral
  * \param [in]  Z1, Z2, Z3, Z4
  *              Atomic Z numbers of the centers
@@ -42,29 +42,29 @@ extern "C" {
  *              Function that computes a single cartesian four-center integral
  *              with interval arithmetic
  */
-void mirp_loop_shell4_d(double * integral,
-                        int Z1, int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
-                        int Z2, int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
-                        int Z3, int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
-                        int Z4, int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
-                        cb_integral4_single_d cb);
+void mirp_integral4_d(double * integrals,
+                      int Z1, int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
+                      int Z2, int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
+                      int Z3, int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
+                      int Z4, int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
+                      cb_integral4_single_d cb);
 
 
 /*! \brief Compute all cartesian integrals of a contracted shell quartet
  *         for an integral (four-center, interval arithmetic)
  *
- * \copydetails mirp_loop_shell4_d
+ * \copydetails mirp_integral4_d
  *
  * \param [in]  working_prec
  *              The working precision (binary digits/bits) to use
  *              in the calculation
  */
-void mirp_loop_shell4(arb_ptr integral,
-                      int Z1, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1,
-                      int Z2, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2,
-                      int Z3, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3,
-                      int Z4, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4,
-                      slong working_prec, cb_integral4_single cb);
+void mirp_integral4(arb_ptr integrals,
+                    int Z1, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1,
+                    int Z2, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2,
+                    int Z3, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3,
+                    int Z4, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4,
+                    slong working_prec, cb_integral4_single cb);
 
 
 /*! \brief Compute a single 4-center integral using interval arithmetic (string input)
@@ -87,6 +87,9 @@ void mirp_loop_shell4(arb_ptr integral,
  * \param [in]  cb
  *              Function that computes a single cartesian four-center integral
  *              with interval arithmetic
+ * \param [in]  working_prec
+ *              The working precision (binary digits/bits) to use
+ *              in the calculation
  */
 void mirp_integral4_single_str(arb_t integral,
                                int Z1, const int * lmn1, const char ** A, const char * alpha1,
@@ -101,7 +104,7 @@ void mirp_integral4_single_str(arb_t integral,
  * This function converts string inputs into arblib types and runs the callback \c cb
  *
  * \param [out] integrals
- *              Output for the computed integrals
+ *              Output for the computed integral
  * \param [in]  Z1, Z2, Z3, Z4
  *              Atomic Z numbers of the centers
  * \param [in]  am1,am2,am3,am4
@@ -120,7 +123,8 @@ void mirp_integral4_single_str(arb_t integral,
  *              for each shell (of lengths \p nprim1 * \p ngen1, \p nprim2 * \p ngen2,
  *              \p nprim3 * \p ngen3, \p nprim4 * \p ngen4 respectively)
  * \param [in]  working_prec
- *              Internal working precision (in bits)
+ *              The working precision (binary digits/bits) to use
+ *              in the calculation
  * \param [in]  cb
  *              Function that computes a single cartesian four-center integral
  *              with interval arithmetic
@@ -209,23 +213,23 @@ void mirp_integral4_exact(double * integrals,
  *
  *  The created function is named `mirp_{name}`.
  *
- *  \sa mirp_loop_shell4
+ *  \sa mirp_integral4
  */
 #define MIRP_WRAP_SHELL4(name) \
     static inline \
-    void mirp_##name(arb_t integral, \
+    void mirp_##name(arb_t integrals, \
                      int Z1, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, \
                      int Z2, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, \
                      int Z3, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, \
                      int Z4, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, \
                      slong working_prec) \
     { \
-        mirp_loop_shell4(integral, \
-                         Z1, am1, A, nprim1, ngen1, alpha1, coeff1, \
-                         Z2, am2, B, nprim2, ngen2, alpha2, coeff2, \
-                         Z3, am3, C, nprim3, ngen3, alpha3, coeff3, \
-                         Z4, am4, D, nprim4, ngen4, alpha4, coeff4, \
-                         working_prec, mirp_##name##_single); \
+        mirp_integral4(integrals, \
+                       Z1, am1, A, nprim1, ngen1, alpha1, coeff1, \
+                       Z2, am2, B, nprim2, ngen2, alpha2, coeff2, \
+                       Z3, am3, C, nprim3, ngen3, alpha3, coeff3, \
+                       Z4, am4, D, nprim4, ngen4, alpha4, coeff4, \
+                       working_prec, mirp_##name##_single); \
     }
 
 
@@ -237,22 +241,22 @@ void mirp_integral4_exact(double * integrals,
  *
  *  The created function is named `mirp_{name}_d`.
  *
- *  \sa mirp_loop_shell4_d
+ *  \sa mirp_integral4_d
  */
 #define MIRP_WRAP_SHELL4_D(name) \
     static inline \
-    void mirp_##name##_d(double * integral, \
+    void mirp_##name##_d(double * integrals, \
                          int Z1, int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1, \
                          int Z2, int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2, \
                          int Z3, int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3, \
                          int Z4, int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4) \
     { \
-        mirp_loop_shell4_d(integral, \
-                           Z1, am1, A, nprim1, ngen1, alpha1, coeff1, \
-                           Z2, am2, B, nprim2, ngen2, alpha2, coeff2, \
-                           Z3, am3, C, nprim3, ngen3, alpha3, coeff3, \
-                           Z4, am4, D, nprim4, ngen4, alpha4, coeff4, \
-                           mirp_##name##_single_d); \
+        mirp_integral4_d(integrals, \
+                         Z1, am1, A, nprim1, ngen1, alpha1, coeff1, \
+                         Z2, am2, B, nprim2, ngen2, alpha2, coeff2, \
+                         Z3, am3, C, nprim3, ngen3, alpha3, coeff3, \
+                         Z4, am4, D, nprim4, ngen4, alpha4, coeff4, \
+                         mirp_##name##_single_d); \
     }
 
 
@@ -265,7 +269,7 @@ void mirp_integral4_exact(double * integrals,
  *
  *  The created function is named `mirp_{name}_single_str`.
  *
- *  \sa mirp_integral4_single_tr
+ *  \sa mirp_integral4_single_str
  */
 #define MIRP_WRAP_SINGLE4_STR(name) \
     static inline \

@@ -58,13 +58,95 @@ void mirp_eri_single(arb_t integral,
 /*******************
  * Wrappings
  *******************/
+
+/*! \brief Compute electron repulsion integrals for a contracted
+ *         shell quartet (interval arithmetic)
+ *
+ * \copydetails mirp_eri_d
+ * \param [in]  working_prec
+ *              The working precision (binary digits/bits) to use
+ *              in the calculation
+ */
 MIRP_WRAP_SHELL4(eri)
+
+/*! \brief Compute electron repulsion integrals for a contracted
+ *         shell quartet (double precision)
+ *
+ * \param [out] integrals
+ *              Output for the computed integral
+ * \param [in]  Z1, Z2, Z3, Z4
+ *              Atomic Z numbers of the centers
+ * \param [in]  am1,am2,am3,am4
+ *              Angular momentum for the four-centers
+ * \param [in]  A,B,C,D
+ *              XYZ coordinates of the four-centers (each of length 3)
+ * \param [in]  nprim1,nprim2,nprim3,nprim4
+ *              Number of primitive gaussians for each shell
+ * \param [in]  ngen1,ngen2,ngen3,ngen4
+ *              Number of general contractions for each shell
+ * \param [in]  alpha1,alpha2,alpha3,alpha4
+ *              Exponents of the primitive gaussians on the four-centers
+ *              (of lengths \p nprim1, \p nprim2, \p nprim3, \p nprim4 respectively)
+ * \param [in]  coeff1,coeff2,coeff3,coeff4
+ *              Coefficients for all primitives and for all general contractions
+ *              for each shell (of lengths \p nprim1 * \p ngen1, \p nprim2 * \p ngen2,
+ *              \p nprim3 * \p ngen3, \p nprim4 * \p ngen4 respectively)
+ */
 MIRP_WRAP_SHELL4_D(eri)
+
+/*! \brief Compute electron repulsion integrals for a contracted
+ *         shell quartet (string inputs)
+ *
+ * \copydetails mirp_eri
+ */
 MIRP_WRAP_SHELL4_STR(eri)
+
+/*! \brief Compute a single electron repulsion integral for a primitive quartet
+ *         (interval arithmetic)
+ *
+ * \param [out] integral
+ *              Output for the computed integral
+ * \param [in]  Z1, Z2, Z3, Z4
+ *              Atomic Z numbers of the centers
+ * \param [in]  lmn1,lmn2,lmn3,lmn4
+ *              Exponents of x, y, and z that signify angular momentum. Required
+ *              to be 3 elements.
+ * \param [in]  A,B,C,D
+ *              XYZ coordinates of the four-centers (each of length 3)
+ * \param [in]  alpha1,alpha2,alpha3,alpha4
+ *              Exponents of the gaussian on the four-centers
+ * \param [in]  working_prec
+ *              Internal working precision
+ * \param [in]  working_prec
+ *              The working precision (binary digits/bits) to use
+ *              in the calculation
+ */
 MIRP_WRAP_SINGLE4_STR(eri)
+
+
+/*! \brief Compute a single electron repulsion integral for a primitive quartet
+ *         (exact double precision)
+ *
+ * \copydetails mirp_eri_single_d
+ */
 MIRP_WRAP_SINGLE4_EXACT(eri)
+
+
+/*! \brief Compute electron repulsion integrals for a contracted
+ *         shell quartet (exact double precision)
+ *
+ * \copydetails mirp_eri_d
+ */
 MIRP_WRAP_SHELL4_EXACT(eri)
 
+
+/***************************************
+ * Documentation for wrapped functions
+ ***************************************/
+
+/*! \fn mirp_eri(arb_t integral, int i)
+ * \brief Compute electron repulsion integrals for a shell quartet
+ */
 
 #ifdef __cplusplus
 }

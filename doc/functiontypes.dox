@@ -46,8 +46,8 @@ the \ref mirp_integral4_single_exact wrapper.
 These functions are analogous to their 'single' counterparts, however they take in contracted shells
 (both segmented and general) as inputs and return a complete set of integral.
 
-Functions with the pattern `mirp_{name}` are created with \ref mirp_loop_shell4 (and `mirp_{name}_d`
-can be created via \ref mirp_loop_shell4_d). The others are created via \ref mirp_integral4_str,
+Functions with the pattern `mirp_{name}` are created with \ref mirp_integral4 (and `mirp_{name}_d`
+can be created via \ref mirp_integral4_d). The others are created via \ref mirp_integral4_str,
 and \ref mirp_integral4_exact.
 
 
@@ -61,8 +61,8 @@ even easier with the `MIRP_WRAP_` macros.
 
 Macro                              | Creates                     | Requires                | Calls
 -----------------------------------|-----------------------------|-------------------------|-----------------------------------
-MIRP_WRAP_SHELL4(name)             | mirp_name                   | mirp_name_single        | \ref mirp_loop_shell4
-MIRP_WRAP_SHELL4_D(name)           | mirp_name_d                 | mirp_name_single_d      | \ref mirp_loop_shell4_d
+MIRP_WRAP_SHELL4(name)             | mirp_name                   | mirp_name_single        | \ref mirp_integral4
+MIRP_WRAP_SHELL4_D(name)           | mirp_name_d                 | mirp_name_single_d      | \ref mirp_integral4_d
 MIRP_WRAP_SINGLE4_STR(name)        | mirp_name_single_str        | mirp_name_single        | \ref mirp_integral4_single_str
 MIRP_WRAP_SINGLE4_EXACT(name)      | mirp_name_single_exact      | mirp_name_single        | \ref mirp_integral4_single_exact
 MIRP_WRAP_SHELL4_STR(name)         | mirp_name_str               | mirp_name               | \ref mirp_integral4_str
