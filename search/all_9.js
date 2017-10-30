@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['lmn',['lmn',['../structmirp_1_1gaussian__single__str.html#a2ac864ca6f32de7df75cc4baea2e5e56',1,'mirp::gaussian_single_str']]]
+  ['kernel_5fboys_2edox',['kernel_boys.dox',['../kernel__boys_8dox.html',1,'']]],
+  ['kernel_5feri_2edox',['kernel_eri.dox',['../kernel__eri_8dox.html',1,'']]]
 ];

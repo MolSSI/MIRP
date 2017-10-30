@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['various_20types_20of_20functions_20for_20integrals',['Various Types of Functions for Integrals',['../functiontypes.html',1,'']]],
-  ['value',['value',['../structmirp_1_1boys__data__entry.html#aafdb9ba311590556709688a7b783c9d7',1,'mirp::boys_data_entry']]]
+  ['unused',['UNUSED',['../eri_8c.html#a86d500a34c624c2cae56bc25a31b12f3',1,'UNUSED():&#160;eri.c'],['../eri__d_8c.html#a86d500a34c624c2cae56bc25a31b12f3',1,'UNUSED():&#160;eri_d.c']]],
+  ['using_20the_20mirp_20library',['Using the MIRP library',['../using_library.html',1,'']]],
+  ['using_5flibrary_2edox',['using_library.dox',['../using__library_8dox.html',1,'']]],
+  ['using_20mirp_20programs',['Using MIRP programs',['../using_programs.html',1,'']]],
+  ['using_5fprograms_2edox',['using_programs.dox',['../using__programs_8dox.html',1,'']]],
+  ['using_20mirp_20reference_20files',['Using MIRP reference files',['../using_reffiles.html',1,'']]],
+  ['using_5freffiles_2edox',['using_reffiles.dox',['../using__reffiles_8dox.html',1,'']]]
 ];

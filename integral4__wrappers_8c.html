@@ -95,9 +95,15 @@ Include dependency graph for integral4_wrappers.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a4cfc2cc65498b8f9490102d43c1bd45c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a4cfc2cc65498b8f9490102d43c1bd45c">mirp_loop_shell4</a> (arb_ptr integral, int Z1, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, int Z2, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, int Z3, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, int Z4, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, slong working_prec, <a class="el" href="typedefs_8h.html#a417fa18f7fa2d551142a35b4d24d8747">cb_integral4_single</a> cb)</td></tr>
-<tr class="memdesc:a4cfc2cc65498b8f9490102d43c1bd45c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian integrals of a contracted shell quartet for an integral (four-center, interval arithmetic)  <a href="#a4cfc2cc65498b8f9490102d43c1bd45c">More...</a><br /></td></tr>
-<tr class="separator:a4cfc2cc65498b8f9490102d43c1bd45c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65f06024c3e4442ce225b59a925270bf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a65f06024c3e4442ce225b59a925270bf">mirp_cartloop4</a> (arb_ptr integrals, int Z1, int am1, arb_srcptr A, const arb_t alpha1, int Z2, int am2, arb_srcptr B, const arb_t alpha2, int Z3, int am3, arb_srcptr C, const arb_t alpha3, int Z4, int am4, arb_srcptr D, const arb_t alpha4, slong working_prec, <a class="el" href="typedefs_8h.html#a417fa18f7fa2d551142a35b4d24d8747">cb_integral4_single</a> cb)</td></tr>
+<tr class="memdesc:a65f06024c3e4442ce225b59a925270bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian components of a single primitive integral (interval arithmetic)  <a href="#a65f06024c3e4442ce225b59a925270bf">More...</a><br /></td></tr>
+<tr class="separator:a65f06024c3e4442ce225b59a925270bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab068a2e2b404a55553921276b5b48e60"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#ab068a2e2b404a55553921276b5b48e60">mirp_cartloop4_d</a> (double *integrals, int Z1, int am1, const double *A, double alpha1, int Z2, int am2, const double *B, double alpha2, int Z3, int am3, const double *C, double alpha3, int Z4, int am4, const double *D, double alpha4, <a class="el" href="typedefs_8h.html#ab4bde9b22667586d502024f2a015ead3">cb_integral4_single_d</a> cb)</td></tr>
+<tr class="memdesc:ab068a2e2b404a55553921276b5b48e60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian components of a single primitive integral (four-center, double precision)  <a href="#ab068a2e2b404a55553921276b5b48e60">More...</a><br /></td></tr>
+<tr class="separator:ab068a2e2b404a55553921276b5b48e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad267bc9ba0310d5d73f2f41b4ee13b8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#ad267bc9ba0310d5d73f2f41b4ee13b8d">mirp_integral4</a> (arb_ptr integrals, int Z1, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, int Z2, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, int Z3, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, int Z4, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, slong working_prec, <a class="el" href="typedefs_8h.html#a417fa18f7fa2d551142a35b4d24d8747">cb_integral4_single</a> cb)</td></tr>
+<tr class="memdesc:ad267bc9ba0310d5d73f2f41b4ee13b8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian integrals of a contracted shell quartet for an integral (four-center, interval arithmetic)  <a href="#ad267bc9ba0310d5d73f2f41b4ee13b8d">More...</a><br /></td></tr>
+<tr class="separator:ad267bc9ba0310d5d73f2f41b4ee13b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa6320f4d37ad5beeda9bdbd78f502ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#aaa6320f4d37ad5beeda9bdbd78f502ac">mirp_integral4_single_str</a> (arb_t integral, int Z1, const int *lmn1, const char **A, const char *alpha1, int Z2, const int *lmn2, const char **B, const char *alpha2, int Z3, const int *lmn3, const char **C, const char *alpha3, int Z4, const int *lmn4, const char **D, const char *alpha4, slong working_prec, <a class="el" href="typedefs_8h.html#a417fa18f7fa2d551142a35b4d24d8747">cb_integral4_single</a> cb)</td></tr>
 <tr class="memdesc:aaa6320f4d37ad5beeda9bdbd78f502ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a single 4-center integral using interval arithmetic (string input)  <a href="#aaa6320f4d37ad5beeda9bdbd78f502ac">More...</a><br /></td></tr>
 <tr class="separator:aaa6320f4d37ad5beeda9bdbd78f502ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,18 +113,750 @@ Functions</h2></td></tr>
 <tr class="memitem:ad3ce2170d70b88e8dad1d423433c8e90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#ad3ce2170d70b88e8dad1d423433c8e90">mirp_integral4_single_exact</a> (double *integral, int Z1, const int *lmn1, const double *A, double alpha1, int Z2, const int *lmn2, const double *B, double alpha2, int Z3, const int *lmn3, const double *C, double alpha3, int Z4, const int *lmn4, const double *D, double alpha4, <a class="el" href="typedefs_8h.html#a417fa18f7fa2d551142a35b4d24d8747">cb_integral4_single</a> cb)</td></tr>
 <tr class="memdesc:ad3ce2170d70b88e8dad1d423433c8e90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a single integral to exact double precision using interval arithmetic (four-center)  <a href="#ad3ce2170d70b88e8dad1d423433c8e90">More...</a><br /></td></tr>
 <tr class="separator:ad3ce2170d70b88e8dad1d423433c8e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a104e8e1bb70f3b4c13f01be131929f08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a104e8e1bb70f3b4c13f01be131929f08">mirp_integral4_exact</a> (double *integral, int Z1, int am1, const double *A, int nprim1, int ngen1, const double *alpha1, const double *coeff1, int Z2, int am2, const double *B, int nprim2, int ngen2, const double *alpha2, const double *coeff2, int Z3, int am3, const double *C, int nprim3, int ngen3, const double *alpha3, const double *coeff3, int Z4, int am4, const double *D, int nprim4, int ngen4, const double *alpha4, const double *coeff4, <a class="el" href="typedefs_8h.html#a649ffd4b235bfb92f735edf0dc2bb7a4">cb_integral4</a> cb)</td></tr>
-<tr class="memdesc:a104e8e1bb70f3b4c13f01be131929f08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian integrals of a contracted shell quartet for an integral to exact double precision (four-center)  <a href="#a104e8e1bb70f3b4c13f01be131929f08">More...</a><br /></td></tr>
-<tr class="separator:a104e8e1bb70f3b4c13f01be131929f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8dd783ebfe73a83e30dffd1a1241727c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a8dd783ebfe73a83e30dffd1a1241727c">mirp_loop_shell4_d</a> (double *integral, int Z1, int am1, const double *A, int nprim1, int ngen1, const double *alpha1, const double *coeff1, int Z2, int am2, const double *B, int nprim2, int ngen2, const double *alpha2, const double *coeff2, int Z3, int am3, const double *C, int nprim3, int ngen3, const double *alpha3, const double *coeff3, int Z4, int am4, const double *D, int nprim4, int ngen4, const double *alpha4, const double *coeff4, <a class="el" href="typedefs_8h.html#ab4bde9b22667586d502024f2a015ead3">cb_integral4_single_d</a> cb)</td></tr>
-<tr class="memdesc:a8dd783ebfe73a83e30dffd1a1241727c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian integrals of a contracted shell quartet for an integral (four-center, double precision)  <a href="#a8dd783ebfe73a83e30dffd1a1241727c">More...</a><br /></td></tr>
-<tr class="separator:a8dd783ebfe73a83e30dffd1a1241727c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86592690bea2608749cf9155aae67667"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#a86592690bea2608749cf9155aae67667">mirp_integral4_exact</a> (double *integrals, int Z1, int am1, const double *A, int nprim1, int ngen1, const double *alpha1, const double *coeff1, int Z2, int am2, const double *B, int nprim2, int ngen2, const double *alpha2, const double *coeff2, int Z3, int am3, const double *C, int nprim3, int ngen3, const double *alpha3, const double *coeff3, int Z4, int am4, const double *D, int nprim4, int ngen4, const double *alpha4, const double *coeff4, <a class="el" href="typedefs_8h.html#a649ffd4b235bfb92f735edf0dc2bb7a4">cb_integral4</a> cb)</td></tr>
+<tr class="memdesc:a86592690bea2608749cf9155aae67667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian integrals of a contracted shell quartet for an integral to exact double precision (four-center)  <a href="#a86592690bea2608749cf9155aae67667">More...</a><br /></td></tr>
+<tr class="separator:a86592690bea2608749cf9155aae67667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa95038e276d0f23ce15a3774c935b355"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="integral4__wrappers_8c.html#aa95038e276d0f23ce15a3774c935b355">mirp_integral4_d</a> (double *integrals, int Z1, int am1, const double *A, int nprim1, int ngen1, const double *alpha1, const double *coeff1, int Z2, int am2, const double *B, int nprim2, int ngen2, const double *alpha2, const double *coeff2, int Z3, int am3, const double *C, int nprim3, int ngen3, const double *alpha3, const double *coeff3, int Z4, int am4, const double *D, int nprim4, int ngen4, const double *alpha4, const double *coeff4, <a class="el" href="typedefs_8h.html#ab4bde9b22667586d502024f2a015ead3">cb_integral4_single_d</a> cb)</td></tr>
+<tr class="memdesc:aa95038e276d0f23ce15a3774c935b355"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute all cartesian integrals of a contracted shell quartet for an integral (four-center, double precision)  <a href="#aa95038e276d0f23ce15a3774c935b355">More...</a><br /></td></tr>
+<tr class="separator:aa95038e276d0f23ce15a3774c935b355"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Some useful wrapping of functionality. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a104e8e1bb70f3b4c13f01be131929f08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a104e8e1bb70f3b4c13f01be131929f08">&#9670;&nbsp;</a></span>mirp_integral4_exact()</h2>
+<a id="a65f06024c3e4442ce225b59a925270bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65f06024c3e4442ce225b59a925270bf">&#9670;&nbsp;</a></span>mirp_cartloop4()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void mirp_cartloop4 </td>
+          <td>(</td>
+          <td class="paramtype">arb_ptr&#160;</td>
+          <td class="paramname"><em>integrals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const arb_t&#160;</td>
+          <td class="paramname"><em>alpha1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const arb_t&#160;</td>
+          <td class="paramname"><em>alpha2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const arb_t&#160;</td>
+          <td class="paramname"><em>alpha3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>D</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const arb_t&#160;</td>
+          <td class="paramname"><em>alpha4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">slong&#160;</td>
+          <td class="paramname"><em>working_prec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="typedefs_8h.html#a417fa18f7fa2d551142a35b4d24d8747">cb_integral4_single</a>&#160;</td>
+          <td class="paramname"><em>cb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute all cartesian components of a single primitive integral (interval arithmetic) </p>
+<p>The <code>integral</code> buffer is expected to be able to hold all primitive integrals (ie, it can hold ncart(am1) * ncart(am2) * ncart(am3) * ncart(am4) elements).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Resulting integral integral </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Z1,Z2,Z3,Z4</td><td>Atomic Z numbers of the centers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">am1,am2,am3,am4</td><td>Angular momentum of the four-centers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the gaussian on the four-centers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Callback that calculates a single cartesian component of a primitive integral </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab068a2e2b404a55553921276b5b48e60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab068a2e2b404a55553921276b5b48e60">&#9670;&nbsp;</a></span>mirp_cartloop4_d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void mirp_cartloop4_d </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>integrals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>alpha1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>alpha2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>alpha3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>D</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>alpha4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="typedefs_8h.html#ab4bde9b22667586d502024f2a015ead3">cb_integral4_single_d</a>&#160;</td>
+          <td class="paramname"><em>cb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute all cartesian components of a single primitive integral (four-center, double precision) </p>
+<p>The <code>integral</code> buffer is expected to be able to hold all primitive integrals (ie, it can hold ncart(am1) * ncart(am2) * ncart(am3) * ncart(am4) elements).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Resulting integral integral </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Z1,Z2,Z3,Z4</td><td>Atomic Z numbers of the centers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">am1,am2,am3,am4</td><td>Angular momentum of the four-centers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the gaussian on the four-centers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Callback that calculates a single cartesian component of a primitive integral </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad267bc9ba0310d5d73f2f41b4ee13b8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad267bc9ba0310d5d73f2f41b4ee13b8d">&#9670;&nbsp;</a></span>mirp_integral4()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mirp_integral4 </td>
+          <td>(</td>
+          <td class="paramtype">arb_ptr&#160;</td>
+          <td class="paramname"><em>integrals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nprim1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ngen1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>alpha1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>coeff1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nprim2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ngen2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>alpha2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>coeff2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nprim3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ngen3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>alpha3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>coeff3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>D</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nprim4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ngen4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>alpha4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_srcptr&#160;</td>
+          <td class="paramname"><em>coeff4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">slong&#160;</td>
+          <td class="paramname"><em>working_prec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="typedefs_8h.html#a417fa18f7fa2d551142a35b4d24d8747">cb_integral4_single</a>&#160;</td>
+          <td class="paramname"><em>cb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute all cartesian integrals of a contracted shell quartet for an integral (four-center, interval arithmetic) </p>
+<p>This function takes in a pointer to a function that computes single, primitive cartesian integrals, and uses it to compute all the cartesian components for an contracted shell quartet.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Output for the computed integral </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Z1,Z2,Z3,Z4</td><td>Atomic Z numbers of the centers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">am1,am2,am3,am4</td><td>Angular momentum for the four-centers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nprim1,nprim2,nprim3,nprim4</td><td>Number of primitive gaussians for each shell </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ngen1,ngen2,ngen3,ngen4</td><td>Number of general contractions for each shell </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the primitive gaussians on the four-centers (of lengths <code>nprim1</code>, <code>nprim2</code>, <code>nprim3</code>, <code>nprim4</code> respectively) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coeff1,coeff2,coeff3,coeff4</td><td>Coefficients for all primitives and for all general contractions for each shell (of lengths <code>nprim1</code> * <code>ngen1</code>, <code>nprim2</code> * <code>ngen2</code>, <code>nprim3</code> * <code>ngen3</code>, <code>nprim4</code> * <code>ngen4</code> respectively) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes a single cartesian four-center integral with interval arithmetic</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa95038e276d0f23ce15a3774c935b355"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa95038e276d0f23ce15a3774c935b355">&#9670;&nbsp;</a></span>mirp_integral4_d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mirp_integral4_d </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>integrals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nprim1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ngen1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>alpha1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>coeff1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nprim2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ngen2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>alpha2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>coeff2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nprim3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ngen3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>alpha3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>coeff3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Z4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>am4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>D</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nprim4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ngen4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>alpha4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>coeff4</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="typedefs_8h.html#ab4bde9b22667586d502024f2a015ead3">cb_integral4_single_d</a>&#160;</td>
+          <td class="paramname"><em>cb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute all cartesian integrals of a contracted shell quartet for an integral (four-center, double precision) </p>
+<p>This function takes in a pointer to a function that computes single, primitive cartesian integrals, and uses it to compute all the cartesian components for an contracted shell quartet.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Output for the computed integral </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Z1,Z2,Z3,Z4</td><td>Atomic Z numbers of the centers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">am1,am2,am3,am4</td><td>Angular momentum for the four-centers </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nprim1,nprim2,nprim3,nprim4</td><td>Number of primitive gaussians for each shell </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ngen1,ngen2,ngen3,ngen4</td><td>Number of general contractions for each shell </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the primitive gaussians on the four-centers (of lengths <code>nprim1</code>, <code>nprim2</code>, <code>nprim3</code>, <code>nprim4</code> respectively) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">coeff1,coeff2,coeff3,coeff4</td><td>Coefficients for all primitives and for all general contractions for each shell (of lengths <code>nprim1</code> * <code>ngen1</code>, <code>nprim2</code> * <code>ngen2</code>, <code>nprim3</code> * <code>ngen3</code>, <code>nprim4</code> * <code>ngen4</code> respectively) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes a single cartesian four-center integral with interval arithmetic </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a86592690bea2608749cf9155aae67667"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86592690bea2608749cf9155aae67667">&#9670;&nbsp;</a></span>mirp_integral4_exact()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -607,6 +1345,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the gaussian on the four-centers </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>Internal working precision </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes a single cartesian four-center integral with interval arithmetic </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation </td></tr>
   </table>
   </dd>
 </dl>
@@ -817,7 +1556,7 @@ Functions</h2></td></tr>
 <p>This function converts string inputs into arblib types and runs the callback <code>cb</code> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Output for the computed integrals </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Output for the computed integral </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">Z1,Z2,Z3,Z4</td><td>Atomic Z numbers of the centers </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">am1,am2,am3,am4</td><td>Angular momentum for the four-centers </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
@@ -825,440 +1564,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ngen1,ngen2,ngen3,ngen4</td><td>Number of general contractions for each shell </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the primitive gaussians on the four-centers (of lengths <code>nprim1</code>, <code>nprim2</code>, <code>nprim3</code>, <code>nprim4</code> respectively) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">coeff1,coeff2,coeff3,coeff4</td><td>Coefficients for all primitives and for all general contractions for each shell (of lengths <code>nprim1</code> * <code>ngen1</code>, <code>nprim2</code> * <code>ngen2</code>, <code>nprim3</code> * <code>ngen3</code>, <code>nprim4</code> * <code>ngen4</code> respectively) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>Internal working precision (in bits) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes a single cartesian four-center integral with interval arithmetic </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a4cfc2cc65498b8f9490102d43c1bd45c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cfc2cc65498b8f9490102d43c1bd45c">&#9670;&nbsp;</a></span>mirp_loop_shell4()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void mirp_loop_shell4 </td>
-          <td>(</td>
-          <td class="paramtype">arb_ptr&#160;</td>
-          <td class="paramname"><em>integral</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>Z1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>A</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>alpha1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>coeff1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>Z2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>B</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>alpha2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>coeff2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>Z3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>C</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>alpha3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>coeff3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>Z4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>D</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>alpha4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">arb_srcptr&#160;</td>
-          <td class="paramname"><em>coeff4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">slong&#160;</td>
-          <td class="paramname"><em>working_prec</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a417fa18f7fa2d551142a35b4d24d8747">cb_integral4_single</a>&#160;</td>
-          <td class="paramname"><em>cb</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Compute all cartesian integrals of a contracted shell quartet for an integral (four-center, interval arithmetic) </p>
-<p>This function takes in a pointer to a function that computes single, primitive cartesian integrals, and uses it to compute all the cartesian components for an contracted shell quartet.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">integral</td><td>Output for the computed integral </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">Z1,Z2,Z3,Z4</td><td>Atomic Z numbers of the centers </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">am1,am2,am3,am4</td><td>Angular momentum for the four-centers </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nprim1,nprim2,nprim3,nprim4</td><td>Number of primitive gaussians for each shell </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ngen1,ngen2,ngen3,ngen4</td><td>Number of general contractions for each shell </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the primitive gaussians on the four-centers (of lengths <code>nprim1</code>, <code>nprim2</code>, <code>nprim3</code>, <code>nprim4</code> respectively) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">coeff1,coeff2,coeff3,coeff4</td><td>Coefficients for all primitives and for all general contractions for each shell (of lengths <code>nprim1</code> * <code>ngen1</code>, <code>nprim2</code> * <code>ngen2</code>, <code>nprim3</code> * <code>ngen3</code>, <code>nprim4</code> * <code>ngen4</code> respectively) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes a single cartesian four-center integral with interval arithmetic</td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a8dd783ebfe73a83e30dffd1a1241727c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8dd783ebfe73a83e30dffd1a1241727c">&#9670;&nbsp;</a></span>mirp_loop_shell4_d()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void mirp_loop_shell4_d </td>
-          <td>(</td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>integral</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>Z1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>A</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>alpha1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>coeff1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>Z2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>B</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>alpha2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>coeff2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>Z3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>C</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>alpha3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>coeff3</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>Z4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>D</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngen4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>alpha4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>coeff4</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#ab4bde9b22667586d502024f2a015ead3">cb_integral4_single_d</a>&#160;</td>
-          <td class="paramname"><em>cb</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Compute all cartesian integrals of a contracted shell quartet for an integral (four-center, double precision) </p>
-<p>This function takes in a pointer to a function that computes single, primitive cartesian integrals, and uses it to compute all the cartesian components for an contracted shell quartet.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">integral</td><td>Output for the computed integral </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">Z1,Z2,Z3,Z4</td><td>Atomic Z numbers of the centers </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">am1,am2,am3,am4</td><td>Angular momentum for the four-centers </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">A,B,C,D</td><td>XYZ coordinates of the four-centers (each of length 3) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nprim1,nprim2,nprim3,nprim4</td><td>Number of primitive gaussians for each shell </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ngen1,ngen2,ngen3,ngen4</td><td>Number of general contractions for each shell </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">alpha1,alpha2,alpha3,alpha4</td><td>Exponents of the primitive gaussians on the four-centers (of lengths <code>nprim1</code>, <code>nprim2</code>, <code>nprim3</code>, <code>nprim4</code> respectively) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">coeff1,coeff2,coeff3,coeff4</td><td>Coefficients for all primitives and for all general contractions for each shell (of lengths <code>nprim1</code> * <code>ngen1</code>, <code>nprim2</code> * <code>ngen2</code>, <code>nprim3</code> * <code>ngen3</code>, <code>nprim4</code> * <code>ngen4</code> respectively) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes a single cartesian four-center integral with interval arithmetic </td></tr>
   </table>
   </dd>
@@ -1269,7 +1575,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 27 2017 17:00:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 30 2017 10:52:14 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

@@ -96,20 +96,44 @@ Include dependency graph for eri.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a86d500a34c624c2cae56bc25a31b12f3"><td class="memItemLeft" align="right" valign="top"><a id="a86d500a34c624c2cae56bc25a31b12f3"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8c.html#a86d500a34c624c2cae56bc25a31b12f3">UNUSED</a>(x)&#160;&#160;&#160;(void)(x)</td></tr>
-<tr class="memdesc:a86d500a34c624c2cae56bc25a31b12f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mark a variable as unused (prevents compiler warnings) <br /></td></tr>
+<tr class="memitem:a86d500a34c624c2cae56bc25a31b12f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8c.html#a86d500a34c624c2cae56bc25a31b12f3">UNUSED</a>(x)&#160;&#160;&#160;(void)(x)</td></tr>
+<tr class="memdesc:a86d500a34c624c2cae56bc25a31b12f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mark a variable as unused (prevents compiler warnings)  <a href="#a86d500a34c624c2cae56bc25a31b12f3">More...</a><br /></td></tr>
 <tr class="separator:a86d500a34c624c2cae56bc25a31b12f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a7da21e2aff9f6a709df97e6cf528b7c0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8c.html#a7da21e2aff9f6a709df97e6cf528b7c0">mirp_farr</a> (arb_ptr f, int lmn1, int lmn2, arb_t xyz1, arb_t xyz2, slong working_prec)</td></tr>
+<tr class="separator:a7da21e2aff9f6a709df97e6cf528b7c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a019380299267980476c4e2155f98a858"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8c.html#a019380299267980476c4e2155f98a858">mirp_G</a> (arb_t G, arb_t fp, arb_t fq, int np, int nq, int w1, int w2, arb_t gammap, arb_t gammaq, arb_t gammapq, slong working_prec)</td></tr>
+<tr class="separator:a019380299267980476c4e2155f98a858"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7b8bb49e222e68cabbb944474a0e75b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8c.html#ae7b8bb49e222e68cabbb944474a0e75b">mirp_eri_single</a> (arb_t integral, int Z1, const int *lmn1, arb_srcptr A, const arb_t alpha1, int Z2, const int *lmn2, arb_srcptr B, const arb_t alpha2, int Z3, const int *lmn3, arb_srcptr C, const arb_t alpha3, int Z4, const int *lmn4, arb_srcptr D, const arb_t alpha4, slong working_prec)</td></tr>
 <tr class="memdesc:ae7b8bb49e222e68cabbb944474a0e75b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a single cartesian electron repulsion integral (interval arithmetic)  <a href="#ae7b8bb49e222e68cabbb944474a0e75b">More...</a><br /></td></tr>
 <tr class="separator:ae7b8bb49e222e68cabbb944474a0e75b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Kernel for electron repulsion integrals (interval arithmetic) </p>
-</div><h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a86d500a34c624c2cae56bc25a31b12f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86d500a34c624c2cae56bc25a31b12f3">&#9670;&nbsp;</a></span>UNUSED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UNUSED</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(void)(x)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mark a variable as unused (prevents compiler warnings) </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="ae7b8bb49e222e68cabbb944474a0e75b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae7b8bb49e222e68cabbb944474a0e75b">&#9670;&nbsp;</a></span>mirp_eri_single()</h2>
 
@@ -248,10 +272,160 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a7da21e2aff9f6a709df97e6cf528b7c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7da21e2aff9f6a709df97e6cf528b7c0">&#9670;&nbsp;</a></span>mirp_farr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void mirp_farr </td>
+          <td>(</td>
+          <td class="paramtype">arb_ptr&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lmn1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lmn2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_t&#160;</td>
+          <td class="paramname"><em>xyz1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_t&#160;</td>
+          <td class="paramname"><em>xyz2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">slong&#160;</td>
+          <td class="paramname"><em>working_prec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a019380299267980476c4e2155f98a858"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a019380299267980476c4e2155f98a858">&#9670;&nbsp;</a></span>mirp_G()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void mirp_G </td>
+          <td>(</td>
+          <td class="paramtype">arb_t&#160;</td>
+          <td class="paramname"><em>G</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_t&#160;</td>
+          <td class="paramname"><em>fp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_t&#160;</td>
+          <td class="paramname"><em>fq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>np</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_t&#160;</td>
+          <td class="paramname"><em>gammap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_t&#160;</td>
+          <td class="paramname"><em>gammaq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arb_t&#160;</td>
+          <td class="paramname"><em>gammapq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">slong&#160;</td>
+          <td class="paramname"><em>working_prec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 27 2017 17:00:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 30 2017 10:52:14 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

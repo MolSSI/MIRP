@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['print_5fresults',['print_results',['../namespacemirp.html#a201a668b0bb583e336bbf6c87736435e',1,'mirp']]]
+  ['nintegrals',['nintegrals',['../namespacemirp.html#ac7ec7b283a1a72f007fdc0b0ded9377b',1,'mirp']]]
 ];

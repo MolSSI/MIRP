@@ -15,5 +15,7 @@ var searchData=
   ['cmdline_5fget_5fswitch',['cmdline_get_switch',['../namespacemirp.html#a1667b1a3866f9d460c474251c1bf471f',1,'mirp']]],
   ['cmdline_5fhas_5farg',['cmdline_has_arg',['../namespacemirp.html#ada07f7317a5c464516b637ff2ea73581',1,'mirp']]],
   ['coeff',['coeff',['../structmirp_1_1gaussian__shell.html#ad7e8b131609fc381ceaf9e24c2269003',1,'mirp::gaussian_shell::coeff()'],['../structmirp_1_1gaussian__shell__str.html#a9916d650e7a7309dde0b8618c5a6414f',1,'mirp::gaussian_shell_str::coeff()']]],
+  ['compute_5ffarr',['compute_farr',['../eri__d_8c.html#ac4007d4cfa56e538cd1256c64344cc1c',1,'eri_d.c']]],
+  ['conventions_2edox',['conventions.dox',['../conventions_8dox.html',1,'']]],
   ['convert_5fcmdline',['convert_cmdline',['../namespacemirp.html#a5d1e9d32611a0f001ff3af9cf821ec33',1,'mirp']]]
 ];

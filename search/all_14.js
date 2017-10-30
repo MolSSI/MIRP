@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['xyz',['xyz',['../structmirp_1_1gaussian__shell.html#aba1fcbd676eb73311e6470b9bac78a24',1,'mirp::gaussian_shell::xyz()'],['../structmirp_1_1gaussian__shell__str.html#afc9fcf45a438596bfa4bc9f65d4a89b5',1,'mirp::gaussian_shell_str::xyz()'],['../structmirp_1_1gaussian__single__str.html#a743b8f4018133325689bf50b8b5ef643',1,'mirp::gaussian_single_str::xyz()'],['../read__construct__basis_8cpp.html#af94f7e1416eb135f6da6b36c0b8e7e5a',1,'xyz():&#160;read_construct_basis.cpp']]]
+  ['working_5fprec',['working_prec',['../structmirp_1_1integral__single__data.html#a863b495cdb3737fc8e56966abfd24010',1,'mirp::integral_single_data::working_prec()'],['../structmirp_1_1integral__data.html#a4983af1611379ff76ddbfd7d701eef3c',1,'mirp::integral_data::working_prec()'],['../structmirp_1_1boys__data.html#ab31578893b15eb40d6462be3a504c444',1,'mirp::boys_data::working_prec()']]],
+  ['write_5fhexdouble',['write_hexdouble',['../namespacemirp.html#a05562936e5f14fff46fa179684b71fdd',1,'mirp']]]
 ];

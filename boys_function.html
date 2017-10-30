@@ -68,50 +68,50 @@ Basic Theory</h1>
 <p>This is only a brief overview of the Boys function. For more details, see</p>
 <p>The Boys function is defined as</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ F_m(t) = \int_0^1 u^{2m} e^{-tu^2} du \qquad \qquad t \ge 0 \]" src="form_0.png"/>
+<img class="formulaDsp" alt="\[ F_m(t) = \int_0^1 u^{2m} e^{-tu^2} du \qquad \qquad t \ge 0 \]" src="form_8.png"/>
 </p>
-<p>and is related to the gamma function <img class="formulaInl" alt="$\Gamma$" src="form_1.png"/></p>
+<p>and is related to the gamma function <img class="formulaInl" alt="$\Gamma$" src="form_9.png"/></p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ F_m(t) = \frac{e^{-t}}{2} \Gamma\left(m+\frac{1}{2}\right) \sum_{i=0}^{\infty} \frac{t^i}{\Gamma\left(m+i+\frac{3}{2}\right)} \]" src="form_2.png"/>
+<img class="formulaDsp" alt="\[ F_m(t) = \frac{e^{-t}}{2} \Gamma\left(m+\frac{1}{2}\right) \sum_{i=0}^{\infty} \frac{t^i}{\Gamma\left(m+i+\frac{3}{2}\right)} \]" src="form_10.png"/>
 </p>
-<p>and to the lower incomplete gamma function <img class="formulaInl" alt="$\gamma$" src="form_3.png"/></p>
+<p>and to the lower incomplete gamma function <img class="formulaInl" alt="$\gamma$" src="form_11.png"/></p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ F_m(t) = \frac{1}{2t^{m+\frac{1}{2}}} \gamma\left( m+\frac{1}{2}, t\right) \]" src="form_4.png"/>
+<img class="formulaDsp" alt="\[ F_m(t) = \frac{1}{2t^{m+\frac{1}{2}}} \gamma\left( m+\frac{1}{2}, t\right) \]" src="form_12.png"/>
 </p>
 <p>The Boys function has the following downward and upward recurrence relations (respectively)</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} F_m(t) &amp;= \frac{2t F_{m+1}(t) + e^{-t}}{2m+1} \\ F_{m+1}(t) &amp;= \frac{(2m+1)F_m(t) - e^{-t}}{2t} \end{eqnarray*}" src="form_5.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} F_m(t) &amp;= \frac{2t F_{m+1}(t) + e^{-t}}{2m+1} \\ F_{m+1}(t) &amp;= \frac{(2m+1)F_m(t) - e^{-t}}{2t} \end{eqnarray*}" src="form_13.png"/>
 </p>
-<p>It should be noted that under some conditions (small <img class="formulaInl" alt="$t$" src="form_6.png"/>), upwards recurrence is numerically unstable.</p>
+<p>It should be noted that under some conditions (small <img class="formulaInl" alt="$t$" src="form_14.png"/>), upwards recurrence is numerically unstable.</p>
 <p>Lastly, values for <em>m=0</em> and for <em>t=0</em> can be calculated easily</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} F_m(0) &amp;= \frac{1}{2m+1} \\ F_0(t) &amp;= \sqrt{\frac{\pi}{4t}}\mathrm{erf}\left(\sqrt{x}\right) \end{eqnarray*}" src="form_7.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} F_m(0) &amp;= \frac{1}{2m+1} \\ F_0(t) &amp;= \sqrt{\frac{\pi}{4t}}\mathrm{erf}\left(\sqrt{x}\right) \end{eqnarray*}" src="form_15.png"/>
 </p>
-<p>In practice, due to the unbounded nature of <img class="formulaInl" alt="$t$" src="form_6.png"/>, evaluation is usually split into three regimes</p>
+<p>In practice, due to the unbounded nature of <img class="formulaInl" alt="$t$" src="form_14.png"/>, evaluation is usually split into three regimes</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} F_m(t) &amp;\approx&amp; \frac{1}{2m+1} \qquad\qquad t \approx 0 \\ F_m(t) &amp;\approx&amp; \frac{(2m-1)!!}{2^{m+1}} \sqrt{\frac{\pi}{t^{2m+1}}} \qquad \qquad \textrm{large } t \end{eqnarray*}" src="form_8.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} F_m(t) &amp;\approx&amp; \frac{1}{2m+1} \qquad\qquad t \approx 0 \\ F_m(t) &amp;\approx&amp; \frac{(2m-1)!!}{2^{m+1}} \sqrt{\frac{\pi}{t^{2m+1}}} \qquad \qquad \textrm{large } t \end{eqnarray*}" src="form_16.png"/>
 </p>
 <p>with the middle regime being interpolated via Taylor series or Chebyschev polynomials.</p>
 <h1><a class="anchor" id="_boys_calc"></a>
 Accurate Calculation</h1>
 <p>For very precise computation of the Boys function (for example, for higher precision floating point, or for calculating the values for an interpolation grid), a practical (although slow) method is given derived from the formulation given by Shavitt.</p>
-<p>The first step is to approximate the value of the Boys function via the large- <img class="formulaInl" alt="$t$" src="form_6.png"/> approximation:</p>
+<p>The first step is to approximate the value of the Boys function via the large- <img class="formulaInl" alt="$t$" src="form_14.png"/> approximation:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ F_m(t) \approx \frac{(2m-1)!!}{2^{m+1}} \sqrt{\frac{\pi}{t^{2m+1}}} \qquad \qquad \textrm{large } t \]" src="form_9.png"/>
+<img class="formulaDsp" alt="\[ F_m(t) \approx \frac{(2m-1)!!}{2^{m+1}} \sqrt{\frac{\pi}{t^{2m+1}}} \qquad \qquad \textrm{large } t \]" src="form_17.png"/>
 </p>
 <p>Next, the error associated with this approximation can be estimated by the (finite!) sum</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} \Delta F_m(t) &amp;\approx&amp; \frac{e^{-t}}{2t} \sum_{i=1}^{[N]} a_i \\ a_0 &amp;=&amp; 1 \\ a_i &amp;=&amp; \frac{2m-2i+1}{2t}a_{i-1} \end{eqnarray*}" src="form_10.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} \Delta F_m(t) &amp;\approx&amp; \frac{e^{-t}}{2t} \sum_{i=1}^{[N]} a_i \\ a_0 &amp;=&amp; 1 \\ a_i &amp;=&amp; \frac{2m-2i+1}{2t}a_{i-1} \end{eqnarray*}" src="form_18.png"/>
 </p>
-<p>making note of the fact that the summation starts at <img class="formulaInl" alt="$i=1$" src="form_11.png"/>. The summation continues until <img class="formulaInl" alt="$a_{i} &gt; a_{i-1}$" src="form_12.png"/>, at which point the summation will continue to diverge.</p>
-<p>Since it guaranteed that the true error is less than this value, it can then determined if the large- <img class="formulaInl" alt="$t$" src="form_6.png"/> approximation is acceptable. If it is not, then the small- <img class="formulaInl" alt="$t$" src="form_6.png"/> (exact) formulation is used:</p>
+<p>making note of the fact that the summation starts at <img class="formulaInl" alt="$i=1$" src="form_19.png"/>. The summation continues until <img class="formulaInl" alt="$a_{i} &gt; a_{i-1}$" src="form_20.png"/>, at which point the summation will continue to diverge.</p>
+<p>Since it guaranteed that the true error is less than this value, it can then determined if the large- <img class="formulaInl" alt="$t$" src="form_14.png"/> approximation is acceptable. If it is not, then the small- <img class="formulaInl" alt="$t$" src="form_14.png"/> (exact) formulation is used:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{eqnarray*} F_m(t) &amp;=&amp; e^{-t} \frac{1}{2^{m+1}} \sum_{i=1}^{\infty} a_i \\ a_0 &amp;=&amp; 1 \\ a_i &amp;=&amp; \frac{2t}{2m+2i+1}a_{i-1} \end{eqnarray*}" src="form_13.png"/>
+<img class="formulaDsp" alt="\begin{eqnarray*} F_m(t) &amp;=&amp; e^{-t} \frac{1}{2^{m+1}} \sum_{i=1}^{\infty} a_i \\ a_0 &amp;=&amp; 1 \\ a_i &amp;=&amp; \frac{2t}{2m+2i+1}a_{i-1} \end{eqnarray*}" src="form_21.png"/>
 </p>
-<p>again noting that the summation starts at <img class="formulaInl" alt="$i=1$" src="form_11.png"/>.</p>
-<p>The large- <img class="formulaInl" alt="$t$" src="form_6.png"/> approximation can be (conservatively) skipped if <img class="formulaInl" alt="$t &lt; m+\frac{1}{2}$" src="form_14.png"/>, which also prevents a division by zero in the large- <img class="formulaInl" alt="$t$" src="form_6.png"/> approximation if <img class="formulaInl" alt="$t=0$" src="form_15.png"/>.</p>
-<p>By splitting the calculation this way, there are no pre-calculated thresholds (ie, between large- <img class="formulaInl" alt="$t$" src="form_6.png"/> and small- <img class="formulaInl" alt="$t$" src="form_6.png"/> formulae), which would necessarily depend on the value of <img class="formulaInl" alt="$m$" src="form_16.png"/> and the desired precision of the calculation. The downside is that this procedure is quite slow.</p>
-<p>In MIRP, the value of the highest value of <img class="formulaInl" alt="$m$" src="form_16.png"/> is calculated in this fashion, and then downward recurrence is used to obtain the rest.</p>
+<p>again noting that the summation starts at <img class="formulaInl" alt="$i=1$" src="form_19.png"/>.</p>
+<p>The large- <img class="formulaInl" alt="$t$" src="form_14.png"/> approximation can be (conservatively) skipped if <img class="formulaInl" alt="$t &lt; m+\frac{1}{2}$" src="form_22.png"/>, which also prevents a division by zero in the large- <img class="formulaInl" alt="$t$" src="form_14.png"/> approximation if <img class="formulaInl" alt="$t=0$" src="form_23.png"/>.</p>
+<p>By splitting the calculation this way, there are no pre-calculated thresholds (ie, between large- <img class="formulaInl" alt="$t$" src="form_14.png"/> and small- <img class="formulaInl" alt="$t$" src="form_14.png"/> formulae), which would necessarily depend on the value of <img class="formulaInl" alt="$m$" src="form_24.png"/> and the desired precision of the calculation. The downside is that this procedure is quite slow.</p>
+<p>In MIRP, the value of the highest value of <img class="formulaInl" alt="$m$" src="form_24.png"/> is calculated in this fashion, and then downward recurrence is used to obtain the rest.</p>
 <h1><a class="anchor" id="_boys_functions"></a>
 Functions in MIRP</h1>
 <p>In MIRP, the Boys function can be calculated via the following functions:</p>
@@ -124,7 +124,7 @@ Functions in MIRP</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 27 2017 17:00:00 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 30 2017 10:52:14 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
