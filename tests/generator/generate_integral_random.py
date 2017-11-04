@@ -27,11 +27,6 @@ def generate_basis_function():
     with mp.workdps(args.ndigits+4):
         am = random.randint(0, args.max_am)
 
-        # Note - this is not used, but left here
-        # to keep the resulting input equal to the previous versions
-        #Z = random.randint(0, args.max_z)
-        Z = random.randint(0, 30)
-
         x = mp.power(mp.mpf(10), random.uniform(-args.xyz_power, args.xyz_power))
         y = mp.power(mp.mpf(10), random.uniform(-args.xyz_power, args.xyz_power))
         z = mp.power(mp.mpf(10), random.uniform(-args.xyz_power, args.xyz_power))
