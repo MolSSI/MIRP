@@ -22,8 +22,6 @@ extern "C" {
  *
  * \param [out] integral
  *              Resulting integral integral
- * \param [in]  Z1, Z2, Z3, Z4
- *              Atomic Z numbers of the centers (unused in ERI)
  * \param [in]  lmn1,lmn2,lmn3,lmn4
  *              Exponents of x, y, and z that signify angular momentum. Required
  *              to be 3 elements.
@@ -33,10 +31,10 @@ extern "C" {
  *              Exponents of the gaussian on the four-centers
  */
 void mirp_eri_single_d(double * integral,
-                       int Z1, const int * lmn1, const double * A, double alpha1,
-                       int Z2, const int * lmn2, const double * B, double alpha2,
-                       int Z3, const int * lmn3, const double * C, double alpha3,
-                       int Z4, const int * lmn4, const double * D, double alpha4);
+                       const int * lmn1, const double * A, double alpha1,
+                       const int * lmn2, const double * B, double alpha2,
+                       const int * lmn3, const double * C, double alpha3,
+                       const int * lmn4, const double * D, double alpha4);
 
 
 /*! \brief Computes a single cartesian electron repulsion integral
@@ -48,10 +46,10 @@ void mirp_eri_single_d(double * integral,
  *                          in the calculation
  */
 void mirp_eri_single(arb_t integral,
-                     int Z1, const int * lmn1, arb_srcptr A, const arb_t alpha1,
-                     int Z2, const int * lmn2, arb_srcptr B, const arb_t alpha2,
-                     int Z3, const int * lmn3, arb_srcptr C, const arb_t alpha3,
-                     int Z4, const int * lmn4, arb_srcptr D, const arb_t alpha4,
+                     const int * lmn1, arb_srcptr A, const arb_t alpha1,
+                     const int * lmn2, arb_srcptr B, const arb_t alpha2,
+                     const int * lmn3, arb_srcptr C, const arb_t alpha3,
+                     const int * lmn4, arb_srcptr D, const arb_t alpha4,
                      slong working_prec);
 
 
@@ -74,8 +72,6 @@ MIRP_WRAP_SHELL4(eri)
  *
  * \param [out] integrals
  *              Output for the computed integral
- * \param [in]  Z1, Z2, Z3, Z4
- *              Atomic Z numbers of the centers
  * \param [in]  am1,am2,am3,am4
  *              Angular momentum for the four-centers
  * \param [in]  A,B,C,D
@@ -106,8 +102,6 @@ MIRP_WRAP_SHELL4_STR(eri)
  *
  * \param [out] integral
  *              Output for the computed integral
- * \param [in]  Z1, Z2, Z3, Z4
- *              Atomic Z numbers of the centers
  * \param [in]  lmn1,lmn2,lmn3,lmn4
  *              Exponents of x, y, and z that signify angular momentum. Required
  *              to be 3 elements.

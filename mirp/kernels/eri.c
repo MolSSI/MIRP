@@ -10,9 +10,6 @@
 #include "mirp/pragma.h"
 #include <assert.h>
 
-/*! \brief Mark a variable as unused (prevents compiler warnings) */
-#define UNUSED(x) (void)(x)
-
 static void mirp_farr(arb_ptr f,
                       int lmn1, int lmn2,
                       arb_t xyz1, arb_t xyz2,
@@ -103,17 +100,12 @@ static void mirp_G(arb_t G, arb_t fp, arb_t fq,
 }
 
 void mirp_eri_single(arb_t integral,
-                     int Z1, const int * lmn1, arb_srcptr A, const arb_t alpha1,
-                     int Z2, const int * lmn2, arb_srcptr B, const arb_t alpha2,
-                     int Z3, const int * lmn3, arb_srcptr C, const arb_t alpha3,
-                     int Z4, const int * lmn4, arb_srcptr D, const arb_t alpha4,
+                     const int * lmn1, arb_srcptr A, const arb_t alpha1,
+                     const int * lmn2, arb_srcptr B, const arb_t alpha2,
+                     const int * lmn3, arb_srcptr C, const arb_t alpha3,
+                     const int * lmn4, arb_srcptr D, const arb_t alpha4,
                      slong working_prec)
 {
-    UNUSED(Z1);
-    UNUSED(Z2);
-    UNUSED(Z3);
-    UNUSED(Z4);
-
     assert(lmn1[0] >= 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
     assert(lmn2[0] >= 0); assert(lmn2[1] >= 0); assert(lmn2[2] >= 0);
     assert(lmn3[0] >= 0); assert(lmn3[1] >= 0); assert(lmn3[2] >= 0);

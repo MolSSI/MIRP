@@ -68,10 +68,10 @@ void integral4_create_test(const std::string & input_filepath,
         }
 
         cb(integrals,
-           ent.g[0].Z, ent.g[0].am, ABCD[0], ent.g[0].nprim, ent.g[0].ngeneral, alpha[0].data(), coeff[0].data(),
-           ent.g[1].Z, ent.g[1].am, ABCD[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha[1].data(), coeff[1].data(),
-           ent.g[2].Z, ent.g[2].am, ABCD[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha[2].data(), coeff[2].data(),
-           ent.g[3].Z, ent.g[3].am, ABCD[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha[3].data(), coeff[3].data(),
+           ent.g[0].am, ABCD[0], ent.g[0].nprim, ent.g[0].ngeneral, alpha[0].data(), coeff[0].data(),
+           ent.g[1].am, ABCD[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha[1].data(), coeff[1].data(),
+           ent.g[2].am, ABCD[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha[2].data(), coeff[2].data(),
+           ent.g[3].am, ABCD[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha[3].data(), coeff[3].data(),
            working_prec);
 
 
@@ -130,10 +130,10 @@ long integral4_verify_test(const std::string & filepath,
         }
 
         cb(integrals,
-           ent.g[0].Z, ent.g[0].am, ABCD[0], ent.g[0].nprim, ent.g[0].ngeneral, alpha[0].data(), coeff[0].data(),
-           ent.g[1].Z, ent.g[1].am, ABCD[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha[1].data(), coeff[1].data(),
-           ent.g[2].Z, ent.g[2].am, ABCD[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha[2].data(), coeff[2].data(),
-           ent.g[3].Z, ent.g[3].am, ABCD[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha[3].data(), coeff[3].data(),
+           ent.g[0].am, ABCD[0], ent.g[0].nprim, ent.g[0].ngeneral, alpha[0].data(), coeff[0].data(),
+           ent.g[1].am, ABCD[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha[1].data(), coeff[1].data(),
+           ent.g[2].am, ABCD[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha[2].data(), coeff[2].data(),
+           ent.g[3].am, ABCD[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha[3].data(), coeff[3].data(),
            working_prec);
 
 
@@ -204,10 +204,10 @@ long integral4_verify_test_d(const std::string & filepath,
         }
 
         cb(integrals.data(),
-           ent.g[0].Z, ent.g[0].am, ABCD[0], ent.g[0].nprim, ent.g[0].ngeneral, alpha[0].data(), coeff[0].data(),
-           ent.g[1].Z, ent.g[1].am, ABCD[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha[1].data(), coeff[1].data(),
-           ent.g[2].Z, ent.g[2].am, ABCD[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha[2].data(), coeff[2].data(),
-           ent.g[3].Z, ent.g[3].am, ABCD[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha[3].data(), coeff[3].data());
+           ent.g[0].am, ABCD[0], ent.g[0].nprim, ent.g[0].ngeneral, alpha[0].data(), coeff[0].data(),
+           ent.g[1].am, ABCD[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha[1].data(), coeff[1].data(),
+           ent.g[2].am, ABCD[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha[2].data(), coeff[2].data(),
+           ent.g[3].am, ABCD[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha[3].data(), coeff[3].data());
 
         bool failed_shell = false;
         for(size_t i = 0; i < nint; i++)
@@ -223,8 +223,7 @@ long integral4_verify_test_d(const std::string & filepath,
                 std::cout << "Entry failed test:\n";
                 for(int j = 0; j < 4; j++)
                 {
-                    std::cout << ent.g[j].Z << " "
-                              << ent.g[j].am << " "
+                    std::cout << ent.g[j].am << " "
                               << ent.g[j].xyz[0] << " "
                               << ent.g[j].xyz[1] << " "
                               << ent.g[j].xyz[2] << "\n";
@@ -309,17 +308,17 @@ long integral4_verify_test_exact(const std::string & filepath,
         }
 
         cb(integrals.data(),
-           ent.g[0].Z, ent.g[0].am, ABCD[0], ent.g[0].nprim, ent.g[0].ngeneral, alpha[0].data(), coeff[0].data(),
-           ent.g[1].Z, ent.g[1].am, ABCD[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha[1].data(), coeff[1].data(),
-           ent.g[2].Z, ent.g[2].am, ABCD[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha[2].data(), coeff[2].data(),
-           ent.g[3].Z, ent.g[3].am, ABCD[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha[3].data(), coeff[3].data());
+           ent.g[0].am, ABCD[0], ent.g[0].nprim, ent.g[0].ngeneral, alpha[0].data(), coeff[0].data(),
+           ent.g[1].am, ABCD[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha[1].data(), coeff[1].data(),
+           ent.g[2].am, ABCD[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha[2].data(), coeff[2].data(),
+           ent.g[3].am, ABCD[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha[3].data(), coeff[3].data());
 
         /* Compute using very high precision */
         cb_mp(integrals_mp,
-              ent.g[0].Z, ent.g[0].am, ABCD_mp[0], ent.g[0].nprim, ent.g[0].ngeneral, alpha_mp[0], coeff_mp[0],
-              ent.g[1].Z, ent.g[1].am, ABCD_mp[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha_mp[1], coeff_mp[1],
-              ent.g[2].Z, ent.g[2].am, ABCD_mp[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha_mp[2], coeff_mp[2],
-              ent.g[3].Z, ent.g[3].am, ABCD_mp[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha_mp[3], coeff_mp[3],
+              ent.g[0].am, ABCD_mp[0], ent.g[0].nprim, ent.g[0].ngeneral, alpha_mp[0], coeff_mp[0],
+              ent.g[1].am, ABCD_mp[1], ent.g[1].nprim, ent.g[1].ngeneral, alpha_mp[1], coeff_mp[1],
+              ent.g[2].am, ABCD_mp[2], ent.g[2].nprim, ent.g[2].ngeneral, alpha_mp[2], coeff_mp[2],
+              ent.g[3].am, ABCD_mp[3], ent.g[3].nprim, ent.g[3].ngeneral, alpha_mp[3], coeff_mp[3],
               512);
 
 
@@ -349,8 +348,7 @@ long integral4_verify_test_exact(const std::string & filepath,
                 std::cout << "Entry failed test:\n";
                 for(int j = 0; j < 4; j++)
                 {
-                    std::cout << ent.g[j].Z << " "
-                              << ent.g[j].am << " "
+                    std::cout << ent.g[j].am << " "
                               << ent.g[j].xyz[0] << " "
                               << ent.g[j].xyz[1] << " "
                               << ent.g[j].xyz[2] << "\n";

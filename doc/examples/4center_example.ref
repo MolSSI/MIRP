@@ -6,10 +6,9 @@
 31
 
 # First shell
-# 8 = Oxygen
 # 0 8 2 = s shell, 8 primitives, 2 general contractions
 # Then, the three coordinates (in bohr)
-8 0 8 2 0x0p+0 0x0p+0 0x1.ebe5b05b479ebp-3
+0 8 2 0x0p+0 0x0p+0 0x1.ebe5b05b479ebp-3
 
 # Exponents
 0x1.df1p+13 0x1.1f6p+11 0x1.0533333333333p+9 0x1.269999999999ap+7 0x1.7c66666666666p+5 0x1.0c28f5c28f5c3p+4 0x1.8d3f7ced91687p+2 0x1.605bc01a36e2fp-1
@@ -20,21 +19,20 @@
 -0x1.e2584f4c6e6dap-14 -0x1.d53cddd6e04cp-11 -0x1.2fd32c625e99fp-8 -0x1.32c625e99e94bp-6 -0x1.deedcc20d562ap-5 -0x1.1779e9d0e992p-3 -0x1.67ea5f84cad58p-3 0x1.34f3343fa2ad4p-1
 
 # Second shell
-# 8 = Oxygen
 # 0 1 1 = S shell, 1 primitive, 1 general contraction
 # Then, the three coordinates (in bohr)
-8 0 1 1 0x0p+0 0x0p+0 0x1.ebe5b05b479ebp-3
+0 1 1 0x0p+0 0x0p+0 0x1.ebe5b05b479ebp-3
 0x1.c083126e978d5p+0
 0x1p+0
 
 # Etc...
-8 0 1 1 0x0p+0 0x0p+0 0x1.ebe5b05b479ebp-3
+0 1 1 0x0p+0 0x0p+0 0x1.ebe5b05b479ebp-3
 0x1.e83e425aee632p-3
 0x1p+0
-8 0 1 1 0x0p+0 0x0p+0 0x1.ebe5b05b479ebp-3
+0 1 1 0x0p+0 0x0p+0 0x1.ebe5b05b479ebp-3
 0x1.2e1ef73c0c1fdp-4
 0x1p+0
-8 1 3 1 0x0p+0 0x0p+0 0x1.ebe5b05b479ebp-3
+1 3 1 0x0p+0 0x0p+0 0x1.ebe5b05b479ebp-3
 0x1.13ae147ae147bp+5 0x1.efef9db22d0e5p+2 0x1.23d70a3d70a3dp+1
 0x1.04f6dfc5cdd51p-6 0x1.9888f861a60d4p-4 0x1.3df19d66adb4p-2
 # <truncated for brevity>

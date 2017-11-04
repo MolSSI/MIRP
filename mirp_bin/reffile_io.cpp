@@ -37,7 +37,7 @@ void reffile_write_basis(const std::vector<gaussian_shell> & shells, std::ostrea
 
     for(const auto & s : shells)
     {
-        fs << s.Z << " " << s.am << " " << s.nprim << " " << s.ngeneral << " ";
+        fs << s.am << " " << s.nprim << " " << s.ngeneral << " ";
 
         write_hexdouble(s.xyz[0], fs);
         fs << " ";
@@ -85,7 +85,7 @@ std::vector<gaussian_shell> reffile_read_basis(std::istream & fs)
         auto & s = shells[i];
 
         file_skip(fs, '#');
-        fs >> s.Z >> s.am >> s.nprim >> s.ngeneral;
+        fs >> s.am >> s.nprim >> s.ngeneral;
 
         file_skip(fs, '#');
         s.xyz[0] = read_hexdouble(fs);

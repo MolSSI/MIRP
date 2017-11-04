@@ -9,7 +9,6 @@ from common import print_integral_input
 parser = argparse.ArgumentParser()
 parser.add_argument("--filename",    type=str, required=True, help="Output file name")
 parser.add_argument("--max-am",      type=int, required=True, help="Maximum AM of the basis functions")
-parser.add_argument("--max-z",       type=int, required=True, help="Maximum atomic Z-number for a center")
 parser.add_argument("--max-nprim",   type=int, required=True, help="Maximum number of primitives in a shell")
 parser.add_argument("--max-ngen",    type=int, required=True, help="Maximum number of general contractions a shell")
 parser.add_argument("--alpha-power", type=int, required=True, help="Maximum power of the exponent (range will be 1e-x to 1e+x)")
@@ -27,7 +26,11 @@ random.seed(args.seed, version=2)
 def generate_basis_function():
     with mp.workdps(args.ndigits+4):
         am = random.randint(0, args.max_am)
-        Z = random.randint(0, args.max_z)
+
+        # Note - this is not used, but left here
+        # to keep the resulting input equal to the previous versions
+        #Z = random.randint(0, args.max_z)
+        Z = random.randint(0, 30)
 
         x = mp.power(mp.mpf(10), random.uniform(-args.xyz_power, args.xyz_power))
         y = mp.power(mp.mpf(10), random.uniform(-args.xyz_power, args.xyz_power))
@@ -64,7 +67,7 @@ def generate_basis_function():
         ngen = len(coeffs)
 
 
-        return (Z, am, nprim, ngen, x, y, z, alphas, coeffs)
+        return (am, nprim, ngen, x, y, z, alphas, coeffs)
 
 
 # Write out the file

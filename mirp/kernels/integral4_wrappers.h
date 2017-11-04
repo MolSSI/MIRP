@@ -21,8 +21,6 @@ extern "C" {
  *
  * \param [out] integrals
  *              Output for the computed integral
- * \param [in]  Z1, Z2, Z3, Z4
- *              Atomic Z numbers of the centers
  * \param [in]  am1,am2,am3,am4
  *              Angular momentum for the four-centers
  * \param [in]  A,B,C,D
@@ -43,10 +41,10 @@ extern "C" {
  *              with interval arithmetic
  */
 void mirp_integral4_d(double * integrals,
-                      int Z1, int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
-                      int Z2, int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
-                      int Z3, int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
-                      int Z4, int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
+                      int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
+                      int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
+                      int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
+                      int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
                       cb_integral4_single_d cb);
 
 
@@ -60,10 +58,10 @@ void mirp_integral4_d(double * integrals,
  *              in the calculation
  */
 void mirp_integral4(arb_ptr integrals,
-                    int Z1, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1,
-                    int Z2, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2,
-                    int Z3, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3,
-                    int Z4, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4,
+                    int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1,
+                    int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2,
+                    int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3,
+                    int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4,
                     slong working_prec, cb_integral4_single cb);
 
 
@@ -73,8 +71,6 @@ void mirp_integral4(arb_ptr integrals,
  * 
  * \param [out] integral
  *              Output for the computed integral
- * \param [in]  Z1, Z2, Z3, Z4
- *              Atomic Z numbers of the centers
  * \param [in]  lmn1,lmn2,lmn3,lmn4
  *              Exponents of x, y, and z that signify angular momentum. Required
  *              to be 3 elements.
@@ -92,10 +88,10 @@ void mirp_integral4(arb_ptr integrals,
  *              in the calculation
  */
 void mirp_integral4_single_str(arb_t integral,
-                               int Z1, const int * lmn1, const char ** A, const char * alpha1,
-                               int Z2, const int * lmn2, const char ** B, const char * alpha2,
-                               int Z3, const int * lmn3, const char ** C, const char * alpha3,
-                               int Z4, const int * lmn4, const char ** D, const char * alpha4,
+                               const int * lmn1, const char ** A, const char * alpha1,
+                               const int * lmn2, const char ** B, const char * alpha2,
+                               const int * lmn3, const char ** C, const char * alpha3,
+                               const int * lmn4, const char ** D, const char * alpha4,
                                slong working_prec, cb_integral4_single cb);
 
 
@@ -105,8 +101,6 @@ void mirp_integral4_single_str(arb_t integral,
  *
  * \param [out] integrals
  *              Output for the computed integral
- * \param [in]  Z1, Z2, Z3, Z4
- *              Atomic Z numbers of the centers
  * \param [in]  am1,am2,am3,am4
  *              Angular momentum for the four-centers
  * \param [in]  A,B,C,D
@@ -130,10 +124,10 @@ void mirp_integral4_single_str(arb_t integral,
  *              with interval arithmetic
  */
 void mirp_integral4_str(arb_ptr integrals,
-                        int Z1, int am1, const char ** A, int nprim1, int ngen1, const char ** alpha1, const char ** coeff1,
-                        int Z2, int am2, const char ** B, int nprim2, int ngen2, const char ** alpha2, const char ** coeff2,
-                        int Z3, int am3, const char ** C, int nprim3, int ngen3, const char ** alpha3, const char ** coeff3,
-                        int Z4, int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4,
+                        int am1, const char ** A, int nprim1, int ngen1, const char ** alpha1, const char ** coeff1,
+                        int am2, const char ** B, int nprim2, int ngen2, const char ** alpha2, const char ** coeff2,
+                        int am3, const char ** C, int nprim3, int ngen3, const char ** alpha3, const char ** coeff3,
+                        int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4,
                         slong working_prec, cb_integral4 cb);
 
 
@@ -146,8 +140,6 @@ void mirp_integral4_str(arb_ptr integrals,
  *
  * \param [out] integral
  *              Output for the computed integral
- * \param [in]  Z1, Z2, Z3, Z4
- *              Atomic Z numbers of the centers
  * \param [in]  lmn1,lmn2,lmn3,lmn4
  *              Exponents of x, y, and z that signify angular momentum. Required
  *              to be 3 elements.
@@ -160,10 +152,10 @@ void mirp_integral4_str(arb_ptr integrals,
  *              with interval arithmetic
  */
 void mirp_integral4_single_exact(double * integral,
-                                 int Z1, const int * lmn1, const double * A, double alpha1,
-                                 int Z2, const int * lmn2, const double * B, double alpha2,
-                                 int Z3, const int * lmn3, const double * C, double alpha3,
-                                 int Z4, const int * lmn4, const double * D, double alpha4,
+                                 const int * lmn1, const double * A, double alpha1,
+                                 const int * lmn2, const double * B, double alpha2,
+                                 const int * lmn3, const double * C, double alpha3,
+                                 const int * lmn4, const double * D, double alpha4,
                                  cb_integral4_single cb);
 
 
@@ -176,8 +168,6 @@ void mirp_integral4_single_exact(double * integral,
  *
  * \param [out] integrals
  *              Output for the computed integrals
- * \param [in]  Z1, Z2, Z3, Z4
- *              Atomic Z numbers of the centers
  * \param [in]  am1,am2,am3,am4
  *              Angular momentum for the four-centers
  * \param [in]  A,B,C,D
@@ -198,10 +188,10 @@ void mirp_integral4_single_exact(double * integral,
  *              with interval arithmetic
  */
 void mirp_integral4_exact(double * integrals,
-                          int Z1, int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
-                          int Z2, int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
-                          int Z3, int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
-                          int Z4, int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
+                          int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
+                          int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
+                          int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
+                          int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
                           cb_integral4 cb);
 
 
@@ -218,17 +208,17 @@ void mirp_integral4_exact(double * integrals,
 #define MIRP_WRAP_SHELL4(name) \
     static inline \
     void mirp_##name(arb_t integrals, \
-                     int Z1, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, \
-                     int Z2, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, \
-                     int Z3, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, \
-                     int Z4, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, \
+                     int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, \
+                     int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, \
+                     int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, \
+                     int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, \
                      slong working_prec) \
     { \
         mirp_integral4(integrals, \
-                       Z1, am1, A, nprim1, ngen1, alpha1, coeff1, \
-                       Z2, am2, B, nprim2, ngen2, alpha2, coeff2, \
-                       Z3, am3, C, nprim3, ngen3, alpha3, coeff3, \
-                       Z4, am4, D, nprim4, ngen4, alpha4, coeff4, \
+                       am1, A, nprim1, ngen1, alpha1, coeff1, \
+                       am2, B, nprim2, ngen2, alpha2, coeff2, \
+                       am3, C, nprim3, ngen3, alpha3, coeff3, \
+                       am4, D, nprim4, ngen4, alpha4, coeff4, \
                        working_prec, mirp_##name##_single); \
     }
 
@@ -246,16 +236,16 @@ void mirp_integral4_exact(double * integrals,
 #define MIRP_WRAP_SHELL4_D(name) \
     static inline \
     void mirp_##name##_d(double * integrals, \
-                         int Z1, int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1, \
-                         int Z2, int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2, \
-                         int Z3, int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3, \
-                         int Z4, int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4) \
+                         int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1, \
+                         int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2, \
+                         int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3, \
+                         int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4) \
     { \
         mirp_integral4_d(integrals, \
-                         Z1, am1, A, nprim1, ngen1, alpha1, coeff1, \
-                         Z2, am2, B, nprim2, ngen2, alpha2, coeff2, \
-                         Z3, am3, C, nprim3, ngen3, alpha3, coeff3, \
-                         Z4, am4, D, nprim4, ngen4, alpha4, coeff4, \
+                         am1, A, nprim1, ngen1, alpha1, coeff1, \
+                         am2, B, nprim2, ngen2, alpha2, coeff2, \
+                         am3, C, nprim3, ngen3, alpha3, coeff3, \
+                         am4, D, nprim4, ngen4, alpha4, coeff4, \
                          mirp_##name##_single_d); \
     }
 
@@ -274,17 +264,17 @@ void mirp_integral4_exact(double * integrals,
 #define MIRP_WRAP_SINGLE4_STR(name) \
     static inline \
     void mirp_##name##_single_str(arb_t integral, \
-                                  int Z1, const int * lmn1, const char ** A, const char * alpha1, \
-                                  int Z2, const int * lmn2, const char ** B, const char * alpha2, \
-                                  int Z3, const int * lmn3, const char ** C, const char * alpha3, \
-                                  int Z4, const int * lmn4, const char ** D, const char * alpha4, \
+                                  const int * lmn1, const char ** A, const char * alpha1, \
+                                  const int * lmn2, const char ** B, const char * alpha2, \
+                                  const int * lmn3, const char ** C, const char * alpha3, \
+                                  const int * lmn4, const char ** D, const char * alpha4, \
                                   slong working_prec) \
     { \
         mirp_integral4_single_str(integral, \
-                                  Z1, lmn1, A, alpha1, \
-                                  Z2, lmn2, B, alpha2, \
-                                  Z3, lmn3, C, alpha3, \
-                                  Z4, lmn4, D, alpha4, \
+                                  lmn1, A, alpha1, \
+                                  lmn2, B, alpha2, \
+                                  lmn3, C, alpha3, \
+                                  lmn4, D, alpha4, \
                                   working_prec, \
                                   mirp_##name##_single); \
     }
@@ -305,17 +295,17 @@ void mirp_integral4_exact(double * integrals,
 #define MIRP_WRAP_SHELL4_STR(name) \
     static inline \
     void mirp_##name##_str(arb_ptr integrals, \
-                           int Z1, int am1, const char ** A, int nprim1, int ngen1, const char ** alpha1, const char ** coeff1, \
-                           int Z2, int am2, const char ** B, int nprim2, int ngen2, const char ** alpha2, const char ** coeff2, \
-                           int Z3, int am3, const char ** C, int nprim3, int ngen3, const char ** alpha3, const char ** coeff3, \
-                           int Z4, int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4, \
+                           int am1, const char ** A, int nprim1, int ngen1, const char ** alpha1, const char ** coeff1, \
+                           int am2, const char ** B, int nprim2, int ngen2, const char ** alpha2, const char ** coeff2, \
+                           int am3, const char ** C, int nprim3, int ngen3, const char ** alpha3, const char ** coeff3, \
+                           int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4, \
                            slong working_prec) \
     { \
         mirp_integral4_str(integrals, \
-                           Z1, am1, A, nprim1, ngen1, alpha1, coeff1, \
-                           Z2, am2, B, nprim2, ngen2, alpha2, coeff2, \
-                           Z3, am3, C, nprim3, ngen3, alpha3, coeff3, \
-                           Z4, am4, D, nprim4, ngen4, alpha4, coeff4, \
+                           am1, A, nprim1, ngen1, alpha1, coeff1, \
+                           am2, B, nprim2, ngen2, alpha2, coeff2, \
+                           am3, C, nprim3, ngen3, alpha3, coeff3, \
+                           am4, D, nprim4, ngen4, alpha4, coeff4, \
                            working_prec, \
                            mirp_##name); \
     }
@@ -336,16 +326,16 @@ void mirp_integral4_exact(double * integrals,
 #define MIRP_WRAP_SINGLE4_EXACT(name) \
     static inline \
     void mirp_##name##_single_exact(double * integral, \
-                                    int Z1, const int * lmn1, const double * A, double alpha1, \
-                                    int Z2, const int * lmn2, const double * B, double alpha2, \
-                                    int Z3, const int * lmn3, const double * C, double alpha3, \
-                                    int Z4, const int * lmn4, const double * D, double alpha4) \
+                                    const int * lmn1, const double * A, double alpha1, \
+                                    const int * lmn2, const double * B, double alpha2, \
+                                    const int * lmn3, const double * C, double alpha3, \
+                                    const int * lmn4, const double * D, double alpha4) \
     { \
         mirp_integral4_single_exact(integral, \
-                                    Z1, lmn1, A, alpha1, \
-                                    Z2, lmn2, B, alpha2, \
-                                    Z3, lmn3, C, alpha3, \
-                                    Z4, lmn4, D, alpha4, \
+                                    lmn1, A, alpha1, \
+                                    lmn2, B, alpha2, \
+                                    lmn3, C, alpha3, \
+                                    lmn4, D, alpha4, \
                                     mirp_##name##_single); \
     }
 
@@ -363,16 +353,16 @@ void mirp_integral4_exact(double * integrals,
 #define MIRP_WRAP_SHELL4_EXACT(name) \
     static inline \
     void mirp_##name##_exact(double * integrals, \
-                             int Z1, int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1, \
-                             int Z2, int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2, \
-                             int Z3, int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3, \
-                             int Z4, int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4) \
+                             int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1, \
+                             int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2, \
+                             int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3, \
+                             int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4) \
     { \
         mirp_integral4_exact(integrals, \
-                             Z1, am1, A, nprim1, ngen1, alpha1, coeff1, \
-                             Z2, am2, B, nprim2, ngen2, alpha2, coeff2, \
-                             Z3, am3, C, nprim3, ngen3, alpha3, coeff3, \
-                             Z4, am4, D, nprim4, ngen4, alpha4, coeff4, \
+                             am1, A, nprim1, ngen1, alpha1, coeff1, \
+                             am2, B, nprim2, ngen2, alpha2, coeff2, \
+                             am3, C, nprim3, ngen3, alpha3, coeff3, \
+                             am4, D, nprim4, ngen4, alpha4, coeff4, \
                              mirp_##name); \
     }
 

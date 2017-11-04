@@ -92,8 +92,7 @@ integral_single_data testfile_read_integral_single(const std::string & filepath,
 
             gaussian_single_str g;
 
-            infile >> g.Z
-                   >> g.lmn[0] >> g.lmn[1] >> g.lmn[2]
+            infile >> g.lmn[0] >> g.lmn[1] >> g.lmn[2]
                    >> g.xyz[0] >> g.xyz[1] >> g.xyz[2]
                    >> g.alpha;
  
@@ -159,8 +158,7 @@ void testfile_write_integral_single(const std::string & filepath, const integral
     {
         for(const auto & g : ent.g)
         {
-            outfile << g.Z << " "
-                    << g.lmn[0] << " " << g.lmn[1] << " " << g.lmn[2] << " "
+            outfile << g.lmn[0] << " " << g.lmn[1] << " " << g.lmn[2] << " "
                     << g.xyz[0] << " " << g.xyz[1] << " " << g.xyz[2] << " "
                     << g.alpha << "\n";
         }
@@ -250,7 +248,7 @@ integral_data testfile_read_integral(const std::string & filepath,
             } 
 
             gaussian_shell_str g;
-            infile >> g.Z >> g.am >> g.nprim >> g.ngeneral
+            infile >> g.am >> g.nprim >> g.ngeneral
                    >> g.xyz[0] >> g.xyz[1] >> g.xyz[2];
 
             if(infile.bad() || infile.fail())
@@ -354,7 +352,7 @@ void testfile_write_integral(const std::string & filepath, const integral_data &
     {
         for(const auto & g : ent.g)
         {
-            outfile << g.Z << " " << g.am << " " << g.nprim << " " << g.ngeneral << " "
+            outfile << g.am << " " << g.nprim << " " << g.ngeneral << " "
                     << g.xyz[0] << " " << g.xyz[1] << " " << g.xyz[2] << "\n";
 
             for(int i = 0; i < g.nprim; i++)

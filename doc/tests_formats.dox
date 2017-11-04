@@ -42,12 +42,11 @@ a specified number of centers (ie, eri = 4 center, overlap = 2 center).
 
 Each shell contains the following information (in order)
 
-  1. The Z number (1 = H, 8 = O, etc)
-  2. The angular momentum (integer)
-  3. The number of primitives in the shell
-  4. The number of general contractions
-  5. The coordinates (in bohr)
-  6. For each primitive, the exponent and the contraction coefficients for each general contraction
+  1. The angular momentum (integer)
+  2. The number of primitives in the shell
+  3. The number of general contractions
+  4. The coordinates (in bohr)
+  5. For each primitive, the exponent and the contraction coefficients for each general contraction
   
 For the test data file, the first line contains the number of tests, number of significant figures,
 and the working precision used to compute the integrals. After specifying the shells, the
@@ -71,11 +70,9 @@ For an input, the first line is again the number of tests. Then, there are block
 of inputs containing information for a single cartesian integral, for the specified
 number of centers.
 
-  1. The Z number (1 = H, 8 = O, etc)
-  2. Values of i,j,k (exponents of x,y,z which control the cartesian component)
-  3. Coordinates (in borh)
-  4. Exponent of the primitive
-
+  1. Values of i,j,k (exponents of x,y,z which control the cartesian component)
+  2. Coordinates (in borh)
+  3. Exponent of the primitive
 The ijk specify which cartesian component that center is (for example, ijk=(1,2,0) is is a fxyy orbital).
 
 Similar to the general integrals, the test data file is similar to the input file, except
@@ -100,11 +97,10 @@ Reference files are printed using hex-float for floating point precision, so the
 The first section of the file describes the basis set. First, the number of shells is printed.
 Then, the data for each shell is provided.
 
-  1. The Z number (1 = H, 8 = O, etc)
-  2. The angular momentum (integer)
-  3. The number of primitives in the shell
-  4. The number of general contractions
-  5. The coordinates (in bohr)
+  1. The angular momentum (integer)
+  2. The number of primitives in the shell
+  3. The number of general contractions
+  4. The coordinates (in bohr)
 
 The next line contains all the primitives. Then, for each general contraction, the coefficients
 for all the primitives are printed (each general contraction on a separate line).

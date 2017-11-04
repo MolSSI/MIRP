@@ -45,13 +45,12 @@ with open(args.filename, 'w') as f:
                 ntet.append(idx)
 
                 b = basis[idx]
-                Z = z_map[b[0][0].lower()]
                 am = b[1]['am']
                 nprim = b[1]['nprim']
                 ngen = b[1]['ngeneral']
                 alpha = b[1]['alpha']
                 coeff = b[1]['coeff']
-                entry.append((Z, am, nprim, ngen, *b[0][1:], alpha, coeff))
+                entry.append((am, nprim, ngen, *b[0][1:], alpha, coeff))
 
                 
             if not ntet in created_ntets:

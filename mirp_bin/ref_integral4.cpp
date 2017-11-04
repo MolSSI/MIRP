@@ -64,10 +64,10 @@ void integral4_create_reference(const std::string & xyz_filepath,
         integrals.resize(nintegrals);
 
         cb(integrals.data(),
-           s1.Z, s1.am, s1.xyz.data(), s1.nprim, s1.ngeneral, s1.alpha.data(), s1.coeff.data(),
-           s2.Z, s2.am, s2.xyz.data(), s2.nprim, s2.ngeneral, s2.alpha.data(), s2.coeff.data(),
-           s3.Z, s3.am, s3.xyz.data(), s3.nprim, s3.ngeneral, s3.alpha.data(), s3.coeff.data(),
-           s4.Z, s4.am, s4.xyz.data(), s4.nprim, s4.ngeneral, s4.alpha.data(), s4.coeff.data());
+           s1.am, s1.xyz.data(), s1.nprim, s1.ngeneral, s1.alpha.data(), s1.coeff.data(),
+           s2.am, s2.xyz.data(), s2.nprim, s2.ngeneral, s2.alpha.data(), s2.coeff.data(),
+           s3.am, s3.xyz.data(), s3.nprim, s3.ngeneral, s3.alpha.data(), s3.coeff.data(),
+           s4.am, s4.xyz.data(), s4.nprim, s4.ngeneral, s4.alpha.data(), s4.coeff.data());
 
         fs << p << " " << q << " " << r << " " << s;
         for(size_t i = 0; i < nintegrals; i++)
@@ -121,10 +121,10 @@ long integral4_test_reference(const std::string & ref_filepath,
             integrals_file[i] = read_hexdouble(fs);
 
         cb(integrals.data(),
-           s1.Z, s1.am, s1.xyz.data(), s1.nprim, s1.ngeneral, s1.alpha.data(), s1.coeff.data(),
-           s2.Z, s2.am, s2.xyz.data(), s2.nprim, s2.ngeneral, s2.alpha.data(), s2.coeff.data(),
-           s3.Z, s3.am, s3.xyz.data(), s3.nprim, s3.ngeneral, s3.alpha.data(), s3.coeff.data(),
-           s4.Z, s4.am, s4.xyz.data(), s4.nprim, s4.ngeneral, s4.alpha.data(), s4.coeff.data());
+           s1.am, s1.xyz.data(), s1.nprim, s1.ngeneral, s1.alpha.data(), s1.coeff.data(),
+           s2.am, s2.xyz.data(), s2.nprim, s2.ngeneral, s2.alpha.data(), s2.coeff.data(),
+           s3.am, s3.xyz.data(), s3.nprim, s3.ngeneral, s3.alpha.data(), s3.coeff.data(),
+           s4.am, s4.xyz.data(), s4.nprim, s4.ngeneral, s4.alpha.data(), s4.coeff.data());
 
         for(size_t i = 0; i < nintegrals; i++)
         {
