@@ -20,7 +20,6 @@ args = parser.parse_args()
 
 random.seed(args.seed, version=2)
 
-# Write out the file
 with open(args.filename, 'w') as f:
     f.write("# THIS FILE IS GENERATED VIA A SCRIPT. DO NOT EDIT\n")
     f.write("#\n")
