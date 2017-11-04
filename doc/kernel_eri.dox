@@ -7,13 +7,11 @@ via the following functions:
 
 - Single Integrals
   - \ref mirp_eri_single
-  - \ref mirp_eri_single_d
   - \ref mirp_eri_single_str
   - \ref mirp_eri_single_exact
 
 - Contracted Shells
   - \ref mirp_eri
-  - \ref mirp_eri_d
   - \ref mirp_eri_str
   - \ref mirp_eri_exact
 

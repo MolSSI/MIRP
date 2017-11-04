@@ -13,7 +13,7 @@ extern "C" {
 
 
 /*! \brief Compute all cartesian integrals of a contracted shell quartet
- *         for an integral (four-center, double precision)
+ *         for an integral (four-center, interval arithmetic)
  *
  * This function takes in a pointer to a function that computes single,
  * primitive cartesian integrals, and uses it to compute all the cartesian
@@ -39,20 +39,6 @@ extern "C" {
  * \param [in]  cb
  *              Function that computes a single cartesian four-center integral
  *              with interval arithmetic
- */
-void mirp_integral4_d(double * integrals,
-                      int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
-                      int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
-                      int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
-                      int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
-                      cb_integral4_single_d cb);
-
-
-/*! \brief Compute all cartesian integrals of a contracted shell quartet
- *         for an integral (four-center, interval arithmetic)
- *
- * \copydetails mirp_integral4_d
- *
  * \param [in]  working_prec
  *              The working precision (binary digits/bits) to use
  *              in the calculation
@@ -221,34 +207,6 @@ void mirp_integral4_exact(double * integrals,
                        am4, D, nprim4, ngen4, alpha4, coeff4, \
                        working_prec, mirp_##name##_single); \
     }
-
-
-/*! \brief Create a function that computes all cartesian integrals
- *         of a contracted shell quartet (four-center, double precision)
- *
- *  A function computing single cartesian integrals in double precision
- *  is expected to exist and be named `mirp_{name}_single_d`
- *
- *  The created function is named `mirp_{name}_d`.
- *
- *  \sa mirp_integral4_d
- */
-#define MIRP_WRAP_SHELL4_D(name) \
-    static inline \
-    void mirp_##name##_d(double * integrals, \
-                         int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1, \
-                         int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2, \
-                         int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3, \
-                         int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4) \
-    { \
-        mirp_integral4_d(integrals, \
-                         am1, A, nprim1, ngen1, alpha1, coeff1, \
-                         am2, B, nprim2, ngen2, alpha2, coeff2, \
-                         am3, C, nprim3, ngen3, alpha3, coeff3, \
-                         am4, D, nprim4, ngen4, alpha4, coeff4, \
-                         mirp_##name##_single_d); \
-    }
-
 
 
 /*! \brief Create a function that computes single cartesian integrals

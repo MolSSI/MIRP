@@ -16,7 +16,20 @@
 /*! \brief Compute all cartesian components of a single primitive integral
  *         (interval arithmetic)
  *
- * \copydetails mirp_cartloop4_d
+ * The \p integral buffer is expected to be able to hold all primitive integrals
+ * (ie, it can hold ncart(am1) * ncart(am2) * ncart(am3) * ncart(am4) elements).
+ *
+ * \param [out] integrals
+ *              Resulting integral integral
+ * \param [in]  am1,am2,am3,am4
+ *              Angular momentum of the four-centers
+ * \param [in]  A,B,C,D
+ *              XYZ coordinates of the four-centers (each of length 3)
+ * \param [in]  alpha1,alpha2,alpha3,alpha4
+ *              Exponents of the gaussian on the four-centers
+ * \param [in]  cb
+ *              Callback that calculates a single cartesian component of a
+ *              primitive integral
  * \param [in] working_prec The working precision (binary digits/bits) to use in the calculation
  */
 static void mirp_cartloop4(arb_ptr integrals,
@@ -66,74 +79,6 @@ static void mirp_cartloop4(arb_ptr integrals,
            lmn3[k], C, alpha3,
            lmn4[l], D, alpha4,
            working_prec);
-    }
-}
-
-
-/*! \brief Compute all cartesian components of a single primitive integral
- *         (four-center, double precision)
- *
- * The \p integral buffer is expected to be able to hold all primitive integrals
- * (ie, it can hold ncart(am1) * ncart(am2) * ncart(am3) * ncart(am4) elements).
- *
- * \param [out] integrals
- *              Resulting integral integral
- * \param [in]  am1,am2,am3,am4
- *              Angular momentum of the four-centers
- * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
- * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four-centers
- * \param [in]  cb
- *              Callback that calculates a single cartesian component of a
- *              primitive integral
- */
-static void mirp_cartloop4_d(double * integrals,
-                             int am1, const double * A, double alpha1,
-                             int am2, const double * B, double alpha2,
-                             int am3, const double * C, double alpha3,
-                             int am4, const double * D, double alpha4,
-                             cb_integral4_single_d cb)
-{
-    assert(am1 >= 0);
-    assert(am2 >= 0);
-    assert(am3 >= 0);
-    assert(am4 >= 0);
-
-    const long ncart1 = MIRP_NCART(am1);
-    const long ncart2 = MIRP_NCART(am2);
-    const long ncart3 = MIRP_NCART(am3);
-    const long ncart4 = MIRP_NCART(am4);
-
-    int lmn1[ncart1][3];
-    int lmn2[ncart2][3];
-    int lmn3[ncart3][3];
-    int lmn4[ncart4][3];
-
-    mirp_gaussian_fill_lmn(am1, (int*)lmn1);
-    mirp_gaussian_fill_lmn(am2, (int*)lmn2);
-    mirp_gaussian_fill_lmn(am3, (int*)lmn3);
-    mirp_gaussian_fill_lmn(am4, (int*)lmn4);
-
-
-    #ifdef _OPENMP
-    #pragma omp parallel for collapse(4)
-    #endif
-    for(long i = 0; i < ncart1; i++)
-    for(long j = 0; j < ncart2; j++)
-    for(long k = 0; k < ncart3; k++)
-    for(long l = 0; l < ncart4; l++)
-    {
-        const long idx = i*ncart4*ncart3*ncart2
-                       + j*ncart4*ncart3
-                       + k*ncart4
-                       + l;
-
-        cb(integrals + idx,
-           lmn1[i], A, alpha1,
-           lmn2[j], B, alpha2,
-           lmn3[k], C, alpha3,
-           lmn4[l], D, alpha4);
     }
 }
 
@@ -599,81 +544,5 @@ void mirp_integral4_exact(double * integrals,
     _arb_vec_clear(coeff3_mp, nprim3*ngen3);
     _arb_vec_clear(coeff4_mp, nprim4*ngen4);
     _arb_vec_clear(integral_mp, nintegrals);
-}
-
-
-void mirp_integral4_d(double * integrals,
-                      int am1, const double * A, int nprim1, int ngen1, const double * alpha1, const double * coeff1,
-                      int am2, const double * B, int nprim2, int ngen2, const double * alpha2, const double * coeff2,
-                      int am3, const double * C, int nprim3, int ngen3, const double * alpha3, const double * coeff3,
-                      int am4, const double * D, int nprim4, int ngen4, const double * alpha4, const double * coeff4,
-                      cb_integral4_single_d cb)
-{
-    assert(am1 >= 0); assert(nprim1 > 0); assert(ngen1 > 0);
-    assert(am2 >= 0); assert(nprim2 > 0); assert(ngen2 > 0);
-    assert(am3 >= 0); assert(nprim3 > 0); assert(ngen3 > 0);
-    assert(am4 >= 0); assert(nprim4 > 0); assert(ngen4 > 0);
-
-    const long ncart1 = MIRP_NCART(am1);
-    const long ncart2 = MIRP_NCART(am2);
-    const long ncart3 = MIRP_NCART(am3);
-    const long ncart4 = MIRP_NCART(am4);
-    const long ncart1234 = ncart1*ncart2*ncart3*ncart4;
-    const long ngen1234 = ngen1*ngen2*ngen3*ngen4;
-    const size_t full_size = (size_t)(ncart1234*ngen1234);
-
-    double * integral_buffer = malloc(full_size * sizeof(double));
-    double * coeff1_norm = malloc((size_t)(nprim1*ngen1) * sizeof(double));
-    double * coeff2_norm = malloc((size_t)(nprim2*ngen2) * sizeof(double));
-    double * coeff3_norm = malloc((size_t)(nprim3*ngen3) * sizeof(double));
-    double * coeff4_norm = malloc((size_t)(nprim4*ngen4) * sizeof(double));
-
-    mirp_normalize_shell_d(am1, nprim1, ngen1, alpha1, coeff1, coeff1_norm);
-    mirp_normalize_shell_d(am2, nprim2, ngen2, alpha2, coeff2, coeff2_norm);
-    mirp_normalize_shell_d(am3, nprim3, ngen3, alpha3, coeff3, coeff3_norm);
-    mirp_normalize_shell_d(am4, nprim4, ngen4, alpha4, coeff4, coeff4_norm);
-
-    memset(integrals, 0, full_size * sizeof(double));
-    for(int i = 0; i < nprim1; i++)
-    for(int j = 0; j < nprim2; j++)
-    for(int k = 0; k < nprim3; k++)
-    for(int l = 0; l < nprim4; l++)
-    {
-        mirp_cartloop4_d(integral_buffer,
-                          am1, A, alpha1[i],
-                          am2, B, alpha2[j],
-                          am3, C, alpha3[k],
-                          am4, D, alpha4[l],
-                          cb);
-
-        #ifdef _OPENMP
-        #pragma omp parallel for collapse(4)
-        #endif
-        for(int m = 0; m < ngen1; m++)
-        for(int n = 0; n < ngen2; n++)
-        for(int o = 0; o < ngen3; o++)
-        for(int p = 0; p < ngen4; p++)
-        {
-            const double coeff = coeff1_norm[m*nprim1+i]
-                               * coeff2_norm[n*nprim2+j]
-                               * coeff3_norm[o*nprim3+k]
-                               * coeff4_norm[p*nprim4+l];
-
-            const long start = ncart1234*(
-                               m*ngen4*ngen3*ngen2
-                             + n*ngen4*ngen3
-                             + o*ngen4
-                             + p);
-
-            for(long q = 0; q < ncart1234; q++)
-                integrals[start*ncart1234+q] += integral_buffer[q] * coeff;
-        }
-    }
-
-    free(integral_buffer);
-    free(coeff1_norm);
-    free(coeff2_norm);
-    free(coeff3_norm);
-    free(coeff4_norm);
 }
 

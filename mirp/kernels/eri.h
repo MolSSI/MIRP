@@ -13,8 +13,9 @@ extern "C" {
 #endif
 
 
+
 /*! \brief Computes a single cartesian electron repulsion integral
- *         (double precision)
+ *         (interval arithmetic)
  *
  * The \p lmn parameters are the exponents on x, y, and z, with the total
  * angular momentum being the sum of the three components. For example,
@@ -29,18 +30,6 @@ extern "C" {
  *              XYZ coordinates of the four-centers (each of length 3)
  * \param [in]  alpha1,alpha2,alpha3,alpha4
  *              Exponents of the gaussian on the four-centers
- */
-void mirp_eri_single_d(double * integral,
-                       const int * lmn1, const double * A, double alpha1,
-                       const int * lmn2, const double * B, double alpha2,
-                       const int * lmn3, const double * C, double alpha3,
-                       const int * lmn4, const double * D, double alpha4);
-
-
-/*! \brief Computes a single cartesian electron repulsion integral
- *         (interval arithmetic)
- *
- * \copydetails mirp_eri_single_d
  *
  * \param [in] working_prec The working precision (binary digits/bits) to use
  *                          in the calculation
@@ -60,16 +49,6 @@ void mirp_eri_single(arb_t integral,
 /*! \brief Compute electron repulsion integrals for a contracted
  *         shell quartet (interval arithmetic)
  *
- * \copydetails mirp_eri_d
- * \param [in]  working_prec
- *              The working precision (binary digits/bits) to use
- *              in the calculation
- */
-MIRP_WRAP_SHELL4(eri)
-
-/*! \brief Compute electron repulsion integrals for a contracted
- *         shell quartet (double precision)
- *
  * \param [out] integrals
  *              Output for the computed integral
  * \param [in]  am1,am2,am3,am4
@@ -87,8 +66,11 @@ MIRP_WRAP_SHELL4(eri)
  *              Coefficients for all primitives and for all general contractions
  *              for each shell (of lengths \p nprim1 * \p ngen1, \p nprim2 * \p ngen2,
  *              \p nprim3 * \p ngen3, \p nprim4 * \p ngen4 respectively)
+ * \param [in]  working_prec
+ *              The working precision (binary digits/bits) to use
+ *              in the calculation
  */
-MIRP_WRAP_SHELL4_D(eri)
+MIRP_WRAP_SHELL4(eri)
 
 /*! \brief Compute electron repulsion integrals for a contracted
  *         shell quartet (string inputs)
@@ -121,7 +103,7 @@ MIRP_WRAP_SINGLE4_STR(eri)
 /*! \brief Compute a single electron repulsion integral for a primitive quartet
  *         (exact double precision)
  *
- * \copydetails mirp_eri_single_d
+ * \copydetails mirp_eri_single
  */
 MIRP_WRAP_SINGLE4_EXACT(eri)
 
@@ -129,18 +111,10 @@ MIRP_WRAP_SINGLE4_EXACT(eri)
 /*! \brief Compute electron repulsion integrals for a contracted
  *         shell quartet (exact double precision)
  *
- * \copydetails mirp_eri_d
+ * \copydetails mirp_eri
  */
 MIRP_WRAP_SHELL4_EXACT(eri)
 
-
-/***************************************
- * Documentation for wrapped functions
- ***************************************/
-
-/*! \fn mirp_eri(arb_t integral, int i)
- * \brief Compute electron repulsion integrals for a shell quartet
- */
 
 #ifdef __cplusplus
 }

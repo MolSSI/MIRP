@@ -107,10 +107,6 @@ int main(int argc, char ** argv)
             {
                 nfailed = integral4_single_verify_test(file, working_prec, mirp_eri_single_str);
             }
-            else if(floattype == "double")
-            {
-                nfailed = integral4_single_verify_test_d(file, mirp_eri_single_d);
-            }
             else if(floattype == "exact")
             {
                 nfailed = integral4_single_verify_test_exact(file, mirp_eri_single_exact, mirp_eri_single);
@@ -126,10 +122,6 @@ int main(int argc, char ** argv)
             if(floattype == "interval")
             {
                 nfailed = integral4_verify_test(file, working_prec, mirp_eri_str);
-            }
-            else if(floattype == "double")
-            {
-                nfailed = integral4_verify_test_d(file, mirp_eri_d);
             }
             else if(floattype == "exact")
             {

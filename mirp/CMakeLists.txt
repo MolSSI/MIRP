@@ -6,10 +6,7 @@ list(APPEND MIRP_FILELIST
 
                kernels/integral4_wrappers.c
 
-               kernels/boys_d.c
                kernels/boys.c
-
-               kernels/eri_d.c
                kernels/eri.c
 )
 

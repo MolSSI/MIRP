@@ -7,11 +7,6 @@ Each integral implemented in MIRP has a few different functions for computing th
 \note The phrase 'single cartesian integral' refers to a single number. For example,
       a (px|px) overlap integral.
 
-\subsection _functiontypes_single_d mirp_name_single_d
-
-Computes a single cartesian integral in double precision. Internally, double precision is used,
-
- 
 
 \subsection _functiontypes_single mirp_name_single
 
@@ -46,15 +41,14 @@ the \ref mirp_integral4_single_exact wrapper.
 These functions are analogous to their 'single' counterparts, however they take in contracted shells
 (both segmented and general) as inputs and return a complete set of integral.
 
-Functions with the pattern `mirp_{name}` are created with \ref mirp_integral4 (and `mirp_{name}_d`
-can be created via \ref mirp_integral4_d). The others are created via \ref mirp_integral4_str,
-and \ref mirp_integral4_exact.
+Functions with the pattern `mirp_{name}` are created with \ref mirp_integral4`.
+The others are created via \ref mirp_integral4_str, and \ref mirp_integral4_exact.
 
 
 \section _functiontypes_wrap Wrapping functions and macros
 
 The wrapping functions mentioned above are used to create the higher-level functions from
-(typically) the `mirp_{name}_single` and `mirp_{name}_single_d` functions. This can be done
+(typically) the `mirp_{name}_single`. This can be done
 even easier with the `MIRP_WRAP_` macros.
 
 \subsection _functiontypes_wrap4 Four-center integrals
@@ -62,7 +56,6 @@ even easier with the `MIRP_WRAP_` macros.
 Macro                              | Creates                     | Requires                | Calls
 -----------------------------------|-----------------------------|-------------------------|-----------------------------------
 MIRP_WRAP_SHELL4(name)             | mirp_name                   | mirp_name_single        | \ref mirp_integral4
-MIRP_WRAP_SHELL4_D(name)           | mirp_name_d                 | mirp_name_single_d      | \ref mirp_integral4_d
 MIRP_WRAP_SINGLE4_STR(name)        | mirp_name_single_str        | mirp_name_single        | \ref mirp_integral4_single_str
 MIRP_WRAP_SINGLE4_EXACT(name)      | mirp_name_single_exact      | mirp_name_single        | \ref mirp_integral4_single_exact
 MIRP_WRAP_SHELL4_STR(name)         | mirp_name_str               | mirp_name               | \ref mirp_integral4_str

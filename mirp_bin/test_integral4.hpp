@@ -55,20 +55,6 @@ long integral4_single_verify_test(const std::string & filepath,
                                   cb_integral4_single_str cb);
 
 
-/*! \brief Test single cartesian integrals in double precision
- *
- * The integrals are tested to a lower relative accuracy to account
- * for rounding error in the double-precision integral kernels.
- *
- * \param [in] filepath  Path to the file with the reference data
- * \param [in] cb        Function that computes single cartesian integrals
- *                       in double precision
- * \return Number of failed tests
- */
-long integral4_single_verify_test_d(const std::string & filepath,
-                                    cb_integral4_single_d cb);
-
-
 /*! \brief Test single cartesian integrals in exact double precision
  *
  * The integrals are tested to be exactly equal to the reference data
@@ -128,20 +114,6 @@ void integral4_create_test(const std::string & input_filepath,
 long integral4_verify_test(const std::string & filepath,
                            slong working_prec,
                            cb_integral4_str cb);
-
-
-/*! \brief Test contracted integrals in double precision
- *
- * The integrals are tested to a lower relative accuracy to account
- * for rounding error in the double-precision integral kernels.
- *
- * \param [in] filepath  Path to the file with the reference data
- * \param [in] cb        Function that computes contracted integrals
- *                       in double precision
- * \return Number of failed tests
- */
-long integral4_verify_test_d(const std::string & filepath,
-                             cb_integral4_d cb);
 
 
 /*! \brief Test contracted integrals in exact double precision

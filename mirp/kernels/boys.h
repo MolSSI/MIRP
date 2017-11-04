@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-/*! \brief Computes the Boys function using double precision
+/*! \brief Computes the Boys function using interval arithmetic
  *
  * See \ref boys_function
  *
@@ -21,13 +21,6 @@ extern "C" {
  * \param [out] F The computed values of the Boys function
  * \param [in]  m The maximum order to calculate
  * \param [in]  t The value at which to evaluate
- */
-void mirp_boys_d(double *F, int m, double t);
-
-
-/*! \brief Computes the Boys function using interval arithmetic
- *
- * \copydetails mirp_boys_d
  *
  * \param [in] working_prec The working precision (binary digits/bits)
  *                          to use in the calculation

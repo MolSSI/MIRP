@@ -12,35 +12,6 @@ extern "C" {
 #endif
 
 
-/*******************************************
- * Double precision
- *******************************************/
-
-/*! \brief Pointer to a function that computes a single cartesian integral
- *         (four-center, double precision)
- */
-typedef void (*cb_integral4_single_d)(double *,
-                                      const int *, const double *, double,
-                                      const int *, const double *, double,
-                                      const int *, const double *, double,
-                                      const int *, const double *, double);
-
-
-/*! \brief Pointer to a function that computes all cartesian integrals
- *         for a contracted shell quartet (four-center, double precision)
- */
-typedef void (*cb_integral4_d)(double *,
-                               int, const double *, int, int, const double *, const double *,
-                               int, const double *, int, int, const double *, const double *,
-                               int, const double *, int, int, const double *, const double *,
-                               int, const double *, int, int, const double *, const double *);
-
-
-
-/*******************************************
- * Interval arithmetic
- *******************************************/
-
 /*! \brief Pointer to a function that computes a single cartesian integral
  *         (four-center, interval arithmetic)
  */

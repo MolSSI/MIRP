@@ -35,7 +35,6 @@ of the gaussian and a given point \f$R\f$
 In MIRP, the parameters to the Gaussian Product Theorem can be calculated
 via the following functions:
 
-- mirp_gpt_d()
 - mirp_gpt()
 
 */

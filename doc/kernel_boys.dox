@@ -97,7 +97,6 @@ the rest.
 
 In MIRP, the Boys function can be calculated via the following functions:
 
-- \ref mirp_boys_d
 - \ref mirp_boys
 - \ref mirp_boys_str
 - \ref mirp_boys_exact

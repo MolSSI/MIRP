@@ -73,16 +73,12 @@ endmacro()
 
 
 # Boys function
-add_boys_test(boys_large_range.dat double 0 0)
-add_boys_test(boys_large_range.dat double 0 10)
 add_boys_test(boys_large_range.dat exact 0 0)
 add_boys_test(boys_large_range.dat exact 0 10)
 add_boys_test(boys_large_range.dat interval 128  0)
 add_boys_test(boys_large_range.dat interval 128 10)
 add_boys_test(boys_large_range.dat interval 332  0)
 add_boys_test(boys_large_range.dat interval 332 10)
-add_boys_test(boys_large_random.dat double 0 0)
-add_boys_test(boys_large_random.dat double 0 10)
 add_boys_test(boys_large_random.dat exact 0 0)
 add_boys_test(boys_large_random.dat exact 0 10)
 add_boys_test(boys_large_random.dat interval 128  0)

@@ -12,7 +12,7 @@ extern "C" {
 #endif
 
 /*! \brief Computes terms from the Gaussian Product Theorem using
- *         double precision
+ *         interval arithmetic
  *
  * The input parameters \p A and \p B, are expected to be arrays
  * of 3 elements.
@@ -33,18 +33,6 @@ extern "C" {
  * \param [out] PB      XYZ distances between the new gaussian
  *                      and the second gaussian
  * \param [out] AB2     Total distance between the first and second gaussians
- */
-void mirp_gpt_d(double alpha1, double alpha2,
-                const double * A, const double * B,
-                double * gamma, double * P,
-                double * PA, double * PB,
-                double * AB2);
-
-
-/*! \brief Computes terms from the Gaussian Product Theorem using
- *         interval arithmetic
- *
- * \copydetails mirp_gpt_d
  *
  * \param [in] working_prec The working precision (binary digits/bits) to use
  *                          in the calculation

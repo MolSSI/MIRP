@@ -68,53 +68,6 @@ long boys_verify_test(const mirp::boys_data & data, int extra_m, slong working_p
 }
 
 
-/* Runs a Boys function test using double precision
- *
- * This just wraps the calculation of Boys function and the
- * comparison of the computed data with the reference values.
- *
- * The number of failing tests is returned
- */
-long boys_verify_test_d(const mirp::boys_data & data, int extra_m)
-{
-    long nfailed = 0;
-
-    const int max_m = boys_max_m(data) + extra_m;
-    std::vector<double> F_dbl(max_m+1);
-
-    arb_t vref_mp;
-    arb_init(vref_mp);
-
-    for(const auto & ent : data.entries)
-    {
-        double t_dbl = std::strtod(ent.t.c_str(), nullptr);
-
-        arb_set_str(vref_mp, ent.value.c_str(), 72); /* 53 bits + more */
-        double vref_dbl = arf_get_d(arb_midref(vref_mp), ARF_RND_NEAR);
-
-        mirp_boys_d(F_dbl.data(), ent.m+extra_m, t_dbl);
-
-        if(!almost_equal(F_dbl[ent.m], vref_dbl, 1e-13))
-        {
-            double reldiff = std::fabs(vref_dbl - F_dbl[ent.m]);
-            reldiff /= std::fmax(std::fabs(vref_dbl), std::fabs(F_dbl[ent.m]));
-
-            std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
-            auto old_cout_prec = std::cout.precision(17);
-            std::cout << "   Calculated: " << F_dbl[ent.m] << "\n";
-            std::cout << "    Reference: " << vref_dbl << "\n";
-            std::cout << "Relative Diff: " << reldiff << "\n\n";
-            std::cout.precision(old_cout_prec);
-            nfailed++;
-        }
-    }
-
-    arb_clear(vref_mp);
-
-    return nfailed;
-}
-
-
 /* Runs a Boys function test using 'exact' double precision
  *
  * This is just a simple test of the wrapper. The function compares
@@ -306,8 +259,6 @@ long boys_verify_test_main(const std::string & filepath,
         nfailed = boys_verify_test(data, extra_m, working_prec);
     else if(floattype == "exact")
         nfailed = boys_verify_test_exact(data, extra_m);
-    else if(floattype == "double")
-        nfailed = boys_verify_test_d(data, extra_m);
     else
     {
         std::string err;
