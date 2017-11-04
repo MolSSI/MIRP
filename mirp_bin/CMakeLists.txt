@@ -4,9 +4,9 @@ add_library(test_common OBJECT cmdline.cpp
                                read_construct_basis.cpp
                                test_boys.cpp
                                test_common.cpp
-                               test_integral4.cpp
-                               test_integral4_single.cpp
-                               ref_integral4.cpp
+                               test_integral.cpp
+                               test_integral_single.cpp
+                               ref_integral.cpp
 )
 
 # Add the include directories to the object library

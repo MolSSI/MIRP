@@ -63,13 +63,13 @@ long integral4_single_verify_test(const std::string & filepath,
  * \param [in] filepath  Path to the file with the reference data
  * \param [in] cb        Function that computes single cartesian integrals
  *                       in exact double precision
- * \param [in] cb_mp     Function that computes single cartesian integrals
+ * \param [in] cb_arb     Function that computes single cartesian integrals
  *                       using interval arithmetic
  * \return Number of failed tests
  */
 long integral4_single_verify_test_exact(const std::string & filepath,
                                         cb_integral4_single_exact cb,
-                                        cb_integral4_single cb_mp);
+                                        cb_integral4_single cb_arb);
 
 
 /************************************************
@@ -124,13 +124,13 @@ long integral4_verify_test(const std::string & filepath,
  * \param [in] filepath  Path to the file with the reference data
  * \param [in] cb        Function that computes contracted integrals
  *                       in exact double precision
- * \param [in] cb_mp     Function that computes contracted integrals
+ * \param [in] cb_arb     Function that computes contracted integrals
  *                       using interval arithmetic
  * \return Number of failed tests
  */
 long integral4_verify_test_exact(const std::string & filepath,
                                  cb_integral4_exact cb,
-                                 cb_integral4 cb_mp);
+                                 cb_integral4 cb_arb);
 
 
 

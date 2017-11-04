@@ -5,7 +5,7 @@
 
 #include "mirp_bin/cmdline.hpp"
 #include "mirp_bin/test_boys.hpp"
-#include "mirp_bin/test_integral4.hpp"
+#include "mirp_bin/test_integral.hpp"
 
 #include <mirp/kernels/all.h>
 
@@ -29,7 +29,6 @@ static void print_help(void)
               << "                       eri_single\n"
               << "    --float        Type of floating-point to test with. Possibilities are:\n"
               << "                       interval\n"
-              << "                       double\n"
               << "                       exact\n"
               << "    --prec         Working precision in binary digits (bits) to test (required for --float interval)\n"
               << "\n"
@@ -66,7 +65,7 @@ int main(int argc, char ** argv)
         integral = cmdline_get_arg_str(cmdline, "--integral");
         floattype = cmdline_get_arg_str(cmdline, "--float");
 
-        if(floattype != "double" && floattype != "exact")
+        if(floattype != "exact")
             working_prec = cmdline_get_arg_long(cmdline, "--prec");
         else if(cmdline_has_arg(cmdline, "--prec"))
             throw std::runtime_error("--prec is not valid for this floating-point type");

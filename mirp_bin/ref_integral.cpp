@@ -3,9 +3,10 @@
  * \brief Functions related to four-center integral reference files
  */
 
-#include "mirp_bin/ref_integral4.hpp"
+#include "mirp_bin/ref_integral.hpp"
 #include "mirp_bin/reffile_io.hpp"
 #include "mirp_bin/test_common.hpp"
+#include "mirp_bin/callback_helper.hpp"
 
 #include <mirp/pragma.h>
 #include <mirp/shell.h>
@@ -14,6 +15,97 @@
 #include <algorithm>
 
 namespace mirp {
+
+namespace detail {
+
+template<int N, typename Func>
+long integral_test_reference(const std::string & ref_filepath,
+                             Func cb)
+{
+    std::ifstream fs(ref_filepath);
+    if(!fs.is_open())
+        throw std::runtime_error("Error opening input file");
+
+
+    file_skip(fs, '#');
+    std::vector<gaussian_shell> shells = reffile_read_basis(fs);
+
+    std::string line;
+    long nfailed = 0;
+    long ncomputed = 0;
+
+    std::array<std::array<double, 3>, N> xyz;
+    std::array<std::vector<double>, N> alpha, coeff;
+    std::array<int, N> am, nprim, ngeneral;
+
+    //#pragma omp parallel for schedule(dynamic) collapse(2)
+    while(fs.good())
+    {
+        std::array<size_t, N> idx;
+
+        for(auto & it : idx)
+            fs >> it;
+
+        if(!fs.good())
+            break;
+
+        size_t nintegrals = 1;
+
+        for(int n = 0; n < N; n++)
+        {
+            const gaussian_shell & s = shells.at(idx[n]);
+            nintegrals *= (MIRP_NCART(s.am)*s.ngeneral);
+
+            am[n] = s.am;
+            nprim[n] = s.nprim;
+            ngeneral[n] = s.ngeneral;
+
+            xyz[n] = s.xyz;
+            alpha[n] = s.alpha;
+            coeff[n] = s.coeff;
+        }
+
+        std::vector<double> integrals(nintegrals);
+        std::vector<double> integrals_file(nintegrals);
+
+        for(size_t i = 0; i < nintegrals; i++)
+            integrals_file[i] = read_hexdouble(fs);
+
+        callback_helper<N>::call_exact(integrals.data(), am, xyz, nprim, ngeneral, alpha, coeff, cb);
+
+        for(size_t i = 0; i < nintegrals; i++)
+        {
+            PRAGMA_WARNING_PUSH
+            PRAGMA_WARNING_IGNORE_FP_EQUALITY
+
+            if(integrals[i] != integrals_file[i])
+            {
+                printf("Failed entry: ");
+
+                for(int n = 0; n < N; n++)
+                    printf("%2d ", am[n]);
+
+                printf(") ");
+
+                for(int n = 0; n < N; n++)
+                    printf("%4lu ", idx[n]);
+
+                printf("%7lu  -> %26.18e %26.18e\n", i, integrals[i], integrals_file[i]);
+                nfailed++;
+            }
+
+            PRAGMA_WARNING_POP
+        }
+        ncomputed += nintegrals;
+    }
+
+    print_results(nfailed, ncomputed);
+
+    return nfailed;
+}
+
+} // close namespace detail
+
 
 void integral4_create_reference(const std::string & xyz_filepath,
                                 const std::string & basis_filepath,
@@ -81,74 +173,13 @@ void integral4_create_reference(const std::string & xyz_filepath,
 }
 
 
+
 long integral4_test_reference(const std::string & ref_filepath,
                               cb_integral4_exact cb)
 {
-    std::ifstream fs(ref_filepath);
-    if(!fs.is_open())
-        throw std::runtime_error("Error opening input file");
-
-
-    file_skip(fs, '#');
-    std::vector<gaussian_shell> shells = reffile_read_basis(fs);
-
-    std::string line;
-    long nfailed = 0;
-    long ncomputed = 0;
-
-    //#pragma omp parallel for schedule(dynamic) collapse(2)
-    while(fs.good())
-    {
-        size_t p, q, r, s;
-        fs >> p >> q >> r >> s;
-
-        if(!fs.good())
-            break;
-
-        const gaussian_shell & s1 = shells.at(p);
-        const gaussian_shell & s2 = shells.at(q);
-        const gaussian_shell & s3 = shells.at(r);
-        const gaussian_shell & s4 = shells.at(s);
-
-        const size_t ncart = MIRP_NCART4(s1.am, s2.am, s3.am, s4.am);
-        const size_t ngen = s1.ngeneral * s2.ngeneral * s3.ngeneral * s4.ngeneral;
-        const size_t nintegrals = ncart * ngen;
-
-        std::vector<double> integrals(nintegrals);
-        std::vector<double> integrals_file(nintegrals);
-
-        for(size_t i = 0; i < nintegrals; i++)
-            integrals_file[i] = read_hexdouble(fs);
-
-        cb(integrals.data(),
-           s1.am, s1.xyz.data(), s1.nprim, s1.ngeneral, s1.alpha.data(), s1.coeff.data(),
-           s2.am, s2.xyz.data(), s2.nprim, s2.ngeneral, s2.alpha.data(), s2.coeff.data(),
-           s3.am, s3.xyz.data(), s3.nprim, s3.ngeneral, s3.alpha.data(), s3.coeff.data(),
-           s4.am, s4.xyz.data(), s4.nprim, s4.ngeneral, s4.alpha.data(), s4.coeff.data());
-
-        for(size_t i = 0; i < nintegrals; i++)
-        {
-            PRAGMA_WARNING_PUSH
-            PRAGMA_WARNING_IGNORE_FP_EQUALITY
-
-            if(integrals[i] != integrals_file[i])
-            {
-                printf("Failed entry: ( %2d %2d | %2d %2d ) %4lu %4lu %4lu %4lu %7lu  -> %26.18e %26.18e\n",
-                     s1.am, s2.am, s3.am, s4.am, 
-                     p, q, r, s, i,
-                     integrals[i], integrals_file[i]);
-                nfailed++;
-            }
-
-            PRAGMA_WARNING_POP
-        }
-        ncomputed += nintegrals;
-    }
-
-    print_results(nfailed, ncomputed);
-
-    return nfailed;
+    return detail::integral_test_reference<4>(ref_filepath, cb);
 }
+
 
 } // close namespace mirp
 

@@ -36,23 +36,23 @@ long boys_verify_test(const mirp::boys_data & data, int extra_m, slong working_p
 
     const int max_m = boys_max_m(data) + extra_m;
 
-    arb_t vref_mp;
-    arb_init(vref_mp);
+    arb_t vref_arb;
+    arb_init(vref_arb);
 
-    arb_ptr F_mp = _arb_vec_init(max_m+1);
+    arb_ptr F_arb = _arb_vec_init(max_m+1);
 
     for(const auto & ent : data.entries)
     {
-        mirp_boys_str(F_mp, ent.m + extra_m, ent.t.c_str(), working_prec);
+        mirp_boys_str(F_arb, ent.m + extra_m, ent.t.c_str(), working_prec);
 
-        arb_set_str(vref_mp, ent.value.c_str(), working_prec);
+        arb_set_str(vref_arb, ent.value.c_str(), working_prec);
 
         /* Do the intervals overlap? */
-        if(!arb_overlaps(F_mp + ent.m, vref_mp))
+        if(!arb_overlaps(F_arb + ent.m, vref_arb))
         {
             std::cout << "Entry failed test: m = " << ent.m << " t = " << ent.t << "\n";
-            char * s1 = arb_get_str(F_mp + ent.m, data.ndigits+5, ARB_STR_MORE);
-            char * s2 = arb_get_str(vref_mp, data.ndigits+5, ARB_STR_MORE);
+            char * s1 = arb_get_str(F_arb + ent.m, data.ndigits+5, ARB_STR_MORE);
+            char * s2 = arb_get_str(vref_arb, data.ndigits+5, ARB_STR_MORE);
             std::cout << "   Calculated: " << s1 << "\n";
             std::cout << "    Reference: " << s2 << "\n";
             free(s1);
@@ -61,8 +61,8 @@ long boys_verify_test(const mirp::boys_data & data, int extra_m, slong working_p
         }
     }
 
-    arb_clear(vref_mp);
-    _arb_vec_clear(F_mp, max_m+1);
+    arb_clear(vref_arb);
+    _arb_vec_clear(F_arb, max_m+1);
 
     return nfailed;
 }
@@ -84,10 +84,10 @@ long boys_verify_test_exact(const mirp::boys_data & data, int extra_m)
     std::vector<double> F_dbl(max_m+1);
 
     /* For comparison */
-    arb_t t_mp;
-    arb_init(t_mp);
+    arb_t t_arb;
+    arb_init(t_arb);
 
-    arb_ptr F_mp = _arb_vec_init(max_m+1);
+    arb_ptr F_arb = _arb_vec_init(max_m+1);
 
     for(const auto & ent : data.entries)
     {
@@ -98,15 +98,15 @@ long boys_verify_test_exact(const mirp::boys_data & data, int extra_m)
 
         /* Compute using the interval arithmetic code */
         /* 256 bits should be enough for testing... */
-        arb_set_d(t_mp, t_dbl);
-        mirp_boys(F_mp, ent.m+extra_m, t_mp, 256);
+        arb_set_d(t_arb, t_dbl);
+        mirp_boys(F_arb, ent.m+extra_m, t_arb, 256);
 
         /* Make sure we really didn't lose a whole bunch of precision */
-        if(arb_rel_accuracy_bits(F_mp + ent.m) < 64)
+        if(arb_rel_accuracy_bits(F_arb + ent.m) < 64)
             throw std::logic_error("Not enough bits in testing boys exact function. Contact the developer");
 
         double vref_dbl = std::strtod(ent.value.c_str(), nullptr);
-        double vref2_dbl = arf_get_d(arb_midref(F_mp + ent.m), ARF_RND_NEAR);
+        double vref2_dbl = arf_get_d(arb_midref(F_arb + ent.m), ARF_RND_NEAR);
 
         PRAGMA_WARNING_PUSH
         PRAGMA_WARNING_IGNORE_FP_EQUALITY
@@ -125,8 +125,8 @@ long boys_verify_test_exact(const mirp::boys_data & data, int extra_m)
         PRAGMA_WARNING_POP
     }
 
-    arb_clear(t_mp);
-    _arb_vec_clear(F_mp, max_m+1);
+    arb_clear(t_arb);
+    _arb_vec_clear(F_arb, max_m+1);
 
     return nfailed;
 }
@@ -249,7 +249,7 @@ void boys_write_file(const std::string & filepath, const boys_data & data)
 long boys_verify_test_main(const std::string & filepath,
                            const std::string & floattype,
                            int extra_m,
-                        slong working_prec)
+                           slong working_prec)
 {
     boys_data data = boys_read_file(filepath, false);
 
@@ -288,28 +288,28 @@ void boys_create_test(const std::string & input_filepath,
 
     const int max_m = boys_max_m(data);
 
-    arb_t t_mp;
-    arb_init(t_mp);
+    arb_t t_arb;
+    arb_init(t_arb);
 
-    arb_ptr F_mp = _arb_vec_init(max_m+1);
+    arb_ptr F_arb = _arb_vec_init(max_m+1);
 
     for(auto & ent : data.entries)
     {
-        arb_set_str(t_mp, ent.t.c_str(), working_prec);
-        mirp_boys(F_mp, ent.m, t_mp, working_prec);
+        arb_set_str(t_arb, ent.t.c_str(), working_prec);
+        mirp_boys(F_arb, ent.m, t_arb, working_prec);
 
-        slong bits = arb_rel_accuracy_bits(F_mp + ent.m);
+        slong bits = arb_rel_accuracy_bits(F_arb + ent.m);
         if(bits > 0 && bits < min_prec)
             throw std::runtime_error("Working precision not large enough for the number of digits");
 
-        char * s = arb_get_str(F_mp + ent.m, ndigits, 0);
+        char * s = arb_get_str(F_arb + ent.m, ndigits, 0);
         ent.value = s;
         free(s);
     }
 
     boys_write_file(output_filepath, data);
-    arb_clear(t_mp);
-    _arb_vec_clear(F_mp, max_m+1);
+    arb_clear(t_arb);
+    _arb_vec_clear(F_arb, max_m+1);
 }
 
 

@@ -5,7 +5,7 @@
 
 #include "mirp_bin/cmdline.hpp"
 #include "mirp_bin/test_boys.hpp"
-#include "mirp_bin/test_integral4.hpp"
+#include "mirp_bin/test_integral.hpp"
 
 #include <mirp/kernels/all.h>
 
