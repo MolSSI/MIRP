@@ -230,7 +230,7 @@ long integral_verify_test_exact(const std::string & filepath,
         callback_helper<N>::call_exact(integrals.data(), am, xyz, nprim, ngeneral, alpha, coeff, cb);
 
         /* Compute using very high precision */
-        callback_helper<N>::call_arb(integrals_arb, am, xyz_arb, nprim, ngeneral, alpha_arb, coeff_arb, 512, cb_arb);
+        callback_helper<N>::call(integrals_arb, am, xyz_arb, nprim, ngeneral, alpha_arb, coeff_arb, 512, cb_arb);
 
 
         for(int n = 0; n < N; n++)

@@ -11,16 +11,6 @@
 
 namespace mirp {
 
-/*! \brief Helps with calling callbacks with the given number of centers
- *
- * This structure is used to appropriately unpack arrays of data (of length \p N
- * when calling C-style callbacks.
- *
- * \tparam Number of centers
- */
-template<int N> struct callback_helper;
-
-
 template<>
 struct callback_helper<4>
 {
@@ -32,15 +22,16 @@ struct callback_helper<4>
     typedef cb_integral4_single_str     cb_single_str_type;
     typedef cb_integral4_single_exact   cb_single_exact_type;
 
-    static void call_str(arb_ptr integrals,
-                         std::array<int, 4> & am,
-                         std::array<std::array<const char *, 3>, 4> & xyz,
-                         std::array<int, 4> & nprim,
-                         std::array<int, 4> & ngeneral,
-                         std::array<std::vector<const char *>, 4> & alpha,
-                         std::array<std::vector<const char *>, 4> & coeff,
-                         slong working_prec,
-                         cb_str_type cb)
+    static void 
+    call_str(arb_ptr integrals,
+             std::array<int, 4> & am,
+             std::array<std::array<const char *, 3>, 4> & xyz,
+             std::array<int, 4> & nprim,
+             std::array<int, 4> & ngeneral,
+             std::array<std::vector<const char *>, 4> & alpha,
+             std::array<std::vector<const char *>, 4> & coeff,
+             slong working_prec,
+             cb_str_type cb)
     {
         cb(integrals,
            am[0], xyz[0].data(), nprim[0], ngeneral[0], alpha[0].data(), coeff[0].data(),
@@ -51,15 +42,16 @@ struct callback_helper<4>
     }
 
 
-    static void call_arb(arb_ptr integrals,
-                         std::array<int, 4> & am,
-                         std::array<arb_ptr, 4> & xyz,
-                         std::array<int, 4> & nprim,
-                         std::array<int, 4> & ngeneral,
-                         std::array<arb_ptr, 4> & alpha,
-                         std::array<arb_ptr, 4> & coeff,
-                         slong working_prec,
-                         cb_type cb)
+    static void
+    call(arb_ptr integrals,
+         std::array<int, 4> & am,
+         std::array<arb_ptr, 4> & xyz,
+         std::array<int, 4> & nprim,
+         std::array<int, 4> & ngeneral,
+         std::array<arb_ptr, 4> & alpha,
+         std::array<arb_ptr, 4> & coeff,
+         slong working_prec,
+         cb_type cb)
     {
         cb(integrals,
            am[0], xyz[0], nprim[0], ngeneral[0], alpha[0], coeff[0],
@@ -70,14 +62,15 @@ struct callback_helper<4>
     }
 
 
-    static void call_exact(double * integrals,
-                           std::array<int, 4> & am,
-                           std::array<std::array<double, 3>, 4> & xyz,
-                           std::array<int, 4> & nprim,
-                           std::array<int, 4> & ngeneral,
-                           std::array<std::vector<double>, 4> & alpha,
-                           std::array<std::vector<double>, 4> & coeff,
-                           cb_exact_type cb)
+    static void
+    call_exact(double * integrals,
+               std::array<int, 4> & am,
+               std::array<std::array<double, 3>, 4> & xyz,
+               std::array<int, 4> & nprim,
+               std::array<int, 4> & ngeneral,
+               std::array<std::vector<double>, 4> & alpha,
+               std::array<std::vector<double>, 4> & coeff,
+               cb_exact_type cb)
     {
         cb(integrals,
            am[0], xyz[0].data(), nprim[0], ngeneral[0], alpha[0].data(), coeff[0].data(),
@@ -87,43 +80,46 @@ struct callback_helper<4>
     }
 
 
-    static void call_single_arb(arb_t integral,
-                                std::array<std::array<int, 3>, 4> & lmn,
-                                std::array<arb_ptr, 4> & xyz,
-                                std::array<arb_t, 4> & alpha,
-                                slong working_prec,
-                                cb_single_type cb)
+    static void
+    call_single_arb(arb_t integral,
+                    std::array<std::array<int, 3>, 4> & lmn,
+                    std::array<arb_ptr, 4> & xyz,
+                    std::array<arb_t, 4> & alpha,
+                    slong working_prec,
+                    cb_single_type cb)
     {
         cb(integral,
-          lmn[0].data(), xyz[0], alpha[0],
-          lmn[1].data(), xyz[1], alpha[1],
-          lmn[2].data(), xyz[2], alpha[2],
-          lmn[3].data(), xyz[3], alpha[3],
-          working_prec);
+           lmn[0].data(), xyz[0], alpha[0],
+           lmn[1].data(), xyz[1], alpha[1],
+           lmn[2].data(), xyz[2], alpha[2],
+           lmn[3].data(), xyz[3], alpha[3],
+           working_prec);
     }
 
 
-    static void call_single_str(arb_t integral,
-                                std::array<std::array<int, 3>, 4> & lmn,
-                                std::array<std::array<const char *, 3>, 4> & xyz,
-                                std::array<const char *, 4> & alpha,
-                                slong working_prec,
-                                cb_single_str_type cb)
+    static void
+    call_single_str(arb_t integral,
+                    std::array<std::array<int, 3>, 4> & lmn,
+                    std::array<std::array<const char *, 3>, 4> & xyz,
+                    std::array<const char *, 4> & alpha,
+                    slong working_prec,
+                    cb_single_str_type cb)
     {
         cb(integral,
-          lmn[0].data(), xyz[0].data(), alpha[0],
-          lmn[1].data(), xyz[1].data(), alpha[1],
-          lmn[2].data(), xyz[2].data(), alpha[2],
-          lmn[3].data(), xyz[3].data(), alpha[3],
-          working_prec);
+           lmn[0].data(), xyz[0].data(), alpha[0],
+           lmn[1].data(), xyz[1].data(), alpha[1],
+           lmn[2].data(), xyz[2].data(), alpha[2],
+           lmn[3].data(), xyz[3].data(), alpha[3],
+           working_prec);
     }
 
 
-    static void call_single_exact(double * integral,
-                                  std::array<std::array<int, 3>, 4> & lmn,
-                                  std::array<std::array<double, 3>, 4> & xyz,
-                                  std::array<double, 4> & alpha,
-                                  cb_single_exact_type cb)
+    static void
+    call_single_exact(double * integral,
+                      std::array<std::array<int, 3>, 4> & lmn,
+                      std::array<std::array<double, 3>, 4> & xyz,
+                      std::array<double, 4> & alpha,
+                      cb_single_exact_type cb)
     {
         cb(integral,
            lmn[0].data(), xyz[0].data(), alpha[0],
@@ -131,8 +127,6 @@ struct callback_helper<4>
            lmn[2].data(), xyz[2].data(), alpha[2],
            lmn[3].data(), xyz[3].data(), alpha[3]);
     }
-
-
 
 };
 
