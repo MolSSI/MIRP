@@ -19,6 +19,9 @@ namespace mirp {
  * \throw std::runtime_error if there is a problem opening the file or there
  *        there is a problem reading or writing the data
  *
+ * \note This is being left un-templatized due to the handling of
+ *       permutational symmetry
+ *
  * \param [in] xyz_filepath    Path to the XYZ file containing the molecule to use
  * \param [in] basis_filepath  Path to a basis set file to use
  * \param [in] output_filepath The output file to write the computed integrals to
@@ -46,9 +49,12 @@ void integral4_create_reference(const std::string & xyz_filepath,
  *                             to exact double precision
  * \return Number of failed tests
  */
-long integral4_test_reference(const std::string & ref_filepath,
-                              cb_integral4_exact cb);
+template<int N, typename Func>
+long integral_test_reference(const std::string & ref_filepath,
+                             Func cb);
 
+extern template long
+integral_test_reference<4, cb_integral4_exact>(const std::string &, cb_integral4_exact);
 
 } // close namespace mirp
 

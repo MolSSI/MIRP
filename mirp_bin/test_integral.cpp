@@ -18,8 +18,6 @@
 
 namespace mirp {
 
-namespace detail {
-
 /*! \brief The number of integrals computed in an entry */
 static size_t nintegrals(const integral_data_entry & ent)
 {
@@ -30,12 +28,12 @@ static size_t nintegrals(const integral_data_entry & ent)
 }
 
 
-template<int N, typename Func>
+template<int N>
 void integral_create_test(const std::string & input_filepath,
                           const std::string & output_filepath,
                           slong working_prec, long ndigits,
                           const std::string & header,
-                          Func cb)
+                          typename callback_helper<N>::cb_str_type cb)
 {
     integral_data data = testfile_read_integral(input_filepath, N, true);
 
@@ -95,10 +93,10 @@ void integral_create_test(const std::string & input_filepath,
 }
 
 
-template<int N, typename Func>
+template<int N>
 long integral_verify_test(const std::string & filepath,
                           slong working_prec,
-                          Func cb)
+                          typename callback_helper<N>::cb_str_type cb)
 {
     long nfailed = 0;
 
@@ -168,9 +166,10 @@ long integral_verify_test(const std::string & filepath,
 }
 
 
-template<int N, typename Func, typename Func_arb>
+template<int N>
 long integral_verify_test_exact(const std::string & filepath,
-                                Func cb, Func_arb cb_arb)
+                                typename callback_helper<N>::cb_exact_type cb,
+                                typename callback_helper<N>::cb_type cb_arb)
 {
     long nfailed = 0;
 
@@ -291,38 +290,26 @@ long integral_verify_test_exact(const std::string & filepath,
     return nfailed;
 }
 
-} // close namespace detail
 
-                        
+/**********************************
+ * Template instantiations
+ **********************************/
+template void
+integral_create_test<4>(const std::string &,
+                        const std::string &,
+                        slong, long,
+                        const std::string &,
+                        callback_helper<4>::cb_str_type);
 
-void integral4_create_test(const std::string & input_filepath,
-                           const std::string & output_filepath,
-                           slong working_prec, long ndigits,
-                           const std::string & header,
-                           cb_integral4_str cb)
-{
-    detail::integral_create_test<4>(input_filepath,
-                                    output_filepath,
-                                    working_prec, ndigits, header, cb);
-}
-
-
-long integral4_verify_test(const std::string & filepath,
-                           slong working_prec,
-                           cb_integral4_str cb)
-{
-    return detail::integral_verify_test<4>(filepath, working_prec, cb);
-}
-
-long integral4_verify_test_exact(const std::string & filepath,
-                                 cb_integral4_exact cb,
-                                 cb_integral4 cb_arb)
-{
-    return detail::integral_verify_test_exact<4>(filepath, cb, cb_arb);
-}
+template long
+integral_verify_test<4>(const std::string &, slong,
+    callback_helper<4>::cb_str_type);
 
 
-
+template long
+integral_verify_test_exact<4>(const std::string &,
+    callback_helper<4>::cb_exact_type,
+    callback_helper<4>::cb_type);
 
 } // close namespace mirp
 

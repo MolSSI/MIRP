@@ -94,15 +94,15 @@ int main(int argc, char ** argv)
             boys_create_test(infile, outfile, working_prec, ndigits, header);
         else if(integral == "eri")
         {
-            integral4_create_test(infile, outfile,
-                                          working_prec, ndigits, header,
-                                          mirp_eri_str);
+            integral_create_test<4>(infile, outfile,
+                                    working_prec, ndigits, header,
+                                    mirp_eri_str);
         }
         else if(integral == "eri_single")
         {
-            integral4_single_create_test(infile, outfile,
-                                                 working_prec, ndigits, header,
-                                                 mirp_eri_single_str);
+            integral_single_create_test<4>(infile, outfile,
+                                           working_prec, ndigits, header,
+                                           mirp_eri_single_str);
         }
         else
         {

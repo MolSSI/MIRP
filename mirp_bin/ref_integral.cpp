@@ -16,8 +16,6 @@
 
 namespace mirp {
 
-namespace detail {
-
 template<int N, typename Func>
 long integral_test_reference(const std::string & ref_filepath,
                              Func cb)
@@ -104,9 +102,6 @@ long integral_test_reference(const std::string & ref_filepath,
     return nfailed;
 }
 
-} // close namespace detail
-
-
 void integral4_create_reference(const std::string & xyz_filepath,
                                 const std::string & basis_filepath,
                                 const std::string & output_filepath,
@@ -173,12 +168,11 @@ void integral4_create_reference(const std::string & xyz_filepath,
 }
 
 
-
-long integral4_test_reference(const std::string & ref_filepath,
-                              cb_integral4_exact cb)
-{
-    return detail::integral_test_reference<4>(ref_filepath, cb);
-}
+/**********************************
+ * Template instantiations
+ **********************************/
+template long
+integral_test_reference<4, cb_integral4_exact>(const std::string &, cb_integral4_exact);
 
 
 } // close namespace mirp

@@ -72,7 +72,7 @@ int main(int argc, char ** argv)
 
         if(integral == "eri")
         {
-            nfailed = integral4_test_reference(infile, mirp_eri_exact);
+            nfailed = integral_test_reference<4>(infile, mirp_eri_exact);
         }
         else
         {

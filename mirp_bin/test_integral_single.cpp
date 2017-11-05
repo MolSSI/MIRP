@@ -16,14 +16,12 @@
 
 namespace mirp {
 
-namespace detail {
-
-template<int N, typename Func>
+template<int N>
 void integral_single_create_test(const std::string & input_filepath,
                                  const std::string & output_filepath,
                                  slong working_prec, long ndigits,
                                  const std::string & header,
-                                 Func cb)
+                                 typename callback_helper<N>::cb_single_str_type cb)
 {
     integral_single_data data = testfile_read_integral_single(input_filepath, N, true);
 
@@ -55,7 +53,7 @@ void integral_single_create_test(const std::string & input_filepath,
                 xyz[n][i] = ent.g[n].xyz[i].c_str();
         }
 
-        detail::callback_helper<N>::call_single_str(integral, lmn, xyz, alpha, working_prec, cb); 
+        callback_helper<N>::call_single_str(integral, lmn, xyz, alpha, working_prec, cb); 
 
         slong bits = arb_rel_accuracy_bits(integral);
         if(bits > 0 && bits < min_prec)
@@ -70,10 +68,10 @@ void integral_single_create_test(const std::string & input_filepath,
     arb_clear(integral);
 }
 
-template<int N, typename Func>
+template<int N>
 long integral_single_verify_test(const std::string & filepath,
                                  slong working_prec,
-                                 Func cb)
+                                 typename callback_helper<N>::cb_single_str_type cb)
 {
     long nfailed = 0;
 
@@ -98,7 +96,7 @@ long integral_single_verify_test(const std::string & filepath,
                 xyz[n][i] = ent.g[n].xyz[i].c_str();
         }
 
-        detail::callback_helper<N>::call_single_str(integral, lmn, xyz, alpha, working_prec+16, cb); 
+        callback_helper<N>::call_single_str(integral, lmn, xyz, alpha, working_prec+16, cb); 
 
         arb_set_str(integral_ref, ent.integral.c_str(), working_prec);
 
@@ -126,10 +124,10 @@ long integral_single_verify_test(const std::string & filepath,
 }
 
 
-template<int N, typename Func, typename Func_arb>
+template<int N>
 long integral_single_verify_test_exact(const std::string & filepath,
-                                       Func cb,
-                                       Func_arb cb_arb)
+                                       typename callback_helper<N>::cb_single_exact_type cb,
+                                       typename callback_helper<N>::cb_single_type cb_arb)
 {
     long nfailed = 0;
 
@@ -170,10 +168,10 @@ long integral_single_verify_test_exact(const std::string & filepath,
         }
 
         /* compute using the callback */
-        detail::callback_helper<N>::call_single_exact(&integral, lmn, xyz, alpha, cb);
+        callback_helper<N>::call_single_exact(&integral, lmn, xyz, alpha, cb);
 
         /* Compute using very high precision */
-        detail::callback_helper<N>::call_single_arb(integral_arb, lmn, xyz_arb, alpha_arb, 512, cb_arb);
+        callback_helper<N>::call_single_arb(integral_arb, lmn, xyz_arb, alpha_arb, 512, cb_arb);
 
         slong acc_bits = arb_rel_accuracy_bits(integral_arb);
 
@@ -223,34 +221,27 @@ long integral_single_verify_test_exact(const std::string & filepath,
     return nfailed;
 }
 
-} // close namespace detail
 
-void integral4_single_create_test(const std::string & input_filepath,
-                                  const std::string & output_filepath,
-                                  slong working_prec, long ndigits,
-                                  const std::string & header,
-                                  cb_integral4_single_str cb)
-{
-    detail::integral_single_create_test<4>(input_filepath,
-                                           output_filepath,
-                                           working_prec, ndigits, header, cb);
-}
+/**********************************
+ * Template instantiations
+ **********************************/
+template void
+integral_single_create_test<4>(
+        const std::string &, const std::string &,
+        slong, long, const std::string &,
+        typename callback_helper<4>::cb_single_str_type);
 
+template long
+integral_single_verify_test<4>(
+        const std::string &, slong,
+        callback_helper<4>::cb_single_str_type);
 
-long integral4_single_verify_test(const std::string & filepath,
-                                  slong working_prec,
-                                  cb_integral4_single_str cb)
-{
-    return detail::integral_single_verify_test<4>(filepath, working_prec, cb);
-}
+template long
+integral_single_verify_test_exact<4>(
+        const std::string &,
+        callback_helper<4>::cb_single_exact_type,
+        callback_helper<4>::cb_single_type);
 
-
-long integral4_single_verify_test_exact(const std::string & filepath,
-                                        cb_integral4_single_exact cb,
-                                        cb_integral4_single cb_arb)
-{
-    return detail::integral_single_verify_test_exact<4>(filepath, cb, cb_arb);
-}
 
 } // close namespace mirp
 
