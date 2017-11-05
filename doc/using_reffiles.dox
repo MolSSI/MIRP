@@ -4,7 +4,7 @@
 
 Reference files are files created by mirp that contains integrals of a molecule/basis set
 computed to exact double precision. That is, arbitrary precision interval arithmetic is
-used to guarantee that the output is know beyond double precision, with the final
+used to guarantee that the output is known beyond double precision, with the final
 value truncated.
 
 These reference files may be quite large, and therefore are distributed separately from

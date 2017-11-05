@@ -12,6 +12,64 @@ extern "C" {
 #endif
 
 
+/*! \brief Compute a single 4-center integral using interval arithmetic (string input)
+ *
+ * This function converts string inputs into arblib types and runs the callback \c cb
+ * 
+ * \param [out] integral
+ *              Output for the computed integral
+ * \param [in]  lmn1,lmn2,lmn3,lmn4
+ *              Exponents of x, y, and z that signify angular momentum. Required
+ *              to be 3 elements.
+ * \param [in]  A,B,C,D
+ *              XYZ coordinates of the four-centers (each of length 3)
+ * \param [in]  alpha1,alpha2,alpha3,alpha4
+ *              Exponents of the gaussian on the four-centers
+ * \param [in]  working_prec
+ *              Internal working precision
+ * \param [in]  cb
+ *              Function that computes a single cartesian four-center integral
+ *              with interval arithmetic
+ * \param [in]  working_prec
+ *              The working precision (binary digits/bits) to use
+ *              in the calculation
+ */
+void mirp_integral4_single_str(arb_t integral,
+                               const int * lmn1, const char ** A, const char * alpha1,
+                               const int * lmn2, const char ** B, const char * alpha2,
+                               const int * lmn3, const char ** C, const char * alpha3,
+                               const int * lmn4, const char ** D, const char * alpha4,
+                               slong working_prec, cb_integral4_single cb);
+
+
+/*! \brief Computes a single integral to exact double precision using interval
+ *         arithmetic (four-center)
+ *
+ * This function takes double precision as input and returns double precision
+ * as output. Internally, it uses interval arithmetic to ensure that no
+ * precision is lost
+ *
+ * \param [out] integral
+ *              Output for the computed integral
+ * \param [in]  lmn1,lmn2,lmn3,lmn4
+ *              Exponents of x, y, and z that signify angular momentum. Required
+ *              to be 3 elements.
+ * \param [in]  A,B,C,D
+ *              XYZ coordinates of the four-centers (each of length 3)
+ * \param [in]  alpha1,alpha2,alpha3,alpha4
+ *              Exponents of the gaussian on the four-centers
+ * \param [in]  cb
+ *              Function that computes a single cartesian four-center integral
+ *              with interval arithmetic
+ */
+void mirp_integral4_single_exact(double * integral,
+                                 const int * lmn1, const double * A, double alpha1,
+                                 const int * lmn2, const double * B, double alpha2,
+                                 const int * lmn3, const double * C, double alpha3,
+                                 const int * lmn4, const double * D, double alpha4,
+                                 cb_integral4_single cb);
+
+
 /*! \brief Compute all cartesian integrals of a contracted shell quartet
  *         for an integral (four-center, interval arithmetic)
  *
@@ -51,36 +109,6 @@ void mirp_integral4(arb_ptr integrals,
                     slong working_prec, cb_integral4_single cb);
 
 
-/*! \brief Compute a single 4-center integral using interval arithmetic (string input)
- *
- * This function converts string inputs into arblib types and runs the callback \c cb
- * 
- * \param [out] integral
- *              Output for the computed integral
- * \param [in]  lmn1,lmn2,lmn3,lmn4
- *              Exponents of x, y, and z that signify angular momentum. Required
- *              to be 3 elements.
- * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
- * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four-centers
- * \param [in]  working_prec
- *              Internal working precision
- * \param [in]  cb
- *              Function that computes a single cartesian four-center integral
- *              with interval arithmetic
- * \param [in]  working_prec
- *              The working precision (binary digits/bits) to use
- *              in the calculation
- */
-void mirp_integral4_single_str(arb_t integral,
-                               const int * lmn1, const char ** A, const char * alpha1,
-                               const int * lmn2, const char ** B, const char * alpha2,
-                               const int * lmn3, const char ** C, const char * alpha3,
-                               const int * lmn4, const char ** D, const char * alpha4,
-                               slong working_prec, cb_integral4_single cb);
-
-
 /*! \brief Compute a single 4-center integral to a target precision (string input)
  *
  * This function converts string inputs into arblib types and runs the callback \c cb
@@ -115,34 +143,6 @@ void mirp_integral4_str(arb_ptr integrals,
                         int am3, const char ** C, int nprim3, int ngen3, const char ** alpha3, const char ** coeff3,
                         int am4, const char ** D, int nprim4, int ngen4, const char ** alpha4, const char ** coeff4,
                         slong working_prec, cb_integral4 cb);
-
-
-/*! \brief Computes a single integral to exact double precision using interval
- *         arithmetic (four-center)
- *
- * This function takes double precision as input and returns double precision
- * as output. Internally, it uses interval arithmetic to ensure that no
- * precision is lost
- *
- * \param [out] integral
- *              Output for the computed integral
- * \param [in]  lmn1,lmn2,lmn3,lmn4
- *              Exponents of x, y, and z that signify angular momentum. Required
- *              to be 3 elements.
- * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
- * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four-centers
- * \param [in]  cb
- *              Function that computes a single cartesian four-center integral
- *              with interval arithmetic
- */
-void mirp_integral4_single_exact(double * integral,
-                                 const int * lmn1, const double * A, double alpha1,
-                                 const int * lmn2, const double * B, double alpha2,
-                                 const int * lmn3, const double * C, double alpha3,
-                                 const int * lmn4, const double * D, double alpha4,
-                                 cb_integral4_single cb);
 
 
 /*! \brief Compute all cartesian integrals of a contracted shell quartet
@@ -181,34 +181,6 @@ void mirp_integral4_exact(double * integrals,
                           cb_integral4 cb);
 
 
-/*! \brief Create a function that computes all cartesian integrals
- *         of a contracted shell quartet (four-center, interval arithmetic)
- *
- *  A function computing single cartesian integrals is expected to exist and
- *  be named `mirp_{name}_single`
- *
- *  The created function is named `mirp_{name}`.
- *
- *  \sa mirp_integral4
- */
-#define MIRP_WRAP_SHELL4(name) \
-    static inline \
-    void mirp_##name(arb_t integrals, \
-                     int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, \
-                     int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, \
-                     int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, \
-                     int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, \
-                     slong working_prec) \
-    { \
-        mirp_integral4(integrals, \
-                       am1, A, nprim1, ngen1, alpha1, coeff1, \
-                       am2, B, nprim2, ngen2, alpha2, coeff2, \
-                       am3, C, nprim3, ngen3, alpha3, coeff3, \
-                       am4, D, nprim4, ngen4, alpha4, coeff4, \
-                       working_prec, mirp_##name##_single); \
-    }
-
-
 /*! \brief Create a function that computes single cartesian integrals
  *         from string arguments (four-center)
  *
@@ -237,6 +209,60 @@ void mirp_integral4_exact(double * integrals,
                                   mirp_##name##_single); \
     }
 
+
+/*! \brief Create a function that computes single cartesian integrals
+ *         to exact double precision (four-center)
+ *
+ *  A function computing single cartesian integrals is
+ *  expected to exist and be named `mirp_{name}_single`
+ *
+ *  The created function is named `mirp_{name}_single_exact`.
+ *
+ *  \sa mirp_integral4_single_exact
+ */
+#define MIRP_WRAP_SINGLE4_EXACT(name) \
+    static inline \
+    void mirp_##name##_single_exact(double * integral, \
+                                    const int * lmn1, const double * A, double alpha1, \
+                                    const int * lmn2, const double * B, double alpha2, \
+                                    const int * lmn3, const double * C, double alpha3, \
+                                    const int * lmn4, const double * D, double alpha4) \
+    { \
+        mirp_integral4_single_exact(integral, \
+                                    lmn1, A, alpha1, \
+                                    lmn2, B, alpha2, \
+                                    lmn3, C, alpha3, \
+                                    lmn4, D, alpha4, \
+                                    mirp_##name##_single); \
+    }
+
+
+/*! \brief Create a function that computes all cartesian integrals
+ *         of a contracted shell quartet (four-center, interval arithmetic)
+ *
+ *  A function computing single cartesian integrals is expected to exist and
+ *  be named `mirp_{name}_single`
+ *
+ *  The created function is named `mirp_{name}`.
+ *
+ *  \sa mirp_integral4
+ */
+#define MIRP_WRAP_SHELL4(name) \
+    static inline \
+    void mirp_##name(arb_t integrals, \
+                     int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, \
+                     int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, \
+                     int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, \
+                     int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, \
+                     slong working_prec) \
+    { \
+        mirp_integral4(integrals, \
+                       am1, A, nprim1, ngen1, alpha1, coeff1, \
+                       am2, B, nprim2, ngen2, alpha2, coeff2, \
+                       am3, C, nprim3, ngen3, alpha3, coeff3, \
+                       am4, D, nprim4, ngen4, alpha4, coeff4, \
+                       working_prec, mirp_##name##_single); \
+    }
 
 
 /*! \brief Create a function that computes all cartesian integrals
@@ -269,35 +295,6 @@ void mirp_integral4_exact(double * integrals,
     }
 
 
-
-
-/*! \brief Create a function that computes single cartesian integrals
- *         to exact double precision (four-center)
- *
- *  A function computing single cartesian integrals is
- *  expected to exist and be named `mirp_{name}_single`
- *
- *  The created function is named `mirp_{name}_single_exact`.
- *
- *  \sa mirp_integral4_single_exact
- */
-#define MIRP_WRAP_SINGLE4_EXACT(name) \
-    static inline \
-    void mirp_##name##_single_exact(double * integral, \
-                                    const int * lmn1, const double * A, double alpha1, \
-                                    const int * lmn2, const double * B, double alpha2, \
-                                    const int * lmn3, const double * C, double alpha3, \
-                                    const int * lmn4, const double * D, double alpha4) \
-    { \
-        mirp_integral4_single_exact(integral, \
-                                    lmn1, A, alpha1, \
-                                    lmn2, B, alpha2, \
-                                    lmn3, C, alpha3, \
-                                    lmn4, D, alpha4, \
-                                    mirp_##name##_single); \
-    }
-
-
 /*! \brief Create a function that computes all cartesian integrals
  *         of a contracted shell quartet to exact double precision (four-center)
  *
@@ -323,7 +320,6 @@ void mirp_integral4_exact(double * integrals,
                              am4, D, nprim4, ngen4, alpha4, coeff4, \
                              mirp_##name); \
     }
-
 
 
 #ifdef __cplusplus

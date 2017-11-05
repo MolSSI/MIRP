@@ -17,22 +17,11 @@ extern "C" {
 /*! \brief Computes a single cartesian electron repulsion integral
  *         (interval arithmetic)
  *
- * The \p lmn parameters are the exponents on x, y, and z, with the total
- * angular momentum being the sum of the three components. For example,
- * { 1, 2, 0 } is the \f$f_{xy^2}\f$ cartesian integral.
+ * \copydetails mirp_eri_single_exact
  *
- * \param [out] integral
- *              Resulting integral integral
- * \param [in]  lmn1,lmn2,lmn3,lmn4
- *              Exponents of x, y, and z that signify angular momentum. Required
- *              to be 3 elements.
- * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
- * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four-centers
- *
- * \param [in] working_prec The working precision (binary digits/bits) to use
- *                          in the calculation
+ * \param [in]  working_prec
+ *              The working precision (binary digits/bits) to use
+ *              in the calculation
  */
 void mirp_eri_single(arb_t integral,
                      const int * lmn1, arb_srcptr A, const arb_t alpha1,
@@ -46,8 +35,55 @@ void mirp_eri_single(arb_t integral,
  * Wrappings
  *******************/
 
+/*! \brief Compute a single electron repulsion integral for a primitive quartet
+ *         (interval arithmetic)
+ *
+ * \copydetails mirp_eri_single
+ */
+MIRP_WRAP_SINGLE4_STR(eri)
+
+
+/*! \brief Compute a single electron repulsion integral for a primitive quartet
+ *         (exact double precision)
+ *
+ * The \p lmn parameters are the exponents on x, y, and z, with the total
+ * angular momentum being the sum of the three components. For example,
+ * { 1, 2, 0 } is the \f$f_{xy^2}\f$ cartesian integral.
+ *
+ * \param [out] integral
+ *              Resulting integral integral
+ * \param [in]  lmn1,lmn2,lmn3,lmn4
+ *              Exponents of x, y, and z that signify angular momentum. Required
+ *              to be 3 elements.
+ * \param [in]  A,B,C,D
+ *              XYZ coordinates of the four-centers (each of length 3)
+ * \param [in]  alpha1,alpha2,alpha3,alpha4
+ *              Exponents of the gaussian on the four-centers
+ */
+MIRP_WRAP_SINGLE4_EXACT(eri)
+
+
 /*! \brief Compute electron repulsion integrals for a contracted
  *         shell quartet (interval arithmetic)
+ *
+ * \copydetails mirp_eri_exact
+ * \param [in]  working_prec
+ *              The working precision (binary digits/bits) to use
+ *              in the calculation
+ */
+MIRP_WRAP_SHELL4(eri)
+
+
+/*! \brief Compute electron repulsion integrals for a contracted
+ *         shell quartet (string inputs)
+ *
+ * \copydetails mirp_eri
+ */
+MIRP_WRAP_SHELL4_STR(eri)
+
+
+/*! \brief Compute electron repulsion integrals for a contracted
+ *         shell quartet (exact double precision)
  *
  * \param [out] integrals
  *              Output for the computed integral
@@ -66,54 +102,10 @@ void mirp_eri_single(arb_t integral,
  *              Coefficients for all primitives and for all general contractions
  *              for each shell (of lengths \p nprim1 * \p ngen1, \p nprim2 * \p ngen2,
  *              \p nprim3 * \p ngen3, \p nprim4 * \p ngen4 respectively)
- * \param [in]  working_prec
- *              The working precision (binary digits/bits) to use
- *              in the calculation
- */
-MIRP_WRAP_SHELL4(eri)
-
-/*! \brief Compute electron repulsion integrals for a contracted
- *         shell quartet (string inputs)
- *
- * \copydetails mirp_eri
- */
-MIRP_WRAP_SHELL4_STR(eri)
-
-/*! \brief Compute a single electron repulsion integral for a primitive quartet
- *         (interval arithmetic)
- *
- * \param [out] integral
- *              Output for the computed integral
- * \param [in]  lmn1,lmn2,lmn3,lmn4
- *              Exponents of x, y, and z that signify angular momentum. Required
- *              to be 3 elements.
- * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
- * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four-centers
- * \param [in]  working_prec
- *              Internal working precision
- * \param [in]  working_prec
- *              The working precision (binary digits/bits) to use
- *              in the calculation
- */
-MIRP_WRAP_SINGLE4_STR(eri)
-
-
-/*! \brief Compute a single electron repulsion integral for a primitive quartet
- *         (exact double precision)
- *
- * \copydetails mirp_eri_single
- */
-MIRP_WRAP_SINGLE4_EXACT(eri)
-
-
-/*! \brief Compute electron repulsion integrals for a contracted
- *         shell quartet (exact double precision)
- *
- * \copydetails mirp_eri
  */
 MIRP_WRAP_SHELL4_EXACT(eri)
+
+
 
 
 #ifdef __cplusplus

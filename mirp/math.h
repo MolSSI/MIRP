@@ -1,7 +1,6 @@
 /*! \file
  *
- * \brief Some miscellaneous mathematical functions in double
- *        precision and interval arithmetic
+ * \brief Some miscellaneous mathematical functions and constants
  */
 
 #pragma once
@@ -69,20 +68,8 @@ void mirp_pow_si(arb_t output, const arb_t b, long e, slong prec);
 void mirp_factorial(arb_t output, long n);
 
 
-/*! \brief Calculates a factorial using double precision */
-double mirp_factorial_d(int n);
-
-
-/*! \brief Calculates a double factorial using double precision */
-double mirp_factorial2_d(int n);
-
-
 /*! \brief Calculates a double factorial using interval arithmetic */
 void mirp_factorial2(arb_t output, long n);
-
-
-/*! \brief Calculates a binomial coefficient using double precision */
-double mirp_binomial_d(int n, int k);
 
 
 /*! \brief Calculates a binomial coefficient using interval arithmetic */

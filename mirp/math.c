@@ -1,7 +1,7 @@
 /*! \file
  *
- * \brief Some miscellaneous mathematical functions in double
- *        precision and interval arithmetic
+ * \brief Some miscellaneous mathematical functions in
+ *        interval arithmetic
  */
 
 #include "mirp/math.h"
@@ -50,40 +50,6 @@ void mirp_factorial(arb_t output, long n)
 }
 
 
-double mirp_factorial_d(int n)
-{
-    assert(n >= 0);
-
-    if(n == 0)
-        return 1.0;
-    if(n == 1)
-        return 1.0;
-    else
-    {
-        double r = 1.0;
-        for(int i = n; i > 0; i--)
-            r *= i;
-        return r;
-    }
-}
-
-
-double mirp_factorial2_d(int n)
-{
-    assert(n >= -1);
-
-    if(n >= -1 && n <= 1)
-        return 1.0;
-    else
-    {
-        double r = 1.0;
-        for(int i = n; i > 0; i-=2)
-            r *= i;
-        return r;
-    }
-}
-
-
 void mirp_factorial2(arb_t output, long n)
 {
     /* arblib has a double factorial function, but only for
@@ -105,16 +71,6 @@ void mirp_factorial2(arb_t output, long n)
         fmpz_clear(tmp);
     }
 
-}
-
-
-double mirp_binomial_d(int n, int k)
-{
-    assert(n >= 0);
-    assert(k >= 0);
-    assert(k <= n);
-
-    return mirp_factorial_d(n)/(mirp_factorial_d(k) * mirp_factorial_d(n-k));
 }
 
 

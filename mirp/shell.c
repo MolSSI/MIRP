@@ -44,48 +44,6 @@ void mirp_gaussian_fill_lmn(int am, int * lmn)
 }
 
 
-void mirp_normalize_shell_d(int am, int nprim, int ngeneral,
-                            const double * alpha,
-                            const double * coeff,
-                            double * coeff_out)
-{
-    const double dam = (double)am;
-    const double m = dam + 1.5;
-    const double m2 = 0.5 * m;
-
-    /* Normalization factor
-     *
-     * norm_fac = pi^(3/2) * (2l-1)!! / 2^l
-     */
-    double norm_fac = MIRP_PI_32;
-    for(int i = 1; i <= am; i++)
-        norm_fac *= ((double)(2.0*i-1))/2.0;
-
-    for(int n = 0; n < ngeneral; n++)
-    {
-        double sum = 0.0;
-
-        for(int i = 0; i < nprim; i++)
-        {
-            const double a1 = alpha[i];
-            const double c1 = coeff[n*nprim+i];
-
-            for(int j = 0; j < nprim; j++)
-            {
-                const double a2 = alpha[j];
-                const double c2 = coeff[n*nprim+j];
-                sum += ( c1 * c2 *  pow(a1*a2, m2) ) / ( pow(a1+a2, m) );
-            }
-        }
-
-        const double norm = 1.0 / sqrt(sum * norm_fac);
-
-        for (int i = 0; i < nprim; ++i)
-            coeff_out[n*nprim+i] = coeff[n*nprim+i] * norm * pow(alpha[i], m2);
-    }
-}
-
-
 void mirp_normalize_shell(int am, int nprim, int ngeneral,
                           arb_srcptr alpha,
                           arb_srcptr coeff,

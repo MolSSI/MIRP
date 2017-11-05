@@ -77,16 +77,6 @@ void mirp_gaussian_fill_lmn(int am, int * lmn);
  *                        (length \p nprim * \p ngeneral)
  * \param [out] coeff_out Normalized contraction coefficients
  *                        (length \p nprim * \p ngeneral)
- */
-void mirp_normalize_shell_d(int am, int nprim, int ngeneral,
-                            const double * alpha,
-                            const double * coeff,
-                            double * coeff_out);
-
-
-/*! \brief Normalize a shell (interval arithmetic)
- *
- * \copydetails mirp_normalize_shell_d
  * \param [in] working_prec The working precision (binary digits/bits) to use
  *                          in the calculation
  */
