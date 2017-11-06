@@ -1,7 +1,7 @@
 <map id="mirp/kernels/eri.c" name="mirp/kernels/eri.c">
 <area shape="rect" id="node2" href="$boys_8h.html" title="Calculation of the boys function. " alt="" coords="5,163,141,189"/>
 <area shape="rect" id="node4" href="$eri_8h.html" title="Kernel for electron repulsion integrals. " alt="" coords="228,80,351,107"/>
-<area shape="rect" id="node7" href="$math_8h.html" title="Some miscellaneous mathematical functions in double precision and interval arithmetic. " alt="" coords="352,245,443,272"/>
+<area shape="rect" id="node7" href="$math_8h.html" title="Some miscellaneous mathematical functions and constants. " alt="" coords="352,245,443,272"/>
 <area shape="rect" id="node8" href="$gpt_8h.html" title="Calculation of the Gaussian Product Theorem terms. " alt="" coords="439,163,519,189"/>
 <area shape="rect" id="node9" href="$pragma_8h.html" title="Pragmas for enabling/disabling compiler warnings. " alt="" coords="489,80,593,107"/>
 <area shape="rect" id="node5" href="$integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="216,155,363,197"/>

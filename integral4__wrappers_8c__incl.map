@@ -1,6 +1,6 @@
 <map id="mirp/kernels/integral4_wrappers.c" name="mirp/kernels/integral4_wrappers.c">
 <area shape="rect" id="node2" href="$pragma_8h.html" title="Pragmas for enabling/disabling compiler warnings. " alt="" coords="14,104,119,131"/>
-<area shape="rect" id="node3" href="$math_8h.html" title="Some miscellaneous mathematical functions in double precision and interval arithmetic. " alt="" coords="5,187,96,213"/>
+<area shape="rect" id="node3" href="$math_8h.html" title="Some miscellaneous mathematical functions and constants. " alt="" coords="5,187,96,213"/>
 <area shape="rect" id="node5" href="$shell_8h.html" title="Functions related to gaussians and shells. " alt="" coords="121,187,209,213"/>
 <area shape="rect" id="node6" href="$boys_8h.html" title="Calculation of the boys function. " alt="" coords="235,187,371,213"/>
 <area shape="rect" id="node7" href="$integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="296,97,443,138"/>

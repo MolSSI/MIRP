@@ -87,12 +87,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <map name="mirp_2kernels_2boys_8hdep" id="mirp_2kernels_2boys_8hdep">
 <area shape="rect" id="node2" href="all_8h.html" title="Convenience header for including headers for all kernels. " alt="" coords="265,88,385,115"/>
 <area shape="rect" id="node7" href="boys_8c.html" title="Calculation of the boys function using interval arithmetic. " alt="" coords="411,88,547,115"/>
-<area shape="rect" id="node8" href="boys__d_8c.html" title="Calculation of the boys function using double precision. " alt="" coords="571,88,721,115"/>
-<area shape="rect" id="node9" href="eri_8c.html" title="Kernel for electron repulsion integrals (interval arithmetic) " alt="" coords="747,88,869,115"/>
-<area shape="rect" id="node10" href="eri__d_8c.html" title="Kernel for electron repulsion integrals (double precision) " alt="" coords="893,88,1029,115"/>
-<area shape="rect" id="node11" href="integral4__wrappers_8c.html" title="Some useful wrapping of functionality. " alt="" coords="1053,81,1200,122"/>
-<area shape="rect" id="node12" href="mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="1225,88,1311,115"/>
-<area shape="rect" id="node13" href="test__boys_8cpp.html" title="Functions related to testing the Boys function. " alt="" coords="1336,88,1493,115"/>
+<area shape="rect" id="node8" href="eri_8c.html" title="Kernel for electron repulsion integrals (interval arithmetic) " alt="" coords="571,88,693,115"/>
+<area shape="rect" id="node9" href="integral4__wrappers_8c.html" title="Some useful wrapping of functionality. " alt="" coords="717,81,864,122"/>
+<area shape="rect" id="node10" href="mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="889,88,975,115"/>
+<area shape="rect" id="node11" href="test__boys_8cpp.html" title="Functions related to testing the Boys function. " alt="" coords="1000,88,1157,115"/>
 <area shape="rect" id="node3" href="mirp__create__reference_8cpp.html" title="mirp_create_reference main function " alt="" coords="5,171,147,213"/>
 <area shape="rect" id="node4" href="mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="171,171,313,213"/>
 <area shape="rect" id="node5" href="mirp__verify__reference_8cpp.html" title="mirp_verify_reference main function " alt="" coords="339,171,477,213"/>
@@ -104,9 +102,6 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad08d94f6398a41e6dfba98ae646fcbe3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boys_8h.html#ad08d94f6398a41e6dfba98ae646fcbe3">mirp_boys_d</a> (double *F, int m, double t)</td></tr>
-<tr class="memdesc:ad08d94f6398a41e6dfba98ae646fcbe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Boys function using double precision.  <a href="#ad08d94f6398a41e6dfba98ae646fcbe3">More...</a><br /></td></tr>
-<tr class="separator:ad08d94f6398a41e6dfba98ae646fcbe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af56c9646d519018d0e234600dcb61406"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boys_8h.html#af56c9646d519018d0e234600dcb61406">mirp_boys</a> (arb_ptr F, int m, const arb_t t, slong working_prec)</td></tr>
 <tr class="memdesc:af56c9646d519018d0e234600dcb61406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Boys function using interval arithmetic.  <a href="#af56c9646d519018d0e234600dcb61406">More...</a><br /></td></tr>
 <tr class="separator:af56c9646d519018d0e234600dcb61406"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,54 +160,8 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">F</td><td>The computed values of the Boys function </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>The maximum order to calculate </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value at which to evaluate</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ad08d94f6398a41e6dfba98ae646fcbe3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad08d94f6398a41e6dfba98ae646fcbe3">&#9670;&nbsp;</a></span>mirp_boys_d()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void mirp_boys_d </td>
-          <td>(</td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>F</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>m</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>t</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Computes the Boys function using double precision. </p>
-<p>See <a class="el" href="boys_function.html">The Boys Function</a></p>
-<dl class="section warning"><dt>Warning</dt><dd><code>F</code> must be large enough to hold (<code>m</code> + 1) values, since this is computing from zero to m.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">F</td><td>The computed values of the Boys function </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>The maximum order to calculate </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value at which to evaluate </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation </td></tr>
   </table>
   </dd>
 </dl>
@@ -253,6 +202,7 @@ Functions</h2></td></tr>
 
 <p>Computes the Boys function to exact double precision using interval arithmetic. </p>
 <p>This function takes double precision as input and returns double precision as output. Internally, it uses interval arithmetic to ensure that no precision is lost</p>
+<dl class="section warning"><dt>Warning</dt><dd><code>F</code> must be large enough to hold (<code>m</code> + 1) values, since this is computing from zero to m.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">F</td><td>The computed values of the Boys function </td></tr>
@@ -309,8 +259,7 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">F</td><td>The computed values of the Boys function </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>The maximum order to calculate </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value at which to evaluate</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value at which to evaluate </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation </td></tr>
   </table>
   </dd>
@@ -321,7 +270,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 30 2017 10:52:14 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 6 2017 10:16:57 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

@@ -76,6 +76,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmirp_1_1boys__data__entry.html">boys_data_entry</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An single entry for a Boys function test.  <a href="structmirp_1_1boys__data__entry.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helps with calling callbacks with the given number of centers.  <a href="structmirp_1_1callback__helper.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmirp_1_1callback__helper_3_014_01_4.html">callback_helper&lt; 4 &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmirp_1_1gaussian__shell.html">gaussian_shell</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A shell of cartesian gaussian functions (double precision)  <a href="structmirp_1_1gaussian__shell.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,12 +129,15 @@ Functions</h2></td></tr>
 <tr class="memitem:acdae67e044b4ee1c9b7a02614b093354"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structmirp_1_1gaussian__shell.html">gaussian_shell</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#acdae67e044b4ee1c9b7a02614b093354">read_construct_basis</a> (const std::string &amp;xyzfile, const std::string &amp;basfile)</td></tr>
 <tr class="memdesc:acdae67e044b4ee1c9b7a02614b093354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a basis from an XYZ file and a basis set file.  <a href="#acdae67e044b4ee1c9b7a02614b093354">More...</a><br /></td></tr>
 <tr class="separator:acdae67e044b4ee1c9b7a02614b093354"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d45a24f2eb91eb68273778e8139bbfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a7d45a24f2eb91eb68273778e8139bbfa">integral4_create_reference</a> (const std::string &amp;xyz_filepath, const std::string &amp;basis_filepath, const std::string &amp;output_filepath, const std::string &amp;header, const std::vector&lt; std::vector&lt; int &gt;&gt; &amp;amlist, <a class="el" href="typedefs_8h.html#a068b7fddadc3a6e5102473c6b56ea41b">cb_integral4_exact</a> cb)</td></tr>
+<tr class="memitem:a0d8bdb46ad41b7f20f067871bd064520"><td class="memTemplParams" colspan="2">template&lt;int N, typename Func &gt; </td></tr>
+<tr class="memitem:a0d8bdb46ad41b7f20f067871bd064520"><td class="memTemplItemLeft" align="right" valign="top">long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a0d8bdb46ad41b7f20f067871bd064520">integral_test_reference</a> (const std::string &amp;ref_filepath, Func cb)</td></tr>
+<tr class="memdesc:a0d8bdb46ad41b7f20f067871bd064520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests a reference file for consistency.  <a href="#a0d8bdb46ad41b7f20f067871bd064520">More...</a><br /></td></tr>
+<tr class="separator:a0d8bdb46ad41b7f20f067871bd064520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d45a24f2eb91eb68273778e8139bbfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a7d45a24f2eb91eb68273778e8139bbfa">integral4_create_reference</a> (const std::string &amp;xyz_filepath, const std::string &amp;basis_filepath, const std::string &amp;output_filepath, const std::string &amp;header, const std::vector&lt; std::vector&lt; int &gt;&gt; &amp;amlist, <a class="el" href="typedefs_8h.html#a961666448f7e097fb4bd399d493c97f0">cb_integral4_exact</a> cb)</td></tr>
 <tr class="memdesc:a7d45a24f2eb91eb68273778e8139bbfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a file with exact double reference values of contracted integrals.  <a href="#a7d45a24f2eb91eb68273778e8139bbfa">More...</a><br /></td></tr>
 <tr class="separator:a7d45a24f2eb91eb68273778e8139bbfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4de5ef1f0a14182ca593a8f68ca2c0c"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#ad4de5ef1f0a14182ca593a8f68ca2c0c">integral4_test_reference</a> (const std::string &amp;ref_filepath, <a class="el" href="typedefs_8h.html#a068b7fddadc3a6e5102473c6b56ea41b">cb_integral4_exact</a> cb)</td></tr>
-<tr class="memdesc:ad4de5ef1f0a14182ca593a8f68ca2c0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests a reference file for consistency.  <a href="#ad4de5ef1f0a14182ca593a8f68ca2c0c">More...</a><br /></td></tr>
-<tr class="separator:ad4de5ef1f0a14182ca593a8f68ca2c0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c1bbf17ac462d26290f4fe81679767e"><td class="memItemLeft" align="right" valign="top">template long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a3c1bbf17ac462d26290f4fe81679767e">integral_test_reference&lt; 4, cb_integral4_exact &gt;</a> (const std::string &amp;, <a class="el" href="typedefs_8h.html#a961666448f7e097fb4bd399d493c97f0">cb_integral4_exact</a>)</td></tr>
+<tr class="separator:a3c1bbf17ac462d26290f4fe81679767e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af08924503706850419e98bf66456e4b0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#af08924503706850419e98bf66456e4b0">read_hexdouble</a> (std::istream &amp;fs)</td></tr>
 <tr class="memdesc:af08924503706850419e98bf66456e4b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a double precision number from an ASCII file.  <a href="#af08924503706850419e98bf66456e4b0">More...</a><br /></td></tr>
 <tr class="separator:af08924503706850419e98bf66456e4b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,30 +192,42 @@ Functions</h2></td></tr>
 <tr class="memitem:ac7ec7b283a1a72f007fdc0b0ded9377b"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#ac7ec7b283a1a72f007fdc0b0ded9377b">nintegrals</a> (const <a class="el" href="structmirp_1_1integral__data__entry.html">integral_data_entry</a> &amp;ent)</td></tr>
 <tr class="memdesc:ac7ec7b283a1a72f007fdc0b0ded9377b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of integrals computed in an entry.  <a href="#ac7ec7b283a1a72f007fdc0b0ded9377b">More...</a><br /></td></tr>
 <tr class="separator:ac7ec7b283a1a72f007fdc0b0ded9377b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af74d132e83d2ddcb3a14dc4c84d1577d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#af74d132e83d2ddcb3a14dc4c84d1577d">integral4_create_test</a> (const std::string &amp;input_filepath, const std::string &amp;output_filepath, slong working_prec, long ndigits, const std::string &amp;header, <a class="el" href="typedefs_8h.html#a1c16a1a39c3f93f8c0d1579f92d1a265">cb_integral4_str</a> cb)</td></tr>
-<tr class="memdesc:af74d132e83d2ddcb3a14dc4c84d1577d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a test of contracted integrals.  <a href="#af74d132e83d2ddcb3a14dc4c84d1577d">More...</a><br /></td></tr>
-<tr class="separator:af74d132e83d2ddcb3a14dc4c84d1577d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a238c7024fff4ddc1baa3796aa7ec9884"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a238c7024fff4ddc1baa3796aa7ec9884">integral4_verify_test</a> (const std::string &amp;filepath, slong working_prec, <a class="el" href="typedefs_8h.html#a1c16a1a39c3f93f8c0d1579f92d1a265">cb_integral4_str</a> cb)</td></tr>
-<tr class="memdesc:a238c7024fff4ddc1baa3796aa7ec9884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a test of single cartesian integrals.  <a href="#a238c7024fff4ddc1baa3796aa7ec9884">More...</a><br /></td></tr>
-<tr class="separator:a238c7024fff4ddc1baa3796aa7ec9884"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff12c35cbda40778e7d6384484bd0952"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#aff12c35cbda40778e7d6384484bd0952">integral4_verify_test_d</a> (const std::string &amp;filepath, <a class="el" href="typedefs_8h.html#ad48a6422cdf88c5e2404e7754a410ad6">cb_integral4_d</a> cb)</td></tr>
-<tr class="memdesc:aff12c35cbda40778e7d6384484bd0952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test contracted integrals in double precision.  <a href="#aff12c35cbda40778e7d6384484bd0952">More...</a><br /></td></tr>
-<tr class="separator:aff12c35cbda40778e7d6384484bd0952"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5ca01fb6ea01f646875ee97351cdfaf"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#ad5ca01fb6ea01f646875ee97351cdfaf">integral4_verify_test_exact</a> (const std::string &amp;filepath, <a class="el" href="typedefs_8h.html#a068b7fddadc3a6e5102473c6b56ea41b">cb_integral4_exact</a> cb, <a class="el" href="typedefs_8h.html#a649ffd4b235bfb92f735edf0dc2bb7a4">cb_integral4</a> cb_mp)</td></tr>
-<tr class="memdesc:ad5ca01fb6ea01f646875ee97351cdfaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test contracted integrals in exact double precision.  <a href="#ad5ca01fb6ea01f646875ee97351cdfaf">More...</a><br /></td></tr>
-<tr class="separator:ad5ca01fb6ea01f646875ee97351cdfaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf20a4cfd122b51e8d60303eec407cd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#aaf20a4cfd122b51e8d60303eec407cd2">integral4_single_create_test</a> (const std::string &amp;input_filepath, const std::string &amp;output_filepath, slong working_prec, long ndigits, const std::string &amp;header, <a class="el" href="typedefs_8h.html#ae6c0106acd451647025e1c96ba29b22d">cb_integral4_single_str</a> cb)</td></tr>
-<tr class="memdesc:aaf20a4cfd122b51e8d60303eec407cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a test of single cartesian integrals.  <a href="#aaf20a4cfd122b51e8d60303eec407cd2">More...</a><br /></td></tr>
-<tr class="separator:aaf20a4cfd122b51e8d60303eec407cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a809e54f17585b9d91d860414005c6686"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a809e54f17585b9d91d860414005c6686">integral4_single_verify_test</a> (const std::string &amp;filepath, slong working_prec, <a class="el" href="typedefs_8h.html#ae6c0106acd451647025e1c96ba29b22d">cb_integral4_single_str</a> cb)</td></tr>
-<tr class="memdesc:a809e54f17585b9d91d860414005c6686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a test of single cartesian integrals using interval math.  <a href="#a809e54f17585b9d91d860414005c6686">More...</a><br /></td></tr>
-<tr class="separator:a809e54f17585b9d91d860414005c6686"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa54f835c9d736cfb31f8289c5dad3b46"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#aa54f835c9d736cfb31f8289c5dad3b46">integral4_single_verify_test_d</a> (const std::string &amp;filepath, <a class="el" href="typedefs_8h.html#ab4bde9b22667586d502024f2a015ead3">cb_integral4_single_d</a> cb)</td></tr>
-<tr class="memdesc:aa54f835c9d736cfb31f8289c5dad3b46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test single cartesian integrals in double precision.  <a href="#aa54f835c9d736cfb31f8289c5dad3b46">More...</a><br /></td></tr>
-<tr class="separator:aa54f835c9d736cfb31f8289c5dad3b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a67bd4338edbc7513b3495606b5bf2f"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a8a67bd4338edbc7513b3495606b5bf2f">integral4_single_verify_test_exact</a> (const std::string &amp;filepath, <a class="el" href="typedefs_8h.html#a55e29f3bdeaac872f8b9986c0715466f">cb_integral4_single_exact</a> cb, <a class="el" href="typedefs_8h.html#a417fa18f7fa2d551142a35b4d24d8747">cb_integral4_single</a> cb_mp)</td></tr>
-<tr class="memdesc:a8a67bd4338edbc7513b3495606b5bf2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test single cartesian integrals in exact double precision.  <a href="#a8a67bd4338edbc7513b3495606b5bf2f">More...</a><br /></td></tr>
-<tr class="separator:a8a67bd4338edbc7513b3495606b5bf2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68d48387ad435d637ae6ec404372c449"><td class="memTemplParams" colspan="2">template&lt;int N&gt; </td></tr>
+<tr class="memitem:a68d48387ad435d637ae6ec404372c449"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a68d48387ad435d637ae6ec404372c449">integral_create_test</a> (const std::string &amp;input_filepath, const std::string &amp;output_filepath, slong working_prec, long ndigits, const std::string &amp;header, typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_str_type cb)</td></tr>
+<tr class="memdesc:a68d48387ad435d637ae6ec404372c449"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a test of contracted integrals.  <a href="#a68d48387ad435d637ae6ec404372c449">More...</a><br /></td></tr>
+<tr class="separator:a68d48387ad435d637ae6ec404372c449"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72f3b05c41e5f1c10cc383b336c20c8b"><td class="memTemplParams" colspan="2">template&lt;int N&gt; </td></tr>
+<tr class="memitem:a72f3b05c41e5f1c10cc383b336c20c8b"><td class="memTemplItemLeft" align="right" valign="top">long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a72f3b05c41e5f1c10cc383b336c20c8b">integral_verify_test</a> (const std::string &amp;filepath, slong working_prec, typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_str_type cb)</td></tr>
+<tr class="memdesc:a72f3b05c41e5f1c10cc383b336c20c8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a test of single cartesian integrals.  <a href="#a72f3b05c41e5f1c10cc383b336c20c8b">More...</a><br /></td></tr>
+<tr class="separator:a72f3b05c41e5f1c10cc383b336c20c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade8084713e84c8e42f57ad70e9f90382"><td class="memTemplParams" colspan="2">template&lt;int N&gt; </td></tr>
+<tr class="memitem:ade8084713e84c8e42f57ad70e9f90382"><td class="memTemplItemLeft" align="right" valign="top">long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemirp.html#ade8084713e84c8e42f57ad70e9f90382">integral_verify_test_exact</a> (const std::string &amp;filepath, typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_exact_type cb, typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_type cb_arb)</td></tr>
+<tr class="memdesc:ade8084713e84c8e42f57ad70e9f90382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test contracted integrals in exact double precision.  <a href="#ade8084713e84c8e42f57ad70e9f90382">More...</a><br /></td></tr>
+<tr class="separator:ade8084713e84c8e42f57ad70e9f90382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad397fea269958039a7e7069008bcc7f7"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#ad397fea269958039a7e7069008bcc7f7">integral_create_test&lt; 4 &gt;</a> (const std::string &amp;, const std::string &amp;, slong, long, const std::string &amp;, <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_str_type)</td></tr>
+<tr class="separator:ad397fea269958039a7e7069008bcc7f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdd07901b6956b9961a8fe71fb7361a5"><td class="memItemLeft" align="right" valign="top">template long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#abdd07901b6956b9961a8fe71fb7361a5">integral_verify_test&lt; 4 &gt;</a> (const std::string &amp;, slong, <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_str_type)</td></tr>
+<tr class="separator:abdd07901b6956b9961a8fe71fb7361a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff8dfc46870c2a1ed84dc516fe2de727"><td class="memItemLeft" align="right" valign="top">template long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#aff8dfc46870c2a1ed84dc516fe2de727">integral_verify_test_exact&lt; 4 &gt;</a> (const std::string &amp;, <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_exact_type, <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_type)</td></tr>
+<tr class="separator:aff8dfc46870c2a1ed84dc516fe2de727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64d8f8cf985f47c8ab49c5eedf92e27f"><td class="memTemplParams" colspan="2">template&lt;int N&gt; </td></tr>
+<tr class="memitem:a64d8f8cf985f47c8ab49c5eedf92e27f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a64d8f8cf985f47c8ab49c5eedf92e27f">integral_single_create_test</a> (const std::string &amp;input_filepath, const std::string &amp;output_filepath, slong working_prec, long ndigits, const std::string &amp;header, typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_single_str_type cb)</td></tr>
+<tr class="memdesc:a64d8f8cf985f47c8ab49c5eedf92e27f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a test of single cartesian integrals.  <a href="#a64d8f8cf985f47c8ab49c5eedf92e27f">More...</a><br /></td></tr>
+<tr class="separator:a64d8f8cf985f47c8ab49c5eedf92e27f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa37a4b679edeb6c9f01e3a3cf2fe2249"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#aa37a4b679edeb6c9f01e3a3cf2fe2249">integral_single_create_test&lt; 4 &gt;</a> (const std::string &amp;, const std::string &amp;, slong, long, const std::string &amp;, <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_single_str_type)</td></tr>
+<tr class="separator:aa37a4b679edeb6c9f01e3a3cf2fe2249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e8587e92b0a4446137f5065b49f33fc"><td class="memTemplParams" colspan="2">template&lt;int N&gt; </td></tr>
+<tr class="memitem:a9e8587e92b0a4446137f5065b49f33fc"><td class="memTemplItemLeft" align="right" valign="top">long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a9e8587e92b0a4446137f5065b49f33fc">integral_single_verify_test</a> (const std::string &amp;filepath, slong working_prec, typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_single_str_type cb)</td></tr>
+<tr class="memdesc:a9e8587e92b0a4446137f5065b49f33fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs a test of single cartesian integrals using interval math.  <a href="#a9e8587e92b0a4446137f5065b49f33fc">More...</a><br /></td></tr>
+<tr class="separator:a9e8587e92b0a4446137f5065b49f33fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e112c63a42a21d9175a12747116b297"><td class="memItemLeft" align="right" valign="top">template long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a6e112c63a42a21d9175a12747116b297">integral_single_verify_test&lt; 4 &gt;</a> (const std::string &amp;, slong, <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_single_str_type)</td></tr>
+<tr class="separator:a6e112c63a42a21d9175a12747116b297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57e47ecf511580a67d7844dc23a011bd"><td class="memTemplParams" colspan="2">template&lt;int N&gt; </td></tr>
+<tr class="memitem:a57e47ecf511580a67d7844dc23a011bd"><td class="memTemplItemLeft" align="right" valign="top">long&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a57e47ecf511580a67d7844dc23a011bd">integral_single_verify_test_exact</a> (const std::string &amp;filepath, typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_single_exact_type cb, typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_single_type cb_arb)</td></tr>
+<tr class="memdesc:a57e47ecf511580a67d7844dc23a011bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test single cartesian integrals in exact double precision.  <a href="#a57e47ecf511580a67d7844dc23a011bd">More...</a><br /></td></tr>
+<tr class="separator:a57e47ecf511580a67d7844dc23a011bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2305aba9668200a844f3eeb8e4f36744"><td class="memItemLeft" align="right" valign="top">template long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a2305aba9668200a844f3eeb8e4f36744">integral_single_verify_test_exact&lt; 4 &gt;</a> (const std::string &amp;, <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_single_exact_type, <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_single_type)</td></tr>
+<tr class="separator:a2305aba9668200a844f3eeb8e4f36744"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9cfb997ce9f6b9062606aa5fb1bc440"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmirp_1_1integral__single__data.html">integral_single_data</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#ac9cfb997ce9f6b9062606aa5fb1bc440">testfile_read_integral_single</a> (const std::string &amp;filepath, int n, bool is_input)</td></tr>
 <tr class="memdesc:ac9cfb997ce9f6b9062606aa5fb1bc440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read generic single integral test data from a file.  <a href="#ac9cfb997ce9f6b9062606aa5fb1bc440">More...</a><br /></td></tr>
 <tr class="separator:ac9cfb997ce9f6b9062606aa5fb1bc440"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -940,7 +960,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a068b7fddadc3a6e5102473c6b56ea41b">cb_integral4_exact</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="typedefs_8h.html#a961666448f7e097fb4bd399d493c97f0">cb_integral4_exact</a>&#160;</td>
           <td class="paramname"><em>cb</em>&#160;</td>
         </tr>
         <tr>
@@ -959,6 +979,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>This is being left un-templatized due to the handling of permutational symmetry</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">xyz_filepath</td><td>Path to the XYZ file containing the molecule to use </td></tr>
@@ -973,14 +994,16 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="af74d132e83d2ddcb3a14dc4c84d1577d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af74d132e83d2ddcb3a14dc4c84d1577d">&#9670;&nbsp;</a></span>integral4_create_test()</h2>
+<a id="a68d48387ad435d637ae6ec404372c449"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68d48387ad435d637ae6ec404372c449">&#9670;&nbsp;</a></span>integral_create_test()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;int N&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void mirp::integral4_create_test </td>
+          <td class="memname">void mirp::integral_create_test </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>input_filepath</em>, </td>
@@ -1012,7 +1035,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a1c16a1a39c3f93f8c0d1579f92d1a265">cb_integral4_str</a>&#160;</td>
+          <td class="paramtype">typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_str_type&#160;</td>
           <td class="paramname"><em>cb</em>&#160;</td>
         </tr>
         <tr>
@@ -1032,6 +1055,12 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>Number of centers the integral needs </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">input_filepath</td><td>The input file to use for integral parameters </td></tr>
@@ -1046,14 +1075,68 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="aaf20a4cfd122b51e8d60303eec407cd2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf20a4cfd122b51e8d60303eec407cd2">&#9670;&nbsp;</a></span>integral4_single_create_test()</h2>
+<a id="ad397fea269958039a7e7069008bcc7f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad397fea269958039a7e7069008bcc7f7">&#9670;&nbsp;</a></span>integral_create_test< 4 >()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void mirp::integral4_single_create_test </td>
+          <td class="memname">template void <a class="el" href="namespacemirp.html#a68d48387ad435d637ae6ec404372c449">mirp::integral_create_test</a>&lt; 4 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">slong&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_str_type&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a64d8f8cf985f47c8ab49c5eedf92e27f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64d8f8cf985f47c8ab49c5eedf92e27f">&#9670;&nbsp;</a></span>integral_single_create_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void mirp::integral_single_create_test </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>input_filepath</em>, </td>
@@ -1085,7 +1168,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#ae6c0106acd451647025e1c96ba29b22d">cb_integral4_single_str</a>&#160;</td>
+          <td class="paramtype">typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_single_str_type&#160;</td>
           <td class="paramname"><em>cb</em>&#160;</td>
         </tr>
         <tr>
@@ -1105,6 +1188,12 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>Number of centers the integral needs </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">input_filepath</td><td>The input file to use for integral parameters </td></tr>
@@ -1119,14 +1208,68 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a809e54f17585b9d91d860414005c6686"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a809e54f17585b9d91d860414005c6686">&#9670;&nbsp;</a></span>integral4_single_verify_test()</h2>
+<a id="aa37a4b679edeb6c9f01e3a3cf2fe2249"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa37a4b679edeb6c9f01e3a3cf2fe2249">&#9670;&nbsp;</a></span>integral_single_create_test< 4 >()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">long mirp::integral4_single_verify_test </td>
+          <td class="memname">template void <a class="el" href="namespacemirp.html#a64d8f8cf985f47c8ab49c5eedf92e27f">mirp::integral_single_create_test</a>&lt; 4 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">slong&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_single_str_type&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e8587e92b0a4446137f5065b49f33fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e8587e92b0a4446137f5065b49f33fc">&#9670;&nbsp;</a></span>integral_single_verify_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">long mirp::integral_single_verify_test </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>filepath</em>, </td>
@@ -1140,7 +1283,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#ae6c0106acd451647025e1c96ba29b22d">cb_integral4_single_str</a>&#160;</td>
+          <td class="paramtype">typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_single_str_type&#160;</td>
           <td class="paramname"><em>cb</em>&#160;</td>
         </tr>
         <tr>
@@ -1158,6 +1301,12 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>Number of centers the integral needs </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">filepath</td><td>Path to the file with the reference data </td></tr>
@@ -1170,23 +1319,29 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="aa54f835c9d736cfb31f8289c5dad3b46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa54f835c9d736cfb31f8289c5dad3b46">&#9670;&nbsp;</a></span>integral4_single_verify_test_d()</h2>
+<a id="a6e112c63a42a21d9175a12747116b297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e112c63a42a21d9175a12747116b297">&#9670;&nbsp;</a></span>integral_single_verify_test< 4 >()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">long mirp::integral4_single_verify_test_d </td>
+          <td class="memname">template long <a class="el" href="namespacemirp.html#a9e8587e92b0a4446137f5065b49f33fc">mirp::integral_single_verify_test</a>&lt; 4 &gt; </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>filepath</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#ab4bde9b22667586d502024f2a015ead3">cb_integral4_single_d</a>&#160;</td>
-          <td class="paramname"><em>cb</em>&#160;</td>
+          <td class="paramtype">slong&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_single_str_type&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1196,27 +1351,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Test single cartesian integrals in double precision. </p>
-<p>The integrals are tested to a lower relative accuracy to account for rounding error in the double-precision integral kernels.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">filepath</td><td>Path to the file with the reference data </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes single cartesian integrals in double precision </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of failed tests </dd></dl>
-
 </div>
 </div>
-<a id="a8a67bd4338edbc7513b3495606b5bf2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a67bd4338edbc7513b3495606b5bf2f">&#9670;&nbsp;</a></span>integral4_single_verify_test_exact()</h2>
+<a id="a57e47ecf511580a67d7844dc23a011bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57e47ecf511580a67d7844dc23a011bd">&#9670;&nbsp;</a></span>integral_single_verify_test_exact()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;int N&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">long mirp::integral4_single_verify_test_exact </td>
+          <td class="memname">long mirp::integral_single_verify_test_exact </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>filepath</em>, </td>
@@ -1224,14 +1370,14 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a55e29f3bdeaac872f8b9986c0715466f">cb_integral4_single_exact</a>&#160;</td>
+          <td class="paramtype">typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_single_exact_type&#160;</td>
           <td class="paramname"><em>cb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a417fa18f7fa2d551142a35b4d24d8747">cb_integral4_single</a>&#160;</td>
-          <td class="paramname"><em>cb_mp</em>&#160;</td>
+          <td class="paramtype">typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_single_type&#160;</td>
+          <td class="paramname"><em>cb_arb</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1243,11 +1389,17 @@ Variables</h2></td></tr>
 
 <p>Test single cartesian integrals in exact double precision. </p>
 <p>The integrals are tested to be exactly equal to the reference data or to integral computed with very large accuracy.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>Number of centers the integral needs </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">filepath</td><td>Path to the file with the reference data </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes single cartesian integrals in exact double precision </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cb_mp</td><td>Function that computes single cartesian integrals using interval arithmetic </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cb_arb</td><td>Function that computes single cartesian integrals using interval arithmetic </td></tr>
   </table>
   </dd>
 </dl>
@@ -1255,14 +1407,50 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ad4de5ef1f0a14182ca593a8f68ca2c0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4de5ef1f0a14182ca593a8f68ca2c0c">&#9670;&nbsp;</a></span>integral4_test_reference()</h2>
+<a id="a2305aba9668200a844f3eeb8e4f36744"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2305aba9668200a844f3eeb8e4f36744">&#9670;&nbsp;</a></span>integral_single_verify_test_exact< 4 >()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">long mirp::integral4_test_reference </td>
+          <td class="memname">template long <a class="el" href="namespacemirp.html#a57e47ecf511580a67d7844dc23a011bd">mirp::integral_single_verify_test_exact</a>&lt; 4 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_single_exact_type&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_single_type&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d8bdb46ad41b7f20f067871bd064520"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d8bdb46ad41b7f20f067871bd064520">&#9670;&nbsp;</a></span>integral_test_reference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int N, typename Func &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">long mirp::integral_test_reference </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>ref_filepath</em>, </td>
@@ -1270,7 +1458,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a068b7fddadc3a6e5102473c6b56ea41b">cb_integral4_exact</a>&#160;</td>
+          <td class="paramtype">Func&#160;</td>
           <td class="paramname"><em>cb</em>&#160;</td>
         </tr>
         <tr>
@@ -1299,14 +1487,44 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a238c7024fff4ddc1baa3796aa7ec9884"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a238c7024fff4ddc1baa3796aa7ec9884">&#9670;&nbsp;</a></span>integral4_verify_test()</h2>
+<a id="a3c1bbf17ac462d26290f4fe81679767e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c1bbf17ac462d26290f4fe81679767e">&#9670;&nbsp;</a></span>integral_test_reference< 4, cb_integral4_exact >()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">long mirp::integral4_verify_test </td>
+          <td class="memname">template long <a class="el" href="namespacemirp.html#a0d8bdb46ad41b7f20f067871bd064520">mirp::integral_test_reference</a>&lt; 4, <a class="el" href="typedefs_8h.html#a961666448f7e097fb4bd399d493c97f0">cb_integral4_exact</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="typedefs_8h.html#a961666448f7e097fb4bd399d493c97f0">cb_integral4_exact</a>&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a72f3b05c41e5f1c10cc383b336c20c8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72f3b05c41e5f1c10cc383b336c20c8b">&#9670;&nbsp;</a></span>integral_verify_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;int N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">long mirp::integral_verify_test </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>filepath</em>, </td>
@@ -1320,7 +1538,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a1c16a1a39c3f93f8c0d1579f92d1a265">cb_integral4_str</a>&#160;</td>
+          <td class="paramtype">typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_str_type&#160;</td>
           <td class="paramname"><em>cb</em>&#160;</td>
         </tr>
         <tr>
@@ -1338,6 +1556,12 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>Number of centers the integral needs </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">filepath</td><td>Path to the file with the reference data </td></tr>
@@ -1350,23 +1574,29 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="aff12c35cbda40778e7d6384484bd0952"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff12c35cbda40778e7d6384484bd0952">&#9670;&nbsp;</a></span>integral4_verify_test_d()</h2>
+<a id="abdd07901b6956b9961a8fe71fb7361a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdd07901b6956b9961a8fe71fb7361a5">&#9670;&nbsp;</a></span>integral_verify_test< 4 >()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">long mirp::integral4_verify_test_d </td>
+          <td class="memname">template long <a class="el" href="namespacemirp.html#a72f3b05c41e5f1c10cc383b336c20c8b">mirp::integral_verify_test</a>&lt; 4 &gt; </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>filepath</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#ad48a6422cdf88c5e2404e7754a410ad6">cb_integral4_d</a>&#160;</td>
-          <td class="paramname"><em>cb</em>&#160;</td>
+          <td class="paramtype">slong&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_str_type&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1376,27 +1606,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Test contracted integrals in double precision. </p>
-<p>The integrals are tested to a lower relative accuracy to account for rounding error in the double-precision integral kernels.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">filepath</td><td>Path to the file with the reference data </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes contracted integrals in double precision </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of failed tests </dd></dl>
-
 </div>
 </div>
-<a id="ad5ca01fb6ea01f646875ee97351cdfaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5ca01fb6ea01f646875ee97351cdfaf">&#9670;&nbsp;</a></span>integral4_verify_test_exact()</h2>
+<a id="ade8084713e84c8e42f57ad70e9f90382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade8084713e84c8e42f57ad70e9f90382">&#9670;&nbsp;</a></span>integral_verify_test_exact()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;int N&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">long mirp::integral4_verify_test_exact </td>
+          <td class="memname">long mirp::integral_verify_test_exact </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>filepath</em>, </td>
@@ -1404,14 +1625,14 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a068b7fddadc3a6e5102473c6b56ea41b">cb_integral4_exact</a>&#160;</td>
+          <td class="paramtype">typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_exact_type&#160;</td>
           <td class="paramname"><em>cb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="typedefs_8h.html#a649ffd4b235bfb92f735edf0dc2bb7a4">cb_integral4</a>&#160;</td>
-          <td class="paramname"><em>cb_mp</em>&#160;</td>
+          <td class="paramtype">typename <a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; N &gt;::cb_type&#160;</td>
+          <td class="paramname"><em>cb_arb</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1423,15 +1644,55 @@ Variables</h2></td></tr>
 
 <p>Test contracted integrals in exact double precision. </p>
 <p>The integrals are tested to be exactly equal to the reference data or to integral computed with very large accuracy.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">N</td><td>Number of centers the integral needs </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">filepath</td><td>Path to the file with the reference data </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">cb</td><td>Function that computes contracted integrals in exact double precision </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">cb_mp</td><td>Function that computes contracted integrals using interval arithmetic </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">cb_arb</td><td>Function that computes contracted integrals using interval arithmetic </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of failed tests </dd></dl>
+
+</div>
+</div>
+<a id="aff8dfc46870c2a1ed84dc516fe2de727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff8dfc46870c2a1ed84dc516fe2de727">&#9670;&nbsp;</a></span>integral_verify_test_exact< 4 >()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template long <a class="el" href="namespacemirp.html#ade8084713e84c8e42f57ad70e9f90382">mirp::integral_verify_test_exact</a>&lt; 4 &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_exact_type&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmirp_1_1callback__helper.html">callback_helper</a>&lt; 4 &gt;::cb_type&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1958,7 +2219,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 30 2017 10:52:14 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 6 2017 10:16:57 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

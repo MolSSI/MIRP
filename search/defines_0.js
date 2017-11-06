@@ -14,7 +14,6 @@ var searchData=
   ['mirp_5fpi_5f32',['MIRP_PI_32',['../math_8h.html#a6304cc7c3ebfd34b51f7925ca140b762',1,'math.h']]],
   ['mirp_5fsqrt_5fpi',['MIRP_SQRT_PI',['../math_8h.html#a6f3f813e29587b5c08ce527fd3104c31',1,'math.h']]],
   ['mirp_5fwrap_5fshell4',['MIRP_WRAP_SHELL4',['../integral4__wrappers_8h.html#aa9cc8aa5090b76ec224f56293f3a7dac',1,'integral4_wrappers.h']]],
-  ['mirp_5fwrap_5fshell4_5fd',['MIRP_WRAP_SHELL4_D',['../integral4__wrappers_8h.html#ad3fa1f45f990cf44b8813e592ee6608b',1,'integral4_wrappers.h']]],
   ['mirp_5fwrap_5fshell4_5fexact',['MIRP_WRAP_SHELL4_EXACT',['../integral4__wrappers_8h.html#ad29e195c89eb60580e6f61854b26ccc2',1,'integral4_wrappers.h']]],
   ['mirp_5fwrap_5fshell4_5fstr',['MIRP_WRAP_SHELL4_STR',['../integral4__wrappers_8h.html#a5b2a43e0e6b181425758562adf7b1dfb',1,'integral4_wrappers.h']]],
   ['mirp_5fwrap_5fsingle4_5fexact',['MIRP_WRAP_SINGLE4_EXACT',['../integral4__wrappers_8h.html#a0ea2ba5104be25900883bb01c5831a28',1,'integral4_wrappers.h']]],

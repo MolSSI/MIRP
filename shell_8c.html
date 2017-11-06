@@ -80,7 +80,7 @@ Include dependency graph for shell.c:</div>
 <div class="center"><img src="shell_8c__incl.png" border="0" usemap="#mirp_2shell_8c" alt=""/></div>
 <map name="mirp_2shell_8c" id="mirp_2shell_8c">
 <area shape="rect" id="node2" href="shell_8h.html" title="Functions related to gaussians and shells. " alt="" coords="5,80,93,107"/>
-<area shape="rect" id="node4" href="math_8h.html" title="Some miscellaneous mathematical functions in double precision and interval arithmetic. " alt="" coords="119,80,209,107"/>
+<area shape="rect" id="node4" href="math_8h.html" title="Some miscellaneous mathematical functions and constants. " alt="" coords="119,80,209,107"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -92,11 +92,8 @@ Functions</h2></td></tr>
 <tr class="memitem:aa235848ccb28e6768a2138c800f8439c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#aa235848ccb28e6768a2138c800f8439c">mirp_gaussian_fill_lmn</a> (int am, int *lmn)</td></tr>
 <tr class="memdesc:aa235848ccb28e6768a2138c800f8439c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create all lmn combinations for a given angular momentum.  <a href="#aa235848ccb28e6768a2138c800f8439c">More...</a><br /></td></tr>
 <tr class="separator:aa235848ccb28e6768a2138c800f8439c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00a3010674e278763c9993847fbb1ab6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a00a3010674e278763c9993847fbb1ab6">mirp_normalize_shell_d</a> (int am, int nprim, int ngeneral, const double *alpha, const double *coeff, double *coeff_out)</td></tr>
-<tr class="memdesc:a00a3010674e278763c9993847fbb1ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalize a shell (double precision)  <a href="#a00a3010674e278763c9993847fbb1ab6">More...</a><br /></td></tr>
-<tr class="separator:a00a3010674e278763c9993847fbb1ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c42462806b8f7fde32b7ee928a7479e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8c.html#a0c42462806b8f7fde32b7ee928a7479e">mirp_normalize_shell</a> (int am, int nprim, int ngeneral, arb_srcptr alpha, arb_srcptr coeff, arb_ptr coeff_out, slong working_prec)</td></tr>
-<tr class="memdesc:a0c42462806b8f7fde32b7ee928a7479e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalize a shell (interval arithmetic)  <a href="#a0c42462806b8f7fde32b7ee928a7479e">More...</a><br /></td></tr>
+<tr class="memdesc:a0c42462806b8f7fde32b7ee928a7479e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalize a shell (double precision)  <a href="#a0c42462806b8f7fde32b7ee928a7479e">More...</a><br /></td></tr>
 <tr class="separator:a0c42462806b8f7fde32b7ee928a7479e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -227,7 +224,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Normalize a shell (interval arithmetic) </p>
+<p>Normalize a shell (double precision) </p>
 <p>This function normalizes the contraction coefficients of the shell.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -244,76 +241,10 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a00a3010674e278763c9993847fbb1ab6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00a3010674e278763c9993847fbb1ab6">&#9670;&nbsp;</a></span>mirp_normalize_shell_d()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void mirp_normalize_shell_d </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>am</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nprim</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ngeneral</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>alpha</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>coeff</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>coeff_out</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Normalize a shell (double precision) </p>
-<p>This function normalizes the contraction coefficients of the shell.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">am</td><td>The angular momentum of the shell (0 = s, 1 = p, etc) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nprim</td><td>Number of primitives in the shell </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ngeneral</td><td>Number of general contractions in the shell </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">alpha</td><td>The exponents of the shell (length <code>nprim</code>) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">coeff</td><td>The (unnormalized) contraction coefficients (length <code>nprim</code> * <code>ngeneral</code>) </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">coeff_out</td><td>Normalized contraction coefficients (length <code>nprim</code> * <code>ngeneral</code>) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 30 2017 10:52:14 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 6 2017 10:16:57 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

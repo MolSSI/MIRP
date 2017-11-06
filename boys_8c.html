@@ -82,7 +82,7 @@ Include dependency graph for boys.c:</div>
 <div class="center"><img src="boys_8c__incl.png" border="0" usemap="#mirp_2kernels_2boys_8c" alt=""/></div>
 <map name="mirp_2kernels_2boys_8c" id="mirp_2kernels_2boys_8c">
 <area shape="rect" id="node2" href="pragma_8h.html" title="Pragmas for enabling/disabling compiler warnings. " alt="" coords="5,80,109,107"/>
-<area shape="rect" id="node3" href="math_8h.html" title="Some miscellaneous mathematical functions in double precision and interval arithmetic. " alt="" coords="135,80,225,107"/>
+<area shape="rect" id="node3" href="math_8h.html" title="Some miscellaneous mathematical functions and constants. " alt="" coords="135,80,225,107"/>
 <area shape="rect" id="node5" href="boys_8h.html" title="Calculation of the boys function. " alt="" coords="249,80,385,107"/>
 </map>
 </div>
@@ -147,7 +147,7 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">F</td><td>The computed values of the Boys function </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>The maximum order to calculate </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value at which to evaluate</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value at which to evaluate </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation </td></tr>
   </table>
   </dd>
@@ -189,6 +189,7 @@ Functions</h2></td></tr>
 
 <p>Computes the Boys function to exact double precision using interval arithmetic. </p>
 <p>This function takes double precision as input and returns double precision as output. Internally, it uses interval arithmetic to ensure that no precision is lost</p>
+<dl class="section warning"><dt>Warning</dt><dd><code>F</code> must be large enough to hold (<code>m</code> + 1) values, since this is computing from zero to m.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">F</td><td>The computed values of the Boys function </td></tr>
@@ -245,8 +246,7 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">F</td><td>The computed values of the Boys function </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">m</td><td>The maximum order to calculate </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value at which to evaluate</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value at which to evaluate </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">working_prec</td><td>The working precision (binary digits/bits) to use in the calculation </td></tr>
   </table>
   </dd>
@@ -257,7 +257,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 30 2017 10:52:14 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 6 2017 10:16:57 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

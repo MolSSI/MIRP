@@ -1,5 +1,4 @@
 <map id="mirp/gpt.h" name="mirp/gpt.h">
 <area shape="rect" id="node2" href="$gpt_8c.html" title="Calculation of the Gaussian Product Theorem terms. " alt="" coords="5,80,85,107"/>
 <area shape="rect" id="node3" href="$eri_8c.html" title="Kernel for electron repulsion integrals (interval arithmetic) " alt="" coords="109,80,232,107"/>
-<area shape="rect" id="node4" href="$eri__d_8c.html" title="Kernel for electron repulsion integrals (double precision) " alt="" coords="256,80,392,107"/>
 </map>
