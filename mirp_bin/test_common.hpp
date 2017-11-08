@@ -12,8 +12,8 @@
 
 namespace mirp {
 
- // Maximum line length
- static const std::streamsize max_length = std::numeric_limits<std::streamsize>::max();
+//! \brief  Maximum length of a line
+static const std::streamsize max_length = std::numeric_limits<std::streamsize>::max();
 
 /*! \brief Compare two double-precision numbers for equality within a tolerance
  *
