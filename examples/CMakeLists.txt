@@ -5,9 +5,6 @@ enable_testing()
 get_filename_component(PARENT_DIR ${CMAKE_CURRENT_LIST_DIR} DIRECTORY)
 file(STRINGS "${PARENT_DIR}/VERSION" MIRP_VERSION)
 
-# add lib64, etc, to search paths (rather than just plain lib)
-set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS True)
-
 # Common C/C++ flags
 include(${PARENT_DIR}/cmake/mirpFlags.cmake)
 

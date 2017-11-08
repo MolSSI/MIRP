@@ -16,8 +16,10 @@ include(CMakePackageConfigHelpers)
 set(PN ${PROJECT_NAME})
 set(CMAKECONFIG_INSTALL_DIR "share/cmake/mirp")
 
-# add lib64, etc, to search paths (rather than just plain lib)
-set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS True)
+# Force 'lib' for library
+# This makes things much simpler for packaging, and doesn't require
+# other developers to use FIND_LIBRARY_USE_LIB64_PATHS
+set(CMAKE_INSTALL_LIBDIR lib)
 
 # Common C/C++ flags
 include(cmake/mirpFlags.cmake)

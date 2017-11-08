@@ -40,17 +40,10 @@ make install
 cd "${CURDIR}"
 rm -Rf "${BUILD_DIR}"
 
-# move from lib to lib64, if necessary
-if [[ -d "${PREFIX}/lib" ]]
-then
-    mv ${PREFIX}/lib/* ${PREFIX}/lib64
-    rm -R "${PREFIX}/lib"
-fi
-
 # Fix the rpaths (if we have patchelf)
 if [[ $(command -v patchelf 2>&1) ]]
 then
-    for I in ${PREFIX}/lib64/*
+    for I in ${PREFIX}/lib/*
     do
         if [[ ! -L "$I" ]]
         then 
@@ -65,7 +58,7 @@ then
         if [[ ! -L "$I" ]]
         then 
             RP1=`patchelf --print-rpath "$I"`
-            patchelf --set-rpath '$ORIGIN/../lib64' "$I"
+            patchelf --set-rpath '$ORIGIN/../lib' "$I"
             RP2=`patchelf --print-rpath "$I"`
             echo "${I}: RPATH changed from \"${RP1}\" to \"${RP2}\""
         fi

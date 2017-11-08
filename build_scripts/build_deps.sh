@@ -133,13 +133,10 @@ rm -Rf ${BUILD_DIR}
 # Remove unneeded .la files
 rm ${PREFIX}/lib/*.la
 
-# Move lib to lib64
-mv ${PREFIX}/lib ${PREFIX}/lib64
-
 # Fix the rpaths (if we have patchelf)
 if [[ $(command -v patchelf 2>&1) ]]
 then
-    for I in ${PREFIX}/lib64/*
+    for I in ${PREFIX}/lib/*
     do
         if [[ ! -L "$I" ]]
         then 
