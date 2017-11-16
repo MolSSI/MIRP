@@ -6,5 +6,5 @@
 #pragma once
 
 #include "mirp/kernels/boys.h"
-#include "mirp/kernels/eri.h"
+#include "mirp/kernels/gtoeri.h"
 

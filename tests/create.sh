@@ -69,29 +69,29 @@ generator/generate_integral_frombasis.py \
 ../build/mirp_bin/mirp_create_test \
            --infile 4center_single_random_1.inp \
            --outfile eri_single_random_1.dat \
-           --integral eri_single \
+           --integral gtoeri_single \
            --prec 2048 --ndigits 101
 
 ../build/mirp_bin/mirp_create_test \
            --infile 4center_single_water_sto-3g.inp \
            --outfile eri_single_water_sto-3g.dat \
-           --integral eri_single \
+           --integral gtoeri_single \
            --prec 2048 --ndigits 101
 
 ../build/mirp_bin/mirp_create_test \
            --infile 4center_random_1.inp \
            --outfile eri_random_1.dat \
-           --integral eri \
+           --integral gtoeri \
            --prec 2048 --ndigits 101
 
 ../build/mirp_bin/mirp_create_test \
            --infile 4center_water_sto-3g.inp \
            --outfile eri_water_sto-3g.dat \
-           --integral eri \
+           --integral gtoeri \
            --prec 2048 --ndigits 101
 
 ../build/mirp_bin/mirp_create_reference \
-           --integral eri \
+           --integral gtoeri \
            --basis generator/basis/sto-3g.bas \
            --geometry generator/geometry/water.xyz \
            --outfile eri_water_sto-3g.ref

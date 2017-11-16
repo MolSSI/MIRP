@@ -1,6 +1,6 @@
 /*! \file
  *
- * \brief Kernel for electron repulsion integrals
+ * \brief Kernel for electron repulsion integrals of gaussian orbitals
  */
 
 #pragma once
@@ -14,36 +14,36 @@ extern "C" {
 
 
 
-/*! \brief Computes a single cartesian electron repulsion integral
+/*! \brief Computes a single cartesian GTO electron repulsion integral
  *         (interval arithmetic)
  *
- * \copydetails mirp_eri_single_exact
+ * \copydetails mirp_gtoeri_single_exact
  *
  * \param [in]  working_prec
  *              The working precision (binary digits/bits) to use
  *              in the calculation
  */
-void mirp_eri_single(arb_t integral,
-                     const int * lmn1, arb_srcptr A, const arb_t alpha1,
-                     const int * lmn2, arb_srcptr B, const arb_t alpha2,
-                     const int * lmn3, arb_srcptr C, const arb_t alpha3,
-                     const int * lmn4, arb_srcptr D, const arb_t alpha4,
-                     slong working_prec);
+void mirp_gtoeri_single(arb_t integral,
+                        const int * lmn1, arb_srcptr A, const arb_t alpha1,
+                        const int * lmn2, arb_srcptr B, const arb_t alpha2,
+                        const int * lmn3, arb_srcptr C, const arb_t alpha3,
+                        const int * lmn4, arb_srcptr D, const arb_t alpha4,
+                        slong working_prec);
 
 
 /*******************
  * Wrappings
  *******************/
 
-/*! \brief Compute a single electron repulsion integral for a primitive quartet
+/*! \brief Compute a single GTO electron repulsion integral for a primitive quartet
  *         (interval arithmetic)
  *
- * \copydetails mirp_eri_single
+ * \copydetails mirp_gtoeri_single
  */
-MIRP_WRAP_SINGLE4_STR(eri)
+MIRP_WRAP_SINGLE4_STR(gtoeri)
 
 
-/*! \brief Compute a single electron repulsion integral for a primitive quartet
+/*! \brief Compute a single GTO electron repulsion integral for a primitive quartet
  *         (exact double precision)
  *
  * The \p lmn parameters are the exponents on x, y, and z, with the total
@@ -60,29 +60,29 @@ MIRP_WRAP_SINGLE4_STR(eri)
  * \param [in]  alpha1,alpha2,alpha3,alpha4
  *              Exponents of the gaussian on the four-centers
  */
-MIRP_WRAP_SINGLE4_EXACT(eri)
+MIRP_WRAP_SINGLE4_EXACT(gtoeri)
 
 
-/*! \brief Compute electron repulsion integrals for a contracted
+/*! \brief Compute GTO electron repulsion integrals for a contracted
  *         shell quartet (interval arithmetic)
  *
- * \copydetails mirp_eri_exact
+ * \copydetails mirp_gtoeri_exact
  * \param [in]  working_prec
  *              The working precision (binary digits/bits) to use
  *              in the calculation
  */
-MIRP_WRAP_SHELL4(eri)
+MIRP_WRAP_SHELL4(gtoeri)
 
 
-/*! \brief Compute electron repulsion integrals for a contracted
+/*! \brief Compute GTO electron repulsion integrals for a contracted
  *         shell quartet (string inputs)
  *
- * \copydetails mirp_eri
+ * \copydetails mirp_gtoeri
  */
-MIRP_WRAP_SHELL4_STR(eri)
+MIRP_WRAP_SHELL4_STR(gtoeri)
 
 
-/*! \brief Compute electron repulsion integrals for a contracted
+/*! \brief Compute GTO electron repulsion integrals for a contracted
  *         shell quartet (exact double precision)
  *
  * \param [out] integrals
@@ -103,7 +103,7 @@ MIRP_WRAP_SHELL4_STR(eri)
  *              for each shell (of lengths \p nprim1 * \p ngen1, \p nprim2 * \p ngen2,
  *              \p nprim3 * \p ngen3, \p nprim4 * \p ngen4 respectively)
  */
-MIRP_WRAP_SHELL4_EXACT(eri)
+MIRP_WRAP_SHELL4_EXACT(gtoeri)
 
 
 

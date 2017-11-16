@@ -100,15 +100,15 @@ int main(int argc, char ** argv)
         {
             nfailed = boys_verify_test_main(file, floattype, extra_m, working_prec);
         }
-        else if(integral == "eri_single")
+        else if(integral == "gtoeri_single")
         {
             if(floattype == "interval")
             {
-                nfailed = integral_single_verify_test<4>(file, working_prec, mirp_eri_single_str);
+                nfailed = integral_single_verify_test<4>(file, working_prec, mirp_gtoeri_single_str);
             }
             else if(floattype == "exact")
             {
-                nfailed = integral_single_verify_test_exact<4>(file, mirp_eri_single_exact, mirp_eri_single);
+                nfailed = integral_single_verify_test_exact<4>(file, mirp_gtoeri_single_exact, mirp_gtoeri_single);
             }
             else
             {
@@ -116,15 +116,15 @@ int main(int argc, char ** argv)
                 return 1;
             }
         }
-        else if(integral == "eri")
+        else if(integral == "gtoeri")
         {
             if(floattype == "interval")
             {
-                nfailed = integral_verify_test<4>(file, working_prec, mirp_eri_str);
+                nfailed = integral_verify_test<4>(file, working_prec, mirp_gtoeri_str);
             }
             else if(floattype == "exact")
             {
-                nfailed = integral_verify_test_exact<4>(file, mirp_eri_exact, mirp_eri);
+                nfailed = integral_verify_test_exact<4>(file, mirp_gtoeri_exact, mirp_gtoeri);
             }
             else
             {

@@ -5,7 +5,4 @@
 
 #pragma once
 
-#include "mirp/shell.h"
-#include "mirp/kernels/integral4_wrappers.h"
-#include "mirp/kernels/eri.h"
-#include "mirp/kernels/boys.h"
+#include "mirp/kernels/all.h"

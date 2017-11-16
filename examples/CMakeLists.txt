@@ -14,11 +14,10 @@ include(${PARENT_DIR}/cmake/mirpFlags.cmake)
 find_package(mirp ${MIRP_VERSION} REQUIRED)
 
 # Example 1 - simple eri
-add_executable(simple_eri simple_eri.c)
-target_link_libraries(simple_eri mirp::mirp)
-add_test(NAME simple_eri COMMAND simple_eri)
+add_executable(simple_gtoeri simple_gtoeri.c)
+target_link_libraries(simple_gtoeri mirp::mirp)
+add_test(NAME simple_gtoeri COMMAND simple_gtoeri)
 
-
-# Example 1 - reading a reference file in C++
+# Example 2 - reading a reference file in C++
 add_executable(read_ref read_ref.cpp)
 add_test(NAME read_ref COMMAND read_ref ${CMAKE_CURRENT_LIST_DIR}/../tests/eri_water_sto-3g.ref)

@@ -126,40 +126,40 @@ int main(void)
 
 
     /* {0, 0, 0, 0} */ 
-    mirp_eri(integrals_interval,
-             0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
-             0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
-             0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
-             0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval, 512);
+    mirp_gtoeri(integrals_interval,
+                0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
+                0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
+                0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
+                0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval, 512);
 
     print_integrals("{0, 0, 0, 0}", integrals_interval, 1);
 
 
     /* {0, 1, 0, 1} */
-    mirp_eri(integrals_interval,
-             0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
-             0, xyz_O_interval, 3, 1, alpha_O_s2_interval, coeff_O_s2_interval,
-             0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
-             0, xyz_O_interval, 3, 1, alpha_O_s2_interval, coeff_O_s2_interval, 512);
+    mirp_gtoeri(integrals_interval,
+                0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
+                0, xyz_O_interval, 3, 1, alpha_O_s2_interval, coeff_O_s2_interval,
+                0, xyz_O_interval, 3, 1, alpha_O_s1_interval, coeff_O_s1_interval,
+                0, xyz_O_interval, 3, 1, alpha_O_s2_interval, coeff_O_s2_interval, 512);
 
     print_integrals("{0, 1, 0, 1}", integrals_interval, 1);
 
 
     /* {3, 2, 4, 1} */
-    mirp_eri(integrals_interval,
-             0, xyz_H1_interval, 3, 1, alpha_H1_s_interval, coeff_H1_s_interval,
-             1, xyz_O_interval,  3, 1, alpha_O_p_interval,  coeff_O_p_interval,
-             0, xyz_H2_interval, 3, 1, alpha_H2_s_interval, coeff_H2_s_interval,
-             0, xyz_O_interval,  3, 1, alpha_O_s2_interval, coeff_O_s2_interval, 512);
+    mirp_gtoeri(integrals_interval,
+                0, xyz_H1_interval, 3, 1, alpha_H1_s_interval, coeff_H1_s_interval,
+                1, xyz_O_interval,  3, 1, alpha_O_p_interval,  coeff_O_p_interval,
+                0, xyz_H2_interval, 3, 1, alpha_H2_s_interval, coeff_H2_s_interval,
+                0, xyz_O_interval,  3, 1, alpha_O_s2_interval, coeff_O_s2_interval, 512);
 
     print_integrals("{3, 2, 4, 1}", integrals_interval, 3);
 
 
-    mirp_eri(integrals_interval,
-             1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval,
-             1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval,
-             1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval,
-             1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval, 512);
+    mirp_gtoeri(integrals_interval,
+                1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval,
+                1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval,
+                1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval,
+                1, xyz_O_interval, 3, 1, alpha_O_p_interval, coeff_O_p_interval, 512);
 
     print_integrals("{2, 2, 2, 2}", integrals_interval, 81);
 

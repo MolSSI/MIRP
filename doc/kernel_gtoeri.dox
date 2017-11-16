@@ -1,0 +1,18 @@
+/*! \page kernel_gtoeri Gaussiaon (GTO) Electron Repulsion Integrals
+
+\section _gtoeri_functions Functions in MIRP
+
+In MIRP, electron repulsion integrals of gaussian-type orbitals
+can be calculated via the following functions:
+
+- Single Integrals
+  - \ref mirp_gtoeri_single
+  - \ref mirp_gtoeri_single_str
+  - \ref mirp_gtoeri_single_exact
+
+- Contracted Shells
+  - \ref mirp_gtoeri
+  - \ref mirp_gtoeri_str
+  - \ref mirp_gtoeri_exact
+
+*/

@@ -24,7 +24,7 @@ static void print_help(void)
               << "Required arguments:\n"
               << "    --file         Reference file to test\n"
               << "    --integral     The type of integral to compute. Possibilities are:\n"
-              << "                       eri\n"
+              << "                       gtoeri\n"
               << "\n"
               << "\n"
               << "Other arguments:\n"
@@ -70,9 +70,9 @@ int main(int argc, char ** argv)
     {
         long nfailed = -1;
 
-        if(integral == "eri")
+        if(integral == "gtoeri")
         {
-            nfailed = integral_test_reference<4>(infile, mirp_eri_exact);
+            nfailed = integral_test_reference<4>(infile, mirp_gtoeri_exact);
         }
         else
         {

@@ -28,8 +28,8 @@ static void print_help(void)
               << "                       be overwritten\n"
               << "    --integral     The type of integral to compute. Possibilities are:\n"
               << "                       boys\n"
-              << "                       eri\n"
-              << "                       eri_single\n"
+              << "                       gtoeri\n"
+              << "                       gtoeri_single\n"
               << "    --prec         Working precision to use in the calculation\n"
               << "    --ndigits      Number of decimal digits to write for each integral\n"
               << "\n"
@@ -92,17 +92,17 @@ int main(int argc, char ** argv)
     {
         if(integral == "boys")
             boys_create_test(infile, outfile, working_prec, ndigits, header);
-        else if(integral == "eri")
+        else if(integral == "gtoeri")
         {
             integral_create_test<4>(infile, outfile,
                                     working_prec, ndigits, header,
-                                    mirp_eri_str);
+                                    mirp_gtoeri_str);
         }
-        else if(integral == "eri_single")
+        else if(integral == "gtoeri_single")
         {
             integral_single_create_test<4>(infile, outfile,
                                            working_prec, ndigits, header,
-                                           mirp_eri_single_str);
+                                           mirp_gtoeri_single_str);
         }
         else
         {

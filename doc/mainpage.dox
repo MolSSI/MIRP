@@ -47,7 +47,7 @@ and shared libraries.
 \section algo_sec Integrals and Algorithms
   - \ref functiontypes
   - Integrals
-    - \ref kernel_eri
+    - \ref kernel_gtoeri
   - Miscellaneous Functionality
     - \ref gaussian_product_theorem
     - \ref boys_function

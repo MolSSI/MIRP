@@ -62,6 +62,6 @@ MIRP_WRAP_SHELL4_STR(name)         | mirp_name_str               | mirp_name    
 MIRP_WRAP_SHELL4_EXACT(name)       | mirp_name_exact             | mirp_name               | \ref mirp_integral4_exact
 
 
-See <a href=eri_8h_source.html>eri.h</a> for an example
+See <a href=gtoeri_8h_source.html>eri.h</a> for an example
 
 */

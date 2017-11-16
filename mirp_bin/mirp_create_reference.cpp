@@ -28,7 +28,7 @@ static void print_help(void)
               << "    --outfile      Output file (usually ends in .dat). Existing data will\n"
               << "                       be overwritten\n"
               << "    --integral     The type of integral to compute. Possibilities are:\n"
-              << "                       eri\n"
+              << "                       gtoeri\n"
               << "\n"
               << "\n"
               << "Optional arguments:\n"
@@ -106,10 +106,10 @@ int main(int argc, char ** argv)
 
     try
     {
-        if(integral == "eri")
+        if(integral == "gtoeri")
         {
             integral4_create_reference(xyzfile, basfile, outfile, header,
-                                       amlist, mirp_eri_exact);
+                                       amlist, mirp_gtoeri_exact);
         }
         else
         {

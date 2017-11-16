@@ -7,7 +7,7 @@ list(APPEND MIRP_FILELIST
                kernels/integral4_wrappers.c
 
                kernels/boys.c
-               kernels/eri.c
+               kernels/gtoeri.c
 )
 
 add_library(mirp SHARED ${MIRP_FILELIST})

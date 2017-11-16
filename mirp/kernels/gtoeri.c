@@ -1,10 +1,10 @@
 /*! \file
  *
- * \brief Kernel for electron repulsion integrals (interval arithmetic)
+ * \brief Kernel for electron repulsion integrals of gaussian orbitals
  */
 
 #include "mirp/kernels/boys.h"
-#include "mirp/kernels/eri.h"
+#include "mirp/kernels/gtoeri.h"
 #include "mirp/math.h"
 #include "mirp/gpt.h"
 #include "mirp/pragma.h"
@@ -99,12 +99,12 @@ static void mirp_G(arb_t G, arb_t fp, arb_t fq,
     arb_clear(tmp2);
 }
 
-void mirp_eri_single(arb_t integral,
-                     const int * lmn1, arb_srcptr A, const arb_t alpha1,
-                     const int * lmn2, arb_srcptr B, const arb_t alpha2,
-                     const int * lmn3, arb_srcptr C, const arb_t alpha3,
-                     const int * lmn4, arb_srcptr D, const arb_t alpha4,
-                     slong working_prec)
+void mirp_gtoeri_single(arb_t integral,
+                        const int * lmn1, arb_srcptr A, const arb_t alpha1,
+                        const int * lmn2, arb_srcptr B, const arb_t alpha2,
+                        const int * lmn3, arb_srcptr C, const arb_t alpha3,
+                        const int * lmn4, arb_srcptr D, const arb_t alpha4,
+                        slong working_prec)
 {
     assert(lmn1[0] >= 0); assert(lmn1[1] >= 0); assert(lmn1[2] >= 0);
     assert(lmn2[0] >= 0); assert(lmn2[1] >= 0); assert(lmn2[2] >= 0);
