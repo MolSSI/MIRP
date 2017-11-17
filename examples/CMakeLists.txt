@@ -20,4 +20,4 @@ add_test(NAME simple_gtoeri COMMAND simple_gtoeri)
 
 # Example 2 - reading a reference file in C++
 add_executable(read_ref read_ref.cpp)
-add_test(NAME read_ref COMMAND read_ref ${CMAKE_CURRENT_LIST_DIR}/../tests/eri_water_sto-3g.ref)
+add_test(NAME read_ref COMMAND read_ref ${CMAKE_CURRENT_LIST_DIR}/../tests/gtoeri_water_sto-3g.ref)
