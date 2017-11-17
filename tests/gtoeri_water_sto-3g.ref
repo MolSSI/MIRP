@@ -1,5 +1,5 @@
-# Reference values for the eri integral generated with:
-#   ../build/mirp_bin/mirp_create_reference --integral eri --basis generator/basis/sto-3g.bas --geometry generator/geometry/water.xyz --outfile eri_water_sto-3g.ref
+# Reference values for the gtoeri integral generated with:
+#   ../build/mirp_bin/mirp_create_reference --integral gtoeri --basis generator/basis/sto-3g.bas --geometry generator/geometry/water.xyz --outfile gtoeri_water_sto-3g.ref
 #
 
 5

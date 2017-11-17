@@ -3,8 +3,8 @@
 # Input parameters for ERI generated with:
 #   generator/generate_integral_single_frombasis.py --filename 4center_single_water_sto-3g.inp --geo generator/geometry/water.xyz --basis generator/basis/sto-3g.bas --ncenter 4 --ndigits 20 --ntests 2000 --seed 770225234
 #
-# Reference values for the eri_single integral generated with:
-#   ../build/mirp_bin/mirp_create_test --infile 4center_single_water_sto-3g.inp --outfile eri_single_water_sto-3g.dat --integral eri_single --prec 2048 --ndigits 101
+# Reference values for the gtoeri_single integral generated with:
+#   ../build/mirp_bin/mirp_create_test --infile 4center_single_water_sto-3g.inp --outfile gtoeri_single_water_sto-3g.dat --integral gtoeri_single --prec 2048 --ndigits 101
 #
 2000 101 2048
 1 0 0 0.0 0.0 0.240184190545689956985953 5.0331513
