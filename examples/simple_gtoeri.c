@@ -12,12 +12,6 @@
 #include <mirp/mirp.h>
 #include <stdio.h>
 
-static void strarr_to_d(const char ** strarr, double * darr, int length)
-{
-    for(int i = 0; i < length; i++)
-        darr[i] = atof(strarr[i]);
-}
-
 static void strarr_to_interval(const char ** strarr, arb_ptr iarr, int length, slong prec)
 {
     for(int i = 0; i < length; i++)
