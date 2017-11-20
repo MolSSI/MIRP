@@ -7,5 +7,8 @@ var searchData=
   ['gaussian_5fsingle_5fstr',['gaussian_single_str',['../structmirp_1_1gaussian__single__str.html',1,'mirp']]],
   ['gpt_2ec',['gpt.c',['../gpt_8c.html',1,'']]],
   ['gpt_2edox',['gpt.dox',['../gpt_8dox.html',1,'']]],
-  ['gpt_2eh',['gpt.h',['../gpt_8h.html',1,'']]]
+  ['gpt_2eh',['gpt.h',['../gpt_8h.html',1,'']]],
+  ['gtoeri_2ec',['gtoeri.c',['../gtoeri_8c.html',1,'']]],
+  ['gtoeri_2eh',['gtoeri.h',['../gtoeri_8h.html',1,'']]],
+  ['gaussiaon_20_28gto_29_20electron_20repulsion_20integrals',['Gaussiaon (GTO) Electron Repulsion Integrals',['../kernel_gtoeri.html',1,'']]]
 ];

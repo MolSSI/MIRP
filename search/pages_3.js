@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gaussian_20product_20theorem',['Gaussian Product Theorem',['../gaussian_product_theorem.html',1,'']]]
+  ['obtaining_20binaries_20of_20mirp_20and_20dependencies',['Obtaining Binaries of MIRP and Dependencies',['../binaries.html',1,'']]]
 ];

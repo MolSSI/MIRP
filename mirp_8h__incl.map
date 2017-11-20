@@ -1,7 +1,7 @@
 <map id="mirp/mirp.h" name="mirp/mirp.h">
-<area shape="rect" id="node2" href="$shell_8h.html" title="Functions related to gaussians and shells. " alt="" coords="5,163,93,189"/>
-<area shape="rect" id="node4" href="$integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="119,155,265,197"/>
-<area shape="rect" id="node6" href="$eri_8h.html" title="Kernel for electron repulsion integrals. " alt="" coords="229,80,352,107"/>
-<area shape="rect" id="node7" href="$boys_8h.html" title="Calculation of the boys function. " alt="" coords="340,245,476,272"/>
-<area shape="rect" id="node5" href="$typedefs_8h.html" title="Typedefs of common function pointers. " alt="" coords="144,245,256,272"/>
+<area shape="rect" id="node2" href="$all_8h.html" title="Convenience header for including headers for all kernels. " alt="" coords="66,80,187,107"/>
+<area shape="rect" id="node3" href="$boys_8h.html" title="Calculation of the boys function. " alt="" coords="5,237,141,264"/>
+<area shape="rect" id="node5" href="$gtoeri_8h.html" title="Kernel for electron repulsion integrals of gaussian orbitals. " alt="" coords="111,155,251,181"/>
+<area shape="rect" id="node6" href="$integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="216,230,363,271"/>
+<area shape="rect" id="node7" href="$typedefs_8h.html" title="Typedefs of common function pointers. " alt="" coords="224,320,336,347"/>
 </map>

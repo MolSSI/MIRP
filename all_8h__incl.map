@@ -1,6 +1,6 @@
 <map id="mirp/kernels/all.h" name="mirp/kernels/all.h">
 <area shape="rect" id="node2" href="$boys_8h.html" title="Calculation of the boys function. " alt="" coords="5,163,141,189"/>
-<area shape="rect" id="node4" href="$eri_8h.html" title="Kernel for electron repulsion integrals. " alt="" coords="117,80,240,107"/>
+<area shape="rect" id="node4" href="$gtoeri_8h.html" title="Kernel for electron repulsion integrals of gaussian orbitals. " alt="" coords="111,80,251,107"/>
 <area shape="rect" id="node5" href="$integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="216,155,363,197"/>
 <area shape="rect" id="node6" href="$typedefs_8h.html" title="Typedefs of common function pointers. " alt="" coords="224,245,336,272"/>
 </map>

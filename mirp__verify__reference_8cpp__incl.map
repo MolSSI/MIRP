@@ -4,6 +4,6 @@
 <area shape="rect" id="node8" href="$all_8h.html" title="Convenience header for including headers for all kernels. " alt="" coords="362,96,483,123"/>
 <area shape="rect" id="node6" href="$typedefs_8h.html" title="Typedefs of common function pointers. " alt="" coords="307,336,419,363"/>
 <area shape="rect" id="node9" href="$boys_8h.html" title="Calculation of the boys function. " alt="" coords="511,253,647,280"/>
-<area shape="rect" id="node10" href="$eri_8h.html" title="Kernel for electron repulsion integrals. " alt="" coords="361,171,484,197"/>
+<area shape="rect" id="node10" href="$gtoeri_8h.html" title="Kernel for electron repulsion integrals of gaussian orbitals. " alt="" coords="353,171,492,197"/>
 <area shape="rect" id="node11" href="$integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="289,246,436,287"/>
 </map>

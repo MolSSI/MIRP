@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['files_20and_20directory_20layout',['Files and Directory Layout',['../filesystem.html',1,'']]]
+  ['gaussian_20product_20theorem',['Gaussian Product Theorem',['../gaussian_product_theorem.html',1,'']]],
+  ['gaussiaon_20_28gto_29_20electron_20repulsion_20integrals',['Gaussiaon (GTO) Electron Repulsion Integrals',['../kernel_gtoeri.html',1,'']]]
 ];

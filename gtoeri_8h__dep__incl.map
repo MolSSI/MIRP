@@ -1,0 +1,9 @@
+<map id="mirp/kernels/gtoeri.h" name="mirp/kernels/gtoeri.h">
+<area shape="rect" id="node2" href="$all_8h.html" title="Convenience header for including headers for all kernels. " alt="" coords="293,80,413,107"/>
+<area shape="rect" id="node8" href="$gtoeri_8c.html" title="Kernel for electron repulsion integrals of gaussian orbitals. " alt="" coords="438,80,577,107"/>
+<area shape="rect" id="node3" href="$mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="5,163,91,189"/>
+<area shape="rect" id="node4" href="$mirp__create__reference_8cpp.html" title="mirp_create_reference main function " alt="" coords="115,155,257,197"/>
+<area shape="rect" id="node5" href="$mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="282,155,424,197"/>
+<area shape="rect" id="node6" href="$mirp__verify__reference_8cpp.html" title="mirp_verify_reference main function " alt="" coords="449,155,588,197"/>
+<area shape="rect" id="node7" href="$mirp__verify__test_8cpp.html" title="mirp_verify_test main function " alt="" coords="612,155,751,197"/>
+</map>

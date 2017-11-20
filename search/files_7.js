@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['integral4_5fwrappers_2ec',['integral4_wrappers.c',['../integral4__wrappers_8c.html',1,'']]],
-  ['integral4_5fwrappers_2eh',['integral4_wrappers.h',['../integral4__wrappers_8h.html',1,'']]]
+  ['kernel_5fboys_2edox',['kernel_boys.dox',['../kernel__boys_8dox.html',1,'']]],
+  ['kernel_5fgtoeri_2edox',['kernel_gtoeri.dox',['../kernel__gtoeri_8dox.html',1,'']]]
 ];

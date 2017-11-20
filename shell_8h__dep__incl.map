@@ -1,8 +1,7 @@
 <map id="mirp/shell.h" name="mirp/shell.h">
 <area shape="rect" id="node2" href="$integral4__wrappers_8c.html" title="Some useful wrapping of functionality. " alt="" coords="5,81,152,122"/>
-<area shape="rect" id="node3" href="$mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="177,88,263,115"/>
-<area shape="rect" id="node4" href="$shell_8c.html" title="Functions related to gaussians and shells. " alt="" coords="287,88,376,115"/>
-<area shape="rect" id="node5" href="$ref__integral_8cpp.html" title="Functions related to four&#45;center integral reference files. " alt="" coords="401,88,564,115"/>
-<area shape="rect" id="node6" href="$test__integral_8cpp.html" title="Functions related to testing four&#45;center integrals. " alt="" coords="589,88,760,115"/>
-<area shape="rect" id="node7" href="$testfile__io_8cpp.html" title="Helper functions for reading/writing test files. " alt="" coords="785,88,940,115"/>
+<area shape="rect" id="node3" href="$shell_8c.html" title="Functions related to gaussians and shells. " alt="" coords="177,88,265,115"/>
+<area shape="rect" id="node4" href="$ref__integral_8cpp.html" title="Functions related to four&#45;center integral reference files. " alt="" coords="290,88,453,115"/>
+<area shape="rect" id="node5" href="$test__integral_8cpp.html" title="Functions related to testing four&#45;center integrals. " alt="" coords="479,88,649,115"/>
+<area shape="rect" id="node6" href="$testfile__io_8cpp.html" title="Helper functions for reading/writing test files. " alt="" coords="674,88,829,115"/>
 </map>

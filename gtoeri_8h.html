@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MolSSI Integral Reference Project: mirp/kernels/eri.h File Reference</title>
+<title>MolSSI Integral Reference Project: mirp/kernels/gtoeri.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,66 +66,66 @@ $(function() {
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">eri.h File Reference</div>  </div>
+<div class="title">gtoeri.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Kernel for electron repulsion integrals.  
+<p>Kernel for electron repulsion integrals of gaussian orbitals.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;arb.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="integral4__wrappers_8h_source.html">mirp/kernels/integral4_wrappers.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for eri.h:</div>
+Include dependency graph for gtoeri.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="eri_8h__incl.png" border="0" usemap="#mirp_2kernels_2eri_8h" alt=""/></div>
-<map name="mirp_2kernels_2eri_8h" id="mirp_2kernels_2eri_8h">
-<area shape="rect" id="node3" href="integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="49,81,196,122"/>
-<area shape="rect" id="node4" href="typedefs_8h.html" title="Typedefs of common function pointers. " alt="" coords="57,171,169,197"/>
+<div class="center"><img src="gtoeri_8h__incl.png" border="0" usemap="#mirp_2kernels_2gtoeri_8h" alt=""/></div>
+<map name="mirp_2kernels_2gtoeri_8h" id="mirp_2kernels_2gtoeri_8h">
+<area shape="rect" id="node3" href="integral4__wrappers_8h.html" title="Some useful wrapping of functionality. " alt="" coords="57,81,204,122"/>
+<area shape="rect" id="node4" href="typedefs_8h.html" title="Typedefs of common function pointers. " alt="" coords="65,171,177,197"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="eri_8h__dep__incl.png" border="0" usemap="#mirp_2kernels_2eri_8hdep" alt=""/></div>
-<map name="mirp_2kernels_2eri_8hdep" id="mirp_2kernels_2eri_8hdep">
-<area shape="rect" id="node2" href="all_8h.html" title="Convenience header for including headers for all kernels. " alt="" coords="265,80,385,107"/>
-<area shape="rect" id="node7" href="eri_8c.html" title="Kernel for electron repulsion integrals (interval arithmetic) " alt="" coords="411,80,533,107"/>
-<area shape="rect" id="node8" href="mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="558,80,644,107"/>
-<area shape="rect" id="node3" href="mirp__create__reference_8cpp.html" title="mirp_create_reference main function " alt="" coords="5,155,147,197"/>
-<area shape="rect" id="node4" href="mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="171,155,313,197"/>
-<area shape="rect" id="node5" href="mirp__verify__reference_8cpp.html" title="mirp_verify_reference main function " alt="" coords="339,155,477,197"/>
-<area shape="rect" id="node6" href="mirp__verify__test_8cpp.html" title="mirp_verify_test main function " alt="" coords="501,155,640,197"/>
+<div class="center"><img src="gtoeri_8h__dep__incl.png" border="0" usemap="#mirp_2kernels_2gtoeri_8hdep" alt=""/></div>
+<map name="mirp_2kernels_2gtoeri_8hdep" id="mirp_2kernels_2gtoeri_8hdep">
+<area shape="rect" id="node2" href="all_8h.html" title="Convenience header for including headers for all kernels. " alt="" coords="293,80,413,107"/>
+<area shape="rect" id="node8" href="gtoeri_8c.html" title="Kernel for electron repulsion integrals of gaussian orbitals. " alt="" coords="438,80,577,107"/>
+<area shape="rect" id="node3" href="mirp_8h.html" title="Convenience header for including common MIRP functionality. " alt="" coords="5,163,91,189"/>
+<area shape="rect" id="node4" href="mirp__create__reference_8cpp.html" title="mirp_create_reference main function " alt="" coords="115,155,257,197"/>
+<area shape="rect" id="node5" href="mirp__create__test_8cpp.html" title="mirp_create_test main function " alt="" coords="282,155,424,197"/>
+<area shape="rect" id="node6" href="mirp__verify__reference_8cpp.html" title="mirp_verify_reference main function " alt="" coords="449,155,588,197"/>
+<area shape="rect" id="node7" href="mirp__verify__test_8cpp.html" title="mirp_verify_test main function " alt="" coords="612,155,751,197"/>
 </map>
 </div>
 </div>
-<p><a href="eri_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="gtoeri_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0279410e8794eb5124945ce51dd27d9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8h.html#a0279410e8794eb5124945ce51dd27d9a">mirp_eri_single</a> (arb_t integral, const int *lmn1, arb_srcptr A, const arb_t alpha1, const int *lmn2, arb_srcptr B, const arb_t alpha2, const int *lmn3, arb_srcptr C, const arb_t alpha3, const int *lmn4, arb_srcptr D, const arb_t alpha4, slong working_prec)</td></tr>
-<tr class="memdesc:a0279410e8794eb5124945ce51dd27d9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a single cartesian electron repulsion integral (interval arithmetic)  <a href="#a0279410e8794eb5124945ce51dd27d9a">More...</a><br /></td></tr>
-<tr class="separator:a0279410e8794eb5124945ce51dd27d9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe17546e30e599dbf59b62fca81933b3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8h.html#afe17546e30e599dbf59b62fca81933b3">mirp_eri_single_str</a> (arb_t integral, const int *lmn1, const char **A, const char *alpha1, const int *lmn2, const char **B, const char *alpha2, const int *lmn3, const char **C, const char *alpha3, const int *lmn4, const char **D, const char *alpha4, slong working_prec)</td></tr>
-<tr class="memdesc:afe17546e30e599dbf59b62fca81933b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a single electron repulsion integral for a primitive quartet (interval arithmetic)  <a href="#afe17546e30e599dbf59b62fca81933b3">More...</a><br /></td></tr>
-<tr class="separator:afe17546e30e599dbf59b62fca81933b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabed5010cd8c850777aa61a854e32645"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8h.html#aabed5010cd8c850777aa61a854e32645">mirp_eri_single_exact</a> (double *integral, const int *lmn1, const double *A, double alpha1, const int *lmn2, const double *B, double alpha2, const int *lmn3, const double *C, double alpha3, const int *lmn4, const double *D, double alpha4)</td></tr>
-<tr class="memdesc:aabed5010cd8c850777aa61a854e32645"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a single electron repulsion integral for a primitive quartet (exact double precision)  <a href="#aabed5010cd8c850777aa61a854e32645">More...</a><br /></td></tr>
-<tr class="separator:aabed5010cd8c850777aa61a854e32645"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3c4e6d02d5ea405badb4cb2a48deb6d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8h.html#aa3c4e6d02d5ea405badb4cb2a48deb6d">mirp_eri</a> (arb_t integrals, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, slong working_prec)</td></tr>
-<tr class="memdesc:aa3c4e6d02d5ea405badb4cb2a48deb6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute electron repulsion integrals for a contracted shell quartet (interval arithmetic)  <a href="#aa3c4e6d02d5ea405badb4cb2a48deb6d">More...</a><br /></td></tr>
-<tr class="separator:aa3c4e6d02d5ea405badb4cb2a48deb6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32b65e99f043a4c154b9afa50266dc6a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8h.html#a32b65e99f043a4c154b9afa50266dc6a">mirp_eri_str</a> (arb_ptr integrals, int am1, const char **A, int nprim1, int ngen1, const char **alpha1, const char **coeff1, int am2, const char **B, int nprim2, int ngen2, const char **alpha2, const char **coeff2, int am3, const char **C, int nprim3, int ngen3, const char **alpha3, const char **coeff3, int am4, const char **D, int nprim4, int ngen4, const char **alpha4, const char **coeff4, slong working_prec)</td></tr>
-<tr class="memdesc:a32b65e99f043a4c154b9afa50266dc6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute electron repulsion integrals for a contracted shell quartet (string inputs)  <a href="#a32b65e99f043a4c154b9afa50266dc6a">More...</a><br /></td></tr>
-<tr class="separator:a32b65e99f043a4c154b9afa50266dc6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01aa43fc31e7315e1a590c02cbc4df24"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="eri_8h.html#a01aa43fc31e7315e1a590c02cbc4df24">mirp_eri_exact</a> (double *integrals, int am1, const double *A, int nprim1, int ngen1, const double *alpha1, const double *coeff1, int am2, const double *B, int nprim2, int ngen2, const double *alpha2, const double *coeff2, int am3, const double *C, int nprim3, int ngen3, const double *alpha3, const double *coeff3, int am4, const double *D, int nprim4, int ngen4, const double *alpha4, const double *coeff4)</td></tr>
-<tr class="memdesc:a01aa43fc31e7315e1a590c02cbc4df24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute electron repulsion integrals for a contracted shell quartet (exact double precision)  <a href="#a01aa43fc31e7315e1a590c02cbc4df24">More...</a><br /></td></tr>
-<tr class="separator:a01aa43fc31e7315e1a590c02cbc4df24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af67940bbb98db84b9b44d8da9d255ddd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gtoeri_8h.html#af67940bbb98db84b9b44d8da9d255ddd">mirp_gtoeri_single</a> (arb_t integral, const int *lmn1, arb_srcptr A, const arb_t alpha1, const int *lmn2, arb_srcptr B, const arb_t alpha2, const int *lmn3, arb_srcptr C, const arb_t alpha3, const int *lmn4, arb_srcptr D, const arb_t alpha4, slong working_prec)</td></tr>
+<tr class="memdesc:af67940bbb98db84b9b44d8da9d255ddd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a single cartesian GTO electron repulsion integral (interval arithmetic)  <a href="#af67940bbb98db84b9b44d8da9d255ddd">More...</a><br /></td></tr>
+<tr class="separator:af67940bbb98db84b9b44d8da9d255ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e64088fc127022c47945ea550415087"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gtoeri_8h.html#a2e64088fc127022c47945ea550415087">mirp_gtoeri_single_str</a> (arb_t integral, const int *lmn1, const char **A, const char *alpha1, const int *lmn2, const char **B, const char *alpha2, const int *lmn3, const char **C, const char *alpha3, const int *lmn4, const char **D, const char *alpha4, slong working_prec)</td></tr>
+<tr class="memdesc:a2e64088fc127022c47945ea550415087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a single GTO electron repulsion integral for a primitive quartet (interval arithmetic)  <a href="#a2e64088fc127022c47945ea550415087">More...</a><br /></td></tr>
+<tr class="separator:a2e64088fc127022c47945ea550415087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2a13bdcd85db6f39c791d521ec5bcd7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gtoeri_8h.html#ad2a13bdcd85db6f39c791d521ec5bcd7">mirp_gtoeri_single_exact</a> (double *integral, const int *lmn1, const double *A, double alpha1, const int *lmn2, const double *B, double alpha2, const int *lmn3, const double *C, double alpha3, const int *lmn4, const double *D, double alpha4)</td></tr>
+<tr class="memdesc:ad2a13bdcd85db6f39c791d521ec5bcd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute a single GTO electron repulsion integral for a primitive quartet (exact double precision)  <a href="#ad2a13bdcd85db6f39c791d521ec5bcd7">More...</a><br /></td></tr>
+<tr class="separator:ad2a13bdcd85db6f39c791d521ec5bcd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32cbf774178956abfc471127a1ff21b1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gtoeri_8h.html#a32cbf774178956abfc471127a1ff21b1">mirp_gtoeri</a> (arb_t integrals, int am1, arb_srcptr A, int nprim1, int ngen1, arb_srcptr alpha1, arb_srcptr coeff1, int am2, arb_srcptr B, int nprim2, int ngen2, arb_srcptr alpha2, arb_srcptr coeff2, int am3, arb_srcptr C, int nprim3, int ngen3, arb_srcptr alpha3, arb_srcptr coeff3, int am4, arb_srcptr D, int nprim4, int ngen4, arb_srcptr alpha4, arb_srcptr coeff4, slong working_prec)</td></tr>
+<tr class="memdesc:a32cbf774178956abfc471127a1ff21b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute GTO electron repulsion integrals for a contracted shell quartet (interval arithmetic)  <a href="#a32cbf774178956abfc471127a1ff21b1">More...</a><br /></td></tr>
+<tr class="separator:a32cbf774178956abfc471127a1ff21b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32e71433f16439f0223a82e42f8b3fd8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gtoeri_8h.html#a32e71433f16439f0223a82e42f8b3fd8">mirp_gtoeri_str</a> (arb_ptr integrals, int am1, const char **A, int nprim1, int ngen1, const char **alpha1, const char **coeff1, int am2, const char **B, int nprim2, int ngen2, const char **alpha2, const char **coeff2, int am3, const char **C, int nprim3, int ngen3, const char **alpha3, const char **coeff3, int am4, const char **D, int nprim4, int ngen4, const char **alpha4, const char **coeff4, slong working_prec)</td></tr>
+<tr class="memdesc:a32e71433f16439f0223a82e42f8b3fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute GTO electron repulsion integrals for a contracted shell quartet (string inputs)  <a href="#a32e71433f16439f0223a82e42f8b3fd8">More...</a><br /></td></tr>
+<tr class="separator:a32e71433f16439f0223a82e42f8b3fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b9b914a61f912757fd6252c1f21a9e3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gtoeri_8h.html#a9b9b914a61f912757fd6252c1f21a9e3">mirp_gtoeri_exact</a> (double *integrals, int am1, const double *A, int nprim1, int ngen1, const double *alpha1, const double *coeff1, int am2, const double *B, int nprim2, int ngen2, const double *alpha2, const double *coeff2, int am3, const double *C, int nprim3, int ngen3, const double *alpha3, const double *coeff3, int am4, const double *D, int nprim4, int ngen4, const double *alpha4, const double *coeff4)</td></tr>
+<tr class="memdesc:a9b9b914a61f912757fd6252c1f21a9e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute GTO electron repulsion integrals for a contracted shell quartet (exact double precision)  <a href="#a9b9b914a61f912757fd6252c1f21a9e3">More...</a><br /></td></tr>
+<tr class="separator:a9b9b914a61f912757fd6252c1f21a9e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Kernel for electron repulsion integrals. </p>
+<div class="textblock"><p>Kernel for electron repulsion integrals of gaussian orbitals. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aa3c4e6d02d5ea405badb4cb2a48deb6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3c4e6d02d5ea405badb4cb2a48deb6d">&#9670;&nbsp;</a></span>mirp_eri()</h2>
+<a id="a32cbf774178956abfc471127a1ff21b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32cbf774178956abfc471127a1ff21b1">&#9670;&nbsp;</a></span>mirp_gtoeri()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,7 +134,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void mirp_eri </td>
+          <td class="memname">static void mirp_gtoeri </td>
           <td>(</td>
           <td class="paramtype">arb_t&#160;</td>
           <td class="paramname"><em>integrals</em>, </td>
@@ -302,7 +302,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute electron repulsion integrals for a contracted shell quartet (interval arithmetic) </p>
+<p>Compute GTO electron repulsion integrals for a contracted shell quartet (interval arithmetic) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Output for the computed integral </td></tr>
@@ -319,8 +319,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a01aa43fc31e7315e1a590c02cbc4df24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01aa43fc31e7315e1a590c02cbc4df24">&#9670;&nbsp;</a></span>mirp_eri_exact()</h2>
+<a id="a9b9b914a61f912757fd6252c1f21a9e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b9b914a61f912757fd6252c1f21a9e3">&#9670;&nbsp;</a></span>mirp_gtoeri_exact()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -329,7 +329,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void mirp_eri_exact </td>
+          <td class="memname">static void mirp_gtoeri_exact </td>
           <td>(</td>
           <td class="paramtype">double *&#160;</td>
           <td class="paramname"><em>integrals</em>, </td>
@@ -491,7 +491,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute electron repulsion integrals for a contracted shell quartet (exact double precision) </p>
+<p>Compute GTO electron repulsion integrals for a contracted shell quartet (exact double precision) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Output for the computed integral </td></tr>
@@ -507,14 +507,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0279410e8794eb5124945ce51dd27d9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0279410e8794eb5124945ce51dd27d9a">&#9670;&nbsp;</a></span>mirp_eri_single()</h2>
+<a id="af67940bbb98db84b9b44d8da9d255ddd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af67940bbb98db84b9b44d8da9d255ddd">&#9670;&nbsp;</a></span>mirp_gtoeri_single()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void mirp_eri_single </td>
+          <td class="memname">void mirp_gtoeri_single </td>
           <td>(</td>
           <td class="paramtype">arb_t&#160;</td>
           <td class="paramname"><em>integral</em>, </td>
@@ -605,7 +605,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Computes a single cartesian electron repulsion integral (interval arithmetic) </p>
+<p>Computes a single cartesian GTO electron repulsion integral (interval arithmetic) </p>
 <p>The <code>lmn</code> parameters are the exponents on x, y, and z, with the total angular momentum being the sum of the three components. For example, { 1, 2, 0 } is the <img class="formulaInl" alt="$f_{xy^2}$" src="form_25.png"/> cartesian integral.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -620,8 +620,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aabed5010cd8c850777aa61a854e32645"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabed5010cd8c850777aa61a854e32645">&#9670;&nbsp;</a></span>mirp_eri_single_exact()</h2>
+<a id="ad2a13bdcd85db6f39c791d521ec5bcd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2a13bdcd85db6f39c791d521ec5bcd7">&#9670;&nbsp;</a></span>mirp_gtoeri_single_exact()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -630,7 +630,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void mirp_eri_single_exact </td>
+          <td class="memname">static void mirp_gtoeri_single_exact </td>
           <td>(</td>
           <td class="paramtype">double *&#160;</td>
           <td class="paramname"><em>integral</em>, </td>
@@ -720,7 +720,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute a single electron repulsion integral for a primitive quartet (exact double precision) </p>
+<p>Compute a single GTO electron repulsion integral for a primitive quartet (exact double precision) </p>
 <p>The <code>lmn</code> parameters are the exponents on x, y, and z, with the total angular momentum being the sum of the three components. For example, { 1, 2, 0 } is the <img class="formulaInl" alt="$f_{xy^2}$" src="form_25.png"/> cartesian integral.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -734,8 +734,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afe17546e30e599dbf59b62fca81933b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe17546e30e599dbf59b62fca81933b3">&#9670;&nbsp;</a></span>mirp_eri_single_str()</h2>
+<a id="a2e64088fc127022c47945ea550415087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e64088fc127022c47945ea550415087">&#9670;&nbsp;</a></span>mirp_gtoeri_single_str()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -744,7 +744,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void mirp_eri_single_str </td>
+          <td class="memname">static void mirp_gtoeri_single_str </td>
           <td>(</td>
           <td class="paramtype">arb_t&#160;</td>
           <td class="paramname"><em>integral</em>, </td>
@@ -840,7 +840,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute a single electron repulsion integral for a primitive quartet (interval arithmetic) </p>
+<p>Compute a single GTO electron repulsion integral for a primitive quartet (interval arithmetic) </p>
 <p>The <code>lmn</code> parameters are the exponents on x, y, and z, with the total angular momentum being the sum of the three components. For example, { 1, 2, 0 } is the <img class="formulaInl" alt="$f_{xy^2}$" src="form_25.png"/> cartesian integral.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -855,8 +855,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a32b65e99f043a4c154b9afa50266dc6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32b65e99f043a4c154b9afa50266dc6a">&#9670;&nbsp;</a></span>mirp_eri_str()</h2>
+<a id="a32e71433f16439f0223a82e42f8b3fd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32e71433f16439f0223a82e42f8b3fd8">&#9670;&nbsp;</a></span>mirp_gtoeri_str()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -865,7 +865,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void mirp_eri_str </td>
+          <td class="memname">static void mirp_gtoeri_str </td>
           <td>(</td>
           <td class="paramtype">arb_ptr&#160;</td>
           <td class="paramname"><em>integrals</em>, </td>
@@ -1033,7 +1033,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Compute electron repulsion integrals for a contracted shell quartet (string inputs) </p>
+<p>Compute GTO electron repulsion integrals for a contracted shell quartet (string inputs) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">integrals</td><td>Output for the computed integral </td></tr>
@@ -1053,7 +1053,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 8 2017 11:17:26 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 20 2017 16:11:24 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
