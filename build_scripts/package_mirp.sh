@@ -71,6 +71,13 @@ fi
 
 mv ${PREFIX}/README ${PREFIX}/README.dependencies
 
+# Copy documentation
+cd "${PREFIX}"
+cp -R ${MIRP_DIR}/doc/html html_doc
+tar -cvjf html_doc.tar.bz2 html_doc
+rm -R html_doc
+cd "${CURDIR}"
+
 # Create the readme file
 GCC_VER=$(gcc --version | head -n 1 | cut -d" " -f 3)
 BUILD_DATE=$(date -I)

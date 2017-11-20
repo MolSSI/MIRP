@@ -32,6 +32,16 @@ MIRP (and dependencies) can be built with most standard C/C++ compilers.
 In addition, both MIRP (and the dependencies) can be obtained as linux executables
 and shared libraries.
 
+\section zenodo_sec Source, Binary, and Reference File Archives
+
+Archives of source and binaries, as well as reference data files,
+can be found on Zenodo.
+
+Software (source and binaries): https://zenodo.org/record/1063526
+
+Reference data: https://zenodo.org/record/1063526
+
+
 \section main_sec Main Documentation
 
   - Obtaining, building, and installing

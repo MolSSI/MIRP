@@ -7,12 +7,15 @@ Precompiled binaries
 For more information, see the documentation at https://molssi.github.io/MIRP/index.html
 or the source code at https://github.com/MolSSI/MIRP
 
+Complete documentation (as standalone HTML) is available in the
+html_doc.tar.bz2 file
+
 Build Date: BUILD_DATE
 
 This contains precompiled binary libraries
 and executables of MIRP.
 
-see README.dependencies for license and build information
+See README.dependencies for license and build information
 of the dependencies of MIRP.
 
 This package was built with GCC GCC_VER

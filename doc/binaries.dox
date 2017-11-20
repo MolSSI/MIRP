@@ -32,23 +32,23 @@ If in doubt, the `core2` binary should run on any processor made after circa 200
 <table>
 <tr><th>Architecture   <th>MIRP + Dependencies    <th>Dependencies only
 <tr><td>core2
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.6_core2.tar.bz2">mirp_v0.6_core2.tar.bz2</a>
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.6_core2.tar.bz2">mirp_deps_v0.6_core2.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_v1.0.0_core2.tar.bz2">mirp_v1.0.0_core2.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_deps_v1.0.0_core2.tar.bz2">mirp_deps_v1.0.0_core2.tar.bz2</a>
 <tr><td>nehalem
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.6_nehalem.tar.bz2">mirp_v0.6_nehalem.tar.bz2</a>
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.6_nehalem.tar.bz2">mirp_deps_v0.6_nehalem.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_v1.0.0_nehalem.tar.bz2">mirp_v1.0.0_nehalem.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_deps_v1.0.0_nehalem.tar.bz2">mirp_deps_v1.0.0_nehalem.tar.bz2</a>
 <tr><td>sandybridge
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.6_sandybridge.tar.bz2">mirp_v0.6_sandybridge.tar.bz2</a>
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.6_sandybridge.tar.bz2">mirp_deps_v0.6_sandybridge.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_v1.0.0_sandybridge.tar.bz2">mirp_v1.0.0_sandybridge.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_deps_v1.0.0_sandybridge.tar.bz2">mirp_deps_v1.0.0_sandybridge.tar.bz2</a>
 <tr><td>haswell
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.6_haswell.tar.bz2">mirp_v0.6_haswell.tar.bz2</a>
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.6_haswell.tar.bz2">mirp_deps_v0.6_haswell.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_v1.0.0_haswell.tar.bz2">mirp_v1.0.0_haswell.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_deps_v1.0.0_haswell.tar.bz2">mirp_deps_v1.0.0_haswell.tar.bz2</a>
 <tr><td>skylake
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.6_skylake.tar.bz2">mirp_v0.6_skylake.tar.bz2</a>
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.6_skylake.tar.bz2">mirp_deps_v0.6_skylake.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_v1.0.0_skylake.tar.bz2">mirp_v1.0.0_skylake.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_deps_v1.0.0_skylake.tar.bz2">mirp_deps_v1.0.0_skylake.tar.bz2</a>
 <tr><td>knl
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_v0.6_knl.tar.bz2">mirp_v0.6_knl.tar.bz2</a>
-    <td><a href="https://www.bennyp.org/research/mirp/download/mirp_deps_v0.6_knl.tar.bz2">mirp_deps_v0.6_knl.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_v1.0.0_knl.tar.bz2">mirp_v1.0.0_knl.tar.bz2</a>
+    <td><a href="https://zenodo.org/record/1063526/files/mirp_deps_v1.0.0_knl.tar.bz2">mirp_deps_v1.0.0_knl.tar.bz2</a>
 </table>
 
 */
