@@ -12,6 +12,7 @@ OMP=$4
 BTYPE=$5
 
 MIRP_VER=$(cat "${MIRP_DIR}/VERSION")
+DEPS_VER=$(cat "${MIRP_DIR}/VERSION_DEPS")
 
 module load ${COMP_MOD}
 module load ${CMAKE_MOD}
@@ -39,7 +40,7 @@ fi
  
 CMAKE="$(which cmake)"
 
-FULL_DEPS_DIR="${DEPS_DIR}/mirp_deps_v${MIRP_VER}_${DEPS_ARCH}"
+FULL_DEPS_DIR="${DEPS_DIR}/mirp_deps_v${DEPS_VER}_${DEPS_ARCH}"
 BUILD_DIR="$(mktemp -d -p /tmp)"
 CURDIR="$(pwd)"
 

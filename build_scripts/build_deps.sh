@@ -6,7 +6,7 @@ MYDIR="$(cd "$(dirname "$0")" && pwd)"
 MIRP_DIR="$(dirname ${MYDIR})"
 
 ARCH=$1
-MIRP_VER=$(cat "${MIRP_DIR}/VERSION")
+DEPS_VER=$(cat "${MIRP_DIR}/VERSION_DEPS")
 PARALLEL=4 # Number of concurrent compilations (use make -j${PARALLEL})
 
 GMP_VER=6.1.2
@@ -30,7 +30,7 @@ FLINT_URL="http://flintlib.org/${FLINT_FILE}"
 ARB_URL="https://github.com/fredrik-johansson/arb/archive/${ARB_VER}.tar.gz"
 
 BUILD_DIR="deps_build_${ARCH}"
-PREFIX="$(pwd)/mirp_deps_v${MIRP_VER}_${ARCH}"
+PREFIX="$(pwd)/mirp_deps_v${DEPS_VER}_${ARCH}"
 
 rm -Rf ${BUILD_DIR}
 rm -Rf ${PREFIX}
@@ -156,7 +156,7 @@ fi
 GCC_VER=$(gcc --version | head -n 1 | cut -d" " -f 3)
 BUILD_DATE=$(date -I)
 cp "${MYDIR}/deps_README.in"           "${PREFIX}/README"
-sed -i "s/MIRP_VER/${MIRP_VER}/g"      "${PREFIX}/README"
+sed -i "s/DEPS_VER/${DEPS_VER}/g"      "${PREFIX}/README"
 sed -i "s/GCC_VER/${GCC_VER}/g"        "${PREFIX}/README"
 sed -i "s/GMP_VER/${GMP_VER}/g"        "${PREFIX}/README"
 sed -i "s/MPFR_VER/${MPFR_VER}/g"      "${PREFIX}/README"

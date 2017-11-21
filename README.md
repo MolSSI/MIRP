@@ -3,15 +3,27 @@ MolSSI Integral Reference Project (MIRP)
 
 [![Build Status](https://www.travis-ci.org/MolSSI/MIRP.svg?branch=master)](https://www.travis-ci.org/MolSSI/MIRP)
 
+
 ## Overview
 
 The goal of the MolSSI Integral Reference Project is to provide both reference
 data and reference implementations of common integrals found in computational
 chemistry.
 
+## DOI and Citation
+
+MIRP is available on Zenodo under the following DOIs:
+
+Source and Binaries: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1063525.svg)](https://doi.org/10.5281/zenodo.1063525)
+
+Reference Files: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1043590.svg)](https://doi.org/10.5281/zenodo.1043590)
+
+These represent DOIs for the overall project and always point to the latest release.
+If you are using a specific version, you should specify the DOI for that version.
+
 ## Documentation
 
-Complete documentation can be found at https://molssi.github.io/MIRP/index.html
+Complete documentation can be found at https://molssi.github.io/MIRP
 
 ## Requirements
 
@@ -29,6 +41,7 @@ Complete documentation can be found at https://molssi.github.io/MIRP/index.html
 
 MIRP is released under the BSD 3-clause license. See LICENSE for details.
 
+## Acknowledgements
 
-
+This material is based upon work supported by the National Science Foundation under grant no. ACI-1547580
 

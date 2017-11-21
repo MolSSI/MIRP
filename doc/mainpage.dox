@@ -37,9 +37,12 @@ and shared libraries.
 Archives of source and binaries, as well as reference data files,
 can be found on Zenodo.
 
-Software (source and binaries): https://zenodo.org/record/1063526
+Software (source and binaries): https://zenodo.org/record/1063525
 
-Reference data: https://zenodo.org/record/1063526
+Reference data: https://zenodo.org/record/1043590
+
+These represent DOIs for the overall project and always point to the latest release.
+If you are using a specific version, you should specify the DOI for that version.
 
 
 \section main_sec Main Documentation
@@ -82,7 +85,7 @@ Bugs and suggestions for improvements can be reported via
 <a href="https://github.com/MolSSI/MIRP/issues">github issues</a> or by
 emailing the main author directly.
 
-\section Authors
+\section authors_sec Authors
 
 MIRP is primarily written by Benjamin Pritchard \<bpp4@vt.edu\>, a Software Scientist at
 MolSSI.
@@ -91,5 +94,9 @@ MolSSI.
 
 MIRP is released under the 3-Clause BSD License. See the LICENSE file for
 more details.
+
+\section ack_sec Acknowledgements
+
+This material is based upon work supported by the National Science Foundation under grant no. ACI-1547580
 
 */
