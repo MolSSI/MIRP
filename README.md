@@ -43,5 +43,5 @@ MIRP is released under the BSD 3-clause license. See LICENSE for details.
 
 ## Acknowledgements
 
-This material is based upon work supported by the National Science Foundation under grant no. ACI-1547580
+This work was supported by the Molecular Sciences Software Institute under U.S. National Science Foundation grant ACI-1547580.
 
