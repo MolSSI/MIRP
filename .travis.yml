@@ -10,6 +10,7 @@ matrix:
           packages:
             - cmake
             - g++-5
+            - lcov
       env:
         - MATRIX_EVAL="CC=gcc-5 CXX=g++-5"
 
@@ -50,7 +51,7 @@ script:
   # Build MIRP
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${DEPDIR} -DCMAKE_INSTALL_PREFIX="${INSTALLDIR}" ../
+  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${DEPDIR} -DCMAKE_INSTALL_PREFIX="${INSTALLDIR}" -DCMAKE_C_FLAGS="-fprofile-arcs -ftest-coverage" -DCMAKE_CXX_FLAGS="-fprofile-arcs -ftest-coverage" ../
   - make install
   - ctest
 
@@ -62,3 +63,10 @@ script:
   - make
   - ctest
 
+
+after_success:
+  - cd ${TRAVIS_BUILD_DIR}/build
+  - lcov --directory . --capture --output-file coverage.info
+  - lcov --remove coverage.info '/usr/*' --output-file coverage.info
+  - lcov --list coverage.info
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

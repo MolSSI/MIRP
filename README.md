@@ -2,6 +2,7 @@ MolSSI Integral Reference Project (MIRP)
 ========================================
 
 [![Build Status](https://www.travis-ci.org/MolSSI/MIRP.svg?branch=master)](https://www.travis-ci.org/MolSSI/MIRP)
+[![codecov](https://codecov.io/gh/MolSSI/MIRP/branch/master/graph/badge.svg)](https://codecov.io/gh/MolSSI/MIRP)
 
 
 ## Overview
