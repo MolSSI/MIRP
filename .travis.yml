@@ -2,18 +2,6 @@ language: C++
 
 matrix:
   include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - cmake
-            - g++-5
-            - lcov
-      env:
-        - MATRIX_EVAL="CC=gcc-5 CXX=g++-5"
-
 #    - os: linux
 #      addons:
 #        apt:
@@ -21,10 +9,23 @@ matrix:
 #            - ubuntu-toolchain-r-test
 #          packages:
 #            - cmake
-#            - patchelf
-#            - g++-6
+#            - g++-5
+#            - lcov
 #      env:
-#        - MATRIX_EVAL="CC=gcc-6 CXX=g++-6"
+#        - MATRIX_EVAL="CC=gcc-5 CXX=g++-5"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - cmake
+            - clang
+            - g++-5
+            - lcov
+      env:
+        - MATRIX_EVAL="CC=clang CXX=clang++"
 
 before_install:
   - eval "${MATRIX_EVAL}"
@@ -51,7 +52,7 @@ script:
   # Build MIRP
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${DEPDIR} -DCMAKE_INSTALL_PREFIX="${INSTALLDIR}" -DCMAKE_C_FLAGS="-fprofile-arcs -ftest-coverage" -DCMAKE_CXX_FLAGS="-fprofile-arcs -ftest-coverage" ../
+  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${DEPDIR} -DCMAKE_INSTALL_PREFIX="${INSTALLDIR}" -DCMAKE_C_FLAGS="-coverage" -DCMAKE_CXX_FLAGS="-coverage" ../
   - make install
   - ctest
 
@@ -66,7 +67,7 @@ script:
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}/build
-  - lcov --directory . --capture --output-file coverage.info
-  - lcov --remove coverage.info '/usr/*' --output-file coverage.info
-  - lcov --list coverage.info
+  - lcov --gcov-tool llvm-cov --directory . --capture --output-file coverage.info
+  - lcov --gcov-tool llvm-cov --remove coverage.info '/usr/*' --output-file coverage.info
+  - lcov --gcov-tool llvm-cov --list coverage.info
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
