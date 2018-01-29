@@ -1,3 +1,5 @@
+include(CMakeMacros.txt)
+
 #############################################
 # Check the sha sums on the test data       #
 # We check for the 'shasum' and 'sha256sum' #
@@ -10,7 +12,7 @@ if(NOT SHASUM_PROG)
 endif()
 
 if(NOT SHASUM_PROG)
-    message(STATUS "shasum or sha256sum not found. I wont check the data files")
+    message(STATUS "shasum or sha256sum not found. I will not check the data files")
 else()
     add_test(NAME tests_checksum
              COMMAND ${SHASUM_PROG} -c sha256sums
@@ -19,86 +21,48 @@ else()
 endif()
 
 
-
 ######################################
-# Creates a test of the boys function
+# Tests the help screen of test progs
 ######################################
-macro(add_boys_test filename floattype prec extra_m)
-    if(${prec} EQUAL 0)
-        add_test(NAME boys_${filename}_${floattype}_extra_${extra_m}
-                 COMMAND mirp_verify_test --integral boys
-                                          --file ${CMAKE_CURRENT_LIST_DIR}/${filename}
-                                          --float ${floattype}
-                                          --extra-m ${extra_m}
-        )
-    else()
-        add_test(NAME boys_${filename}_${floattype}_${prec}_extra_${extra_m}
-                 COMMAND mirp_verify_test --integral boys
-                                          --file ${CMAKE_CURRENT_LIST_DIR}/${filename}
-                                          --float ${floattype} --prec ${prec}
-                                          --extra-m ${extra_m}
-        )
-    endif()
-endmacro()
+add_test(NAME help_mirp_create_test_1 COMMAND mirp_create_test)
+add_test(NAME help_mirp_create_test_2 COMMAND mirp_create_test -h)
+add_test(NAME help_mirp_verify_test_1 COMMAND mirp_verify_test)
+add_test(NAME help_mirp_verify_test_2 COMMAND mirp_verify_test -h)
+add_test(NAME help_mirp_create_reference_1 COMMAND mirp_create_reference)
+add_test(NAME help_mirp_create_reference_2 COMMAND mirp_create_reference -h)
+add_test(NAME help_mirp_verify_reference_1 COMMAND mirp_verify_reference)
+add_test(NAME help_mirp_verify_reference_2 COMMAND mirp_verify_reference -h)
 
-##############################################
-# Creates a test of general integrals
-##############################################
-macro(add_integral_test filename integral floattype prec)
-    if(${prec} EQUAL 0)
-        add_test(NAME ${integral}_${filename}_${floattype}
-                 COMMAND mirp_verify_test --integral ${integral} 
-                                           --file ${CMAKE_CURRENT_LIST_DIR}/${filename}
-                                           --float ${floattype}
-        )
-    else()
-        add_test(NAME ${integral}_${filename}_${floattype}_${prec}
-                 COMMAND mirp_verify_test --integral ${integral} 
-                                       --file ${CMAKE_CURRENT_LIST_DIR}/${filename}
-                                       --float ${floattype} --prec ${prec}
-        )
-    endif()
-endmacro()
+#############################################
+# Test failures
+# This makes sure the testing infrastructure
+# is sane
+#############################################
+__verify_test_boys(${CMAKE_CURRENT_LIST_DIR}/boys_failure_1.dat interval 332 0 "1 / 1 failed")
+__verify_test_boys(${CMAKE_CURRENT_LIST_DIR}/boys_failure_1.dat interval 332 10 "1 / 1 failed")
+__verify_test(${CMAKE_CURRENT_LIST_DIR}/gtoeri_failure_1.dat gtoeri interval 332 "1 / 1 failed")
 
 
-##############################################
-# Creates a test of reference files
-##############################################
-macro(add_integral_reftest filename integral)
-    add_test(NAME reftest_${integral}_${filename}
-             COMMAND mirp_verify_reference --integral ${integral} 
-                                           --file ${CMAKE_CURRENT_LIST_DIR}/${filename}
-    )
-endmacro()
-
-
+################
 # Boys function
-add_boys_test(boys_large_range.dat exact 0 0)
-add_boys_test(boys_large_range.dat exact 0 10)
-add_boys_test(boys_large_range.dat interval 128  0)
-add_boys_test(boys_large_range.dat interval 128 10)
-add_boys_test(boys_large_range.dat interval 332  0)
-add_boys_test(boys_large_range.dat interval 332 10)
-add_boys_test(boys_large_random.dat exact 0 0)
-add_boys_test(boys_large_random.dat exact 0 10)
-add_boys_test(boys_large_random.dat interval 128  0)
-add_boys_test(boys_large_random.dat interval 128 10)
-add_boys_test(boys_large_random.dat interval 332  0)
-add_boys_test(boys_large_random.dat interval 332 10)
+################
+verify_test_boys(${CMAKE_CURRENT_LIST_DIR}/boys_large_range.dat)
+verify_test_boys(${CMAKE_CURRENT_LIST_DIR}/boys_large_random.dat)
+create_and_verify_test_boys(${CMAKE_CURRENT_LIST_DIR}/boys_large_random.inp)
 
+
+############
 # ERI
-add_integral_test(gtoeri_single_random_1.dat gtoeri_single interval 128)
-add_integral_test(gtoeri_single_random_1.dat gtoeri_single interval 332)
-add_integral_test(gtoeri_single_random_1.dat gtoeri_single exact 0)
-add_integral_test(gtoeri_single_water_sto-3g.dat gtoeri_single interval 128)
-add_integral_test(gtoeri_single_water_sto-3g.dat gtoeri_single interval 332)
-add_integral_test(gtoeri_single_water_sto-3g.dat gtoeri_single exact 0)
+############
+verify_test(${CMAKE_CURRENT_LIST_DIR}/gtoeri_single_random_1.dat gtoeri_single)
+verify_test(${CMAKE_CURRENT_LIST_DIR}/gtoeri_single_water_sto-3g.dat gtoeri_single)
 
-add_integral_test(gtoeri_random_1.dat gtoeri interval 128)
-add_integral_test(gtoeri_random_1.dat gtoeri interval 332)
-add_integral_test(gtoeri_random_1.dat gtoeri exact 0)
-add_integral_test(gtoeri_water_sto-3g.dat gtoeri interval 128)
-add_integral_test(gtoeri_water_sto-3g.dat gtoeri interval 332)
-add_integral_test(gtoeri_water_sto-3g.dat gtoeri exact 0)
+verify_test(${CMAKE_CURRENT_LIST_DIR}/gtoeri_random_1.dat gtoeri)
+verify_test(${CMAKE_CURRENT_LIST_DIR}/gtoeri_water_sto-3g.dat gtoeri)
 
-add_integral_reftest(gtoeri_water_sto-3g.ref gtoeri)
+verify_reference(${CMAKE_CURRENT_LIST_DIR}/gtoeri_water_sto-3g.ref gtoeri)
+
+
+create_and_verify_test(${CMAKE_CURRENT_LIST_DIR}/4center_single_water_sto-3g.inp gtoeri_single)
+create_and_verify_test(${CMAKE_CURRENT_LIST_DIR}/4center_water_sto-3g.inp gtoeri)
+create_and_verify_reference(gtoeri)

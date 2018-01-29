@@ -1,0 +1,138 @@
+####################################################
+# Verifies a Boys function test file
+# This verifies a single test file with the given parameters
+####################################################
+macro(__verify_test_boys filepath floattype prec extra_m)
+    get_filename_component(filename ${filepath} NAME)
+
+    if(${prec} EQUAL 0)
+        set(test_name boys_${filename}_${floattype}_+${extra_m})
+        add_test(NAME ${test_name}
+                 COMMAND mirp_verify_test --integral boys
+                                          --file ${filepath}
+                                          --float ${floattype}
+                                          --extra-m ${extra_m}
+        )
+    else()
+        set(test_name boys_${filename}_${floattype}_${prec}_+${extra_m})
+        add_test(NAME ${test_name}
+                 COMMAND mirp_verify_test --integral boys
+                                          --file ${filepath}
+                                          --float ${floattype} --prec ${prec}
+                                          --extra-m ${extra_m}
+        )
+    endif()
+
+    # Parse the PASS_REGULAR_EXPRESSION, if provided
+    set(extra_args ${ARGN})
+    list(LENGTH extra_args len)
+    if(${len} GREATER 0)
+        set_tests_properties(${test_name} PROPERTIES PASS_REGULAR_EXPRESSION ${extra_args})
+    endif()
+endmacro()
+
+
+#######################################
+# Verifies a Boys function test file
+# This tests with multiple float types,
+# precisions, and extra m values
+#######################################
+macro(verify_test_boys filepath)
+    __verify_test_boys(${filepath} exact 0 0)
+    __verify_test_boys(${filepath} exact 0 10)
+    __verify_test_boys(${filepath} interval 128  0)
+    __verify_test_boys(${filepath} interval 128 10)
+    __verify_test_boys(${filepath} interval 332  0)
+    __verify_test_boys(${filepath} interval 332 10)
+endmacro()
+
+
+################################################################
+# Create an Boys test file via create_test, then verify it
+################################################################
+macro(create_and_verify_test_boys filepath)
+    get_filename_component(filename ${filepath} NAME)
+    add_test(NAME boys_${filename}_create_test
+             COMMAND mirp_create_test --infile ${filepath}
+                                      --outfile boys_${filename}_testcreate.dat
+                                      --integral boys --prec 2048 --ndigits 101
+    )
+    verify_test_boys(boys_${filename}_testcreate.dat)
+endmacro()
+
+
+##############################################################
+# Verify an integral test file
+# This verifies a single test file with the given parameters
+##############################################################
+macro(__verify_test filepath integral floattype prec)
+    get_filename_component(filename ${filepath} NAME)
+    if(${prec} EQUAL 0)
+        set(test_name ${integral}_${filename}_${floattype})
+        add_test(NAME ${test_name}
+                 COMMAND mirp_verify_test --integral ${integral}
+                                           --file ${filepath}
+                                           --float ${floattype}
+        )
+    else()
+        set(test_name ${integral}_${filename}_${floattype}_${prec})
+        add_test(NAME ${test_name}
+                 COMMAND mirp_verify_test --integral ${integral}
+                                       --file ${filepath}
+                                       --float ${floattype} --prec ${prec}
+        )
+    endif()
+
+    # Parse the PASS_REGULAR_EXPRESSION, if provided
+    set(extra_args ${ARGN})
+    list(LENGTH extra_args len)
+    if(${len} GREATER 0)
+        set_tests_properties(${test_name} PROPERTIES PASS_REGULAR_EXPRESSION ${extra_args})
+    endif()
+endmacro()
+
+macro(verify_test filepath integral)
+    __verify_test(${filepath} ${integral} interval 128)
+    __verify_test(${filepath} ${integral} interval 332)
+    __verify_test(${filepath} ${integral} exact 0)
+endmacro()
+
+
+####################################################
+# Verify an integral reference file
+####################################################
+macro(verify_reference filepath integral)
+    get_filename_component(filename ${filepath} NAME)
+    add_test(NAME reference_${integral}_${filename}
+             COMMAND mirp_verify_reference --integral ${integral}
+                                           --file ${filepath}
+    )
+endmacro()
+
+
+################################################################
+# Create an integral test file via create_test, then verify it
+################################################################
+macro(create_and_verify_test filepath integral)
+    get_filename_component(filename ${filepath} NAME)
+    add_test(NAME ${integral}_${filename}_create_test
+             COMMAND mirp_create_test --infile ${filepath}
+                                      --outfile ${integral}_${filename}_testcreate.dat
+                                      --integral ${integral} --prec 2048 --ndigits 101
+    )
+    verify_test(${integral}_${filename}_testcreate.dat ${integral})
+endmacro()
+
+
+################################################################
+# Create a reference file via create_reference, then verify it
+################################################################
+macro(create_and_verify_reference integral)
+    add_test(NAME ${integral}_${geometry}_${basis}_create_reference
+             COMMAND mirp_create_reference --integral ${integral}
+                                           --basis ${CMAKE_CURRENT_LIST_DIR}/generator/basis/sto-3g.bas
+                                           --geometry ${CMAKE_CURRENT_LIST_DIR}/generator/geometry/water.xyz
+                                           --outfile ${integral}_testref.ref
+    )
+    verify_reference(${integral}_testref.ref ${integral})
+endmacro()
