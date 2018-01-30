@@ -61,26 +61,6 @@ std::map<std::string, int> z_map
 namespace mirp {
 
 
-bool almost_equal(double a, double b, double tol)
-{
-    using std::fabs;
-    using std::fmax;
-
-    double diff = fabs(a-b);
-
-    PRAGMA_WARNING_PUSH
-    PRAGMA_WARNING_IGNORE_FP_EQUALITY
-
-    if(diff == 0.0)
-        return true;
-
-    PRAGMA_WARNING_POP
-
-    double denominator = fmax(fabs(a), fabs(b));
-    return (diff / denominator) < tol;
-}
-
-
 void print_results(unsigned long nfailed, unsigned long ntests)
 {
     double nfailed_d = static_cast<double>(nfailed);

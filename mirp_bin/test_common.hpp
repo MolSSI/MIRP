@@ -15,20 +15,6 @@ namespace mirp {
 //! \brief  Maximum length of a line
 static const std::streamsize max_length = std::numeric_limits<std::streamsize>::max();
 
-/*! \brief Compare two double-precision numbers for equality within a tolerance
- *
- * This tests the relative difference between two double-precision values.
- *
- * The relative difference is calculated as
- *
- * abs(a - b)/max(abs(a), abs(b))
- *
- * \param [in] a,b Values to compare
- * \param [in] tol Tolerance to compare to
- * \return True if the relative difference is less than \p tol
- */
-bool almost_equal(double a, double b, double tol);
-
 
 /*! \brief Print the results of a test
  *
