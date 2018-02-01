@@ -22,11 +22,11 @@
  * \param [out] integrals
  *              Resulting integral integral
  * \param [in]  am1,am2,am3,am4
- *              Angular momentum of the four-centers
+ *              Angular momentum of the four centers
  * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
+ *              XYZ coordinates of the four centers (each of length 3)
  * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four-centers
+ *              Exponents of the gaussian on the four centers
  * \param [in]  cb
  *              Callback that calculates a single cartesian component of a
  *              primitive integral

@@ -22,9 +22,9 @@ extern "C" {
  *              Exponents of x, y, and z that signify angular momentum. Required
  *              to be 3 elements.
  * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
+ *              XYZ coordinates of the four centers (each of length 3)
  * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four-centers
+ *              Exponents of the gaussian on the four centers
  * \param [in]  working_prec
  *              Internal working precision
  * \param [in]  cb
@@ -55,9 +55,9 @@ void mirp_integral4_single_str(arb_t integral,
  *              Exponents of x, y, and z that signify angular momentum. Required
  *              to be 3 elements.
  * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
+ *              XYZ coordinates of the four centers (each of length 3)
  * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the gaussian on the four-centers
+ *              Exponents of the gaussian on the four centers
  * \param [in]  cb
  *              Function that computes a single cartesian four-center integral
  *              with interval arithmetic
@@ -80,15 +80,15 @@ void mirp_integral4_single_exact(double * integral,
  * \param [out] integrals
  *              Output for the computed integral
  * \param [in]  am1,am2,am3,am4
- *              Angular momentum for the four-centers
+ *              Angular momentum for the four centers
  * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
+ *              XYZ coordinates of the four centers (each of length 3)
  * \param [in]  nprim1,nprim2,nprim3,nprim4
  *              Number of primitive gaussians for each shell
  * \param [in]  ngen1,ngen2,ngen3,ngen4
  *              Number of general contractions for each shell
  * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the primitive gaussians on the four-centers
+ *              Exponents of the primitive gaussians on the four centers
  *              (of lengths \p nprim1, \p nprim2, \p nprim3, \p nprim4 respectively)
  * \param [in]  coeff1,coeff2,coeff3,coeff4
  *              Coefficients for all primitives and for all general contractions
@@ -116,15 +116,15 @@ void mirp_integral4(arb_ptr integrals,
  * \param [out] integrals
  *              Output for the computed integral
  * \param [in]  am1,am2,am3,am4
- *              Angular momentum for the four-centers
+ *              Angular momentum for the four centers
  * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
+ *              XYZ coordinates of the four centers (each of length 3)
  * \param [in]  nprim1,nprim2,nprim3,nprim4
  *              Number of primitive gaussians for each shell
  * \param [in]  ngen1,ngen2,ngen3,ngen4
  *              Number of general contractions for each shell
  * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the primitive gaussians on the four-centers
+ *              Exponents of the primitive gaussians on the four centers
  *              (of lengths \p nprim1, \p nprim2, \p nprim3, \p nprim4 respectively)
  * \param [in]  coeff1,coeff2,coeff3,coeff4
  *              Coefficients for all primitives and for all general contractions
@@ -155,15 +155,15 @@ void mirp_integral4_str(arb_ptr integrals,
  * \param [out] integrals
  *              Output for the computed integrals
  * \param [in]  am1,am2,am3,am4
- *              Angular momentum for the four-centers
+ *              Angular momentum for the four centers
  * \param [in]  A,B,C,D
- *              XYZ coordinates of the four-centers (each of length 3)
+ *              XYZ coordinates of the four centers (each of length 3)
  * \param [in]  nprim1,nprim2,nprim3,nprim4
  *              Number of primitive gaussians for each shell
  * \param [in]  ngen1,ngen2,ngen3,ngen4
  *              Number of general contractions for each shell
  * \param [in]  alpha1,alpha2,alpha3,alpha4
- *              Exponents of the primitive gaussians on the four-centers
+ *              Exponents of the primitive gaussians on the four centers
  *              (of lengths \p nprim1, \p nprim2, \p nprim3, \p nprim4 respectively)
  * \param [in]  coeff1,coeff2,coeff3,coeff4
  *              Coefficients for all primitives and for all general contractions
