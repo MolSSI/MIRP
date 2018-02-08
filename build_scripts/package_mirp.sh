@@ -60,9 +60,10 @@ mv ${PREFIX}/README ${PREFIX}/README.dependencies
 
 # Copy documentation
 cd "${PREFIX}"
-cp -R ${MIRP_DIR}/doc/html html_doc
-tar -cvjf html_doc.tar.bz2 html_doc
-rm -R html_doc
+DOCNAME="mirp_v${MIRP_VER}_html_doc"
+cp -R ${MIRP_DIR}/doc/html ${DOCNAME}
+tar -cvjf ${DOCNAME}.tar.bz2 ${DOCNAME}
+rm -R ${DOCNAME}
 cd "${CURDIR}"
 
 # Create the readme file
