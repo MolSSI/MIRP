@@ -9,8 +9,8 @@ MIRP_VER=$(cat "${MIRP_DIR}/VERSION")
 
 ARCH=$1
 
-CC=gcc
-CXX=g++
+CC=`which clang`
+CXX=`which clang++`
 
 CURDIR="$(pwd)"
 
@@ -21,14 +21,14 @@ PREFIX="${CURDIR}/mirp_v${MIRP_VER}_${ARCH}"
 rm -Rf "${PREFIX}"
 cp -R "${FULL_DEPS_DIR}" "${PREFIX}"
 
-BUILD_DIR="$(mktemp -d -p /tmp)"
+BUILD_DIR="$(mktemp -d /tmp/mirp_pkg.${ARCH}.XXXXXX)"
 cd "${BUILD_DIR}"
 cmake -DCMAKE_C_COMPILER=${CC} -DCMAKE_CXX_COMPILER=${CXX} \
       -DCMAKE_C_FLAGS="-march=${ARCH}" \
       -DCMAKE_CXX_FLAGS="-march=${ARCH}" \
       -DCMAKE_BUILD_TYPE=Release \
-      -DMIRP_OPENMP=True \
-      -DMIRP_STATIC=True \
+      -DMIRP_OPENMP=False \
+      -DMIRP_STATIC=False \
       -DCMAKE_PREFIX_PATH=${PREFIX} \
       -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
       ${MIRP_DIR}
@@ -40,19 +40,26 @@ make install
 cd "${CURDIR}"
 rm -Rf "${BUILD_DIR}"
 
-# Fix the rpaths (if we have patchelf)
-if [[ $(command -v patchelf 2>&1) ]]
+# Fix the rpaths (if we have install_name_tool)
+if [[ $(command -v install_name_tool 2>&1) ]]
 then
     for I in ${PREFIX}/bin/*
     do
-        RP1=`patchelf --print-rpath "$I"`
-        patchelf --set-rpath '$ORIGIN/../lib' "$I"
-        RP2=`patchelf --print-rpath "$I"`
+        RP1=`otool -l $I | grep -A3 LC_RPATH | tail -n 1 | awk '{print $2}'`
+        install_name_tool -add_rpath '@executable_path/../lib' "$I"
+        RP2=`otool -l $I | grep -A3 LC_RPATH | tail -n 1 | awk '{print $2}'`
         echo "${I}: RPATH changed from \"${RP1}\" to \"${RP2}\""
+
+        # Change all the dependency entries to use rpath
+        otool -L ${I} | grep ${PREFIX} | awk '{print $1}' | while read F
+        do
+            FNAME=`basename $F`
+            install_name_tool -change "$F" "@rpath/$FNAME" "$I"
+        done
     done
 else
     echo
-    echo "!!! Patchelf not installed. Skipping fixing RPATHS !!!"
+    echo "!!! install_name_tool not installed. Skipping fixing RPATHS !!!"
     echo
 fi
 
@@ -67,7 +74,7 @@ cd "${CURDIR}"
 
 # Create the readme file
 COMPILER_VER=$(${CC} --version | head -n 1)
-BUILD_DATE=$(date -I)
+BUILD_DATE=$(date +%Y-%m-%d)
 cp "${MIRP_DIR}/LICENSE"               "${PREFIX}"
 cp "${MYDIR}/mirp_README.in"           "${PREFIX}/README"
 sed -i "s/MIRP_VER/${MIRP_VER}/g"      "${PREFIX}/README"

@@ -9,7 +9,7 @@ Build Date: BUILD_DATE
 This contains precompiled binary libraries
 for the dependencies of MIRP.
 
-All dependencies were built with GCC GCC_VER
+All dependencies were built with COMPILER_VER
 with -march=ARCH
 
 

@@ -18,6 +18,6 @@ and executables of MIRP.
 See README.dependencies for license and build information
 of the dependencies of MIRP.
 
-This package was built with GCC GCC_VER
+This package was built with COMPILER_VER
 with -march=ARCH
 
