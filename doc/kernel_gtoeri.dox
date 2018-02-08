@@ -1,4 +1,11 @@
-/*! \page kernel_gtoeri Gaussiaon (GTO) Electron Repulsion Integrals
+/*! \page kernel_gtoeri Gaussian (GTO) Electron Repulsion Integrals
+
+The method used in these functions is adapted from 
+from the test/benchmark code from the libint2 package
+by Edward Valeev.
+
+See also the tech report "Fundamentals of Molecular Integrals Evaluation"
+by Justin T. Fermann and Edward F. Valeev
 
 \section _gtoeri_functions Functions in MIRP
 

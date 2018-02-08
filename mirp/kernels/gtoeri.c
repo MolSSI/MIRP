@@ -3,6 +3,17 @@
  * \brief Kernel for electron repulsion integrals of gaussian orbitals
  */
 
+
+
+/***********************************************************
+ * The method here is inspired from the test/benchmark code
+ * from the libint2 package by Edward Valeev.
+ *
+ * See also the tech report
+ * "Fundamentals of Molecular Integrals Evaluation"
+ * by Justin T. Fermann and Edward F. Valeev
+***********************************************************/
+
 #include "mirp/kernels/boys.h"
 #include "mirp/kernels/gtoeri.h"
 #include "mirp/math.h"
