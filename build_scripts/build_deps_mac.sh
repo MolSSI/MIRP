@@ -142,7 +142,7 @@ then
         if [[ ! -L "$I" ]]
         then 
             RP1=`otool -l $I | grep -A3 LC_RPATH | tail -n 1 | awk '{print $2}'`
-            install_name_tool -add_rpath '@executable_path' "$I"
+            install_name_tool -add_rpath '@loader_path' "$I"
             RP2=`otool -l $I | grep -A3 LC_RPATH | tail -n 1 | awk '{print $2}'`
             echo "${I}: RPATH changed from \"${RP1}\" to \"${RP2}\""
 
@@ -164,12 +164,12 @@ fi
 # Create the readme file
 COMPILER_VER=$(${CC} --version | head -n 1)
 BUILD_DATE=$(date +%Y-%m-%d)
-cp "${MYDIR}/deps_README.in"           "${PREFIX}/README"
-sed -i "" "s/MIRP_VER/${MIRP_VER}/g"      "${PREFIX}/README"
-sed -i "" "s/COMPILER_VER/${COMPILER_VER}/g"        "${PREFIX}/README"
-sed -i "" "s/GMP_VER/${GMP_VER}/g"        "${PREFIX}/README"
-sed -i "" "s/MPFR_VER/${MPFR_VER}/g"      "${PREFIX}/README"
-sed -i "" "s/FLINT_VER/${FLINT_VER}/g"    "${PREFIX}/README"
-sed -i "" "s/ARB_VER/${ARB_VER}/g"        "${PREFIX}/README"
-sed -i "" "s/ARCH/${ARCH}/g"              "${PREFIX}/README"
-sed -i "" "s/BUILD_DATE/${BUILD_DATE}/g"  "${PREFIX}/README"
+cp "${MYDIR}/deps_README.in"              "${PREFIX}/README"
+sed -i "" "s/MIRP_VER/${MIRP_VER}/g"         "${PREFIX}/README"
+sed -i "" "s/COMPILER_VER/${COMPILER_VER}/g" "${PREFIX}/README"
+sed -i "" "s/GMP_VER/${GMP_VER}/g"           "${PREFIX}/README"
+sed -i "" "s/MPFR_VER/${MPFR_VER}/g"         "${PREFIX}/README"
+sed -i "" "s/FLINT_VER/${FLINT_VER}/g"       "${PREFIX}/README"
+sed -i "" "s/ARB_VER/${ARB_VER}/g"           "${PREFIX}/README"
+sed -i "" "s/ARCH/${ARCH}/g"                 "${PREFIX}/README"
+sed -i "" "s/BUILD_DATE/${BUILD_DATE}/g"     "${PREFIX}/README"

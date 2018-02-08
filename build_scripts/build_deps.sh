@@ -155,13 +155,13 @@ fi
 
 # Create the readme file
 COMPILER_VER=$(${CC} --version | head -n 1)
-BUILD_DATE=$(date -I)
-cp "${MYDIR}/deps_README.in"           "${PREFIX}/README"
-sed -i "s/MIRP_VER/${MIRP_VER}/g"      "${PREFIX}/README"
-sed -i "s/COMPILER_VER/${COMPILER_VER}/g"        "${PREFIX}/README"
-sed -i "s/GMP_VER/${GMP_VER}/g"        "${PREFIX}/README"
-sed -i "s/MPFR_VER/${MPFR_VER}/g"      "${PREFIX}/README"
-sed -i "s/FLINT_VER/${FLINT_VER}/g"    "${PREFIX}/README"
-sed -i "s/ARB_VER/${ARB_VER}/g"        "${PREFIX}/README"
-sed -i "s/ARCH/${ARCH}/g"              "${PREFIX}/README"
-sed -i "s/BUILD_DATE/${BUILD_DATE}/g"  "${PREFIX}/README"
+BUILD_DATE=$(date +%Y-%m-%d)
+cp "${MYDIR}/deps_README.in"              "${PREFIX}/README"
+sed -i "s/MIRP_VER/${MIRP_VER}/g"         "${PREFIX}/README"
+sed -i "s/COMPILER_VER/${COMPILER_VER}/g" "${PREFIX}/README"
+sed -i "s/GMP_VER/${GMP_VER}/g"           "${PREFIX}/README"
+sed -i "s/MPFR_VER/${MPFR_VER}/g"         "${PREFIX}/README"
+sed -i "s/FLINT_VER/${FLINT_VER}/g"       "${PREFIX}/README"
+sed -i "s/ARB_VER/${ARB_VER}/g"           "${PREFIX}/README"
+sed -i "s/ARCH/${ARCH}/g"                 "${PREFIX}/README"
+sed -i "s/BUILD_DATE/${BUILD_DATE}/g"     "${PREFIX}/README"
