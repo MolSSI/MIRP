@@ -43,6 +43,32 @@ rm -Rf "${BUILD_DIR}"
 # Fix the rpaths (if we have install_name_tool)
 if [[ $(command -v install_name_tool 2>&1) ]]
 then
+    for I in ${PREFIX}/lib/*mirp*
+    do
+        # If this isn't a symlink
+        if [[ ! -L "$I" ]]
+        then
+            RP1=`otool -l $I | grep -A3 LC_RPATH | tail -n 1 | awk '{print $2}'`
+            install_name_tool -add_rpath '@loader_path' "$I"
+            RP2=`otool -l $I | grep -A3 LC_RPATH | tail -n 1 | awk '{print $2}'`
+            echo "${I}: RPATH changed from \"${RP1}\" to \"${RP2}\""
+
+            # Change all the dependency entries to use rpath
+            NEWID="@rpath/$(basename ${I})"
+            install_name_tool -id "${NEWID}" "${I}"
+            otool -L ${I} | tail -n +2 | grep ${PREFIX} | awk '{print $1}' | while read F
+            do
+                FNAME=`basename $F`
+                NEWF="@rpath/${FNAME}"
+                echo "${I}: Fixing path from ${F} to ${NEWF}"
+                install_name_tool -change "$F" "${NEWF}" "$I"
+            done
+            echo "----------------------"
+            otool -L ${I}
+            echo "----------------------"
+        fi
+    done
+
     for I in ${PREFIX}/bin/*
     do
         RP1=`otool -l $I | grep -A3 LC_RPATH | tail -n 1 | awk '{print $2}'`
@@ -51,10 +77,12 @@ then
         echo "${I}: RPATH changed from \"${RP1}\" to \"${RP2}\""
 
         # Change all the dependency entries to use rpath
-        otool -L ${I} | grep ${PREFIX} | awk '{print $1}' | while read F
+        otool -L ${I} | tail -n +2 | grep ${PREFIX} | awk '{print $1}' | while read F
         do
             FNAME=`basename $F`
-            install_name_tool -change "$F" "@rpath/$FNAME" "$I"
+            NEWF="@rpath/${FNAME}"
+            echo "$I: Fixing path from ${F} to ${NEWF}"
+            install_name_tool -change "$F" "${NEWF}" "$I"
         done
     done
 else

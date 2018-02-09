@@ -12,7 +12,7 @@ PARALLEL=4 # Number of concurrent compilations (use make -j${PARALLEL})
 GMP_VER=6.1.2
 MPFR_VER=3.1.5
 FLINT_VER=2.5.2
-ARB_VER=2.11.1
+ARB_VER=2.12.0
 
 GMP_DIR="gmp-${GMP_VER}"
 MPFR_DIR="mpfr-${MPFR_VER}"
@@ -147,12 +147,18 @@ then
             echo "${I}: RPATH changed from \"${RP1}\" to \"${RP2}\""
 
             # Change all the dependency entries to use rpath
-            otool -L ${I} | grep ${PREFIX} | awk '{print $1}' | while read F
+            NEWID="@rpath/$(basename ${I})"
+            install_name_tool -id "${NEWID}" "${I}"
+            otool -L ${I} | tail -n +2 | grep ${PREFIX} | awk '{print $1}' | while read F
             do
                 FNAME=`basename $F`
-                install_name_tool -change "$F" "@rpath/$FNAME" "$I"
+                NEWF="@rpath/${FNAME}"
+                echo "${I}: Fixing path from ${F} to ${NEWF}"
+                install_name_tool -change "$F" "${NEWF}" "$I"
             done
-            
+            echo "----------------------"
+            otool -L ${I}
+            echo "----------------------"
         fi
     done
 else
