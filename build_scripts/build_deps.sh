@@ -12,7 +12,7 @@ PARALLEL=4 # Number of concurrent compilations (use make -j${PARALLEL})
 GMP_VER=6.1.2
 MPFR_VER=3.1.5
 FLINT_VER=2.5.2
-ARB_VER=2.11.1
+ARB_VER=2.12.0
 
 GMP_DIR="gmp-${GMP_VER}"
 MPFR_DIR="mpfr-${MPFR_VER}"
