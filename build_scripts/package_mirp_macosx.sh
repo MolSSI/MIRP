@@ -106,6 +106,7 @@ cd "${CURDIR}"
 COMPILER_VER=$(${CC} --version | head -n 1)
 BUILD_DATE=$(date +%Y-%m-%d)
 cp "${MIRP_DIR}/LICENSE"                      "${PREFIX}"
+cp "${MIRP_DIR}/CHANGELOG"                    "${PREFIX}"
 cp "${MYDIR}/mirp_README.in"                  "${PREFIX}/README"
 sed -i "" "s/MIRP_VER/${MIRP_VER}/g"          "${PREFIX}/README"
 sed -i "" "s/COMPILER_VER/${COMPILER_VER}/g"  "${PREFIX}/README"
