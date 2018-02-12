@@ -6,6 +6,7 @@ MYDIR="$(cd "$(dirname "$0")" && pwd)"
 MIRP_DIR="$(dirname ${MYDIR})"
 
 MIRP_VER=$(cat "${MIRP_DIR}/VERSION")
+DEPS_VER=$(cat "${MIRP_DIR}/VERSION_DEPS")
 
 ARCH=$1
 

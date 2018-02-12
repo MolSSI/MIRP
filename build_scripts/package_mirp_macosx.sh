@@ -6,6 +6,7 @@ MYDIR="$(cd "$(dirname "$0")" && pwd)"
 MIRP_DIR="$(dirname ${MYDIR})"
 
 MIRP_VER=$(cat "${MIRP_DIR}/VERSION")
+DEPS_VER=$(cat "${MIRP_DIR}/VERSION_DEPS")
 
 ARCH=$1
 
@@ -14,7 +15,7 @@ CXX=`which clang++`
 
 CURDIR="$(pwd)"
 
-FULL_DEPS_DIR="${DEPS_DIR}/mirp_deps_v${MIRP_VER}_macosx_${ARCH}"
+FULL_DEPS_DIR="${DEPS_DIR}/mirp_deps_v${DEPS_VER}_macosx_${ARCH}"
 PREFIX="${CURDIR}/mirp_v${MIRP_VER}_macosx_${ARCH}"
 
 # Copy the dependencies to the install prefix
