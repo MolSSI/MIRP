@@ -3,9 +3,11 @@
 set -eu
 
 MYDIR="$(cd "$(dirname "$0")" && pwd)"
+OS=$1
+MATFILE=$2
 
-for M in `cat $1`
+for ARCH in `cat ${MATFILE}`
 do
-    echo "Building ${M}"
-    bash "${MYDIR}/build_deps.sh" ${M} &> $M.build.log
+    echo "Building ${ARCH}"
+    bash "${MYDIR}/build_deps_${OS}.sh" ${ARCH} &> ${OS}_${ARCH}.build.log
 done

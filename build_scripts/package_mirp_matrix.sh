@@ -3,9 +3,11 @@
 set -eu
 
 MYDIR="$(cd "$(dirname "$0")" && pwd)"
+OS=$1
+MATFILE=$2
 
-for M in `cat $1`
+for ARCH in `cat ${MATFILE}`
 do
-    echo "Building ${M}"
-    bash "${MYDIR}/package_mirp.sh" ${M} &> mirp_${M}_package.log
+    echo "Building ${ARCH}"
+    bash "${MYDIR}/package_mirp_${OS}.sh" ${ARCH} &> mirp_${ARCH}_package.log
 done

@@ -40,7 +40,7 @@ install:
   # Obtain the dependencies
   - export MIRP_VER=$(cat VERSION)
   - export DEPS_VER=$(cat VERSION_DEPS)
-  - export DEPS_BASE="mirp_deps_v${DEPS_VER}_ivybridge"
+  - export DEPS_BASE="mirp_deps_v${DEPS_VER}_linux_ivybridge"
   - wget https://www.bennyp.org/research/mirp/download/${DEPS_BASE}.tar.bz2
   - tar -xvf ${DEPS_BASE}.tar.bz2
   - export DEPDIR="$(pwd)/${DEPS_BASE}"

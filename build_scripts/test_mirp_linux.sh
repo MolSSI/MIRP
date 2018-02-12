@@ -40,7 +40,7 @@ fi
  
 CMAKE="$(which cmake)"
 
-FULL_DEPS_DIR="${DEPS_DIR}/mirp_deps_v${DEPS_VER}_${DEPS_ARCH}"
+FULL_DEPS_DIR="${DEPS_DIR}/mirp_deps_v${DEPS_VER}_linux_${DEPS_ARCH}"
 BUILD_DIR="$(mktemp -d -p /tmp)"
 CURDIR="$(pwd)"
 

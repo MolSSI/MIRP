@@ -30,7 +30,7 @@ FLINT_URL="http://flintlib.org/${FLINT_FILE}"
 ARB_URL="https://github.com/fredrik-johansson/arb/archive/${ARB_VER}.tar.gz"
 
 BUILD_DIR="deps_build_${ARCH}"
-PREFIX="$(pwd)/mirp_deps_v${MIRP_VER}_${ARCH}"
+PREFIX="$(pwd)/mirp_deps_v${MIRP_VER}_macosx_${ARCH}"
 
 rm -Rf ${BUILD_DIR}
 rm -Rf ${PREFIX}
@@ -61,14 +61,14 @@ mkdir -p "${MPFR_DIR}/build"
 # Common flags
 ###################
 CFLAGS="-O2 -march=${ARCH}"
-CC=`which gcc`
+CC=`which clang`
 
 ###################
 # Build GMP
 ###################
 cd "${GMP_DIR}/build"
 ../configure CFLAGS="${CFLAGS}" CC="${CC}" \
-             --build=x86_64-linux-gnu \
+             --build=x86_64-apple-darwin \
              --disable-static \
              --prefix=${PREFIX}
 
@@ -83,7 +83,7 @@ cd ../../
 cd "${MPFR_DIR}/build"
 ../configure --with-gmp=${PREFIX} \
              CFLAGS="${CFLAGS}" CC="${CC}" \
-             --build=x86_64-linux-gnu \
+             --build=x86_64-apple-darwin \
              --disable-static \
              --prefix=${PREFIX}
 
@@ -133,23 +133,37 @@ rm -Rf ${BUILD_DIR}
 # Remove unneeded .la files
 rm ${PREFIX}/lib/*.la
 
-# Fix the rpaths (if we have patchelf)
-if [[ $(command -v patchelf 2>&1) ]]
+# Fix the rpaths (if we have install_name_tool)
+if [[ $(command -v install_name_tool 2>&1) ]]
 then
     for I in ${PREFIX}/lib/*
     do
         # If this isn't a symlink
         if [[ ! -L "$I" ]]
         then 
-            RP1=`patchelf --print-rpath "$I"`
-            patchelf --set-rpath '$ORIGIN' "$I"
-            RP2=`patchelf --print-rpath "$I"`
+            RP1=`otool -l $I | grep -A3 LC_RPATH | tail -n 1 | awk '{print $2}'`
+            install_name_tool -add_rpath '@loader_path' "$I"
+            RP2=`otool -l $I | grep -A3 LC_RPATH | tail -n 1 | awk '{print $2}'`
             echo "${I}: RPATH changed from \"${RP1}\" to \"${RP2}\""
+
+            # Change all the dependency entries to use rpath
+            NEWID="@rpath/$(basename ${I})"
+            install_name_tool -id "${NEWID}" "${I}"
+            otool -L ${I} | tail -n +2 | grep ${PREFIX} | awk '{print $1}' | while read F
+            do
+                FNAME=`basename $F`
+                NEWF="@rpath/${FNAME}"
+                echo "${I}: Fixing path from ${F} to ${NEWF}"
+                install_name_tool -change "$F" "${NEWF}" "$I"
+            done
+            echo "----------------------"
+            otool -L ${I}
+            echo "----------------------"
         fi
     done
 else
     echo
-    echo "!!! Patchelf not installed. Skipping fixing RPATHS !!!"
+    echo "!!! install_name_tool not installed. Skipping fixing RPATHS !!!"
     echo
 fi
 
@@ -157,11 +171,11 @@ fi
 COMPILER_VER=$(${CC} --version | head -n 1)
 BUILD_DATE=$(date +%Y-%m-%d)
 cp "${MYDIR}/deps_README.in"              "${PREFIX}/README"
-sed -i "s/MIRP_VER/${MIRP_VER}/g"         "${PREFIX}/README"
-sed -i "s/COMPILER_VER/${COMPILER_VER}/g" "${PREFIX}/README"
-sed -i "s/GMP_VER/${GMP_VER}/g"           "${PREFIX}/README"
-sed -i "s/MPFR_VER/${MPFR_VER}/g"         "${PREFIX}/README"
-sed -i "s/FLINT_VER/${FLINT_VER}/g"       "${PREFIX}/README"
-sed -i "s/ARB_VER/${ARB_VER}/g"           "${PREFIX}/README"
-sed -i "s/ARCH/${ARCH}/g"                 "${PREFIX}/README"
-sed -i "s/BUILD_DATE/${BUILD_DATE}/g"     "${PREFIX}/README"
+sed -i "" "s/MIRP_VER/${MIRP_VER}/g"         "${PREFIX}/README"
+sed -i "" "s/COMPILER_VER/${COMPILER_VER}/g" "${PREFIX}/README"
+sed -i "" "s/GMP_VER/${GMP_VER}/g"           "${PREFIX}/README"
+sed -i "" "s/MPFR_VER/${MPFR_VER}/g"         "${PREFIX}/README"
+sed -i "" "s/FLINT_VER/${FLINT_VER}/g"       "${PREFIX}/README"
+sed -i "" "s/ARB_VER/${ARB_VER}/g"           "${PREFIX}/README"
+sed -i "" "s/ARCH/${ARCH}/g"                 "${PREFIX}/README"
+sed -i "" "s/BUILD_DATE/${BUILD_DATE}/g"     "${PREFIX}/README"
