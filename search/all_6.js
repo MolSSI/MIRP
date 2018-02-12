@@ -10,5 +10,5 @@ var searchData=
   ['gpt_2eh',['gpt.h',['../gpt_8h.html',1,'']]],
   ['gtoeri_2ec',['gtoeri.c',['../gtoeri_8c.html',1,'']]],
   ['gtoeri_2eh',['gtoeri.h',['../gtoeri_8h.html',1,'']]],
-  ['gaussiaon_20_28gto_29_20electron_20repulsion_20integrals',['Gaussiaon (GTO) Electron Repulsion Integrals',['../kernel_gtoeri.html',1,'']]]
+  ['gaussian_20_28gto_29_20electron_20repulsion_20integrals',['Gaussian (GTO) Electron Repulsion Integrals',['../kernel_gtoeri.html',1,'']]]
 ];

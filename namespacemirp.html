@@ -165,9 +165,6 @@ Functions</h2></td></tr>
 <tr class="memitem:afe4f94b598ebbd2f92a358bdbfbc3361"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#afe4f94b598ebbd2f92a358bdbfbc3361">boys_create_test</a> (const std::string &amp;input_filepath, const std::string &amp;output_filepath, slong working_prec, long ndigits, const std::string &amp;header)</td></tr>
 <tr class="memdesc:afe4f94b598ebbd2f92a358bdbfbc3361"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a test file for the Boys function from a given input file.  <a href="#afe4f94b598ebbd2f92a358bdbfbc3361">More...</a><br /></td></tr>
 <tr class="separator:afe4f94b598ebbd2f92a358bdbfbc3361"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41fee805572ff9cb1eff7582169f0f7f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a41fee805572ff9cb1eff7582169f0f7f">almost_equal</a> (double a, double b, double tol)</td></tr>
-<tr class="memdesc:a41fee805572ff9cb1eff7582169f0f7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two double-precision numbers for equality within a tolerance.  <a href="#a41fee805572ff9cb1eff7582169f0f7f">More...</a><br /></td></tr>
-<tr class="separator:a41fee805572ff9cb1eff7582169f0f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a201a668b0bb583e336bbf6c87736435e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemirp.html#a201a668b0bb583e336bbf6c87736435e">print_results</a> (unsigned long nfailed, unsigned long ntests)</td></tr>
 <tr class="memdesc:a201a668b0bb583e336bbf6c87736435e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the results of a test.  <a href="#a201a668b0bb583e336bbf6c87736435e">More...</a><br /></td></tr>
 <tr class="separator:a201a668b0bb583e336bbf6c87736435e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -250,53 +247,6 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The main namespace for MIRP in C++ </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a41fee805572ff9cb1eff7582169f0f7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41fee805572ff9cb1eff7582169f0f7f">&#9670;&nbsp;</a></span>almost_equal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool mirp::almost_equal </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>b</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>tol</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Compare two double-precision numbers for equality within a tolerance. </p>
-<p>This tests the relative difference between two double-precision values.</p>
-<p>The relative difference is calculated as</p>
-<p>abs(a - b)/max(abs(a), abs(b))</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">a,b</td><td>Values to compare </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tol</td><td>Tolerance to compare to </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the relative difference is less than <code>tol</code> </dd></dl>
-
-</div>
-</div>
 <a id="a04c928248b24b1578f893e0680abaaab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a04c928248b24b1578f893e0680abaaab">&#9670;&nbsp;</a></span>amchar_to_int()</h2>
 
@@ -2222,7 +2172,7 @@ template&lt;int N&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 21 2017 16:36:51 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Feb 12 2018 13:57:11 for MolSSI Integral Reference Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
