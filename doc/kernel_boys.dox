@@ -77,7 +77,7 @@ Since it guaranteed that the true error is less than this value, it can then det
 If it is not, then the small-\f$t\f$ (exact) formulation is used:
 
 \f{eqnarray*}{
-   F_m(t) &=& e^{-t} \frac{1}{2^{m+1}} \sum_{i=1}^{\infty} a_i \\
+   F_m(t) &=& e^{-t} \frac{1}{2m+1} \sum_{i=1}^{\infty} a_i \\
    a_0 &=& 1 \\
    a_i &=& \frac{2t}{2m+2i+1}a_{i-1}
 \f}
